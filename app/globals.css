@@ -1,0 +1,69 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+@layer utilities {
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    
+    body {
+      background: white !important;
+      color: black !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    main {
+      padding: 0 !important;
+      margin: 0 !important;
+      width: 100% !important;
+      max-width: none !important;
+    }
+
+    aside, header, footer, .ProgressBar, button, .ProgressBar-container {
+      display: none !important;
+    }
+
+    .bg-white, .bg-slate-50, .bg-indigo-50 {
+      background-color: transparent !important;
+      border-color: #eee !important;
+    }
+
+    .shadow-2xl, .shadow-xl, .shadow-lg, .shadow-md {
+      box-shadow: none !important;
+    }
+
+    table {
+      border: 1px solid #ddd !important;
+    }
+
+    th, td {
+      border-bottom: 1px solid #eee !important;
+      color: black !important;
+    }
+
+    h1, h2, h3 {
+      color: black !important;
+      page-break-after: avoid;
+    }
+  }
+}

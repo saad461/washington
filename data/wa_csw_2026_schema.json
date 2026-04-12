@@ -1,0 +1,384 @@
+{
+  "Part I: Income": [
+    {
+      "id": "1a",
+      "label": "Wages and Salaries",
+      "type": "currency",
+      "description": "Gross monthly wages and salaries."
+    },
+    {
+      "id": "1b",
+      "label": "Interest and Dividend Income",
+      "type": "currency",
+      "description": "Monthly income from interest and dividends."
+    },
+    {
+      "id": "1c",
+      "label": "Business Income",
+      "type": "currency",
+      "description": "Monthly gross income from business or self-employment."
+    },
+    {
+      "id": "1d",
+      "label": "Maintenance Received",
+      "type": "currency",
+      "description": "Monthly alimony or maintenance received from other actions."
+    },
+    {
+      "id": "1e",
+      "label": "Other Income",
+      "type": "currency",
+      "description": "Any other sources of monthly gross income."
+    },
+    {
+      "id": "1f",
+      "label": "Imputed Income",
+      "type": "currency",
+      "description": "Income imputed to a parent who is voluntarily unemployed or underemployed."
+    },
+    {
+      "id": "1g",
+      "label": "Total Gross Monthly Income",
+      "type": "currency",
+      "description": "Total of lines 1a through 1f."
+    },
+    {
+      "id": "2a",
+      "label": "Income Taxes (Federal and State)",
+      "type": "currency",
+      "description": "Monthly federal and state income tax deductions."
+    },
+    {
+      "id": "2b",
+      "label": "FICA / Self-Employment Taxes",
+      "type": "currency",
+      "description": "Social Security and Medicare taxes."
+    },
+    {
+      "id": "2c",
+      "label": "Mandatory State Deductions",
+      "type": "currency",
+      "description": "Mandatory state insurance premiums, paid family leave, and WA Cares premiums."
+    },
+    {
+      "id": "2d",
+      "label": "State Industrial Insurance Deductions",
+      "type": "currency",
+      "description": "Worker's compensation / L&I deductions."
+    },
+    {
+      "id": "2e",
+      "label": "Mandatory Union/Professional Dues",
+      "type": "currency",
+      "description": "Mandatory dues required for employment."
+    },
+    {
+      "id": "2f",
+      "label": "Mandatory Pension Plan Payments",
+      "type": "currency",
+      "description": "Required contributions to a pension plan."
+    },
+    {
+      "id": "2g",
+      "label": "Voluntary Retirement Contributions",
+      "type": "currency",
+      "description": "Voluntary retirement contributions (up to certain limits)."
+    },
+    {
+      "id": "2h",
+      "label": "Maintenance Paid",
+      "type": "currency",
+      "description": "Alimony or maintenance paid to others."
+    },
+    {
+      "id": "2i",
+      "label": "Normal Business Expenses",
+      "type": "currency",
+      "description": "Ordinary and necessary business expenses for self-employed parents."
+    },
+    {
+      "id": "2j",
+      "label": "Total Deductions from Gross Income",
+      "type": "currency",
+      "description": "Total of lines 2a through 2i."
+    },
+    {
+      "id": "3",
+      "label": "Monthly Net Income",
+      "type": "currency",
+      "description": "Gross monthly income minus total monthly deductions (Line 1g - 2j)."
+    },
+    {
+      "id": "4",
+      "label": "Combined Monthly Net Income",
+      "type": "currency",
+      "description": "Sum of both parents' monthly net incomes."
+    },
+    {
+      "id": "5_children",
+      "label": "Number of children",
+      "type": "number",
+      "description": "Total number of children in the current action."
+    },
+    {
+      "id": "5_per_child",
+      "label": "Basic Support Per Child",
+      "type": "currency",
+      "description": "The amount per child from the Economic Table based on Combined Net Income."
+    },
+    {
+      "id": "5",
+      "label": "Basic Child Support Obligation",
+      "type": "currency",
+      "description": "Total calculated basic support (Number of children x Amount per child)."
+    },
+    {
+      "id": "6",
+      "label": "Proportional Share of Income",
+      "type": "percentage",
+      "description": "Each parent's share of the combined net income (Line 3 divided by Line 4)."
+    }
+  ],
+  "Part II: Basic Child Support Obligation": [
+    {
+      "id": "7",
+      "label": "Basic Obligation (No limitations)",
+      "type": "currency",
+      "description": "Each parent's share of the basic obligation (Line 5 multiplied by Line 6)."
+    },
+    {
+      "id": "8_reserve",
+      "label": "Self-Support Reserve",
+      "type": "currency",
+      "description": "180% of the federal poverty guideline for a one-person family."
+    },
+    {
+      "id": "8a",
+      "label": "Presumptive Minimum ($2,200 Combined)",
+      "type": "currency",
+      "description": "Presumptive $50 per child if combined net income is less than $2,200."
+    },
+    {
+      "id": "8b",
+      "label": "Self-Support Reserve Limit (Individual)",
+      "type": "currency",
+      "description": "Presumptive $50 per child if parent's net income is less than self-support reserve."
+    },
+    {
+      "id": "8c",
+      "label": "Self-Support Reserve Adjustment",
+      "type": "currency",
+      "description": "Adjusted support if net income allows for self-support reserve."
+    },
+    {
+      "id": "8d",
+      "label": "Other Children Adjustment",
+      "type": "currency",
+      "description": "Adjustment for other biological or legal children."
+    },
+    {
+      "id": "9",
+      "label": "Basic Support Obligation (After Limitations)",
+      "type": "currency",
+      "description": "Final basic support after applying low-income limitations."
+    }
+  ],
+  "Part III: Healthcare, Daycare, and Special Child Rearing Expenses": [
+    {
+      "id": "10a",
+      "label": "Health Insurance Premiums Paid for Child(ren)",
+      "type": "currency",
+      "description": "Monthly premium cost for children's insurance."
+    },
+    {
+      "id": "10b",
+      "label": "Uninsured Healthcare Expenses Paid",
+      "type": "currency",
+      "description": "Projected uninsured monthly medical expenses."
+    },
+    {
+      "id": "10c",
+      "label": "Total Healthcare Expenses",
+      "type": "currency",
+      "description": "Line 10a plus Line 10b."
+    },
+    {
+      "id": "10d",
+      "label": "Combined Monthly Healthcare Expenses",
+      "type": "currency",
+      "description": "Sum of both parents' Line 10c."
+    },
+    {
+      "id": "11a",
+      "label": "Daycare Expenses",
+      "type": "currency",
+      "description": "Monthly work-related childcare / daycare costs."
+    },
+    {
+      "id": "11b",
+      "label": "Education Expenses",
+      "type": "currency",
+      "description": "Tuition or other monthly educational costs."
+    },
+    {
+      "id": "11c",
+      "label": "Long Distance Transportation Expenses",
+      "type": "currency",
+      "description": "Travel costs for visitation/custody."
+    },
+    {
+      "id": "11d",
+      "label": "Other Special Expenses",
+      "type": "currency",
+      "description": "Other agreed-upon special child rearing expenses."
+    },
+    {
+      "id": "11e",
+      "label": "Total Daycare and Special Expenses",
+      "type": "currency",
+      "description": "Total of lines 11a through 11d."
+    },
+    {
+      "id": "12",
+      "label": "Combined Monthly Daycare and Special Expenses",
+      "type": "currency",
+      "description": "Sum of both parents' Line 11e."
+    },
+    {
+      "id": "13",
+      "label": "Total Health/Daycare/Special Expenses",
+      "type": "currency",
+      "description": "Combined Healthcare (10d) plus Combined Daycare (12)."
+    },
+    {
+      "id": "14",
+      "label": "Parent's Share of Health/Daycare/Special",
+      "type": "currency",
+      "description": "Line 6 multiplied by Line 13."
+    }
+  ],
+  "Part IV: Gross Child Support Obligation": [
+    {
+      "id": "15",
+      "label": "Gross Child Support Obligation",
+      "type": "currency",
+      "description": "Final basic support (Line 9) plus share of special expenses (Line 14)."
+    }
+  ],
+  "Part V: Child Support Credits": [
+    {
+      "id": "16a",
+      "label": "Monthly Healthcare Expenses Credit",
+      "type": "currency",
+      "description": "Credit for healthcare expenses actually paid."
+    },
+    {
+      "id": "16b",
+      "label": "Daycare and Special Expenses Credit",
+      "type": "currency",
+      "description": "Credit for daycare/special expenses actually paid."
+    },
+    {
+      "id": "16c",
+      "label": "Other Ordinary Expenses Credit",
+      "type": "currency",
+      "description": "Credit for other ordinary expenses paid by the source/non-custodial parent."
+    },
+    {
+      "id": "16d",
+      "label": "Total Support Credits",
+      "type": "currency",
+      "description": "Total of lines 16a through 16c."
+    }
+  ],
+  "Part VI: Standard Calculation/Presumptive Transfer Payment": [
+    {
+      "id": "17",
+      "label": "Standard Calculation",
+      "type": "currency",
+      "description": "Gross obligation minus credits (Line 15 - 16d). Presumptive minimum $50/child applies."
+    }
+  ],
+  "Part VII: Additional Informational Calculations": [
+    {
+      "id": "18",
+      "label": "45% of Net Income Limit",
+      "type": "currency",
+      "description": "45 percent of the parent's monthly net income (reference check)."
+    },
+    {
+      "id": "19",
+      "label": "25% of Basic Support Obligation",
+      "type": "currency",
+      "description": "25 percent of the basic support obligation (Line 9 reference check)."
+    }
+  ],
+  "Part VIII: Additional Factors for Consideration": [
+    {
+      "id": "20a",
+      "label": "Real Estate Value",
+      "type": "currency",
+      "description": "Estimated present value of real estate assets."
+    },
+    {
+      "id": "20b",
+      "label": "Investments Value",
+      "type": "currency",
+      "description": "Value of stocks, bonds, and other investments."
+    },
+    {
+      "id": "20c",
+      "label": "Vehicles and Boats Value",
+      "type": "currency",
+      "description": "Current market value of vehicles and boats."
+    },
+    {
+      "id": "20d",
+      "label": "Bank Accounts and Cash",
+      "type": "currency",
+      "description": "Total liquid cash assets."
+    },
+    {
+      "id": "20e",
+      "label": "Retirement Accounts Value",
+      "type": "currency",
+      "description": "Total value of retirement funds (IRA, 401k, etc.)."
+    },
+    {
+      "id": "21",
+      "label": "Household Debt",
+      "type": "currency",
+      "description": "Liens, extraordinary debt, and major liabilities."
+    },
+    {
+      "id": "22a",
+      "label": "Income of Current Spouse/Partner",
+      "type": "currency",
+      "description": "Monthly gross income of a non-parent spouse or domestic partner."
+    },
+    {
+      "id": "22b",
+      "label": "Income of Other Adults In Household",
+      "type": "currency",
+      "description": "Income from other non-dependents in the home."
+    },
+    {
+      "id": "22c",
+      "label": "Excluded Overtime/Second Job Income",
+      "type": "currency",
+      "description": "Income requested for exclusion per guidelines."
+    },
+    {
+      "id": "22d",
+      "label": "Income of Child(ren)",
+      "type": "currency",
+      "description": "Extraordinary income of the child(ren) being considered."
+    },
+    {
+      "id": "24",
+      "label": "Monthly Child Support for Other Children",
+      "type": "currency",
+      "description": "Legal support child paid for children not in this action."
+    }
+  ]
+}
