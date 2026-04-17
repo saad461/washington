@@ -18,14 +18,14 @@ export default function BlogListingPage() {
     <div className="min-h-screen bg-[#FDFDFE] font-sans selection:bg-indigo-100 selection:text-indigo-700">
       
       {/* Hero / Featured Section */}
-      <section className="relative pt-14 md:pt-20 pb-16 md:pb-28 overflow-hidden w-full">
+      <section className="relative pt-20 pb-32 overflow-hidden w-full">
         {/* Decorative Gradients */}
         <div className="absolute inset-0 pointer-events-none z-0">
           <div className="absolute top-0 right-0 w-[60rem] h-[60rem] bg-indigo-50/40 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/2" />
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col items-center text-center mb-12 md:mb-20">
+          <div className="flex flex-col items-center text-center mb-20">
             <div className="p-3 bg-indigo-600 rounded-2xl shadow-xl shadow-indigo-600/20 mb-6">
               <BookOpen className="w-8 h-8 text-white" />
             </div>
@@ -40,7 +40,7 @@ export default function BlogListingPage() {
 
           {/* Featured Post Spotlight */}
           {featuredPost && (
-            <div className="group relative mb-12 md:mb-20 lg:mb-24">
+            <div className="group relative mb-24">
               <Link href={`/blog/${featuredPost.slug}`} className="block">
                 <div className="bg-slate-900 rounded-[4rem] p-10 md:p-20 text-white relative overflow-hidden transition-all duration-500 hover:shadow-[0_40px_100px_-20px_rgba(79,70,229,0.3)] hover:-translate-y-2">
                   <div className="absolute top-0 right-0 w-[40rem] h-[40rem] bg-indigo-500/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 transition-all duration-700 group-hover:bg-indigo-500/30" />
@@ -88,7 +88,7 @@ export default function BlogListingPage() {
       </section>
 
       {/* Grid Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-16 md:pb-28 lg:pb-40">
+      <section className="max-w-7xl mx-auto px-6 pb-40">
         <div className="flex items-center justify-between mb-16">
           <div className="flex items-center gap-5">
             <div className="p-4 bg-indigo-600 rounded-[2rem] shadow-xl shadow-indigo-600/20">
@@ -108,7 +108,7 @@ export default function BlogListingPage() {
       </section>
 
       {/* Call to Action Footer */}
-      <section className="bg-white border-t border-slate-50 py-16 md:py-24 lg:py-32">
+      <section className="bg-white border-t border-slate-50 py-32">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-black text-slate-900 tracking-tight mb-8 italic uppercase">Ready for a Precise Calculation?</h2>
           <p className="text-slate-500 font-medium mb-12 text-lg">
