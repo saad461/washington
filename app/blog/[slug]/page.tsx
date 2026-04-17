@@ -11,7 +11,6 @@ import {
 } from 'lucide-react';
 import { blogs, type BlogPost } from '@/data/blogs';
 import TableOfContents, { TOCItem } from '@/components/TableOfContents';
-import MobileTOC from '@/components/MobileTOC';
 import AuthorBox from '@/components/AuthorBox';
 import FAQAccordion from '@/components/FAQAccordion';
 import AdContainer from '@/components/AdContainer';
@@ -132,7 +131,7 @@ export default async function BlogPostPage({ params }: Props) {
     <div className="min-h-screen bg-[#FDFDFE] font-sans selection:bg-indigo-100 selection:text-indigo-700">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20">
+      <div className="max-w-7xl mx-auto px-6 py-20">
         
         {/* Back navigation */}
         <Link href="/blog" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors mb-20 group no-print">
@@ -141,13 +140,13 @@ export default async function BlogPostPage({ params }: Props) {
         </Link>
 
         {/* Global Article Wrapper */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           
           {/* Main Content Column */}
           <article className="lg:col-span-8">
             
             {/* Header */}
-            <header className="mb-10 md:mb-16">
+            <header className="mb-16">
               <div className="flex items-center gap-4 mb-4">
                 <span className="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-black uppercase tracking-[0.2em] rounded-md ring-1 ring-indigo-200">
                   {post.category}
@@ -195,9 +194,6 @@ export default async function BlogPostPage({ params }: Props) {
                 </div>
               )}
             </header>
-
-            {/* Mobile TOC (collapsed, above article body on small screens) */}
-            <MobileTOC headings={headings} />
 
             {/* Ad Placeholder: TOP */}
             <AdContainer slot="top" wordCount={updatedHtml.split(' ').length} />
