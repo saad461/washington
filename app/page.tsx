@@ -63,7 +63,7 @@ export default function Home() {
         <HomeCalculator />
 
         {/* ── KEY FIGURES STRIP (SEO & Trust) ── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-slate-50 border border-slate-100 rounded-3xl p-6 md:p-8 mt-12 w-full shadow-sm">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-gradient-to-br from-white to-slate-50 border border-slate-200/60 rounded-3xl p-6 md:p-8 mt-12 w-full shadow-sm hover:shadow-md transition-shadow">
           {[
             { label: "2026 SSR", value: "$1,514" },
             { label: "Min Support", value: "$50 / child" },
@@ -83,7 +83,7 @@ export default function Home() {
           <div className="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm bg-white">
             <table className="w-full text-left border-collapse min-w-[500px]">
               <thead>
-                <tr className="bg-slate-50/50 border-b border-slate-100">
+                <tr className="bg-gradient-to-r from-slate-50 to-white border-b border-slate-100">
                   <th className="px-6 py-4 text-xs font-black text-slate-500 uppercase tracking-widest">Monthly Income</th>
                   <th className="px-6 py-4 text-xs font-black text-slate-500 uppercase tracking-widest">1 Child</th>
                   <th className="px-6 py-4 text-xs font-black text-slate-500 uppercase tracking-widest">2 Children</th>
@@ -117,7 +117,7 @@ export default function Home() {
         <div className="mt-12 flex justify-center w-full">
           <Link 
             href="/worksheet" 
-            className="group relative inline-flex items-center justify-center px-10 py-4 text-lg font-black text-white bg-indigo-600 hover:bg-indigo-700 rounded-full shadow-xl shadow-indigo-100 transition-all hover:-translate-y-1 active:translate-y-0"
+            className="group relative inline-flex items-center justify-center px-10 py-4 text-lg font-black text-white bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 rounded-full shadow-xl shadow-indigo-600/20 transition-all hover:-translate-y-1 active:translate-y-0"
           >
             Calculate Your Exact Support
             <svg 
@@ -135,7 +135,7 @@ export default function Home() {
       {/* ── AI SEARCH OPTIMIZATION (AEO) ── */}
       <section className="mt-20 max-w-4xl w-full mx-auto px-4 relative z-10">
         <h2 className="text-2xl font-black text-slate-900 mb-6 tracking-tight text-center">Example Calculation</h2>
-        <div className="bg-indigo-50/50 border border-indigo-100 rounded-[2rem] p-8 mt-6">
+        <div className="bg-gradient-to-br from-indigo-50/50 to-white border border-indigo-100/80 rounded-[2rem] p-8 mt-6 shadow-sm hover:shadow-md transition-shadow">
           <h3 className="text-xl font-bold text-slate-800 mb-4">Calculate child support for $5000 income in King County</h3>
           <p className="mb-2 text-slate-700"><strong>Input:</strong> Combined Monthly Net Income: $5,000 | Children: 2 | County: King County</p>
           <p className="mb-4 text-slate-700"><strong>Output:</strong> Estimated Monthly Basic Support Obligation: $1,155</p>
