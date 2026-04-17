@@ -295,15 +295,15 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
         <div className="absolute bottom-0 left-0 w-[55rem] h-[55rem] bg-emerald-50/30 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 opacity-40" />
       </div>
 
-      <div className="max-w-7xl w-full mx-auto z-10 relative px-6 py-12 md:py-20 lg:py-24">
+      <div className="max-w-7xl w-full mx-auto z-10 relative px-4 sm:px-6 py-10 md:py-16 lg:py-24">
         <Breadcrumbs county={county} income={income} childCount={children} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20">
           <div className="lg:col-span-8">
             <AdContainer slot="top" wordCount={wordCount} />
 
-            <div className="mb-14">
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 mb-8 leading-[1.1] font-heading">
+            <div className="mb-10 md:mb-14">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 mb-6 md:mb-8 leading-[1.15] md:leading-[1.1] font-heading">
                 {formattedIncome} <span className="text-indigo-600 block sm:inline">Child Support</span> in <span className="text-gray-900 underline decoration-indigo-200 underline-offset-8 decoration-4">{locationName}</span>
               </h1>
             </div>
@@ -338,7 +338,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
             </div>
 
             {/* Key Figures Table */}
-            <div className="mb-20">
+            <div className="mb-12 md:mb-20">
               <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3 tracking-tight font-heading">
                 <Landmark className="text-indigo-600 w-6 h-6" /> Key Calculation Figures
               </h2>
@@ -406,7 +406,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
             </article>
 
             {/* CTA SECTION */}
-            <div className="my-8 text-center text-sm font-medium text-gray-500">
+            <div className="my-8 md:my-12 text-center text-sm font-medium text-gray-500">
               Want to see our methodology? Review our <Link href="/editorial-methodology" className="text-indigo-600 hover:text-indigo-800 transition-colors underline underline-offset-4">2026 calculation standards</Link>.
             </div>
 
@@ -433,11 +433,11 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
           </div>
 
           {/* --- MOBILE SIDEBAR (collapsed resources section) --- */}
-          <div className="lg:hidden col-span-1 mt-8">
-            <details className="bg-white border border-slate-100 rounded-2xl shadow-sm">
-              <summary className="flex items-center justify-between px-6 py-4 cursor-pointer min-h-[48px] text-sm font-bold text-slate-700">
-                <span>📚 Resources & Legal Sources</span>
-                <svg className="w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+          <div className="lg:hidden col-span-1 mt-6 md:mt-8">
+            <details className="bg-white border border-slate-100 rounded-2xl shadow-sm group">
+              <summary className="flex items-center justify-between px-6 py-4 cursor-pointer min-h-[48px] text-sm font-bold text-slate-700 select-none list-none">
+                <span>📚 Resources &amp; Legal Sources</span>
+                <svg className="w-5 h-5 text-slate-400 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
               </summary>
               <div className="px-6 pb-6">
                 <AuthoritySidebar county={county} />
@@ -448,7 +448,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
         </div>
 
         {/* --- INTERNAL LINKING MATRIX --- */}
-        <div className="border-t border-gray-100 pt-20 mt-10">
+        <div className="border-t border-gray-100 pt-12 md:pt-20 mt-6 md:mt-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
             {internalLinks.map((link, idx) => (
               <Link key={idx} href={link.href} className="group p-6 bg-white border border-gray-100 rounded-2xl hover:border-indigo-600 transition-all shadow-sm">
