@@ -78,14 +78,6 @@ export default function Home() {
         </div>
 
         {/* ── BENCHMARK DATA TABLE (AI SEO) ── */}
-        <div className="w-full mb-16 md:mb-24 lg:mb-32" id="benchmark-table">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 tracking-tight font-heading">Support Benchmark Estimates</h2>
-            <p className="text-gray-500 text-sm font-medium">Typical presumptive transfer amounts based on the 2026 economic schedule.</p>
-          </div>
-          <div className="overflow-x-auto rounded-2xl border border-gray-100 shadow-sm bg-white hover:border-gray-200 transition-all">
-            <table className="w-full text-left border-collapse min-w-[600px]">
-
         <div className="mt-20 w-full" id="benchmark-table">
           <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center tracking-tight font-heading">Washington Child Support Benchmark Estimates</h2>
           <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm bg-white">
@@ -116,14 +108,14 @@ export default function Home() {
         </div>
 
         {/* ── TRUST TEXT (EEAT BOOST) ── */}
-        <div className="mt-6 text-center max-w-2xl">
+        <div className="mt-8 text-center max-w-2xl">
           <p className="text-sm text-gray-500 leading-relaxed italic">
             &quot;These estimates are based on the 2026 Washington State child support guidelines. Actual support amounts may vary depending on custody arrangements, healthcare costs, and judicial decisions.&quot;
           </p>
         </div>
 
         {/* ── CTA SECTION (CONVERSION) ── */}
-        <div className="mt-8 flex justify-center w-full">
+        <div className="mt-12 flex justify-center w-full">
           <Link 
             href="/worksheet" 
             className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-lg shadow-indigo-100 transition-all hover:-translate-y-1 active:translate-y-0"
@@ -178,9 +170,6 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="w-full mt-16 md:mt-24 lg:mt-32 border-t border-gray-100 pt-12 md:pt-20 lg:pt-24">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-10 md:mb-12 tracking-tight text-center font-heading">Frequently Asked Questions</h3>
-            <FAQAccordion items={homeFaqs} />
           <div className="space-y-4">
             <h3 className="text-2xl font-bold text-gray-900 font-heading">What the Basic Obligation Covers</h3>
             <p>
@@ -221,10 +210,6 @@ export default function Home() {
           ))}
         </div>
 
-        {/* ── QUICKLINKS (FULL WIDTH) ── */}
-        <div className="max-w-7xl mx-auto px-4 mt-16 md:mt-24 lg:mt-32">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-
         {/* Blog quicklinks */}
         <div className="mt-16 border-t border-gray-100 pt-16">
           <h3 className="text-xl font-bold text-gray-900 mb-8 tracking-tight font-heading">Latest Legal Guides</h3>
@@ -240,26 +225,6 @@ export default function Home() {
               </Link>
             ))}
           </div>
-
-          <div className="mt-12 md:mt-16 pt-16 md:pt-24 border-t border-gray-100">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-12">
-               <h3 className="text-2xl font-bold text-gray-900 tracking-tight font-heading">Latest Legal Insights</h3>
-               <Link href="/blog" className="text-[10px] font-bold text-gray-400 uppercase tracking-widest hover:text-indigo-600 transition-colors">See all articles →</Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { label: '2026 WA Guidelines: Complete Handbook', href: '/blog/washington-child-support-guidelines-2026', cat: 'Legal' },
-                { label: 'Self-Support Reserve (SSR) Explained', href: '/blog/washington-ssr-self-support-reserve-explained', cat: 'Analysis' },
-                { label: 'King County Child Support Rules', href: '/blog/king-county-child-support-rules', cat: 'Local Rules' },
-              ].map((p) => (
-                <Link key={p.href} href={p.href} className="block p-8 bg-white border border-gray-100 rounded-2xl hover:border-indigo-200 hover:shadow-md transition-all group">
-                  <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest block mb-4">{p.cat}</span>
-                  <span className="text-base font-bold text-gray-900 group-hover:text-indigo-700 transition-colors leading-snug font-heading">{p.label}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-
         </div>
 
       </section>
