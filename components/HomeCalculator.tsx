@@ -174,7 +174,7 @@ export default function HomeCalculator() {
 
       {/* Quick Tips */}
       <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl w-full px-4">
-        <div className="p-8 bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 transform hover:-translate-y-1 transition-all">
+        <div className="p-8 bg-gradient-to-br from-white to-slate-50 rounded-3xl border border-slate-200/60 shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all">
           <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6">
             <Scale size={24} />
           </div>
@@ -182,7 +182,7 @@ export default function HomeCalculator() {
           <p className="text-sm text-slate-600 leading-relaxed">Updated with official 2026 Washington State Economic Tables and mandatory guidelines.</p>
         </div>
         
-        <div className="p-8 bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 transform hover:-translate-y-1 transition-all">
+        <div className="p-8 bg-gradient-to-br from-white to-slate-50 rounded-3xl border border-slate-200/60 shadow-sm hover:shadow-md transform hover:-translate-y-1 transition-all">
           <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6">
             <Shield size={24} />
           </div>
@@ -190,7 +190,7 @@ export default function HomeCalculator() {
           <p className="text-sm text-slate-600 leading-relaxed">No data is stored on our servers. All calculations happen locally in your browser.</p>
         </div>
 
-        <div className="p-8 bg-indigo-600 rounded-3xl shadow-xl shadow-indigo-200 transform hover:-translate-y-1 transition-all text-white relative overflow-hidden group">
+        <div className="p-8 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-3xl shadow-xl shadow-indigo-600/20 transform hover:-translate-y-1 transition-all text-white relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-16 translate-x-16 group-hover:bg-white/20 transition-colors" />
           <div className="w-12 h-12 bg-white/20 text-white rounded-2xl flex items-center justify-center mb-6">
             <Calculator size={24} />

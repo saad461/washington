@@ -52,10 +52,10 @@ export default function Home() {
       {/* Calculator hero */}
       <div className="max-w-4xl w-full mx-auto relative z-10 flex flex-col items-center">
         <div className="text-center mb-12 w-full">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 drop-shadow-sm leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-slate-900 via-indigo-950 to-indigo-900 mb-6 leading-tight drop-shadow-sm px-2">
             Washington Child Support Calculator
           </h1>
-          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed px-4">
             Estimate child support payments based on combined income, number of children, and Washington State guidelines.
           </p>
         </div>

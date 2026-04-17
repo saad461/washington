@@ -58,7 +58,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
           return (
             <div 
               key={index} 
-              className="bg-white border border-slate-200 hover:border-indigo-500 transition-colors rounded-2xl overflow-hidden shadow-sm"
+              className="bg-gradient-to-br from-white to-slate-50 border border-slate-200/60 hover:border-indigo-400 transition-all duration-300 rounded-2xl overflow-hidden shadow-sm hover:shadow-md"
             >
               <h3>
                 <button
