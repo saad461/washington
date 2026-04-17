@@ -10,6 +10,7 @@ import {
   PrintButtonClient as PrintButton 
 } from '@/components/ClientDynamic';
 import CalculatorSchema from '@/components/CalculatorSchema';
+import FAQAccordion from '@/components/FAQAccordion';
 import { contentVariants } from '@/lib/contentVariants';
 import { getVariantIndices, formatVariant } from '@/lib/getVariant';
 
@@ -232,12 +233,6 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
   ];
 
   // JSON-LD Generation
-  const faqSchemaElements = dynamicFAQs.map(faq => ({
-    "@type": "Question",
-    "name": faq.q,
-    "acceptedAnswer": { "@type": "Answer", "text": faq.a }
-  }));
-
   const canonicalUrl = `https://wcssc.site/${slug}`;
   const breadcrumbItems = [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wcssc.site" },
@@ -248,10 +243,6 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "FAQPage",
-        "mainEntity": faqSchemaElements
-      },
       {
         "@type": "FinancialService",
         "@id": "https://wcssc.site",
@@ -412,17 +403,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
             {/* DYNAMIC FAQS */}
             <section className="mb-20">
               <h2 className="text-3xl font-black text-slate-900 mb-10 tracking-tight text-indigo-900">Legal FAQs for {formattedIncome} Tier</h2>
-              <div className="space-y-4">
-                {dynamicFAQs.map((faq, i) => (
-                  <div key={i} className="p-8 bg-white rounded-[2rem] border border-slate-100 hover:border-indigo-500 transition-all">
-                    <p className="font-black text-slate-900 text-lg mb-3 flex items-start gap-4">
-                      <span className="w-8 h-8 rounded-full bg-slate-900 shrink-0 flex items-center justify-center text-[10px] text-white font-black mt-1">Q</span>
-                      <span className="leading-tight">{faq.q}</span>
-                    </p>
-                    <p className="text-slate-600 font-medium leading-relaxed pl-12">{faq.a}</p>
-                  </div>
-                ))}
-              </div>
+              <FAQAccordion items={dynamicFAQs.map(f => ({ question: f.q, answer: f.a }))} />
             </section>
 
           </div>

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import HomeCalculator from "@/components/HomeCalculator";
 import CalculatorSchema from "@/components/CalculatorSchema";
+import FAQAccordion from "@/components/FAQAccordion";
 
 export const metadata: Metadata = {
   title: "WCSSC — Washington Child Support Calculator 2026",
@@ -10,7 +11,6 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  // JSON-LD: WebSite
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -18,6 +18,25 @@ export default function Home() {
     "url": "https://wcssc.site",
     "description": "Washington's most accurate 2026 child support calculator."
   };
+
+  const homeFaqs = [
+    {
+      question: "What is the minimum child support in Washington state?",
+      answer: "The statutory minimum child support in Washington is $50 per child per month. Judges may deviate below this amount in extraordinary circumstances only, to ensure the paying parent’s self-support reserve is protected."
+    },
+    {
+      question: "How is Washington child support calculated in 2026?",
+      answer: "Washington uses an Income Shares Model. Both parents' net incomes are calculated and combined. The total presumptive support obligation is derived from the state's 2026 economic table and then split proportionally between the parents based on their percentage of the combined income."
+    },
+    {
+      question: "What is the Self-Support Reserve (SSR) for 2026?",
+      answer: "The 2026 Self-Support Reserve (SSR) is $1,514 per month. This low-income protection ensures that a paying parent is not left with less than $1,514 to live on after making a basic child support payment."
+    },
+    {
+      question: "Does child support cover extraordinary expenses like daycare?",
+      answer: "No, the basic child support obligation covers only food, shelter, and basic clothing. Extraordinary expenses, such as work-related daycare, health insurance premiums, and approved educational costs, are apportioned separately based on the parents' proportional share of income."
+    }
+  ];
 
   return (
     <div className="flex-1 flex flex-col items-center px-4 py-16 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden w-full">
@@ -157,6 +176,12 @@ export default function Home() {
           <p>
             While the AOC economic tables provide the presumptive amount, judges can grant a <strong className="text-slate-800">Deviation</strong> upward or downward based on documented &quot;good cause&quot; — including 50/50 shared residential schedules, significant wealth disparities, or obligations to biological children from other relationships.
           </p>
+        </div>
+
+        {/* ── HOME FAQS ── */}
+        <div className="mt-14 w-full">
+          <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-8 tracking-tight text-center">Frequently Asked Questions</h3>
+          <FAQAccordion items={homeFaqs} />
         </div>
 
         {/* County quicklinks */}

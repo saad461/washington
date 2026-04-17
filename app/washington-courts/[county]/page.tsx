@@ -9,6 +9,7 @@ import {
   FileText, Clock, BookOpen, ArrowRight
 } from 'lucide-react';
 import CalculatorSchema from '@/components/CalculatorSchema';
+import FAQAccordion from '@/components/FAQAccordion';
 import { cleanEmDashContent } from '@/lib/textOptimizer';
 
 type Props = { params: Promise<{ county: string }> };
@@ -52,16 +53,16 @@ function generateCountyContent(county: WashingtonCounty): {
   const contextPhrase = isLargeUrban
     ? `As one of Washington's most populous counties, ${county.name} sees a disproportionately high volume of family law filings each year`
     : isRemote
-    ? `Though ${county.name} is one of Washington's more rural and geographically vast counties, its residents have equal access to state-mandated child support protections`
-    : isIsland
-    ? `The unique geographical nature of ${county.name} — accessible by ferry from the mainland — adds an additional logistical consideration when planning family law court appearances`
-    : isBorderCounty
-    ? `${county.name} sits near the Oregon border, and many families navigating child support here have cross-jurisdictional concerns that require careful handling under Washington's RCW 26.19 statute`
-    : isStateCapital
-    ? `As the seat of Washington State government in Olympia, ${county.name} is uniquely positioned where the laws governing child support are literally written — yet enforcement happens locally at the county level like everywhere else`
-    : isBilingual
-    ? `${county.name} has a large Spanish-speaking population, and the local court system proactively provides bilingual facilitator support — a significant advantage for non-English-speaking parents navigating family law`
-    : `${county.name} is one of the 39 Washington counties whose residents rely on the Washington State Child Support Schedule (WSCSS) to determine child support obligations`;
+      ? `Though ${county.name} is one of Washington's more rural and geographically vast counties, its residents have equal access to state-mandated child support protections`
+      : isIsland
+        ? `The unique geographical nature of ${county.name} — accessible by ferry from the mainland — adds an additional logistical consideration when planning family law court appearances`
+        : isBorderCounty
+          ? `${county.name} sits near the Oregon border, and many families navigating child support here have cross-jurisdictional concerns that require careful handling under Washington's RCW 26.19 statute`
+          : isStateCapital
+            ? `As the seat of Washington State government in Olympia, ${county.name} is uniquely positioned where the laws governing child support are literally written — yet enforcement happens locally at the county level like everywhere else`
+            : isBilingual
+              ? `${county.name} has a large Spanish-speaking population, and the local court system proactively provides bilingual facilitator support — a significant advantage for non-English-speaking parents navigating family law`
+              : `${county.name} is one of the 39 Washington counties whose residents rely on the Washington State Child Support Schedule (WSCSS) to determine child support obligations`;
 
   const introduction = [
     `Understanding child support in ${county.name}, Washington requires navigating both uniform state law and specific local court procedures. ${contextPhrase}. Under Washington's Revised Code (RCW 26.19), child support obligations are calculated using an Income Shares Model — a methodology designed to ensure that children receive a level of financial support proportionate to what they would have enjoyed if their parents had remained together.`,
@@ -88,10 +89,10 @@ function generateCountyContent(county: WashingtonCounty): {
     isLargeUrban
       ? `In high-volume counties like ${county.name}, understanding the court's internal workflow can make or break your timeline. Large urban courts often have separate family law commissioners and judge rotations. Motions for temporary support orders may be heard on dedicated "Family Law Motion" days. Showing up without confirming your assigned courtroom and calendar can result in your motion being stricken — losing weeks of progress.`
       : isRemote
-      ? `In a rural county like ${county.name}, the logistical challenges of appearing in court are very real. The clerk's office may have only one or two staff members handling all case types. Incomplete packets or missing signatures will likely require you to return in person — a significant burden if you live far from ${county.seat}. The best practice is to call the clerk at ${county.clerkPhone} in advance, describe exactly what you're filing, and ask if there is anything specific they need prepared.`
-      : isIsland
-      ? `For ${county.name} residents who must take a ferry to reach ${county.seat}, the courts have no blanket policy excusing ferry-related tardiness. You must plan for the earliest reasonable departure. Check Washington State Ferries scheduling at wsdot.wa.gov before any court date. Courts routinely deny continuances for "ferry issues" unless documented by extreme weather.`
-      : `Filing properly in ${county.name} means understanding not just the state rules, but also the local courtroom culture. Every county's judge and commissioner has discretionary latitude on procedural compliance. Some counties are known to be stricter about formatting requirements, attachment checklists, and scheduling. Getting these details wrong can delay your case by months even if your underlying math is correct.`,
+        ? `In a rural county like ${county.name}, the logistical challenges of appearing in court are very real. The clerk's office may have only one or two staff members handling all case types. Incomplete packets or missing signatures will likely require you to return in person — a significant burden if you live far from ${county.seat}. The best practice is to call the clerk at ${county.clerkPhone} in advance, describe exactly what you're filing, and ask if there is anything specific they need prepared.`
+        : isIsland
+          ? `For ${county.name} residents who must take a ferry to reach ${county.seat}, the courts have no blanket policy excusing ferry-related tardiness. You must plan for the earliest reasonable departure. Check Washington State Ferries scheduling at wsdot.wa.gov before any court date. Courts routinely deny continuances for "ferry issues" unless documented by extreme weather.`
+          : `Filing properly in ${county.name} means understanding not just the state rules, but also the local courtroom culture. Every county's judge and commissioner has discretionary latitude on procedural compliance. Some counties are known to be stricter about formatting requirements, attachment checklists, and scheduling. Getting these details wrong can delay your case by months even if your underlying math is correct.`,
     `Pro tip: Before submitting your final packet to the ${county.court} clerk, review the Local Family Law Rules (LFLR) published directly on the court's official website at ${county.website}. These county-specific rules cover mandatory formatting requirements, hearing scheduling procedures, and whether a mandatory parenting seminar is required before a hearing is set.`
   ];
 
@@ -184,14 +185,6 @@ export default async function CountyCourtPage({ params }: Props) {
         },
         telephone: county!.clerkPhone,
         url: county!.website
-      },
-      {
-        '@type': 'FAQPage',
-        mainEntity: faqs.map(faq => ({
-          '@type': 'Question',
-          name: faq.q,
-          acceptedAnswer: { '@type': 'Answer', text: faq.a }
-        }))
       },
       {
         '@type': 'BreadcrumbList',
@@ -420,14 +413,7 @@ export default async function CountyCourtPage({ params }: Props) {
               <h2 className="text-2xl font-black text-slate-900 mb-8">
                 Frequently Asked Questions — {county!.name}
               </h2>
-              <div className="space-y-4">
-                {faqs.map((faq, i) => (
-                  <div key={i} className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                    <h3 className="font-bold text-slate-900 mb-3 text-[16px]">{faq.q}</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">{faq.a}</p>
-                  </div>
-                ))}
-              </div>
+              <FAQAccordion items={faqs.map(f => ({ question: f.q, answer: f.a }))} />
             </section>
 
             {/* H. CONCLUSION */}

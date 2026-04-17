@@ -12,6 +12,7 @@ import {
 import { blogs, type BlogPost } from '@/data/blogs';
 import TableOfContents, { TOCItem } from '@/components/TableOfContents';
 import AuthorBox from '@/components/AuthorBox';
+import FAQAccordion from '@/components/FAQAccordion';
 import AdContainer from '@/components/AdContainer';
 import BlogCTA from '@/components/BlogCTA';
 import { cleanEmDashContent } from '@/lib/textOptimizer';
@@ -122,16 +123,7 @@ export default async function BlogPostPage({ params }: Props) {
           "logo": { "@type": "ImageObject", "url": "https://wcssc.site/wcssc-og.webp", "width": 1200, "height": 630 }
         },
         "mainEntityOfPage": { "@type": "WebPage", "@id": `https://wcssc.site/blog/${slug}` }
-      },
-      // Insert FAQPage dynamically if faqs exist
-      ...(post.faqs && post.faqs.length > 0 ? [{
-        "@type": "FAQPage",
-        "mainEntity": post.faqs.map((faq: { question: string; answer: string }) => ({
-          "@type": "Question",
-          "name": faq.question,
-          "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
-        }))
-      }] : [])
+      }
     ]
   };
 
@@ -228,14 +220,7 @@ export default async function BlogPostPage({ params }: Props) {
                   <HelpCircle className="w-8 h-8 text-indigo-600" />
                   Common Questions
                 </h2>
-                <div className="space-y-6">
-                  {post.faqs.map((faq: { question: string; answer: string }, idx: number) => (
-                    <div key={idx} className="p-8 md:p-10 bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-900/5 transition-all">
-                      <p className="text-lg font-black text-slate-900 mb-4 tracking-tight">{faq.question}</p>
-                      <p className="text-slate-600 font-medium leading-relaxed italic">{faq.answer}</p>
-                    </div>
-                  ))}
-                </div>
+                <FAQAccordion items={post.faqs.map(f => ({ question: f.question, answer: f.answer }))} />
               </section>
             )}
 
