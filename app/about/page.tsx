@@ -13,7 +13,7 @@ export default function AboutPage() {
     <div className="min-h-screen bg-[#FDFDFE] font-sans">
       <div className="max-w-4xl mx-auto px-6 py-20">
 
-        <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-indigo-600 transition-colors mb-16">
+        <Link href="/" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors mb-16">
           <ArrowLeft size={14} />
           Back to Calculator
         </Link>
@@ -23,7 +23,7 @@ export default function AboutPage() {
             <Users className="w-8 h-8 text-white" />
           </div>
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600 mb-1">E-E-A-T Transparency</p>
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-600 mb-1">E-E-A-T Transparency</p>
             <h1 className="text-4xl font-black text-slate-900 tracking-tight">About WCSSC</h1>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function AboutPage() {
                   { step: "03", label: "Technical Audit", desc: "Calculation engine tested against known edge cases and SSR thresholds" },
                 ].map((s) => (
                   <div key={s.step} className="p-5 bg-slate-50 rounded-2xl border border-slate-100">
-                    <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-[10px] font-black mb-3">{s.step}</div>
+                    <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-xs font-black mb-3">{s.step}</div>
                     <p className="text-xs font-black text-slate-900 uppercase tracking-widest mb-1">{s.label}</p>
                     <p className="text-[11px] text-slate-500">{s.desc}</p>
                   </div>
@@ -122,7 +122,7 @@ export default function AboutPage() {
 
         <div className="mt-16 p-8 bg-slate-900 rounded-[3rem] text-center text-slate-400">
           <p className="text-sm font-medium mb-4">Washington Child Support Schedule Center &copy; 2026</p>
-          <div className="flex justify-center gap-8 text-[10px] font-black uppercase tracking-widest">
+          <div className="flex justify-center gap-8 text-xs font-black uppercase tracking-widest">
             <Link href="/privacy" className="hover:text-indigo-400 transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-indigo-400 transition-colors">Terms of Service</Link>
             <Link href="/disclaimer" className="hover:text-indigo-400 transition-colors">Disclaimer</Link>

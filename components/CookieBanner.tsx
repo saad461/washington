@@ -63,23 +63,23 @@ export default function CookieBanner() {
                   Privacy Policy
                 </Link>
               </p>
-              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">
+              <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">
                 Required for GDPR · CCPA Compliance
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0 w-full sm:w-auto">
             <button
               onClick={handleDecline}
-              className="flex items-center gap-1.5 px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-200 transition-colors border border-slate-700 rounded-xl hover:border-slate-500"
+              className="flex items-center justify-center gap-1.5 px-4 py-3 text-xs font-black uppercase tracking-widest text-slate-400 hover:text-slate-200 transition-colors border border-slate-700 rounded-xl hover:border-slate-500 min-h-[48px]"
             >
               <X className="w-3 h-3" />
               Decline
             </button>
             <button
               onClick={handleAccept}
-              className="px-6 py-2.5 bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-900/30 active:scale-95"
+              className="px-6 py-3 bg-indigo-600 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-900/30 active:scale-95 min-h-[48px]"
             >
               Accept & Continue
             </button>

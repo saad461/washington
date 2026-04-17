@@ -35,7 +35,7 @@ export default function CourtsIndex() {
             >
               <h2 className="text-xl font-black text-slate-900 mb-4 group-hover:text-emerald-700 transition-colors flex items-center justify-between">
                 <span>{court.name}</span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 bg-slate-50 px-2 py-1 rounded-lg">View</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-500 bg-slate-50 px-2 py-1 rounded-lg">View</span>
               </h2>
               
               <div className="space-y-3">

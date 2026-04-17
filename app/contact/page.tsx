@@ -16,7 +16,7 @@ export default function ContactPage() {
       <div className="max-w-4xl mx-auto px-6 py-20">
 
         {/* Back Link */}
-        <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-indigo-600 transition-colors mb-16">
+        <Link href="/" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors mb-16">
           <ArrowLeft size={14} />
           Back to Calculator
         </Link>
@@ -27,7 +27,7 @@ export default function ContactPage() {
             <Mail className="w-8 h-8 text-white" />
           </div>
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600 mb-1">Support & Feedback</p>
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-600 mb-1">Support & Feedback</p>
             <h1 className="text-4xl font-black text-slate-900 tracking-tight">Contact WCSSC</h1>
           </div>
         </div>

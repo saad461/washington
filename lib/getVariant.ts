@@ -1,5 +1,5 @@
-
 import { contentVariants } from './contentVariants';
+import { cleanEmDashContent } from './textOptimizer';
 
 /**
  * Generates a deterministic hash from a string (the slug).
@@ -45,10 +45,12 @@ export function formatVariant(
     locationName: string;
   }
 ): string {
-  return text
+  const formatted = text
     .replace(/{formattedIncome}/g, values.formattedIncome)
     .replace(/{formattedSupport}/g, values.formattedSupport)
     .replace(/{childrenText}/g, values.childrenText)
     .replace(/{countyName}/g, values.countyName)
     .replace(/{locationName}/g, values.locationName);
+    
+  return cleanEmDashContent(formatted);
 }

@@ -50,7 +50,7 @@ export default async function GlossaryTermPage({ params }: Props) {
       <div className="max-w-4xl mx-auto px-6 py-20 lg:py-24 relative z-10">
         
         {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 mb-12 text-[10px] font-black uppercase tracking-widest text-slate-400">
+        <nav className="flex items-center gap-2 mb-12 text-xs font-black uppercase tracking-widest text-slate-500">
           <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
           <ChevronRight className="w-3 h-3 opacity-50" />
           <Link href="/glossary" className="hover:text-indigo-600 transition-colors">Glossary</Link>
@@ -80,7 +80,7 @@ export default async function GlossaryTermPage({ params }: Props) {
           </div>
 
           <div className="border-t border-slate-100 pt-10">
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6">Related Tools & Resources</h3>
+            <h3 className="text-xs font-black uppercase tracking-widest text-slate-500 mb-6">Related Tools & Resources</h3>
             <div className="flex flex-col sm:flex-row gap-4">
               {termData.relatedLinks.map((link, idx) => (
                 <Link 

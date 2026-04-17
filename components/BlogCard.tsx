@@ -25,10 +25,10 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
       </div>
 
       <div className="flex items-center gap-3 mb-4">
-        <span className="px-3 py-1 bg-indigo-50 text-indigo-600 text-[10px] font-black uppercase tracking-widest rounded-lg">
+        <span className="px-3 py-1 bg-indigo-50 text-indigo-600 text-xs font-black uppercase tracking-widest rounded-lg">
           {post.category}
         </span>
-        <div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+        <div className="flex items-center gap-1.5 text-slate-500 text-xs font-bold uppercase tracking-widest">
           <Clock size={12} />
           {post.readTime}
         </div>
@@ -38,12 +38,12 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
         {post.title}
       </h3>
 
-      <p className="text-sm text-slate-500 font-medium leading-relaxed mb-8 flex-1 line-clamp-3">
+      <p className="text-sm text-slate-600 font-medium leading-relaxed mb-8 flex-1 line-clamp-3">
         {post.excerpt}
       </p>
 
       <div className="pt-6 border-t border-slate-50 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-slate-400 text-[9px] font-black uppercase tracking-widest">
+        <div className="flex items-center gap-2 text-slate-500 text-[11px] font-black uppercase tracking-widest">
           <Calendar size={12} />
           {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
         </div>

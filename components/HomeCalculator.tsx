@@ -126,11 +126,11 @@ export default function HomeCalculator() {
           <button 
             type="submit" 
             disabled={isLoading}
-            className={`mt-2 w-full text-white rounded-xl py-4 font-semibold text-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-slate-900/20 ${isLoading ? 'bg-slate-700 cursor-not-allowed opacity-80' : 'bg-slate-900 hover:bg-slate-800 hover:shadow-lg active:scale-[0.98]'}`}
+            className={`mt-2 w-full text-white rounded-2xl py-4 font-semibold text-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-slate-900/20 ${isLoading ? 'bg-slate-700 cursor-not-allowed opacity-80' : 'bg-slate-900 hover:bg-slate-800 hover:shadow-lg active:scale-[0.98]'}`}
           >
-            {isLoading ? "Calculating..." : "Calculate Estimate"}
+            {isLoading ? "Calculating..." : "Calculate Your Child Support"}
           </button>
-          <p className="text-xs text-slate-500 text-center mt-3 px-2 leading-relaxed">
+          <p className="text-xs text-slate-600 text-center mt-3 px-2 leading-relaxed">
             Based on the official Washington State Child Support Schedule (Effective January 2026). Actual court-ordered support may vary.
           </p>
 
@@ -154,14 +154,14 @@ export default function HomeCalculator() {
                   <div className="flex justify-between items-center pt-2">
                     <div>
                       <p className="font-semibold text-slate-800">Parent 1 Share</p>
-                      <p className="text-xs text-slate-500 mt-0.5">{(result.parent1Share * 100).toFixed(1)}% of total</p>
+                      <p className="text-xs text-slate-600 mt-0.5">{(result.parent1Share * 100).toFixed(1)}% of total</p>
                     </div>
                     <p className="text-lg font-bold text-indigo-700">{formatCurrency(result.parent1Support)}</p>
                   </div>
                   <div className="flex justify-between items-center pt-2">
                     <div>
                       <p className="font-semibold text-slate-800">Parent 2 Share</p>
-                      <p className="text-xs text-slate-500 mt-0.5">{(result.parent2Share * 100).toFixed(1)}% of total</p>
+                      <p className="text-xs text-slate-600 mt-0.5">{(result.parent2Share * 100).toFixed(1)}% of total</p>
                     </div>
                     <p className="text-lg font-bold text-indigo-700">{formatCurrency(result.parent2Support)}</p>
                   </div>

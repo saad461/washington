@@ -181,7 +181,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Breadcrumbs = ({ county, income, childCount }: { county: { name: string; slug: string } | null; income: number; childCount: number }) => (
-  <nav aria-label="Breadcrumb" className="flex mb-12 text-[10px] font-black uppercase tracking-widest text-slate-400 no-print flex-wrap gap-y-2">
+  <nav aria-label="Breadcrumb" className="flex mb-12 text-xs font-black uppercase tracking-widest text-slate-500 no-print flex-wrap gap-y-2">
     <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link><span className="mx-2 opacity-30">/</span><span className="opacity-60">Washington</span>
     {county && (
       <><span className="mx-2 opacity-30">/</span><Link href={`/${county.slug}-income-5000-${childCount}-${childCount === 1 ? 'child' : 'children'}`} className="hover:text-indigo-600 transition-colors">{county.name}</Link></>
@@ -311,7 +311,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
             {/* Result Header Card */}
             <div className="mb-16">
               <div className="w-full bg-white rounded-[3rem] shadow-2xl shadow-indigo-900/10 border border-slate-100 p-12 text-center relative overflow-hidden">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-8">Estimated 2026 Monthly Payment</p>
+                <p className="text-xs font-black text-slate-500 uppercase tracking-[0.3em] mb-8">Estimated 2026 Monthly Payment</p>
                 <div className="inline-flex py-8 px-16 bg-slate-900 rounded-[3rem] text-white shadow-xl mb-8">
                   <p className={`font-black tracking-tighter leading-none ${supportNum === null ? 'text-2xl' : 'text-5xl md:text-7xl'}`}>
                     {supportNum !== null && <span className="text-3xl text-indigo-400 align-top mr-2">$</span>}
@@ -319,8 +319,8 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   </p>
                 </div>
                 <div className="flex justify-center gap-8">
-                  <div className="text-center"><p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Combined</p><p className="text-sm font-black">{formattedIncome}</p></div>
-                  <div className="text-center"><p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Children</p><p className="text-sm font-black">{children}</p></div>
+                  <div className="text-center"><p className="text-xs font-black text-slate-500 uppercase tracking-widest mb-1">Combined</p><p className="text-sm font-black">{formattedIncome}</p></div>
+                  <div className="text-center"><p className="text-xs font-black text-slate-500 uppercase tracking-widest mb-1">Children</p><p className="text-sm font-black">{children}</p></div>
                 </div>
 
                 <PrintButton />
@@ -337,17 +337,17 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <caption className="sr-only">Monthly Support Estimate for {formattedIncome} {county ? `in ${county.name}` : 'in Washington'}</caption>
                   <thead className="bg-slate-50 border-b border-slate-100">
                     <tr>
-                      <th className="px-6 py-4 text-[10px] font-black uppercase text-slate-400 tracking-widest">Metric</th>
-                      <th className="px-6 py-4 text-[10px] font-black uppercase text-slate-400 tracking-widest">Value</th>
+                      <th className="px-4 sm:px-6 py-4 text-xs font-black uppercase text-slate-500 tracking-widest">Metric</th>
+                      <th className="px-4 sm:px-6 py-4 text-xs font-black uppercase text-slate-500 tracking-widest">Value</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     {keyFigures.map((item, idx) => (
                       <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
-                        <td className="px-6 py-4 flex items-center gap-3 font-bold text-slate-700 text-sm">
+                        <td className="px-4 sm:px-6 py-4 flex items-center gap-3 font-bold text-slate-700 text-sm">
                           <span className="text-indigo-500">{item.icon}</span> {item.label}
                         </td>
-                        <td className="px-6 py-4 font-black text-slate-900 text-sm">{item.value}</td>
+                        <td className="px-4 sm:px-6 py-4 font-black text-slate-900 text-sm">{item.value}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -386,13 +386,13 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
               <p className="leading-relaxed">{conclusion}</p>
 
               <div className="bg-slate-50 p-8 rounded-3xl border border-slate-100 mt-12 not-prose">
-                <p className="text-xs text-slate-500 font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
+                <p className="text-xs text-slate-600 font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
                   <Scale className="w-4 h-4" /> Legal Disclaimer
                 </p>
-                <p className="text-sm text-slate-500 italic leading-relaxed">{legal}</p>
+                <p className="text-sm text-slate-600 italic leading-relaxed">{legal}</p>
               </div>
 
-              <p className="text-xs text-slate-400 font-bold tracking-widest uppercase mt-12">{timestamp}</p>
+              <p className="text-xs text-slate-500 font-bold tracking-widest uppercase mt-12">{timestamp}</p>
             </article>
 
             {/* CTA SECTION */}
@@ -427,9 +427,23 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
 
           </div>
 
-          {/* --- SIDEBAR --- */}
-          <div className="lg:col-span-4">
+          {/* --- SIDEBAR (Desktop only — mobile gets inline collapsed resources below) --- */}
+          <div className="hidden lg:block lg:col-span-4">
             <AuthoritySidebar county={county} />
+            <AuthorBox />
+          </div>
+
+          {/* --- MOBILE SIDEBAR (collapsed resources section) --- */}
+          <div className="lg:hidden col-span-1 mt-8">
+            <details className="bg-white border border-slate-100 rounded-2xl shadow-sm">
+              <summary className="flex items-center justify-between px-6 py-4 cursor-pointer min-h-[48px] text-sm font-bold text-slate-700">
+                <span>📚 Resources & Legal Sources</span>
+                <svg className="w-5 h-5 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+              </summary>
+              <div className="px-6 pb-6">
+                <AuthoritySidebar county={county} />
+              </div>
+            </details>
             <AuthorBox />
           </div>
         </div>
@@ -452,7 +466,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-5xl mx-auto">
             {/* Same County ±$1000 */}
             <div>
-              <h3 className="text-[11px] font-black text-indigo-600 uppercase tracking-widest mb-6">Nearby Income Tiers ({countyName})</h3>
+              <h3 className="text-xs font-black text-indigo-600 uppercase tracking-widest mb-6">Nearby Income Tiers ({countyName})</h3>
               <div className="space-y-3">
                 {[-1000, -500, +500, +1000].map(diff => {
                   const newInc = income + diff;
@@ -473,7 +487,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
 
             {/* Sibling Counties Same Income */}
             <div>
-              <h3 className="text-[11px] font-black text-indigo-600 uppercase tracking-widest mb-6">Compare Washington Counties</h3>
+              <h3 className="text-xs font-black text-indigo-600 uppercase tracking-widest mb-6">Compare Washington Counties</h3>
               <div className="space-y-3">
                 {siblingCounties.map(c => {
                   const nChildren = children === 1 ? '1-child' : `${children}-children`;

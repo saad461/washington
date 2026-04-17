@@ -29,7 +29,7 @@ export default function BlogListingPage() {
             <div className="p-3 bg-indigo-600 rounded-2xl shadow-xl shadow-indigo-600/20 mb-6">
               <BookOpen className="w-8 h-8 text-white" />
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600 mb-4">Resource Center</p>
+            <p className="text-xs font-black uppercase tracking-[0.4em] text-indigo-600 mb-4">Resource Center</p>
             <h1 className="text-4xl md:text-7xl font-black text-slate-900 tracking-tight leading-none mb-8">
               Expert <span className="italic text-indigo-600 underline decoration-indigo-200 underline-offset-8">Insights</span> for WA Parents
             </h1>
@@ -48,11 +48,11 @@ export default function BlogListingPage() {
                   <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div>
                       <div className="flex items-center gap-4 mb-8">
-                        <span className="flex items-center gap-2 px-3 py-1 bg-indigo-500/20 rounded-lg text-indigo-300 text-[9px] font-black uppercase tracking-widest border border-indigo-500/30">
+                        <span className="flex items-center gap-2 px-3 py-1 bg-indigo-500/20 rounded-lg text-indigo-300 text-[11px] font-black uppercase tracking-widest border border-indigo-500/30">
                           < Sparkles size={12} />
                           Featured Article
                         </span>
-                        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{featuredPost.readTime} Read</span>
+                        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{featuredPost.readTime} Read</span>
                       </div>
                       <h2 className="text-3xl md:text-5xl font-black mb-8 leading-tight tracking-tight italic">
                         {featuredPost.title}
@@ -64,7 +64,7 @@ export default function BlogListingPage() {
                         <div className="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center font-black">W</div>
                         <div>
                           <p className="text-xs font-black uppercase tracking-widest leading-none mb-1">{featuredPost.author}</p>
-                          <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest leading-none">Editorial & Legal Audit</p>
+                          <p className="text-xs text-slate-500 font-bold uppercase tracking-widest leading-none">Editorial & Legal Audit</p>
                         </div>
                       </div>
                     </div>
@@ -95,13 +95,13 @@ export default function BlogListingPage() {
               <FileText className="w-8 h-8 text-white" />
             </div>
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600 mb-1">Expert Analysis</p>
-              <h1 className="text-4xl font-black text-slate-900 tracking-tight">Legal Guides</h1>
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-600 mb-1">Expert Analysis</p>
+              <h2 className="text-4xl font-black text-slate-900 tracking-tight">Legal Guides</h2>
             </div>
           </div>
           <div className="hidden md:block p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
-            <p className="text-[9px] font-black text-emerald-600 uppercase tracking-widest mb-1">Status: Updated 2026</p>
-            <p className="text-[11px] text-emerald-800 font-medium italic">Latest AOC Economic Table changes integrated.</p>
+            <p className="text-[11px] font-black text-emerald-600 uppercase tracking-widest mb-1">Status: Updated 2026</p>
+            <p className="text-xs text-emerald-800 font-medium italic">Latest AOC Economic Table changes integrated.</p>
           </div>
         </div>
         <BlogGridClient initialBlogs={blogs} />

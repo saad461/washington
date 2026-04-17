@@ -4,6 +4,15 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Design System Tokens */
+  --color-primary: #4f46e5; /* indigo-600 */
+  --color-primary-hover: #4338ca; /* indigo-700 */
+  --color-text-primary: #1e293b; /* slate-800 */
+  --color-text-body: #334155; /* slate-700 */
+  --color-text-secondary: #475569; /* slate-600 */
+  --color-text-muted: #64748b; /* slate-500 — minimum on light bg */
+  --min-label-size: 0.6875rem; /* 11px — micro-label floor */
+  --min-touch-target: 48px;
 }
 
 @theme inline {
@@ -17,6 +26,26 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-size: 1rem; /* 16px base minimum */
+  line-height: 1.7;
+}
+
+/* ── Touch target enforcement ── */
+@media (pointer: coarse) {
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    min-height: 44px;
+  }
+}
+
+/* ── Micro-label utility (replaces text-[8px], text-[9px], text-[10px]) ── */
+.text-label {
+  font-size: var(--min-label-size);
+  line-height: 1.2;
 }
 
 @layer utilities {

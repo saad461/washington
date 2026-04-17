@@ -43,7 +43,7 @@ export default function ExtraExpensesCalculator() {
         <div className="bg-white border border-slate-100 rounded-[3rem] shadow-2xl shadow-indigo-900/5 p-8 md:p-14 mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Parent 1 Net Income</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-slate-500 mb-2">Parent 1 Net Income</label>
               <div className="relative group">
                 <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
                 <input 
@@ -56,7 +56,7 @@ export default function ExtraExpensesCalculator() {
               </div>
             </div>
             <div>
-              <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Parent 2 Net Income</label>
+              <label className="block text-xs font-black uppercase tracking-widest text-slate-500 mb-2">Parent 2 Net Income</label>
               <div className="relative group">
                 <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
                 <input 
@@ -71,7 +71,7 @@ export default function ExtraExpensesCalculator() {
           </div>
 
           <div className="mb-12">
-            <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Total Monthly Extraordinary Expense (e.g. Daycare)</label>
+            <label className="block text-xs font-black uppercase tracking-widest text-slate-500 mb-2">Total Monthly Extraordinary Expense (e.g. Daycare)</label>
             <div className="relative group max-w-md">
               <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
               <input 
@@ -91,18 +91,18 @@ export default function ExtraExpensesCalculator() {
               className="bg-slate-900 rounded-[2rem] p-8 text-white mt-10 relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl -translate-y-16 translate-x-16" />
-              <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6">Proportional Split Results</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-slate-500 mb-6">Proportional Split Results</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="bg-white/10 rounded-2xl p-6 border border-white/5">
                   <p className="text-slate-400 text-xs font-bold mb-1">Parent 1 Share ({perFormatter.format(p1Share)})</p>
                   <p className="text-3xl font-black">{curFormatter.format(p1Cost)}</p>
-                  <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-2">{curFormatter.format(p1)} / mo net income</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-widest mt-2">{curFormatter.format(p1)} / mo net income</p>
                 </div>
                 <div className="bg-white/10 rounded-2xl p-6 border border-white/5">
                   <p className="text-slate-400 text-xs font-bold mb-1">Parent 2 Share ({perFormatter.format(p2Share)})</p>
                   <p className="text-3xl font-black text-indigo-400">{curFormatter.format(p2Cost)}</p>
-                  <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-2">{curFormatter.format(p2)} / mo net income</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-widest mt-2">{curFormatter.format(p2)} / mo net income</p>
                 </div>
               </div>
             </motion.div>

@@ -26,7 +26,7 @@ const LocalInsight: React.FC<LocalInsightProps> = ({ county }) => {
               </div>
               <div>
                 <h2 className="text-2xl font-black text-slate-900 leading-none mb-2">Local Authority</h2>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">{county.name} Filing Guide</p>
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-500">{county.name} Filing Guide</p>
               </div>
             </div>
 
@@ -38,7 +38,7 @@ const LocalInsight: React.FC<LocalInsightProps> = ({ county }) => {
                   <MapPin className="w-5 h-5 text-slate-400 group-hover:text-indigo-600" />
                 </div>
                 <div>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">Courthouse Address</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-1">Courthouse Address</p>
                   <p className="text-sm font-bold text-slate-900 leading-snug">{county.courtAddress}</p>
                 </div>
               </div>
@@ -48,7 +48,7 @@ const LocalInsight: React.FC<LocalInsightProps> = ({ county }) => {
                   <PhoneCall className="w-5 h-5 text-slate-400 group-hover:text-emerald-600" />
                 </div>
                 <div>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">Clerk of the Court</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-1">Clerk of the Court</p>
                   <p className="text-sm font-bold text-slate-900">{county.clerkPhone}</p>
                 </div>
               </div>
@@ -58,7 +58,7 @@ const LocalInsight: React.FC<LocalInsightProps> = ({ county }) => {
                   <DollarSign className="w-5 h-5 text-slate-400 group-hover:text-indigo-600" />
                 </div>
                 <div>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">Standard Filing Fee</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-1">Standard Filing Fee</p>
                   <p className="text-sm font-bold text-slate-900">{county.filingFee}</p>
                 </div>
               </div>

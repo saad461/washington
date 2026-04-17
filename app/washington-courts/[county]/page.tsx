@@ -9,6 +9,7 @@ import {
   FileText, Clock, BookOpen, ArrowRight
 } from 'lucide-react';
 import CalculatorSchema from '@/components/CalculatorSchema';
+import { cleanEmDashContent } from '@/lib/textOptimizer';
 
 type Props = { params: Promise<{ county: string }> };
 
@@ -116,7 +117,15 @@ function generateCountyContent(county: WashingtonCounty): {
     { step: 'Attend Your Hearing', detail: `Review the local calendar for ${county.name}. Some counties use dedicated Family Law Motion days. Arrive early and bring copies of everything.` },
   ];
 
-  return { introduction, howItWorks, filingProcess, localInsightExpanded, exampleNarrative, conclusion, filingSteps };
+  return {
+    introduction: introduction.map(cleanEmDashContent),
+    howItWorks: howItWorks.map(cleanEmDashContent),
+    filingProcess: filingProcess.map(cleanEmDashContent),
+    localInsightExpanded: localInsightExpanded.map(cleanEmDashContent),
+    exampleNarrative: exampleNarrative.map(cleanEmDashContent),
+    conclusion: conclusion.map(cleanEmDashContent),
+    filingSteps: filingSteps.map(step => ({ ...step, detail: cleanEmDashContent(step.detail) }))
+  };
 }
 
 // ─── County Page Component ────────────────────────────────────────────────────
@@ -204,7 +213,7 @@ export default async function CountyCourtPage({ params }: Props) {
       <section className="bg-white border-b border-slate-100">
         <div className="max-w-6xl mx-auto px-6 py-14 md:py-20 text-center">
           {/* Breadcrumb */}
-          <nav className="flex items-center justify-center gap-2 mb-8 text-[9px] font-black uppercase tracking-widest text-slate-400">
+          <nav className="flex items-center justify-center gap-2 mb-8 text-xs font-black uppercase tracking-widest text-slate-500">
             <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
             <ChevronRight className="w-3 h-3 opacity-40" />
             <Link href="/washington-courts" className="hover:text-indigo-600 transition-colors">Courts</Link>
@@ -225,7 +234,7 @@ export default async function CountyCourtPage({ params }: Props) {
           </p>
 
           {/* Quick stats strip */}
-          <div className="inline-flex flex-wrap justify-center gap-4 text-[10px] font-black uppercase tracking-widest text-slate-500">
+          <div className="inline-flex flex-wrap justify-center gap-4 text-xs font-black uppercase tracking-widest text-slate-500">
             <span className="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full">SSR: $1,514</span>
             <span className="bg-slate-100 text-slate-700 px-4 py-2 rounded-full">2026 Guidelines</span>
             <span className="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full">All 39 Counties</span>
@@ -389,17 +398,17 @@ export default async function CountyCourtPage({ params }: Props) {
               {/* Visual calc breakdown */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
                 <div className="bg-slate-900 text-white rounded-2xl p-5 text-center">
-                  <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-2">Parent A Net</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-2">Parent A Net</p>
                   <p className="text-2xl font-black">$5,000</p>
                   <p className="text-xs text-indigo-400 mt-1 font-bold">62.5%</p>
                 </div>
                 <div className="bg-slate-200 rounded-2xl p-5 text-center">
-                  <p className="text-[9px] font-black uppercase tracking-widest text-slate-500 mb-2">Parent B Net</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-2">Parent B Net</p>
                   <p className="text-2xl font-black text-slate-700">$3,000</p>
                   <p className="text-xs text-slate-500 mt-1 font-bold">37.5%</p>
                 </div>
                 <div className="bg-indigo-600 text-white rounded-2xl p-5 text-center">
-                  <p className="text-[9px] font-black uppercase tracking-widest text-indigo-200 mb-2">2 Children Total</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-indigo-200 mb-2">2 Children Total</p>
                   <p className="text-2xl font-black">≈$1,883</p>
                   <p className="text-xs text-indigo-200 mt-1 font-bold">Presumptive Obligation</p>
                 </div>
@@ -454,21 +463,21 @@ export default async function CountyCourtPage({ params }: Props) {
 
               <div className="space-y-5 mb-6">
                 <div>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">Physical Address</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-1">Physical Address</p>
                   <p className="flex items-start gap-2 text-sm font-medium">
                     <MapPin className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
                     {county!.courtAddress}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">Clerk Phone</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-1">Clerk Phone</p>
                   <p className="flex items-center gap-2 text-sm font-bold">
                     <Phone className="w-4 h-4 text-indigo-400 shrink-0" />
                     {county!.clerkPhone}
                   </p>
                 </div>
                 <div>
-                  <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1">Standard Filing Fee</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-1">Standard Filing Fee</p>
                   <p className="text-sm font-bold">{county!.filingFee}</p>
                 </div>
                 <div className="flex items-start gap-2 bg-white/5 p-3 rounded-xl border border-white/10">
@@ -516,7 +525,7 @@ export default async function CountyCourtPage({ params }: Props) {
 
             {/* INTERNAL LINKS */}
             <div className="bg-white border border-slate-200 rounded-[2rem] p-7 shadow-sm">
-              <h4 className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-5 flex items-center gap-2">
+              <h4 className="text-xs font-black uppercase tracking-widest text-slate-500 mb-5 flex items-center gap-2">
                 <BookOpen className="w-4 h-4" /> Related Legal Resources
               </h4>
               <nav className="flex flex-col space-y-2.5">
@@ -538,7 +547,7 @@ export default async function CountyCourtPage({ params }: Props) {
 
             {/* OTHER COUNTIES */}
             <div className="bg-white border border-slate-200 rounded-[2rem] p-7 shadow-sm">
-              <h4 className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-5">Other County Guides</h4>
+              <h4 className="text-xs font-black uppercase tracking-widest text-slate-500 mb-5">Other County Guides</h4>
               <nav className="flex flex-col space-y-2.5">
                 {relatedCounties.map(c => (
                   <Link key={c.slug} href={`/washington-courts/${c.slug}`} className="flex items-center gap-2 text-sm text-slate-600 hover:text-indigo-600 transition-colors font-medium">

@@ -18,10 +18,10 @@ const AuthorBox = () => {
           </div>
 
           <div className="flex-1">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-600 mb-2">Academic & Legal Entity</h3>
+            <h3 className="text-xs font-black uppercase tracking-[0.4em] text-indigo-600 mb-2">Academic & Legal Entity</h3>
             <h2 className="text-2xl font-black text-slate-900 mb-6 italic tracking-tight">WCSSC Editorial & Legal Team</h2>
             
-            <p className="text-slate-500 font-medium leading-relaxed mb-8 max-w-2xl font-serif">
+            <p className="text-slate-600 font-medium leading-relaxed mb-8 max-w-2xl font-serif">
               Our calculations and guides are rigorously audited by family law advocates and technical developers to ensure compliance with RCW 26.19 and the latest 2026 economic table updates. We maintain a strict editorial protocol based on official AOC mandatory forms and WAC guidelines.
             </p>
 
@@ -30,13 +30,13 @@ const AuthorBox = () => {
                 <div className="w-8 h-8 rounded-xl bg-slate-50 flex items-center justify-center text-indigo-600">
                   <Mail size={14} />
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">support@wcssc.site</span>
+                <span className="text-xs font-black uppercase tracking-widest text-slate-500">support@wcssc.site</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-slate-50 flex items-center justify-center text-indigo-600">
                   <CheckCircle2 size={14} />
                 </div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Strict RCW 26.19 Compliance</span>
+                <span className="text-xs font-black uppercase tracking-widest text-slate-500">Strict RCW 26.19 Compliance</span>
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@ const AuthorBox = () => {
       </div>
       
       <div className="mt-12 text-center px-12">
-        <p className="text-[10px] font-medium text-slate-300 leading-loose italic">
+        <p className="text-xs font-medium text-slate-500 leading-loose italic">
           Transparency Disclosure: WCSSC is an independent resource center. We are not a government agency or a law firm. Our calculations are provided for educational and estimation purposes based on the latest 2026 guidelines.
         </p>
       </div>

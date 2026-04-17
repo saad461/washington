@@ -70,7 +70,7 @@ export default function ComparisonTool() {
             
             <div className="space-y-8 mb-10">
               <div>
-                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Combined Monthly Net Income</label>
+                <label className="block text-xs font-black uppercase tracking-widest text-slate-500 mb-2">Combined Monthly Net Income</label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
                   <input 
@@ -83,7 +83,7 @@ export default function ComparisonTool() {
               </div>
 
               <div>
-                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Number of Children</label>
+                <label className="block text-xs font-black uppercase tracking-widest text-slate-500 mb-2">Number of Children</label>
                 <div className="flex gap-2">
                   {[1, 2, 3, 4, 5].map((num) => (
                     <button
@@ -112,7 +112,7 @@ export default function ComparisonTool() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
             <div className="bg-slate-200/50 border border-slate-200 rounded-[2.5rem] p-8 relative overflow-hidden opacity-80">
-              <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest mb-4">Old 2024 Presumptive</p>
+              <p className="text-slate-600 text-xs font-black uppercase tracking-widest mb-4">Old 2024 Presumptive</p>
               <p className="text-4xl font-black text-slate-700 mb-2">
                 {actual2024 !== null ? curFormatter.format(actual2024) : 'Court Discretion'}
               </p>
@@ -121,7 +121,7 @@ export default function ComparisonTool() {
 
             <div className="bg-indigo-600 border border-indigo-500 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl shadow-indigo-900/20">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-16 translate-x-16" />
-              <p className="text-indigo-200 text-[10px] font-black uppercase tracking-widest mb-4">New 2026 Presumptive</p>
+              <p className="text-indigo-200 text-xs font-black uppercase tracking-widest mb-4">New 2026 Presumptive</p>
               <p className="text-4xl font-black text-white mb-2">
                 {actual2026 !== null ? curFormatter.format(actual2026) : 'Court Discretion'}
               </p>

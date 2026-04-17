@@ -14,6 +14,7 @@ import TableOfContents, { TOCItem } from '@/components/TableOfContents';
 import AuthorBox from '@/components/AuthorBox';
 import AdContainer from '@/components/AdContainer';
 import BlogCTA from '@/components/BlogCTA';
+import { cleanEmDashContent } from '@/lib/textOptimizer';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -96,7 +97,8 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   // Extract structural content safely
-  const { headings, updatedHtml } = parseTOC(post.content);
+  const cleanedContent = cleanEmDashContent(post.content);
+  const { headings, updatedHtml } = parseTOC(cleanedContent);
 
   // Structured Data (Article + FAQ)
   const jsonLd = {
@@ -140,7 +142,7 @@ export default async function BlogPostPage({ params }: Props) {
       <div className="max-w-7xl mx-auto px-6 py-20">
         
         {/* Back navigation */}
-        <Link href="/blog" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-indigo-600 transition-colors mb-20 group no-print">
+        <Link href="/blog" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors mb-20 group no-print">
           <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
           Back to Resource Center
         </Link>
@@ -154,10 +156,10 @@ export default async function BlogPostPage({ params }: Props) {
             {/* Header */}
             <header className="mb-16">
               <div className="flex items-center gap-4 mb-4">
-                <span className="px-3 py-1 bg-indigo-50 text-indigo-700 text-[9px] font-black uppercase tracking-[0.2em] rounded-md ring-1 ring-indigo-200">
+                <span className="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-black uppercase tracking-[0.2em] rounded-md ring-1 ring-indigo-200">
                   {post.category}
                 </span>
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
                   Updated: {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                 </span>
               </div>
@@ -171,7 +173,7 @@ export default async function BlogPostPage({ params }: Props) {
                     <User size={16} />
                   </div>
                   <div>
-                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Author</p>
+                    <p className="text-xs font-black text-slate-500 uppercase tracking-widest leading-none mb-1">Author</p>
                     <p className="text-sm font-black text-slate-900 leading-none">{post.author}</p>
                   </div>
                 </div>
@@ -180,7 +182,7 @@ export default async function BlogPostPage({ params }: Props) {
                     <Clock size={16} />
                   </div>
                   <div>
-                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Time</p>
+                    <p className="text-xs font-black text-slate-500 uppercase tracking-widest leading-none mb-1">Time</p>
                     <p className="text-sm font-black text-slate-900 leading-none">{post.readTime} Read</p>
                   </div>
                 </div>
@@ -208,10 +210,10 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="prose prose-slate prose-lg max-w-none 
               prose-h2:text-3xl prose-h2:font-black prose-h2:tracking-tight prose-h2:text-slate-900 prose-h2:italic prose-h2:mt-16 prose-h2:mb-8 prose-h2:-scroll-mt-24
               prose-h3:text-xl prose-h3:font-bold prose-h3:text-slate-800 prose-h3:mt-10 prose-h3:mb-4 prose-h3:-scroll-mt-24
-              prose-p:text-slate-500 prose-p:font-medium prose-p:leading-loose prose-p:mb-8
+              prose-p:text-slate-600 prose-p:font-medium prose-p:leading-loose prose-p:mb-8
               prose-strong:text-slate-900 prose-strong:font-black
               prose-a:text-indigo-600 prose-a:font-black prose-a:no-underline prose-a:decoration-indigo-100 prose-a:underline-offset-4 hover:prose-a:underline
-              prose-li:text-slate-500 prose-li:font-medium prose-li:mb-2
+              prose-li:text-slate-600 prose-li:font-medium prose-li:mb-2
             "
               dangerouslySetInnerHTML={{ __html: updatedHtml }}
             />
@@ -230,7 +232,7 @@ export default async function BlogPostPage({ params }: Props) {
                   {post.faqs.map((faq: { question: string; answer: string }, idx: number) => (
                     <div key={idx} className="p-8 md:p-10 bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-900/5 transition-all">
                       <p className="text-lg font-black text-slate-900 mb-4 tracking-tight">{faq.question}</p>
-                      <p className="text-slate-500 font-medium leading-relaxed italic">{faq.answer}</p>
+                      <p className="text-slate-600 font-medium leading-relaxed italic">{faq.answer}</p>
                     </div>
                   ))}
                 </div>
@@ -259,21 +261,21 @@ export default async function BlogPostPage({ params }: Props) {
             )}
             
             <div className={`p-8 bg-indigo-50 rounded-[2rem] border border-indigo-100 italic ${headings.length > 0 ? 'mt-12' : ''}`}>
-              <h4 className="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-4">E-E-A-T Disclosure</h4>
+              <h4 className="text-xs font-black text-indigo-600 uppercase tracking-widest mb-4">E-E-A-T Disclosure</h4>
               <p className="text-xs text-indigo-900 font-bold leading-relaxed mb-6">
                 All WCSSC insights are reviewed for compliance with RCW 26.19.065 and official AOC guidelines.
               </p>
-              <Link href="/editorial-methodology" className="text-[9px] font-black text-indigo-500 uppercase tracking-widest hover:text-indigo-700 transition-colors block mb-2">
+              <Link href="/editorial-methodology" className="text-xs font-black text-indigo-500 uppercase tracking-widest hover:text-indigo-700 transition-colors block mb-2">
                 Our calculation methodology &rarr;
               </Link>
-              <Link href="/disclaimer" className="text-[9px] font-black text-indigo-500 uppercase tracking-widest hover:text-indigo-700 transition-colors">
+              <Link href="/disclaimer" className="text-xs font-black text-indigo-500 uppercase tracking-widest hover:text-indigo-700 transition-colors">
                 Read Legal Disclaimer &rarr;
               </Link>
             </div>
 
             {/* Other Blogs Promo */}
             <div className="mt-12 sticky top-24">
-              <h4 className="text-[10px] font-black text-slate-900 uppercase tracking-[0.3em] mb-6 ml-4">Trending Read</h4>
+              <h4 className="text-xs font-black text-slate-900 uppercase tracking-[0.3em] mb-6 ml-4">Trending Read</h4>
               <div className="space-y-4">
                 {blogs.filter(p => p.slug !== slug).slice(0, 3).map((other) => (
                   <Link 
@@ -281,7 +283,7 @@ export default async function BlogPostPage({ params }: Props) {
                     href={`/blog/${other.slug}`}
                     className="group block p-6 bg-white border border-slate-100 shadow-sm rounded-[1.5rem] hover:border-indigo-500 transition-all hover:shadow-xl hover:shadow-indigo-900/5"
                   >
-                    <p className="text-[9px] font-black text-indigo-600 uppercase tracking-widest mb-2 italic">{other.category}</p>
+                    <p className="text-xs font-black text-indigo-600 uppercase tracking-widest mb-2 italic">{other.category}</p>
                     <p className="text-sm font-black text-slate-900 transition-colors group-hover:text-indigo-600 leading-tight">
                       {other.title}
                     </p>

@@ -25,7 +25,7 @@ export default function BlogCTA() {
           href="/worksheet" 
           className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-500 hover:bg-indigo-400 text-white font-black uppercase tracking-widest text-sm rounded-xl shadow-[0_0_40px_-10px_rgba(99,102,241,0.6)] hover:shadow-[0_0_60px_-15px_rgba(99,102,241,0.8)] transition-all duration-300 hover:-translate-y-1"
         >
-          Use Worksheet
+          Calculate Your Child Support
           <ArrowRight className="w-5 h-5" />
         </Link>
       </div>

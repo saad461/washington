@@ -52,7 +52,7 @@ export default function Home() {
             { label: "State Law", value: "Washington" },
           ].map((fig, i) => (
             <div key={i} className="text-center">
-              <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">{fig.label}</div>
+              <div className="text-xs font-black uppercase tracking-widest text-slate-500 mb-1">{fig.label}</div>
               <div className="text-lg md:text-xl font-black text-slate-800">{fig.value}</div>
             </div>
           ))}
@@ -60,7 +60,7 @@ export default function Home() {
 
         {/* ── BENCHMARK DATA TABLE (AI SEO) ── */}
         <div className="mt-16 w-full" id="benchmark-table">
-          <h3 className="text-xl font-black text-slate-900 mb-6 text-center tracking-tight">Washington Child Support Benchmark Estimates</h3>
+          <h2 className="text-xl font-black text-slate-900 mb-6 text-center tracking-tight">Washington Child Support Benchmark Estimates</h2>
           <div className="overflow-x-auto rounded-2xl border border-slate-100 shadow-sm bg-white">
             <table className="w-full text-left border-collapse min-w-[500px]">
               <thead>
@@ -89,7 +89,7 @@ export default function Home() {
 
         {/* ── TRUST TEXT (EEAT BOOST) ── */}
         <div className="mt-8 text-center max-w-2xl">
-          <p className="text-sm text-slate-500 leading-relaxed italic">
+          <p className="text-sm text-slate-600 leading-relaxed italic">
             &quot;These estimates are based on Washington State child support guidelines (2026). Actual support amounts may vary depending on custody arrangements, healthcare costs, and court decisions. Use the calculator above for an accurate estimate.&quot;
           </p>
         </div>
@@ -168,7 +168,7 @@ export default function Home() {
             { label: 'Spokane County', href: '/spokane-county-income-5000-2-children' },
           ].map((c) => (
             <Link key={c.href} href={c.href} className="block p-4 bg-white border border-slate-100 rounded-2xl hover:border-indigo-500 transition-all text-center shadow-sm hover:shadow-md group">
-              <span className="text-[10px] font-black text-indigo-600 uppercase tracking-widest block mb-1">County Guide</span>
+              <span className="text-xs font-black text-indigo-600 uppercase tracking-widest block mb-1">County Guide</span>
               <span className="text-sm font-bold text-slate-800 group-hover:text-indigo-700 transition-colors">{c.label}</span>
             </Link>
           ))}
@@ -184,7 +184,7 @@ export default function Home() {
               { label: 'King County Child Support Rules', href: '/blog/king-county-child-support-rules', cat: 'County Guide' },
             ].map((p) => (
               <Link key={p.href} href={p.href} className="block p-6 bg-white border border-slate-100 rounded-2xl hover:border-indigo-500 transition-all shadow-sm hover:shadow-md group">
-                <span className="text-[9px] font-black text-indigo-600 uppercase tracking-widest block mb-2">{p.cat}</span>
+                <span className="text-[11px] font-black text-indigo-600 uppercase tracking-widest block mb-2">{p.cat}</span>
                 <span className="text-sm font-bold text-slate-800 group-hover:text-indigo-700 transition-colors leading-snug">{p.label}</span>
               </Link>
             ))}

@@ -14,7 +14,7 @@ export default function TermsPage() {
       <div className="max-w-4xl mx-auto px-6 py-20">
 
         {/* Back Link */}
-        <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-indigo-600 transition-colors mb-16">
+        <Link href="/" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors mb-16">
           <ArrowLeft size={14} />
           Back to Calculator
         </Link>
@@ -25,7 +25,7 @@ export default function TermsPage() {
             <FileText className="w-8 h-8 text-white" />
           </div>
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600 mb-1">Legal Agreement</p>
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-600 mb-1">Legal Agreement</p>
             <h1 className="text-4xl font-black text-slate-900 tracking-tight">Terms of Service</h1>
           </div>
         </div>
@@ -90,7 +90,7 @@ export default function TermsPage() {
 
         <div className="mt-16 p-8 bg-slate-900 rounded-[3rem] text-center text-slate-400">
           <p className="text-sm font-medium mb-4">Effective Date: January 1, 2026</p>
-          <div className="flex justify-center gap-8 text-[10px] font-black uppercase tracking-widest">
+          <div className="flex justify-center gap-8 text-xs font-black uppercase tracking-widest">
             <Link href="/privacy" className="hover:text-indigo-400 transition-colors">Privacy Policy</Link>
             <Link href="/disclaimer" className="hover:text-indigo-400 transition-colors">Legal Disclaimer</Link>
             <Link href="/" className="hover:text-indigo-400 transition-colors">Calculator</Link>

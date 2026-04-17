@@ -8,7 +8,7 @@ export default function ContactForm() {
     <div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-xl shadow-indigo-900/5">
       <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
         <div>
-          <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Full Name</label>
+          <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Full Name</label>
           <input 
             type="text" 
             className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all font-medium"
@@ -16,7 +16,7 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Email Address</label>
+          <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Email Address</label>
           <input 
             type="email" 
             className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all font-medium"
@@ -24,7 +24,7 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Subject</label>
+          <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Subject</label>
           <select className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all font-medium appearance-none">
             <option>Calculator Bug / Feedback</option>
             <option>Data Correction</option>
@@ -33,7 +33,7 @@ export default function ContactForm() {
           </select>
         </div>
         <div>
-          <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Message</label>
+          <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Message</label>
           <textarea 
             rows={4}
             className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all font-medium resize-none"

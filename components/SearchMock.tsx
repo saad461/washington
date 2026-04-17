@@ -45,14 +45,14 @@ const SearchMock = ({ isSidebar = false }: { isSidebar?: boolean }) => {
                     </div>
                     <div>
                       <p className="font-black text-slate-900 text-sm">{county.name}</p>
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{county.seat}, WA</p>
+                      <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">{county.seat}, WA</p>
                     </div>
                   </div>
                   <ChevronRight size={16} className="text-slate-300 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all" />
                 </Link>
               ))}
               <div className="pt-4 px-4 border-t border-slate-50 mt-2 text-center">
-                <p className="text-[8px] font-black text-slate-300 uppercase tracking-[0.2em]">Showing Top Results for {query}</p>
+                <p className="text-[11px] font-black text-slate-500 uppercase tracking-[0.2em]">Showing Top Results for {query}</p>
               </div>
             </div>
           ) : (
