@@ -73,7 +73,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
                     {item.question}
                   </span>
                   <ChevronDown 
-                    className={\`w-5 h-5 text-indigo-500 shrink-0 transition-transform duration-300 ease-in-out \${isOpen ? 'rotate-180' : ''}\`} 
+                    className={`w-5 h-5 text-indigo-500 shrink-0 transition-transform duration-300 ease-in-out ${isOpen ? 'rotate-180' : ''}`} 
                   />
                 </button>
               </h3>
@@ -82,7 +82,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
                 id={controlId}
                 role="region"
                 aria-labelledby={buttonId}
-                className={\`grid transition-all duration-300 ease-in-out \${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}\`}
+                className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
               >
                 <div className="overflow-hidden">
                   <div className="px-4 pb-4 sm:px-6 sm:pb-6 text-sm text-slate-600 leading-relaxed font-medium">

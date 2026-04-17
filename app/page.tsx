@@ -145,7 +145,7 @@ export default function Home() {
         </div>
       </section>
       {/* ── EDUCATIONAL CONTENT (AdSense compliance: 350+ words) ── */}
-      <section className="mt-24 max-w-4xl w-full mx-auto px-4 pb-24 relative z-10">
+      <section className="mt-16 max-w-4xl w-full mx-auto px-4 pb-24 relative z-10">
 
         <h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-6 tracking-tight text-center">
           How Washington Child Support Is Calculated
@@ -179,20 +179,20 @@ export default function Home() {
         </div>
 
         {/* ── HOME FAQS ── */}
-        <div className="mt-14 w-full">
+        <div className="mt-12 w-full">
           <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-8 tracking-tight text-center">Frequently Asked Questions</h3>
           <FAQAccordion items={homeFaqs} />
         </div>
 
         {/* County quicklinks */}
-        <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             { label: 'King County', href: '/king-county-income-5000-2-children' },
             { label: 'Pierce County', href: '/pierce-county-income-5000-2-children' },
             { label: 'Snohomish County', href: '/snohomish-county-income-5000-2-children' },
             { label: 'Spokane County', href: '/spokane-county-income-5000-2-children' },
           ].map((c) => (
-            <Link key={c.href} href={c.href} className="block p-4 bg-white border border-slate-100 rounded-2xl hover:border-indigo-500 transition-all text-center shadow-sm hover:shadow-md group">
+            <Link key={c.href} href={c.href} className="block p-4 bg-gradient-to-br from-white to-slate-50 border border-slate-100 rounded-2xl hover:border-indigo-300 hover:from-white hover:to-indigo-50 transition-all duration-300 text-center shadow-sm hover:shadow-md hover:-translate-y-1 group">
               <span className="text-xs font-black text-indigo-600 uppercase tracking-widest block mb-1">County Guide</span>
               <span className="text-sm font-bold text-slate-800 group-hover:text-indigo-700 transition-colors">{c.label}</span>
             </Link>
@@ -200,7 +200,7 @@ export default function Home() {
         </div>
 
         {/* Blog quicklinks */}
-        <div className="mt-14">
+        <div className="mt-10">
           <h3 className="text-lg font-black text-slate-900 mb-6 tracking-tight">Latest Legal Guides</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
@@ -208,7 +208,7 @@ export default function Home() {
               { label: 'Self-Support Reserve (SSR) Explained', href: '/blog/washington-ssr-self-support-reserve-explained', cat: 'Deep-Dive' },
               { label: 'King County Child Support Rules', href: '/blog/king-county-child-support-rules', cat: 'County Guide' },
             ].map((p) => (
-              <Link key={p.href} href={p.href} className="block p-6 bg-white border border-slate-100 rounded-2xl hover:border-indigo-500 transition-all shadow-sm hover:shadow-md group">
+              <Link key={p.href} href={p.href} className="block p-6 bg-gradient-to-br from-white to-slate-50 border border-slate-100 rounded-2xl hover:border-indigo-300 hover:from-white hover:to-indigo-50 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 group">
                 <span className="text-[11px] font-black text-indigo-600 uppercase tracking-widest block mb-2">{p.cat}</span>
                 <span className="text-sm font-bold text-slate-800 group-hover:text-indigo-700 transition-colors leading-snug">{p.label}</span>
               </Link>
