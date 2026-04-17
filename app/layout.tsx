@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import React, { Suspense } from "react";
 import Script from "next/script";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Poppins, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { 
   NavbarClient as Navbar, 
@@ -9,15 +9,25 @@ import {
   CookieBannerClient as CookieBanner 
 } from "@/components/ClientDynamic";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
+
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://wcssc.site'),
@@ -59,7 +69,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${poppins.variable} ${geistMono.variable} h-full antialiased`}>
       <head>
         {/* Performance: preconnect to ad & analytics origins for faster load */}
         <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
@@ -67,7 +77,8 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       </head>
-      <body className="min-h-full flex flex-col bg-gray-50 text-slate-900">
+      <body className="min-h-full flex flex-col bg-white text-gray-900">
+
         {/* Google AdSense — Publisher ID: ca-pub-9902783604679065 */}
         <Script
           async

@@ -58,7 +58,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
           return (
             <div 
               key={index} 
-              className="bg-white border border-slate-200 hover:border-indigo-500 transition-colors rounded-2xl overflow-hidden shadow-sm"
+              className="bg-white border border-gray-100 hover:border-indigo-200 transition-all duration-300 rounded-2xl overflow-hidden shadow-sm active:scale-[0.99]"
             >
               <h3>
                 <button
@@ -67,13 +67,13 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
                   aria-controls={controlId}
                   role="button"
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex items-center justify-between min-h-[48px] py-3 px-4 sm:p-6 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:ring-offset-2"
+                  className="w-full flex items-center justify-between min-h-[56px] py-4 px-6 md:px-8 cursor-pointer outline-none focus-visible:bg-gray-50 group"
                 >
-                  <span className="text-base font-bold text-slate-800 text-left pr-4">
+                  <span className="text-base font-bold text-gray-900 text-left pr-4 font-heading leading-tight group-hover:text-indigo-600 transition-colors">
                     {item.question}
                   </span>
                   <ChevronDown 
-                    className={`w-5 h-5 text-indigo-500 shrink-0 transition-transform duration-300 ease-in-out ${isOpen ? 'rotate-180' : ''}`} 
+                    className={`w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300 ease-in-out ${isOpen ? 'rotate-180 text-indigo-500' : ''}`} 
                   />
                 </button>
               </h3>
@@ -85,7 +85,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
                 className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
               >
                 <div className="overflow-hidden">
-                  <div className="px-4 pb-4 sm:px-6 sm:pb-6 text-sm text-slate-600 leading-relaxed font-medium">
+                  <div className="px-6 pb-6 md:px-8 md:pb-8 text-sm md:text-base text-gray-600 leading-relaxed font-medium">
                     <p>{item.answer}</p>
                   </div>
                 </div>
