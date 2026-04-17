@@ -12,7 +12,7 @@ export default function CookieBanner() {
       const consent = localStorage.getItem('wcssc-cookie-consent');
       if (!consent) {
         // Small delay to avoid layout shift on initial render
-        const timer = setTimeout(() => setShow(true), 1200);
+        const timer = setTimeout(() => setShow(true), 2000);
         return () => clearTimeout(timer);
       }
     } catch {
@@ -48,40 +48,39 @@ export default function CookieBanner() {
       role="dialog"
       aria-label="Cookie consent"
       aria-live="polite"
-      className="fixed bottom-0 left-0 right-0 z-[999] no-print animate-in slide-in-from-bottom duration-500"
+      className="fixed bottom-0 left-0 right-0 z-[999] no-print animate-in slide-in-from-bottom duration-700"
     >
-      <div className="bg-slate-900 border-t border-slate-700 shadow-2xl shadow-black/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-gray-900 border-t border-gray-800 shadow-2xl">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-start gap-4 flex-1">
-            <div className="p-2 bg-indigo-600/20 rounded-xl flex-shrink-0 mt-0.5">
-              <Shield className="w-4 h-4 text-indigo-400" />
+            <div className="p-2.5 bg-gray-800 rounded-xl flex-shrink-0 mt-0.5 shadow-sm">
+              <Shield className="w-5 h-5 text-indigo-400" />
             </div>
             <div>
-              <p className="text-sm text-slate-200 font-medium leading-relaxed">
-                We use cookies for anonymous analytics and Google AdSense advertising. No personal calculation data is ever stored.{' '}
-                <Link href="/privacy" className="text-indigo-400 underline underline-offset-2 hover:text-indigo-300 transition-colors font-bold">
+              <p className="text-sm text-gray-300 font-medium leading-relaxed font-sans">
+                We use cookies for anonymous analytics and advertising. No personal calculation data is ever stored on our servers.{' '}
+                <Link href="/privacy" className="text-white underline underline-offset-4 decoration-gray-700 hover:decoration-indigo-400 transition-all font-bold">
                   Privacy Policy
                 </Link>
               </p>
-              <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">
-                Required for GDPR · CCPA Compliance
+              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-2">
+                GDPR · CCPA · 2026 Compliance Standard
               </p>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-shrink-0 w-full sm:w-auto">
+          <div className="flex items-center gap-4 flex-shrink-0 w-full sm:w-auto">
             <button
               onClick={handleDecline}
-              className="flex items-center justify-center gap-1.5 px-4 py-3 text-xs font-black uppercase tracking-widest text-slate-400 hover:text-slate-200 transition-colors border border-slate-700 rounded-xl hover:border-slate-500 min-h-[48px]"
+              className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-all rounded-xl border border-gray-800 hover:border-gray-700 font-heading"
             >
-              <X className="w-3 h-3" />
               Decline
             </button>
             <button
               onClick={handleAccept}
-              className="px-6 py-3 bg-indigo-600 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-900/30 active:scale-95 min-h-[48px]"
+              className="px-8 py-3.5 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition-all shadow-lg active:scale-[0.98] font-heading"
             >
-              Accept & Continue
+              Accept All
             </button>
           </div>
         </div>

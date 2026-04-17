@@ -21,24 +21,29 @@ import Link from 'next/link';
 
 export default function WorksheetPage() {
   return (
-    <div className="flex-1 w-full bg-slate-50">
+    <div className="flex-1 w-full bg-white font-sans">
       <CalculatorSchema url="https://wcssc.site/worksheet" />
       <WorksheetWizard />
 
       {/* AI Search Optimization (AEO) Section */}
-      <div className="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-black text-slate-900 mb-6">Example Calculation</h2>
-        <h3 className="text-xl font-bold text-slate-800 mb-4">Calculate child support for $5000 income in King County</h3>
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-          <p className="mb-2"><strong>Input:</strong> Combined Monthly Net Income: $5,000 | Children: 2 | County: King County</p>
-          <p className="mb-4"><strong>Output:</strong> Estimated Monthly Basic Support Obligation: $1,155</p>
-          <p className="text-slate-600">
-            <strong>Short explanation:</strong> In King County, courts use the standard Washington State economic table. For a combined net income of $5,000 with 2 children, the base presumptive support is $1,155. This amount may be split proportionally between parents based on their respective incomes, and may not include extraordinary expenses like healthcare or daycare.
-          </p>
-        </div>
-        
-        <div className="mt-8 text-sm text-slate-500">
-          Want to know how we arrived at these figures? Read our <Link href="/editorial-methodology" className="text-indigo-600 underline hover:text-indigo-800">Editorial Methodology</Link>.
+      <div className="max-w-7xl mx-auto px-4 py-24 md:py-32 sm:px-6 lg:px-8 border-t border-gray-100">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 font-heading">Example Calculation</h2>
+          <h3 className="text-xl font-bold text-gray-900 mb-4">Support Scenario: $5,000 Income in King County</h3>
+          <div className="bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm mb-10">
+            <p className="mb-3 text-gray-700"><strong>Input:</strong> Combined Monthly Net Income: $5,000 | Children: 2 | County: King County</p>
+            <p className="mb-6 text-gray-900 font-bold"><strong>Output:</strong> Estimated Monthly Basic Support Obligation: $1,155</p>
+            <p className="text-gray-500 text-sm leading-relaxed">
+              <strong>Short explanation:</strong> In King County, courts use the standard Washington State economic table. For a combined net income of $5,000 with 2 children, the base presumptive support is $1,155. This amount may be split proportionally between parents based on their respective incomes, and may not include extraordinary expenses like healthcare or daycare.
+            </p>
+          </div>
+          
+          <div className="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
+            Want to know how we arrived at these figures? 
+            <Link href="/editorial-methodology" className="text-indigo-600 underline decoration-indigo-200 underline-offset-4 hover:text-indigo-700">
+              Read our Editorial Methodology
+            </Link>
+          </div>
         </div>
       </div>
     </div>

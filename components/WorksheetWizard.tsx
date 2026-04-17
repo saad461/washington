@@ -46,18 +46,18 @@ const ProgressBar = ({ currentStep, totalSteps }: { currentStep: number; totalSt
   const progress = ((currentStep + 1) / totalSteps) * 100;
 
   return (
-    <div className="w-full mb-8">
-      <div className="flex justify-between items-center mb-4 px-2">
-        <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest">
+    <div className="w-full mb-10">
+      <div className="flex justify-between items-center mb-4 px-1">
+        <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-[0.2em] font-sans">
           Step {currentStep + 1} of {totalSteps}
         </span>
-        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] font-sans">
           {Math.round(progress)}% Complete
         </span>
       </div>
-      <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-200/50">
+      <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full"
+          className="h-full bg-indigo-600 rounded-full"
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.5, ease: "easeOut" }}
@@ -88,13 +88,13 @@ const InputField = ({
         <button
           type="button"
           onClick={() => onChange(parent, !val)}
-          className={`flex items-center justify-center w-full h-12 rounded-xl border-2 transition-all ${val
+          className={`flex items-center justify-center w-full h-12 rounded-xl border transition-all ${val
             ? 'bg-indigo-50 border-indigo-500 text-indigo-700 shadow-sm'
-            : 'bg-white border-slate-200 text-slate-400 hover:border-slate-300'
+            : 'bg-white border-gray-200 text-gray-400 hover:border-gray-300'
             }`}
         >
           {val ? <CheckCircle2 className="w-4 h-4 mr-2" /> : <Circle className="w-4 h-4 mr-2" />}
-          <span className="text-sm font-semibold uppercase tracking-wider">{val ? 'Yes' : 'No'}</span>
+          <span className="text-xs font-bold uppercase tracking-widest">{val ? 'Yes' : 'No'}</span>
         </button>
       );
     }
@@ -102,7 +102,7 @@ const InputField = ({
     return (
       <div className="relative group">
         {isCurrency && (
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium group-focus-within:text-indigo-500 transition-colors">
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium group-focus-within:text-indigo-600 transition-colors">
             $
           </span>
         )}
@@ -111,10 +111,10 @@ const InputField = ({
           value={val as string}
           onChange={(e) => onChange(parent, e.target.value)}
           placeholder="0.00"
-          className={`w-full h-12 rounded-xl border border-slate-200 bg-slate-50/50 px-4 transition-all focus:bg-white focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 focus:outline-none text-slate-900 font-medium ${isCurrency ? 'pl-8' : ''} ${isPercentage ? 'pr-8' : ''}`}
+          className={`w-full h-12 rounded-xl border border-gray-200 bg-white px-4 transition-all focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-600 focus:outline-none text-gray-900 font-medium ${isCurrency ? 'pl-8' : ''} ${isPercentage ? 'pr-8' : ''}`}
         />
         {isPercentage && (
-          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium group-focus-within:text-indigo-500 transition-colors">
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium group-focus-within:text-indigo-600 transition-colors">
             %
           </span>
         )}
@@ -123,30 +123,30 @@ const InputField = ({
   };
 
   return (
-    <div className="mb-6 last:mb-0 animate-in fade-in slide-in-from-bottom-2 duration-500">
-      <div className="flex items-start gap-2 mb-2">
-        <span className="text-xs bg-slate-100 text-slate-500 font-bold px-1.5 py-0.5 rounded uppercase mt-0.5">{field.id}</span>
-        <label className="text-sm font-bold text-slate-700 leading-tight">
+    <div className="mb-8 last:mb-0 animate-in fade-in slide-in-from-bottom-2 duration-500 font-sans">
+      <div className="flex items-start gap-2 mb-3">
+        <span className="text-[10px] bg-gray-100 text-gray-500 font-bold px-1.5 py-0.5 rounded uppercase mt-0.5">{field.id}</span>
+        <label className="text-sm font-bold text-gray-900 leading-snug">
           {field.label}
         </label>
         {field.description && (
           <div className="group relative">
-            <Info className="w-3.5 h-3.5 text-slate-400 cursor-help" />
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-slate-800 text-white text-[10px] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
+            <Info className="w-3.5 h-3.5 text-gray-400 cursor-help" />
+            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-3 bg-gray-900 text-white text-[10px] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-lg">
               {field.description}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-slate-800" />
+              <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-gray-900" />
             </div>
           </div>
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div className="space-y-1">
-          <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest ml-1 opacity-60">Parent 1</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-1.5">
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Parent 1</p>
           {renderInput('p1')}
         </div>
-        <div className="space-y-1">
-          <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest ml-1 opacity-60">Parent 2</p>
+        <div className="space-y-1.5">
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Parent 2</p>
           {renderInput('p2')}
         </div>
       </div>
@@ -276,21 +276,21 @@ export default function WorksheetWizard() {
         id="pdf-summary-content"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="space-y-12 pb-24 bg-white p-8 rounded-3xl"
+        className="space-y-12 pb-24 bg-white p-8 md:p-12 rounded-2xl"
       >
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-slate-100 pb-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-gray-100 pb-10">
           <div className="text-center md:text-left w-full">
             <div className="flex justify-between items-start mb-2">
-              <h1 className="text-4xl font-black text-slate-900 tracking-tight">Worksheet Summary</h1>
-              <span className="text-indigo-600 font-black text-xl tracking-widest uppercase">WCSSC.site</span>
+              <h1 className="text-4xl font-bold text-gray-900 tracking-tight font-heading">Worksheet Summary</h1>
+              <span className="text-indigo-600 font-bold text-xl tracking-widest uppercase font-heading">WCSSC</span>
             </div>
-            <p className="text-slate-500 font-medium">Final calculated results for the 2026 Washington State Child Support Schedule.</p>
-            <p className="text-slate-400 text-xs font-bold mt-2">Date of Calculation: {new Date().toLocaleDateString()}</p>
+            <p className="text-gray-500 font-medium">Official calculation results based on the 2026 Washington State Child Support Schedule.</p>
+            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-4">Date of Calculation: {new Date().toLocaleDateString()}</p>
           </div>
           <button
             id="pdf-edit-btn"
             onClick={resetWizard}
-            className="flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-600 font-bold rounded-2xl hover:bg-slate-50 transition-all active:scale-95 shadow-sm shrink-0"
+            className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 text-gray-600 font-bold rounded-xl hover:bg-gray-50 transition-all active:scale-[0.98] shadow-sm shrink-0"
           >
             <Calculator className="w-5 h-5" />
             Edit Data
@@ -299,37 +299,36 @@ export default function WorksheetWizard() {
 
         {/* High-Level Result Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl -translate-y-16 translate-x-16 group-hover:bg-indigo-500/30 transition-colors" />
-            <p className="text-slate-400 text-xs font-black uppercase tracking-widest mb-2">Total Combined Net</p>
-            <h3 className="text-3xl font-black mb-1">{curFormatter.format(calculation.combinedIncome)}</h3>
-            <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">Combined Monthly Income</p>
+          <div className="bg-gray-900 rounded-2xl p-8 text-white shadow-lg relative overflow-hidden group">
+            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2">Total Combined Net</p>
+            <h3 className="text-3xl font-bold mb-1 font-heading">{curFormatter.format(calculation.combinedIncome)}</h3>
+            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Combined Monthly Income</p>
           </div>
 
-          <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-xl shadow-slate-200/50">
-            <p className="text-indigo-600 text-xs font-black uppercase tracking-widest mb-2">Parent 1 Transfer</p>
-            <h3 className="text-3xl font-black text-slate-900 mb-1">{curFormatter.format(derivedData['17']?.p1 || 0)}</h3>
-            <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">Presumptive Payment</p>
+          <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+            <p className="text-indigo-600 text-[10px] font-bold uppercase tracking-widest mb-2">Parent 1 Transfer</p>
+            <h3 className="text-3xl font-bold text-gray-900 mb-1 font-heading">{curFormatter.format(derivedData['17']?.p1 || 0)}</h3>
+            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Presumptive Payment</p>
           </div>
 
-          <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-xl shadow-slate-200/50">
-            <p className="text-indigo-600 text-xs font-black uppercase tracking-widest mb-2">Parent 2 Transfer</p>
-            <h3 className="text-3xl font-black text-slate-900 mb-1">{curFormatter.format(derivedData['17']?.p2 || 0)}</h3>
-            <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">Presumptive Payment</p>
+          <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+            <p className="text-indigo-600 text-[10px] font-bold uppercase tracking-widest mb-2">Parent 2 Transfer</p>
+            <h3 className="text-3xl font-bold text-gray-900 mb-1 font-heading">{curFormatter.format(derivedData['17']?.p2 || 0)}</h3>
+            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Presumptive Payment</p>
           </div>
         </div>
 
         {/* Detailed Breakdown Table */}
-        <div className="bg-white rounded-[3rem] border border-slate-100 shadow-2xl shadow-indigo-900/5 overflow-hidden">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50/80 border-b border-slate-100">
-                <th className="px-6 sm:px-8 py-6 text-xs font-black text-slate-500 uppercase tracking-widest">Part / Field</th>
-                <th className="px-6 sm:px-8 py-6 text-xs font-black text-slate-500 uppercase tracking-widest">Parent 1</th>
-                <th className="px-6 sm:px-8 py-6 text-xs font-black text-slate-500 uppercase tracking-widest">Parent 2</th>
+              <tr className="bg-gray-50 border-b border-gray-100">
+                <th className="px-6 md:px-8 py-5 text-[10px] font-bold text-gray-400 uppercase tracking-widest font-sans">Part / Field</th>
+                <th className="px-6 md:px-8 py-5 text-[10px] font-bold text-gray-400 uppercase tracking-widest font-sans">P1</th>
+                <th className="px-6 md:px-8 py-5 text-[10px] font-bold text-gray-400 uppercase tracking-widest font-sans">P2</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-50">
+            <tbody className="divide-y divide-gray-50">
               {[
                 { label: 'Total Gross Income (1g)', id: '1g' },
                 { label: 'Total Deductions (2j)', id: '2j' },
@@ -338,28 +337,28 @@ export default function WorksheetWizard() {
                 { label: 'Basic Support (Table)', id: 'base', value: calculation.baseSupport },
                 { label: 'Adjustment Reason', id: '8_reason', isReason: true },
                 { label: 'Final Basic Support (9)', id: '9', highlight: true },
-                { label: 'Extra Expenses Obligation (14)', id: '14' },
+                { label: 'Extra Expenses (14)', id: '14' },
                 { label: 'Total Credits (16d)', id: '16d' },
                 { label: 'Presumptive Transfer (17)', id: '17', highlight: true, bold: true },
               ].map((row) => (
-                <tr key={row.id} className={`${row.highlight ? 'bg-indigo-50/30' : ''} transition-colors hover:bg-slate-50/50`}>
-                  <td className={`px-8 py-5 text-sm ${row.bold ? 'font-black text-slate-900' : 'font-semibold text-slate-600'}`}>
+                <tr key={row.id} className={`${row.highlight ? 'bg-indigo-50/30' : ''} transition-colors hover:bg-gray-50/50`}>
+                  <td className={`px-6 md:px-8 py-4 text-sm ${row.bold ? 'font-bold text-gray-900 font-heading' : 'font-medium text-gray-600'}`}>
                     {row.label}
                   </td>
                   {row.isReason ? (
-                    <td colSpan={2} className="px-8 py-5 text-xs font-bold text-indigo-500 italic">
+                    <td colSpan={2} className="px-6 md:px-8 py-4 text-xs font-bold text-indigo-600 italic">
                       {(derivedData[row.id] as unknown as { reason?: string })?.reason}
                     </td>
                   ) : row.value !== undefined ? (
-                    <td colSpan={2} className="px-8 py-5 text-sm font-bold text-slate-900">
+                    <td colSpan={2} className="px-6 md:px-8 py-4 text-sm font-bold text-gray-900">
                       {curFormatter.format(row.value)}
                     </td>
                   ) : (
                     <>
-                      <td className={`px-8 py-5 text-sm ${row.bold ? 'font-black text-indigo-700' : 'font-medium text-slate-700'}`}>
+                      <td className={`px-6 md:px-8 py-4 text-sm ${row.bold ? 'font-bold text-indigo-600' : 'font-medium text-gray-700'}`}>
                         {row.type === 'per' ? perFormatter.format(derivedData[row.id]?.p1 || 0) : curFormatter.format(derivedData[row.id]?.p1 || 0)}
                       </td>
-                      <td className={`px-8 py-5 text-sm ${row.bold ? 'font-black text-indigo-700' : 'font-medium text-slate-700'}`}>
+                      <td className={`px-6 md:px-8 py-4 text-sm ${row.bold ? 'font-bold text-indigo-600' : 'font-medium text-gray-700'}`}>
                         {row.type === 'per' ? perFormatter.format(derivedData[row.id]?.p2 || 0) : curFormatter.format(derivedData[row.id]?.p2 || 0)}
                       </td>
                     </>
@@ -370,9 +369,9 @@ export default function WorksheetWizard() {
           </table>
         </div>
 
-        <div className="pt-8 border-t border-slate-200 text-center">
-          <p className="text-xs text-slate-500 font-medium leading-relaxed max-w-3xl mx-auto">
-            <strong>Disclaimer:</strong> This is an estimate based on the 2026 Washington State Child Support Schedule. Actual support amounts may vary based on judicial deviations, custody arrangements, and localized court rules. Consult with a legal professional for official filing and representation. Generated via WCSSC.site.
+        <div className="pt-8 border-t border-gray-100 text-center">
+          <p className="text-[10px] text-gray-400 font-medium leading-relaxed max-w-2xl mx-auto">
+            Disclaimer: This is an estimate based on the 2026 Washington State Child Support Schedule. Actual support amounts may vary based on judicial deviations, custody arrangements, and localized court rules. Generated via WCSSC.
           </p>
         </div>
 
@@ -380,10 +379,10 @@ export default function WorksheetWizard() {
         <div className="flex justify-center">
           <button 
             id="pdf-download-btn"
-            className="w-full sm:w-auto px-10 py-5 bg-indigo-600 text-white font-black rounded-[2rem] shadow-2xl hover:bg-indigo-700 transition-all hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3"
+            className="w-full sm:w-auto px-10 py-5 bg-gray-900 text-white font-bold rounded-xl shadow-lg hover:bg-gray-800 transition-all active:scale-[0.98] flex items-center justify-center gap-3 font-heading"
             onClick={handleDownloadPDF}
           >
-            <CheckCircle2 className="w-6 h-6 text-white" />
+            <CheckCircle2 className="w-6 h-6 text-indigo-400" />
             Download Official PDF
           </button>
         </div>
@@ -392,29 +391,23 @@ export default function WorksheetWizard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFDFE] flex font-sans selection:bg-indigo-100 selection:text-indigo-700">
-
-      {/* Decorative background gradients */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[-10%] left-[-10%] w-[50rem] h-[50rem] bg-indigo-50/40 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50rem] h-[50rem] bg-blue-50/40 rounded-full blur-[120px]" />
-      </div>
+    <div className="min-h-screen bg-white flex font-sans selection:bg-indigo-50 selection:text-indigo-700">
 
       {/* Sidebar Navigation (Desktop) */}
       {!showSummary && (
-        <aside className={`no-print fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-100 transform transition-transform duration-300 lg:translate-x-0 lg:static ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <aside className={`no-print fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-gray-100 transform transition-transform duration-300 lg:translate-x-0 lg:static ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           <div className="h-full flex flex-col p-6">
             <div className="mb-10 mt-4 flex items-center gap-3">
-              <div className="p-2.5 bg-indigo-600 rounded-xl shadow-lg shadow-indigo-200">
-                <Calculator className="w-6 h-6 text-white" />
+              <div className="p-2.5 bg-gray-900 rounded-xl shadow-md">
+                <Calculator className="w-6 h-6 text-indigo-400" />
               </div>
               <div>
-                <h2 className="text-lg font-black text-slate-800 tracking-tight leading-none mb-1">Worksheet Pro</h2>
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">v2026 Guidelines</span>
+                <h2 className="text-lg font-bold text-gray-900 tracking-tight leading-none mb-1 font-heading">Worksheet Pro</h2>
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">2026 Guidelines</span>
               </div>
             </div>
 
-            <nav className="flex-1 space-y-1">
+            <nav className="flex-1 space-y-1 overflow-y-auto pr-2 custom-scrollbar">
               {PARTS.map((part, idx) => (
                 <button
                   key={part}
@@ -422,12 +415,12 @@ export default function WorksheetWizard() {
                     setCurrentStep(idx);
                     setIsSidebarOpen(false);
                   }}
-                  className={`w-full group flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-200 font-semibold text-sm ${currentStep === idx
-                    ? 'bg-indigo-50/80 text-indigo-700 shadow-[0_4px_12px_rgba(79,70,229,0.08)]'
-                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                  className={`w-full group flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-200 font-semibold text-sm ${currentStep === idx
+                    ? 'bg-gray-50 text-gray-900'
+                    : 'text-gray-400 hover:bg-gray-50 hover:text-gray-900'
                     }`}
                 >
-                  <div className={`w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-bold border-2 transition-colors ${currentStep === idx ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white border-slate-200 text-slate-400 group-hover:border-slate-300'
+                  <div className={`w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-bold border transition-colors ${currentStep === idx ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white border-gray-200 text-gray-400 group-hover:border-gray-300'
                     }`}>
                     {idx + 1}
                   </div>
@@ -437,20 +430,18 @@ export default function WorksheetWizard() {
             </nav>
 
             <motion.div
-              className="mt-auto p-5 bg-slate-900 rounded-[2rem] border border-slate-800 shadow-2xl relative overflow-hidden"
+              className="mt-8 p-6 bg-gray-900 rounded-2xl relative overflow-hidden shadow-md"
               layout
             >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-500/20 rounded-full blur-2xl -translate-y-12 translate-x-12" />
-              <div className="flex items-center gap-3 mb-3 relative z-10">
-                <div className="p-1.5 bg-indigo-500/20 rounded-lg">
+              <div className="flex items-center gap-3 mb-4 relative z-10">
+                <div className="p-1.5 bg-gray-800 rounded-lg">
                   <LayoutDashboard className="w-4 h-4 text-indigo-400" />
                 </div>
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Current Estimate</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Est. Base Support</span>
               </div>
-              <p className="text-2xl font-black text-white leading-tight relative z-10">
+              <p className="text-2xl font-bold text-white leading-tight relative z-10 font-heading">
                 {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
               </p>
-              <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-widest mt-1 relative z-10">Total Basic Obligation</p>
             </motion.div>
           </div>
         </aside>
@@ -461,34 +452,34 @@ export default function WorksheetWizard() {
 
         {/* Mobile Header (Only in Wizard Mode) */}
         {!showSummary && (
-          <header className="no-print lg:hidden flex items-center justify-between p-4 bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-40">
-            <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 text-slate-500 hover:bg-slate-50 rounded-xl">
+          <header className="no-print lg:hidden flex items-center justify-between p-4 bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40">
+            <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 text-gray-400 hover:bg-gray-50 rounded-xl">
               {isSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <span className="text-xs font-black text-slate-800 uppercase tracking-widest truncate max-w-[200px]">
+            <span className="text-[10px] font-bold text-gray-900 uppercase tracking-widest truncate max-w-[200px] font-heading">
               {currentPartKey}
             </span>
             <div className="w-10" />
           </header>
         )}
 
-        <div className="max-w-6xl mx-auto w-full py-8 px-4 sm:px-10 lg:py-16">
+        <div className="max-w-7xl mx-auto w-full py-10 px-4 sm:px-6 lg:px-8 lg:py-20">
 
           {showSummary ? renderSummaryContent() : (
             <div className="max-w-4xl mx-auto">
               <ProgressBar currentStep={currentStep} totalSteps={PARTS.length} />
 
               {/* Form Card */}
-              <div className="bg-white rounded-[2.5rem] border border-slate-100 shadow-2xl shadow-indigo-900/5 p-6 sm:p-10 md:p-14">
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sm:p-10 md:p-12">
 
                 <div className="mb-12 text-center sm:text-left">
-                  <span className="inline-block px-3 py-1 bg-indigo-50 text-indigo-600 text-xs font-bold uppercase tracking-widest rounded-full mb-4">
+                  <span className="inline-block px-3 py-1 bg-gray-50 text-gray-500 text-[10px] font-bold uppercase tracking-widest rounded-full mb-4">
                     Requirement Step {currentStep + 1}
                   </span>
-                  <h1 className="text-4xl font-black text-slate-900 tracking-tight mb-3">
+                  <h1 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-4 font-heading">
                     {currentPartKey}
                   </h1>
-                  <p className="text-slate-500 text-base font-medium leading-relaxed max-w-2xl">
+                  <p className="text-gray-500 text-sm md:text-base font-medium leading-relaxed max-w-2xl">
                     Fill in the mandatory fields below. Your live support estimate updates automatically as you input parent income and deduction details.
                   </p>
                 </div>
@@ -516,7 +507,7 @@ export default function WorksheetWizard() {
                               onChange={(parent, val) => handleInputChange(field.id, parent, val)}
                             />
                             {isCalculated && (
-                              <p className="text-[11px] font-bold text-indigo-500 uppercase tracking-widest -mt-5 ml-11 mb-8 animate-pulse">
+                              <p className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest -mt-6 ml-11 mb-8 animate-pulse">
                                 Auto-Calculating...
                               </p>
                             )}
@@ -527,24 +518,24 @@ export default function WorksheetWizard() {
                   </motion.div>
                 </AnimatePresence>
 
-                <div className="mt-14 flex items-center justify-between gap-4 pt-10 border-t border-slate-50">
+                <div className="mt-14 flex flex-col sm:flex-row items-center justify-between gap-4 pt-10 border-t border-gray-50">
                   <button
                     onClick={prevStep}
                     disabled={currentStep === 0}
-                    className={`flex items-center justify-center px-6 py-4 rounded-2xl font-bold text-sm transition-all ${currentStep === 0
-                      ? 'text-slate-300 pointer-events-none'
-                      : 'text-slate-500 hover:bg-slate-50 active:scale-95'
+                    className={`flex items-center justify-center w-full sm:w-auto px-6 py-4 rounded-xl font-bold text-sm transition-all ${currentStep === 0
+                      ? 'text-gray-200 pointer-events-none'
+                      : 'text-gray-400 hover:bg-gray-50 active:scale-[0.98]'
                       }`}
                   >
                     <ChevronLeft className="w-5 h-5 mr-2" />
-                    Return to Previous
+                    Previous Step
                   </button>
 
                   <button
                     onClick={nextStep}
-                    className="flex items-center justify-center bg-slate-900 text-white px-10 py-4 rounded-2xl font-bold text-sm hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/10 transition-all active:scale-95 group"
+                    className="flex items-center justify-center w-full sm:w-auto bg-gray-900 text-white px-10 py-4 rounded-xl font-bold text-sm hover:bg-gray-800 transition-all active:scale-[0.98] group font-heading"
                   >
-                    {currentStep === PARTS.length - 1 ? 'Generate Final Report' : 'Save & Continue'}
+                    {currentStep === PARTS.length - 1 ? 'Generate Report' : 'Save & Continue'}
                     <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
@@ -570,19 +561,19 @@ export default function WorksheetWizard() {
 
       {/* Floating Summary Bar (Mobile Only) */}
       {!showSummary && (
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-xl border-t border-slate-100 z-50 flex items-center justify-between animate-in slide-in-from-bottom duration-500 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-xl border-t border-gray-100 z-50 flex items-center justify-between animate-in slide-in-from-bottom duration-500 shadow-lg">
           <div>
-            <p className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-0.5">Est. Basic Support</p>
-            <p className="text-xl font-black text-indigo-700">
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Est. Support</p>
+            <p className="text-xl font-bold text-indigo-600 font-heading">
               {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
             </p>
           </div>
           <button
             onClick={() => nextStep()}
             disabled={currentStep === PARTS.length - 1}
-            className="bg-indigo-600 text-white px-8 py-3.5 rounded-2xl font-bold text-sm flex items-center shadow-lg shadow-indigo-200"
+            className="bg-gray-900 text-white px-8 py-3.5 rounded-xl font-bold text-xs flex items-center shadow-md font-heading"
           >
-            {currentStep === PARTS.length - 1 ? 'Go to Report' : 'Next Part'}
+            {currentStep === PARTS.length - 1 ? 'Get Report' : 'Next Step'}
             <ArrowRight className="w-4 h-4 ml-2" />
           </button>
         </div>
