@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function CompareToolPage() {
   return (
-    <div className="flex-1 bg-slate-50 relative w-full overflow-hidden font-sans min-h-screen">
+    <div className="flex-1 bg-gray-50 relative w-full overflow-hidden font-sans min-h-screen">
       <CalculatorSchema year={2026} url="https://wcssc.site/compare-2024-2026" />
       <ComparisonTool />
     </div>

@@ -100,7 +100,11 @@ export default async function BlogPostPage({ params }: Props) {
 
   // Extract structural content safely
   const cleanedContent = cleanEmDashContent(post.content);
-  const { headings, updatedHtml } = parseTOC(cleanedContent);
+  const { headings, updatedHtml: rawHtml } = parseTOC(cleanedContent);
+
+  // Enforce consistent paragraph spacing and other basic styles in raw HTML if necessary
+  // But better to do it via Tailwind Typography (prose)
+  const updatedHtml = rawHtml;
 
   // Structured Data (Article + FAQ)
   const jsonLd = {
@@ -129,14 +133,14 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFDFE] font-sans selection:bg-indigo-100 selection:text-indigo-700">
+    <div className="min-h-screen bg-white font-sans selection:bg-indigo-100 selection:text-indigo-700">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20">
         
         {/* Back navigation */}
-        <Link href="/blog" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors mb-20 group no-print">
-          <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+        <Link href="/blog" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-indigo-600 transition-colors mb-20 group no-print">
+          <ArrowLeft size={14} className="group-hover:-trangray-x-1 transition-transform" />
           Back to Resource Center
         </Link>
 
@@ -144,46 +148,46 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           
           {/* Main Content Column */}
-          <article className="lg:col-span-8">
+          <article className="lg:col-span-8 max-w-3xl">
             
             {/* Header */}
             <header className="mb-10 md:mb-16">
               <div className="flex items-center gap-4 mb-4">
-                <span className="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-black uppercase tracking-[0.2em] rounded-md ring-1 ring-indigo-200">
+                <span className="px-3 py-1 bg-indigo-50 text-indigo-700 text-[10px] font-bold uppercase tracking-widest rounded-md ring-1 ring-indigo-200">
                   {post.category}
                 </span>
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
                   Updated: {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-10 italic">
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight mb-10 font-heading">
                 {post.title}
               </h1>
               
-              <div className="flex flex-wrap items-center gap-8 py-8 border-t border-slate-100 mb-8">
+              <div className="flex flex-wrap items-center gap-8 py-8 border-t border-gray-100 mb-8">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white">
+                  <div className="w-10 h-10 rounded-xl bg-gray-900 flex items-center justify-center text-white">
                     <User size={16} />
                   </div>
                   <div>
-                    <p className="text-xs font-black text-slate-500 uppercase tracking-widest leading-none mb-1">Author</p>
-                    <p className="text-sm font-black text-slate-900 leading-none">{post.author}</p>
+                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-none mb-1">Author</p>
+                    <p className="text-sm font-bold text-gray-900 leading-none">{post.author}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-indigo-600">
+                  <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-indigo-600">
                     <Clock size={16} />
                   </div>
                   <div>
-                    <p className="text-xs font-black text-slate-500 uppercase tracking-widest leading-none mb-1">Time</p>
-                    <p className="text-sm font-black text-slate-900 leading-none">{post.readTime} Read</p>
+                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-none mb-1">Time</p>
+                    <p className="text-sm font-bold text-gray-900 leading-none">{post.readTime} Read</p>
                   </div>
                 </div>
               </div>
 
               {/* Featured Image */}
               {post.image?.url && (
-                <div className="relative w-full aspect-[16/9] md:aspect-[2/1] rounded-[2rem] overflow-hidden mb-12 shadow-xl shadow-indigo-900/5 ring-1 ring-slate-100">
+                <div className="relative w-full aspect-[16/9] md:aspect-[2/1] rounded-[2rem] overflow-hidden mb-12 shadow-xl shadow-indigo-900/5 ring-1 ring-gray-100">
                   <Image
                     src={post.image.url}
                     alt={post.image.alt || post.title}
@@ -203,13 +207,13 @@ export default async function BlogPostPage({ params }: Props) {
             <AdContainer slot="top" wordCount={updatedHtml.split(' ').length} />
 
             {/* Content Body */}
-            <div className="prose prose-slate prose-lg max-w-none 
-              prose-h2:text-3xl prose-h2:font-black prose-h2:tracking-tight prose-h2:text-slate-900 prose-h2:italic prose-h2:mt-16 prose-h2:mb-8 prose-h2:-scroll-mt-24
-              prose-h3:text-xl prose-h3:font-bold prose-h3:text-slate-800 prose-h3:mt-10 prose-h3:mb-4 prose-h3:-scroll-mt-24
-              prose-p:text-slate-600 prose-p:font-medium prose-p:leading-loose prose-p:mb-8
-              prose-strong:text-slate-900 prose-strong:font-black
-              prose-a:text-indigo-600 prose-a:font-black prose-a:no-underline prose-a:decoration-indigo-100 prose-a:underline-offset-4 hover:prose-a:underline
-              prose-li:text-slate-600 prose-li:font-medium prose-li:mb-2
+            <div className="prose prose-gray prose-lg max-w-none
+              prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:font-bold prose-h2:tracking-tight prose-h2:text-gray-900 prose-h2:font-heading prose-h2:mt-12 prose-h2:mb-6 prose-h2:-scroll-mt-24
+              prose-h3:text-xl md:prose-h3:text-2xl prose-h3:font-bold prose-h3:text-gray-900 prose-h3:font-heading prose-h3:mt-8 prose-h3:mb-4 prose-h3:-scroll-mt-24
+              prose-p:text-gray-700 prose-p:font-medium prose-p:leading-relaxed prose-p:mb-4 md:prose-p:mb-6
+              prose-strong:text-gray-900 prose-strong:font-bold
+              prose-a:text-blue-600 prose-a:font-medium prose-a:no-underline prose-a:decoration-blue-100 prose-a:underline-offset-4 hover:prose-a:underline
+              prose-li:text-gray-700 prose-li:font-medium prose-li:mb-2
             "
               dangerouslySetInnerHTML={{ __html: updatedHtml }}
             />
@@ -220,7 +224,7 @@ export default async function BlogPostPage({ params }: Props) {
             {/* FAQ Section */}
             {post.faqs && post.faqs.length > 0 && (
               <section className="mt-20">
-                <h2 className="text-3xl font-black text-slate-900 tracking-tight italic mb-10 flex items-center gap-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight mb-10 flex items-center gap-4 font-heading">
                   <HelpCircle className="w-8 h-8 text-indigo-600" />
                   Common Questions
                 </h2>
@@ -249,31 +253,31 @@ export default async function BlogPostPage({ params }: Props) {
               <TableOfContents headings={headings} />
             )}
             
-            <div className={`p-8 bg-indigo-50 rounded-[2rem] border border-indigo-100 italic ${headings.length > 0 ? 'mt-12' : ''}`}>
-              <h4 className="text-xs font-black text-indigo-600 uppercase tracking-widest mb-4">E-E-A-T Disclosure</h4>
+            <div className={`p-8 bg-indigo-50 rounded-3xl border border-indigo-100 ${headings.length > 0 ? 'mt-12' : ''}`}>
+              <h4 className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-4">E-E-A-T Disclosure</h4>
               <p className="text-xs text-indigo-900 font-bold leading-relaxed mb-6">
                 All WCSSC insights are reviewed for compliance with RCW 26.19.065 and official AOC guidelines.
               </p>
-              <Link href="/editorial-methodology" className="text-xs font-black text-indigo-500 uppercase tracking-widest hover:text-indigo-700 transition-colors block mb-2">
+              <Link href="/editorial-methodology" className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest hover:text-indigo-700 transition-colors block mb-2">
                 Our calculation methodology &rarr;
               </Link>
-              <Link href="/disclaimer" className="text-xs font-black text-indigo-500 uppercase tracking-widest hover:text-indigo-700 transition-colors">
+              <Link href="/disclaimer" className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest hover:text-indigo-700 transition-colors">
                 Read Legal Disclaimer &rarr;
               </Link>
             </div>
 
             {/* Other Blogs Promo */}
             <div className="mt-12 sticky top-24">
-              <h4 className="text-xs font-black text-slate-900 uppercase tracking-[0.3em] mb-6 ml-4">Trending Read</h4>
+              <h4 className="text-[10px] font-bold text-gray-900 uppercase tracking-widest mb-6 ml-4">Trending Read</h4>
               <div className="space-y-4">
                 {blogs.filter(p => p.slug !== slug).slice(0, 3).map((other) => (
                   <Link 
                     key={other.slug}
                     href={`/blog/${other.slug}`}
-                    className="group block p-6 bg-white border border-slate-100 shadow-sm rounded-[1.5rem] hover:border-indigo-500 transition-all hover:shadow-xl hover:shadow-indigo-900/5"
+                    className="group block p-6 bg-white border border-gray-100 shadow-sm rounded-2xl hover:border-indigo-500 transition-all hover:shadow-xl hover:shadow-indigo-900/5"
                   >
-                    <p className="text-xs font-black text-indigo-600 uppercase tracking-widest mb-2 italic">{other.category}</p>
-                    <p className="text-sm font-black text-slate-900 transition-colors group-hover:text-indigo-600 leading-tight">
+                    <p className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-2">{other.category}</p>
+                    <p className="text-sm font-bold text-gray-900 transition-colors group-hover:text-indigo-600 leading-tight">
                       {other.title}
                     </p>
                   </Link>

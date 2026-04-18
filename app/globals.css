@@ -9,7 +9,7 @@
   --color-primary-hover: #4338ca; /* indigo-700 */
   --color-text-primary: #111827; /* gray-900 */
   --color-text-secondary: #374151; /* gray-700 */
-  --color-text-muted: #4b5563; /* gray-600 — WCAG AA compliant on white */
+  --color-text-muted: #6b7280; /* gray-500 */
   --min-label-size: 0.75rem; /* 12px minimum for readability */
   --min-touch-target: 48px;
 }
@@ -32,11 +32,63 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+p {
+  margin-bottom: 1rem; /* mb-4 */
+}
+
+@media (min-width: 768px) {
+  p {
+    margin-bottom: 1.5rem; /* mb-6 */
+  }
+}
+
+h1 {
   font-family: var(--font-heading);
   color: var(--color-text-primary);
+  font-size: 2.25rem; /* text-4xl */
   line-height: 1.25; /* leading-tight */
   font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3rem; /* text-5xl */
+  }
+}
+
+h2 {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  font-size: 1.5rem; /* text-2xl */
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 1.875rem; /* text-3xl */
+  }
+}
+
+h3 {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  font-size: 1.25rem; /* text-xl */
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  h3 {
+    font-size: 1.5rem; /* text-2xl */
+  }
+}
+
+h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-primary);
+  line-height: 1.25;
+  font-weight: 600;
 }
 
 
@@ -82,7 +134,7 @@ h1, h2, h3, h4, h5, h6 {
       display: none !important;
     }
 
-    .bg-white, .bg-slate-50, .bg-indigo-50 {
+    .bg-white, .bg-gray-50, .bg-indigo-50 {
       background-color: transparent !important;
       border-color: #eee !important;
     }

@@ -51,7 +51,7 @@ export default function ComparisonTool() {
         <div className="inline-flex p-3 bg-indigo-50 text-indigo-600 rounded-2xl mb-8">
           <ArrowRight className="w-8 h-8 rotate-45" />
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 mb-6 font-heading leading-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-6 font-heading leading-tight">
           2024 vs 2026 Guideline Comparison
         </h1>
         <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">

@@ -46,7 +46,7 @@ export default function BlogGridClient({ initialBlogs }: BlogGridClientProps) {
         </div>
         
         <div className="h-px flex-1 mx-6 bg-gray-100 hidden lg:block" />
-        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] shrink-0">
+        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest shrink-0">
           Showing {filteredBlogs.length} Article{filteredBlogs.length !== 1 && 's'}
         </span>
       </div>
@@ -56,7 +56,7 @@ export default function BlogGridClient({ initialBlogs }: BlogGridClientProps) {
           <BlogCard key={post.slug} post={post} />
         ))}
         {filteredBlogs.length === 0 && (
-          <div className="col-span-full py-20 text-center text-slate-500 font-medium">
+          <div className="col-span-full py-20 text-center text-gray-500 font-medium">
             No articles found in this category.
           </div>
         )}

@@ -22,7 +22,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-semibold mb-5 md:mb-8 uppercase tracking-[0.2em] text-xs">Calculators</h4>
+            <h4 className="text-white font-bold mb-5 md:mb-8 uppercase tracking-widest text-[10px]">Calculators</h4>
             <ul className="space-y-4 text-[13px] font-medium">
               <li><Link href="/" className="hover:text-indigo-400 transition-colors">Quick Estimator</Link></li>
               <li><Link href="/worksheet" className="hover:text-indigo-400 transition-colors">Worksheet Pro Wizard</Link></li>
@@ -33,7 +33,7 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h4 className="text-white font-semibold mb-5 md:mb-8 uppercase tracking-[0.2em] text-xs">Resources</h4>
+            <h4 className="text-white font-bold mb-5 md:mb-8 uppercase tracking-widest text-[10px]">Resources</h4>
             <ul className="space-y-4 text-[13px] font-medium">
               <li><a href="https://www.courts.wa.gov/forms/?fa=forms.contribute&formID=16" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400 transition-colors">AOC Mandatory Forms</a></li>
               <li><a href="https://www.dshs.wa.gov/esa/division-child-support" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400 transition-colors">WA DSHS Support Center</a></li>
@@ -45,7 +45,7 @@ export default function Footer() {
 
           {/* Legal */}
           <div>
-            <h4 className="text-white font-semibold mb-5 md:mb-8 uppercase tracking-[0.2em] text-xs">Legal</h4>
+            <h4 className="text-white font-bold mb-5 md:mb-8 uppercase tracking-widest text-[10px]">Legal</h4>
             <ul className="space-y-4 text-[13px] font-medium">
               <li className="flex items-center gap-3 hover:text-indigo-400 transition-colors cursor-pointer"><Mail size={14} /><a href="mailto:support@wcssc.site">Contact Us</a></li>
               <li className="flex items-center gap-3 hover:text-indigo-400 transition-colors cursor-pointer"><Shield size={14} /><Link href="/privacy">Privacy Policy</Link></li>

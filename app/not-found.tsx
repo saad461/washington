@@ -46,7 +46,7 @@ export default function NotFound() {
           </Link>
         </div>
 
-        <div className="mt-16 text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400">
+        <div className="mt-16 text-[10px] font-bold uppercase tracking-widest text-gray-400">
           Official 2026 WA State Guidelines Index
         </div>
       </div>

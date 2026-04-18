@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-[#FDFDFE] font-sans">
-      <div className="max-w-4xl mx-auto px-6 py-20">
+      <div className="max-w-3xl mx-auto px-6 py-20">
 
         {/* Back Link */}
-        <Link href="/" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors mb-16">
+        <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-indigo-600 transition-colors mb-16">
           <ArrowLeft size={14} />
           Back to Calculator
         </Link>
@@ -25,17 +25,17 @@ export default function TermsPage() {
             <FileText className="w-8 h-8 text-white" />
           </div>
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-600 mb-1">Legal Agreement</p>
-            <h1 className="text-4xl font-black text-slate-900 tracking-tight">Terms of Service</h1>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-indigo-600 mb-1">Legal Agreement</p>
+            <h1 className="text-4xl font-bold text-gray-900 tracking-tight">Terms of Service</h1>
           </div>
         </div>
 
-        <p className="text-slate-500 font-medium leading-relaxed mb-14 text-lg">
+        <p className="text-gray-500 font-medium leading-relaxed mb-14 text-lg">
           By accessing or using the Washington Child Support Schedule Center (WCSSC) website, you agree to be bound by the following Terms of Service. If you do not agree, please do not use our services.
         </p>
 
         {/* Terms Sections */}
-        <div className="space-y-8 text-slate-600">
+        <div className="space-y-8 text-gray-600">
           {[
             {
               title: "1. Acceptance of Terms",
@@ -78,19 +78,19 @@ export default function TermsPage() {
               body: "If you have questions about these Terms, please contact us at: support@wcssc.site."
             }
           ].map((section, i) => (
-            <div key={i} className="p-10 bg-white rounded-[3rem] border border-slate-100 shadow-sm group hover:border-indigo-100 transition-colors">
+            <div key={i} className="p-10 bg-white rounded-[3rem] border border-gray-100 shadow-sm group hover:border-indigo-100 transition-colors">
               <div className="flex items-center gap-4 mb-4">
                 <CheckCircle2 className="w-5 h-5 text-indigo-400 flex-shrink-0" />
-                <h2 className="text-lg font-black text-slate-900">{section.title}</h2>
+                <h2 className="text-lg font-bold text-gray-900">{section.title}</h2>
               </div>
               <p className="font-medium leading-loose pl-9">{section.body}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-16 p-8 bg-slate-900 rounded-[3rem] text-center text-slate-400">
+        <div className="mt-16 p-8 bg-gray-900 rounded-[3rem] text-center text-gray-400">
           <p className="text-sm font-medium mb-4">Effective Date: January 1, 2026</p>
-          <div className="flex justify-center gap-8 text-xs font-black uppercase tracking-widest">
+          <div className="flex justify-center gap-8 text-[10px] font-bold uppercase tracking-widest">
             <Link href="/privacy" className="hover:text-indigo-400 transition-colors">Privacy Policy</Link>
             <Link href="/disclaimer" className="hover:text-indigo-400 transition-colors">Legal Disclaimer</Link>
             <Link href="/" className="hover:text-indigo-400 transition-colors">Calculator</Link>

@@ -16,32 +16,32 @@ export const AdContainerClient = dynamic(
 
 export const AuthoritySidebarClient = dynamic(
   () => import('@/components/AuthoritySidebar'),
-  { ssr: false, loading: () => <div className="w-full h-48 animate-pulse bg-slate-100 rounded-3xl" /> }
+  { ssr: false, loading: () => <div className="w-full h-48 animate-pulse bg-gray-100 rounded-3xl" /> }
 );
 
 export const AuthorBoxClient = dynamic(
   () => import('@/components/AuthorBox'),
-  { ssr: false, loading: () => <div className="w-full h-32 animate-pulse bg-slate-100 rounded-3xl" /> }
+  { ssr: false, loading: () => <div className="w-full h-32 animate-pulse bg-gray-100 rounded-3xl" /> }
 );
 
 export const HomeCalculatorClient = dynamic(
   () => import('@/components/HomeCalculator'),
-  { ssr: false, loading: () => <div className="w-full max-w-lg h-96 animate-pulse bg-slate-100 rounded-3xl" /> }
+  { ssr: false, loading: () => <div className="w-full max-w-lg h-96 animate-pulse bg-gray-100 rounded-3xl" /> }
 );
 
 export const BlogGridClientClient = dynamic(
   () => import('@/components/BlogGridClient'),
-  { ssr: false, loading: () => <div className="w-full h-16 animate-pulse bg-slate-100 rounded-2xl" /> }
+  { ssr: false, loading: () => <div className="w-full h-16 animate-pulse bg-gray-100 rounded-2xl" /> }
 );
 
 export const ComparisonToolClient = dynamic(
   () => import('@/components/ComparisonTool'),
-  { ssr: false, loading: () => <div className="w-full h-96 animate-pulse bg-slate-100 rounded-3xl" /> }
+  { ssr: false, loading: () => <div className="w-full h-96 animate-pulse bg-gray-100 rounded-3xl" /> }
 );
 
 export const WorksheetWizardClient = dynamic(
   () => import('@/components/WorksheetWizard'),
-  { ssr: false, loading: () => <div className="w-full min-h-screen animate-pulse bg-slate-50 rounded-3xl" /> }
+  { ssr: false, loading: () => <div className="w-full min-h-screen animate-pulse bg-gray-50 rounded-3xl" /> }
 );
 
 export const NavbarClient = dynamic(

@@ -79,7 +79,7 @@ function generateCountyContent(county: WashingtonCounty): {
 
   const filingProcess = [
     `Filing for child support in ${county.name} is a multi-step legal process that requires submitting several mandatory documents to the ${county.court}. The primary location for filing is ${county.courtAddress}. You can reach the clerk's office at ${county.clerkPhone}. Before showing up, call ahead to confirm current operating hours, as many rural Washington county clerks maintain limited hours.`,
-    `The most critical document you must prepare is the <strong>Washington Child Support Worksheet (FL All Family 130)</strong>. This is the official 2026 form that translates your financial data into a presumptive support amount using the AOC economic tables. You can use our free calculator above to prepare your estimates before formally completing the official PDF version.`,
+    `The most critical document you must prepare is the <strong>Washington Child Support Worksheet (FL All Family 130)</strong>. This is the official 2026 form that trangrays your financial data into a presumptive support amount using the AOC economic tables. You can use our free calculator above to prepare your estimates before formally completing the official PDF version.`,
     `Alongside your worksheet, you must file a <strong>Financial Declaration (FL All Family 131)</strong>. This sworn document — signed under penalty of perjury — discloses your complete financial picture: income from all sources, monthly expenses, debts, and assets. Incomplete or misleading financial declarations are one of the leading reasons judges in ${county.name} impute income at a higher rate than what a parent actually earns.`,
     `Once your paperwork is filed and the fee of ${county.filingFee} is paid (fee waivers are available via Form GR 34 for qualifying low-income filers), the other parent must be served via a third-party process server or Sheriff — the petitioner cannot self-serve. A Response to Petition and Response to Motion (FL All Family 120) is then due from the other party within 20 days in ${county.name} if personally served.`
   ];
@@ -203,33 +203,33 @@ export default async function CountyCourtPage({ params }: Props) {
       <CalculatorSchema county={county?.name} url={`https://wcssc.site/washington-courts/${county?.slug}`} />
 
       {/* ── 1. HERO ──────────────────────────────────────────────────────────── */}
-      <section className="bg-white border-b border-slate-100">
+      <section className="bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-6 py-14 md:py-20 text-center">
           {/* Breadcrumb */}
-          <nav className="flex items-center justify-center gap-2 mb-8 text-xs font-black uppercase tracking-widest text-slate-500">
+          <nav className="flex items-center justify-center gap-2 mb-8 text-[10px] font-bold uppercase tracking-widest text-gray-500">
             <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
             <ChevronRight className="w-3 h-3 opacity-40" />
             <Link href="/washington-courts" className="hover:text-indigo-600 transition-colors">Courts</Link>
             <ChevronRight className="w-3 h-3 opacity-40" />
-            <span className="text-slate-700">{county!.name}</span>
+            <span className="text-gray-700">{county!.name}</span>
           </nav>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 mb-6 leading-[1.05] max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-6 leading-[1.05] max-w-4xl mx-auto">
             Child Support Calculator –{' '}
             <span className="text-indigo-600">{county!.name}</span>
             <br className="hidden sm:block" /> Washington{' '}
-            <span className="text-slate-400">(2026)</span>
+            <span className="text-gray-400">(2026)</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-8">
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
             Official 2026 child support estimates for {county!.name} residents. Based on the Washington State Income Shares Model with the updated SSR of <strong>$1,514</strong> and economic tables covering incomes up to{' '}
             <strong>$50,000 combined</strong>. File locally at the {county!.court}.
           </p>
 
           {/* Quick stats strip */}
-          <div className="inline-flex flex-wrap justify-center gap-4 text-xs font-black uppercase tracking-widest text-slate-500">
+          <div className="inline-flex flex-wrap justify-center gap-4 text-[10px] font-bold uppercase tracking-widest text-gray-500">
             <span className="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full">SSR: $1,514</span>
-            <span className="bg-slate-100 text-slate-700 px-4 py-2 rounded-full">2026 Guidelines</span>
+            <span className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full">2026 Guidelines</span>
             <span className="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full">All 39 Counties</span>
             <span className="bg-amber-50 text-amber-700 px-4 py-2 rounded-full">Min: $50 / child</span>
           </div>
@@ -237,13 +237,13 @@ export default async function CountyCourtPage({ params }: Props) {
       </section>
 
       {/* ── 2. CALCULATOR ────────────────────────────────────────────────────── */}
-      <section className="py-16 bg-slate-50 border-b border-slate-100">
+      <section className="py-16 bg-gray-50 border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-10">
-            <h2 className="text-2xl font-black text-slate-900 mb-2">
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
               Free {county!.name} Child Support Calculator (2026)
             </h2>
-            <p className="text-slate-500 text-sm">Enter both parents&apos; monthly net incomes below. Results are based on the official Washington 2026 economic table.</p>
+            <p className="text-gray-500 text-sm">Enter both parents&apos; monthly net incomes below. Results are based on the official Washington 2026 economic table.</p>
           </div>
           <div className="flex justify-center">
             <HomeCalculator />
@@ -259,35 +259,35 @@ export default async function CountyCourtPage({ params }: Props) {
 
             {/* A. INTRODUCTION */}
             <section>
-              <h2 className="text-3xl font-black text-slate-900 mb-6 leading-tight">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 leading-tight">
                 Child Support in {county!.name}: A 2026 Guide
               </h2>
               {content.introduction.map((para, i) => (
-                <p key={i} className="text-slate-600 leading-relaxed mb-5 text-[17px]">{para}</p>
+                <p key={i} className="text-gray-600 leading-relaxed mb-5 text-[17px]">{para}</p>
               ))}
-              <p className="text-sm font-medium text-slate-500 italic mt-4">
+              <p className="text-sm font-medium text-gray-500 italic mt-4">
                 Our estimates are based on the latest 2026 guidelines. Learn more about our <Link href="/editorial-methodology" className="text-indigo-600 underline hover:text-indigo-800">calculation methodology</Link>.
               </p>
             </section>
 
             {/* B. HOW IT WORKS */}
             <section>
-              <h2 className="text-2xl font-black text-slate-900 mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 How Child Support Is Calculated in {county!.name}
               </h2>
               {content.howItWorks.map((para, i) => (
                 <p
                   key={i}
-                  className="text-slate-600 leading-relaxed mb-5 text-[17px]"
+                  className="text-gray-600 leading-relaxed mb-5 text-[17px]"
                   dangerouslySetInnerHTML={{ __html: para }}
                 />
               ))}
 
               {/* 3. KEY FIGURES */}
-              <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-md mt-8">
-                <div className="bg-slate-900 text-white px-6 py-4 flex items-center gap-2">
+              <div className="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-md mt-8">
+                <div className="bg-gray-900 text-white px-6 py-4 flex items-center gap-2">
                   <Info className="w-4 h-4 text-indigo-400" />
-                  <span className="text-xs font-black uppercase tracking-widest">2026 Key Figures — Statewide</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest">2026 Key Figures — Statewide</span>
                 </div>
                 <table className="w-full text-sm">
                   <tbody>
@@ -298,9 +298,9 @@ export default async function CountyCourtPage({ params }: Props) {
                       ['Economic Table Coverage', 'Up to $50,000 combined income'],
                       ['Guideline Version', 'Washington AOC — January 2026'],
                     ].map(([label, value], i) => (
-                      <tr key={i} className={`border-b border-slate-100 ${i % 2 === 0 ? 'bg-slate-50/50' : 'bg-white'}`}>
-                        <td className="px-6 py-3.5 font-medium text-slate-500">{label}</td>
-                        <td className="px-6 py-3.5 font-bold text-slate-900 text-right">{value}</td>
+                      <tr key={i} className={`border-b border-gray-100 ${i % 2 === 0 ? 'bg-gray-50/50' : 'bg-white'}`}>
+                        <td className="px-6 py-3.5 font-medium text-gray-500">{label}</td>
+                        <td className="px-6 py-3.5 font-bold text-gray-900 text-right">{value}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -310,13 +310,13 @@ export default async function CountyCourtPage({ params }: Props) {
 
             {/* C. FILING PROCESS */}
             <section>
-              <h2 className="text-2xl font-black text-slate-900 mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 Step-by-Step Filing Process in {county!.name}
               </h2>
               {content.filingProcess.map((para, i) => (
                 <p
                   key={i}
-                  className="text-slate-600 leading-relaxed mb-5 text-[17px]"
+                  className="text-gray-600 leading-relaxed mb-5 text-[17px]"
                   dangerouslySetInnerHTML={{ __html: para }}
                 />
               ))}
@@ -324,13 +324,13 @@ export default async function CountyCourtPage({ params }: Props) {
               {/* Numbered filing steps */}
               <div className="mt-8 space-y-4">
                 {content.filingSteps.map((step, i) => (
-                  <div key={i} className="flex gap-4 bg-white border border-slate-100 rounded-2xl p-5 shadow-sm">
-                    <div className="w-9 h-9 rounded-full bg-indigo-600 text-white flex items-center justify-center font-black text-sm shrink-0">
+                  <div key={i} className="flex gap-4 bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                    <div className="w-9 h-9 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold text-sm shrink-0">
                       {i + 1}
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-900 mb-1">{step.step}</h4>
-                      <p className="text-sm text-slate-600 leading-relaxed">{step.detail}</p>
+                      <h4 className="font-bold text-gray-900 mb-1">{step.step}</h4>
+                      <p className="text-sm text-gray-600 leading-relaxed">{step.detail}</p>
                     </div>
                   </div>
                 ))}
@@ -339,13 +339,13 @@ export default async function CountyCourtPage({ params }: Props) {
 
             {/* E. LOCAL INSIGHT EXPANDED */}
             <section>
-              <h2 className="text-2xl font-black text-slate-900 mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 Local Filing Insights: {county!.name}
               </h2>
               <div className="bg-amber-50 border border-amber-200 rounded-3xl p-8 mb-6">
                 <div className="flex items-center gap-3 mb-4">
                   <Lightbulb className="w-6 h-6 text-amber-500 shrink-0" />
-                  <span className="text-sm font-black uppercase tracking-widest text-amber-700">Local Expert Tip</span>
+                  <span className="text-sm font-bold uppercase tracking-widest text-amber-700">Local Expert Tip</span>
                 </div>
                 {content.localInsightExpanded.map((para, i) => (
                   <p key={i} className="text-amber-900 leading-relaxed mb-4 last:mb-0 text-[16px] font-medium">{para}</p>
@@ -353,9 +353,9 @@ export default async function CountyCourtPage({ params }: Props) {
               </div>
 
               {/* Required documents list */}
-              <div className="bg-white border border-slate-200 rounded-[2rem] p-8 shadow-sm">
-                <h3 className="font-black text-slate-900 mb-5 flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-slate-400" />
+              <div className="bg-white border border-gray-200 rounded-[2rem] p-8 shadow-sm">
+                <h3 className="font-bold text-gray-900 mb-5 flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-gray-400" />
                   Required Documents for {county!.name}
                 </h3>
                 <ul className="space-y-3">
@@ -367,7 +367,7 @@ export default async function CountyCourtPage({ params }: Props) {
                     'Documentation of all extraordinary expenses (childcare receipts, insurance EOBs)',
                     'Proof of Service after the other parent is served',
                   ].map((doc, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                    <li key={i} className="flex items-start gap-3 text-sm text-gray-600">
                       <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
                       {doc}
                     </li>
@@ -378,31 +378,31 @@ export default async function CountyCourtPage({ params }: Props) {
 
             {/* F. EXAMPLE CALCULATION */}
             <section>
-              <h2 className="text-2xl font-black text-slate-900 mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 Example Calculation for {county!.name} Families
               </h2>
               {content.exampleNarrative.map((para, i) => (
                 <p
                   key={i}
-                  className="text-slate-600 leading-relaxed mb-5 text-[17px]"
+                  className="text-gray-600 leading-relaxed mb-5 text-[17px]"
                   dangerouslySetInnerHTML={{ __html: para }}
                 />
               ))}
               {/* Visual calc breakdown */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-                <div className="bg-slate-900 text-white rounded-2xl p-5 text-center">
-                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-2">Parent A Net</p>
-                  <p className="text-2xl font-black">$5,000</p>
+                <div className="bg-gray-900 text-white rounded-2xl p-5 text-center">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Parent A Net</p>
+                  <p className="text-2xl font-bold">$5,000</p>
                   <p className="text-xs text-indigo-400 mt-1 font-bold">62.5%</p>
                 </div>
-                <div className="bg-slate-200 rounded-2xl p-5 text-center">
-                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-2">Parent B Net</p>
-                  <p className="text-2xl font-black text-slate-700">$3,000</p>
-                  <p className="text-xs text-slate-500 mt-1 font-bold">37.5%</p>
+                <div className="bg-gray-200 rounded-2xl p-5 text-center">
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">Parent B Net</p>
+                  <p className="text-2xl font-bold text-gray-700">$3,000</p>
+                  <p className="text-xs text-gray-500 mt-1 font-bold">37.5%</p>
                 </div>
                 <div className="bg-indigo-600 text-white rounded-2xl p-5 text-center">
-                  <p className="text-xs font-black uppercase tracking-widest text-indigo-200 mb-2">2 Children Total</p>
-                  <p className="text-2xl font-black">≈$1,883</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-indigo-200 mb-2">2 Children Total</p>
+                  <p className="text-2xl font-bold">≈$1,883</p>
                   <p className="text-xs text-indigo-200 mt-1 font-bold">Presumptive Obligation</p>
                 </div>
               </div>
@@ -410,7 +410,7 @@ export default async function CountyCourtPage({ params }: Props) {
 
             {/* G. FAQs */}
             <section>
-              <h2 className="text-2xl font-black text-slate-900 mb-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-8">
                 Frequently Asked Questions — {county!.name}
               </h2>
               <FAQAccordion items={faqs.map(f => ({ question: f.q, answer: f.a }))} />
@@ -418,7 +418,7 @@ export default async function CountyCourtPage({ params }: Props) {
 
             {/* H. CONCLUSION */}
             <section className="bg-indigo-50 border border-indigo-100 rounded-[2rem] p-8">
-              <h2 className="text-xl font-black text-indigo-900 mb-5">
+              <h2 className="text-xl font-bold text-indigo-900 mb-5">
                 Your Next Steps in {county!.name}
               </h2>
               {content.conclusion.map((para, i) => (
@@ -427,7 +427,7 @@ export default async function CountyCourtPage({ params }: Props) {
                 </p>
               ))}
               <div className="flex flex-col sm:flex-row gap-3 mt-8">
-                <Link href="/worksheet" className="flex-1 text-center px-6 py-4 bg-indigo-600 text-white font-black rounded-xl hover:bg-indigo-700 transition-colors text-sm">
+                <Link href="/worksheet" className="flex-1 text-center px-6 py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors text-sm">
                   Launch Full Worksheet Wizard
                 </Link>
                 <Link href="/how-to-file-child-support-washington" className="flex-1 text-center px-6 py-4 bg-white border border-indigo-200 text-indigo-700 font-bold rounded-xl hover:bg-indigo-50 transition-colors text-sm">
@@ -442,33 +442,33 @@ export default async function CountyCourtPage({ params }: Props) {
           <aside className="lg:col-span-5 space-y-8 lg:sticky lg:top-24 lg:self-start">
 
             {/* D. COURT INFO CARD */}
-            <div className="bg-slate-900 text-white rounded-[2rem] p-8 shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-500/20 rounded-full blur-3xl -translate-y-20 translate-x-20 pointer-events-none" />
+            <div className="bg-gray-900 text-white rounded-[2rem] p-8 shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-500/20 rounded-full blur-3xl -trangray-y-20 trangray-x-20 pointer-events-none" />
               <Building2 className="w-8 h-8 text-indigo-400 mb-6" />
-              <h3 className="text-xl font-black mb-7 leading-tight">{county!.court}</h3>
+              <h3 className="text-xl font-bold mb-7 leading-tight">{county!.court}</h3>
 
               <div className="space-y-5 mb-6">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-1">Physical Address</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1">Physical Address</p>
                   <p className="flex items-start gap-2 text-sm font-medium">
                     <MapPin className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
                     {county!.courtAddress}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-1">Clerk Phone</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1">Clerk Phone</p>
                   <p className="flex items-center gap-2 text-sm font-bold">
                     <Phone className="w-4 h-4 text-indigo-400 shrink-0" />
                     {county!.clerkPhone}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs font-black uppercase tracking-widest text-slate-500 mb-1">Standard Filing Fee</p>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-1">Standard Filing Fee</p>
                   <p className="text-sm font-bold">{county!.filingFee}</p>
                 </div>
                 <div className="flex items-start gap-2 bg-white/5 p-3 rounded-xl border border-white/10">
                   <Clock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                  <p className="text-xs text-slate-400">Call ahead to verify current clerk hours before visiting.</p>
+                  <p className="text-xs text-gray-400">Call ahead to verify current clerk hours before visiting.</p>
                 </div>
               </div>
 
@@ -483,10 +483,10 @@ export default async function CountyCourtPage({ params }: Props) {
             </div>
 
             {/* 5. GOOGLE MAP */}
-            <div className="rounded-[2rem] overflow-hidden border border-slate-200 shadow-xl">
-              <div className="bg-slate-800 text-white px-5 py-3 flex items-center gap-2">
+            <div className="rounded-[2rem] overflow-hidden border border-gray-200 shadow-xl">
+              <div className="bg-gray-800 text-white px-5 py-3 flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-indigo-400" />
-                <span className="text-xs font-black uppercase tracking-widest">Courthouse Location</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest">Courthouse Location</span>
               </div>
               <div className="relative" style={{ paddingBottom: '65%', height: 0 }}>
                 <iframe
@@ -497,7 +497,7 @@ export default async function CountyCourtPage({ params }: Props) {
                   className="absolute top-0 left-0 w-full h-full border-0"
                 />
               </div>
-              <div className="bg-slate-50 border-t border-slate-100 p-3 text-center">
+              <div className="bg-gray-50 border-t border-gray-100 p-3 text-center">
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
                   target="_blank"
@@ -510,8 +510,8 @@ export default async function CountyCourtPage({ params }: Props) {
             </div>
 
             {/* INTERNAL LINKS */}
-            <div className="bg-white border border-slate-200 rounded-[2rem] p-7 shadow-sm">
-              <h4 className="text-xs font-black uppercase tracking-widest text-slate-500 mb-5 flex items-center gap-2">
+            <div className="bg-white border border-gray-200 rounded-[2rem] p-7 shadow-sm">
+              <h4 className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-5 flex items-center gap-2">
                 <BookOpen className="w-4 h-4" /> Related Legal Resources
               </h4>
               <nav className="flex flex-col space-y-2.5">
@@ -523,8 +523,8 @@ export default async function CountyCourtPage({ params }: Props) {
                   { href: '/how-to-file-child-support-washington', label: 'WA State Filing Guide (Step by Step)' },
                   { href: '/blog', label: 'Family Law Guides & Blog' },
                 ].map(({ href, label }) => (
-                  <Link key={href} href={href} className="flex items-center gap-2 text-sm text-slate-600 hover:text-indigo-600 transition-colors font-medium">
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-300 shrink-0" />
+                  <Link key={href} href={href} className="flex items-center gap-2 text-sm text-gray-600 hover:text-indigo-600 transition-colors font-medium">
+                    <ArrowRight className="w-3.5 h-3.5 text-gray-300 shrink-0" />
                     {label}
                   </Link>
                 ))}
@@ -532,12 +532,12 @@ export default async function CountyCourtPage({ params }: Props) {
             </div>
 
             {/* OTHER COUNTIES */}
-            <div className="bg-white border border-slate-200 rounded-[2rem] p-7 shadow-sm">
-              <h4 className="text-xs font-black uppercase tracking-widest text-slate-500 mb-5">Other County Guides</h4>
+            <div className="bg-white border border-gray-200 rounded-[2rem] p-7 shadow-sm">
+              <h4 className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-5">Other County Guides</h4>
               <nav className="flex flex-col space-y-2.5">
                 {relatedCounties.map(c => (
-                  <Link key={c.slug} href={`/washington-courts/${c.slug}`} className="flex items-center gap-2 text-sm text-slate-600 hover:text-indigo-600 transition-colors font-medium">
-                    <ChevronRight className="w-3.5 h-3.5 text-slate-300 shrink-0" />
+                  <Link key={c.slug} href={`/washington-courts/${c.slug}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-indigo-600 transition-colors font-medium">
+                    <ChevronRight className="w-3.5 h-3.5 text-gray-300 shrink-0" />
                     {c.name} Child Support Guide
                   </Link>
                 ))}
@@ -552,11 +552,11 @@ export default async function CountyCourtPage({ params }: Props) {
       </div>
 
       {/* 9. DISCLAIMER */}
-      <div className="bg-slate-100 border-t border-slate-200 py-10">
+      <div className="bg-gray-100 border-t border-gray-200 py-10">
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex items-start gap-4">
-            <AlertTriangle className="w-6 h-6 text-slate-400 shrink-0 mt-0.5" />
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <AlertTriangle className="w-6 h-6 text-gray-400 shrink-0 mt-0.5" />
+            <p className="text-xs text-gray-500 leading-relaxed">
               <strong>Legal Disclaimer:</strong> This content is for informational purposes only and does not constitute legal advice. The estimates produced by this calculator are based on the 2026 Washington State Child Support Schedule published by the Administrative Office of the Courts. Actual court-ordered support amounts in {county!.name} may differ based on judicial discretion, income imputation, deviation requests, residential credit calculations, and extraordinary expense adjustments. WCSSC is not a law firm and does not provide legal representation. Please consult with a licensed Washington State family law attorney for advice specific to your circumstances.
             </p>
           </div>

@@ -43,10 +43,10 @@ const ProgressBar = ({ currentStep, totalSteps }: { currentStep: number; totalSt
   return (
     <div className="w-full mb-8">
       <div className="flex justify-between items-center mb-3 px-1">
-        <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-[0.2em] font-sans">
+        <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest font-sans">
           Step {currentStep + 1} of {totalSteps}
         </span>
-        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] font-sans">
+        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest font-sans">
           {Math.round(progress)}% Complete
         </span>
       </div>
@@ -107,7 +107,7 @@ const MobileStepNav = ({
                   : 'bg-white text-gray-400 border-gray-200 hover:border-gray-300 hover:text-gray-600'
               }`}
             >
-              <span className={`flex items-center justify-center w-4 h-4 rounded-full text-[9px] font-black ${
+              <span className={`flex items-center justify-center w-4 h-4 rounded-full text-[9px] font-bold ${
                 isActive ? 'bg-white/20' : isDone ? 'bg-emerald-200 text-emerald-800' : 'bg-gray-100'
               }`}>
                 {isDone ? '✓' : idx + 1}
@@ -149,7 +149,7 @@ const InputField = ({
             }`}
         >
           {val ? <CheckCircle2 className="w-4 h-4 mr-2" /> : <Circle className="w-4 h-4 mr-2" />}
-          <span className="text-xs font-bold uppercase tracking-widest">{val ? 'Yes' : 'No'}</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest">{val ? 'Yes' : 'No'}</span>
         </button>
       );
     }
@@ -238,10 +238,10 @@ export default function WorksheetWizard() {
   if (!currentFields || !Array.isArray(currentFields)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FDFDFE]">
-        <div className="text-center p-12 bg-white rounded-[3rem] border border-slate-100 shadow-xl max-w-md">
+        <div className="text-center p-12 bg-white rounded-[3rem] border border-gray-100 shadow-xl max-w-md">
           <Calculator className="w-12 h-12 text-indigo-600 mx-auto mb-6" />
-          <h2 className="text-2xl font-black text-slate-900 mb-4">Step Not Found</h2>
-          <p className="text-slate-500 font-medium mb-8">The requested worksheet step could not be loaded.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Step Not Found</h2>
+          <p className="text-gray-500 font-medium mb-8">The requested worksheet step could not be loaded.</p>
           <button onClick={() => setCurrentStep(0)} className="px-8 py-3 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 transition-colors">
             Back to Start
           </button>
@@ -584,11 +584,11 @@ export default function WorksheetWizard() {
               <div className="max-w-4xl mx-auto mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 md:gap-6 px-4 pb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">AOC-Certified Worksheet v01/2026</span>
+                  <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">AOC-Certified Worksheet v01/2026</span>
                 </div>
                 <div className="flex gap-4">
-                  <Link href="/privacy" className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-slate-900 transition-colors">Privacy Policy</Link>
-                  <Link href="/terms" className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-slate-900 transition-colors">Terms of Service</Link>
+                  <Link href="/privacy" className="text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-gray-900 transition-colors">Privacy Policy</Link>
+                  <Link href="/terms" className="text-xs font-bold text-gray-400 uppercase tracking-widest hover:text-gray-900 transition-colors">Terms of Service</Link>
                 </div>
               </div>
             )}

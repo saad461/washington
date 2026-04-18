@@ -50,43 +50,43 @@ export default async function GlossaryTermPage({ params }: Props) {
       <div className="max-w-4xl mx-auto px-6 py-20 lg:py-24 relative z-10">
         
         {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 mb-12 text-xs font-black uppercase tracking-widest text-slate-500">
+        <nav className="flex items-center gap-2 mb-12 text-[10px] font-bold uppercase tracking-widest text-gray-500">
           <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
           <ChevronRight className="w-3 h-3 opacity-50" />
           <Link href="/glossary" className="hover:text-indigo-600 transition-colors">Glossary</Link>
           <ChevronRight className="w-3 h-3 opacity-50" />
-          <span className="text-slate-900">{termData.term}</span>
+          <span className="text-gray-900">{termData.term}</span>
         </nav>
 
-        <article className="bg-white border border-slate-100 shadow-2xl shadow-indigo-900/5 rounded-[3rem] p-8 md:p-14 mb-12">
+        <article className="bg-white border border-gray-100 shadow-2xl shadow-indigo-900/5 rounded-[3rem] p-8 md:p-14 mb-12">
           <div className="flex items-center gap-4 mb-8">
             <div className="p-4 bg-indigo-50 rounded-2xl text-indigo-600">
               <BookA className="w-8 h-8" />
             </div>
-            <h1 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-900">
               {termData.term}
             </h1>
           </div>
 
-          <div className="prose prose-lg max-w-none text-slate-600 mb-12">
-            <p className="text-xl font-medium text-slate-800 leading-relaxed border-l-4 border-indigo-500 pl-6 bg-slate-50 p-6 rounded-r-2xl">
+          <div className="prose prose-lg max-w-none text-gray-600 mb-12">
+            <p className="text-xl font-medium text-gray-800 leading-relaxed border-l-4 border-indigo-500 pl-6 bg-gray-50 p-6 rounded-r-2xl">
               {termData.definition}
             </p>
 
-            <h3 className="text-2xl font-black text-slate-900 mt-12 mb-4">Real-World Example</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Real-World Example</h3>
             <p className="leading-relaxed bg-emerald-50 text-emerald-900 p-6 rounded-2xl">
               {termData.example}
             </p>
           </div>
 
-          <div className="border-t border-slate-100 pt-10">
-            <h3 className="text-xs font-black uppercase tracking-widest text-slate-500 mb-6">Related Tools & Resources</h3>
+          <div className="border-t border-gray-100 pt-10">
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-6">Related Tools & Resources</h3>
             <div className="flex flex-col sm:flex-row gap-4">
               {termData.relatedLinks.map((link, idx) => (
                 <Link 
                   key={idx}
                   href={link.href}
-                  className="flex items-center justify-between p-5 bg-slate-50 hover:bg-indigo-600 hover:text-white text-indigo-900 rounded-2xl font-bold transition-colors group flex-1"
+                  className="flex items-center justify-between p-5 bg-gray-50 hover:bg-indigo-600 hover:text-white text-indigo-900 rounded-2xl font-bold transition-colors group flex-1"
                 >
                   <span className="flex items-center gap-3">
                     <Calculator className="w-5 h-5 opacity-70 group-hover:text-white" />

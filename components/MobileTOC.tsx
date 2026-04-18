@@ -20,7 +20,7 @@ export default function MobileTOC({ headings }: MobileTOCProps) {
 
   return (
     <details className="lg:hidden mb-8 bg-indigo-50 border border-indigo-100 rounded-2xl overflow-hidden group">
-      <summary className="flex items-center justify-between px-5 py-4 cursor-pointer font-black text-sm text-indigo-700 uppercase tracking-widest select-none list-none">
+      <summary className="flex items-center justify-between px-5 py-4 cursor-pointer font-bold text-sm text-indigo-700 uppercase tracking-widest select-none list-none">
         <span>📑 Table of Contents</span>
         <svg
           className="w-4 h-4 text-indigo-400 transition-transform duration-300 group-open:rotate-180"

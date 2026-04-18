@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default function DisclaimerPage() {
   return (
     <div className="min-h-screen bg-[#FDFDFE] font-sans">
-      <div className="max-w-4xl mx-auto px-6 py-20">
+      <div className="max-w-3xl mx-auto px-6 py-20">
 
         {/* Back Link */}
-        <Link href="/" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors mb-16">
+        <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-indigo-600 transition-colors mb-16">
           <ArrowLeft size={14} />
           Back to Calculator
         </Link>
@@ -25,8 +25,8 @@ export default function DisclaimerPage() {
             <Scale className="w-8 h-8 text-white" />
           </div>
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-amber-600 mb-1">Important Notice</p>
-            <h1 className="text-4xl font-black text-slate-900 tracking-tight">Legal Disclaimer</h1>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-amber-600 mb-1">Important Notice</p>
+            <h1 className="text-4xl font-bold text-gray-900 tracking-tight">Legal Disclaimer</h1>
           </div>
         </div>
 
@@ -34,7 +34,7 @@ export default function DisclaimerPage() {
         <div className="p-8 bg-amber-50 border-2 border-amber-200 rounded-[3rem] mb-12 flex items-start gap-6">
           <ShieldCheck className="w-8 h-8 text-amber-600 flex-shrink-0 mt-1" />
           <div>
-            <h2 className="text-lg font-black text-amber-900 mb-2">WCSSC Is Not a Law Firm</h2>
+            <h2 className="text-lg font-bold text-amber-900 mb-2">WCSSC Is Not a Law Firm</h2>
             <p className="text-amber-800 font-medium leading-relaxed">
               The Washington Child Support Schedule Center (WCSSC) is an independent educational resource. We are NOT a law firm, attorney, legal aid organization, or government agency. Nothing on this website constitutes legal advice, legal representation, or a professional legal opinion.
             </p>
@@ -42,7 +42,7 @@ export default function DisclaimerPage() {
         </div>
 
         {/* Content Sections */}
-        <div className="space-y-10 text-slate-600 leading-relaxed">
+        <div className="space-y-10 text-gray-600 leading-relaxed">
           {[
             {
               title: "1. Educational Purpose Only",
@@ -69,16 +69,16 @@ export default function DisclaimerPage() {
               body: "WCSSC, its operators, employees, and contributors shall not be liable for any damages arising from the use or reliance on information provided on this website. This includes direct, indirect, incidental, and consequential damages."
             }
           ].map((section, i) => (
-            <div key={i} id={section.title.includes("Educational") ? "faq" : undefined} className="p-10 bg-white rounded-[3rem] border border-slate-100 shadow-sm">
-              <h2 className="text-lg font-black text-slate-900 mb-4">{section.title}</h2>
+            <div key={i} id={section.title.includes("Educational") ? "faq" : undefined} className="p-10 bg-white rounded-[3rem] border border-gray-100 shadow-sm">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">{section.title}</h2>
               <p className="font-medium leading-loose">{section.body}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-16 p-8 bg-slate-900 rounded-[3rem] text-center text-slate-400">
+        <div className="mt-16 p-8 bg-gray-900 rounded-[3rem] text-center text-gray-400">
           <p className="text-sm font-medium mb-4">Last Updated: January 2026</p>
-          <div className="flex justify-center gap-8 text-xs font-black uppercase tracking-widest">
+          <div className="flex justify-center gap-8 text-[10px] font-bold uppercase tracking-widest">
             <Link href="/privacy" className="hover:text-indigo-400 transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-indigo-400 transition-colors">Terms of Service</Link>
             <Link href="/" className="hover:text-indigo-400 transition-colors">Calculator</Link>
