@@ -4,10 +4,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { 
-  ArrowLeft, 
   User, 
   Clock, 
-  HelpCircle
+  HelpCircle,
+  Scale
 } from 'lucide-react';
 import { blogs, type BlogPost } from '@/data/blogs';
 import TableOfContents, { TOCItem } from '@/components/TableOfContents';
@@ -92,6 +92,16 @@ function parseTOC(htmlContent: string) {
   return { headings, updatedHtml };
 }
 
+const Breadcrumbs = ({ title }: { title: string }) => (
+  <nav className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-8 flex-wrap">
+    <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
+    <span className="mx-3 opacity-30">/</span>
+    <Link href="/blog" className="hover:text-indigo-600 transition-colors">Blog</Link>
+    <span className="mx-3 opacity-30">/</span>
+    <span className="text-gray-900 line-clamp-1">{title}</span>
+  </nav>
+);
+
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = getValidPost(slug);
@@ -129,106 +139,112 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFDFE] font-sans selection:bg-indigo-100 selection:text-indigo-700">
+    <div className="min-h-screen bg-white font-sans selection:bg-indigo-100 selection:text-indigo-700 overflow-hidden relative">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-20">
+      {/* Decorative blurred backgrounds */}
+      <div className="absolute inset-0 pointer-events-none flex justify-center items-center overflow-hidden z-0" aria-hidden="true">
+        <div className="w-[30rem] h-[30rem] bg-indigo-100 rounded-full blur-[80px] opacity-40 absolute top-[-10%] translate-x-[-30%]" />
+        <div className="w-[30rem] h-[30rem] bg-blue-100 rounded-full blur-[80px] opacity-40 absolute bottom-[0%] translate-x-[30%]" />
+      </div>
+
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 relative z-10">
         
-        {/* Back navigation */}
-        <Link href="/blog" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors mb-20 group no-print">
-          <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-          Back to Resource Center
-        </Link>
+        <Breadcrumbs title={post.title} />
 
         {/* Global Article Wrapper */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+        <div className="w-full">
           
-          {/* Main Content Column */}
-          <article className="lg:col-span-8">
+          {/* Main Content */}
+          <article className="w-full">
             
             {/* Header */}
-            <header className="mb-10 md:mb-16">
-              <div className="flex items-center gap-4 mb-4">
-                <span className="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-black uppercase tracking-[0.2em] rounded-md ring-1 ring-indigo-200">
+            <header className="mb-12 md:mb-16">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-600">
                   {post.category}
                 </span>
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+                <span className="w-1 h-1 bg-gray-300 rounded-full" />
+                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
                   Updated: {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-10 italic">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 tracking-tight leading-tight mb-8 font-heading">
                 {post.title}
               </h1>
               
-              <div className="flex flex-wrap items-center gap-8 py-8 border-t border-slate-100 mb-8">
+              <div className="flex flex-wrap items-center gap-8 py-6 border-y border-gray-100 mb-10">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white">
+                  <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100">
                     <User size={16} />
                   </div>
                   <div>
-                    <p className="text-xs font-black text-slate-500 uppercase tracking-widest leading-none mb-1">Author</p>
-                    <p className="text-sm font-black text-slate-900 leading-none">{post.author}</p>
+                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-none mb-1">Author</p>
+                    <p className="text-sm font-bold text-gray-900 leading-none">{post.author}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-indigo-600">
+                  <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100">
                     <Clock size={16} />
                   </div>
                   <div>
-                    <p className="text-xs font-black text-slate-500 uppercase tracking-widest leading-none mb-1">Time</p>
-                    <p className="text-sm font-black text-slate-900 leading-none">{post.readTime} Read</p>
+                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-none mb-1">Time</p>
+                    <p className="text-sm font-bold text-gray-900 leading-none">{post.readTime} Read</p>
                   </div>
                 </div>
               </div>
 
               {/* Featured Image */}
               {post.image?.url && (
-                <div className="relative w-full aspect-[16/9] md:aspect-[2/1] rounded-[2rem] overflow-hidden mb-12 shadow-xl shadow-indigo-900/5 ring-1 ring-slate-100">
+                <div className="relative w-full aspect-[16/9] md:aspect-[2/1] rounded-2xl overflow-hidden mb-12 shadow-sm border border-gray-100">
                   <Image
                     src={post.image.url}
                     alt={post.image.alt || post.title}
                     fill
                     priority
                     className="object-cover transition-transform duration-700 hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 66vw"
+                    sizes="(max-width: 1024px) 100vw, 800px"
                   />
                 </div>
               )}
             </header>
 
             {/* Mobile TOC (collapsed, above article body on small screens) */}
-            <MobileTOC headings={headings} />
+            <div className="mb-10">
+              <MobileTOC headings={headings} />
+            </div>
 
-            {/* Ad Placeholder: TOP */}
+            {/* Ad Container: TOP */}
             <AdContainer slot="top" wordCount={updatedHtml.split(' ').length} />
 
             {/* Content Body */}
-            <div className="prose prose-slate prose-lg max-w-none 
-              prose-h2:text-3xl prose-h2:font-black prose-h2:tracking-tight prose-h2:text-slate-900 prose-h2:italic prose-h2:mt-16 prose-h2:mb-8 prose-h2:-scroll-mt-24
-              prose-h3:text-xl prose-h3:font-bold prose-h3:text-slate-800 prose-h3:mt-10 prose-h3:mb-4 prose-h3:-scroll-mt-24
-              prose-p:text-slate-600 prose-p:font-medium prose-p:leading-loose prose-p:mb-8
-              prose-strong:text-slate-900 prose-strong:font-black
-              prose-a:text-indigo-600 prose-a:font-black prose-a:no-underline prose-a:decoration-indigo-100 prose-a:underline-offset-4 hover:prose-a:underline
-              prose-li:text-slate-600 prose-li:font-medium prose-li:mb-2
+            <div className="prose prose-gray prose-lg max-w-none
+              prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:font-bold prose-h2:tracking-tight prose-h2:text-gray-900 prose-h2:mt-12 prose-h2:mb-6 prose-h2:-scroll-mt-24 prose-h2:font-heading
+              prose-h3:text-xl prose-h3:font-bold prose-h3:text-gray-900 prose-h3:mt-10 prose-h3:mb-4 prose-h3:-scroll-mt-24 prose-h3:font-heading
+              prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
+              prose-strong:text-gray-900 prose-strong:font-bold
+              prose-a:text-indigo-600 prose-a:font-bold prose-a:no-underline prose-a:border-b prose-a:border-indigo-100 hover:prose-a:border-indigo-600 transition-colors
+              prose-li:text-gray-700 prose-li:mb-2
+              prose-img:rounded-2xl prose-img:border prose-img:border-gray-100
             "
               dangerouslySetInnerHTML={{ __html: updatedHtml }}
             />
 
-            {/* Ad Placeholder: MIDDLE */}
+            {/* Ad Container: MIDDLE */}
             <AdContainer slot="mid" wordCount={updatedHtml.split(' ').length} />
 
             {/* FAQ Section */}
             {post.faqs && post.faqs.length > 0 && (
               <section className="mt-20">
-                <h2 className="text-3xl font-black text-slate-900 tracking-tight italic mb-10 flex items-center gap-4">
-                  <HelpCircle className="w-8 h-8 text-indigo-600" />
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight mb-10 flex items-center gap-3 font-heading">
+                  <HelpCircle className="w-6 h-6 text-gray-400" />
                   Common Questions
                 </h2>
                 <FAQAccordion items={post.faqs.map(f => ({ question: f.question, answer: f.answer }))} />
               </section>
             )}
 
-            {/* Ad Placeholder: BOTTOM */}
+            {/* Ad Container: BOTTOM */}
             <div className="mt-16">
               <AdContainer slot="bottom" wordCount={updatedHtml.split(' ').length} />
             </div>
@@ -241,46 +257,24 @@ export default async function BlogPostPage({ params }: Props) {
               <AuthorBox />
             </div>
 
-          </article>
-
-          {/* Sidebar */}
-          <aside className="lg:col-span-4 no-print relative">
-            {headings.length > 0 && (
-              <TableOfContents headings={headings} />
-            )}
-            
-            <div className={`p-8 bg-indigo-50 rounded-[2rem] border border-indigo-100 italic ${headings.length > 0 ? 'mt-12' : ''}`}>
-              <h4 className="text-xs font-black text-indigo-600 uppercase tracking-widest mb-4">E-E-A-T Disclosure</h4>
-              <p className="text-xs text-indigo-900 font-bold leading-relaxed mb-6">
+            <div className="mt-12 p-6 bg-gray-50 rounded-2xl border border-gray-100">
+              <p className="text-[10px] text-gray-500 font-bold tracking-widest uppercase mb-3 flex items-center gap-2">
+                <Scale className="w-4 h-4 text-gray-400" /> E-E-A-T Disclosure
+              </p>
+              <p className="text-xs text-gray-600 leading-relaxed mb-4">
                 All WCSSC insights are reviewed for compliance with RCW 26.19.065 and official AOC guidelines.
               </p>
-              <Link href="/editorial-methodology" className="text-xs font-black text-indigo-500 uppercase tracking-widest hover:text-indigo-700 transition-colors block mb-2">
-                Our calculation methodology &rarr;
-              </Link>
-              <Link href="/disclaimer" className="text-xs font-black text-indigo-500 uppercase tracking-widest hover:text-indigo-700 transition-colors">
-                Read Legal Disclaimer &rarr;
-              </Link>
-            </div>
-
-            {/* Other Blogs Promo */}
-            <div className="mt-12 sticky top-24">
-              <h4 className="text-xs font-black text-slate-900 uppercase tracking-[0.3em] mb-6 ml-4">Trending Read</h4>
-              <div className="space-y-4">
-                {blogs.filter(p => p.slug !== slug).slice(0, 3).map((other) => (
-                  <Link 
-                    key={other.slug}
-                    href={`/blog/${other.slug}`}
-                    className="group block p-6 bg-white border border-slate-100 shadow-sm rounded-[1.5rem] hover:border-indigo-500 transition-all hover:shadow-xl hover:shadow-indigo-900/5"
-                  >
-                    <p className="text-xs font-black text-indigo-600 uppercase tracking-widest mb-2 italic">{other.category}</p>
-                    <p className="text-sm font-black text-slate-900 transition-colors group-hover:text-indigo-600 leading-tight">
-                      {other.title}
-                    </p>
-                  </Link>
-                ))}
+              <div className="flex flex-wrap gap-4">
+                <Link href="/editorial-methodology" className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest hover:text-indigo-800 transition-colors">
+                  Our methodology &rarr;
+                </Link>
+                <Link href="/disclaimer" className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest hover:text-indigo-800 transition-colors">
+                  Legal Disclaimer &rarr;
+                </Link>
               </div>
             </div>
-          </aside>
+
+          </article>
 
         </div>
       </div>
