@@ -50,12 +50,12 @@ export default function Home() {
         <div className="w-[30rem] h-[30rem] bg-blue-100 rounded-full blur-[80px] opacity-40 absolute bottom-[0%] translate-x-[30%]" />
       </div>
 
-      <div className="max-w-4xl w-full mx-auto relative z-10 flex flex-col items-center">
+      <div className="max-w-3xl w-full mx-auto relative z-10 flex flex-col items-center">
         <div className="text-center mb-16 w-full">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900 mb-6 leading-tight font-heading px-2">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6 leading-tight font-heading px-2">
             Washington Child Support Calculator
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed px-4">
+          <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed px-4">
             Estimate child support payments based on combined monthly income, number of children, and official 2026 Washington State guidelines.
           </p>
         </div>
@@ -71,7 +71,7 @@ export default function Home() {
             { label: "State Law", value: "Washington" },
           ].map((fig, i) => (
             <div key={i} className="text-center">
-              <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-2">{fig.label}</div>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-2">{fig.label}</div>
               <div className="text-lg md:text-xl font-bold text-gray-900">{fig.value}</div>
             </div>
           ))}
@@ -79,7 +79,7 @@ export default function Home() {
 
         {/* ── BENCHMARK DATA TABLE (AI SEO) ── */}
         <div className="mt-20 w-full" id="benchmark-table">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center tracking-tight font-heading">Washington Child Support Benchmark Estimates</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center tracking-tight font-heading">Washington Child Support Benchmark Estimates</h2>
           <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm bg-white">
             <table className="w-full text-left border-collapse min-w-[500px]">
               <caption className="sr-only">Benchmark Child Support Estimates for Washington State 2026</caption>
@@ -127,10 +127,10 @@ export default function Home() {
       </div>
 
       {/* ── AI SEARCH OPTIMIZATION (AEO) ── */}
-      <section className="mt-28 max-w-4xl w-full mx-auto px-4 relative z-10 font-sans">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8 tracking-tight text-center font-heading">Example Calculation</h2>
+      <section className="mt-28 max-w-3xl w-full mx-auto px-4 relative z-10 font-sans">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 tracking-tight text-center font-heading">Example Calculation</h2>
         <div className="bg-gray-50 border border-gray-100 rounded-2xl p-8 md:p-10 shadow-sm">
-          <h3 className="text-xl font-bold text-gray-900 mb-4 font-heading">How much is child support for $5,000 income?</h3>
+          <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 font-heading">How much is child support for $5,000 income?</h3>
           <p className="mb-3 text-gray-700 font-medium"><strong>Scenario:</strong> Combined Monthly Net Income: $5,000 | Children: 2 | County: King County</p>
           <p className="mb-6 text-gray-900 font-bold text-lg"><strong>Result:</strong> Estimated Monthly Basic Support Obligation: $1,155</p>
           <p className="text-gray-600 leading-relaxed text-sm">
@@ -140,7 +140,7 @@ export default function Home() {
       </section>
 
       {/* ── EDUCATIONAL CONTENT (AdSense compliance: 350+ words) ── */}
-      <section className="mt-20 max-w-4xl w-full mx-auto px-4 pb-24 relative z-10 font-sans">
+      <section className="mt-20 max-w-3xl w-full mx-auto px-4 pb-24 relative z-10 font-sans">
 
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 tracking-tight text-center font-heading">
           How Washington Child Support Is Calculated
@@ -148,11 +148,11 @@ export default function Home() {
 
         <div className="text-gray-700 leading-relaxed space-y-8 text-base md:text-lg">
           <p>
-            Washington State uses the <strong className="text-gray-900">Income Shares Model</strong>, where both parents&apos; monthly net incomes are combined. A proportional share is dedicated to the children, reflecting what would have been spent if the household remained together.
+            Washington State uses the <strong className="text-gray-900 font-bold">Income Shares Model</strong>, where both parents&apos; monthly net incomes are combined. A proportional share is dedicated to the children, reflecting what would have been spent if the household remained together.
           </p>
           
           <div className="bg-gray-50 p-6 md:p-8 rounded-xl border border-gray-100">
-            <h3 className="text-xl font-bold text-gray-900 mb-4 font-heading">The 2026 Economic Schedule</h3>
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 font-heading">The 2026 Economic Schedule</h3>
             <p className="mb-4">
               The 2026 economic tables, published by the <strong className="text-gray-900">Administrative Office of the Courts (AOC)</strong>, cover combined monthly net incomes from $0 to $12,000. For incomes above $12,000, family court judges exercise extrapolative discretion to determine the final amount.
             </p>
@@ -164,14 +164,14 @@ export default function Home() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-gray-900 font-heading">The Self-Support Reserve (SSR)</h3>
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 font-heading">The Self-Support Reserve (SSR)</h3>
             <p>
-              Washington&apos;s primary low-income protection is the <strong className="text-gray-900">Self-Support Reserve (SSR)</strong>, which is set at <strong className="text-gray-900">$1,514 per month for 2026</strong>. If a payment would leave the paying parent with less than $1,514 to live on, the court can deviate the basic transfer payment downward.
+              Washington&apos;s primary low-income protection is the <strong className="text-gray-900 font-bold">Self-Support Reserve (SSR)</strong>, which is set at <strong className="text-gray-900 font-bold">$1,514 per month for 2026</strong>. If a payment would leave the paying parent with less than $1,514 to live on, the court can deviate the basic transfer payment downward.
             </p>
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-gray-900 font-heading">What the Basic Obligation Covers</h3>
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 font-heading">What the Basic Obligation Covers</h3>
             <p>
               The transfer payment covers <strong className="text-gray-900">food, basic clothing, and housing</strong>. Extraordinary expenses are calculated separately and split proportionally:
             </p>
@@ -203,25 +203,25 @@ export default function Home() {
             { label: 'Snohomish County', href: '/snohomish-county-income-5000-2-children' },
             { label: 'Spokane County', href: '/spokane-county-income-5000-2-children' },
           ].map((c) => (
-            <Link key={c.href} href={c.href} className="block p-5 bg-white border border-gray-100 rounded-xl hover:border-indigo-200 hover:bg-gray-50 transition-all text-center shadow-sm group">
+            <Link key={c.href} href={c.href} className="block p-5 bg-white border border-gray-100 rounded-xl hover:border-indigo-600 transition-all text-center shadow-sm group">
               <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest block mb-2">County Guide</span>
-              <span className="text-sm font-semibold text-gray-800 group-hover:text-indigo-700 transition-colors leading-tight">{c.label}</span>
+              <span className="text-sm font-bold text-gray-900 group-hover:text-indigo-700 transition-colors leading-tight">{c.label}</span>
             </Link>
           ))}
         </div>
 
         {/* Blog quicklinks */}
         <div className="mt-16 border-t border-gray-100 pt-16">
-          <h3 className="text-xl font-bold text-gray-900 mb-8 tracking-tight font-heading">Latest Legal Guides</h3>
+          <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-8 tracking-tight font-heading">Latest Legal Guides</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { label: '2026 WA Guidelines: Complete Handbook', href: '/blog/washington-child-support-guidelines-2026', cat: 'Legal' },
               { label: 'Self-Support Reserve (SSR) Explained', href: '/blog/washington-ssr-self-support-reserve-explained', cat: 'Analysis' },
               { label: 'King County Child Support Rules', href: '/blog/king-county-child-support-rules', cat: 'Local Rules' },
             ].map((p) => (
-              <Link key={p.href} href={p.href} className="block p-6 bg-white border border-gray-100 rounded-2xl hover:border-indigo-200 hover:bg-gray-50 transition-all shadow-sm group">
+              <Link key={p.href} href={p.href} className="block p-6 bg-white border border-gray-100 rounded-2xl hover:border-indigo-600 transition-all shadow-sm group">
                 <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest block mb-3">{p.cat}</span>
-                <span className="text-sm font-bold text-gray-800 group-hover:text-indigo-700 transition-colors leading-snug">{p.label}</span>
+                <span className="text-sm font-bold text-gray-900 group-hover:text-indigo-700 transition-colors leading-snug">{p.label}</span>
               </Link>
             ))}
           </div>

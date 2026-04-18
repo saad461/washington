@@ -111,7 +111,7 @@ export default function RootLayout({
         </Script>
         <Navbar />
         <main className="flex-1 flex flex-col">
-          <Suspense fallback={<div className="min-h-screen bg-slate-50" />}>
+          <Suspense fallback={<div className="min-h-screen bg-gray-50" />}>
             {children}
           </Suspense>
         </main>

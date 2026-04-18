@@ -39,7 +39,7 @@ export default function HowToFileGuide() {
   };
 
   return (
-    <div className="flex-1 bg-slate-50 relative w-full overflow-hidden font-sans">
+    <div className="flex-1 bg-gray-50 relative w-full overflow-hidden font-sans">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       
       <div className="max-w-4xl mx-auto px-6 py-20 lg:py-24 relative z-10">
@@ -48,30 +48,30 @@ export default function HowToFileGuide() {
           <div className="inline-flex p-3 bg-indigo-50 text-indigo-600 rounded-2xl mb-6">
             <FileText className="w-8 h-8" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6 leading-tight">
             How to File Child Support <br className="hidden sm:block" />in Washington State
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Navigating the family court system can be overwhelming. This guide breaks down the exact 2026 process for petitioning or modifying a child support order.
           </p>
         </div>
 
-        <article className="bg-white border border-slate-200 rounded-[3rem] shadow-xl p-8 md:p-14 mb-12">
+        <article className="bg-white border border-gray-200 rounded-[3rem] shadow-xl p-8 md:p-14 mb-12">
           
-          <div className="prose prose-lg max-w-none text-slate-600 space-y-12">
+          <div className="prose prose-lg max-w-none text-gray-600 space-y-12">
             
             <section>
-              <h2 className="text-2xl font-black text-slate-900 flex items-center gap-4">
+              <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-4">
                 <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-600 text-white text-base">1</span>
                 Calculate Your Presumptive Amount
               </h2>
               <p>
                 Before you file any paperwork, you must know what the state presumes your support amount should be. Washington law requires all child support petitions to include a formally calculated <strong>Washington State Child Support Worksheet (v2026)</strong>.
               </p>
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 not-prose">
+              <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4 not-prose">
                 <div>
-                  <h4 className="font-bold text-slate-900">Generate Your Free Worksheet</h4>
-                  <p className="text-sm text-slate-500">Includes the mandatory 2026 economic table updates.</p>
+                  <h4 className="font-bold text-gray-900">Generate Your Free Worksheet</h4>
+                  <p className="text-sm text-gray-500">Includes the mandatory 2026 economic table updates.</p>
                 </div>
                 <Link href="/worksheet" className="px-6 py-3 bg-indigo-600 text-white text-sm font-bold rounded-xl hover:bg-indigo-700 transition-colors w-full sm:w-auto text-center shrink-0">
                   Start Calculator
@@ -80,7 +80,7 @@ export default function HowToFileGuide() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-black text-slate-900 flex items-center gap-4">
+              <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-4">
                 <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-600 text-white text-base">2</span>
                 Complete the Mandatory Court Forms
               </h2>
@@ -108,29 +108,29 @@ export default function HowToFileGuide() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-black text-slate-900 flex items-center gap-4">
+              <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-4">
                 <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-600 text-white text-base">3</span>
                 File with the County Clerk
               </h2>
               <p>
                 Child support is handled at the county level. You must file your forms at the Superior Court Clerk&apos;s office in the county where the child resides. There is usually a filing fee (which varies by county) unless you qualify for a fee waiver (Form GR 34).
               </p>
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 not-prose">
+              <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4 not-prose">
                 <div className="flex items-center gap-3">
-                  <Building2 className="w-8 h-8 text-slate-400" />
+                  <Building2 className="w-8 h-8 text-gray-400" />
                   <div>
-                    <h4 className="font-bold text-slate-900">Find Your Courthouse</h4>
-                    <p className="text-sm text-slate-500">Get addresses and clerk phone numbers for all 39 WA counties.</p>
+                    <h4 className="font-bold text-gray-900">Find Your Courthouse</h4>
+                    <p className="text-sm text-gray-500">Get addresses and clerk phone numbers for all 39 WA counties.</p>
                   </div>
                 </div>
-                <Link href="/washington-courts" className="px-6 py-3 bg-slate-900 text-white text-sm font-bold rounded-xl hover:bg-slate-800 transition-colors w-full sm:w-auto text-center shrink-0 flex items-center justify-center">
+                <Link href="/washington-courts" className="px-6 py-3 bg-gray-900 text-white text-sm font-bold rounded-xl hover:bg-gray-800 transition-colors w-full sm:w-auto text-center shrink-0 flex items-center justify-center">
                   View Directory <ChevronRight className="w-4 h-4 ml-2" />
                 </Link>
               </div>
             </section>
 
             <section>
-              <h2 className="text-2xl font-black text-slate-900 flex items-center gap-4">
+              <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-4">
                 <span className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-600 text-white text-base">4</span>
                 Serve the Other Parent
               </h2>

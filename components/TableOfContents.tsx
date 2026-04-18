@@ -68,7 +68,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
     <>
       {/* Desktop: Sticky Sidebar TOC */}
       <div className="hidden lg:block bg-white border border-gray-100 rounded-2xl p-6 shadow-sm sticky top-28">
-        <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-6 flex items-center gap-2">
+        <h3 className="text-[11px] font-bold uppercase tracking-widest text-gray-500 mb-6 flex items-center gap-2">
           <svg className="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
           Table of Contents
         </h3>

@@ -30,7 +30,7 @@ export default function Navbar() {
           </div>
           <div className="flex flex-col text-left font-heading">
             <span className="text-xl font-bold tracking-tight text-gray-900 leading-none">WCSSC</span>
-            <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-[0.2em] leading-none mt-1.5">Washington State</span>
+            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-none mt-1.5">Washington State</span>
           </div>
         </Link>
 

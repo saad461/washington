@@ -183,7 +183,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Breadcrumbs = ({ county, income, childCount }: { county: { name: string; slug: string } | null; income: number; childCount: number }) => (
-  <nav aria-label="Breadcrumb" className="flex mb-10 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 no-print flex-wrap gap-y-2">
+  <nav aria-label="Breadcrumb" className="flex mb-10 text-[10px] font-bold uppercase tracking-widest text-gray-500 no-print flex-wrap gap-y-2">
     <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
     <span className="mx-3 opacity-30">/</span>
     <span className="opacity-80">Washington</span>
@@ -299,11 +299,11 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
         <Breadcrumbs county={county} income={income} childCount={children} />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20">
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-8 max-w-3xl">
             <AdContainer slot="top" wordCount={wordCount} />
 
             <div className="mb-10 md:mb-14">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 mb-6 md:mb-8 leading-[1.15] md:leading-[1.1] font-heading">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 mb-6 md:mb-8 leading-tight font-heading">
                 {formattedIncome} <span className="text-indigo-600 block sm:inline">Child Support</span> in <span className="text-gray-900 underline decoration-indigo-200 underline-offset-8 decoration-4">{locationName}</span>
               </h1>
             </div>
@@ -311,10 +311,10 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
             {/* Result Header Card */}
             <div className="mb-16">
               <div className="w-full bg-white rounded-3xl shadow-sm border border-gray-100 p-8 md:p-12 text-center relative overflow-hidden">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-10">2026 Monthly Presumptive Payment</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-10">2026 Monthly Presumptive Payment</p>
                 
                 <div className="mb-10">
-                  <span className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-gray-900 font-heading">
+                  <span className="text-4xl md:text-5xl lg:text-4xl font-bold tracking-tight text-gray-900 font-heading">
                     {formattedSupport}
                   </span>
                 </div>
@@ -366,34 +366,41 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
             </div>
 
             {/* --- LONG FORM SEO CONTENT --- */}
-            <article className="prose prose-gray prose-lg max-w-none mb-20 text-gray-700">
-              <h2 className="text-3xl font-bold text-gray-900 tracking-tight font-heading">Washington Child Support Guidelines (2026 Updates)</h2>
-              <p className="leading-relaxed">{intro}</p>
+            <article className="prose prose-gray prose-lg max-w-none mb-20
+              prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:font-bold prose-h2:tracking-tight prose-h2:text-gray-900 prose-h2:font-heading prose-h2:mt-12 prose-h2:mb-6
+              prose-h3:text-xl md:prose-h3:text-2xl prose-h3:font-bold prose-h3:text-gray-900 prose-h3:font-heading prose-h3:mt-8 prose-h3:mb-4
+              prose-p:text-gray-700 prose-p:font-medium prose-p:leading-relaxed prose-p:mb-4 md:prose-p:mb-6
+              prose-strong:text-gray-900 prose-strong:font-bold
+              prose-a:text-blue-600 prose-a:font-medium hover:prose-a:underline
+              prose-li:text-gray-700 prose-li:font-medium prose-li:mb-2
+            ">
+              <h2 className="font-heading">Washington Child Support Guidelines (2026 Updates)</h2>
+              <p>{intro}</p>
 
               <div className="my-10 not-prose">
                 <AdContainer slot="mid" wordCount={wordCount} />
               </div>
 
-              <h2 className="text-3xl font-bold text-gray-900 tracking-tight font-heading">Breakdown of the {formattedIncome} Calculation</h2>
-              <p className="leading-relaxed">{calculation}</p>
+              <h2 className="font-heading">Breakdown of the {formattedIncome} Calculation</h2>
+              <p>{calculation}</p>
 
               <div className="not-prose" dangerouslySetInnerHTML={{ __html: incomeBlock }} />
               <div className="not-prose" dangerouslySetInnerHTML={{ __html: familyBlock }} />
 
-              <h2 className="text-3xl font-bold text-gray-900 tracking-tight font-heading">The SSR and Low-Income Safeguards</h2>
-              <p className="leading-relaxed">{ssr}</p>
+              <h2 className="font-heading">The SSR and Low-Income Safeguards</h2>
+              <p>{ssr}</p>
 
               {county && (
                 <>
-                  <h2 className="text-3xl font-bold text-gray-900 tracking-tight font-heading">Application in {countyName} Superior Court</h2>
-                  <p className="leading-relaxed">
+                  <h2 className="font-heading">Application in {countyName} Superior Court</h2>
+                  <p>
                     While the 2026 economic schedule is uniform statewide, the <strong>{county.court}</strong> handles procedural enforcement. In <strong>{countyName}</strong>, judges may require additional proof of income before finalizing the {formattedSupport} order. Local rules also dictate how daycare and health insurance premiums are shared proportionally.
                   </p>
                 </>
               )}
 
-              <h2 className="text-3xl font-bold text-gray-900 tracking-tight font-heading">Calculation Summary & Requirements</h2>
-              <p className="leading-relaxed">{conclusion}</p>
+              <h2 className="font-heading">Calculation Summary & Requirements</h2>
+              <p>{conclusion}</p>
 
               <div className="bg-gray-50 p-6 md:p-8 rounded-2xl border border-gray-100 mt-12 not-prose">
                 <p className="text-[10px] text-gray-500 font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
@@ -434,10 +441,10 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
 
           {/* --- MOBILE SIDEBAR (collapsed resources section) --- */}
           <div className="lg:hidden col-span-1 mt-6 md:mt-8">
-            <details className="bg-white border border-slate-100 rounded-2xl shadow-sm group">
-              <summary className="flex items-center justify-between px-6 py-4 cursor-pointer min-h-[48px] text-sm font-bold text-slate-700 select-none list-none">
+            <details className="bg-white border border-gray-100 rounded-2xl shadow-sm group">
+              <summary className="flex items-center justify-between px-6 py-4 cursor-pointer min-h-[48px] text-sm font-bold text-gray-700 select-none list-none">
                 <span>📚 Resources &amp; Legal Sources</span>
-                <svg className="w-5 h-5 text-slate-400 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                <svg className="w-5 h-5 text-gray-400 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
               </summary>
               <div className="px-6 pb-6">
                 <AuthoritySidebar county={county} />
@@ -465,7 +472,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             {/* Same County ±$1000 */}
             <div>
-              <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-8">Nearby Income Tiers ({countyName})</h3>
+              <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-8">Nearby Income Tiers ({countyName})</h3>
               <div className="space-y-4">
                 {[-1000, -500, +500, +1000].map(diff => {
                   const newInc = income + diff;
@@ -486,7 +493,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
 
             {/* Sibling Counties Same Income */}
             <div>
-              <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-8">Compare Washington Counties</h3>
+              <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-8">Compare Washington Counties</h3>
               <div className="space-y-4">
                 {siblingCounties.map(c => {
                   const nChildren = children === 1 ? '1-child' : `${children}-children`;

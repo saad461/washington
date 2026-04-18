@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#FDFDFE] font-sans">
-      <div className="max-w-4xl mx-auto px-6 py-20">
+      <div className="max-w-3xl mx-auto px-6 py-20">
 
-        <Link href="/" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors mb-16">
+        <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-indigo-600 transition-colors mb-16">
           <ArrowLeft size={14} />
           Back to Calculator
         </Link>
@@ -23,30 +23,30 @@ export default function AboutPage() {
             <Users className="w-8 h-8 text-white" />
           </div>
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-600 mb-1">E-E-A-T Transparency</p>
-            <h1 className="text-4xl font-black text-slate-900 tracking-tight">About WCSSC</h1>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-indigo-600 mb-1">E-E-A-T Transparency</p>
+            <h1 className="text-4xl font-bold text-gray-900 tracking-tight">About WCSSC</h1>
           </div>
         </div>
 
-        <p className="text-slate-500 font-medium leading-relaxed mb-14 text-lg">
+        <p className="text-gray-500 font-medium leading-relaxed mb-14 text-lg">
           The Washington Child Support Schedule Center (WCSSC) is an independent educational platform dedicated to helping Washington State families understand and estimate child support obligations under the 2026 guidelines.
         </p>
 
-        <div className="space-y-8 text-slate-600">
-          <div className="p-10 bg-white rounded-[3rem] border border-slate-100 shadow-sm">
+        <div className="space-y-8 text-gray-600">
+          <div className="p-10 bg-white rounded-[3rem] border border-gray-100 shadow-sm">
             <div className="flex items-center gap-4 mb-4">
               <Scale className="w-5 h-5 text-indigo-400 flex-shrink-0" />
-              <h2 className="text-lg font-black text-slate-900">Our Mission</h2>
+              <h2 className="text-lg font-bold text-gray-900">Our Mission</h2>
             </div>
             <p className="font-medium leading-loose pl-9">
               Navigating child support calculations can be overwhelming. WCSSC was built to demystify the process by providing a free, accurate, and easy-to-use calculator based on the official 2026 Washington State Child Support Economic Table. We believe every parent deserves access to transparent, understandable financial guidance — without requiring expensive legal consultations for basic estimates.
             </p>
           </div>
 
-          <div className="p-10 bg-white rounded-[3rem] border border-slate-100 shadow-sm">
+          <div className="p-10 bg-white rounded-[3rem] border border-gray-100 shadow-sm">
             <div className="flex items-center gap-4 mb-4">
               <Database className="w-5 h-5 text-indigo-400 flex-shrink-0" />
-              <h2 className="text-lg font-black text-slate-900">Data Sources &amp; Methodology</h2>
+              <h2 className="text-lg font-bold text-gray-900">Data Sources &amp; Methodology</h2>
             </div>
             <div className="font-medium leading-loose pl-9 space-y-4">
               <p>Our calculations are powered by:</p>
@@ -60,10 +60,10 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="p-10 bg-white rounded-[3rem] border border-slate-100 shadow-sm">
+          <div className="p-10 bg-white rounded-[3rem] border border-gray-100 shadow-sm">
             <div className="flex items-center gap-4 mb-4">
               <ShieldCheck className="w-5 h-5 text-indigo-400 flex-shrink-0" />
-              <h2 className="text-lg font-black text-slate-900">Editorial &amp; Legal Review</h2>
+              <h2 className="text-lg font-bold text-gray-900">Editorial &amp; Legal Review</h2>
             </div>
             <div className="font-medium leading-loose pl-9 space-y-4">
               <p>
@@ -75,54 +75,54 @@ export default function AboutPage() {
                   { step: "02", label: "Legal Review", desc: "Content reviewed for compliance with RCW 26.19 and current case law" },
                   { step: "03", label: "Technical Audit", desc: "Calculation engine tested against known edge cases and SSR thresholds" },
                 ].map((s) => (
-                  <div key={s.step} className="p-5 bg-slate-50 rounded-2xl border border-slate-100">
-                    <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-xs font-black mb-3">{s.step}</div>
-                    <p className="text-xs font-black text-slate-900 uppercase tracking-widest mb-1">{s.label}</p>
-                    <p className="text-[11px] text-slate-500">{s.desc}</p>
+                  <div key={s.step} className="p-5 bg-gray-50 rounded-2xl border border-gray-100">
+                    <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-xs font-bold mb-3">{s.step}</div>
+                    <p className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-1">{s.label}</p>
+                    <p className="text-[11px] text-gray-500">{s.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          <div className="p-10 bg-white rounded-[3rem] border border-slate-100 shadow-sm">
+          <div className="p-10 bg-white rounded-[3rem] border border-gray-100 shadow-sm">
             <div className="flex items-center gap-4 mb-4">
               <Globe className="w-5 h-5 text-indigo-400 flex-shrink-0" />
-              <h2 className="text-lg font-black text-slate-900">Coverage</h2>
+              <h2 className="text-lg font-bold text-gray-900">Coverage</h2>
             </div>
             <p className="font-medium leading-loose pl-9">
               WCSSC provides detailed child support calculations for all <strong>39 Washington counties</strong>, including localized courthouse information, filing guidance, and county-specific insights. From King County to Garfield County, our platform covers the full spectrum of Washington State jurisdictions with over 7,800 unique calculation pages.
             </p>
           </div>
 
-          <div className="p-10 bg-white rounded-[3rem] border border-slate-100 shadow-sm">
+          <div className="p-10 bg-white rounded-[3rem] border border-gray-100 shadow-sm">
             <div className="flex items-center gap-4 mb-4">
               <CheckCircle2 className="w-5 h-5 text-indigo-400 flex-shrink-0" />
-              <h2 className="text-lg font-black text-slate-900">Important Disclaimer</h2>
+              <h2 className="text-lg font-bold text-gray-900">Important Disclaimer</h2>
             </div>
             <p className="font-medium leading-loose pl-9">
               WCSSC is <strong>not a law firm</strong> and does not provide legal advice. Our calculations are estimates for educational purposes only. Actual court-ordered child support may differ based on healthcare costs, childcare expenses, custody arrangements, deviation petitions, and judicial discretion. We strongly recommend consulting a licensed Washington State family law attorney for specific legal guidance.
             </p>
           </div>
 
-          <div className="p-10 bg-white rounded-[3rem] border border-slate-100 shadow-sm">
+          <div className="p-10 bg-white rounded-[3rem] border border-gray-100 shadow-sm">
             <div className="flex items-center gap-4 mb-4">
               <Mail className="w-5 h-5 text-indigo-400 flex-shrink-0" />
-              <h2 className="text-lg font-black text-slate-900">Contact Us</h2>
+              <h2 className="text-lg font-bold text-gray-900">Contact Us</h2>
             </div>
             <div className="font-medium leading-loose pl-9">
               <p className="mb-4">Have questions, feedback, or data correction requests? We&apos;d love to hear from you.</p>
-              <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 inline-block">
-                <p className="text-sm font-bold text-slate-900">General Inquiries &amp; Support</p>
+              <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100 inline-block">
+                <p className="text-sm font-bold text-gray-900">General Inquiries &amp; Support</p>
                 <a href="mailto:support@wcssc.site" className="text-indigo-600 font-bold underline">support@wcssc.site</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-16 p-8 bg-slate-900 rounded-[3rem] text-center text-slate-400">
+        <div className="mt-16 p-8 bg-gray-900 rounded-[3rem] text-center text-gray-400">
           <p className="text-sm font-medium mb-4">Washington Child Support Schedule Center &copy; 2026</p>
-          <div className="flex justify-center gap-8 text-xs font-black uppercase tracking-widest">
+          <div className="flex justify-center gap-8 text-[10px] font-bold uppercase tracking-widest">
             <Link href="/privacy" className="hover:text-indigo-400 transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-indigo-400 transition-colors">Terms of Service</Link>
             <Link href="/disclaimer" className="hover:text-indigo-400 transition-colors">Disclaimer</Link>

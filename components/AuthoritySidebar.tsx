@@ -23,7 +23,7 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
       <div className="bg-gray-900 rounded-2xl p-8 text-white relative overflow-hidden shadow-sm">
         <div className="flex items-center gap-3 mb-6 relative z-10">
           <ShieldCheck className="w-6 h-6 text-indigo-400" />
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Verified Legal Source</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Verified Legal Source</span>
         </div>
         <h3 className="text-xl font-bold mb-4 relative z-10 leading-tight font-heading">2026 Data Synchronized</h3>
         <p className="text-gray-400 text-sm leading-relaxed mb-8">
@@ -78,7 +78,7 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
         <div className="p-8 border border-gray-100 rounded-2xl border-dashed bg-white">
           <div className="flex items-center gap-3 mb-6">
             <MapPin className="w-5 h-5 text-indigo-500" />
-            <h4 className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em]">{county.name} Filing Info</h4>
+            <h4 className="text-[10px] font-bold text-gray-900 uppercase tracking-widest">{county.name} Filing Info</h4>
           </div>
           <p className="text-xs font-bold text-gray-700 mb-2">Primary Seat: {county.seat}</p>
           <p className="text-xs font-medium text-gray-500 leading-relaxed mb-6">{county.courtAddress}</p>

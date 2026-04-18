@@ -16,10 +16,10 @@ const AuthorBox = () => {
           </div>
 
           <div className="flex-1">
-            <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] text-indigo-600 mb-2">Academic & Legal Entity</h3>
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-indigo-600 mb-2">Academic & Legal Entity</h3>
             <h2 className="text-2xl font-bold text-gray-900 mb-6 font-heading tracking-tight">WCSSC Editorial & Legal Team</h2>
             
-            <p className="text-gray-600 font-medium leading-relaxed mb-8 max-w-2xl text-sm md:text-base">
+            <p className="text-gray-700 font-medium leading-relaxed mb-8 max-w-2xl text-sm md:text-base">
               Our calculations and guides are rigorously audited by family law advocates and technical developers to ensure compliance with RCW 26.19 and the latest 2026 economic table updates. We maintain a strict editorial protocol based on official AOC mandatory forms and WAC guidelines.
             </p>
 

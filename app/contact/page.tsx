@@ -16,7 +16,7 @@ export default function ContactPage() {
       <div className="max-w-4xl mx-auto px-6 py-20">
 
         {/* Back Link */}
-        <Link href="/" className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors mb-16">
+        <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-indigo-600 transition-colors mb-16">
           <ArrowLeft size={14} />
           Back to Calculator
         </Link>
@@ -27,37 +27,37 @@ export default function ContactPage() {
             <Mail className="w-8 h-8 text-white" />
           </div>
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-indigo-600 mb-1">Support & Feedback</p>
-            <h1 className="text-4xl font-black text-slate-900 tracking-tight">Contact WCSSC</h1>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-indigo-600 mb-1">Support & Feedback</p>
+            <h1 className="text-4xl font-bold text-gray-900 tracking-tight">Contact WCSSC</h1>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
           {/* Contact Info */}
           <div className="md:col-span-5">
-            <h2 className="text-2xl font-black text-slate-900 mb-6 tracking-tight">How can we help?</h2>
-            <p className="text-slate-500 font-medium leading-relaxed mb-10">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 tracking-tight">How can we help?</h2>
+            <p className="text-gray-500 font-medium leading-relaxed mb-10">
               Whether you found a bug in our 2026 calculator, have a suggestion for our legal glossary, or need to report an error in a county courthouse address, our editorial team is ready to listen.
             </p>
 
             <div className="space-y-6">
-              <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm flex items-start gap-4">
+              <div className="p-6 bg-white rounded-3xl border border-gray-100 shadow-sm flex items-start gap-4">
                 <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl">
                   <Mail size={20} />
                 </div>
                 <div>
-                  <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Email Support</p>
-                  <p className="text-slate-900 font-bold">support@wcssc.site</p>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Email Support</p>
+                  <p className="text-gray-900 font-bold">support@wcssc.site</p>
                 </div>
               </div>
 
-              <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm flex items-start gap-4">
+              <div className="p-6 bg-white rounded-3xl border border-gray-100 shadow-sm flex items-start gap-4">
                 <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl">
                   <MessageCircle size={20} />
                 </div>
                 <div>
-                  <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Editorial Team</p>
-                  <p className="text-slate-900 font-bold">editor@wcssc.site</p>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Editorial Team</p>
+                  <p className="text-gray-900 font-bold">editor@wcssc.site</p>
                 </div>
               </div>
             </div>
@@ -77,9 +77,9 @@ export default function ContactPage() {
         </div>
 
         {/* Legal Reminder */}
-        <div className="mt-20 p-10 bg-slate-50 rounded-[3rem] text-center border border-slate-100">
-          <p className="text-xs text-slate-400 font-bold tracking-widest uppercase mb-4">Important Legal Notice</p>
-          <p className="text-slate-500 text-sm leading-relaxed max-w-2xl mx-auto">
+        <div className="mt-20 p-10 bg-gray-50 rounded-[3rem] text-center border border-gray-100">
+          <p className="text-xs text-gray-400 font-bold tracking-widest uppercase mb-4">Important Legal Notice</p>
+          <p className="text-gray-500 text-sm leading-relaxed max-w-2xl mx-auto">
             WCSSC is an educational tool and does not provide legal representation. If you are in immediate need of legal assistance regarding child support in Washington, please contact the <Link href="/washington-courts" className="text-indigo-600 font-bold underline">Washington State Courts</Link> directly or seek a licensed attorney.
           </p>
         </div>
