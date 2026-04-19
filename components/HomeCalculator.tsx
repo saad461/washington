@@ -64,7 +64,7 @@ export default function HomeCalculator() {
         <form className="flex flex-col gap-8" onSubmit={(e) => { e.preventDefault(); handleCalculate(); }}>
 
           <div className="flex flex-col text-left">
-            <label htmlFor="parent1-income" className="mb-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+            <label htmlFor="parent1-income" className="mb-3 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
               Parent 1 Monthly Net Income
             </label>
             <div className="relative group">
@@ -81,7 +81,7 @@ export default function HomeCalculator() {
           </div>
 
           <div className="flex flex-col text-left">
-            <label htmlFor="parent2-income" className="mb-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+            <label htmlFor="parent2-income" className="mb-3 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
               Parent 2 Monthly Net Income
             </label>
             <div className="relative group">
@@ -95,11 +95,11 @@ export default function HomeCalculator() {
                 className={`w-full h-14 pl-8 pr-4 rounded-xl border ${error ? 'border-red-200 bg-red-50 focus:ring-red-500/5 focus:border-red-500' : 'border-gray-200 bg-gray-50/50 focus:ring-indigo-500/5 focus:border-indigo-600'} text-gray-900 text-xl font-bold transition-all focus:bg-white focus:outline-none`}
               />
             </div>
-            {error && <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest mt-3 animate-pulse">{error}</p>}
+            {error && <p className="text-red-500 text-[10px] font-bold uppercase tracking-[0.2em] mt-3 animate-pulse">{error}</p>}
           </div>
 
           <div className="flex flex-col text-left">
-            <label htmlFor="children-count" className="mb-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+            <label htmlFor="children-count" className="mb-3 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
               Number of Children
             </label>
             <div className="relative">
@@ -126,7 +126,7 @@ export default function HomeCalculator() {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full bg-gray-900 text-white rounded-xl h-14 font-bold text-sm uppercase tracking-widest transition-all ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-gray-800 active:scale-[0.98]'}`}
+            className={`w-full bg-gray-900 text-white rounded-xl h-14 font-bold text-sm uppercase tracking-[0.2em] transition-all ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-gray-800 active:scale-[0.98]'}`}
           >
             {isLoading ? "Synchronizing..." : "Calculate Presumptive Support"}
           </button>
@@ -138,7 +138,7 @@ export default function HomeCalculator() {
           <div aria-live="polite" aria-atomic="true">
             {result !== null && (
               <div className="mt-4 p-8 bg-gray-50 border border-gray-100 rounded-2xl animate-in fade-in slide-in-from-bottom-3 duration-500">
-                <h3 className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-6 text-center">
+                <h3 className="text-[10px] font-bold text-indigo-600 uppercase tracking-[0.2em] mb-6 text-center">
                   Calculation Results (2026)
                 </h3>
                 <div className="space-y-5 text-sm">
@@ -154,11 +154,11 @@ export default function HomeCalculator() {
                   </div>
                   <div className="flex justify-between items-center pt-2">
                     <div>
-                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">P1 Transfer</p>
+                      <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">P1 Transfer</p>
                       <p className="text-xl font-bold text-indigo-600 font-heading">{formatCurrency(result.parent1Support)}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">P2 Transfer</p>
+                      <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">P2 Transfer</p>
                       <p className="text-xl font-bold text-indigo-600 font-heading">{formatCurrency(result.parent2Support)}</p>
                     </div>
                   </div>
@@ -171,7 +171,7 @@ export default function HomeCalculator() {
 
       {/* Quick Tips */}
       <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto w-full px-4">
-        <div className="p-10 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-indigo-100 transition-all group">
+        <div className="p-10 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-indigo-200 hover:bg-gray-50 transition-all group">
           <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
             <Scale size={24} />
           </div>
@@ -179,7 +179,7 @@ export default function HomeCalculator() {
           <p className="text-sm text-gray-500 leading-relaxed font-medium">Mapped exactly to the new 2026 Washington State Economic Tables and statutory updates.</p>
         </div>
 
-        <div className="p-10 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-emerald-100 transition-all group">
+        <div className="p-10 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-indigo-200 hover:bg-gray-50 transition-all group">
           <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
             <Shield size={24} />
           </div>
@@ -194,7 +194,7 @@ export default function HomeCalculator() {
           </div>
           <h3 className="font-bold mb-3 font-heading text-lg">Worksheet Pro Wizard</h3>
           <p className="text-sm text-gray-400 leading-relaxed mb-8">Generate the mandatory 8-part official PDF worksheet using our advanced automated wizard.</p>
-          <Link href="/worksheet" className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest bg-white text-gray-900 px-6 py-4 rounded-xl hover:bg-indigo-50 transition-all active:scale-[0.98]">
+          <Link href="/worksheet" className="inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] bg-white text-gray-900 px-6 py-4 rounded-xl hover:bg-indigo-50 transition-all active:scale-[0.98]">
             Launch Wizard
             <ChevronRight size={14} className="text-indigo-600" />
           </Link>
