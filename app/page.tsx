@@ -130,10 +130,30 @@ export default function Home() {
       <section className="mt-28 max-w-4xl w-full mx-auto px-4 relative z-10 font-sans">
         <h2 className="text-2xl font-bold text-gray-900 mb-8 tracking-tight text-center font-heading">Example Calculation</h2>
         <div className="bg-gray-50 border border-gray-100 rounded-2xl p-8 md:p-10 shadow-sm">
-          <h3 className="text-xl font-bold text-gray-900 mb-4 font-heading">How much is child support for $5,000 income?</h3>
-          <p className="mb-3 text-gray-700 font-medium"><strong>Scenario:</strong> Combined Monthly Net Income: $5,000 | Children: 2 | County: King County</p>
-          <p className="mb-6 text-gray-900 font-bold text-lg"><strong>Result:</strong> Estimated Monthly Basic Support Obligation: $1,155</p>
-          <p className="text-gray-600 leading-relaxed text-sm">
+          <h3 className="text-xl font-bold text-gray-900 mb-8 font-heading text-center">How much is child support for $5,000 income?</h3>
+
+          <div className="mb-8">
+            <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-4 text-center">Scenario</div>
+            <div className="grid grid-cols-3 gap-1 md:gap-4 bg-white border border-gray-100 rounded-xl p-3 md:p-6 shadow-sm">
+              {[
+                { label: "Monthly Income", value: "$5,000" },
+                { label: "Children", value: "2" },
+                { label: "County", value: "King" },
+              ].map((item, i) => (
+                <div key={i} className="text-center flex flex-col justify-center">
+                  <div className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.1em] md:tracking-[0.2em] text-gray-500 mb-1 leading-tight">{item.label}</div>
+                  <div className="text-sm md:text-lg font-bold text-gray-900">{item.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-indigo-600 rounded-xl p-6 text-center mb-8 shadow-md shadow-indigo-100">
+            <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-200 mb-1">Estimated Basic Support</div>
+            <div className="text-3xl font-bold text-white tracking-tight">$1,155<span className="text-sm font-medium text-indigo-200 ml-1">/ mo</span></div>
+          </div>
+
+          <p className="text-gray-600 leading-relaxed text-sm text-center max-w-2xl mx-auto">
             In King County, courts apply the standard Washington economic schedule. For a combined net income of $5,000 with 2 children, the base presumptive support is $1,155. This amount is typically shared between parents based on their proportional income share.
           </p>
         </div>
