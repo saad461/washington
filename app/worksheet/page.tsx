@@ -38,7 +38,7 @@ export default function WorksheetPage() {
             </p>
           </div>
           
-          <div className="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
+          <div className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] flex items-center gap-2">
             Want to know how we arrived at these figures? 
             <Link href="/editorial-methodology" className="text-indigo-600 underline decoration-indigo-200 underline-offset-4 hover:text-indigo-700">
               Read our Editorial Methodology

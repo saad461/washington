@@ -51,7 +51,7 @@ export default function ComparisonTool() {
         <div className="inline-flex p-3 bg-indigo-50 text-indigo-600 rounded-2xl mb-8">
           <ArrowRight className="w-8 h-8 rotate-45" />
         </div>
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 mb-6 font-heading leading-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-6 font-heading leading-tight">
           2024 vs 2026 Guideline Comparison
         </h1>
         <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
@@ -70,7 +70,7 @@ export default function ComparisonTool() {
             
             <div className="space-y-8 mb-10">
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Combined Monthly Net Income</label>
+                <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-3">Combined Monthly Net Income</label>
                 <div className="relative group">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium group-focus-within:text-indigo-600 transition-colors">$</span>
                   <input 
@@ -83,7 +83,7 @@ export default function ComparisonTool() {
               </div>
 
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Number of Children</label>
+                <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-3">Number of Children</label>
                 <div className="flex gap-2">
                   {[1, 2, 3, 4, 5].map((num) => (
                     <button
@@ -112,20 +112,20 @@ export default function ComparisonTool() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-gray-50 border border-gray-100 rounded-2xl p-8 relative overflow-hidden group">
-              <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-4">Old 2024 Presumptive</p>
+              <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">Old 2024 Presumptive</p>
               <p className="text-3xl md:text-4xl font-bold text-gray-400 mb-2 font-heading">
                 {actual2024 !== null ? curFormatter.format(actual2024) : 'Court Discretion'}
               </p>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Averages Estimate</p>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Averages Estimate</p>
             </div>
 
             <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-white relative overflow-hidden shadow-md">
               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl -translate-y-16 translate-x-16" />
-              <p className="text-gray-500 text-[10px] font-bold uppercase tracking-widest mb-4">New 2026 Presumptive</p>
+              <p className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">New 2026 Presumptive</p>
               <p className="text-3xl md:text-4xl font-bold text-white mb-2 font-heading">
                 {actual2026 !== null ? curFormatter.format(actual2026) : 'Court Discretion'}
               </p>
-              <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest">Official 2026 Tables</p>
+              <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-[0.2em]">Official 2026 Tables</p>
             </div>
           </div>
 

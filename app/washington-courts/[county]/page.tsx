@@ -353,7 +353,7 @@ export default async function CountyCourtPage({ params }: Props) {
               </div>
 
               {/* Required documents list */}
-              <div className="bg-white border border-gray-200 rounded-[2rem] p-8 shadow-sm">
+              <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
                 <h3 className="font-bold text-gray-900 mb-5 font-heading flex items-center gap-2">
                   <FileText className="w-5 h-5 text-gray-400" />
                   Required Documents for {county!.name}
@@ -417,7 +417,7 @@ export default async function CountyCourtPage({ params }: Props) {
             </section>
 
             {/* H. CONCLUSION */}
-            <section className="bg-indigo-50 border border-indigo-100 rounded-[2rem] p-8">
+            <section className="bg-indigo-50 border border-indigo-100 rounded-2xl p-8">
               <h2 className="text-xl font-bold text-indigo-900 mb-5 font-heading">
                 Your Next Steps in {county!.name}
               </h2>
@@ -442,7 +442,7 @@ export default async function CountyCourtPage({ params }: Props) {
           <aside className="lg:col-span-5 space-y-8 lg:sticky lg:top-24 lg:self-start">
 
             {/* D. COURT INFO CARD */}
-            <div className="bg-gray-900 text-white rounded-[2rem] p-8 shadow-2xl relative overflow-hidden">
+            <div className="bg-gray-900 text-white rounded-2xl p-8 shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-40 h-40 bg-indigo-500/20 rounded-full blur-3xl -translate-y-20 translate-x-20 pointer-events-none" />
               <Building2 className="w-8 h-8 text-indigo-400 mb-6" />
               <h3 className="text-xl font-bold mb-7 leading-tight">{county!.court}</h3>
@@ -483,7 +483,7 @@ export default async function CountyCourtPage({ params }: Props) {
             </div>
 
             {/* 5. GOOGLE MAP */}
-            <div className="rounded-[2rem] overflow-hidden border border-gray-200 shadow-xl">
+            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-xl">
               <div className="bg-gray-800 text-white px-5 py-3 flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-indigo-400" />
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Courthouse Location</span>
@@ -510,7 +510,7 @@ export default async function CountyCourtPage({ params }: Props) {
             </div>
 
             {/* INTERNAL LINKS */}
-            <div className="bg-white border border-gray-200 rounded-[2rem] p-7 shadow-sm">
+            <div className="bg-white border border-gray-200 rounded-2xl p-7 shadow-sm">
               <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-5 flex items-center gap-2">
                 <BookOpen className="w-4 h-4" /> Related Legal Resources
               </h4>
@@ -532,7 +532,7 @@ export default async function CountyCourtPage({ params }: Props) {
             </div>
 
             {/* OTHER COUNTIES */}
-            <div className="bg-white border border-gray-200 rounded-[2rem] p-7 shadow-sm">
+            <div className="bg-white border border-gray-200 rounded-2xl p-7 shadow-sm">
               <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-5">Other County Guides</h4>
               <nav className="flex flex-col space-y-2.5">
                 {relatedCounties.map(c => (

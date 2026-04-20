@@ -63,7 +63,7 @@ export default function CookieBanner() {
                   Privacy Policy
                 </Link>
               </p>
-              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-2">
+              <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mt-2">
                 GDPR · CCPA · 2026 Compliance Standard
               </p>
             </div>
@@ -72,13 +72,13 @@ export default function CookieBanner() {
           <div className="flex items-center gap-4 flex-shrink-0 w-full sm:w-auto">
             <button
               onClick={handleDecline}
-              className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-all rounded-xl border border-gray-800 hover:border-gray-700 font-heading"
+              className="px-6 py-3.5 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 hover:text-white transition-all rounded-xl border border-gray-800 hover:border-gray-700 font-heading"
             >
               Decline
             </button>
             <button
               onClick={handleAccept}
-              className="px-8 py-3.5 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition-all shadow-lg active:scale-[0.98] font-heading"
+              className="px-8 py-3.5 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-xl hover:bg-indigo-500 transition-all shadow-lg active:scale-[0.98] font-heading"
             >
               Accept All
             </button>

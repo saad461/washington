@@ -16,7 +16,7 @@ export default function EditorialMethodology() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
         <div className="max-w-3xl mx-auto">
           <header className="mb-16">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-8 tracking-tight font-heading leading-[1.1]">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 tracking-tight font-heading leading-[1.1]">
               How We Calculate: Our Editorial Methodology
             </h1>
             <p className="text-xl leading-relaxed text-gray-600">

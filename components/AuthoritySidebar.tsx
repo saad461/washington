@@ -29,7 +29,7 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
         <p className="text-gray-400 text-sm leading-relaxed mb-8">
           This calculator is calibrated to the official 2026 Washington State Child Support Schedule.
         </p>
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-800 rounded-full text-[10px] font-bold uppercase tracking-widest text-emerald-400 border border-gray-700">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-800 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-400 border border-gray-700">
           <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
           Status: Live 2026
         </div>
@@ -37,7 +37,7 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
 
       {/* 2. Interactive Search */}
       <div className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm relative overflow-visible">
-        <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+        <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
           <Gavel className="w-4 h-4 text-indigo-600" />
           Change Location
         </h3>
@@ -48,7 +48,7 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
 
       {/* 3. Official Source Links (E-E-A-T) */}
       <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
-        <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-8">Official Authorities</h3>
+        <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-8">Official Authorities</h3>
         <div className="space-y-3">
           {[
             { label: "WA DSHS Support Center", url: "https://www.dshs.wa.gov/esa/division-child-support", icon: Globe },
@@ -66,7 +66,7 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
                 <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center group-hover:bg-indigo-50 transition-colors">
                   <ExternalLink size={14} className="text-gray-400 group-hover:text-indigo-600" />
                 </div>
-                <span className="text-xs font-bold text-gray-600 uppercase tracking-widest group-hover:text-gray-900 transition-colors">{link.label}</span>
+                <span className="text-xs font-bold text-gray-600 uppercase tracking-[0.2em] group-hover:text-gray-900 transition-colors">{link.label}</span>
               </div>
             </a>
           ))}
@@ -82,7 +82,7 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
           </div>
           <p className="text-xs font-bold text-gray-700 mb-2">Primary Seat: {county.seat}</p>
           <p className="text-xs font-medium text-gray-500 leading-relaxed mb-6">{county.courtAddress}</p>
-          <div className="flex items-center gap-2 text-[10px] font-bold text-indigo-600 uppercase tracking-widest">
+          <div className="flex items-center gap-2 text-[10px] font-bold text-indigo-600 uppercase tracking-[0.2em]">
             <Clock className="w-3 h-3" />
             Clerk: {county.clerkPhone}
           </div>

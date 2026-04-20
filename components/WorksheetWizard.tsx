@@ -107,7 +107,7 @@ const MobileStepNav = ({
                   : 'bg-white text-gray-400 border-gray-200 hover:border-gray-300 hover:text-gray-600'
               }`}
             >
-              <span className={`flex items-center justify-center w-4 h-4 rounded-full text-[9px] font-black ${
+              <span className={`flex items-center justify-center w-4 h-4 rounded-full text-[9px] font-bold ${
                 isActive ? 'bg-white/20' : isDone ? 'bg-emerald-200 text-emerald-800' : 'bg-gray-100'
               }`}>
                 {isDone ? '✓' : idx + 1}
@@ -149,7 +149,7 @@ const InputField = ({
             }`}
         >
           {val ? <CheckCircle2 className="w-4 h-4 mr-2" /> : <Circle className="w-4 h-4 mr-2" />}
-          <span className="text-xs font-bold uppercase tracking-widest">{val ? 'Yes' : 'No'}</span>
+          <span className="text-xs font-bold uppercase tracking-[0.2em]">{val ? 'Yes' : 'No'}</span>
         </button>
       );
     }
@@ -197,11 +197,11 @@ const InputField = ({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Parent 1</p>
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] ml-1">Parent 1</p>
           {renderInput('p1')}
         </div>
         <div className="space-y-1.5">
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Parent 2</p>
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] ml-1">Parent 2</p>
           {renderInput('p2')}
         </div>
       </div>
@@ -238,10 +238,10 @@ export default function WorksheetWizard() {
   if (!currentFields || !Array.isArray(currentFields)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#FDFDFE]">
-        <div className="text-center p-12 bg-white rounded-[3rem] border border-slate-100 shadow-xl max-w-md">
+        <div className="text-center p-12 bg-white rounded-2xl border border-gray-100 shadow-xl max-w-md">
           <Calculator className="w-12 h-12 text-indigo-600 mx-auto mb-6" />
-          <h2 className="text-2xl font-black text-slate-900 mb-4">Step Not Found</h2>
-          <p className="text-slate-500 font-medium mb-8">The requested worksheet step could not be loaded.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Step Not Found</h2>
+          <p className="text-gray-500 font-medium mb-8">The requested worksheet step could not be loaded.</p>
           <button onClick={() => setCurrentStep(0)} className="px-8 py-3 bg-indigo-600 text-white font-bold rounded-2xl hover:bg-indigo-700 transition-colors">
             Back to Start
           </button>
@@ -324,10 +324,10 @@ export default function WorksheetWizard() {
           <div className="w-full">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-2">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight font-heading">Worksheet Summary</h1>
-              <span className="text-indigo-600 font-bold text-lg md:text-xl tracking-widest uppercase font-heading">WCSSC</span>
+              <span className="text-indigo-600 font-bold text-lg md:text-xl tracking-[0.2em] uppercase font-heading">WCSSC</span>
             </div>
             <p className="text-gray-500 font-medium">Official calculation results based on the 2026 Washington State Child Support Schedule.</p>
-            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-4">Date of Calculation: {new Date().toLocaleDateString()}</p>
+            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mt-4">Date of Calculation: {new Date().toLocaleDateString()}</p>
           </div>
           <button
             id="pdf-edit-btn"
@@ -342,19 +342,19 @@ export default function WorksheetWizard() {
         {/* Result Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
           <div className="bg-gray-900 rounded-2xl p-6 md:p-8 text-white shadow-lg">
-            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2">Total Combined Net</p>
+            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-2">Total Combined Net</p>
             <h3 className="text-2xl md:text-3xl font-bold mb-1 font-heading">{curFormatter.format(calculation.combinedIncome)}</h3>
-            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Combined Monthly Income</p>
+            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em]">Combined Monthly Income</p>
           </div>
           <div className="bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm">
-            <p className="text-indigo-600 text-[10px] font-bold uppercase tracking-widest mb-2">Parent 1 Transfer</p>
+            <p className="text-indigo-600 text-[10px] font-bold uppercase tracking-[0.2em] mb-2">Parent 1 Transfer</p>
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1 font-heading">{curFormatter.format(derivedData['17']?.p1 || 0)}</h3>
-            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Presumptive Payment</p>
+            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em]">Presumptive Payment</p>
           </div>
           <div className="bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm">
-            <p className="text-indigo-600 text-[10px] font-bold uppercase tracking-widest mb-2">Parent 2 Transfer</p>
+            <p className="text-indigo-600 text-[10px] font-bold uppercase tracking-[0.2em] mb-2">Parent 2 Transfer</p>
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1 font-heading">{curFormatter.format(derivedData['17']?.p2 || 0)}</h3>
-            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Presumptive Payment</p>
+            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em]">Presumptive Payment</p>
           </div>
         </div>
 
@@ -363,9 +363,9 @@ export default function WorksheetWizard() {
           <table className="w-full text-left border-collapse min-w-[400px]">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-100">
-                <th className="px-5 md:px-8 py-5 text-[10px] font-bold text-gray-400 uppercase tracking-widest font-sans">Part / Field</th>
-                <th className="px-5 md:px-8 py-5 text-[10px] font-bold text-gray-400 uppercase tracking-widest font-sans">P1</th>
-                <th className="px-5 md:px-8 py-5 text-[10px] font-bold text-gray-400 uppercase tracking-widest font-sans">P2</th>
+                <th className="px-5 md:px-8 py-5 text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] font-sans">Part / Field</th>
+                <th className="px-5 md:px-8 py-5 text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] font-sans">P1</th>
+                <th className="px-5 md:px-8 py-5 text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] font-sans">P2</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
@@ -442,7 +442,7 @@ export default function WorksheetWizard() {
               </div>
               <div>
                 <h2 className="text-lg font-bold text-gray-900 tracking-tight leading-none mb-1 font-heading">Worksheet Pro</h2>
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">2026 Guidelines</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">2026 Guidelines</span>
               </div>
             </div>
 
@@ -478,7 +478,7 @@ export default function WorksheetWizard() {
                 <div className="p-1.5 bg-gray-800 rounded-lg">
                   <LayoutDashboard className="w-4 h-4 text-indigo-400" />
                 </div>
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Est. Base Support</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Est. Base Support</span>
               </div>
               <p className="text-2xl font-bold text-white leading-tight relative z-10 font-heading">
                 {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
@@ -510,7 +510,7 @@ export default function WorksheetWizard() {
                 {/* Form Card */}
                 <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-8 md:p-10 lg:p-12">
                   <div className="mb-8 md:mb-12 text-center sm:text-left">
-                    <span className="inline-block px-3 py-1 bg-gray-50 text-gray-500 text-[10px] font-bold uppercase tracking-widest rounded-full mb-3 md:mb-4">
+                    <span className="inline-block px-3 py-1 bg-gray-50 text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full mb-3 md:mb-4">
                       Requirement Step {currentStep + 1}
                     </span>
                     <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 tracking-tight mb-3 md:mb-4 font-heading">
@@ -543,7 +543,7 @@ export default function WorksheetWizard() {
                                 onChange={(parent, val) => handleInputChange(field.id, parent, val)}
                               />
                               {isCalculated && (
-                                <p className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest -mt-6 ml-11 mb-8 animate-pulse">
+                                <p className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em] -mt-6 ml-11 mb-8 animate-pulse">
                                   Auto-Calculating...
                                 </p>
                               )}
@@ -584,11 +584,11 @@ export default function WorksheetWizard() {
               <div className="max-w-4xl mx-auto mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 md:gap-6 px-4 pb-6">
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">AOC-Certified Worksheet v01/2026</span>
+                  <span className="text-xs font-bold text-gray-500 uppercase tracking-[0.2em]">AOC-Certified Worksheet v01/2026</span>
                 </div>
                 <div className="flex gap-4">
-                  <Link href="/privacy" className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-slate-900 transition-colors">Privacy Policy</Link>
-                  <Link href="/terms" className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-slate-900 transition-colors">Terms of Service</Link>
+                  <Link href="/privacy" className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] hover:text-gray-900 transition-colors">Privacy Policy</Link>
+                  <Link href="/terms" className="text-xs font-bold text-gray-400 uppercase tracking-[0.2em] hover:text-gray-900 transition-colors">Terms of Service</Link>
                 </div>
               </div>
             )}
@@ -600,7 +600,7 @@ export default function WorksheetWizard() {
       {!showSummary && (
         <div className="lg:hidden fixed bottom-0 left-0 right-0 p-3 sm:p-4 bg-white/95 backdrop-blur-xl border-t border-gray-100 z-50 flex items-center justify-between shadow-lg">
           <div>
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Est. Support</p>
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-0.5">Est. Support</p>
             <p className="text-lg sm:text-xl font-bold text-indigo-600 font-heading">
               {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
             </p>
