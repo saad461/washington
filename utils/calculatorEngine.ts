@@ -9,117 +9,178 @@ const SELF_SUPPORT_RESERVE = 2394;
  */
 
 interface ParentValues {
-  p1?: string | number;
-  p2?: string | number;
+  p1?: string | number | boolean;
+  p2?: string | number | boolean;
 }
 
 export function calculateChildSupport(formData: Record<string, ParentValues>) {
   // HELPER: Sum specific fields for a parent
   function sum(fields: (ParentValues | undefined)[], parentKey: 'p1' | 'p2') {
     return fields.reduce((acc, field) => {
-      // Ensure we treat the value as a number (handle string inputs from forms)
       const value = parseFloat(String(field?.[parentKey] || 0)) || 0;
       return acc + value;
     }, 0);
   }
 
-  // STEP 1: TOTAL GROSS INCOME (1g)
-  const grossP1 = sum([
-    formData["1a"], formData["1b"], formData["1c"],
-    formData["1d"], formData["1e"], formData["1f"]
-  ], "p1");
+  // GET INPUTS
+  const incomeType = String(formData["incomeType"]?.p1 || "monthly");
+  const payingParent = String(formData["payingParent"]?.p1 || "P1");
+  const parentingTime = parseFloat(String(formData["parentingTime"]?.p1 ?? 20));
+  const otherChildren = parseFloat(String(formData["otherChildren"]?.p1 || 0)) || 0;
+  const healthInsurance = parseFloat(String(formData["healthInsurance"]?.p1 || 0)) || 0;
+  const daycare = parseFloat(String(formData["daycare"]?.p1 || 0)) || 0;
+  const children = parseInt(String(formData["5_children"]?.p1 || 1), 10) || 1;
 
-  const grossP2 = sum([
-    formData["1a"], formData["1b"], formData["1c"],
-    formData["1d"], formData["1e"], formData["1f"]
-  ], "p2");
+  // STEP 1 & 2: GROSS & DEDUCTIONS
+  let grossP1 = sum([formData["1a"], formData["1b"], formData["1c"], formData["1d"], formData["1e"], formData["1f"]], "p1");
+  let grossP2 = sum([formData["1a"], formData["1b"], formData["1c"], formData["1d"], formData["1e"], formData["1f"]], "p2");
+  let deductionsP1 = sum([formData["2a"], formData["2b"], formData["2c"], formData["2d"], formData["2e"], formData["2f"], formData["2g"], formData["2h"], formData["2i"]], "p1");
+  let deductionsP2 = sum([formData["2a"], formData["2b"], formData["2c"], formData["2d"], formData["2e"], formData["2f"], formData["2g"], formData["2h"], formData["2i"]], "p2");
 
-  // STEP 2: TOTAL DEDUCTIONS (2j)
-  const deductionsP1 = sum([
-    formData["2a"], formData["2b"], formData["2c"],
-    formData["2d"], formData["2e"], formData["2f"],
-    formData["2g"], formData["2h"], formData["2i"]
-  ], "p1");
+  // ✅ (A) Convert Income
+  if (incomeType === "yearly") {
+    grossP1 /= 12;
+    grossP2 /= 12;
+    deductionsP1 /= 12;
+    deductionsP2 /= 12;
+  }
 
-  const deductionsP2 = sum([
-    formData["2a"], formData["2b"], formData["2c"],
-    formData["2d"], formData["2e"], formData["2f"],
-    formData["2g"], formData["2h"], formData["2i"]
-  ], "p2");
-
-  // STEP 3: NET INCOME (3)
+  // STEP 3: NET INCOME
   const netP1 = Math.max(0, grossP1 - deductionsP1);
   const netP2 = Math.max(0, grossP2 - deductionsP2);
 
-  // STEP 4: COMBINED NET INCOME (4)
+  // STEP 4: COMBINED NET INCOME
   const combinedIncome = netP1 + netP2;
-
-  // STEP 5: LOOKUP TABLE
-  // Standard Washington 2026 lookup logic using rounded combined income
-  const roundedIncome = Math.round(combinedIncome / 100) * 100;
-  const row = washingtonTable2026[roundedIncome];
-
-  // Number of children from form (default to 1)
-  const childrenField = formData["5_children"];
-  const children = parseInt(String(childrenField?.p1 || 1), 10) || 1;
-
-  const baseSupport = row ? (row[Math.min(children, 5)] || 0) : 0;
-
-  // STEP 6: PROPORTIONAL SHARE (6)
   const shareP1 = combinedIncome > 0 ? netP1 / combinedIncome : 0;
   const shareP2 = combinedIncome > 0 ? netP2 / combinedIncome : 0;
 
-  // STEP 7: APPLY LOW-INCOME RULES & ADJUSTMENTS
-  let totalSupport = baseSupport;
+  let obligationP1 = 0;
+  let obligationP2 = 0;
+  let baseTableSupport = 0;
   let adjustmentReason = "Standard calculation";
 
-  // CASE A: Combined income < 2200 (Minimum support rule)
+  // ✅ (B) Apply Low-Income Rule FIRST
   if (combinedIncome < 2200) {
-    totalSupport = MIN_SUPPORT_PER_CHILD * children;
+    const totalObligation = MIN_SUPPORT_PER_CHILD * children;
+    baseTableSupport = totalObligation;
     adjustmentReason = "Low income minimum rule applied ($50/child)";
+
+    // Assign to paying parent as per Answer 6
+    if (payingParent === "P1") {
+      obligationP1 = totalObligation;
+      obligationP2 = 0;
+    } else {
+      obligationP1 = 0;
+      obligationP2 = totalObligation;
+    }
+  } else {
+    // STEP 5: LOOKUP TABLE
+    const roundedIncome = Math.round(combinedIncome / 100) * 100;
+    const row = washingtonTable2026[roundedIncome];
+    baseTableSupport = row ? (row[Math.min(children, 5)] || 0) : 0;
+
+    obligationP1 = baseTableSupport * shareP1;
+    obligationP2 = baseTableSupport * shareP2;
   }
 
-  // STEP 8: EACH PARENT OBLIGATION (Proportional share of total)
-  let obligationP1 = totalSupport * shareP1;
-  let obligationP2 = totalSupport * shareP2;
+  // TRACK BREAKDOWN
+  let parentingAdjustment = 0;
+  let otherChildrenAdjustment = 0;
+  let extraCostsAdjustment = 0;
 
-  // STEP 9: APPLY SSR PROTECTION (Cap-based rule)
-  // Each parent's obligation is capped so they retain the Self-Support Reserve
+  // Apply further adjustments ONLY if combined income is above $2,200
+  if (combinedIncome >= 2200) {
+    // OTHER CHILDREN ADJUSTMENT
+    if (otherChildren > 0) {
+      const reductionRate = Math.min(otherChildren * 0.05, 0.20);
+      const prevP1 = obligationP1;
+      const prevP2 = obligationP2;
+
+      obligationP1 *= (1 - reductionRate);
+      obligationP2 *= (1 - reductionRate);
+
+      otherChildrenAdjustment = payingParent === "P1" ? (obligationP1 - prevP1) : (obligationP2 - prevP2);
+    }
+
+    // ✅ (D) Parenting Time Adjustment
+    if (parentingTime > 25) {
+      const adjustment = (parentingTime - 25) / 100;
+      const prevP1 = obligationP1;
+      const prevP2 = obligationP2;
+
+      if (payingParent === "P1") {
+        obligationP1 *= (1 - adjustment);
+        parentingAdjustment = obligationP1 - prevP1;
+      } else {
+        obligationP2 *= (1 - adjustment);
+        parentingAdjustment = obligationP2 - prevP2;
+      }
+    }
+
+    // ✅ (E) Add Extra Expenses
+    const totalExtra = healthInsurance + daycare;
+    if (totalExtra > 0) {
+      const extraP1 = totalExtra * shareP1;
+      const extraP2 = totalExtra * shareP2;
+      obligationP1 += extraP1;
+      obligationP2 += extraP2;
+      extraCostsAdjustment = payingParent === "P1" ? extraP1 : extraP2;
+    }
+  }
+
+  // ✅ (C) Apply SSR Protection
   const applySSRCap = (obligation: number, netIncome: number) => {
     const maxAffordable = netIncome - SELF_SUPPORT_RESERVE;
-    if (maxAffordable <= 0) {
-      // If income is below SSR, they pay the $50/child minimum
-      return MIN_SUPPORT_PER_CHILD * children;
-    }
-    // Otherwise, they pay the lesser of their share or what's above the SSR
+    if (maxAffordable <= 0) return MIN_SUPPORT_PER_CHILD * children;
     return Math.min(obligation, maxAffordable);
   };
 
-  const originalP1 = obligationP1;
-  const originalP2 = obligationP2;
+  const originalObligationP1 = obligationP1;
+  const originalObligationP2 = obligationP2;
 
   obligationP1 = applySSRCap(obligationP1, netP1);
   obligationP2 = applySSRCap(obligationP2, netP2);
 
-  if (obligationP1 !== originalP1 || obligationP2 !== originalP2) {
-    adjustmentReason = "Self-support reserve protection applied (capped at income above approximately $2,394)";
+  if (obligationP1 !== originalObligationP1 || obligationP2 !== originalObligationP2) {
+    const isP1Capped = payingParent === "P1" && obligationP1 !== originalObligationP1;
+    const isP2Capped = payingParent === "P2" && obligationP2 !== originalObligationP2;
+    if (isP1Capped || isP2Capped) {
+      adjustmentReason = "Self-support reserve protection applied";
+    }
   }
 
+  // ✅ (F) Apply 45% Rule (Safety Cap)
+  const apply45Rule = (obligation: number, netIncome: number) => {
+    const maxLimit = netIncome * 0.45;
+    return Math.min(obligation, maxLimit);
+  }
+  obligationP1 = apply45Rule(obligationP1, netP1);
+  obligationP2 = apply45Rule(obligationP2, netP2);
+
+  // ✅ (G) Prevent Invalid Values
+  obligationP1 = Math.max(obligationP1, 0);
+  obligationP2 = Math.max(obligationP2, 0);
+
+  const finalObligation = payingParent === "P1" ? obligationP1 : obligationP2;
+  const ssrApplied = (payingParent === "P1" && netP1 < SELF_SUPPORT_RESERVE) || (payingParent === "P2" && netP2 < SELF_SUPPORT_RESERVE);
+
   return {
-    grossP1,
-    grossP2,
-    deductionsP1,
-    deductionsP2,
-    netP1,
-    netP2,
+    grossP1, grossP2,
+    deductionsP1, deductionsP2,
+    netP1, netP2,
     combinedIncome,
-    baseSupport,
-    finalSupport: totalSupport, // Base support after low-income combined rule
+    baseSupport: baseTableSupport,
+    finalSupport: finalObligation,
     adjustmentReason,
-    shareP1,
-    shareP2,
-    obligationP1,
-    obligationP2,
-    children
+    shareP1, shareP2,
+    obligationP1, obligationP2,
+    children,
+    breakdown: {
+      baseSupport: payingParent === "P1" ? (baseTableSupport * shareP1) : (baseTableSupport * shareP2),
+      parentingAdjustment,
+      otherChildrenAdjustment,
+      extraCosts: extraCostsAdjustment
+    },
+    ssrApplied
   };
 }
