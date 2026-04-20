@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `Child Support in ${county.name} Washington 2026 | Court Guide & Calculator`,
-    description: `Free 2026 child support calculator for ${county.name}, WA. Official SSR ($1,514), income shares model, local ${county.court} filing info, clerk phone & step-by-step guide.`,
+    description: `Free 2026 child support calculator for ${county.name}, WA. Official SSR (approximately $2,394), income shares model, local ${county.court} filing info, clerk phone & step-by-step guide.`,
     alternates: { canonical: `https://wcssc.site/washington-courts/${county.slug}` },
   };
 }
@@ -66,7 +66,7 @@ function generateCountyContent(county: WashingtonCounty): {
 
   const introduction = [
     `Understanding child support in ${county.name}, Washington requires navigating both uniform state law and specific local court procedures. ${contextPhrase}. Under Washington's Revised Code (RCW 26.19), child support obligations are calculated using an Income Shares Model — a methodology designed to ensure that children receive a level of financial support proportionate to what they would have enjoyed if their parents had remained together.`,
-    `In 2026, the Washington State Administrative Office of the Courts (AOC) updated the mandatory child support economic tables that all ${county.name} courts must use. These tables cap at a combined monthly net income of $50,000 and set a firm Self-Support Reserve (SSR) of $1,514 per month — a critical poverty-protection threshold that prevents courts from issuing orders that would impoverish the paying parent.`,
+    `In 2026, the Washington State Administrative Office of the Courts (AOC) updated the mandatory child support economic tables that all ${county.name} courts must use. These tables cap at a combined monthly net income of $50,000 and set a firm Self-Support Reserve (SSR) of approximately $2,394 per month — a critical poverty-protection threshold that prevents courts from issuing orders that would impoverish the paying parent.`,
     `This guide provides ${county.name} residents with everything they need: a live 2026 calculator, step-by-step filing instructions for the ${county.court}, local procedural tips, and clear answers to the most common child support questions specific to this county.`
   ];
 
@@ -74,7 +74,7 @@ function generateCountyContent(county: WashingtonCounty): {
     `Washington's Income Shares Model — the legal framework used in ${county.name} and every county in the state — starts with a simple but powerful premise: both parents are financially responsible for their children. The court determines each parent's monthly net income (gross income minus mandatory deductions like income taxes, Social Security, and state-mandated insurance premiums). These two incomes are added together to form the Combined Monthly Net Income (CMNI).`,
     `Next, the court looks up the applicable basic support obligation from the Washington 2026 economic table based on the CMNI and the number of children. For example, two parents earning a combined $8,000 per month with 2 children would have a presumptive basic support obligation of around $1,600 to $1,700 per month total. This total amount is then divided proportionally based on each parent's share of the combined income.`,
     `Beyond the base obligation, the 2026 guidelines require parents in ${county.name} to proportionally split additional "extraordinary expenses" such as work-related childcare, health insurance premiums for the child, and approved educational costs. These are calculated separately using the same income-share formula. Use our <strong>Extra Expense Splitter</strong> at <a href="/extra-expenses">/extra-expenses</a> to calculate these add-on costs.`,
-    `A crucial protection in every ${county.name} child support case is the Self-Support Reserve (SSR). Under 2026 rules, the SSR is set at <strong>$1,514 per month</strong> — equal to 180% of the federal poverty level for a single person. If the paying parent's remaining monthly income after paying child support falls below $1,514, the court must limit the support amount to protect them. The absolute minimum support obligation per child is $50 per month regardless of income.`
+    `A crucial protection in every ${county.name} child support case is the Self-Support Reserve (SSR). Under 2026 rules, the SSR is set at <strong>approximately $2,394 per month</strong> — equal to 180% of the federal poverty level for a single person. If the paying parent's remaining monthly income after paying child support falls below approximately $2,394, the court must limit the support amount to protect them. The absolute minimum support obligation per child is $50 per month regardless of income.`
   ];
 
   const filingProcess = [
@@ -100,7 +100,7 @@ function generateCountyContent(county: WashingtonCounty): {
     `To illustrate how the 2026 income shares model applies to a real-world ${county.name} family, consider this scenario: Parent A is a healthcare worker earning $5,000 per month net after taxes and mandatory deductions. Parent B is a part-time retail worker earning $3,000 per month net. They have two children together. Their combined monthly net income (CMNI) is $8,000.`,
     `Referencing the 2026 Washington economic table for $8,000 combined income with 2 children, the presumptive basic support obligation is approximately $1,883 per month. Parent A earns 62.5% of the combined income ($5,000 ÷ $8,000), so Parent A's proportional share is approximately <strong>$1,176.88 per month</strong>. Parent B's 37.5% share equals approximately <strong>$706.12 per month</strong>.`,
     `Now assume the children are in employer-sponsored childcare costing $800 per month, and the children are on Parent B's health insurance plan at a cost of $200 per month — both allowable extraordinary expenses under RCW 26.19.075. These are split proportionally by the same 62.5/37.5 ratio. The final monthly cash transfer payment — typically from the higher-earning Parent A to Parent B — would be calculated by the court considering residential credit, the direction of income flow, and all extraordinary add-ons.`,
-    `Neither parent's income in this example falls below the $1,514 SSR threshold, so no adjustments are needed. Had Parent B been earning significantly less, the SSR would have capped the obligation to protect them. Courts at the ${county.court} apply this calculation consistently, though judges retain discretion to deviate from the presumptive amount when compelling extraordinary circumstances are documented and argued effectively.`
+    `Neither parent's income in this example falls below the approximately $2,394 SSR threshold, so no adjustments are needed. Had Parent B been earning significantly less, the SSR would have capped the obligation to protect them. Courts at the ${county.court} apply this calculation consistently, though judges retain discretion to deviate from the presumptive amount when compelling extraordinary circumstances are documented and argued effectively.`
   ];
 
   const conclusion = [
@@ -159,7 +159,7 @@ export default async function CountyCourtPage({ params }: Props) {
     },
     {
       q: `What is the Self-Support Reserve (SSR) in 2026?`,
-      a: `The Self-Support Reserve is a poverty protection threshold set by the state. In 2026, the SSR is $1,514 per month — equal to 180% of the federal poverty level for a single individual. A ${county!.name} court cannot issue a child support order that leaves the paying parent with less than $1,514 to live on each month.`
+      a: `The Self-Support Reserve is a poverty protection threshold set by the state. In 2026, the SSR is approximately $2,394 per month — equal to 180% of the federal poverty level for a single individual. A ${county!.name} court cannot issue a child support order that leaves the paying parent with less than approximately $2,394 to live on each month.`
     },
     {
       q: `Can a child support order from ${county!.name} be modified later?`,
@@ -222,13 +222,13 @@ export default async function CountyCourtPage({ params }: Props) {
           </h1>
 
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-            Official 2026 child support estimates for {county!.name} residents. Based on the Washington State Income Shares Model with the updated SSR of <strong>$1,514</strong> and economic tables covering incomes up to{' '}
+            Official 2026 child support estimates for {county!.name} residents. Based on the Washington State Income Shares Model with the updated SSR of <strong>approximately $2,394</strong> and economic tables covering incomes up to{' '}
             <strong>$50,000 combined</strong>. File locally at the {county!.court}.
           </p>
 
           {/* Quick stats strip */}
           <div className="inline-flex flex-wrap justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">
-            <span className="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full">SSR: $1,514</span>
+            <span className="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full">SSR: approximately $2,394</span>
             <span className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full">2026 Guidelines</span>
             <span className="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full">All 39 Counties</span>
             <span className="bg-amber-50 text-amber-700 px-4 py-2 rounded-full">Min: $50 / child</span>
@@ -247,6 +247,11 @@ export default async function CountyCourtPage({ params }: Props) {
           </div>
           <div className="flex flex-col items-center">
             <HomeCalculator />
+          </div>
+          <div className="max-w-lg mx-auto mt-8">
+             <p className="text-xs text-gray-500 leading-relaxed text-center italic">
+              Low-income protections may apply below approximately $2,394/month (180% of the federal poverty level). Estimates are based on Washington State guidelines (RCW 26.19).
+            </p>
           </div>
         </div>
       </section>
@@ -293,7 +298,7 @@ export default async function CountyCourtPage({ params }: Props) {
                   <tbody>
                     {[
                       ['Legal Model', 'Income Shares (RCW 26.19)'],
-                      ['Self-Support Reserve (SSR)', '$1,514 / month'],
+                      ['Self-Support Reserve (SSR)', 'approximately $2,394 / month'],
                       ['Minimum Support', '$50 per child / month'],
                       ['Economic Table Coverage', 'Up to $50,000 combined income'],
                       ['Guideline Version', 'Washington AOC — January 2026'],

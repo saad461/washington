@@ -31,7 +31,7 @@ export default function Home() {
     },
     {
       question: "What is the Self-Support Reserve (SSR) for 2026?",
-      answer: "The 2026 Self-Support Reserve (SSR) is $1,514 per month. This low-income protection ensures that a paying parent is not left with less than $1,514 to live on after making a basic child support payment."
+      answer: "The 2026 Self-Support Reserve (SSR) is approximately $2,394 per month. This low-income protection ensures that a paying parent is not left with less than approximately $2,394 to live on after making a basic child support payment."
     },
     {
       question: "Does child support cover extraordinary expenses like daycare?",
@@ -65,7 +65,7 @@ export default function Home() {
         {/* ── KEY FIGURES STRIP (SEO & Trust) ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-gray-50 border border-gray-100 rounded-2xl p-6 md:p-8 mt-12 w-full shadow-sm">
           {[
-            { label: "2026 SSR", value: "$1,514" },
+            { label: "2026 SSR", value: "approximately $2,394" },
             { label: "Min Support", value: "$50 / child" },
             { label: "Table Limit", value: "$50,000" },
             { label: "State Law", value: "Washington" },
@@ -186,7 +186,7 @@ export default function Home() {
           <div className="space-y-4">
             <h3 className="text-2xl font-bold text-gray-900 font-heading">The Self-Support Reserve (SSR)</h3>
             <p>
-              Washington&apos;s primary low-income protection is the <strong className="text-gray-900">Self-Support Reserve (SSR)</strong>, which is set at <strong className="text-gray-900">$1,514 per month for 2026</strong>. If a payment would leave the paying parent with less than $1,514 to live on, the court can deviate the basic transfer payment downward.
+              Washington&apos;s primary low-income protection is the <strong className="text-gray-900">Self-Support Reserve (SSR)</strong>, which is set at <strong className="text-gray-900">approximately $2,394 per month for 2026</strong>. If a payment would leave the paying parent with less than approximately $2,394 to live on, the court can deviate the basic transfer payment downward.
             </p>
           </div>
 

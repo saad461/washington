@@ -152,7 +152,7 @@ export default function ComparisonTool() {
                 <div>
                   <h4 className="font-bold text-gray-900 mb-2 font-heading">New 180% Self-Support Reserve (SSR)</h4>
                   <p className="text-sm text-gray-500 leading-relaxed">
-                    The 2026 changes index the SSR to 180% of the federal poverty level. This provides stronger poverty protections, lowering presumptive payments for earners under $2,200 net.
+                    The 2026 changes index the SSR to 180% of the federal poverty level (approximately $2,394/month). This provides stronger poverty protections, lowering presumptive payments for low-income earners.
                   </p>
                 </div>
               </div>

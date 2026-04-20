@@ -26,7 +26,7 @@ export const blogs: BlogPost[] = [
     readTime: "14 min",
     excerpt: "Everything you need to know about Washington's 2026 child support schedule — including exactly what changed, how the economic tables work, and what you can expect in court.",
     metaTitle: "2026 WA Child Support Guidelines | The Complete Parent Handbook",
-    metaDescription: "Master the 2026 Washington Child Support Schedule. Expert breakdown of the updated economic tables, SSR thresholds ($1,514), shared custody rules, and extraordinary expenses.",
+    metaDescription: "Master the 2026 Washington Child Support Schedule. Expert breakdown of the updated economic tables, SSR thresholds (approximately $2,394), shared custody rules, and extraordinary expenses.",
     author: "WCSSC Editorial Team",
     createdAt: "2026-01-05",
     updatedAt: "2026-04-09",
@@ -37,7 +37,7 @@ export const blogs: BlogPost[] = [
 <strong>Key Takeaways (2026)</strong>
 <ul class="space-y-2 text-indigo-800 list-disc ml-6 mt-2">
           <li>The 2026 economic table increased by approximately 4.2% across most income brackets</li>
-          <li>The Self-Support Reserve (SSR) is firmly set at <strong>$1,514 per month</strong></li>
+          <li>The Self-Support Reserve (SSR) is firmly set at <strong>approximately $2,394 per month</strong></li>
           <li>Combined income table now covers up to $50,000/month before judicial extrapolation</li>
           <li>The 45% net income cap still hard-limits total child support obligations</li>
           <li>Shared parenting time (50/50) can trigger a deviation — but it's not automatic</li>
@@ -47,14 +47,14 @@ export const blogs: BlogPost[] = [
 
       <p>If you've recently been served with child support paperwork — or you're the one filing — you're probably staring at a bunch of legal jargon wondering how anyone is supposed to make sense of this. You're not alone. Every January, Washington State updates its child support schedule, and 2026 brought some meaningful changes that affect tens of thousands of families across the state.</p>
 
-      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Factor</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Value (2026)</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$1,514</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>This guide walks you through everything that matters: what actually changed in 2026, how the math works, what the courts are required to do, and where you have room to push back. We'll talk about real numbers, real situations, and what to realistically expect when you walk into a King County courtroom or log into Pierce County's e-filing system.</p>
+      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Factor</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Value (2026)</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>approximately $2,394</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>This guide walks you through everything that matters: what actually changed in 2026, how the math works, what the courts are required to do, and where you have room to push back. We'll talk about real numbers, real situations, and what to realistically expect when you walk into a King County courtroom or log into Pierce County's e-filing system.</p>
 
       <h2>What Actually Changed in January 2026</h2>
       <p>Washington's child support schedule is reviewed on a staggered cycle, and January 1, 2026 brought a revision that affected several key numbers. The most important changes:</p>
 
       <ul>
         <li><strong>The economic table increased by roughly 4.2%</strong> across most combined income tiers. That means if you had a $600/month obligation in 2024, it might be closer to $625 now. The adjustment reflects updated cost-of-living data and the rising cost of raising children in Washington.</li>
-        <li><strong>The Self-Support Reserve rose to $1,514/month.</strong> This is the minimum the paying parent must be left with after paying child support. It went up from the prior year, providing slightly more protection for lower-income obligors.</li>
+        <li><strong>The Self-Support Reserve rose to approximately $2,394/month.</strong> This is the minimum the paying parent must be left with after paying child support. It went up from the prior year, providing slightly more protection for lower-income obligors.</li>
         <li><strong>The income table now natively covers up to $50,000 in combined monthly net income</strong> before judges have to start improvising. Previously this was capped lower, and high-earner cases required more judicial discretion at earlier thresholds.</li>
         <li><strong>The 45% net income cap remains unchanged.</strong> Your total child support obligation — base payment plus all split extraordinary expenses — cannot exceed 45% of your adjusted net monthly income without the court making a specific "good cause" finding.</li>
       </ul>
@@ -90,13 +90,13 @@ export const blogs: BlogPost[] = [
       <p>This distinction trips people up constantly. Just because you have a large car payment or credit card balance doesn't mean the court reduces your support obligation. Only the specific deductions listed in RCW 26.19 count.</p>
 
       <h2>The Self-Support Reserve: Your Floor, Not Your Ceiling</h2>
-      <p>One of the most important protections in Washington child support law is the Self-Support Reserve, currently set at <strong>$1,514 per month in 2026</strong>. The legislature's reasoning is straightforward: you can't help your children if you've been driven into poverty yourself.</p>
+      <p>One of the most important protections in Washington child support law is the Self-Support Reserve, currently set at <strong>approximately $2,394 per month in 2026</strong>. The legislature's reasoning is straightforward: you can't help your children if you've been driven into poverty yourself.</p>
 
-      <p>Here's how it works: before finalizing any support order, the court performs an SSR check. If the calculated support amount would leave the paying parent with less than $1,514 after making the payment, the court <em>must</em> reduce the obligation — often all the way down to the statutory minimum of <strong>$50 per child per month</strong>.</p>
+      <p>Here's how it works: before finalizing any support order, the court performs an SSR check. If the calculated support amount would leave the paying parent with less than approximately $2,394 after making the payment, the court <em>must</em> reduce the obligation — often all the way down to the statutory minimum of <strong>$50 per child per month</strong>.</p>
 
-      <p>For example, imagine a parent who nets $1,900 per month. The standard table might generate a support obligation of $550. But $1,900 minus $550 leaves only $1,350 — which is below the $1,514 SSR. In this case, the court would need to reduce the payment, likely to $50 per child. If there are two children, that's $100/month rather than $550.</p>
+      <p>For example, imagine a parent who nets $1,900 per month. The standard table might generate a support obligation of $550. But $1,900 minus $550 leaves only $1,350 — which is below the approximately $2,394 SSR. In this case, the court would need to reduce the payment, likely to $50 per child. If there are two children, that's $100/month rather than $550.</p>
 
-      <p>Read our full deep-dive on this topic: <a href="/blog/washington-ssr-self-support-reserve-explained">Understanding the $1,514 Self-Support Reserve in 2026</a>.</p>
+      <p>Read our full deep-dive on this topic: <a href="/blog/washington-ssr-self-support-reserve-explained">Understanding the approximately $2,394 Self-Support Reserve in 2026</a>.</p>
 
       <h2>What the Basic Support Amount Does — and Doesn't — Cover</h2>
       <p>Here's something a lot of parents don't realize until they're already in court: the basic transfer payment shown on the economic table only covers <strong>food, ordinary clothing, and shelter</strong>. That's it.</p>
@@ -133,7 +133,7 @@ export const blogs: BlogPost[] = [
       <h2>Related Articles From WCSSC</h2>
       <ul>
         <li><a href="/blog/child-support-calculation-washington-2026">Full Calculation Walkthrough: Step-by-Step for 2026</a></li>
-        <li><a href="/blog/washington-ssr-self-support-reserve-explained">Understanding the $1,514 Self-Support Reserve</a></li>
+        <li><a href="/blog/washington-ssr-self-support-reserve-explained">Understanding the approximately $2,394 Self-Support Reserve</a></li>
         <li><a href="/blog/how-courts-decide-child-support-washington">How Washington Courts Decide Your Final Order</a></li>
       </ul>
 
@@ -144,7 +144,7 @@ export const blogs: BlogPost[] = [
     faqs: [
       {
         question: "When did the 2026 Washington child support tables take effect?",
-        answer: "The updated 2026 economic tables became effective January 1, 2026, following the biennial legislative review. They reflect updated cost-of-living data and increased the SSR to $1,514/month."
+        answer: "The updated 2026 economic tables became effective January 1, 2026, following the biennial legislative review. They reflect updated cost-of-living data and increased the SSR to approximately $2,394/month."
       },
       {
         question: "What is the maximum combined income covered by the standard table?",
@@ -192,7 +192,7 @@ export const blogs: BlogPost[] = [
 
       <p>King County is Washington's largest judicial district, and its family court system is busy. If you've never navigated it before, knowing exactly what to expect — which building to go to, which forms to fill out, what the clerk will ask for — saves enormous time and frustration. Let's walk through it step by step.</p>
 
-      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Item</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Current Washington Standard</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$1,514</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>First, before you even think about the courthouse: run your estimated support amount through our <a href="/king-county-income-5000-2-children">King County child support calculator</a>. Walking into court with a realistic figure in hand puts you in a genuinely stronger position at every stage of this process.</p>
+      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Item</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Current Washington Standard</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>approximately $2,394</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>First, before you even think about the courthouse: run your estimated support amount through our <a href="/king-county-income-5000-2-children">King County child support calculator</a>. Walking into court with a realistic figure in hand puts you in a genuinely stronger position at every stage of this process.</p>
 
       <h2>1. Seattle or Kent? Which Courthouse Handles Your Case</h2>
       <p>King County's Superior Court operates across two main locations, and routing is determined by <strong>where the responding parent lives</strong> (typically the non-custodial parent), not where you live.</p>
@@ -281,13 +281,13 @@ export const blogs: BlogPost[] = [
   // BLOG 3
   // ─────────────────────────────────────────────────────────────────────────────
   {
-    title: "Understanding the $1,514 Self-Support Reserve (SSR) in 2026",
+    title: "Understanding the approximately $2,394 Self-Support Reserve (SSR) in 2026",
     slug: "washington-ssr-self-support-reserve-explained",
     category: "Calculation Guide",
     readTime: "10 min",
     excerpt: "A plain-English deep dive into the 2026 Self-Support Reserve — what it is, how the math actually works at different income levels, and what happens when your support obligation hits the floor.",
     metaTitle: "WA Self-Support Reserve (SSR) Explained | 2026 Guide",
-    metaDescription: "What is the WA Child Support SSR? Plain-English guide to how the $1,514 monthly floor protects low-income parents, with real math examples at different income levels.",
+    metaDescription: "What is the WA Child Support SSR? Plain-English guide to how the approximately $2,394 monthly floor protects low-income parents, with real math examples at different income levels.",
     author: "WCSSC Editorial Team",
     createdAt: "2026-03-20",
     updatedAt: "2026-04-09",
@@ -297,7 +297,7 @@ export const blogs: BlogPost[] = [
       <div class="bg-indigo-50 p-4 rounded-xl mb-8">
 <strong>Key Takeaways (2026)</strong>
 <ul class="space-y-2 text-indigo-800 list-disc ml-6 mt-2">
-          <li>The 2026 SSR is set at exactly <strong>$1,514 per month (net income)</strong></li>
+          <li>The 2026 SSR is set at <strong>approximately $2,394 per month (net income)</strong></li>
           <li>The SSR applies to the <em>paying parent's</em> income only — not combined income</li>
           <li>When SSR kicks in, the obligation typically drops to the $50/child minimum</li>
           <li>The SSR works alongside (not instead of) the 45% income cap</li>
@@ -308,21 +308,21 @@ export const blogs: BlogPost[] = [
 
       <p>If you're a low-income parent facing a child support order in Washington State, the Self-Support Reserve might be your most important legal protection — and one that a surprising number of people going through this process have never heard of.</p>
 
-      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Guideline Factor</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Amount</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$1,514</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>In simple terms: Washington law says <em>you can't be forced into poverty to pay child support</em>. The SSR is the mechanism that enforces that principle. Set at <strong>$1,514 per month in 2026</strong>, it represents the absolute minimum income the paying parent must be left with after making their monthly payment. If the standard calculation would leave you with less than that, the court <em>must</em> reduce your obligation — often dramatically.</p>
+      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Guideline Factor</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Amount</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>approximately $2,394</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>In simple terms: Washington law says <em>you can't be forced into poverty to pay child support</em>. The SSR is the mechanism that enforces that principle. Set at <strong>approximately $2,394 per month in 2026</strong>, it represents the absolute minimum income the paying parent must be left with after making their monthly payment. If the standard calculation would leave you with less than that, the court <em>must</em> reduce your obligation — often dramatically.</p>
 
       <h2>1. What Exactly Is the Self-Support Reserve?</h2>
       <p>The SSR is not an income threshold that determines whether you pay at all. It's a floor that limits <em>how much</em> you pay. It's calculated based on your individual net monthly income — the amount you actually take home after taxes, FICA, mandatory deductions, and any other legally-allowable subtractions under RCW 26.19.</p>
 
-      <p>Think of it as a test the court runs on every order: <em>"After this parent pays child support, will they have at least $1,514 left to survive on?"</em> If the answer is no, the court cannot approve the standard calculated amount. It has to reduce the payment until the parent retains $1,514 — or cap it at the $50 per child per month statutory minimum.</p>
+      <p>Think of it as a test the court runs on every order: <em>"After this parent pays child support, will they have at least approximately $2,394 left to survive on?"</em> If the answer is no, the court cannot approve the standard calculated amount. It has to reduce the payment until the parent retains approximately $2,394 — or cap it at the $50 per child per month statutory minimum.</p>
 
-      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-amber-50 border-y border-amber-100'><th class='py-3 px-4 text-sm font-bold text-amber-900'>Monthly Net Income</th><th class='py-3 px-4 text-sm font-bold text-amber-900'>Support Order Impact</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Below $1,514</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>Reduction applied (often to $50/child)</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>$1,514 - $2,500</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>Standard obligation, unless 45% cap hits</td></tr></tbody></table><h2>2. Real Math: Three Income Scenarios</h2>
+      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-amber-50 border-y border-amber-100'><th class='py-3 px-4 text-sm font-bold text-amber-900'>Monthly Net Income</th><th class='py-3 px-4 text-sm font-bold text-amber-900'>Support Order Impact</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Below approximately $2,394</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>Reduction applied (often to $50/child)</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>approximately $2,394 - $2,500</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>Standard obligation, unless 45% cap hits</td></tr></tbody></table><h2>2. Real Math: Three Income Scenarios</h2>
       <p>Let's look at how the SSR actually plays out at three different income levels for a parent supporting one child:</p>
 
       <h3>Scenario A: $1,800/month net income</h3>
-      <p>Suppose the income shares calculation generates a standard support obligation of $450/month. But $1,800 minus $450 = $1,350 — which is below the $1,514 SSR. In this case, the court would reduce the obligation. Since $1,800 - $1,514 = $286 remaining "room" — less than the standard obligation — the order would likely be reduced to approximately $286, or down to the $50 minimum if even that leaves insufficient funds. The court has discretion in exactly where to land, but the SSR floor is mandatory.</p>
+      <p>Suppose the income shares calculation generates a standard support obligation of $450/month. But $1,800 minus $450 = $1,350 — which is below the approximately $2,394 SSR. In this case, the court would reduce the obligation. Since $1,800 - approximately $2,394 = $286 remaining "room" — less than the standard obligation — the order would likely be reduced to approximately $286, or down to the $50 minimum if even that leaves insufficient funds. The court has discretion in exactly where to land, but the SSR floor is mandatory.</p>
 
       <h3>Scenario B: $2,200/month net income</h3>
-      <p>At $2,200, if the calculated obligation is $400: $2,200 - $400 = $1,800 remaining, which does clear the $1,514 SSR. The standard obligation holds. However, if the income drops — say, to $1,900 — recalculate: $1,900 - $400 = $1,500 (below $1,514). Now the SSR kicks in and the obligation must be reduced.</p>
+      <p>At $2,200, if the calculated obligation is $400: $2,200 - $400 = $1,800 remaining, which does clear the approximately $2,394 SSR. The standard obligation holds. However, if the income drops — say, to $1,900 — recalculate: $1,900 - $400 = $1,500 (below approximately $2,394). Now the SSR kicks in and the obligation must be reduced.</p>
 
       <h3>Scenario C: $3,500/month net income</h3>
       <p>At $3,500, you're comfortably above the SSR no matter what the basic obligation is. The SSR isn't actively reducing your payment — but the 45% net income cap still applies. Your total child support burden (base plus extraordinary expenses) cannot exceed $1,575/month (45% of $3,500) without the court making a specific finding.</p>
@@ -335,18 +335,18 @@ export const blogs: BlogPost[] = [
       <h2>4. The SSR vs. the 45% Cap — Two Different Protections</h2>
       <p>The SSR and the 45% cap are separate but related protections that work together:</p>
       <ul>
-        <li><strong>The SSR</strong> asks: after paying, will you have at least $1,514? It primarily protects low-income parents.</li>
+        <li><strong>The SSR</strong> asks: after paying, will you have at least approximately $2,394? It primarily protects low-income parents.</li>
         <li><strong>The 45% cap</strong> asks: is this payment more than 45% of your net income? It primarily protects middle-income parents who would otherwise face very high total obligations once extraordinary expenses are added.</li>
       </ul>
       <p>A parent earning $4,000/month is comfortably above the SSR but could hit the 45% cap ($1,800 maximum) if they have multiple children and high daycare and healthcare costs. Both protections must be checked in every case.</p>
 
       <h2>5. Does the SSR Apply to Support Modifications?</h2>
-      <p>Yes, absolutely. If you were paying based on an older order established before the SSR was raised — or before your income dropped — you may now be entitled to a reduction. If your current income is hovering near the $1,514 threshold, it's worth running a fresh calculation and potentially filing a Petition to Modify Child Support.</p>
+      <p>Yes, absolutely. If you were paying based on an older order established before the SSR was raised — or before your income dropped — you may now be entitled to a reduction. If your current income is hovering near the approximately $2,394 threshold, it's worth running a fresh calculation and potentially filing a Petition to Modify Child Support.</p>
 
       <p>Remember: you can only get a modification from the date you file, not retroactively from when your income changed. If you lost your job three months ago and haven't filed yet, those three months of accrued payments won't be forgiven even if your income clearly triggered the SSR. File immediately when your situation changes.</p>
 
       <h2>6. How to Raise the SSR in Court</h2>
-      <p>If you believe the SSR applies to your situation, you need to bring it to the court's attention explicitly — don't assume the commissioner will apply it automatically. Make sure your financial worksheet documents your adjusted net income accurately, and specifically note in your declaration that the calculated obligation, if applied, would leave you below the $1,514 SSR. Provide your pay stubs and tax documents to prove your income is what you claim.</p>
+      <p>If you believe the SSR applies to your situation, you need to bring it to the court's attention explicitly — don't assume the commissioner will apply it automatically. Make sure your financial worksheet documents your adjusted net income accurately, and specifically note in your declaration that the calculated obligation, if applied, would leave you below the approximately $2,394 SSR. Provide your pay stubs and tax documents to prove your income is what you claim.</p>
 
       <p>If you're appearing without an attorney and the opposing party pushes back on your income claims, be ready to explain how you calculated your net income under RCW 26.19.071 — the court responds well to people who've done their homework.</p>
 
@@ -358,7 +358,7 @@ export const blogs: BlogPost[] = [
       </ul>
 
       <h2>The Bottom Line</h2>
-      <p>The Self-Support Reserve exists because the legislature recognized that destroying a parent's ability to survive doesn't serve anyone — not the children, not the courts, and not society. If your income puts you near that $1,514 line, know your rights, document your income carefully, and ask the court to apply the SSR explicitly. It's not a loophole — it's the law.</p>
+      <p>The Self-Support Reserve exists because the legislature recognized that destroying a parent's ability to survive doesn't serve anyone — not the children, not the courts, and not society. If your income puts you near that approximately $2,394 line, know your rights, document your income carefully, and ask the court to apply the SSR explicitly. It's not a loophole — it's the law.</p>
     <div class="mt-8 mb-8 p-6 bg-slate-50 rounded-2xl border border-slate-100"><h3 class="text-xl font-bold text-slate-800 mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class="text-indigo-600 hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><a href="/income-5000-2-children" class="text-indigo-600 hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class="text-indigo-600 hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class="text-indigo-600 hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm text-slate-500 mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class="text-indigo-600 hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class="text-indigo-600 hover:underline">Washington Courts</a> homepage.</p><div class="mt-6 p-4 bg-indigo-600 text-white rounded-xl text-center"><strong>👉 Calculate Your Exact Child Support</strong><br/>Use our <a href="/worksheet" class="underline">Child Support Calculator</a></div>`,
     faqs: [
       {
@@ -367,11 +367,11 @@ export const blogs: BlogPost[] = [
       },
       {
         question: "Can a judge ignore the SSR even if my income is below it?",
-        answer: "The SSR is a presumptive floor under Washington law, meaning courts are required to apply it. However, judges have some discretion in edge cases — for instance, if the court has reason to believe you're underreporting income or are voluntarily underemployed. Imputed income could effectively raise the calculated baseline above $1,514 even if your actual take-home is lower."
+        answer: "The SSR is a presumptive floor under Washington law, meaning courts are required to apply it. However, judges have some discretion in edge cases — for instance, if the court has reason to believe you're underreporting income or are voluntarily underemployed. Imputed income could effectively raise the calculated baseline above approximately $2,394 even if your actual take-home is lower."
       },
       {
         question: "Does the SSR apply to both parents?",
-        answer: "The SSR specifically protects the obligor — the parent who is making payments. It's applied to that parent's net income to determine whether the calculated support amount leaves them with at least $1,514. The custodial parent's income is used in the proportional shares calculation but the SSR test is only applied to the paying parent's side."
+        answer: "The SSR specifically protects the obligor — the parent who is making payments. It's applied to that parent's net income to determine whether the calculated support amount leaves them with at least approximately $2,394. The custodial parent's income is used in the proportional shares calculation but the SSR test is only applied to the paying parent's side."
       }
     ]
   },
@@ -407,7 +407,7 @@ export const blogs: BlogPost[] = [
 
       <p>Ask most people how child support is calculated and you'll get a shrug or a vague answer about "following a formula." The truth is, there's a very specific, legally-mandated process that Washington courts follow — and once you understand it, a lot of the confusion and anxiety around child support goes away.</p>
 
-      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Calculation Metric</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Value</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$1,514</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>This guide walks through the entire calculation from beginning to end, with a real worked example so you can follow along with your own numbers. By the end, you'll understand exactly where every dollar of a support order comes from — and what you can and can't change about it.</p>
+      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Calculation Metric</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Value</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>approximately $2,394</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>This guide walks through the entire calculation from beginning to end, with a real worked example so you can follow along with your own numbers. By the end, you'll understand exactly where every dollar of a support order comes from — and what you can and can't change about it.</p>
 
       <h2>The Foundation: Washington's Income Shares Model</h2>
       <p>Washington operates on the <strong>Income Shares Model</strong>, which is used by the majority of U.S. states. The philosophical core of this model is that children should receive the same percentage of parental income they would have received if their parents had stayed together.</p>
@@ -475,7 +475,7 @@ export const blogs: BlogPost[] = [
       <h2>Step 6: Apply the SSR and 45% Cap Checks</h2>
       <p>Before the order is finalized, the court performs two safety checks:</p>
       <ul>
-        <li><strong>SSR Check:</strong> Will the paying parent retain at least $1,514/month after this payment? If not, the obligation must be reduced.</li>
+        <li><strong>SSR Check:</strong> Will the paying parent retain at least approximately $2,394/month after this payment? If not, the obligation must be reduced.</li>
         <li><strong>45% Cap Check:</strong> Does the total obligation (base + extraordinary expenses) exceed 45% of the paying parent's net income? If yes, there needs to be a "good cause" finding for the court to approve it.</li>
       </ul>
 
@@ -495,7 +495,7 @@ export const blogs: BlogPost[] = [
 
       <h2>Related Articles</h2>
       <ul>
-        <li><a href="/blog/washington-ssr-self-support-reserve-explained">SSR: The $1,514 Floor Explained</a></li>
+        <li><a href="/blog/washington-ssr-self-support-reserve-explained">SSR: The approximately $2,394 Floor Explained</a></li>
         <li><a href="/blog/how-courts-decide-child-support-washington">How Courts Decide Your Final Order</a></li>
         <li><a href="/blog/washington-child-support-guidelines-2026">2026 Guidelines: The Complete Handbook</a></li>
       </ul>
@@ -529,7 +529,7 @@ export const blogs: BlogPost[] = [
     readTime: "11 min",
     excerpt: "If your income is low or you've lost your job, here's what Washington law actually requires — including the $50 minimum, the SSR protection, imputed income risks, and how to get a legitimate reduction.",
     metaTitle: "Minimum Child Support in WA | Low-Income Parent Guide 2026",
-    metaDescription: "Struggling to afford child support in Washington State? Learn how minimum orders work, the $1,514 SSR limit, imputed income rules, and the right way to petition for a reduction.",
+    metaDescription: "Struggling to afford child support in Washington State? Learn how minimum orders work, the approximately $2,394 SSR limit, imputed income rules, and the right way to petition for a reduction.",
     author: "WCSSC Editorial Team",
     createdAt: "2026-04-09",
     updatedAt: "2026-04-09",
@@ -540,7 +540,7 @@ export const blogs: BlogPost[] = [
 <strong>Key Takeaways (2026)</strong>
 <ul class="space-y-2 text-indigo-800 list-disc ml-6 mt-2">
           <li>The presumptive minimum is <strong>$50 per child per month</strong></li>
-          <li>The 2026 SSR ($1,514) legally requires a downward deviation if your income is too low</li>
+          <li>The 2026 SSR (approximately $2,394) legally requires a downward deviation if your income is too low</li>
           <li>Quitting your job to avoid support is dangerous — courts will impute income</li>
           <li>Arrears cannot be waived retroactively — file a modification petition immediately if your income drops</li>
           <li>DSHS can garnish unemployment benefits — they count as gross income</li>
@@ -550,19 +550,19 @@ export const blogs: BlogPost[] = [
 
       <p>Getting a child support order when you're already struggling financially is one of the most stressful legal experiences in Washington. If you're working minimum wage, dealing with job loss, or facing a sudden income drop, understanding how Washington's minimum support rules actually work — and what you can do — is critical.</p>
 
-      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Key Metric</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Standard</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$1,514</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>The good news: Washington law has built-in protections for genuinely low-income parents. The hard news: the courts take a very dim view of parents who try to game the system by artificially reducing their income. Let's talk through both realities.</p>
+      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Key Metric</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Standard</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>approximately $2,394</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>The good news: Washington law has built-in protections for genuinely low-income parents. The hard news: the courts take a very dim view of parents who try to game the system by artificially reducing their income. Let's talk through both realities.</p>
 
       <h2>1. The Absolute Minimum: $50 Per Child Per Month</h2>
       <p>Washington law establishes a <strong>presumptive minimum of $50 per child per month</strong> under RCW 26.19.065. This is the floor beneath which no court-ordered support obligation can go in normal circumstances. For one child, that's $50/month. For three children, that's $150/month. It's not optional, and it's extremely rare for a court to waive it entirely.</p>
 
       <p>This minimum applies when the Self-Support Reserve calculation brings the obligation down dramatically — when a parent's income is so low that the regular formula would leave them destitute. In those cases, the court ordinarily reduces the obligation to the $50/child baseline rather than following the standard table amount.</p>
 
-      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-amber-50 border-y border-amber-100'><th class='py-3 px-4 text-sm font-bold text-amber-900'>Income Level</th><th class='py-3 px-4 text-sm font-bold text-amber-900'>Likely Minimum Support</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Under SSR ($1,514)</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child minimum</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Zero Income (Voluntary)</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>Imputed income at minimum wage</td></tr></tbody></table><h2>2. How the SSR Forces a Reduction</h2>
-      <p>The <strong>Self-Support Reserve of $1,514/month</strong> is what makes the $50 minimum relevant for most low-income cases. Here's the chain of events:</p>
+      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-amber-50 border-y border-amber-100'><th class='py-3 px-4 text-sm font-bold text-amber-900'>Income Level</th><th class='py-3 px-4 text-sm font-bold text-amber-900'>Likely Minimum Support</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Under SSR (approximately $2,394)</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child minimum</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Zero Income (Voluntary)</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>Imputed income at minimum wage</td></tr></tbody></table><h2>2. How the SSR Forces a Reduction</h2>
+      <p>The <strong>Self-Support Reserve of approximately $2,394/month</strong> is what makes the $50 minimum relevant for most low-income cases. Here's the chain of events:</p>
       <ol>
         <li>The income shares calculation produces a standard obligation — say, $380/month</li>
-        <li>The court checks: does $380 leave the paying parent with at least $1,514?</li>
-        <li>If the parent nets only $1,700/month, then $1,700 - $380 = $1,320 — below $1,514</li>
+        <li>The court checks: does $380 leave the paying parent with at least approximately $2,394?</li>
+        <li>If the parent nets only $1,700/month, then $1,700 - $380 = $1,320 — below approximately $2,394</li>
         <li>The obligation must be reduced, typically to $50/child</li>
       </ol>
 
@@ -580,10 +580,10 @@ export const blogs: BlogPost[] = [
       <h2>4. Real Scenarios at Different Income Levels</h2>
 
       <h3>If you earn $1,400/month net:</h3>
-      <p>You're below the $1,514 SSR. The court cannot impose even the $50/child minimum if that would leave you under $1,514 — though practically, courts often do order the minimum even in these cases, on the theory that $50/child keeps the obligation alive while recognizing genuine hardship. You have real grounds to argue for zero temporarily with a review hearing in 90 days.</p>
+      <p>You're below the approximately $2,394 SSR. The court cannot impose even the $50/child minimum if that would leave you under approximately $2,394 — though practically, courts often do order the minimum even in these cases, on the theory that $50/child keeps the obligation alive while recognizing genuine hardship. You have real grounds to argue for zero temporarily with a review hearing in 90 days.</p>
 
       <h3>If you earn $2,000/month net:</h3>
-      <p>At $2,000/month, you have $486 above the SSR ($2,000 - $1,514 = $486). If the standard calculation generates a $600 obligation, the court would reduce it to fit within that $486 ceiling — likely ordering around $200-$250/month after the SSR test. Still substantial for a tight budget, but far less than the standard amount.</p>
+      <p>At $2,000/month, you have $486 above the SSR ($2,000 - approximately $2,394 = $486). If the standard calculation generates a $600 obligation, the court would reduce it to fit within that $486 ceiling — likely ordering around $200-$250/month after the SSR test. Still substantial for a tight budget, but far less than the standard amount.</p>
 
       <h3>If you earn $2,800/month net:</h3>
       <p>You're above the SSR, but the 45% cap still applies. Your maximum total obligation (base + extraordinary expenses) is $1,260/month (45% of $2,800). If two children plus daycare costs would push your obligation beyond $1,260, the court needs to make a specific finding. At <a href="/pierce-county-income-3000-2-children">this income range</a>, the standard table typically applies without SSR intervention.</p>
@@ -593,8 +593,8 @@ export const blogs: BlogPost[] = [
       <ol>
         <li>File your FL All Family 132 Worksheets with your accurate net income documented</li>
         <li>Attach your last 3 pay stubs and most recent federal tax return</li>
-        <li>In your declaration, explicitly cite that the standard obligation would leave you below the $1,514 SSR</li>
-        <li>Calculate the maximum amount you can pay while retaining $1,514 and propose that as your obligation</li>
+        <li>In your declaration, explicitly cite that the standard obligation would leave you below the approximately $2,394 SSR</li>
+        <li>Calculate the maximum amount you can pay while retaining approximately $2,394 and propose that as your obligation</li>
         <li>If you can't calculate this accurately, use our <a href="/worksheet">Worksheet Wizard</a> to get the right numbers</li>
       </ol>
 
@@ -605,7 +605,7 @@ export const blogs: BlogPost[] = [
 
       <h2>Related Articles</h2>
       <ul>
-        <li><a href="/blog/washington-ssr-self-support-reserve-explained">Understanding the $1,514 Self-Support Reserve</a></li>
+        <li><a href="/blog/washington-ssr-self-support-reserve-explained">Understanding the approximately $2,394 Self-Support Reserve</a></li>
         <li><a href="/blog/what-happens-if-child-support-is-not-paid-washington">What Happens If Child Support Is Not Paid</a></li>
         <li><a href="/blog/washington-child-support-guidelines-2026">2026 Guidelines: Complete Handbook</a></li>
       </ul>
@@ -660,7 +660,7 @@ export const blogs: BlogPost[] = [
 
       <p>If you've read Washington's state child support guidelines and assumed that's all you need to know before walking into a King County courtroom, you're about to be surprised. King County operates under a supplemental set of Local Family Law Rules (LFLR) that add requirements layered on top of state law — and commissioners there enforce them with far less patience for non-compliance than you'd encounter in a smaller county.</p>
 
-      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Guideline</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Rule</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$1,514</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>King County also sees a disproportionate number of high-income cases — tech workers at Amazon, Microsoft, and Boeing, professionals with complex compensation packages, and dual-income households where both parents earn well above the state average. These cases present unique calculation challenges that the standard table handles differently here than anywhere else in Washington.</p>
+      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Guideline</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Rule</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>approximately $2,394</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>King County also sees a disproportionate number of high-income cases — tech workers at Amazon, Microsoft, and Boeing, professionals with complex compensation packages, and dual-income households where both parents earn well above the state average. These cases present unique calculation challenges that the standard table handles differently here than anywhere else in Washington.</p>
 
       <p>Before diving into the local rules, check your income scenario using our <a href="/king-county-income-5000-2-children">King County child support calculator</a>.</p>
 
@@ -769,7 +769,7 @@ export const blogs: BlogPost[] = [
 
       <p>If you're behind on child support in Washington State — whether intentionally or because life threw something unexpected at you — you need to understand exactly what enforcement mechanisms are coming your way and how fast they move. Washington is one of the more aggressive states when it comes to child support enforcement, largely because <a href="https://www.dshs.wa.gov/esa/division-child-support" target="_blank" rel="nofollow">DSHS's Division of Child Support (DCS)</a> is staffed specifically to pursue non-payers.</p>
 
-      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Core Standard</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Threshold</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$1,514</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>The goal of this guide isn't to scare you — it's to help you understand the full picture so you can make the smartest possible decisions. Sometimes that's fighting the order. Sometimes it's getting back on track. Either way, knowledge is your most valuable tool right now.</p>
+      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Core Standard</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Threshold</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>approximately $2,394</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>The goal of this guide isn't to scare you — it's to help you understand the full picture so you can make the smartest possible decisions. Sometimes that's fighting the order. Sometimes it's getting back on track. Either way, knowledge is your most valuable tool right now.</p>
 
       <h2>1. The First Response: Income Withholding Orders (IWOs)</h2>
       <p>In Washington, virtually every child support order automatically comes with an <strong>Income Withholding Order (IWO)</strong> — also called an earnings withholding order. This is a legal mandate sent directly to your employer requiring them to deduct support payments from your paycheck and send the money to DCS before you ever see it.</p>
@@ -885,7 +885,7 @@ export const blogs: BlogPost[] = [
 
       <p>Most people going through a child support case have an image of a formal courtroom, a gavel, and a black-robed judge making pronouncements from a raised bench. The reality is usually much less dramatic — and much more math-heavy. Understanding what actually happens in a Washington family court hearing can eliminate a lot of anxiety and help you show up prepared.</p>
 
-      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Legal Metric</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Benchmark</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$1,514</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>Before your hearing, it's worth running your estimated obligation through our <a href="/">calculator</a> and our <a href="/worksheet">Worksheet Wizard</a>. Walking into court knowing your numbers is one of the most practical advantages you can have.</p>
+      <table class='w-full text-left border-collapse my-6'><thead><tr class='bg-indigo-50 border-y border-indigo-100'><th class='py-3 px-4 text-sm font-bold text-indigo-900'>Legal Metric</th><th class='py-3 px-4 text-sm font-bold text-indigo-900'>2026 Benchmark</th></tr></thead><tbody><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>approximately $2,394</td></tr><tr class='border-b border-slate-100 bg-slate-50/50'><td class='py-3 px-4 text-sm text-slate-700'>Economic Table Limit</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50,000</td></tr><tr class='border-b border-slate-100'><td class='py-3 px-4 text-sm text-slate-700'>Minimum Support</td><td class='py-3 px-4 text-sm font-semibold text-slate-900'>$50 per child</td></tr></tbody></table><p>Before your hearing, it's worth running your estimated obligation through our <a href="/">calculator</a> and our <a href="/worksheet">Worksheet Wizard</a>. Walking into court knowing your numbers is one of the most practical advantages you can have.</p>
 
       <h2>1. Commissioner or Judge — Who's Actually Deciding Your Case?</h2>
       <p>In Washington, most child support hearings are handled by <strong>Court Commissioners</strong> rather than Superior Court Judges. Commissioners are appointed judicial officers with full authority to establish, modify, and enforce child support orders. They're not junior judges — their orders carry exactly the same legal weight.</p>

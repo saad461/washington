@@ -2,49 +2,20 @@ import { washingtonTable2026 } from '../data/washingtonTable2026';
 
 // LEGAL CONSTANTS
 const MIN_SUPPORT_PER_CHILD = 50;
-const SELF_SUPPORT_RESERVE = 1514;
+const SELF_SUPPORT_RESERVE = 2394;
 
 /**
  * 2026 Washington State Child Support Calculation Engine
  */
 
-function applyLowIncomeRules(data: {
-  netP1: number;
-  netP2: number;
-  combinedIncome: number;
-  baseSupport: number;
-  children: number;
-}) {
-  const { netP1, netP2, combinedIncome, baseSupport, children } = data;
-  const minTotal = MIN_SUPPORT_PER_CHILD * children;
-
-  // CASE A: Combined income < 2200
-  if (combinedIncome < 2200) {
-    return {
-      finalSupport: minTotal,
-      reason: "Low income minimum rule applied ($50/child)"
-    };
-  }
-
-  // CASE B: Parent below Self-Support Reserve (SSR)
-  if (netP1 < SELF_SUPPORT_RESERVE || netP2 < SELF_SUPPORT_RESERVE) {
-    // Presumptive rule: greater of $50/child or 50% of shared obligation
-    return {
-      finalSupport: Math.max(minTotal, baseSupport * 0.5),
-      reason: "Self-support reserve protection applied"
-    };
-  }
-
-  // DEFAULT
-  return {
-    finalSupport: baseSupport,
-    reason: "Standard calculation"
-  };
+interface ParentValues {
+  p1?: string | number;
+  p2?: string | number;
 }
 
-export function calculateChildSupport(formData: any) {
+export function calculateChildSupport(formData: Record<string, ParentValues>) {
   // HELPER: Sum specific fields for a parent
-  function sum(fields: any[], parentKey: 'p1' | 'p2') {
+  function sum(fields: (ParentValues | undefined)[], parentKey: 'p1' | 'p2') {
     return fields.reduce((acc, field) => {
       // Ensure we treat the value as a number (handle string inputs from forms)
       const value = parseFloat(String(field?.[parentKey] || 0)) || 0;
@@ -99,20 +70,40 @@ export function calculateChildSupport(formData: any) {
   const shareP2 = combinedIncome > 0 ? netP2 / combinedIncome : 0;
 
   // STEP 7: APPLY LOW-INCOME RULES & ADJUSTMENTS
-  const adjustment = applyLowIncomeRules({
-    netP1,
-    netP2,
-    combinedIncome,
-    baseSupport,
-    children
-  });
+  let totalSupport = baseSupport;
+  let adjustmentReason = "Standard calculation";
 
-  const finalSupport = adjustment.finalSupport;
-  const adjustmentReason = adjustment.reason;
+  // CASE A: Combined income < 2200 (Minimum support rule)
+  if (combinedIncome < 2200) {
+    totalSupport = MIN_SUPPORT_PER_CHILD * children;
+    adjustmentReason = "Low income minimum rule applied ($50/child)";
+  }
 
-  // STEP 8: EACH PARENT OBLIGATION (7)
-  const obligationP1 = finalSupport * shareP1;
-  const obligationP2 = finalSupport * shareP2;
+  // STEP 8: EACH PARENT OBLIGATION (Proportional share of total)
+  let obligationP1 = totalSupport * shareP1;
+  let obligationP2 = totalSupport * shareP2;
+
+  // STEP 9: APPLY SSR PROTECTION (Cap-based rule)
+  // Each parent's obligation is capped so they retain the Self-Support Reserve
+  const applySSRCap = (obligation: number, netIncome: number) => {
+    const maxAffordable = netIncome - SELF_SUPPORT_RESERVE;
+    if (maxAffordable <= 0) {
+      // If income is below SSR, they pay the $50/child minimum
+      return MIN_SUPPORT_PER_CHILD * children;
+    }
+    // Otherwise, they pay the lesser of their share or what's above the SSR
+    return Math.min(obligation, maxAffordable);
+  };
+
+  const originalP1 = obligationP1;
+  const originalP2 = obligationP2;
+
+  obligationP1 = applySSRCap(obligationP1, netP1);
+  obligationP2 = applySSRCap(obligationP2, netP2);
+
+  if (obligationP1 !== originalP1 || obligationP2 !== originalP2) {
+    adjustmentReason = "Self-support reserve protection applied (capped at income above approximately $2,394)";
+  }
 
   return {
     grossP1,
@@ -123,7 +114,7 @@ export function calculateChildSupport(formData: any) {
     netP2,
     combinedIncome,
     baseSupport,
-    finalSupport,
+    finalSupport: totalSupport, // Base support after low-income combined rule
     adjustmentReason,
     shareP1,
     shareP2,
