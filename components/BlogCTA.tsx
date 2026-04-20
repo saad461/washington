@@ -15,7 +15,7 @@ export default function BlogCTA() {
         </h3>
         
         <p className="text-gray-600 mb-8 max-w-xl text-base leading-relaxed font-medium">
-          Get an immediate estimate based on the 2026 Washington State Economic Tables. Our tool accounts for the expanded $50,000 threshold and the $1,514 Self-Support Reserve.
+          Get an immediate estimate based on the 2026 Washington State Economic Tables. Our tool accounts for the expanded $50,000 threshold and the approximately $2,394 Self-Support Reserve.
         </p>
         
         <Link 

@@ -5,7 +5,7 @@ import CalculatorSchema from '@/components/CalculatorSchema';
 
 export const metadata: Metadata = {
   title: '2024 vs 2026 Child Support Comparison | WCSSC',
-  description: 'Compare Washington State child support guidelines for 2024 and 2026. See how the new SSR ($1,514) and expanded economic tables impact your payments.',
+  description: 'Compare Washington State child support guidelines for 2024 and 2026. See how the new SSR (approximately $2,394) and expanded economic tables impact your payments.',
   alternates: { canonical: 'https://wcssc.site/compare-2024-2026' },
 };
 

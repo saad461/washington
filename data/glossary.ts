@@ -10,8 +10,8 @@ export const glossaryTerms: GlossaryTerm[] = [
   {
     term: "Self-Support Reserve (SSR)",
     slug: "self-support-reserve",
-    definition: "The Self-Support Reserve (SSR) is a minimum income protection limit set by Washington State to ensure a paying parent is not left impoverished after paying child support. In 2026, the SSR is $1,514 (180% of the federal poverty level).",
-    example: "If a non-custodial parent earns $2,000 net income and their calculated child support is $800, paying it would leave them with only $1,200 (below the $1,514 SSR). In this case, the court will likely deviate the payment downward to preserve their basic living needs.",
+    definition: "The Self-Support Reserve (SSR) is a minimum income protection limit set by Washington State to ensure a paying parent is not left impoverished after paying child support. In 2026, the SSR is approximately $2,394 (180% of the federal poverty level).",
+    example: "If a non-custodial parent earns $2,000 net income and their calculated child support is $800, paying it would leave them with only $1,200 (below the approximately $2,394 SSR). In this case, the court will likely deviate the payment downward to preserve their basic living needs.",
     relatedLinks: [
       { label: "Check your SSR Eligibility", href: "/worksheet" },
       { label: "King County Support Filing", href: "/washington-courts/king-county" }

@@ -52,7 +52,7 @@ export default function AboutPage() {
               <p>Our calculations are powered by:</p>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>2026 Washington State Economic Table</strong> — Published by the Administrative Office of the Courts (AOC), effective January 1, 2026.</li>
-                <li><strong>RCW 26.19</strong> — Washington&apos;s Revised Code governing child support obligations, including the Self-Support Reserve (SSR) of $1,514/month.</li>
+                <li><strong>RCW 26.19</strong> — Washington&apos;s Revised Code governing child support obligations, including the Self-Support Reserve (SSR) of approximately $2,394/month.</li>
                 <li><strong>WAC 388-14A</strong> — Washington Administrative Code rules for child support implementation.</li>
                 <li><strong>County Court Data</strong> — Filing addresses, clerk contact information, and courthouse locations for all 39 Washington counties.</li>
               </ul>

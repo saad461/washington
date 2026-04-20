@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Scale, Shield, Calculator, ChevronRight } from "lucide-react";
-import { getExactSupport } from "@/data/washingtonTable2026";
+import { calculateChildSupport } from "@/utils/calculatorEngine";
 
 export default function HomeCalculator() {
   const [parent1Income, setParent1Income] = useState("");
@@ -36,18 +36,18 @@ export default function HomeCalculator() {
     setIsLoading(true);
 
     setTimeout(() => {
-      const combinedIncome = p1 + p2;
-      const parent1Share = combinedIncome > 0 ? p1 / combinedIncome : 0;
-      const parent2Share = combinedIncome > 0 ? p2 / combinedIncome : 0;
-      const totalSupport = getExactSupport(combinedIncome, childrenCount);
+      const calcResult = calculateChildSupport({
+        "1a": { p1, p2 },
+        "5_children": { p1: childrenCount }
+      });
 
       setResult({
-        combinedIncome,
-        parent1Share,
-        parent2Share,
-        totalSupport,
-        parent1Support: (totalSupport || 0) * parent1Share,
-        parent2Support: (totalSupport || 0) * parent2Share,
+        combinedIncome: calcResult.combinedIncome,
+        parent1Share: calcResult.shareP1,
+        parent2Share: calcResult.shareP2,
+        totalSupport: calcResult.finalSupport,
+        parent1Support: calcResult.obligationP1,
+        parent2Support: calcResult.obligationP2,
       });
 
       setIsLoading(false);
@@ -161,6 +161,11 @@ export default function HomeCalculator() {
                       <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">P2 Transfer</p>
                       <p className="text-xl font-bold text-indigo-600 font-heading">{formatCurrency(result.parent2Support)}</p>
                     </div>
+                  </div>
+                  <div className="mt-6 pt-6 border-t border-gray-100">
+                    <p className="text-[10px] text-gray-500 leading-relaxed font-medium text-center italic">
+                      Low-income protections may apply below approximately $2,394/month (180% of the federal poverty level). Estimates are based on Washington State guidelines (RCW 26.19).
+                    </p>
                   </div>
                 </div>
               </div>

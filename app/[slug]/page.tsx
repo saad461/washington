@@ -81,7 +81,7 @@ function generateDynamicContent(slug: string, income: number, children: number, 
         <h3 class="text-indigo-900 flex items-center gap-2 mt-0 font-bold font-heading"><svg class="w-6 h-6 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg> Low-Income Protective Measures</h3>
         <p class="text-gray-700 leading-relaxed">For families with a combined monthly income of <strong>${formattedIncome}</strong>, Washington's 2026 guidelines trigger automatic poverty protections. At this level, the standard ${formattedSupport} obligation is often reduced to the statutory minimum of $50 per child.</p>
         <ul class="text-gray-700 mt-5 space-y-2 list-disc pl-5 font-medium">
-          <li><strong>SSR Protection:</strong> The $1,514 reserve is strictly applied.</li>
+          <li><strong>SSR Protection:</strong> The approximately $2,394 reserve is strictly applied.</li>
           <li><strong>Statutory Minimum:</strong> Usually $50/month per child.</li>
           <li><strong>Deviation Probability:</strong> High at the ${formattedIncome} income tier.</li>
         </ul>
@@ -141,7 +141,7 @@ function generateDynamicFAQs(income: number, children: number, countyName: strin
     },
     {
       q: `How does the 2026 SSR affect my $${income.toLocaleString()} child support order?`,
-      a: `The 2026 Self-Support Reserve (SSR) is $1,514. If the parent paying the ${formattedSupport} would be left with less than $1,514 in monthly net income, the court must consider a downward deviation. This is a critical protection for parents at the ${formattedIncome} level to ensure they can maintain their own basic housing and food.`
+      a: `The 2026 Self-Support Reserve (SSR) is approximately $2,394. If the parent paying the ${formattedSupport} would be left with less than approximately $2,394 in monthly net income, the court must consider a downward deviation. This is a critical protection for parents at the ${formattedIncome} level to ensure they can maintain their own basic housing and food.`
     },
     {
       q: `Does $${formattedSupport} include health insurance for ${childrenText}?`,
@@ -162,7 +162,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? `${formattedAmt} Income Child Support ${locationText} (2026 Calculator)`
     : `How Much is Child Support for ${formattedAmt} Income ${locationText}? (2026 Estimate)`;
 
-  const description = `Calculate child support in ${county?.name || 'Washington'}. Includes 2026 SSR rules ($1,514 limit), Courthouse location (${county?.courtAddress || 'WA'}), and low-income protections.`;
+  const description = `Calculate child support in ${county?.name || 'Washington'}. Includes 2026 SSR rules (approximately $2,394 limit), Courthouse location (${county?.courtAddress || 'WA'}), and low-income protections.`;
 
   // --- Index Control Logic ---
   // If income is NOT round (1000, 2000, etc), add noindex
@@ -229,7 +229,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
     { label: "Combined Monthly Net Income", value: formattedIncome, icon: <Calculator className="w-4 h-4" /> },
     { label: "Number of Children", value: children.toString(), icon: <Info className="w-4 h-4" /> },
     { label: "Presumptive Basic Support", value: formattedSupport, icon: <Landmark className="w-4 h-4" /> },
-    { label: "Self-Support Reserve (2026)", value: "$1,514", icon: <Scale className="w-4 h-4" /> },
+    { label: "Self-Support Reserve (2026)", value: "approximately $2,394", icon: <Scale className="w-4 h-4" /> },
     { label: "Jurisdiction", value: locationName, icon: <Landmark className="w-4 h-4" /> },
   ];
 
@@ -382,6 +382,9 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
 
               <h2 className="text-3xl font-bold text-gray-900 tracking-tight font-heading">The SSR and Low-Income Safeguards</h2>
               <p className="leading-relaxed">{ssr}</p>
+              <p className="text-sm italic text-gray-600 mt-4 leading-relaxed">
+                Low-income protections may apply below approximately $2,394/month (180% of the federal poverty level). Estimates are based on Washington State guidelines (RCW 26.19).
+              </p>
 
               {county && (
                 <>
