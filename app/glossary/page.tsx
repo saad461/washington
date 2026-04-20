@@ -17,7 +17,7 @@ export default function GlossaryIndex() {
           <div className="inline-flex p-3 bg-indigo-50 text-indigo-600 rounded-2xl mb-8">
             <BookA className="w-8 h-8" />
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 mb-6 font-heading leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-6 font-heading leading-tight">
             Washington Child Support Glossary (2026)
           </h1>
           <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">

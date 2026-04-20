@@ -59,13 +59,13 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 md:pt-10 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 md:gap-6">
           <div className="text-left">
-            <p className="text-[11px] font-semibold uppercase tracking-widest mb-3">&copy; 2026 Washington Child Support Schedule Center.</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] mb-3">&copy; 2026 Washington Child Support Schedule Center.</p>
             <p className="text-gray-500 max-w-2xl text-xs leading-relaxed">
               DISCLAIMER: WCSSC is not a law firm and does not provide legal advice. We are an independent resource for 2026 WA State Child Support guidelines.
             </p>
           </div>
           <div className="flex gap-6 items-center">
-            <span className="text-emerald-500 flex items-center gap-2 text-xs font-bold uppercase tracking-widest">
+            <span className="text-emerald-500 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em]">
               <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
               Guidelines 01/2026 Certified
             </span>

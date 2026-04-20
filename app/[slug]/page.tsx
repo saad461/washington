@@ -93,11 +93,11 @@ function generateDynamicContent(slug: string, income: number, children: number, 
         <p class="text-gray-700 leading-relaxed">Your ${formattedIncome} income falls within the standard economic schedule. This means the <strong>${formattedSupport}</strong> figure is the presumptive legal standard. In ${countyName}, the court assumes this basic obligation is sufficient for ${childrenText}.</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
           <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 font-sans leading-none">Presumptive Amount</p>
+            <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-2 font-sans leading-none">Presumptive Amount</p>
             <p class="text-xl font-bold text-gray-900 font-heading leading-none">${formattedSupport}</p>
           </div>
           <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
-            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2 font-sans leading-none">Schedule Bracket</p>
+            <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-2 font-sans leading-none">Schedule Bracket</p>
             <p class="text-xl font-bold text-gray-900 font-heading leading-none">Standard Limit</p>
           </div>
         </div>
@@ -321,12 +321,12 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
 
                 <div className="flex justify-center items-center gap-12 border-t border-gray-50 pt-10">
                   <div className="text-center">
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Net Income</p>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-2">Net Income</p>
                     <p className="text-lg font-semibold text-gray-900">{formattedIncome}</p>
                   </div>
                   <div className="w-px h-10 bg-gray-100" aria-hidden="true" />
                   <div className="text-center">
-                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Children</p>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-2">Children</p>
                     <p className="text-lg font-semibold text-gray-900">{children}</p>
                   </div>
                 </div>
@@ -347,8 +347,8 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <caption className="sr-only">Detailed Child Support Metric Figures for ${income.toLocaleString()} monthly income</caption>
                   <thead>
                     <tr className="bg-gray-50 border-b border-gray-100">
-                      <th className="px-6 py-4 text-[11px] font-bold uppercase text-gray-500 tracking-widest">Metric</th>
-                      <th className="px-6 py-4 text-[11px] font-bold uppercase text-gray-500 tracking-widest">Value</th>
+                      <th className="px-6 py-4 text-[11px] font-bold uppercase text-gray-500 tracking-[0.2em]">Metric</th>
+                      <th className="px-6 py-4 text-[11px] font-bold uppercase text-gray-500 tracking-[0.2em]">Value</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-50">
@@ -396,13 +396,13 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
               <p className="leading-relaxed">{conclusion}</p>
 
               <div className="bg-gray-50 p-6 md:p-8 rounded-2xl border border-gray-100 mt-12 not-prose">
-                <p className="text-[10px] text-gray-500 font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
+                <p className="text-[10px] text-gray-500 font-bold tracking-[0.2em] uppercase mb-4 flex items-center gap-2">
                   <Scale className="w-4 h-4 text-indigo-600" /> Accuracy & Legal Status
                 </p>
                 <p className="text-sm text-gray-600 italic leading-relaxed">{legal}</p>
               </div>
 
-              <p className="text-[10px] text-gray-400 font-bold tracking-widest uppercase mt-12">{timestamp}</p>
+              <p className="text-[10px] text-gray-400 font-bold tracking-[0.2em] uppercase mt-12">{timestamp}</p>
             </article>
 
             {/* CTA SECTION */}
@@ -434,10 +434,10 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
 
           {/* --- MOBILE SIDEBAR (collapsed resources section) --- */}
           <div className="lg:hidden col-span-1 mt-6 md:mt-8">
-            <details className="bg-white border border-slate-100 rounded-2xl shadow-sm group">
-              <summary className="flex items-center justify-between px-6 py-4 cursor-pointer min-h-[48px] text-sm font-bold text-slate-700 select-none list-none">
+            <details className="bg-white border border-gray-100 rounded-2xl shadow-sm group">
+              <summary className="flex items-center justify-between px-6 py-4 cursor-pointer min-h-[48px] text-sm font-bold text-gray-700 select-none list-none">
                 <span>📚 Resources &amp; Legal Sources</span>
-                <svg className="w-5 h-5 text-slate-400 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                <svg className="w-5 h-5 text-gray-400 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
               </summary>
               <div className="px-6 pb-6">
                 <AuthoritySidebar county={county} />
@@ -452,7 +452,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
             {internalLinks.map((link, idx) => (
               <Link key={idx} href={link.href} className="group p-6 bg-white border border-gray-100 rounded-2xl hover:border-indigo-600 transition-all shadow-sm">
-                <p className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest mb-3">Resource</p>
+                <p className="text-[10px] font-bold text-indigo-600 uppercase tracking-[0.2em] mb-3">Resource</p>
                 <h4 className="font-bold text-gray-900 group-hover:text-indigo-600 transition-colors flex items-center gap-2 text-sm leading-snug">
                   {link.label} <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </h4>

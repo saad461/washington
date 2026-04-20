@@ -39,9 +39,9 @@ const AdContainer: React.FC<AdContainerProps> = ({ slot, wordCount = 600 }) => {
 
   if (!shouldRenderAd()) {
     return (
-      <div className="w-full py-10 px-8 border-2 border-dashed border-slate-50 rounded-3xl flex flex-col items-center justify-center opacity-30 grayscale no-print my-10">
-        <AlertCircle className="w-5 h-5 text-slate-300 mb-2" />
-        <p className="text-xs font-bold text-slate-300 uppercase tracking-widest italic">Inventory Held: Awaiting Content Depth</p>
+      <div className="w-full py-10 px-8 border-2 border-dashed border-gray-50 rounded-3xl flex flex-col items-center justify-center opacity-30 grayscale no-print my-10">
+        <AlertCircle className="w-5 h-5 text-gray-300 mb-2" />
+        <p className="text-xs font-bold text-gray-300 uppercase tracking-[0.2em] italic">Inventory Held: Awaiting Content Depth</p>
       </div>
     );
   }

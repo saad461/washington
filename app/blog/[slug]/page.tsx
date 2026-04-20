@@ -161,11 +161,11 @@ export default async function BlogPostPage({ params }: Props) {
             {/* Header */}
             <header className="mb-12 md:mb-16">
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-indigo-600">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-600">
                   {post.category}
                 </span>
                 <span className="w-1 h-1 bg-gray-300 rounded-full" />
-                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
                   Updated: {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                 </span>
               </div>
@@ -179,7 +179,7 @@ export default async function BlogPostPage({ params }: Props) {
                     <User size={16} />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-none mb-1">Author</p>
+                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] leading-none mb-1">Author</p>
                     <p className="text-sm font-bold text-gray-900 leading-none">{post.author}</p>
                   </div>
                 </div>
@@ -188,7 +188,7 @@ export default async function BlogPostPage({ params }: Props) {
                     <Clock size={16} />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-none mb-1">Time</p>
+                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] leading-none mb-1">Time</p>
                     <p className="text-sm font-bold text-gray-900 leading-none">{post.readTime} Read</p>
                   </div>
                 </div>
@@ -258,17 +258,17 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
 
             <div className="mt-12 p-6 bg-gray-50 rounded-2xl border border-gray-100">
-              <p className="text-[10px] text-gray-500 font-bold tracking-widest uppercase mb-3 flex items-center gap-2">
+              <p className="text-[10px] text-gray-500 font-bold tracking-[0.2em] uppercase mb-3 flex items-center gap-2">
                 <Scale className="w-4 h-4 text-gray-400" /> E-E-A-T Disclosure
               </p>
               <p className="text-xs text-gray-600 leading-relaxed mb-4">
                 All WCSSC insights are reviewed for compliance with RCW 26.19.065 and official AOC guidelines.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="/editorial-methodology" className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest hover:text-indigo-800 transition-colors">
+                <Link href="/editorial-methodology" className="text-[10px] font-bold text-indigo-600 uppercase tracking-[0.2em] hover:text-indigo-800 transition-colors">
                   Our methodology &rarr;
                 </Link>
-                <Link href="/disclaimer" className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest hover:text-indigo-800 transition-colors">
+                <Link href="/disclaimer" className="text-[10px] font-bold text-indigo-600 uppercase tracking-[0.2em] hover:text-indigo-800 transition-colors">
                   Legal Disclaimer &rarr;
                 </Link>
               </div>

@@ -46,11 +46,11 @@ export default function BlogListingPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                   <div className="lg:col-span-8">
                     <div className="flex items-center gap-4 mb-8">
-                      <span className="text-indigo-600 text-[10px] font-bold uppercase tracking-widest">
+                      <span className="text-indigo-600 text-[10px] font-bold uppercase tracking-[0.2em]">
                         Featured Article
                       </span>
                       <span className="w-1 h-1 bg-gray-300 rounded-full" />
-                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+                      <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
                         {featuredPost.readTime} Read
                       </span>
                     </div>
@@ -65,8 +65,8 @@ export default function BlogListingPage() {
                         <User size={16} />
                       </div>
                       <div>
-                        <p className="text-[10px] font-bold text-gray-900 uppercase tracking-widest leading-none mb-1">{featuredPost.author}</p>
-                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest leading-none">Editorial & Legal Audit</p>
+                        <p className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] leading-none mb-1">{featuredPost.author}</p>
+                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em] leading-none">Editorial & Legal Audit</p>
                       </div>
                     </div>
                   </div>
@@ -91,7 +91,7 @@ export default function BlogListingPage() {
       {/* Call to Action Footer */}
       <section className="bg-gray-50 border-y border-gray-100 py-20 md:py-32 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-indigo-600 mb-6">Start Your Estimate</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-indigo-600 mb-6">Start Your Estimate</p>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-8 font-heading">Ready for a Precise Calculation?</h2>
           <p className="text-gray-600 font-medium mb-12 text-lg md:text-xl leading-relaxed">
             Our expert tools are updated for the 2026 Washington State Child Support Schedule. Start your local county calculation now.

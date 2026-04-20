@@ -82,7 +82,7 @@ h1, h2, h3, h4, h5, h6 {
       display: none !important;
     }
 
-    .bg-white, .bg-slate-50, .bg-indigo-50 {
+    .bg-white, .bg-gray-50, .bg-indigo-50 {
       background-color: transparent !important;
       border-color: #eee !important;
     }

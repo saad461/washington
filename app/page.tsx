@@ -85,9 +85,9 @@ export default function Home() {
               <caption className="sr-only">Benchmark Child Support Estimates for Washington State 2026</caption>
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-100">
-                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Monthly Income</th>
-                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-widest">1 Child</th>
-                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-widest">2 Children</th>
+                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-[0.2em]">Monthly Income</th>
+                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-[0.2em]">1 Child</th>
+                  <th className="px-6 py-4 text-[11px] font-bold text-gray-500 uppercase tracking-[0.2em]">2 Children</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -224,7 +224,7 @@ export default function Home() {
             { label: 'Spokane County', href: '/spokane-county-income-5000-2-children' },
           ].map((c) => (
             <Link key={c.href} href={c.href} className="block p-5 bg-white border border-gray-100 rounded-xl hover:border-indigo-200 hover:bg-gray-50 transition-all text-center shadow-sm group">
-              <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest block mb-2">County Guide</span>
+              <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-[0.2em] block mb-2">County Guide</span>
               <span className="text-sm font-semibold text-gray-800 group-hover:text-indigo-700 transition-colors leading-tight">{c.label}</span>
             </Link>
           ))}
@@ -240,7 +240,7 @@ export default function Home() {
               { label: 'King County Child Support Rules', href: '/blog/king-county-child-support-rules', cat: 'Local Rules' },
             ].map((p) => (
               <Link key={p.href} href={p.href} className="block p-6 bg-white border border-gray-100 rounded-2xl hover:border-indigo-200 hover:bg-gray-50 transition-all shadow-sm group">
-                <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-widest block mb-3">{p.cat}</span>
+                <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-[0.2em] block mb-3">{p.cat}</span>
                 <span className="text-sm font-bold text-gray-800 group-hover:text-indigo-700 transition-colors leading-snug">{p.label}</span>
               </Link>
             ))}

@@ -28,13 +28,13 @@ const AuthorBox = () => {
                 <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-indigo-600">
                   <Mail size={14} />
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">support@wcssc.site</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">support@wcssc.site</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-indigo-600">
                   <CheckCircle2 size={14} />
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Strict RCW 26.19 Compliance</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Strict RCW 26.19 Compliance</span>
               </div>
             </div>
           </div>
