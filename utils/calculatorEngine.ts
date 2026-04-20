@@ -150,6 +150,8 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   }
 
   // ✅ (F) Apply 45% Rule (Safety Cap)
+  const pre45P1 = obligationP1;
+  const pre45P2 = obligationP2;
   const apply45Rule = (obligation: number, netIncome: number) => {
     const maxLimit = netIncome * 0.45;
     return Math.min(obligation, maxLimit);
@@ -162,7 +164,9 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   obligationP2 = Math.max(obligationP2, 0);
 
   const finalObligation = payingParent === "P1" ? obligationP1 : obligationP2;
-  const ssrApplied = (payingParent === "P1" && netP1 < SELF_SUPPORT_RESERVE) || (payingParent === "P2" && netP2 < SELF_SUPPORT_RESERVE);
+  const ssrApplied = (payingParent === "P1" && obligationP1 !== originalObligationP1) || (payingParent === "P2" && obligationP2 !== originalObligationP2);
+  const is45PercentCapped = (payingParent === "P1" && obligationP1 < pre45P1) || (payingParent === "P2" && obligationP2 < pre45P2);
+  const isLowIncome = combinedIncome < 2200;
 
   return {
     grossP1, grossP2,
@@ -181,6 +185,8 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
       otherChildrenAdjustment,
       extraCosts: extraCostsAdjustment
     },
-    ssrApplied
+    ssrApplied,
+    is45PercentCapped,
+    isLowIncome
   };
 }

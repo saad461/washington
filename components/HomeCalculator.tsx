@@ -1,9 +1,23 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { Scale, Shield, Calculator, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
+import { Scale, Shield, Calculator, ChevronRight, ChevronDown, ChevronUp, CheckCircle, AlertCircle, Info, Download } from "lucide-react";
 import { calculateChildSupport } from "@/utils/calculatorEngine";
+import { motion, useSpring, useTransform } from "framer-motion";
+
+function AnimatedNumber({ value }: { value: number }) {
+  const spring = useSpring(value, { mass: 0.8, stiffness: 75, damping: 15 });
+  const display = useTransform(spring, (latest) =>
+    new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(latest)
+  );
+
+  useEffect(() => {
+    spring.set(value);
+  }, [value, spring]);
+
+  return <motion.span>{display}</motion.span>;
+}
 
 export default function HomeCalculator() {
   // Core Inputs
@@ -25,36 +39,39 @@ export default function HomeCalculator() {
 
   const [result, setResult] = useState<any>(null);
 
-  const handleCalculate = () => {
-    setError("");
-    setResult(null);
-
+  const handleCalculate = useCallback(() => {
     const p1 = parseFloat(parent1Income) || 0;
     const p2 = parseFloat(parent2Income) || 0;
 
     if (p1 === 0 && p2 === 0) {
-      setError(`Please enter valid ${incomeType} net income.`);
+      setResult(null);
       return;
     }
 
-    setIsLoading(true);
+    setError("");
+    // We don't set result to null here to allow smooth transitions
 
-    setTimeout(() => {
-      const calcResult = calculateChildSupport({
-        "1a": { p1, p2 },
-        "5_children": { p1: childrenCount },
-        "incomeType": { p1: incomeType },
-        "payingParent": { p1: payingParent },
-        "parentingTime": { p1: parentingTime },
-        "otherChildren": { p1: otherChildren },
-        "healthInsurance": { p1: parseFloat(healthInsurance) || 0 },
-        "daycare": { p1: parseFloat(daycare) || 0 }
-      });
+    const calcResult = calculateChildSupport({
+      "1a": { p1, p2 },
+      "5_children": { p1: childrenCount },
+      "incomeType": { p1: incomeType },
+      "payingParent": { p1: payingParent },
+      "parentingTime": { p1: parentingTime },
+      "otherChildren": { p1: otherChildren },
+      "healthInsurance": { p1: parseFloat(healthInsurance) || 0 },
+      "daycare": { p1: parseFloat(daycare) || 0 }
+    });
 
-      setResult(calcResult);
-      setIsLoading(false);
+    setResult(calcResult);
+  }, [parent1Income, parent2Income, childrenCount, incomeType, payingParent, parentingTime, otherChildren, healthInsurance, daycare]);
+
+  // Live calculation with debounce
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleCalculate();
     }, 400);
-  };
+    return () => clearTimeout(timer);
+  }, [handleCalculate]);
 
   const formatCurrency = (val: number) =>
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
@@ -169,6 +186,20 @@ export default function HomeCalculator() {
               </label>
               <span className="text-[10px] font-bold text-indigo-600 uppercase tracking-[0.2em]">{parentingTime}%</span>
             </div>
+
+            <div className="flex gap-2 mb-4">
+              {[10, 20, 30, 40, 50].map((val) => (
+                <button
+                  key={val}
+                  type="button"
+                  onClick={() => setParentingTime(val)}
+                  className={`flex-1 py-2 text-[10px] font-bold rounded-lg border transition-all ${parentingTime === val ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' : 'bg-white border-gray-100 text-gray-500 hover:border-indigo-200'}`}
+                >
+                  {val}%
+                </button>
+              ))}
+            </div>
+
             <input
               id="parenting-time"
               type="range"
@@ -255,46 +286,135 @@ export default function HomeCalculator() {
                 </h3>
 
                 <div className="text-center mb-8">
-                  <p className="text-4xl font-bold text-gray-900 font-heading mb-2">
-                    {formatCurrency(result.finalSupport)}
+                  <p className="text-5xl font-bold text-gray-900 font-heading mb-2">
+                    <AnimatedNumber value={result.finalSupport} />
                   </p>
-                  {result.ssrApplied && (
-                    <span className="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-[10px] font-bold uppercase tracking-[0.1em] rounded-full">
-                      Protected by Self-Support Reserve
-                    </span>
-                  )}
+
+                  <div className="mt-6 mb-2">
+                    <Link
+                      href="/worksheet"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-xl hover:bg-gray-800 transition-all active:scale-[0.98] shadow-md shadow-gray-200"
+                    >
+                      <Download size={14} className="text-indigo-400" />
+                      Download Full Court Worksheet (PDF)
+                    </Link>
+                  </div>
+                  <div className="flex flex-col items-center gap-2 mt-4">
+                    {result.ssrApplied && (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-700 text-[10px] font-bold uppercase tracking-[0.1em] rounded-full border border-amber-100">
+                        <AlertCircle size={12} />
+                        Protected by Self-Support Reserve
+                      </span>
+                    )}
+                    {result.isLowIncome && (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-700 text-[10px] font-bold uppercase tracking-[0.1em] rounded-full border border-blue-100">
+                        <Info size={12} />
+                        Minimum Support Rule Applied ($50/child)
+                      </span>
+                    )}
+                    {result.is45PercentCapped && (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-50 text-red-700 text-[10px] font-bold uppercase tracking-[0.1em] rounded-full border border-red-100">
+                        <AlertCircle size={12} />
+                        Limited by Washington 45% Net Income Rule
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="space-y-4 text-sm pt-6 border-t border-gray-200">
                   <div className="flex justify-between items-center">
+                    <span className="font-medium text-gray-500">Combined Net Income</span>
+                    <span className="font-bold text-gray-900">
+                      <AnimatedNumber value={result.combinedIncome} />
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-gray-500">Parent 1 Share (%)</span>
+                    <span className="font-bold text-gray-900">
+                      {Math.round(result.shareP1 * 100)}%
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-gray-500">Parent 2 Share (%)</span>
+                    <span className="font-bold text-gray-900">
+                      {Math.round(result.shareP2 * 100)}%
+                    </span>
+                  </div>
+
+                  <div className="pt-4 mt-2 border-t border-gray-100 flex justify-between items-center">
                     <span className="font-medium text-gray-500">Base Support</span>
-                    <span className="font-bold text-gray-900">{formatCurrency(result.breakdown.baseSupport)}</span>
+                    <span className="font-bold text-gray-900">
+                      <AnimatedNumber value={result.breakdown.baseSupport} />
+                    </span>
                   </div>
 
                   {result.breakdown.otherChildrenAdjustment !== 0 && (
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-gray-500">Other Children Adj.</span>
-                      <span className="font-bold text-emerald-600">{formatCurrency(result.breakdown.otherChildrenAdjustment)}</span>
+                      <span className="font-bold text-emerald-600">
+                        <AnimatedNumber value={result.breakdown.otherChildrenAdjustment} />
+                      </span>
                     </div>
                   )}
 
                   {result.breakdown.parentingAdjustment !== 0 && (
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-gray-500">Parenting Adjustment</span>
-                      <span className="font-bold text-emerald-600">{formatCurrency(result.breakdown.parentingAdjustment)}</span>
+                      <span className="font-bold text-emerald-600">
+                        <AnimatedNumber value={result.breakdown.parentingAdjustment} />
+                      </span>
                     </div>
                   )}
 
                   {result.breakdown.extraCosts !== 0 && (
                     <div className="flex justify-between items-center">
                       <span className="font-medium text-gray-500">Extra Costs</span>
-                      <span className="font-bold text-indigo-600">+{formatCurrency(result.breakdown.extraCosts)}</span>
+                      <span className="font-bold text-indigo-600">
+                        +<AnimatedNumber value={result.breakdown.extraCosts} />
+                      </span>
                     </div>
                   )}
 
+                  <div className="mt-8 pt-8 border-t border-gray-200">
+                    <h4 className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em] mb-4">
+                      What This Means
+                    </h4>
+                    <ul className="space-y-3">
+                      {result.ssrApplied ? (
+                        <>
+                          <li className="flex items-start gap-3 text-xs text-gray-600 leading-relaxed">
+                            <div className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-amber-500" />
+                            Your income is below the protected threshold (Self-Support Reserve).
+                          </li>
+                          <li className="flex items-start gap-3 text-xs text-gray-600 leading-relaxed">
+                            <div className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-amber-500" />
+                            The court limits your payment to ensure you can support yourself.
+                          </li>
+                        </>
+                      ) : (
+                        <>
+                          <li className="flex items-start gap-3 text-xs text-gray-600 leading-relaxed">
+                            <div className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                            Based on your proportional share of the combined family income.
+                          </li>
+                          <li className="flex items-start gap-3 text-xs text-gray-600 leading-relaxed">
+                            <div className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+                            Parenting time and other child obligations have been applied.
+                          </li>
+                        </>
+                      )}
+                      <li className="flex items-start gap-3 text-xs text-gray-600 leading-relaxed">
+                        <div className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-gray-300" />
+                        This is an estimate only — a judge has final discretion on all orders.
+                      </li>
+                    </ul>
+                  </div>
+
                   <div className="mt-6 pt-6 border-t border-gray-100">
                     <p className="text-[10px] text-gray-400 leading-relaxed font-medium text-center italic">
-                      This estimate follows Washington State child support guidelines (RCW 26.19) and may vary based on court decisions.
+                      This estimate follows Washington State child support guidelines (RCW 26.19).
                     </p>
                   </div>
                 </div>
@@ -302,6 +422,54 @@ export default function HomeCalculator() {
             )}
           </div>
         </form>
+      </div>
+
+      {/* Comparison Table Section */}
+      <div className="mt-24 w-full max-w-lg mx-auto">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <div className="p-6 border-b border-gray-50 bg-gray-50/50">
+            <h3 className="text-[10px] font-bold text-gray-900 uppercase tracking-[0.2em]">
+              Why Our Calculator is More Accurate
+            </h3>
+          </div>
+          <table className="w-full text-left">
+            <thead>
+              <tr className="border-b border-gray-50">
+                <th className="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-[0.1em]">Feature</th>
+                <th className="px-6 py-4 text-[10px] font-bold text-gray-900 uppercase tracking-[0.1em] text-center">WCSSC</th>
+                <th className="px-6 py-4 text-[10px] font-bold text-gray-400 uppercase tracking-[0.1em] text-center">Others</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-50">
+              {[
+                { name: "2026 SSR Protection", wcssc: true, others: false },
+                { name: "45% Net Income Cap", wcssc: true, others: false },
+                { name: "Parenting Adjustment", wcssc: true, others: false },
+                { name: "Expense Adjustments", wcssc: true, others: false },
+              ].map((row, i) => (
+                <tr key={i} className="hover:bg-gray-50/50 transition-colors">
+                  <td className="px-6 py-4 text-xs font-bold text-gray-600">{row.name}</td>
+                  <td className="px-6 py-4 text-center">
+                    <CheckCircle size={16} className="text-emerald-500 mx-auto" />
+                  </td>
+                  <td className="px-6 py-4 text-center">
+                    <div className="w-4 h-0.5 bg-gray-200 mx-auto rounded-full" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="p-4 bg-indigo-50/30 border-t border-indigo-50">
+            <p className="text-[10px] text-indigo-600 font-bold text-center uppercase tracking-[0.1em]">
+              Official Washington State RCW 26.19 Compliant
+            </p>
+          </div>
+        </div>
+
+        <p className="mt-8 text-[10px] text-gray-400 font-medium text-center leading-relaxed">
+          This calculator follows Washington State guidelines (RCW 26.19). <br />
+          It is for estimation purposes only and does not constitute legal advice.
+        </p>
       </div>
 
       {/* Quick Tips */}
