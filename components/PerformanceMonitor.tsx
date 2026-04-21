@@ -7,25 +7,25 @@ import { useEffect } from 'react';
  * Uses dynamic import pattern to ensure it never runs during SSR/pre-rendering.
  */
 export default function PerformanceMonitor() {
-  useEffect(() => {
-    // Only runs in browser, never during SSR
-    if (process.env.NODE_ENV !== 'development') return;
-    if (typeof window === 'undefined' || typeof performance === 'undefined') return;
+ useEffect(() => {
+ // Only runs in browser, never during SSR
+ if (process.env.NODE_ENV !== 'development') return;
+ if (typeof window === 'undefined' || typeof performance === 'undefined') return;
 
-    const handleTTI = () => {
-      const now = performance.now();
-      console.log(
-        `%c[WCSSC Performance] TTI Approx: ${now.toFixed(0)}ms`,
-        "color: #4F46E5; font-weight: bold;"
-      );
-    };
+ const handleTTI = () => {
+ const now = performance.now();
+ console.log(
+ `%c[WCSSC Performance] TTI Approx: ${now.toFixed(0)}ms`,
+ "color: #4F46E5; font-weight: bold;"
+ );
+ };
 
-    if (document.readyState === 'complete') {
-      handleTTI();
-    } else {
-      window.addEventListener('load', handleTTI, { once: true });
-    }
-  }, []);
+ if (document.readyState === 'complete') {
+ handleTTI();
+ } else {
+ window.addEventListener('load', handleTTI, { once: true });
+ }
+ }, []);
 
-  return null;
+ return null;
 }
