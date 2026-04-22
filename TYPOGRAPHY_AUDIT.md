@@ -26,113 +26,135 @@ Defined in `globals.css` base layer:
 
 ---
 
-## 2. Page-by-Page Audit
+## 2. Page-by-Page & Section Audit
 
 ### Home Page (`/`)
 - **Hero Section**:
   - H1: Follows baseline (`text-3xl md:text-4xl`).
   - Paragraph: `text-base md:text-lg text-gray-700 leading-relaxed`.
+  - Spacing: `py-12 md:py-16`.
 - **Calculator Card**:
   - Labels: `text-[10px] font-bold uppercase tracking-widest text-gray-500`.
   - Inputs: `h-12 font-medium text-gray-900`.
-  - Results: `bg-indigo-600 text-white`, `text-2xl md:text-3xl font-bold`.
+  - Results Box: `bg-indigo-600 text-white rounded-xl px-6 py-4 text-center font-semibold text-lg shadow-sm`.
 - **Key Figures Strip**:
   - Card Labels: `text-[10px] uppercase font-bold text-gray-500`.
   - Values: `text-base md:text-lg text-gray-700 font-semibold`.
-- **Benchmark Table**:
-  - Headers: `text-[10px] uppercase font-bold text-gray-500 tracking-widest`.
-  - Body: `text-base text-gray-700`.
-- **Educational Content Sections**:
+- **Benchmark Table Section**:
   - H2: Follows baseline.
-  - H3: Follows baseline.
+  - Table Headers: `text-[10px] uppercase font-bold text-gray-500 tracking-widest`.
+  - Table Body: `text-base text-gray-700`.
+  - Spacing: `py-12 md:py-16`.
+- **Educational Content Sections**:
+  - H2/H3: Follows baseline.
   - Paragraphs: `text-base md:text-lg`.
-- **Spacing**: Consistent `py-12 md:py-16` for main sections.
+  - Padding: `p-6 md:p-8` for cards.
+- **FAQ Section**:
+  - Container: `py-12 md:py-16`.
 
 ### Worksheet Pro Wizard (`/worksheet`)
 - **Hero Section**:
-  - H1: **Inconsistency**. Uses `text-2xl md:text-3xl`, which is smaller than the H1 baseline.
+  - H1: **Inconsistency**. Uses `text-2xl md:text-3xl`.
+  - Paragraph: `text-sm md:text-base font-medium`.
+- **Progress Bar**: `text-[10px] uppercase font-bold text-gray-500 tracking-widest`.
 - **Sidebar (Desktop)**:
   - Header: `font-heading font-semibold tracking-tight`.
   - Steps: `text-sm font-medium`.
   - Numbers: `text-[10px] font-bold`.
-- **Wizard Form**:
+- **Wizard Form Section**:
   - Field Labels: `text-sm font-medium`.
   - Field IDs: `text-[10px] uppercase font-bold bg-gray-100`.
   - Parent Labels: `text-[10px] uppercase font-bold text-gray-500`.
-- **Summary Report**:
-  - H1: Follows baseline (no class override).
+  - Padding: `p-5 sm:p-6 md:p-6 lg:p-12`.
+- **Summary Report Section**:
+  - H1: Baseline size.
+  - Cards: `bg-gray-900` and `bg-white`.
   - Table Headers: `text-[10px] uppercase font-bold text-gray-500 tracking-widest`.
-- **Responsive**: Mobile uses a sticky step navigation with pills (`text-[10px] font-bold`).
 
 ### Washington Courts Directory (`/washington-courts`)
-- **Header**:
+- **Header Section**:
   - H1: Follows baseline.
   - Paragraph: `text-lg`.
-- **Court Cards**:
-  - H2 (County Name): Follows baseline.
+  - Spacing: `py-10 md:py-16`.
+- **Court Cards Section**:
+  - H2 (County Name): Baseline.
   - Details (Address/Phone): `text-sm`.
-  - "View" Badge: `text-[10px] uppercase font-bold`.
-- **Spacing**: `gap-6` grid.
+  - Padding: `p-6`.
+  - Grid: `gap-6`.
 
 ### County Specific Pages (`/washington-courts/[county]`)
-- **Hero**:
-  - H1: Follows baseline but adds `leading-[1.05]`.
-  - Quick Stats: `text-[10px] uppercase font-bold`.
-- **Main Content**:
+- **Hero Section**:
+  - H1: Baseline size, `leading-[1.05]`.
+  - Quick Stats Strip: `text-[10px] uppercase font-bold`.
+  - Spacing: `py-14 md:py-20`.
+- **Calculator Section**: `py-16 bg-gray-50`.
+- **Main Article Content**:
   - H2: Follows baseline.
-  - Body Text: `text-[17px]` (Custom size, slightly larger than baseline `text-base`).
-- **Filing Steps**:
-  - Step Numbers: `text-sm`.
-  - Step Titles: `h4` baseline.
-- **Sidebar**:
-  - Labels: `text-[10px] uppercase font-bold text-gray-500`.
-  - Address/Phone: `text-sm`.
-- **Responsive**: Sidebars stack below main content on mobile.
+  - Body Text: `text-[17px]`.
+- **Filing Steps Section**:
+  - Numbered Badges: `bg-indigo-600 text-white text-sm`.
+  - Padding: `p-5`.
+- **Local Insight Card**: `bg-amber-50 text-amber-900 p-6`.
+- **Sidebar (Desktop)**:
+  - Court Info Card: `bg-gray-900 p-6`.
+  - Links: `text-sm`.
 
 ### Blog Listing (`/blog`)
-- **Hero**:
-  - H1: Follows baseline.
-- **Featured Post**:
-  - H2: **Inconsistency**. Uses `text-2xl md:text-3xl md:text-4xl`.
+- **Hero Section**: H1 baseline.
+- **Featured Post Section**:
+  - H2: `text-2xl md:text-3xl md:text-4xl`.
   - Excerpt: `text-base md:text-lg`.
-- **Grid**:
-  - Card H3: Uses `font-heading font-semibold` but no size class, relying on baseline.
-  - Meta: `text-[10px] uppercase font-bold`.
+  - Spacing: `mb-20 lg:mb-32`.
+- **Blog Grid Section**: `pb-24 md:pb-40`.
 
 ### Blog Post Detail (`/blog/[slug]`)
-- **Typography Wrapper**: Uses `@tailwindcss/typography` with `prose-lg`.
-- **Prose Overrides**:
-  - H2: `text-2xl md:text-3xl`.
-  - H3: `text-xl`.
-  - Paragraphs: Standard `prose-lg` defaults.
-- **Meta Data**: `text-[10px] uppercase font-bold text-gray-500`.
+- **Header Section**:
+  - Category: `text-[10px] uppercase font-bold text-gray-500`.
+  - H1: Follows baseline.
+  - Meta Box: `text-sm`.
+- **Article Body**:
+  - Typography: `prose-lg`.
+  - H2 Overrides: `text-2xl md:text-3xl`.
+  - H3 Overrides: `text-xl`.
+- **FAQ/CTA Sections**: Consistent with components.
 
 ### Extra Expenses Splitter (`/extra-expenses`)
-- **Hero**: H1 follows baseline.
-- **Input Labels**: `text-[10px] uppercase font-bold text-gray-500 tracking-widest`.
-- **Results Card**: `bg-gray-900 text-white`.
+- **Hero Section**: H1 baseline.
+- **Form Card**:
+  - Labels: `text-[10px] uppercase font-bold text-gray-500 tracking-widest`.
+  - Inputs: `h-14`.
+  - Padding: `p-6 md:p-14`.
+- **Results Card**: `bg-gray-900 text-white p-6`.
 - **Result Values**: `text-3xl`.
 
 ### Glossary Index (`/glossary`)
-- **Hero**: H1 follows baseline.
-- **Term Cards**: H2 uses baseline size. Definitions use `text-sm`.
-- **Arrow Icons**: `w-5 h-5`.
+- **Hero Section**: H1 baseline.
+- **Term Grid Section**:
+  - H2: Baseline.
+  - Definitions: `text-sm` (14px).
+  - Padding: `p-6`.
 
-### How to File Guide (`/how-to-file-child-support-washington`)
-- **Hero**: H1 follows baseline.
-- **Steps**: H2 with numeric badges (`bg-indigo-600 text-white`).
-- **Checklist Items**: `flex items-start gap-3`.
-
-### Editorial Methodology (`/editorial-methodology`)
-- **Hero**: H1 baseline with `leading-[1.1]`.
-- **Subheaders**: H2 baseline.
-- **List Spacing**: `space-y-6` in prose.
+### About / Contact / Legal Pages
+- **Layout**: `max-w-3xl mx-auto`.
+- **Header Section**:
+  - Icon Box: `p-4 bg-indigo-600` (or `amber-500` for disclaimer).
+  - H1: Baseline.
+  - Spacing: `py-10 md:py-16`.
+- **Content Cards**:
+  - H2: Baseline.
+  - Paragraphs: `text-lg` or `md:leading-loose`.
+  - Padding: `p-6`.
+- **Footer Section (Internal)**: `bg-gray-900 text-gray-500 text-[10px] uppercase font-bold`.
 
 ### Programmatic SEO Pages (`/[slug]`)
-- **Hero**: H1 with `leading-[1.15] md:leading-[1.1]`.
-- **Result Amount**: `text-3xl md:text-4xl`.
-- **Tables**: `text-[10px] uppercase font-bold text-gray-500 tracking-widest` for headers.
-- **Internal Link Matrix**: `text-sm` leading-snug.
+- **Hero Section**: H1 with `leading-[1.15] md:leading-[1.1]`.
+- **Result Card Section**:
+  - Amount: `text-3xl md:text-4xl`.
+  - Padding: `p-6 md:p-12`.
+- **Article Section**:
+  - H2: `text-3xl`.
+  - Paragraphs: `prose-lg`.
+- **Key Figures Table**: `text-[10px] uppercase font-bold text-gray-500 tracking-widest` for headers.
 
 ---
 
@@ -144,60 +166,48 @@ Defined in `globals.css` base layer:
 - **Button**: `px-6 py-3 text-sm font-medium`.
 
 ### Footer
-- **Brand**: `text-xl md:text-2xl font-bold`.
 - **Headers**: `text-[10px] font-bold uppercase tracking-widest text-gray-500`.
 - **Links**: `text-sm text-gray-500`.
-- **Copyright**: `text-[10px] font-bold uppercase tracking-widest`.
+- **Bottom Bar**: `text-[10px] font-bold uppercase tracking-widest`.
 
 ### FAQ Accordion
 - **Question**: `text-xl font-semibold text-gray-900`.
 - **Answer**: `text-base md:text-lg text-gray-700`.
 
+### Cookie Banner
+- **Message**: `text-sm font-medium`.
+- **Compliance Label**: `text-[10px] uppercase font-bold`.
+
 ---
 
-## 4. Identified Inconsistencies & UI/UX Issues
+## 4. Spacing, Padding & Margins (Audit)
 
-### Typography Inconsistencies
-1. **H1 Size Variance**:
-   - Baseline: `text-3xl md:text-4xl`.
-   - Worksheet Page: `text-2xl md:text-3xl` (Under-sized).
-   - Featured Blog: `text-2xl md:text-3xl md:text-4xl` (Matches baseline but uses redundant classes).
-2. **Body Text Sizing**:
-   - Baseline: `text-base` (16px).
-   - County Pages: `text-[17px]` (1px larger than baseline).
-   - Blog Posts: `prose-lg` (Approx 18px).
-   - Glossary Definitions: `text-sm` (14px) - potentially too small for secondary content accessibility.
-   - *Recommendation*: Standardize informational body text to either `text-base` or `text-lg`.
-3. **Label Metadata**:
-   - Most labels use `text-[10px] uppercase font-bold text-gray-500 tracking-widest`.
-   - Some instances omit `tracking-widest` or use `tracking-tight` (e.g., Navbar Brand), creating slight visual friction.
-4. **Font Weight for Headings**:
-   - Baseline H2-H4 uses `font-semibold`.
-   - Some manual overrides use `font-bold` for H2s (e.g., Home Page Hero H1).
-   - *Recommendation*: Use `font-bold` for H1 and `font-semibold` consistently for H2-H4.
-5. **Heading Leading**:
-   - Variation between `leading-none`, `leading-snug`, `leading-[1.1]`, and `leading-[1.15] md:leading-[1.1]` across different page heroes.
+### Page Containers
+- **Informational Pages**: `max-w-3xl mx-auto px-4 sm:px-6`.
+- **Grid/Functional Pages**: `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`.
+- **Global Vertical Spacing**: `py-10 md:py-16` or `py-12 md:py-16`.
 
-### Color Inconsistencies
-1. **Body Text Color**:
-   - `globals.css` sets `body` to `gray-700`.
-   - However, many sections manually apply `text-gray-900` to body-like text (e.g., result breakdowns), which can reduce visual hierarchy between content and headers.
-2. **Link Colors**:
-   - Some links use `hover:text-indigo-700` while others use `hover:text-indigo-800` or just `hover:text-gray-900`.
+### Card Padding
+- **Standard Card**: `p-6` (Mobile) / `p-8` (Desktop).
+- **High-Impact Cards**: `p-6` (Mobile) / `p-12` or `p-14` (Desktop).
 
-### Layout & Spacing (UX)
-1. **Desktop vs Mobile Padding**:
-   - Global standard is `px-4 sm:px-6 lg:px-8`.
-   - Some pages (like `/washington-courts`) use `px-6` directly, which might be too tight on very small mobile devices (320px).
-2. **Container Width**:
-   - Most content is constrained by `max-w-3xl` for readability.
-   - However, the `/washington-courts` index uses `max-w-7xl` with a 3-column grid, which significantly changes the reading rhythm compared to the rest of the site.
-3. **Button Consistency**:
-   - Standard primary button: `px-6 py-3 min-h-[48px]`.
-   - Some secondary buttons use `px-5 py-2.5 min-h-[44px]`.
-   - *UX Note*: While both meet touch target standards (44px/48px), the visual variance in height when buttons are near each other is noticeable.
+### Inconsistencies in Spacing
+- **County Pages**: Use `px-6` directly on mobile containers instead of the standard `px-4 sm:px-6`.
+- **Hero Vertical Spacing**: Ranges from `py-10` to `py-24` depending on the page template.
 
-## 5. Summary Table
+---
+
+## 5. Identified Inconsistencies & UI/UX Issues
+
+1. **H1 Size Variance**: Worksheet H1 is too small (`text-2xl md:text-3xl`).
+2. **Body Text Divergence**: Sizing fluctuates between `text-base` (16px), `text-sm` (14px), and `text-[17px]` (17px).
+3. **Leading (Line Height)**: Hero headings use inconsistent leading values (`none`, `snug`, `[1.1]`).
+4. **Label Uniformity**: Metadata labels inconsistently apply `tracking-widest` vs `tracking-tight`.
+5. **Button Heights**: Standard varies between 44px and 48px, causing slight misalignment in side-by-side buttons.
+
+---
+
+## 6. Summary Table
 
 | Element | Font | Desktop Size | Mobile Size | Weight | Color |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -209,4 +219,4 @@ Defined in `globals.css` base layer:
 | **Buttons** | Inter | 14px-16px | 16px | Medium | White/Gray-900 |
 
 ---
-*End of Audit Report*
+*End of Final Audit Report*
