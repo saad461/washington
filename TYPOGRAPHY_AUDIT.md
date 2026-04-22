@@ -107,6 +107,33 @@ Defined in `globals.css` base layer:
   - Paragraphs: Standard `prose-lg` defaults.
 - **Meta Data**: `text-[10px] uppercase font-bold text-gray-500`.
 
+### Extra Expenses Splitter (`/extra-expenses`)
+- **Hero**: H1 follows baseline.
+- **Input Labels**: `text-[10px] uppercase font-bold text-gray-500 tracking-widest`.
+- **Results Card**: `bg-gray-900 text-white`.
+- **Result Values**: `text-3xl`.
+
+### Glossary Index (`/glossary`)
+- **Hero**: H1 follows baseline.
+- **Term Cards**: H2 uses baseline size. Definitions use `text-sm`.
+- **Arrow Icons**: `w-5 h-5`.
+
+### How to File Guide (`/how-to-file-child-support-washington`)
+- **Hero**: H1 follows baseline.
+- **Steps**: H2 with numeric badges (`bg-indigo-600 text-white`).
+- **Checklist Items**: `flex items-start gap-3`.
+
+### Editorial Methodology (`/editorial-methodology`)
+- **Hero**: H1 baseline with `leading-[1.1]`.
+- **Subheaders**: H2 baseline.
+- **List Spacing**: `space-y-6` in prose.
+
+### Programmatic SEO Pages (`/[slug]`)
+- **Hero**: H1 with `leading-[1.15] md:leading-[1.1]`.
+- **Result Amount**: `text-3xl md:text-4xl`.
+- **Tables**: `text-[10px] uppercase font-bold text-gray-500 tracking-widest` for headers.
+- **Internal Link Matrix**: `text-sm` leading-snug.
+
 ---
 
 ## 3. Component Style Audit
@@ -139,6 +166,7 @@ Defined in `globals.css` base layer:
    - Baseline: `text-base` (16px).
    - County Pages: `text-[17px]` (1px larger than baseline).
    - Blog Posts: `prose-lg` (Approx 18px).
+   - Glossary Definitions: `text-sm` (14px) - potentially too small for secondary content accessibility.
    - *Recommendation*: Standardize informational body text to either `text-base` or `text-lg`.
 3. **Label Metadata**:
    - Most labels use `text-[10px] uppercase font-bold text-gray-500 tracking-widest`.
@@ -147,6 +175,8 @@ Defined in `globals.css` base layer:
    - Baseline H2-H4 uses `font-semibold`.
    - Some manual overrides use `font-bold` for H2s (e.g., Home Page Hero H1).
    - *Recommendation*: Use `font-bold` for H1 and `font-semibold` consistently for H2-H4.
+5. **Heading Leading**:
+   - Variation between `leading-none`, `leading-snug`, `leading-[1.1]`, and `leading-[1.15] md:leading-[1.1]` across different page heroes.
 
 ### Color Inconsistencies
 1. **Body Text Color**:
