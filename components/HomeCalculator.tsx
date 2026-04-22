@@ -79,19 +79,19 @@ export default function HomeCalculator() {
  return (
  <>
  {/* Full Calculator UI Card */}
- <div className="w-full max-w-lg bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-6 font-sans">
+ <div className="w-full max-w-lg bg-white border border-gray-200 ring-1 ring-gray-100 rounded-2xl shadow-sm p-6 md:p-8 font-sans">
  <form className="flex flex-col gap-6" onSubmit={(e) => { e.preventDefault(); handleCalculate(); }}>
 
  {/* Income Type Selector */}
  <div className="flex flex-col text-left">
- <label htmlFor="income-type" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <label htmlFor="income-type" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
  Income Type
  </label>
  <select
  id="income-type"
  value={incomeType}
  onChange={(e) => setIncomeType(e.target.value)}
- className="w-full h-14 px-4 appearance-none rounded-xl border border-gray-200 bg-gray-50/50 text-lg font-medium transition-all focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-600"
+ className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-white text-gray-900 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
  >
  <option value="monthly">Monthly</option>
  <option value="yearly">Yearly</option>
@@ -100,43 +100,43 @@ export default function HomeCalculator() {
 
  <div className="grid grid-cols-1 gap-6">
  <div className="flex flex-col text-left">
- <label htmlFor="parent1-income" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <label htmlFor="parent1-income" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
  Parent 1 {incomeType === 'monthly' ? 'Monthly' : 'Yearly'} Net Income
  </label>
  <div className="relative group">
- <span className="absolute inset-y-0 left-0 flex items-center pl-4 font-medium group-focus-within: transition-colors">$</span>
+ <span className="absolute inset-y-0 left-0 flex items-center pl-4 font-medium">$</span>
  <input
  type="number"
  id="parent1-income"
  value={parent1Income}
  onChange={(e) => setParent1Income(e.target.value)}
  placeholder="0.00"
- className={`w-full h-14 pl-8 pr-4 rounded-xl border ${error ? 'border-red-200 bg-red-50 focus:ring-red-500/5 focus:border-red-500' : 'border-gray-200 bg-gray-50/50 focus:ring-indigo-500/5 focus:border-indigo-600'} text-xl font-medium transition-all focus:bg-white focus:outline-none`}
+ className={`w-full h-12 pl-8 pr-4 rounded-xl border ${error ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 focus:outline-none'} bg-white text-gray-900 font-medium placeholder-gray-400 transition-all`}
  />
  </div>
  </div>
 
  <div className="flex flex-col text-left">
- <label htmlFor="parent2-income" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <label htmlFor="parent2-income" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
  Parent 2 {incomeType === 'monthly' ? 'Monthly' : 'Yearly'} Net Income
  </label>
  <div className="relative group">
- <span className="absolute inset-y-0 left-0 flex items-center pl-4 font-medium group-focus-within: transition-colors">$</span>
+ <span className="absolute inset-y-0 left-0 flex items-center pl-4 font-medium">$</span>
  <input
  type="number"
  id="parent2-income"
  value={parent2Income}
  onChange={(e) => setParent2Income(e.target.value)}
  placeholder="0.00"
- className={`w-full h-14 pl-8 pr-4 rounded-xl border ${error ? 'border-red-200 bg-red-50 focus:ring-red-500/5 focus:border-red-500' : 'border-gray-200 bg-gray-50/50 focus:ring-indigo-500/5 focus:border-indigo-600'} text-xl font-medium transition-all focus:bg-white focus:outline-none`}
+ className={`w-full h-12 pl-8 pr-4 rounded-xl border ${error ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 focus:outline-none'} bg-white text-gray-900 font-medium placeholder-gray-400 transition-all`}
  />
  </div>
- {error && <p className="text-red-500 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mt-3 animate-pulse">{error}</p>}
+ {error && <p className="text-red-500 text-[10px] uppercase font-bold tracking-widest mt-3 animate-pulse">{error}</p>}
  </div>
  </div>
 
  <div className="flex flex-col text-left">
- <label htmlFor="children-count" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <label htmlFor="children-count" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
  Number of Children
  </label>
  <div className="relative">
@@ -144,7 +144,7 @@ export default function HomeCalculator() {
  id="children-count"
  value={childrenCount}
  onChange={(e) => setChildrenCount(Number(e.target.value))}
- className="w-full h-14 px-4 appearance-none rounded-xl border border-gray-200 bg-gray-50/50 text-lg font-medium transition-all focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-600"
+ className="w-full h-12 px-4 appearance-none rounded-xl border border-gray-300 bg-white text-gray-900 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
  >
  <option value="1">1 Child</option>
  <option value="2">2 Children</option>
@@ -157,21 +157,21 @@ export default function HomeCalculator() {
 
  {/* Paying Parent Selector */}
  <div className="flex flex-col text-left">
- <label className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <label className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
  Who is paying support?
  </label>
  <div className="grid grid-cols-2 gap-4">
  <button
  type="button"
  onClick={() => setPayingParent("P1")}
- className={`h-12 rounded-xl border font-medium text-sm transition-all ${payingParent === "P1" ? 'bg-gray-900 border-gray-900 text-white shadow-sm' : 'bg-gray-50 border-gray-200 hover:border-indigo-200'}`}
+ className={`px-5 py-2.5 min-h-[44px] rounded-xl border font-medium transition-all ${payingParent === "P1" ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
  >
  Parent 1
  </button>
  <button
  type="button"
  onClick={() => setPayingParent("P2")}
- className={`h-12 rounded-xl border font-medium text-sm transition-all ${payingParent === "P2" ? 'bg-gray-900 border-gray-900 text-white shadow-sm' : 'bg-gray-50 border-gray-200 hover:border-indigo-200'}`}
+ className={`px-5 py-2.5 min-h-[44px] rounded-xl border font-medium transition-all ${payingParent === "P2" ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
  >
  Parent 2
  </button>
@@ -181,10 +181,10 @@ export default function HomeCalculator() {
  {/* Parenting Time Slider */}
  <div className="flex flex-col text-left">
  <div className="flex justify-between mb-3">
- <label htmlFor="parenting-time" className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <label htmlFor="parenting-time" className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase">
  Parenting Time (Paying Parent)
  </label>
- <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">{parentingTime}%</span>
+ <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest">{parentingTime}%</span>
  </div>
 
  <div className="flex gap-2 mb-4">
@@ -193,7 +193,7 @@ export default function HomeCalculator() {
  key={val}
  type="button"
  onClick={() => setParentingTime(val)}
- className={`flex-1 py-2 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold rounded-lg border transition-all ${parentingTime === val ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' : 'bg-white border-gray-100 hover:border-indigo-200'}`}
+ className={`flex-1 py-2 text-[10px] uppercase font-bold rounded-lg border transition-all ${parentingTime === val ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'}`}
  >
  {val}%
  </button>
@@ -216,7 +216,7 @@ export default function HomeCalculator() {
  <button
  type="button"
  onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
- className="flex items-center justify-between py-2 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase hover: transition-colors"
+ className="flex items-center justify-between py-2 text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase"
  >
  Advanced Options
  {isAdvancedOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -225,14 +225,14 @@ export default function HomeCalculator() {
  {isAdvancedOpen && (
  <div className="mt-4 flex flex-col gap-6 animate-in fade-in slide-in-from-top-2 duration-300">
  <div className="flex flex-col text-left">
- <label htmlFor="other-children" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <label htmlFor="other-children" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
  Other Children (outside this case)
  </label>
  <select
  id="other-children"
  value={otherChildren}
  onChange={(e) => setOtherChildren(Number(e.target.value))}
- className="w-full h-12 px-4 appearance-none rounded-xl border border-gray-200 bg-gray-50/50 font-medium transition-all focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-600"
+ className="w-full h-12 px-4 appearance-none rounded-xl border border-gray-300 bg-white text-gray-900 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
  >
  {[0, 1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
  </select>
@@ -240,7 +240,7 @@ export default function HomeCalculator() {
 
  <div className="grid grid-cols-2 gap-4">
  <div className="flex flex-col text-left">
- <label htmlFor="health-insurance" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <label htmlFor="health-insurance" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
  Health Insurance ($)
  </label>
  <input
@@ -249,11 +249,11 @@ export default function HomeCalculator() {
  value={healthInsurance}
  onChange={(e) => setHealthInsurance(e.target.value)}
  placeholder="0"
- className="w-full h-12 px-4 rounded-xl border border-gray-200 bg-gray-50/50 font-medium transition-all focus:bg-white focus:outline-none"
+ className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-white text-gray-900 font-medium placeholder-gray-400 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
  />
  </div>
  <div className="flex flex-col text-left">
- <label htmlFor="daycare" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <label htmlFor="daycare" className="mb-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
  Daycare ($)
  </label>
  <input
@@ -262,7 +262,7 @@ export default function HomeCalculator() {
  value={daycare}
  onChange={(e) => setDaycare(e.target.value)}
  placeholder="0"
- className="w-full h-12 px-4 rounded-xl border border-gray-200 bg-gray-50/50 font-medium transition-all focus:bg-white focus:outline-none"
+ className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-white text-gray-900 font-medium placeholder-gray-400 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
  />
  </div>
  </div>
@@ -273,51 +273,54 @@ export default function HomeCalculator() {
  <button
  type="submit"
  disabled={isLoading}
- className={`w-full bg-gray-900 text-white rounded-xl h-14 font-medium text-sm uppercase transition-all ${isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-gray-100 active:scale-[0.98]'}`}
+ className="w-full md:w-auto px-6 py-3 min-h-[48px] rounded-xl font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition disabled:opacity-70 disabled:cursor-not-allowed"
  >
  {isLoading ? "Calculating..." : "Calculate Presumptive Support"}
  </button>
 
  <div aria-live="polite" aria-atomic="true">
  {result !== null && (
- <div className="mt-4 p-6 bg-gray-50 border border-gray-100 rounded-xl animate-in fade-in slide-in-from-bottom-3 duration-500">
- <h3 className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-semibold uppercase mb-6 text-center">
+ <div className="mt-6 space-y-6 animate-in fade-in slide-in-from-bottom-3 duration-500">
+ <div className="bg-indigo-600 text-white rounded-xl px-6 py-4 text-center font-semibold text-lg shadow-sm">
+ <h3 className="text-sm opacity-90 font-semibold uppercase mb-2">
  Final Estimate (You Pay)
  </h3>
 
- <div className="text-center mb-8">
- <p className="text-3xl md:text-4xl font-medium font-heading mb-2">
+ <div className="text-center">
+ <div className="text-2xl md:text-3xl font-bold mb-4">
  <AnimatedNumber value={result.finalSupport} />
- </p>
-
- <div className="mt-6 mb-2">
- <Link
- href="/worksheet"
- className="inline-flex items-center gap-2 px-6 py-3 min-h-[48px] bg-gray-900 text-white text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase rounded-xl hover:bg-gray-100 transition-all active:scale-[0.98] shadow-sm shadow-gray-200"
- >
- <Download size={14} className="text-indigo-400" />
- Download Full Court Worksheet (PDF)
- </Link>
  </div>
- <div className="flex flex-col items-center gap-2 mt-4">
+
+ <div className="flex flex-col items-center gap-2 mb-4">
  {result.ssrApplied && (
- <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-700 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase rounded-full border border-amber-100">
+ <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 text-white text-[10px] uppercase font-bold tracking-widest rounded-full border border-white/20">
  <AlertCircle size={12} />
  Protected by Self-Support Reserve
  </span>
  )}
  {result.isLowIncome && (
- <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-700 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase rounded-full border border-blue-100">
+ <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 text-white text-[10px] uppercase font-bold tracking-widest rounded-full border border-white/20">
  <Info size={12} />
  Minimum Support Rule Applied ($50/child)
  </span>
  )}
  {result.is45PercentCapped && (
- <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-50 text-red-700 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase rounded-full border border-red-100">
+ <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 text-white text-[10px] uppercase font-bold tracking-widest rounded-full border border-white/20">
  <AlertCircle size={12} />
  Limited by Washington 45% Net Income Rule
  </span>
  )}
+ </div>
+
+ <div className="mt-4">
+ <Link
+ href="/worksheet"
+ className="inline-flex items-center gap-2 px-5 py-2.5 min-h-[44px] bg-white border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-all active:scale-[0.98] shadow-sm font-medium"
+ >
+ <Download size={14} className="text-indigo-600" />
+ Download Full Court Worksheet (PDF)
+ </Link>
+ </div>
  </div>
  </div>
 
@@ -378,35 +381,35 @@ export default function HomeCalculator() {
  )}
 
  <div className="mt-8 pt-8 border-t border-gray-200">
- <h4 className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-semibold uppercase mb-4">
+ <h4 className="text-[10px] uppercase font-bold text-gray-900 tracking-widest font-semibold mb-4">
  What This Means
  </h4>
  <ul className="space-y-3">
  {result.ssrApplied ? (
  <>
- <li className="flex items-start gap-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest leading-relaxed">
- <div className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-amber-500" />
+ <li className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
+ <div className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-600" />
  Your income is below the protected threshold (Self-Support Reserve).
  </li>
- <li className="flex items-start gap-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest leading-relaxed">
- <div className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-amber-500" />
+ <li className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
+ <div className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-600" />
  The court limits your payment to ensure you can support yourself.
  </li>
  </>
  ) : (
  <>
- <li className="flex items-start gap-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest leading-relaxed">
- <div className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+ <li className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
+ <div className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-600" />
  Based on your proportional share of the combined family income.
  </li>
- <li className="flex items-start gap-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest leading-relaxed">
- <div className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-500" />
+ <li className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
+ <div className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-indigo-600" />
  Parenting time and other child obligations have been applied.
  </li>
  </>
  )}
- <li className="flex items-start gap-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest leading-relaxed">
- <div className="mt-1 shrink-0 w-1.5 h-1.5 rounded-full bg-gray-300" />
+ <li className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
+ <div className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-gray-300" />
  This is an estimate only — a judge has final discretion on all orders.
  </li>
  </ul>
@@ -426,31 +429,31 @@ export default function HomeCalculator() {
 
  {/* Comparison Table Section */}
  <div className="mt-24 w-full max-w-lg mx-auto">
- <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
- <div className="p-6 border-b border-gray-50 bg-gray-50/50">
- <h3 className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-semibold uppercase ">
+ <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+ <div className="p-6 border-b border-gray-100 bg-gray-50/50">
+ <h3 className="text-[10px] uppercase font-bold text-gray-900 tracking-widest font-semibold">
  Why Our Calculator is More Accurate
  </h3>
  </div>
- <table className="w-full text-left border border-gray-100 rounded-xl overflow-hidden"><caption className="sr-only">Detailed Calculation Breakdown</caption>
+ <table className="w-full text-left border-collapse"><caption className="sr-only">Detailed Calculation Breakdown</caption>
  <thead>
- <tr className="border-b border-gray-50">
- <th className="px-6 py-3 min-h-[48px] text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">Feature</th>
- <th className="px-6 py-3 min-h-[48px] text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase text-center">WCSSC</th>
- <th className="px-6 py-3 min-h-[48px] text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase text-center">Others</th>
+ <tr className="border-b border-gray-100">
+ <th className="px-6 py-3 min-h-[48px] text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase">Feature</th>
+ <th className="px-6 py-3 min-h-[48px] text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase text-center">WCSSC</th>
+ <th className="px-6 py-3 min-h-[48px] text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase text-center">Others</th>
  </tr>
  </thead>
- <tbody className="divide-y divide-gray-50">
+ <tbody className="divide-y divide-gray-100">
  {[
  { name: "2026 SSR Protection", wcssc: true, others: false },
  { name: "45% Net Income Cap", wcssc: true, others: false },
  { name: "Parenting Adjustment", wcssc: true, others: false },
  { name: "Expense Adjustments", wcssc: true, others: false },
  ].map((row, i) => (
- <tr key={i} className="hover:bg-gray-50/50 transition-colors">
- <td className="px-6 py-3 min-h-[48px] text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold ">{row.name}</td>
+ <tr key={i} className="hover:bg-gray-50 transition-colors">
+ <td className="px-6 py-3 min-h-[48px] text-[10px] uppercase font-bold text-gray-700 tracking-widest">{row.name}</td>
  <td className="px-6 py-3 min-h-[48px] text-center">
- <CheckCircle size={16} className=" mx-auto" />
+ <CheckCircle size={16} className="mx-auto text-indigo-600" />
  </td>
  <td className="px-6 py-3 min-h-[48px] text-center">
  <div className="w-4 h-0.5 bg-gray-200 mx-auto rounded-full" />
@@ -459,10 +462,10 @@ export default function HomeCalculator() {
  ))}
  </tbody>
  </table>
- <div className="p-4 bg-indigo-50/30 border-t border-indigo-50">
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-medium text-center uppercase ">
+ <div className="p-4 bg-indigo-50/30 border-t border-indigo-100 text-center">
+ <span className="text-[10px] uppercase font-bold text-indigo-600 tracking-widest uppercase">
  Official Washington State RCW 26.19 Compliant
- </p>
+ </span>
  </div>
  </div>
 
@@ -472,32 +475,31 @@ export default function HomeCalculator() {
  </p>
  </div>
 
- {/* Quick Tips */}
+ {/* Quick Tips / Feature Cards */}
  <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto w-full px-4">
- <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-indigo-200 hover:bg-gray-50 transition-all group">
- <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+ <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-indigo-200 transition-all group">
+ <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
  <Scale size={24} />
  </div>
- <h3 className="font-semibold mb-3 font-heading text-lg">Legal Precision</h3>
- <p className="text-sm leading-relaxed font-medium">Mapped exactly to the new 2026 Washington State Economic Tables and statutory updates.</p>
+ <h3 className="text-xl font-semibold text-gray-900 mb-3">Legal Precision</h3>
+ <p className="text-base md:text-lg text-gray-700 leading-relaxed">Mapped exactly to the new 2026 Washington State Economic Tables and statutory updates.</p>
  </div>
 
- <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-indigo-200 hover:bg-gray-50 transition-all group">
- <div className="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+ <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-indigo-200 transition-all group">
+ <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
  <Shield size={24} />
  </div>
- <h3 className="font-semibold mb-3 font-heading text-lg">Privacy First</h3>
- <p className="text-sm leading-relaxed font-medium">No calculation data is stored. All processing remains local in your browser session for 100% privacy.</p>
+ <h3 className="text-xl font-semibold text-gray-900 mb-3">Privacy First</h3>
+ <p className="text-base md:text-lg text-gray-700 leading-relaxed">No calculation data is stored. All processing remains local in your browser session for 100% privacy.</p>
  </div>
 
- <div className="p-6 bg-gray-900 rounded-2xl shadow-sm shadow-gray-200 transition-all text-white relative overflow-hidden group">
- <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl -translate-y-16 translate-x-16" />
- <div className="w-12 h-12 bg-gray-800 text-indigo-400 rounded-xl flex items-center justify-center mb-6">
+ <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-indigo-200 transition-all group">
+ <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
  <Calculator size={24} />
  </div>
- <h3 className="font-semibold mb-3 font-heading text-lg">Worksheet Pro Wizard</h3>
- <p className="text-sm leading-relaxed mb-8">Generate the mandatory 8-part official PDF worksheet using our advanced automated wizard.</p>
- <Link href="/worksheet" className="inline-flex items-center gap-3 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase bg-white px-6 py-3 min-h-[48px] rounded-xl hover:bg-indigo-50 transition-all active:scale-[0.98]">
+ <h3 className="text-xl font-semibold text-gray-900 mb-3">Worksheet Pro Wizard</h3>
+ <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-8">Generate the mandatory 8-part official PDF worksheet using our advanced automated wizard.</p>
+ <Link href="/worksheet" className="inline-flex items-center gap-2 px-5 py-2.5 min-h-[44px] bg-white border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-all active:scale-[0.98] shadow-sm font-medium">
  Launch Wizard
  <ChevronRight size={14}  />
  </Link>

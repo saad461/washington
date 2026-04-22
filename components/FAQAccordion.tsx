@@ -49,7 +49,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  />
  <h2 className="sr-only">Frequently Asked Questions</h2>
 
- <div className="space-y-6">
+ <div className="space-y-4">
  {items.map((item, index) => {
  const isOpen = openIndexes.includes(index);
  const controlId = `faq-content-${index}`;
@@ -58,7 +58,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  return (
  <div
  key={index}
- className="bg-white border border-gray-100 hover:border-indigo-200 transition-all duration-300 rounded-xl overflow-hidden shadow-sm active:scale-[0.99]"
+ className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm"
  >
  <h3>
  <button
@@ -67,9 +67,9 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  aria-controls={controlId}
  role="button"
  onClick={() => toggleAccordion(index)}
- className="w-full flex items-center justify-between min-h-[56px] py-4 min-h-[48px] px-6 md:px-8 cursor-pointer outline-none focus-visible:bg-gray-50 group"
+ className="w-full flex items-center justify-between cursor-pointer outline-none group"
  >
- <span className="text-base font-medium text-left pr-4 font-heading leading-tight group-hover: transition-colors">
+ <span className="text-xl font-semibold text-gray-900 text-left pr-4 leading-tight">
  {item.question}
  </span>
  <ChevronDown
@@ -85,7 +85,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
  >
  <div className="overflow-hidden">
- <div className="px-6 pb-6 md:px-8 md:pb-8 text-sm md:text-base leading-relaxed font-medium">
+ <div className="pt-4 text-base md:text-lg text-gray-700 leading-relaxed">
  <p>{item.answer}</p>
  </div>
  </div>
