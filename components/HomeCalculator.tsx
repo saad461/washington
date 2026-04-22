@@ -79,7 +79,9 @@ export default function HomeCalculator() {
  return (
  <>
  {/* Full Calculator UI Card */}
- <div className="w-full max-w-lg bg-white border border-gray-200 ring-1 ring-gray-100 rounded-2xl shadow-sm p-6 md:p-8 font-sans">
+ <div className="relative w-full max-w-lg mb-8">
+  <div className="absolute -inset-4 bg-indigo-500/10 blur-2xl rounded-[3rem] -z-10" aria-hidden="true" />
+  <div className="bg-white border border-[#E2E8F0] rounded-2xl shadow-sm p-6 md:p-8 font-sans relative">
  <form className="flex flex-col gap-6" onSubmit={(e) => { e.preventDefault(); handleCalculate(); }}>
 
  {/* Income Type Selector */}
@@ -91,7 +93,7 @@ export default function HomeCalculator() {
  id="income-type"
  value={incomeType}
  onChange={(e) => setIncomeType(e.target.value)}
- className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-white text-gray-900 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
+ className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-white text-gray-900 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
  >
  <option value="monthly">Monthly</option>
  <option value="yearly">Yearly</option>
@@ -111,7 +113,7 @@ export default function HomeCalculator() {
  value={parent1Income}
  onChange={(e) => setParent1Income(e.target.value)}
  placeholder="0.00"
- className={`w-full h-12 pl-8 pr-4 rounded-xl border ${error ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 focus:outline-none'} bg-white text-gray-900 font-medium placeholder-gray-400 transition-all`}
+ className={`w-full h-12 pl-8 pr-4 rounded-xl border ${error ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-[#6366F1] focus:outline-none'} bg-white text-gray-900 font-medium placeholder-gray-400 transition-all`}
  />
  </div>
  </div>
@@ -128,7 +130,7 @@ export default function HomeCalculator() {
  value={parent2Income}
  onChange={(e) => setParent2Income(e.target.value)}
  placeholder="0.00"
- className={`w-full h-12 pl-8 pr-4 rounded-xl border ${error ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-indigo-500 focus:outline-none'} bg-white text-gray-900 font-medium placeholder-gray-400 transition-all`}
+ className={`w-full h-12 pl-8 pr-4 rounded-xl border ${error ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-[#6366F1] focus:outline-none'} bg-white text-gray-900 font-medium placeholder-gray-400 transition-all`}
  />
  </div>
  {error && <p className="text-red-500 text-[10px] uppercase font-bold tracking-widest mt-3 animate-pulse">{error}</p>}
@@ -144,7 +146,7 @@ export default function HomeCalculator() {
  id="children-count"
  value={childrenCount}
  onChange={(e) => setChildrenCount(Number(e.target.value))}
- className="w-full h-12 px-4 appearance-none rounded-xl border border-gray-300 bg-white text-gray-900 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
+ className="w-full h-12 px-4 appearance-none rounded-xl border border-gray-300 bg-white text-gray-900 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
  >
  <option value="1">1 Child</option>
  <option value="2">2 Children</option>
@@ -164,14 +166,14 @@ export default function HomeCalculator() {
  <button
  type="button"
  onClick={() => setPayingParent("P1")}
- className={`px-5 py-2.5 min-h-[44px] rounded-xl border font-medium transition-all ${payingParent === "P1" ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
+ className={`px-5 py-2.5 min-h-[44px] rounded-xl border font-medium transition-all ${payingParent === "P1" ? 'bg-[#6366F1] border-[#6366F1] text-white' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
  >
  Parent 1
  </button>
  <button
  type="button"
  onClick={() => setPayingParent("P2")}
- className={`px-5 py-2.5 min-h-[44px] rounded-xl border font-medium transition-all ${payingParent === "P2" ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
+ className={`px-5 py-2.5 min-h-[44px] rounded-xl border font-medium transition-all ${payingParent === "P2" ? 'bg-[#6366F1] border-[#6366F1] text-white' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
  >
  Parent 2
  </button>
@@ -193,7 +195,7 @@ export default function HomeCalculator() {
  key={val}
  type="button"
  onClick={() => setParentingTime(val)}
- className={`flex-1 py-2 text-[10px] uppercase font-bold rounded-lg border transition-all ${parentingTime === val ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'}`}
+ className={`flex-1 py-2 text-[10px] uppercase font-bold rounded-lg border transition-all ${parentingTime === val ? 'bg-[#6366F1] border-[#6366F1] text-white shadow-sm' : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'}`}
  >
  {val}%
  </button>
@@ -232,7 +234,7 @@ export default function HomeCalculator() {
  id="other-children"
  value={otherChildren}
  onChange={(e) => setOtherChildren(Number(e.target.value))}
- className="w-full h-12 px-4 appearance-none rounded-xl border border-gray-300 bg-white text-gray-900 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
+ className="w-full h-12 px-4 appearance-none rounded-xl border border-gray-300 bg-white text-gray-900 font-medium transition-all focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
  >
  {[0, 1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
  </select>
@@ -249,7 +251,7 @@ export default function HomeCalculator() {
  value={healthInsurance}
  onChange={(e) => setHealthInsurance(e.target.value)}
  placeholder="0"
- className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-white text-gray-900 font-medium placeholder-gray-400 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
+ className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-white text-gray-900 font-medium placeholder-gray-400 transition-all focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
  />
  </div>
  <div className="flex flex-col text-left">
@@ -262,7 +264,7 @@ export default function HomeCalculator() {
  value={daycare}
  onChange={(e) => setDaycare(e.target.value)}
  placeholder="0"
- className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-white text-gray-900 font-medium placeholder-gray-400 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
+ className="w-full h-12 px-4 rounded-xl border border-gray-300 bg-white text-gray-900 font-medium placeholder-gray-400 transition-all focus:outline-none focus:ring-2 focus:ring-[#6366F1]"
  />
  </div>
  </div>
@@ -273,7 +275,7 @@ export default function HomeCalculator() {
  <button
  type="submit"
  disabled={isLoading}
- className="w-full md:w-auto px-6 py-3 min-h-[48px] rounded-xl font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition disabled:opacity-70 disabled:cursor-not-allowed"
+ className="w-full md:w-auto px-6 py-3 min-h-[48px] rounded-xl font-medium text-white bg-gradient-to-r from-[#6366F1] to-purple-500 shadow-sm hover:-translate-y-[1px] hover:shadow transition-all disabled:opacity-70 disabled:cursor-not-allowed"
  >
  {isLoading ? "Calculating..." : "Calculate Presumptive Support"}
  </button>
@@ -425,6 +427,7 @@ export default function HomeCalculator() {
  )}
  </div>
  </form>
+  </div>
  </div>
 
  {/* Comparison Table Section */}
@@ -474,37 +477,6 @@ export default function HomeCalculator() {
  It is for estimation purposes only and does not constitute legal advice.
  </p>
  </div>
-
- {/* Quick Tips / Feature Cards */}
- <div className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto w-full px-4">
- <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-indigo-200 transition-all group">
- <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
- <Scale size={24} />
- </div>
- <h3 className="text-xl font-semibold text-gray-900 mb-3">Legal Precision</h3>
- <p className="text-base md:text-lg text-gray-700 leading-relaxed">Mapped exactly to the new 2026 Washington State Economic Tables and statutory updates.</p>
- </div>
-
- <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-indigo-200 transition-all group">
- <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
- <Shield size={24} />
- </div>
- <h3 className="text-xl font-semibold text-gray-900 mb-3">Privacy First</h3>
- <p className="text-base md:text-lg text-gray-700 leading-relaxed">No calculation data is stored. All processing remains local in your browser session for 100% privacy.</p>
- </div>
-
- <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-indigo-200 transition-all group">
- <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
- <Calculator size={24} />
- </div>
- <h3 className="text-xl font-semibold text-gray-900 mb-3">Worksheet Pro Wizard</h3>
- <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-8">Generate the mandatory 8-part official PDF worksheet using our advanced automated wizard.</p>
- <Link href="/worksheet" className="inline-flex items-center gap-2 px-5 py-2.5 min-h-[44px] bg-white border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-all active:scale-[0.98] shadow-sm font-medium">
- Launch Wizard
- <ChevronRight size={14}  />
- </Link>
- </div>
- </div>
- </>
- );
+  </>
+  );
 }
