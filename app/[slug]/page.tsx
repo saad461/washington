@@ -141,11 +141,11 @@ function generateDynamicContent(
  <p class=" ">Your ${formattedIncome} income falls within the standard economic schedule. This means the <strong>${formattedSupport}</strong> figure is the presumptive legal standard. In ${countyName}, the court assumes this basic obligation is sufficient for ${childrenText}.</p>
  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
  <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
- <p class="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-2 font-sans leading-none">Presumptive Amount</p>
+ <p class="label-metadata mb-2 font-sans leading-none">Presumptive Amount</p>
  <p class="text-xl leading-none">${formattedSupport}</p>
  </div>
  <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
- <p class="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-2 font-sans leading-none">Schedule Bracket</p>
+ <p class="label-metadata mb-2 font-sans leading-none">Schedule Bracket</p>
  <p class="text-xl leading-none">Standard Limit</p>
  </div>
  </div>
@@ -266,7 +266,7 @@ const Breadcrumbs = ({
 }) => (
   <nav
     aria-label="Breadcrumb"
-    className="flex mb-10 text-[10px] uppercase font-bold text-gray-500 tracking-widest no-print flex-wrap gap-y-2"
+    className="flex mb-10 label-metadata no-print flex-wrap gap-y-2"
   >
     <Link href="/" className="hover: transition-colors">
       Home
@@ -461,7 +461,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
         <div className="absolute bottom-0 left-0 w-[55rem] h-[55rem] bg-emerald-50/30 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 opacity-40" />
       </div>
 
-      <div className="max-w-7xl w-full mx-auto z-10 relative px-4 sm:px-6 py-10 md:py-16 lg:py-24">
+      <div className="max-w-7xl w-full mx-auto z-10 relative px-4 sm:px-6 section-default lg:py-24">
         <Breadcrumbs county={county} income={income} childCount={children} />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-20">
@@ -481,26 +481,26 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
             {/* Result Header Card */}
             <div className="mb-16">
               <div className="w-full bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-12 text-center relative overflow-hidden">
-                <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-10">
+                <p className="label-metadata mb-10">
                   2026 Monthly Presumptive Payment
                 </p>
 
                 <div className="mb-10">
-                  <span className="text-3xl md:text-4xl ">
+                  <span className="text-3xl ">
                     {formattedSupport}
                   </span>
                 </div>
 
                 <div className="flex justify-center items-center gap-12 border-t border-gray-50 pt-10">
                   <div className="text-center">
-                    <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-2">
+                    <p className="label-metadata mb-2">
                       Net Income
                     </p>
                     <p className="text-lg ">{formattedIncome}</p>
                   </div>
                   <div className="w-px h-10 bg-gray-100" aria-hidden="true" />
                   <div className="text-center">
-                    <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-2">
+                    <p className="label-metadata mb-2">
                       Children
                     </p>
                     <p className="text-lg ">{children}</p>
@@ -529,10 +529,10 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   </caption>
                   <thead>
                     <tr className="bg-gray-50 border-b border-gray-100">
-                      <th className="px-6 py-3 min-h-[48px] text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase ">
+                      <th className="px-6 py-3 min-h-[48px] label-metadata ">
                         Metric
                       </th>
-                      <th className="px-6 py-3 min-h-[48px] text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase ">
+                      <th className="px-6 py-3 min-h-[48px] label-metadata ">
                         Value
                       </th>
                     </tr>
@@ -613,13 +613,13 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
               <p>{conclusion}</p>
 
               <div className="bg-gray-50 p-6 md:p-6 rounded-xl border border-gray-100 mt-12 not-prose">
-                <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-4 flex items-center gap-2">
+                <p className="label-metadata mb-4 flex items-center gap-2">
                   <Scale className="w-4 h-4 " /> Accuracy & Legal Status
                 </p>
                 <p className="text-sm italic ">{legal}</p>
               </div>
 
-              <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mt-12">
+              <p className="label-metadata mt-12">
                 {timestamp}
               </p>
             </article>
@@ -704,7 +704,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                 href={link.href}
                 className="group p-6 bg-white border border-gray-100 rounded-xl hover:border-indigo-600 transition-all shadow-sm"
               >
-                <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-3">
+                <p className="label-metadata mb-3">
                   Resource
                 </p>
                 <h4 className=" group-hover: transition-colors flex items-center gap-2 text-sm leading-snug">
@@ -720,10 +720,10 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             {/* Same County ±$1000 */}
             <div>
-              <h3 className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-8">
+              <h3 className="label-metadata mb-8">
                 Nearby Income Tiers ({countyName})
               </h3>
-              <div className="space-y-6">
+              <div className="stack-space">
                 {[-1000, -500, +500, +1000].map((diff) => {
                   const newInc = income + diff;
                   if (newInc <= 0) return null;
@@ -750,10 +750,10 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
 
             {/* Sibling Counties Same Income */}
             <div>
-              <h3 className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-8">
+              <h3 className="label-metadata mb-8">
                 Compare Washington Counties
               </h3>
-              <div className="space-y-6">
+              <div className="stack-space">
                 {siblingCounties.map((c) => {
                   const nChildren =
                     children === 1 ? "1-child" : `${children}-children`;

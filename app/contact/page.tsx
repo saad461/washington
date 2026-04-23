@@ -13,10 +13,10 @@ export const metadata: Metadata = {
 export default function ContactPage() {
  return (
  <div className="min-h-screen bg-gray-50 font-sans">
- <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 md:py-16">
+ <div className="max-w-3xl mx-auto px-4 sm:px-6 section-default">
 
  {/* Back Link */}
- <Link href="/" className="inline-flex items-center gap-2 text-[10px] uppercase font-bold text-gray-500 tracking-widest hover: transition-colors mb-12 md:mb-16">
+ <Link href="/" className="inline-flex items-center gap-2 label-metadata hover: transition-colors mb-12 md:mb-16">
  <ArrowLeft size={14} />
  Back to Calculator
  </Link>
@@ -27,7 +27,7 @@ export default function ContactPage() {
  <Mail className="w-8 h-8 text-white" />
  </div>
  <div>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-1">Support & Feedback</p>
+ <p className="label-metadata mb-1">Support & Feedback</p>
  <h1 >Contact WCSSC</h1>
  </div>
  </div>
@@ -40,13 +40,13 @@ export default function ContactPage() {
  Whether you found a bug in our 2026 calculator, have a suggestion for our legal glossary, or need to report an error in a county courthouse address, our editorial team is ready to listen.
  </p>
 
- <div className="space-y-6">
+ <div className="stack-space">
  <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm flex items-start gap-4 hover:border-indigo-200 transition-all">
  <div className="p-2 bg-indigo-50 rounded-xl">
  <Mail size={20} />
  </div>
  <div>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-1">Email Support</p>
+ <p className="label-metadata mb-1">Email Support</p>
  <p className=" break-all">support@wcssc.site</p>
  </div>
  </div>
@@ -56,7 +56,7 @@ export default function ContactPage() {
  <MessageCircle size={20} />
  </div>
  <div>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-1">Editorial Team</p>
+ <p className="label-metadata mb-1">Editorial Team</p>
  <p className=" break-all">editor@wcssc.site</p>
  </div>
  </div>
@@ -78,7 +78,7 @@ export default function ContactPage() {
 
  {/* Legal Reminder */}
  <div className="mt-20 p-6 md:p-6 bg-gray-100 rounded-xl text-center border border-gray-200">
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-4">Important Legal Notice</p>
+ <p className="label-metadata mb-4">Important Legal Notice</p>
  <p className=" text-sm max-w-2xl mx-auto">
  WCSSC is an educational tool and does not provide legal representation. If you are in immediate need of legal assistance regarding child support in Washington, please contact the <Link href="/washington-courts" className=" underline">Washington State Courts</Link> directly or seek a licensed attorney.
  </p>

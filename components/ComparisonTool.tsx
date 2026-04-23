@@ -45,7 +45,7 @@ export default function ComparisonTool() {
  const curFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
  return (
- <div className="max-w-7xl mx-auto px-4 py-24 md:py-3  sm:px-6 lg:px-8 relative z-10 font-sans">
+ <div className="max-w-7xl mx-auto px-4 section-default  sm:px-6 lg:px-8 relative z-10 font-sans">
 
  <div className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
  <div className="inline-flex p-3 bg-indigo-50 rounded-xl mb-8">
@@ -54,7 +54,7 @@ export default function ComparisonTool() {
  <h1 className="font-bold tracking-tight mb-6 font-heading leading-tight">
  2024 vs 2026 Guideline Comparison
  </h1>
- <p className="text-base md:text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto leading-relaxed">
+ <p className="text-body leading-relaxed text-body max-w-2xl mx-auto leading-relaxed">
  See exactly how Washington State&apos;s new 2026 economic tables (HB 1014 impacts) change your presumptive child support obligation compared to the old rules.
  </p>
  </div>
@@ -70,7 +70,7 @@ export default function ComparisonTool() {
 
  <div className="space-y-8 mb-10">
  <div>
- <label className="block text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-3">Combined Monthly Net Income</label>
+ <label className="block label-metadata mb-3">Combined Monthly Net Income</label>
  <div className="relative group">
  <span className="absolute left-4 top-1/2 -translate-y-1/2 font-medium group-focus-within: transition-colors">$</span>
  <input
@@ -83,7 +83,7 @@ export default function ComparisonTool() {
  </div>
 
  <div>
- <label className="block text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-3">Number of Children</label>
+ <label className="block label-metadata mb-3">Number of Children</label>
  <div className="flex gap-2">
  {[1, 2, 3, 4, 5].map((num) => (
  <button
@@ -112,20 +112,20 @@ export default function ComparisonTool() {
 
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
  <div className="bg-gray-50 border border-gray-100 rounded-xl p-6 relative overflow-hidden group">
- <p className=" text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-4">Old 2024 Presumptive</p>
- <p className="text-3xl md:text-4xl font-medium mb-2 font-heading">
+ <p className=" label-metadata mb-4">Old 2024 Presumptive</p>
+ <p className="text-3xl font-medium mb-2 font-heading">
  {actual2024 !== null ? curFormatter.format(actual2024) : 'Court Discretion'}
  </p>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">Averages Estimate</p>
+ <p className="label-metadata ">Averages Estimate</p>
  </div>
 
  <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 text-white relative overflow-hidden shadow-sm">
  <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl -translate-y-16 translate-x-16" />
- <p className=" text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-4">New 2026 Presumptive</p>
- <p className="text-3xl md:text-4xl font-medium text-white mb-2 font-heading">
+ <p className=" label-metadata mb-4">New 2026 Presumptive</p>
+ <p className="text-3xl font-medium text-white mb-2 font-heading">
  {actual2026 !== null ? curFormatter.format(actual2026) : 'Court Discretion'}
  </p>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold text-indigo-400 uppercase ">Official 2026 Tables</p>
+ <p className="label-metadata text-indigo-400 uppercase ">Official 2026 Tables</p>
  </div>
  </div>
 

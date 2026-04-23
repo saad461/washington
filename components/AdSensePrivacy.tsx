@@ -66,8 +66,8 @@ const AdSensePrivacy = () => {
  <Eye className="w-6 h-6 text-indigo-600" />
  <h2 className="font-semibold ">Data Sharing &amp; Cookies</h2>
  </div>
- <p className="mb-6 font-medium uppercase text-[10px] uppercase font-bold text-gray-500 tracking-widest ">Mandatory Third-Party Disclosure:</p>
- <ul className="list-disc pl-6 space-y-6 mb-6">
+ <p className="mb-6 font-medium label-metadata ">Mandatory Third-Party Disclosure:</p>
+ <ul className="list-disc pl-6 stack-space mb-6">
  <li>Third-party vendors, including Google, use cookies to serve ads based on a user&apos;s prior visits to your website or other websites.</li>
  <li>Google&apos;s use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</li>
  <li>Users may opt out of personalized advertising by visiting <Link href="https://www.google.com/settings/ads" className=" underline">Ads Settings</Link>.</li>

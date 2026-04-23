@@ -56,7 +56,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
  activeId === heading.id
  ? ' font-medium border-l-2 border-indigo-600 pl-4 bg-indigo-50/30'
  : ' hover: border-l-2 border-transparent pl-4 hover:border-gray-200'
- } ${heading.level === 3 ? 'ml-4 text-[10px] uppercase font-bold text-gray-500 tracking-widest' : ''}`}
+ } ${heading.level === 3 ? 'ml-4 label-metadata' : ''}`}
  >
  {heading.text}
  </a>
@@ -68,7 +68,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
  <>
  {/* Desktop: Sticky Sidebar TOC */}
  <div className="hidden lg:block bg-white border border-gray-100 rounded-xl p-6 shadow-sm sticky top-28">
- <h3 className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-6 flex items-center gap-2">
+ <h3 className="label-metadata mb-6 flex items-center gap-2">
  <svg className="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
  Table of Contents
  </h3>
@@ -83,7 +83,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
  aria-expanded={isOpen}
  aria-controls="toc-mobile-panel"
  >
- <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase flex items-center gap-2">
+ <span className="label-metadata flex items-center gap-2">
  <svg className="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
  In this guide
  </span>

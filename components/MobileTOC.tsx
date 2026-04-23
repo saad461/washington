@@ -39,7 +39,7 @@ export default function MobileTOC({ headings }: MobileTOCProps) {
  onClick={(e) => handleClick(e, h.id)}
  className={`block transition-colors leading-snug hover:text-indigo-800 ${
  h.level === 3
- ? 'pl-4 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold text-indigo-600'
+ ? 'pl-4 label-metadata text-indigo-600'
  : 'text-sm font-medium '
  }`}
  >

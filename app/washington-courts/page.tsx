@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function CourtsIndex() {
  return (
  <div className="flex-1 bg-gray-50 relative w-full overflow-hidden font-sans">
- <div className="max-w-7xl mx-auto px-6 py-10 md:py-16 relative z-10">
+ <div className="max-w-7xl mx-auto px-6 section-default relative z-10">
 
  <div className="mb-16 text-center max-w-3xl mx-auto">
  <div className="inline-flex p-3 bg-emerald-50 text-emerald-500 rounded-xl mb-6">
@@ -35,7 +35,7 @@ export default function CourtsIndex() {
  >
  <h2 className=" mb-4 group-hover:text-emerald-700 transition-colors flex items-center justify-between">
  <span>{court.name}</span>
- <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest bg-gray-50 px-2 py-1 rounded-lg">View</span>
+ <span className="label-metadata bg-gray-50 px-2 py-1 rounded-lg">View</span>
  </h2>
 
  <div className="space-y-3">

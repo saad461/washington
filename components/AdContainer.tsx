@@ -41,7 +41,7 @@ const AdContainer: React.FC<AdContainerProps> = ({ slot, wordCount = 600 }) => {
  return (
  <div className="w-full py-10 px-8 border-2 border-dashed border-gray-50 rounded-xl flex flex-col items-center justify-center opacity-30 grayscale no-print my-10">
  <AlertCircle className="w-5 h-5 mb-2" />
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase italic">Inventory Held: Awaiting Content Depth</p>
+ <p className="label-metadata italic">Inventory Held: Awaiting Content Depth</p>
  </div>
  );
  }

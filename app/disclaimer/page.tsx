@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default function DisclaimerPage() {
  return (
  <div className="min-h-screen bg-gray-50 font-sans">
- <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 md:py-16">
+ <div className="max-w-3xl mx-auto px-4 sm:px-6 section-default">
 
  {/* Back Link */}
- <Link href="/" className="inline-flex items-center gap-2 text-[10px] uppercase font-bold text-gray-500 tracking-widest hover: transition-colors mb-12 md:mb-16">
+ <Link href="/" className="inline-flex items-center gap-2 label-metadata hover: transition-colors mb-12 md:mb-16">
  <ArrowLeft size={14} />
  Back to Calculator
  </Link>
@@ -25,7 +25,7 @@ export default function DisclaimerPage() {
  <Scale className="w-8 h-8 text-white" />
  </div>
  <div>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase text-amber-600 mb-1">Important Notice</p>
+ <p className="label-metadata text-amber-600 mb-1">Important Notice</p>
  <h1 >Legal Disclaimer</h1>
  </div>
  </div>
@@ -42,7 +42,7 @@ export default function DisclaimerPage() {
  </div>
 
  {/* Content Sections */}
- <div className="space-y-6 md:space-y-10 ">
+ <div className="stack-space md:space-y-10 ">
  {[
  {
  title: "1. Educational Purpose Only",
@@ -77,8 +77,8 @@ export default function DisclaimerPage() {
  </div>
 
  <div className="mt-16 p-6 bg-gray-900 rounded-2xl text-center ">
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-6">Last Updated: January 2026</p>
- <div className="grid grid-cols-3 md:flex md:justify-center gap-4 md:gap-6 text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase ">
+ <p className="label-metadata mb-6">Last Updated: January 2026</p>
+ <div className="grid grid-cols-3 md:flex md:justify-center gap-4 md:gap-6 label-metadata ">
  <Link href="/privacy" className="hover:text-indigo-400 transition-colors">Privacy Policy</Link>
  <Link href="/terms" className="hover:text-indigo-400 transition-colors text-center">Terms of Service</Link>
  <Link href="/" className="hover:text-indigo-400 transition-colors">Calculator</Link>

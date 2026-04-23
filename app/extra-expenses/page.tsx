@@ -26,7 +26,7 @@ export default function ExtraExpensesCalculator() {
 
  return (
  <div className="flex-1 bg-[#FDFDFE] relative w-full overflow-hidden font-sans min-h-screen">
- <div className="max-w-3xl mx-auto px-6 py-10 md:py-16 relative z-10">
+ <div className="max-w-3xl mx-auto px-6 section-default relative z-10">
 
  <div className="mb-16 text-center">
  <div className="inline-flex p-3 bg-indigo-50 rounded-xl mb-6">
@@ -43,7 +43,7 @@ export default function ExtraExpensesCalculator() {
  <div className="bg-white border border-gray-100 rounded-xl shadow-sm shadow-indigo-900/5 p-6 md:p-14 mb-12">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
  <div>
- <label className="block text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-2">Parent 1 Net Income</label>
+ <label className="block label-metadata mb-2">Parent 1 Net Income</label>
  <div className="relative group">
  <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 group-focus-within:text-indigo-600 transition-colors" />
  <input
@@ -56,7 +56,7 @@ export default function ExtraExpensesCalculator() {
  </div>
  </div>
  <div>
- <label className="block text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-2">Parent 2 Net Income</label>
+ <label className="block label-metadata mb-2">Parent 2 Net Income</label>
  <div className="relative group">
  <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 group-focus-within:text-indigo-600 transition-colors" />
  <input
@@ -71,7 +71,7 @@ export default function ExtraExpensesCalculator() {
  </div>
 
  <div className="mb-12">
- <label className="block text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-2">Total Monthly Extraordinary Expense (e.g. Daycare)</label>
+ <label className="block label-metadata mb-2">Total Monthly Extraordinary Expense (e.g. Daycare)</label>
  <div className="relative group max-w-md">
  <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 group-focus-within:text-indigo-600 transition-colors" />
  <input
@@ -91,18 +91,18 @@ export default function ExtraExpensesCalculator() {
  className="bg-gray-900 rounded-2xl p-6 text-white mt-10 relative overflow-hidden"
  >
  <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl -translate-y-16 translate-x-16" />
- <h3 className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-6">Proportional Split Results</h3>
+ <h3 className="label-metadata mb-6">Proportional Split Results</h3>
 
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
  <div className="bg-white/10 rounded-xl p-6 border border-white/5">
- <p className=" text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-1">Parent 1 Share ({perFormatter.format(p1Share)})</p>
+ <p className=" label-metadata mb-1">Parent 1 Share ({perFormatter.format(p1Share)})</p>
  <p className="text-3xl ">{curFormatter.format(p1Cost)}</p>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mt-2">{curFormatter.format(p1)} / mo net income</p>
+ <p className="label-metadata mt-2">{curFormatter.format(p1)} / mo net income</p>
  </div>
  <div className="bg-white/10 rounded-xl p-6 border border-white/5">
- <p className=" text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-1">Parent 2 Share ({perFormatter.format(p2Share)})</p>
+ <p className=" label-metadata mb-1">Parent 2 Share ({perFormatter.format(p2Share)})</p>
  <p className="text-3xl text-indigo-400">{curFormatter.format(p2Cost)}</p>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mt-2">{curFormatter.format(p2)} / mo net income</p>
+ <p className="label-metadata mt-2">{curFormatter.format(p2)} / mo net income</p>
  </div>
  </div>
  </motion.div>

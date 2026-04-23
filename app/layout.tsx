@@ -60,7 +60,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
- themeColor: '#4f46e5',
+ themeColor: '#6366F1',
 };
 
 export default function RootLayout({
@@ -77,7 +77,7 @@ export default function RootLayout({
  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
  </head>
- <body className="min-h-full flex flex-col bg-white ">
+ <body className="min-h-full flex flex-col bg-page">
 
  {/* Google AdSense — Publisher ID: ca-pub-9902783604679065 */}
  <Script
@@ -111,7 +111,7 @@ export default function RootLayout({
  </Script>
  <Navbar />
  <main className="flex-1 flex flex-col">
- <Suspense fallback={<div className="min-h-screen bg-gray-50" />}>
+ <Suspense fallback={<div className="min-h-screen bg-section-alt" />}>
  {children}
  </Suspense>
  </main>

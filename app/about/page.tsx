@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
  return (
  <div className="min-h-screen bg-gray-50 font-sans">
- <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 md:py-16">
+ <div className="max-w-3xl mx-auto px-4 sm:px-6 section-default">
 
- <Link href="/" className="inline-flex items-center gap-2 text-[10px] uppercase font-bold text-gray-500 tracking-widest hover: transition-colors mb-12 md:mb-16">
+ <Link href="/" className="inline-flex items-center gap-2 label-metadata hover: transition-colors mb-12 md:mb-16">
  <ArrowLeft size={14} />
  Back to Calculator
  </Link>
@@ -23,7 +23,7 @@ export default function AboutPage() {
  <Users className="w-8 h-8 text-white" />
  </div>
  <div>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-1">E-E-A-T Transparency</p>
+ <p className="label-metadata mb-1">E-E-A-T Transparency</p>
  <h1 >About WCSSC</h1>
  </div>
  </div>
@@ -32,7 +32,7 @@ export default function AboutPage() {
  The Washington Child Support Schedule Center (WCSSC) is an independent educational platform dedicated to helping Washington State families understand and estimate child support obligations under the 2026 guidelines.
  </p>
 
- <div className="space-y-6 md:space-y-8 ">
+ <div className="stack-space ">
  <div className="p-6 md:p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-indigo-200 hover:bg-gray-50 transition-all">
  <div className="flex items-center gap-4 mb-4">
  <Scale className="w-5 h-5 text-indigo-600 flex-shrink-0" />
@@ -48,7 +48,7 @@ export default function AboutPage() {
  <Database className="w-5 h-5 text-indigo-600 flex-shrink-0" />
  <h2 className="text-xl md: ">Data Sources &amp; Methodology</h2>
  </div>
- <div className=" md:leading-loose md:pl-9 space-y-6">
+ <div className=" md:leading-loose md:pl-9 stack-space">
  <p>Our calculations are powered by:</p>
  <ul className="list-disc pl-6 space-y-2">
  <li><strong>2026 Washington State Economic Table</strong> — Published by the Administrative Office of the Courts (AOC), effective January 1, 2026.</li>
@@ -65,7 +65,7 @@ export default function AboutPage() {
  <ShieldCheck className="w-5 h-5 text-indigo-600 flex-shrink-0" />
  <h2 className="text-xl md: ">Editorial &amp; Legal Review</h2>
  </div>
- <div className=" md:leading-loose md:pl-9 space-y-6">
+ <div className=" md:leading-loose md:pl-9 stack-space">
  <p>
  The WCSSC Editorial &amp; Legal Team consists of family law advocates, data analysts, and technical developers with expertise in Washington State family law. Our content undergoes a multi-step review process:
  </p>
@@ -76,9 +76,9 @@ export default function AboutPage() {
  { step: "03", label: "Technical Audit", desc: "Calculation engine tested against known edge cases and SSR thresholds" },
  ].map((s) => (
  <div key={s.step} className="p-5 bg-gray-50 rounded-2xl border border-gray-100">
- <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-3">{s.step}</div>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-1">{s.label}</p>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest ">{s.desc}</p>
+ <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white label-metadata mb-3">{s.step}</div>
+ <p className="label-metadata mb-1">{s.label}</p>
+ <p className="label-metadata ">{s.desc}</p>
  </div>
  ))}
  </div>
@@ -113,7 +113,7 @@ export default function AboutPage() {
  <div className=" md:leading-loose md:pl-9">
  <p className="mb-4">Have questions, feedback, or data correction requests? We&apos;d love to hear from you.</p>
  <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100 inline-block w-full sm:w-auto">
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-1">General Inquiries &amp; Support</p>
+ <p className="label-metadata mb-1">General Inquiries &amp; Support</p>
  <a href="mailto:support@wcssc.site" className=" underline break-all sm:break-normal">support@wcssc.site</a>
  </div>
  </div>
@@ -121,8 +121,8 @@ export default function AboutPage() {
  </div>
 
  <div className="mt-16 p-6 bg-gray-900 rounded-2xl text-center ">
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase mb-6">Washington Child Support Schedule Center &copy; 2026</p>
- <div className="grid grid-cols-2 md:flex md:justify-center gap-4 md:gap-6 text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase ">
+ <p className="label-metadata mb-6">Washington Child Support Schedule Center &copy; 2026</p>
+ <div className="grid grid-cols-2 md:flex md:justify-center gap-4 md:gap-6 label-metadata ">
  <Link href="/privacy" className="hover:text-indigo-400 transition-colors">Privacy Policy</Link>
  <Link href="/terms" className="hover:text-indigo-400 transition-colors">Terms of Service</Link>
  <Link href="/disclaimer" className="hover:text-indigo-400 transition-colors">Disclaimer</Link>

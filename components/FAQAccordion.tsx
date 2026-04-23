@@ -69,7 +69,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  onClick={() => toggleAccordion(index)}
  className="w-full flex items-center justify-between cursor-pointer outline-none group"
  >
- <span className="text-xl font-semibold text-gray-900 text-left pr-4 leading-tight">
+ <span className="text-xl font-semibold text-heading text-left pr-4 leading-tight">
  {item.question}
  </span>
  <ChevronDown
@@ -85,7 +85,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
  >
  <div className="overflow-hidden">
- <div className="pt-4 text-base md:text-lg text-gray-700 leading-relaxed">
+ <div className="pt-4 text-body text-body leading-relaxed">
  <p>{item.answer}</p>
  </div>
  </div>

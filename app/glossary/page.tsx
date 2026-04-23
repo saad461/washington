@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function GlossaryIndex() {
  return (
  <div className="flex-1 bg-white relative w-full overflow-hidden font-sans">
- <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-3  relative z-10">
+ <div className="container-wide section-default  relative z-10">
  <div className="max-w-3xl mx-auto mb-20 text-center">
  <div className="inline-flex p-3 bg-indigo-50 rounded-xl mb-8">
  <BookA className="w-8 h-8" />
@@ -20,7 +20,7 @@ export default function GlossaryIndex() {
  <h1 className=" mb-6 ">
  Washington Child Support Glossary (2026)
  </h1>
- <p className="text-base md:text-lg leading-relaxed text-gray-700 max-w-2xl mx-auto ">
+ <p className="text-body leading-relaxed text-body max-w-2xl mx-auto ">
  Understanding family court requires learning a new legal language. We break down complex terms into simple, actionable definitions to help you navigate your 2026 payments.
  </p>
  </div>

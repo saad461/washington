@@ -47,10 +47,10 @@ export default async function GlossaryTermPage({ params }: Props) {
  <div className="flex-1 bg-[#FDFDFE] relative w-full overflow-hidden font-sans">
  <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
- <div className="max-w-3xl mx-auto px-6 py-10 md:py-16 relative z-10">
+ <div className="max-w-3xl mx-auto px-6 section-default relative z-10">
 
  {/* Breadcrumbs */}
- <nav className="flex items-center gap-2 mb-12 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
+ <nav className="flex items-center gap-2 mb-12 label-metadata">
  <Link href="/" className="hover: transition-colors">Home</Link>
  <ChevronRight className="w-3 h-3 opacity-50" />
  <Link href="/glossary" className="hover: transition-colors">Glossary</Link>
@@ -69,7 +69,7 @@ export default async function GlossaryTermPage({ params }: Props) {
  </div>
 
  <div className="prose prose-lg max-w-none mb-12">
- <p className="text-xl text-gray-800 border-l-4 border-indigo-500 pl-6 bg-gray-50 p-6 rounded-r-2xl">
+ <p className="text-xl text-heading border-l-4 border-indigo-500 pl-6 bg-gray-50 p-6 rounded-r-2xl">
  {termData.definition}
  </p>
 
@@ -80,7 +80,7 @@ export default async function GlossaryTermPage({ params }: Props) {
  </div>
 
  <div className="border-t border-gray-100 pt-10">
- <h3 className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-6">Related Tools & Resources</h3>
+ <h3 className="label-metadata mb-6">Related Tools & Resources</h3>
  <div className="flex flex-col sm:flex-row gap-4">
  {termData.relatedLinks.map((link, idx) => (
  <Link

@@ -42,7 +42,7 @@ export default function HowToFileGuide() {
  <div className="flex-1 bg-gray-50 relative w-full overflow-hidden font-sans">
  <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
- <div className="max-w-3xl mx-auto px-6 py-10 md:py-16 relative z-10">
+ <div className="max-w-3xl mx-auto px-6 section-default relative z-10">
 
  <div className="mb-16 text-center">
  <div className="inline-flex p-3 bg-indigo-50 rounded-xl mb-6">
@@ -87,7 +87,7 @@ export default function HowToFileGuide() {
  <p>
  You must complete the specific mandatory forms prescribed by the Washington State Administrative Office of the Courts (AOC). The core forms include:
  </p>
- <ul className="list-none space-y-6 pl-0">
+ <ul className="list-none stack-space pl-0">
  <li className="flex items-start gap-3">
  <CheckCircle2 className="w-6 h-6 shrink-0 mt-1" />
  <span><strong>FL All Family 130:</strong> Child Support Worksheet.</span>

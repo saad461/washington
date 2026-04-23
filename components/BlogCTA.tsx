@@ -10,7 +10,7 @@ export default function BlogCTA() {
  <Calculator className="w-8 h-8 " />
  </div>
 
- <h3 className="text-2xl md:text-3xl sm:text-3xl md:text-4xl font-semibold mb-4 tracking-tight leading-tight font-heading">
+ <h3 className="text-2xl  md:text-4xl font-semibold mb-4 tracking-tight leading-tight font-heading">
  Calculate Your Exact Child Support
  </h3>
 
