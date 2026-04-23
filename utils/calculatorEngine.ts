@@ -92,7 +92,7 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   if (combinedIncome >= 2200) {
     // OTHER CHILDREN ADJUSTMENT
     if (otherChildren > 0) {
-      const reductionRate = Math.min(otherChildren * 0.05, 0.20);
+      const reductionRate = Math.min(otherChildren * 0.025, 0.125);
       const prevP1 = obligationP1;
       const prevP2 = obligationP2;
 
@@ -103,19 +103,23 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
     }
 
     // ✅ (D) Parenting Time Adjustment
-    if (parentingTime > 25) {
-      const adjustment = (parentingTime - 25) / 100;
-      const prevP1 = obligationP1;
-      const prevP2 = obligationP2;
+    const BASELINE = 25;
+    let parentingAdjustmentAmount = 0;
+
+    if (parentingTime > BASELINE) {
+      const extraTime = parentingTime - BASELINE;
+      const maxReductionRate = 0.5; // max 50% reduction
+      const reductionRate = Math.min(extraTime / 100, maxReductionRate);
 
       if (payingParent === "P1") {
-        obligationP1 *= (1 - adjustment);
-        parentingAdjustment = obligationP1 - prevP1;
+        parentingAdjustmentAmount = obligationP1 * reductionRate;
+        obligationP1 -= parentingAdjustmentAmount;
       } else {
-        obligationP2 *= (1 - adjustment);
-        parentingAdjustment = obligationP2 - prevP2;
+        parentingAdjustmentAmount = obligationP2 * reductionRate;
+        obligationP2 -= parentingAdjustmentAmount;
       }
     }
+    parentingAdjustment = -parentingAdjustmentAmount;
 
     // ✅ (E) Add Extra Expenses
     const totalExtra = healthInsurance + daycare;
@@ -131,7 +135,9 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   // ✅ (C) Apply SSR Protection
   const applySSRCap = (obligation: number, netIncome: number) => {
     const maxAffordable = netIncome - SELF_SUPPORT_RESERVE;
-    if (maxAffordable <= 0) return MIN_SUPPORT_PER_CHILD * children;
+    if (maxAffordable <= 0) {
+      return Math.min(MIN_SUPPORT_PER_CHILD * children, obligation);
+    }
     return Math.min(obligation, maxAffordable);
   };
 
@@ -160,10 +166,15 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   obligationP2 = apply45Rule(obligationP2, netP2);
 
   // ✅ (G) Prevent Invalid Values
-  obligationP1 = Math.max(obligationP1, 0);
-  obligationP2 = Math.max(obligationP2, 0);
+  obligationP1 = Math.max(0, obligationP1);
+  obligationP2 = Math.max(0, obligationP2);
 
-  const finalObligation = payingParent === "P1" ? obligationP1 : obligationP2;
+  let finalObligation = payingParent === "P1" ? obligationP1 : obligationP2;
+
+  // ✅ (H) Safety Clamp for Extreme Cases
+  const MAX_REASONABLE_SUPPORT = combinedIncome * 0.6;
+  finalObligation = Math.min(finalObligation, MAX_REASONABLE_SUPPORT);
+
   const ssrApplied = (payingParent === "P1" && obligationP1 !== originalObligationP1) || (payingParent === "P2" && obligationP2 !== originalObligationP2);
   const is45PercentCapped = (payingParent === "P1" && obligationP1 < pre45P1) || (payingParent === "P2" && obligationP2 < pre45P2);
   const isLowIncome = combinedIncome < 2200;
