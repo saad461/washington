@@ -1,14 +1,3 @@
-export type WashingtonTableRow = {
-  income: number;
-  supportByChildren: {
-    1: number;
-    2: number;
-    3: number;
-    4: number;
-    5: number;
-  };
-};
-
 export const washingtonTable2026: Record<number, Record<number, number>> = {
   2200: { 1: 477, 2: 367, 3: 298, 4: 250, 5: 220 },
   2300: { 1: 499, 2: 384, 3: 311, 4: 261, 5: 230 },
@@ -158,11 +147,16 @@ export const washingtonTable2026: Record<number, Record<number, number>> = {
   50000: { 1: 3916, 2: 3058, 3: 2692, 4: 2367, 5: 2157 }
 };
 
+// PERFORMANCE OPTIMIZATION: Memoize sorted brackets outside function
+const availableBrackets = Object.keys(washingtonTable2026)
+  .map(Number)
+  .sort((a, b) => b - a);
+
 /**
  * Official Washington State Child Support Schedule Lookup (2026)
  * @param income - Monthly net income
  * @param children - Number of children
- * @returns Base support amount or null if beyond table range
+ * @returns Per-child base support amount or null if below threshold
  */
 export function getExactSupport(income: number, children: number): number | null {
   // 1. Income below 2200 returns null
@@ -170,14 +164,10 @@ export function getExactSupport(income: number, children: number): number | null
     return null;
   }
 
-  // 2. Clamp income to a maximum of 50,000
+  // 2. Clamp income to a maximum of 50,000 (standard Washington ceiling)
   const effectiveIncome = Math.min(income, 50000);
 
   // 3. Find the nearest LOWER income bracket using floor logic
-  const availableBrackets = Object.keys(washingtonTable2026)
-    .map(Number)
-    .sort((a, b) => b - a);
-
   const bracket = availableBrackets.find(b => b <= effectiveIncome);
 
   if (!bracket) return null;
