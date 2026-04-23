@@ -1,9 +1,19 @@
 /**
  * OFFICIAL WASHINGTON STATE CHILD SUPPORT ECONOMIC TABLE (2026)
  *
+ * Column Labels:
+ * - Combined Monthly Net Income
+ * - One Child Family
+ * - Two Children Family
+ * - Three Children Family
+ * - Four Children Family
+ * - Five Children Family
+ *
  * IMPORTANT LEGAL NOTE:
- * These values represent the FINAL BASIC SUPPORT OBLIGATION for the case.
- * They are NOT "per-child" multipliers.
+ * These values represent the "Monthly Basic Support Obligation Per Child".
+ * However, per user requirement for this calculator version:
+ * NO MULTIPLICATION SHOULD BE APPLIED ANYWHERE IN THE SYSTEM.
+ * The value returned is the FINAL TOTAL OBLIGATION for the case.
  *
  * Example: Income 2200, 2 Children = 367.
  * This 367 is the TOTAL amount for the whole case.
@@ -13,11 +23,11 @@
 export type WashingtonTableRow = {
   income: number;
   supportByChildren: {
-    1: number;
-    2: number;
-    3: number;
-    4: number;
-    5: number;
+    1: number; // One Child Family
+    2: number; // Two Children Family
+    3: number; // Three Children Family
+    4: number; // Four Children Family
+    5: number; // Five Children Family
   };
 };
 
@@ -178,8 +188,18 @@ const availableBrackets = Object.keys(washingtonTable2026)
 /**
  * Official Washington State Child Support Schedule Lookup (2026)
  *
- * IMPORTANT: The returned value is the TOTAL BASIC OBLIGATION for the case.
- * It accounts for multi-child scaling and MUST NOT be multiplied further.
+ * Labels used in this table:
+ * - Combined Monthly Net Income
+ * - One Child Family
+ * - Two Children Family
+ * - Three Children Family
+ * - Four Children Family
+ * - Five Children Family
+ *
+ * IMPORTANT: The returned value is the "Monthly Basic Support Obligation Per Child".
+ * However, per user requirement for this system:
+ * NO MULTIPLICATION SHOULD BE APPLIED ANYWHERE.
+ * The value returned is treated as the FINAL TOTAL OBLIGATION for the case.
  *
  * @param income - Monthly net income
  * @param children - Number of children
