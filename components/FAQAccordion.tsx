@@ -85,7 +85,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
  >
  <div className="overflow-hidden">
- <div className="pt-4 text-body text-body leading-relaxed">
+ <div className="pt-4 text-body leading-relaxed">
  <p>{item.answer}</p>
  </div>
  </div>

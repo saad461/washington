@@ -162,7 +162,7 @@ export default function Home() {
               <div className="text-4xl font-bold tracking-tight">$1,155<span className="text-sm font-normal ml-1 opacity-80">/ mo</span></div>
             </div>
 
-            <p className="text-body text-body leading-relaxed text-center max-w-2xl mx-auto">
+            <p className="text-body leading-relaxed text-center max-w-2xl mx-auto">
               In King County, courts apply the standard Washington economic schedule. For a combined net income of $5,000 with 2 children, the base presumptive support is $1,155. This amount is typically shared between parents based on their proportional income share.
             </p>
           </div>
@@ -176,7 +176,7 @@ export default function Home() {
             How Washington Child Support Is Calculated
           </h2>
 
-          <div className="max-w-2xl mx-auto space-y-10 text-body text-body leading-relaxed">
+          <div className="max-w-2xl mx-auto space-y-10 text-body leading-relaxed">
             <p>
               Washington State uses the <strong>Income Shares Model</strong>, where both parents&apos; monthly net incomes are combined. A proportional share is dedicated to the children, reflecting what would have been spent if the household remained together.
             </p>
