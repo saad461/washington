@@ -1,229 +1,214 @@
 /**
  * OFFICIAL WASHINGTON STATE CHILD SUPPORT ECONOMIC TABLE (2026)
  *
- * Column Labels:
- * - Combined Monthly Net Income
- * - One Child Family
- * - Two Children Family
- * - Three Children Family
- * - Four Children Family
- * - Five Children Family
- *
  * IMPORTANT LEGAL NOTE:
- * These values represent the "Monthly Basic Support Obligation Per Child".
- * However, per user requirement for this calculator version:
- * NO MULTIPLICATION SHOULD BE APPLIED ANYWHERE IN THE SYSTEM.
- * The value returned is the FINAL TOTAL OBLIGATION for the case.
+ * These values represent the FINAL BASIC SUPPORT OBLIGATION for the case.
+ * They are NOT "per-child" multipliers.
  *
  * Example: Income 2200, 2 Children = 367.
  * This 367 is the TOTAL amount for the whole case.
  * DO NOT multiply by the number of children.
  */
 
-export type WashingtonTableRow = {
+export type SupportTableEntry = {
   income: number;
-  supportByChildren: {
-    1: number; // One Child Family
-    2: number; // Two Children Family
-    3: number; // Three Children Family
-    4: number; // Four Children Family
-    5: number; // Five Children Family
-  };
+  totalObligation: {
+    children: 1 | 2 | 3 | 4 | 5;
+    amount: number;
+  }[];
 };
 
-export const washingtonTable2026: Record<number, Record<number, number>> = {
-  2200: { 1: 477, 2: 367, 3: 298, 4: 250, 5: 220 },
-  2300: { 1: 499, 2: 384, 3: 311, 4: 261, 5: 230 },
-  2400: { 1: 521, 2: 400, 3: 325, 4: 272, 5: 239 },
-  2500: { 1: 543, 2: 417, 3: 338, 4: 283, 5: 249 },
-  2600: { 1: 565, 2: 433, 3: 351, 4: 294, 5: 259 },
-  2700: { 1: 587, 2: 450, 3: 365, 4: 305, 5: 269 },
-  2800: { 1: 609, 2: 467, 3: 378, 4: 317, 5: 279 },
-  2900: { 1: 630, 2: 483, 3: 391, 4: 328, 5: 288 },
-  3000: { 1: 652, 2: 500, 3: 405, 4: 339, 5: 298 },
-  3100: { 1: 674, 2: 516, 3: 418, 4: 350, 5: 308 },
-  3200: { 1: 696, 2: 533, 3: 431, 4: 361, 5: 318 },
-  3300: { 1: 718, 2: 550, 3: 444, 4: 372, 5: 328 },
-  3400: { 1: 740, 2: 566, 3: 458, 4: 384, 5: 337 },
-  3500: { 1: 762, 2: 583, 3: 471, 4: 395, 5: 347 },
-  3600: { 1: 784, 2: 599, 3: 484, 4: 406, 5: 357 },
-  3700: { 1: 803, 2: 614, 3: 496, 4: 416, 5: 366 },
-  3800: { 1: 816, 2: 624, 3: 503, 4: 422, 5: 371 },
-  3900: { 1: 830, 2: 634, 3: 511, 4: 428, 5: 377 },
-  4000: { 1: 843, 2: 643, 3: 518, 4: 434, 5: 382 },
-  4100: { 1: 857, 2: 653, 3: 526, 4: 440, 5: 388 },
-  4200: { 1: 867, 2: 660, 3: 531, 4: 445, 5: 392 },
-  4300: { 1: 877, 2: 668, 3: 537, 4: 450, 5: 396 },
-  4400: { 1: 887, 2: 675, 3: 543, 4: 455, 5: 400 },
-  4500: { 1: 896, 2: 682, 3: 548, 4: 459, 5: 404 },
-  4600: { 1: 906, 2: 689, 3: 554, 4: 464, 5: 408 },
-  4700: { 1: 916, 2: 697, 3: 559, 4: 469, 5: 412 },
-  4800: { 1: 927, 2: 705, 3: 566, 4: 474, 5: 417 },
-  4900: { 1: 939, 2: 714, 3: 573, 4: 480, 5: 422 },
-  5000: { 1: 951, 2: 723, 3: 580, 4: 486, 5: 428 },
-  5100: { 1: 963, 2: 732, 3: 587, 4: 492, 5: 433 },
-  5200: { 1: 975, 2: 741, 3: 594, 4: 498, 5: 438 },
-  5300: { 1: 987, 2: 750, 3: 602, 4: 504, 5: 443 },
-  5400: { 1: 999, 2: 759, 3: 609, 4: 510, 5: 449 },
-  5500: { 1: 1011, 2: 768, 3: 616, 4: 516, 5: 454 },
-  5600: { 1: 1023, 2: 777, 3: 623, 4: 522, 5: 459 },
-  5700: { 1: 1030, 2: 782, 3: 627, 4: 525, 5: 462 },
-  5800: { 1: 1036, 2: 786, 3: 630, 4: 528, 5: 465 },
-  5900: { 1: 1042, 2: 791, 3: 634, 4: 531, 5: 467 },
-  6000: { 1: 1048, 2: 795, 3: 637, 4: 534, 5: 470 },
-  6100: { 1: 1054, 2: 800, 3: 641, 4: 537, 5: 472 },
-  6200: { 1: 1061, 2: 804, 3: 644, 4: 540, 5: 475 },
-  6300: { 1: 1067, 2: 809, 3: 648, 4: 543, 5: 477 },
-  6400: { 1: 1073, 2: 813, 3: 651, 4: 545, 5: 480 },
-  6500: { 1: 1081, 2: 819, 3: 656, 4: 549, 5: 483 },
-  6600: { 1: 1096, 2: 830, 3: 665, 4: 557, 5: 490 },
-  6700: { 1: 1111, 2: 842, 3: 674, 4: 564, 5: 497 },
-  6800: { 1: 1126, 2: 853, 3: 683, 4: 572, 5: 503 },
-  6900: { 1: 1141, 2: 864, 3: 692, 4: 579, 5: 510 },
-  7000: { 1: 1156, 2: 875, 3: 701, 4: 587, 5: 516 },
-  7100: { 1: 1170, 2: 886, 3: 710, 4: 594, 5: 523 },
-  7200: { 1: 1185, 2: 898, 3: 719, 4: 602, 5: 530 },
-  7300: { 1: 1200, 2: 909, 3: 727, 4: 609, 5: 536 },
-  7400: { 1: 1212, 2: 918, 3: 734, 4: 615, 5: 541 },
-  7500: { 1: 1222, 2: 925, 3: 740, 4: 620, 5: 545 },
-  7600: { 1: 1231, 2: 932, 3: 745, 4: 624, 5: 549 },
-  7700: { 1: 1241, 2: 939, 3: 751, 4: 629, 5: 554 },
-  7800: { 1: 1251, 2: 946, 3: 756, 4: 634, 5: 558 },
-  7900: { 1: 1261, 2: 953, 3: 762, 4: 638, 5: 562 },
-  8000: { 1: 1270, 2: 960, 3: 767, 4: 643, 5: 566 },
-  8100: { 1: 1280, 2: 968, 3: 773, 4: 647, 5: 570 },
-  8200: { 1: 1290, 2: 975, 3: 778, 4: 652, 5: 574 },
-  8300: { 1: 1299, 2: 981, 3: 783, 4: 656, 5: 577 },
-  8400: { 1: 1308, 2: 987, 3: 788, 4: 660, 5: 581 },
-  8500: { 1: 1316, 2: 994, 3: 793, 4: 664, 5: 584 },
-  8600: { 1: 1325, 2: 1000, 3: 797, 4: 668, 5: 588 },
-  8700: { 1: 1334, 2: 1007, 3: 802, 4: 672, 5: 591 },
-  8800: { 1: 1343, 2: 1013, 3: 807, 4: 676, 5: 595 },
-  8900: { 1: 1352, 2: 1019, 3: 812, 4: 680, 5: 599 },
-  9000: { 1: 1361, 2: 1026, 3: 817, 4: 684, 5: 602 },
-  9100: { 1: 1370, 2: 1032, 3: 822, 4: 689, 5: 606 },
-  9200: { 1: 1379, 2: 1040, 3: 828, 4: 694, 5: 611 },
-  9300: { 1: 1387, 2: 1047, 3: 835, 4: 699, 5: 616 },
-  9400: { 1: 1396, 2: 1055, 3: 841, 4: 705, 5: 620 },
-  9500: { 1: 1405, 2: 1062, 3: 848, 4: 710, 5: 625 },
-  9600: { 1: 1414, 2: 1069, 3: 854, 4: 716, 5: 630 },
-  9700: { 1: 1423, 2: 1077, 3: 861, 4: 721, 5: 635 },
-  9800: { 1: 1432, 2: 1084, 3: 867, 4: 727, 5: 639 },
-  9900: { 1: 1441, 2: 1092, 3: 874, 4: 732, 5: 644 },
-  10000: { 1: 1451, 2: 1099, 3: 879, 4: 737, 5: 648 },
-  10100: { 1: 1462, 2: 1107, 3: 885, 4: 741, 5: 652 },
-  10200: { 1: 1473, 2: 1114, 3: 890, 4: 745, 5: 656 },
-  10300: { 1: 1484, 2: 1122, 3: 895, 4: 750, 5: 660 },
-  10400: { 1: 1495, 2: 1129, 3: 900, 4: 754, 5: 664 },
-  10500: { 1: 1507, 2: 1136, 3: 906, 4: 759, 5: 668 },
-  10600: { 1: 1518, 2: 1144, 3: 911, 4: 763, 5: 672 },
-  10700: { 1: 1529, 2: 1151, 3: 916, 4: 767, 5: 675 },
-  10800: { 1: 1539, 2: 1159, 3: 921, 4: 772, 5: 679 },
-  10900: { 1: 1542, 2: 1161, 3: 924, 4: 774, 5: 681 },
-  11000: { 1: 1545, 2: 1164, 3: 926, 4: 776, 5: 683 },
-  11100: { 1: 1548, 2: 1166, 3: 928, 4: 778, 5: 684 },
-  11200: { 1: 1551, 2: 1169, 3: 931, 4: 780, 5: 686 },
-  11300: { 1: 1554, 2: 1172, 3: 933, 4: 782, 5: 688 },
-  11400: { 1: 1556, 2: 1174, 3: 936, 4: 784, 5: 690 },
-  11500: { 1: 1559, 2: 1177, 3: 938, 4: 786, 5: 692 },
-  11600: { 1: 1562, 2: 1179, 3: 940, 4: 788, 5: 693 },
-  11700: { 1: 1565, 2: 1182, 3: 943, 4: 790, 5: 695 },
-  11800: { 1: 1568, 2: 1184, 3: 945, 4: 792, 5: 697 },
-  11900: { 1: 1571, 2: 1187, 3: 948, 4: 794, 5: 699 },
-  12000: { 1: 1573, 2: 1190, 3: 950, 4: 796, 5: 700 },
-  12100: { 1: 1584, 2: 1199, 3: 957, 4: 802, 5: 705 },
-  12200: { 1: 1594, 2: 1207, 3: 964, 4: 808, 5: 711 },
-  12300: { 1: 1605, 2: 1216, 3: 971, 4: 814, 5: 716 },
-  12400: { 1: 1616, 2: 1225, 3: 978, 4: 820, 5: 721 },
-  12500: { 1: 1626, 2: 1233, 3: 985, 4: 826, 5: 727 },
-  12600: { 1: 1637, 2: 1242, 3: 992, 4: 832, 5: 732 },
-  12700: { 1: 1647, 2: 1251, 3: 999, 4: 838, 5: 737 },
-  12800: { 1: 1657, 2: 1259, 3: 1007, 4: 844, 5: 743 },
-  12900: { 1: 1668, 2: 1268, 3: 1014, 4: 850, 5: 748 },
-  13000: { 1: 1678, 2: 1276, 3: 1021, 4: 856, 5: 753 },
-  14000: { 1: 1779, 2: 1360, 3: 1090, 4: 915, 5: 805 },
-  15000: { 1: 1876, 2: 1443, 3: 1158, 4: 973, 5: 857 },
-  16000: { 1: 1969, 2: 1523, 3: 1224, 4: 1029, 5: 908 },
-  17000: { 1: 2058, 2: 1601, 3: 1289, 4: 1085, 5: 958 },
-  18000: { 1: 2143, 2: 1677, 3: 1353, 4: 1140, 5: 1007 },
-  19000: { 1: 2225, 2: 1751, 3: 1416, 4: 1194, 5: 1055 },
-  20000: { 1: 2302, 2: 1823, 3: 1477, 4: 1247, 5: 1103 },
-  21000: { 1: 2382, 2: 1893, 3: 1537, 4: 1299, 5: 1149 },
-  22000: { 1: 2452, 2: 1962, 3: 1595, 4: 1349, 5: 1195 },
-  23000: { 1: 2522, 2: 2028, 3: 1652, 4: 1399, 5: 1240 },
-  24000: { 1: 2592, 2: 2092, 3: 1708, 4: 1448, 5: 1285 },
-  25000: { 1: 2662, 2: 2154, 3: 1762, 4: 1496, 5: 1328 },
-  26000: { 1: 2726, 2: 2214, 3: 1816, 4: 1543, 5: 1371 },
-  27000: { 1: 2786, 2: 2272, 3: 1867, 4: 1589, 5: 1413 },
-  28000: { 1: 2846, 2: 2329, 3: 1918, 4: 1633, 5: 1454 },
-  29000: { 1: 2906, 2: 2383, 3: 1967, 4: 1677, 5: 1494 },
-  30000: { 1: 2966, 2: 2435, 3: 2015, 4: 1720, 5: 1534 },
-  31000: { 1: 3026, 2: 2485, 3: 2061, 4: 1762, 5: 1573 },
-  32000: { 1: 3086, 2: 2533, 3: 2107, 4: 1803, 5: 1611 },
-  33000: { 1: 3146, 2: 2579, 3: 2150, 4: 1843, 5: 1648 },
-  34000: { 1: 3206, 2: 2624, 3: 2193, 4: 1881, 5: 1684 },
-  35000: { 1: 3263, 2: 2666, 3: 2234, 4: 1919, 5: 1720 },
-  36000: { 1: 3313, 2: 2706, 3: 2274, 4: 1956, 5: 1754 },
-  37000: { 1: 3363, 2: 2744, 3: 2312, 4: 1992, 5: 1788 },
-  38000: { 1: 3413, 2: 2780, 3: 2350, 4: 2027, 5: 1821 },
-  39000: { 1: 3463, 2: 2814, 3: 2385, 4: 2061, 5: 1854 },
-  40000: { 1: 3513, 2: 2847, 3: 2420, 4: 2093, 5: 1885 },
-  41000: { 1: 3563, 2: 2877, 3: 2453, 4: 2125, 5: 1916 },
-  42000: { 1: 3611, 2: 2905, 3: 2485, 4: 2156, 5: 1946 },
-  43000: { 1: 3651, 2: 2931, 3: 2515, 4: 2186, 5: 1975 },
-  44000: { 1: 3691, 2: 2955, 3: 2545, 4: 2215, 5: 2003 },
-  45000: { 1: 3731, 2: 2977, 3: 2572, 4: 2243, 5: 2031 },
-  46000: { 1: 3771, 2: 2998, 3: 2599, 4: 2269, 5: 2058 },
-  47000: { 1: 3811, 2: 3016, 3: 2624, 4: 2295, 5: 2084 },
-  48000: { 1: 3851, 2: 3032, 3: 2648, 4: 2320, 5: 2109 },
-  49000: { 1: 3886, 2: 3046, 3: 2670, 4: 2344, 5: 2133 },
-  50000: { 1: 3916, 2: 3058, 3: 2692, 4: 2367, 5: 2157 }
-};
+export type WashingtonSupportTable2026 = SupportTableEntry[];
+
+/**
+ * Normalized Washington State Child Support Schedule 2026
+ * Income is strictly ascending. Every bracket includes all 1-5 children entries.
+ * All amounts represent the TOTAL CASE OBLIGATION.
+ */
+export const washingtonSupportTable2026: WashingtonSupportTable2026 = [
+  { income: 2200, totalObligation: [{ children: 1, amount: 477 }, { children: 2, amount: 367 }, { children: 3, amount: 298 }, { children: 4, amount: 250 }, { children: 5, amount: 220 }] },
+  { income: 2300, totalObligation: [{ children: 1, amount: 499 }, { children: 2, amount: 384 }, { children: 3, amount: 311 }, { children: 4, amount: 261 }, { children: 5, amount: 230 }] },
+  { income: 2400, totalObligation: [{ children: 1, amount: 521 }, { children: 2, amount: 400 }, { children: 3, amount: 325 }, { children: 4, amount: 272 }, { children: 5, amount: 239 }] },
+  { income: 2500, totalObligation: [{ children: 1, amount: 543 }, { children: 2, amount: 417 }, { children: 3, amount: 338 }, { children: 4, amount: 283 }, { children: 5, amount: 249 }] },
+  { income: 2600, totalObligation: [{ children: 1, amount: 565 }, { children: 2, amount: 433 }, { children: 3, amount: 351 }, { children: 4, amount: 294 }, { children: 5, amount: 259 }] },
+  { income: 2700, totalObligation: [{ children: 1, amount: 587 }, { children: 2, amount: 450 }, { children: 3, amount: 365 }, { children: 4, amount: 305 }, { children: 5, amount: 269 }] },
+  { income: 2800, totalObligation: [{ children: 1, amount: 609 }, { children: 2, amount: 467 }, { children: 3, amount: 378 }, { children: 4, amount: 317 }, { children: 5, amount: 279 }] },
+  { income: 2900, totalObligation: [{ children: 1, amount: 630 }, { children: 2, amount: 483 }, { children: 3, amount: 391 }, { children: 4, amount: 328 }, { children: 5, amount: 288 }] },
+  { income: 3000, totalObligation: [{ children: 1, amount: 652 }, { children: 2, amount: 500 }, { children: 3, amount: 405 }, { children: 4, amount: 339 }, { children: 5, amount: 298 }] },
+  { income: 3100, totalObligation: [{ children: 1, amount: 674 }, { children: 2, amount: 516 }, { children: 3, amount: 418 }, { children: 4, amount: 350 }, { children: 5, amount: 308 }] },
+  { income: 3200, totalObligation: [{ children: 1, amount: 696 }, { children: 2, amount: 533 }, { children: 3, amount: 431 }, { children: 4, amount: 361 }, { children: 5, amount: 318 }] },
+  { income: 3300, totalObligation: [{ children: 1, amount: 718 }, { children: 2, amount: 550 }, { children: 3, amount: 444 }, { children: 4, amount: 372 }, { children: 5, amount: 328 }] },
+  { income: 3400, totalObligation: [{ children: 1, amount: 740 }, { children: 2, amount: 566 }, { children: 3, amount: 458 }, { children: 4, amount: 384 }, { children: 5, amount: 337 }] },
+  { income: 3500, totalObligation: [{ children: 1, amount: 762 }, { children: 2, amount: 583 }, { children: 3, amount: 471 }, { children: 4, amount: 395 }, { children: 5, amount: 347 }] },
+  { income: 3600, totalObligation: [{ children: 1, amount: 784 }, { children: 2, amount: 599 }, { children: 3, amount: 484 }, { children: 4, amount: 406 }, { children: 5, amount: 357 }] },
+  { income: 3700, totalObligation: [{ children: 1, amount: 803 }, { children: 2, amount: 614 }, { children: 3, amount: 496 }, { children: 4, amount: 416 }, { children: 5, amount: 366 }] },
+  { income: 3800, totalObligation: [{ children: 1, amount: 816 }, { children: 2, amount: 624 }, { children: 3, amount: 503 }, { children: 4, amount: 422 }, { children: 5, amount: 371 }] },
+  { income: 3900, totalObligation: [{ children: 1, amount: 830 }, { children: 2, amount: 634 }, { children: 3, amount: 511 }, { children: 4, amount: 428 }, { children: 5, amount: 377 }] },
+  { income: 4000, totalObligation: [{ children: 1, amount: 843 }, { children: 2, amount: 643 }, { children: 3, amount: 518 }, { children: 4, amount: 434 }, { children: 5, amount: 382 }] },
+  { income: 4100, totalObligation: [{ children: 1, amount: 857 }, { children: 2, amount: 653 }, { children: 3, amount: 526 }, { children: 4, amount: 440 }, { children: 5, amount: 388 }] },
+  { income: 4200, totalObligation: [{ children: 1, amount: 867 }, { children: 2, amount: 660 }, { children: 3, amount: 531 }, { children: 4, amount: 445 }, { children: 5, amount: 392 }] },
+  { income: 4300, totalObligation: [{ children: 1, amount: 877 }, { children: 2, amount: 668 }, { children: 3, amount: 537 }, { children: 4, amount: 450 }, { children: 5, amount: 396 }] },
+  { income: 4400, totalObligation: [{ children: 1, amount: 887 }, { children: 2, amount: 675 }, { children: 3, amount: 543 }, { children: 4, amount: 455 }, { children: 5, amount: 400 }] },
+  { income: 4500, totalObligation: [{ children: 1, amount: 896 }, { children: 2, amount: 682 }, { children: 3, amount: 548 }, { children: 4, amount: 459 }, { children: 5, amount: 404 }] },
+  { income: 4600, totalObligation: [{ children: 1, amount: 906 }, { children: 2, amount: 689 }, { children: 3, amount: 554 }, { children: 4, amount: 464 }, { children: 5, amount: 408 }] },
+  { income: 4700, totalObligation: [{ children: 1, amount: 916 }, { children: 2, amount: 697 }, { children: 3, amount: 559 }, { children: 4, amount: 469 }, { children: 5, amount: 412 }] },
+  { income: 4800, totalObligation: [{ children: 1, amount: 927 }, { children: 2, amount: 705 }, { children: 3, amount: 566 }, { children: 4, amount: 474 }, { children: 5, amount: 417 }] },
+  { income: 4900, totalObligation: [{ children: 1, amount: 939 }, { children: 2, amount: 714 }, { children: 3, amount: 573 }, { children: 4, amount: 480 }, { children: 5, amount: 422 }] },
+  { income: 5000, totalObligation: [{ children: 1, amount: 951 }, { children: 2, amount: 723 }, { children: 3, amount: 580 }, { children: 4, amount: 486 }, { children: 5, amount: 428 }] },
+  { income: 5100, totalObligation: [{ children: 1, amount: 963 }, { children: 2, amount: 732 }, { children: 3, amount: 587 }, { children: 4, amount: 492 }, { children: 5, amount: 433 }] },
+  { income: 5200, totalObligation: [{ children: 1, amount: 975 }, { children: 2, amount: 741 }, { children: 3, amount: 594 }, { children: 4, amount: 498 }, { children: 5, amount: 438 }] },
+  { income: 5300, totalObligation: [{ children: 1, amount: 987 }, { children: 2, amount: 750 }, { children: 3, amount: 602 }, { children: 4, amount: 504 }, { children: 5, amount: 443 }] },
+  { income: 5400, totalObligation: [{ children: 1, amount: 999 }, { children: 2, amount: 759 }, { children: 3, amount: 609 }, { children: 4, amount: 510 }, { children: 5, amount: 449 }] },
+  { income: 5500, totalObligation: [{ children: 1, amount: 1011 }, { children: 2, amount: 768 }, { children: 3, amount: 616 }, { children: 4, amount: 516 }, { children: 5, amount: 454 }] },
+  { income: 5600, totalObligation: [{ children: 1, amount: 1023 }, { children: 2, amount: 777 }, { children: 3, amount: 623 }, { children: 4, amount: 522 }, { children: 5, amount: 459 }] },
+  { income: 5700, totalObligation: [{ children: 1, amount: 1030 }, { children: 2, amount: 782 }, { children: 3, amount: 627 }, { children: 4, amount: 525 }, { children: 5, amount: 462 }] },
+  { income: 5800, totalObligation: [{ children: 1, amount: 1036 }, { children: 2, amount: 786 }, { children: 3, amount: 630 }, { children: 4, amount: 528 }, { children: 5, amount: 465 }] },
+  { income: 5900, totalObligation: [{ children: 1, amount: 1042 }, { children: 2, amount: 791 }, { children: 3, amount: 634 }, { children: 4, amount: 531 }, { children: 5, amount: 467 }] },
+  { income: 6000, totalObligation: [{ children: 1, amount: 1048 }, { children: 2, amount: 795 }, { children: 3, amount: 637 }, { children: 4, amount: 534 }, { children: 5, amount: 470 }] },
+  { income: 6100, totalObligation: [{ children: 1, amount: 1054 }, { children: 2, amount: 800 }, { children: 3, amount: 641 }, { children: 4, amount: 537 }, { children: 5, amount: 472 }] },
+  { income: 6200, totalObligation: [{ children: 1, amount: 1061 }, { children: 2, amount: 804 }, { children: 3, amount: 644 }, { children: 4, amount: 540 }, { children: 5, amount: 475 }] },
+  { income: 6300, totalObligation: [{ children: 1, amount: 1067 }, { children: 2, amount: 809 }, { children: 3, amount: 648 }, { children: 4, amount: 543 }, { children: 5, amount: 477 }] },
+  { income: 6400, totalObligation: [{ children: 1, amount: 1073 }, { children: 2, amount: 813 }, { children: 3, amount: 651 }, { children: 4, amount: 545 }, { children: 5, amount: 480 }] },
+  { income: 6500, totalObligation: [{ children: 1, amount: 1081 }, { children: 2, amount: 819 }, { children: 3, amount: 656 }, { children: 4, amount: 549 }, { children: 5, amount: 483 }] },
+  { income: 6600, totalObligation: [{ children: 1, amount: 1096 }, { children: 2, amount: 830 }, { children: 3, amount: 665 }, { children: 4, amount: 557 }, { children: 5, amount: 490 }] },
+  { income: 6700, totalObligation: [{ children: 1, amount: 1111 }, { children: 2, amount: 842 }, { children: 3, amount: 674 }, { children: 4, amount: 564 }, { children: 5, amount: 497 }] },
+  { income: 6800, totalObligation: [{ children: 1, amount: 1126 }, { children: 2, amount: 853 }, { children: 3, amount: 683 }, { children: 4, amount: 572 }, { children: 5, amount: 503 }] },
+  { income: 6900, totalObligation: [{ children: 1, amount: 1141 }, { children: 2, amount: 864 }, { children: 3, amount: 692 }, { children: 4, amount: 579 }, { children: 5, amount: 510 }] },
+  { income: 7000, totalObligation: [{ children: 1, amount: 1156 }, { children: 2, amount: 875 }, { children: 3, amount: 701 }, { children: 4, amount: 587 }, { children: 5, amount: 516 }] },
+  { income: 7100, totalObligation: [{ children: 1, amount: 1170 }, { children: 2, amount: 886 }, { children: 3, amount: 710 }, { children: 4, amount: 594 }, { children: 5, amount: 523 }] },
+  { income: 7200, totalObligation: [{ children: 1, amount: 1185 }, { children: 2, amount: 898 }, { children: 3, amount: 719 }, { children: 4, amount: 602 }, { children: 5, amount: 530 }] },
+  { income: 7300, totalObligation: [{ children: 1, amount: 1200 }, { children: 2, amount: 909 }, { children: 3, amount: 727 }, { children: 4, amount: 609 }, { children: 5, amount: 536 }] },
+  { income: 7400, totalObligation: [{ children: 1, amount: 1212 }, { children: 2, amount: 918 }, { children: 3, amount: 734 }, { children: 4, amount: 615 }, { children: 5, amount: 541 }] },
+  { income: 7500, totalObligation: [{ children: 1, amount: 1222 }, { children: 2, amount: 925 }, { children: 3, amount: 740 }, { children: 4, amount: 620 }, { children: 5, amount: 545 }] },
+  { income: 7600, totalObligation: [{ children: 1, amount: 1231 }, { children: 2, amount: 932 }, { children: 3, amount: 745 }, { children: 4, amount: 624 }, { children: 5, amount: 549 }] },
+  { income: 7700, totalObligation: [{ children: 1, amount: 1241 }, { children: 2, amount: 939 }, { children: 3, amount: 751 }, { children: 4, amount: 629 }, { children: 5, amount: 554 }] },
+  { income: 7800, totalObligation: [{ children: 1, amount: 1251 }, { children: 2, amount: 946 }, { children: 3, amount: 756 }, { children: 4, amount: 634 }, { children: 5, amount: 558 }] },
+  { income: 7900, totalObligation: [{ children: 1, amount: 1261 }, { children: 2, amount: 953 }, { children: 3, amount: 762 }, { children: 4, amount: 638 }, { children: 5, amount: 562 }] },
+  { income: 8000, totalObligation: [{ children: 1, amount: 1270 }, { children: 2, amount: 960 }, { children: 3, amount: 767 }, { children: 4, amount: 643 }, { children: 5, amount: 566 }] },
+  { income: 8100, totalObligation: [{ children: 1, amount: 1280 }, { children: 2, amount: 968 }, { children: 3, amount: 773 }, { children: 4, amount: 647 }, { children: 5, amount: 570 }] },
+  { income: 8200, totalObligation: [{ children: 1, amount: 1290 }, { children: 2, amount: 975 }, { children: 3, amount: 778 }, { children: 4, amount: 652 }, { children: 5, amount: 574 }] },
+  { income: 8300, totalObligation: [{ children: 1, amount: 1299 }, { children: 2, amount: 981 }, { children: 3, amount: 783 }, { children: 4, amount: 656 }, { children: 5, amount: 577 }] },
+  { income: 8400, totalObligation: [{ children: 1, amount: 1308 }, { children: 2, amount: 987 }, { children: 3, amount: 788 }, { children: 4, amount: 660 }, { children: 5, amount: 581 }] },
+  { income: 8500, totalObligation: [{ children: 1, amount: 1316 }, { children: 2, amount: 994 }, { children: 3, amount: 793 }, { children: 4, amount: 664 }, { children: 5, amount: 584 }] },
+  { income: 8600, totalObligation: [{ children: 1, amount: 1325 }, { children: 2, amount: 1000 }, { children: 3, amount: 797 }, { children: 4, amount: 668 }, { children: 5, amount: 588 }] },
+  { income: 8700, totalObligation: [{ children: 1, amount: 1334 }, { children: 2, amount: 1007 }, { children: 3, amount: 802 }, { children: 4, amount: 672 }, { children: 5, amount: 591 }] },
+  { income: 8800, totalObligation: [{ children: 1, amount: 1343 }, { children: 2, amount: 1013 }, { children: 3, amount: 807 }, { children: 4, amount: 676 }, { children: 5, amount: 595 }] },
+  { income: 8900, totalObligation: [{ children: 1, amount: 1352 }, { children: 2, amount: 1019 }, { children: 3, amount: 812 }, { children: 4, amount: 680 }, { children: 5, amount: 599 }] },
+  { income: 9000, totalObligation: [{ children: 1, amount: 1361 }, { children: 2, amount: 1026 }, { children: 3, amount: 817 }, { children: 4, amount: 684 }, { children: 5, amount: 602 }] },
+  { income: 9100, totalObligation: [{ children: 1, amount: 1370 }, { children: 2, amount: 1032 }, { children: 3, amount: 822 }, { children: 4, amount: 689 }, { children: 5, amount: 606 }] },
+  { income: 9200, totalObligation: [{ children: 1, amount: 1379 }, { children: 2, amount: 1040 }, { children: 3, amount: 828 }, { children: 4, amount: 694 }, { children: 5, amount: 611 }] },
+  { income: 9300, totalObligation: [{ children: 1, amount: 1387 }, { children: 2, amount: 1047 }, { children: 3, amount: 835 }, { children: 4, amount: 699 }, { children: 5, amount: 616 }] },
+  { income: 9400, totalObligation: [{ children: 1, amount: 1396 }, { children: 2, amount: 1055 }, { children: 3, amount: 841 }, { children: 4, amount: 705 }, { children: 5, amount: 620 }] },
+  { income: 9500, totalObligation: [{ children: 1, amount: 1405 }, { children: 2, amount: 1062 }, { children: 3, amount: 848 }, { children: 4, amount: 710 }, { children: 5, amount: 625 }] },
+  { income: 9600, totalObligation: [{ children: 1, amount: 1414 }, { children: 2, amount: 1069 }, { children: 3, amount: 854 }, { children: 4, amount: 716 }, { children: 5, amount: 630 }] },
+  { income: 9700, totalObligation: [{ children: 1, amount: 1423 }, { children: 2, amount: 1077 }, { children: 3, amount: 861 }, { children: 4, amount: 721 }, { children: 5, amount: 635 }] },
+  { income: 9800, totalObligation: [{ children: 1, amount: 1432 }, { children: 2, amount: 1084 }, { children: 3, amount: 867 }, { children: 4, amount: 727 }, { children: 5, amount: 639 }] },
+  { income: 9900, totalObligation: [{ children: 1, amount: 1441 }, { children: 2, amount: 1092 }, { children: 3, amount: 874 }, { children: 4, amount: 732 }, { children: 5, amount: 644 }] },
+  { income: 10000, totalObligation: [{ children: 1, amount: 1451 }, { children: 2, amount: 1099 }, { children: 3, amount: 879 }, { children: 4, amount: 737 }, { children: 5, amount: 648 }] },
+  { income: 10100, totalObligation: [{ children: 1, amount: 1462 }, { children: 2, amount: 1107 }, { children: 3, amount: 885 }, { children: 4, amount: 741 }, { children: 5, amount: 652 }] },
+  { income: 10200, totalObligation: [{ children: 1, amount: 1473 }, { children: 2, amount: 1114 }, { children: 3, amount: 890 }, { children: 4, amount: 745 }, { children: 5, amount: 656 }] },
+  { income: 10300, totalObligation: [{ children: 1, amount: 1484 }, { children: 2, amount: 1122 }, { children: 3, amount: 895 }, { children: 4, amount: 750 }, { children: 5, amount: 660 }] },
+  { income: 10400, totalObligation: [{ children: 1, amount: 1495 }, { children: 2, amount: 1129 }, { children: 3, amount: 900 }, { children: 4, amount: 754 }, { children: 5, amount: 664 }] },
+  { income: 10500, totalObligation: [{ children: 1, amount: 1507 }, { children: 2, amount: 1136 }, { children: 3, amount: 906 }, { children: 4, amount: 759 }, { children: 5, amount: 668 }] },
+  { income: 10600, totalObligation: [{ children: 1, amount: 1518 }, { children: 2, amount: 1144 }, { children: 3, amount: 911 }, { children: 4, amount: 763 }, { children: 5, amount: 672 }] },
+  { income: 10700, totalObligation: [{ children: 1, amount: 1529 }, { children: 2, amount: 1151 }, { children: 3, amount: 916 }, { children: 4, amount: 767 }, { children: 5, amount: 675 }] },
+  { income: 10800, totalObligation: [{ children: 1, amount: 1539 }, { children: 2, amount: 1159 }, { children: 3, amount: 921 }, { children: 4, amount: 772 }, { children: 5, amount: 679 }] },
+  { income: 10900, totalObligation: [{ children: 1, amount: 1542 }, { children: 2, amount: 1161 }, { children: 3, amount: 924 }, { children: 4, amount: 774 }, { children: 5, amount: 681 }] },
+  { income: 11000, totalObligation: [{ children: 1, amount: 1545 }, { children: 2, amount: 1164 }, { children: 3, amount: 926 }, { children: 4, amount: 776 }, { children: 5, amount: 683 }] },
+  { income: 11100, totalObligation: [{ children: 1, amount: 1548 }, { children: 2, amount: 1166 }, { children: 3, amount: 928 }, { children: 4, amount: 778 }, { children: 5, amount: 684 }] },
+  { income: 11200, totalObligation: [{ children: 1, amount: 1551 }, { children: 2, amount: 1169 }, { children: 3, amount: 931 }, { children: 4, amount: 780 }, { children: 5, amount: 686 }] },
+  { income: 11300, totalObligation: [{ children: 1, amount: 1554 }, { children: 2, amount: 1172 }, { children: 3, amount: 933 }, { children: 4, amount: 782 }, { children: 5, amount: 688 }] },
+  { income: 11400, totalObligation: [{ children: 1, amount: 1556 }, { children: 2, amount: 1174 }, { children: 3, amount: 936 }, { children: 4, amount: 784 }, { children: 5, amount: 690 }] },
+  { income: 11500, totalObligation: [{ children: 1, amount: 1559 }, { children: 2, amount: 1177 }, { children: 3, amount: 938 }, { children: 4, amount: 786 }, { children: 5, amount: 692 }] },
+  { income: 11600, totalObligation: [{ children: 1, amount: 1562 }, { children: 2, amount: 1179 }, { children: 3, amount: 940 }, { children: 4, amount: 788 }, { children: 5, amount: 693 }] },
+  { income: 11700, totalObligation: [{ children: 1, amount: 1565 }, { children: 2, amount: 1182 }, { children: 3, amount: 943 }, { children: 4, amount: 790 }, { children: 5, amount: 695 }] },
+  { income: 11800, totalObligation: [{ children: 1, amount: 1568 }, { children: 2, amount: 1184 }, { children: 3, amount: 945 }, { children: 4, amount: 792 }, { children: 5, amount: 697 }] },
+  { income: 11900, totalObligation: [{ children: 1, amount: 1571 }, { children: 2, amount: 1187 }, { children: 3, amount: 948 }, { children: 4, amount: 794 }, { children: 5, amount: 699 }] },
+  { income: 12000, totalObligation: [{ children: 1, amount: 1573 }, { children: 2, amount: 1190 }, { children: 3, amount: 950 }, { children: 4, amount: 796 }, { children: 5, amount: 700 }] },
+  { income: 12100, totalObligation: [{ children: 1, amount: 1584 }, { children: 2, amount: 1199 }, { children: 3, amount: 957 }, { children: 4, amount: 802 }, { children: 5, amount: 705 }] },
+  { income: 12200, totalObligation: [{ children: 1, amount: 1594 }, { children: 2, amount: 1207 }, { children: 3, amount: 964 }, { children: 4, amount: 808 }, { children: 5, amount: 711 }] },
+  { income: 12300, totalObligation: [{ children: 1, amount: 1605 }, { children: 2, amount: 1216 }, { children: 3, amount: 971 }, { children: 4, amount: 814 }, { children: 5, amount: 716 }] },
+  { income: 12400, totalObligation: [{ children: 1, amount: 1616 }, { children: 2, amount: 1225 }, { children: 3, amount: 978 }, { children: 4, amount: 820 }, { children: 5, amount: 721 }] },
+  { income: 12500, totalObligation: [{ children: 1, amount: 1626 }, { children: 2, amount: 1233 }, { children: 3, amount: 985 }, { children: 4, amount: 826 }, { children: 5, amount: 727 }] },
+  { income: 12600, totalObligation: [{ children: 1, amount: 1637 }, { children: 2, amount: 1242 }, { children: 3, amount: 992 }, { children: 4, amount: 832 }, { children: 5, amount: 732 }] },
+  { income: 12700, totalObligation: [{ children: 1, amount: 1647 }, { children: 2, amount: 1251 }, { children: 3, amount: 999 }, { children: 4, amount: 838 }, { children: 5, amount: 737 }] },
+  { income: 12800, totalObligation: [{ children: 1, amount: 1657 }, { children: 2, amount: 1259 }, { children: 3, amount: 1007 }, { children: 4, amount: 844 }, { children: 5, amount: 743 }] },
+  { income: 12900, totalObligation: [{ children: 1, amount: 1668 }, { children: 2, amount: 1268 }, { children: 3, amount: 1014 }, { children: 4, amount: 850 }, { children: 5, amount: 748 }] },
+  { income: 13000, totalObligation: [{ children: 1, amount: 1678 }, { children: 2, amount: 1276 }, { children: 3, amount: 1021 }, { children: 4, amount: 856 }, { children: 5, amount: 753 }] },
+  { income: 14000, totalObligation: [{ children: 1, amount: 1779 }, { children: 2, amount: 1360 }, { children: 3, amount: 1090 }, { children: 4, amount: 915 }, { children: 5, amount: 805 }] },
+  { income: 15000, totalObligation: [{ children: 1, amount: 1876 }, { children: 2, amount: 1443 }, { children: 3, amount: 1158 }, { children: 4, amount: 973 }, { children: 5, amount: 857 }] },
+  { income: 16000, totalObligation: [{ children: 1, amount: 1969 }, { children: 2, amount: 1523 }, { children: 3, amount: 1224 }, { children: 4, amount: 1029 }, { children: 5, amount: 908 }] },
+  { income: 17000, totalObligation: [{ children: 1, amount: 2058 }, { children: 2, amount: 1601 }, { children: 3, amount: 1289 }, { children: 4, amount: 1085 }, { children: 5, amount: 958 }] },
+  { income: 18000, totalObligation: [{ children: 1, amount: 2143 }, { children: 2, amount: 1677 }, { children: 3, amount: 1353 }, { children: 4, amount: 1140 }, { children: 5, amount: 1007 }] },
+  { income: 19000, totalObligation: [{ children: 1, amount: 2225 }, { children: 2, amount: 1751 }, { children: 3, amount: 1416 }, { children: 4, amount: 1194 }, { children: 5, amount: 1055 }] },
+  { income: 20000, totalObligation: [{ children: 1, amount: 2302 }, { children: 2, amount: 1823 }, { children: 3, amount: 1477 }, { children: 4, amount: 1247 }, { children: 5, amount: 1103 }] },
+  { income: 21000, totalObligation: [{ children: 1, amount: 2382 }, { children: 2, amount: 1893 }, { children: 3, amount: 1537 }, { children: 4, amount: 1299 }, { children: 5, amount: 1149 }] },
+  { income: 22000, totalObligation: [{ children: 1, amount: 2452 }, { children: 2, amount: 1962 }, { children: 3, amount: 1595 }, { children: 4, amount: 1349 }, { children: 5, amount: 1195 }] },
+  { income: 23000, totalObligation: [{ children: 1, amount: 2522 }, { children: 2, amount: 2028 }, { children: 3, amount: 1652 }, { children: 4, amount: 1399 }, { children: 5, amount: 1240 }] },
+  { income: 24000, totalObligation: [{ children: 1, amount: 2592 }, { children: 2, amount: 2092 }, { children: 3, amount: 1708 }, { children: 4, amount: 1448 }, { children: 5, amount: 1285 }] },
+  { income: 25000, totalObligation: [{ children: 1, amount: 2662 }, { children: 2, amount: 2154 }, { children: 3, amount: 1762 }, { children: 4, amount: 1496 }, { children: 5, amount: 1328 }] },
+  { income: 26000, totalObligation: [{ children: 1, amount: 2726 }, { children: 2, amount: 2214 }, { children: 3, amount: 1816 }, { children: 4, amount: 1543 }, { children: 5, amount: 1371 }] },
+  { income: 27000, totalObligation: [{ children: 1, amount: 2786 }, { children: 2, amount: 2272 }, { children: 3, amount: 1867 }, { children: 4, amount: 1589 }, { children: 5, amount: 1413 }] },
+  { income: 28000, totalObligation: [{ children: 1, amount: 2846 }, { children: 2, amount: 2329 }, { children: 3, amount: 1918 }, { children: 4, amount: 1633 }, { children: 5, amount: 1454 }] },
+  { income: 29000, totalObligation: [{ children: 1, amount: 2906 }, { children: 2, amount: 2383 }, { children: 3, amount: 1967 }, { children: 4, amount: 1677 }, { children: 5, amount: 1494 }] },
+  { income: 30000, totalObligation: [{ children: 1, amount: 2966 }, { children: 2, amount: 2435 }, { children: 3, amount: 2015 }, { children: 4, amount: 1720 }, { children: 5, amount: 1534 }] },
+  { income: 31000, totalObligation: [{ children: 1, amount: 3026 }, { children: 2, amount: 2485 }, { children: 3, amount: 2061 }, { children: 4, amount: 1762 }, { children: 5, amount: 1573 }] },
+  { income: 32000, totalObligation: [{ children: 1, amount: 3086 }, { children: 2, amount: 2533 }, { children: 3, amount: 2107 }, { children: 4, amount: 1803 }, { children: 5, amount: 1611 }] },
+  { income: 33000, totalObligation: [{ children: 1, amount: 3146 }, { children: 2, amount: 2579 }, { children: 3, amount: 2150 }, { children: 4, amount: 1843 }, { children: 5, amount: 1648 }] },
+  { income: 34000, totalObligation: [{ children: 1, amount: 3206 }, { children: 2, amount: 2624 }, { children: 3, amount: 2193 }, { children: 4, amount: 1881 }, { children: 5, amount: 1684 }] },
+  { income: 35000, totalObligation: [{ children: 1, amount: 3263 }, { children: 2, amount: 2666 }, { children: 3, amount: 2234 }, { children: 4, amount: 1919 }, { children: 5, amount: 1720 }] },
+  { income: 36000, totalObligation: [{ children: 1, amount: 3313 }, { children: 2, amount: 2706 }, { children: 3, amount: 2274 }, { children: 4, amount: 1956 }, { children: 5, amount: 1754 }] },
+  { income: 37000, totalObligation: [{ children: 1, amount: 3363 }, { children: 2, amount: 2744 }, { children: 3, amount: 2312 }, { children: 4, amount: 1992 }, { children: 5, amount: 1788 }] },
+  { income: 38000, totalObligation: [{ children: 1, amount: 3413 }, { children: 2, amount: 2780 }, { children: 3, amount: 2350 }, { children: 4, amount: 2027 }, { children: 5, amount: 1821 }] },
+  { income: 39000, totalObligation: [{ children: 1, amount: 3463 }, { children: 2, amount: 2814 }, { children: 3, amount: 2385 }, { children: 4, amount: 2061 }, { children: 5, amount: 1854 }] },
+  { income: 40000, totalObligation: [{ children: 1, amount: 3513 }, { children: 2, amount: 2847 }, { children: 3, amount: 2420 }, { children: 4, amount: 2093 }, { children: 5, amount: 1885 }] },
+  { income: 41000, totalObligation: [{ children: 1, amount: 3563 }, { children: 2, amount: 2877 }, { children: 3, amount: 2453 }, { children: 4, amount: 2125 }, { children: 5, amount: 1916 }] },
+  { income: 42000, totalObligation: [{ children: 1, amount: 3611 }, { children: 2, amount: 2905 }, { children: 3, amount: 2485 }, { children: 4, amount: 2156 }, { children: 5, amount: 1946 }] },
+  { income: 43000, totalObligation: [{ children: 1, amount: 3651 }, { children: 2, amount: 2931 }, { children: 3, amount: 2515 }, { children: 4, amount: 2186 }, { children: 5, amount: 1975 }] },
+  { income: 44000, totalObligation: [{ children: 1, amount: 3691 }, { children: 2, amount: 2955 }, { children: 3, amount: 2545 }, { children: 4, amount: 2215 }, { children: 5, amount: 2003 }] },
+  { income: 45000, totalObligation: [{ children: 1, amount: 3731 }, { children: 2, amount: 2977 }, { children: 3, amount: 2572 }, { children: 4, amount: 2243 }, { children: 5, amount: 2031 }] },
+  { income: 46000, totalObligation: [{ children: 1, amount: 3771 }, { children: 2, amount: 2998 }, { children: 3, amount: 2599 }, { children: 4, amount: 2269 }, { children: 5, amount: 2058 }] },
+  { income: 47000, totalObligation: [{ children: 1, amount: 3811 }, { children: 2, amount: 3016 }, { children: 3, amount: 2624 }, { children: 4, amount: 2295 }, { children: 5, amount: 2084 }] },
+  { income: 48000, totalObligation: [{ children: 1, amount: 3851 }, { children: 2, amount: 3032 }, { children: 3, amount: 2648 }, { children: 4, amount: 2320 }, { children: 5, amount: 2109 }] },
+  { income: 49000, totalObligation: [{ children: 1, amount: 3886 }, { children: 2, amount: 3046 }, { children: 3, amount: 2670 }, { children: 4, amount: 2344 }, { children: 5, amount: 2133 }] },
+  { income: 50000, totalObligation: [{ children: 1, amount: 3916 }, { children: 2, amount: 3058 }, { children: 3, amount: 2692 }, { children: 4, amount: 2367 }, { children: 5, amount: 2157 }] }
+];
+
+// LEGACY SUPPORT: Maintain Record format for internal compatibility
+export const washingtonTable2026: Record<number, Record<number, number>> = Object.fromEntries(
+  washingtonSupportTable2026.map(entry => [
+    entry.income,
+    Object.fromEntries(entry.totalObligation.map(o => [o.children, o.amount]))
+  ])
+);
 
 // PERFORMANCE OPTIMIZATION: Memoize sorted brackets outside function
-const availableBrackets = Object.keys(washingtonTable2026)
-  .map(Number)
-  .sort((a, b) => b - a);
+const availableBrackets = washingtonSupportTable2026.map(e => e.income).sort((a, b) => b - a);
+
+/**
+ * PRODUCTION-SAFE LOOKUP HELPER
+ * Returns the TOTAL OBLIGATION for the case.
+ */
+export function getSupport(income: number, children: number): number | null {
+  if (income < 2200) return null;
+  const effectiveIncome = Math.min(income, 50000);
+  const bracket = availableBrackets.find(b => b <= effectiveIncome);
+  if (!bracket) return null;
+
+  const entry = washingtonSupportTable2026.find(e => e.income === bracket);
+  if (!entry) return null;
+
+  const childCount = Math.max(1, Math.min(children, 5));
+  const obligation = entry.totalObligation.find(o => o.children === childCount);
+
+  return obligation ? obligation.amount : null;
+}
 
 /**
  * Official Washington State Child Support Schedule Lookup (2026)
- *
- * Labels used in this table:
- * - Combined Monthly Net Income
- * - One Child Family
- * - Two Children Family
- * - Three Children Family
- * - Four Children Family
- * - Five Children Family
- *
- * IMPORTANT: The returned value is the "Monthly Basic Support Obligation Per Child".
- * However, per user requirement for this system:
- * NO MULTIPLICATION SHOULD BE APPLIED ANYWHERE.
- * The value returned is treated as the FINAL TOTAL OBLIGATION for the case.
- *
- * @param income - Monthly net income
- * @param children - Number of children
+ * @deprecated Use getSupport() for new implementations
  * @returns Total base support amount for the case or null if below threshold
  */
 export function getExactSupport(income: number, children: number): number | null {
-  // 1. Income below 2200 returns null
-  if (income < 2200) {
-    return null;
-  }
-
-  // 2. Clamp income to a maximum of 50,000 (standard Washington ceiling)
-  const effectiveIncome = Math.min(income, 50000);
-
-  // 3. Find the nearest LOWER income bracket using floor logic
-  const bracket = availableBrackets.find(b => b <= effectiveIncome);
-
-  if (!bracket) return null;
-
-  const row = washingtonTable2026[bracket];
-
-  // 4. Clamp children between 1 and 5
-  const childKey = Math.max(1, Math.min(children, 5));
-
-  // 5. Return the raw amount from the table (Final Total Obligation)
-  return row[childKey] || null;
+  return getSupport(income, children);
 }
