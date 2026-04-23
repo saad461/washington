@@ -1,3 +1,26 @@
+/**
+ * OFFICIAL WASHINGTON STATE CHILD SUPPORT ECONOMIC TABLE (2026)
+ *
+ * IMPORTANT LEGAL NOTE:
+ * These values represent the FINAL BASIC SUPPORT OBLIGATION for the case.
+ * They are NOT "per-child" multipliers.
+ *
+ * Example: Income 2200, 2 Children = 367.
+ * This 367 is the TOTAL amount for the whole case.
+ * DO NOT multiply by the number of children.
+ */
+
+export type WashingtonTableRow = {
+  income: number;
+  supportByChildren: {
+    1: number;
+    2: number;
+    3: number;
+    4: number;
+    5: number;
+  };
+};
+
 export const washingtonTable2026: Record<number, Record<number, number>> = {
   2200: { 1: 477, 2: 367, 3: 298, 4: 250, 5: 220 },
   2300: { 1: 499, 2: 384, 3: 311, 4: 261, 5: 230 },
@@ -154,9 +177,13 @@ const availableBrackets = Object.keys(washingtonTable2026)
 
 /**
  * Official Washington State Child Support Schedule Lookup (2026)
+ *
+ * IMPORTANT: The returned value is the TOTAL BASIC OBLIGATION for the case.
+ * It accounts for multi-child scaling and MUST NOT be multiplied further.
+ *
  * @param income - Monthly net income
  * @param children - Number of children
- * @returns Per-child base support amount or null if below threshold
+ * @returns Total base support amount for the case or null if below threshold
  */
 export function getExactSupport(income: number, children: number): number | null {
   // 1. Income below 2200 returns null
@@ -177,6 +204,6 @@ export function getExactSupport(income: number, children: number): number | null
   // 4. Clamp children between 1 and 5
   const childKey = Math.max(1, Math.min(children, 5));
 
-  // 5. Return the per-child amount from the table
+  // 5. Return the raw amount from the table (Final Total Obligation)
   return row[childKey] || null;
 }
