@@ -6,9 +6,9 @@ import { Send } from 'lucide-react';
 export default function ContactForm() {
  return (
  <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm shadow-indigo-900/5">
- <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+ <form className="stack-space" onSubmit={(e) => e.preventDefault()}>
  <div>
- <label className="block text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-2 ml-1">Full Name</label>
+ <label className="block label-metadata mb-2 ml-1">Full Name</label>
  <input
  type="text"
  className="w-full px-6 py-3 min-h-[48px] bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all font-medium"
@@ -16,7 +16,7 @@ export default function ContactForm() {
  />
  </div>
  <div>
- <label className="block text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-2 ml-1">Email Address</label>
+ <label className="block label-metadata mb-2 ml-1">Email Address</label>
  <input
  type="email"
  className="w-full px-6 py-3 min-h-[48px] bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all font-medium"
@@ -24,7 +24,7 @@ export default function ContactForm() {
  />
  </div>
  <div>
- <label className="block text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-2 ml-1">Subject</label>
+ <label className="block label-metadata mb-2 ml-1">Subject</label>
  <select className="w-full px-6 py-3 min-h-[48px] bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all font-medium appearance-none">
  <option>Calculator Bug / Feedback</option>
  <option>Data Correction</option>
@@ -33,7 +33,7 @@ export default function ContactForm() {
  </select>
  </div>
  <div>
- <label className="block text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-2 ml-1">Message</label>
+ <label className="block label-metadata mb-2 ml-1">Message</label>
  <textarea
  rows={4}
  className="w-full px-6 py-3 min-h-[48px] bg-gray-50 border border-gray-100 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all font-medium resize-none"

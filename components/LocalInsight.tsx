@@ -15,65 +15,65 @@ interface LocalInsightProps {
 
 const LocalInsight: React.FC<LocalInsightProps> = ({ county }) => {
  return (
- <section className="w-full max-w-3xl mx-auto mb-24 px-6 md:px-0">
- <div className="bg-white rounded-2xl border-2 border-gray-50 shadow-sm shadow-indigo-900/5 overflow-hidden transition-all hover:shadow-indigo-900/10">
+ <section className="container-reading mb-16 md:mb-24 px-6 md:px-0">
+ <div className="card-standard !p-0 overflow-hidden group">
  <div className="flex flex-col md:flex-row">
  {/* Left Side: Courthouse Identity */}
- <div className="flex-1 p-12 md:p-16 border-b md:border-b-0 md:border-r border-gray-50">
- <div className="flex items-center gap-4 mb-10">
- <div className="p-3 bg-indigo-600 rounded-2xl shadow-sm shadow-indigo-500/20">
+ <div className="flex-1 p-8 md:p-12 border-b md:border-b-0 md:border-r border-border-default">
+ <div className="flex items-center gap-4 mb-8">
+ <div className="p-3 bg-indigo-600 rounded-xl shadow-lg shadow-indigo-600/20">
  <Scale className="w-6 h-6 text-white" />
  </div>
  <div>
- <h2 className="font-semibold leading-none mb-2">Local Authority</h2>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase">{county.name} Filing Guide</p>
+ <h2 className="text-lg font-bold leading-none mb-1 text-heading">Local Authority</h2>
+ <p className="label-metadata">{county.name} Filing Guide</p>
  </div>
  </div>
 
- <h3 className="font-semibold text-gray-800 mb-8 italic tracking-tight">{county.court}</h3>
+ <h3 className="text-xl font-bold text-heading mb-8 italic tracking-tight">{county.court}</h3>
 
- <div className="space-y-8">
- <div className="flex items-start gap-5 group">
- <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-indigo-50">
- <MapPin className="w-5 h-5 group-hover:" />
+ <div className="space-y-6">
+ <div className="flex items-start gap-4 group/item">
+ <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center shrink-0 border border-border-default transition-colors group-hover/item:bg-indigo-50">
+ <MapPin className="w-5 h-5 text-indigo-600" />
  </div>
  <div>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-1">Courthouse Address</p>
- <p className="text-sm font-medium leading-snug">{county.courtAddress}</p>
+ <p className="label-metadata mb-1">Courthouse Address</p>
+ <p className="text-sm font-semibold text-body leading-relaxed">{county.courtAddress}</p>
  </div>
  </div>
 
- <div className="flex items-start gap-5 group">
- <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-emerald-50">
- <PhoneCall className="w-5 h-5 group-hover:text-emerald-500" />
+ <div className="flex items-start gap-4 group/item">
+ <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center shrink-0 border border-border-default transition-colors group-hover/item:bg-emerald-50">
+ <PhoneCall className="w-5 h-5 text-emerald-600" />
  </div>
  <div>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-1">Clerk of the Court</p>
- <p className="text-sm font-medium ">{county.clerkPhone}</p>
+ <p className="label-metadata mb-1">Clerk of the Court</p>
+ <p className="text-sm font-bold text-heading">{county.clerkPhone}</p>
  </div>
  </div>
 
- <div className="flex items-start gap-5 group">
- <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-indigo-50">
- <DollarSign className="w-5 h-5 group-hover:" />
+ <div className="flex items-start gap-4 group/item">
+ <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center shrink-0 border border-border-default transition-colors group-hover/item:bg-indigo-50">
+ <DollarSign className="w-5 h-5 text-indigo-600" />
  </div>
  <div>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-1">Standard Filing Fee</p>
- <p className="text-sm font-medium ">{county.filingFee}</p>
+ <p className="label-metadata mb-1">Standard Filing Fee</p>
+ <p className="text-sm font-bold text-heading">{county.filingFee}</p>
  </div>
  </div>
  </div>
  </div>
 
  {/* Right Side: Pro-Tips & Intent */}
- <div className="flex-1 p-12 md:p-16 bg-gray-50/50 flex flex-col justify-center">
- <div className="flex items-center gap-3 mb-8">
+ <div className="flex-1 p-8 md:p-12 bg-gray-50 flex flex-col justify-center">
+ <div className="flex items-center gap-3 mb-6">
  <Info className="w-5 h-5 text-indigo-600" />
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">Jurisdictionary Insight</p>
+ <p className="label-metadata text-heading">Jurisdictionary Insight</p>
  </div>
 
- <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm mb-10 relative group hover:border-indigo-500 transition-colors">
- <p className=" font-medium leading-relaxed italic text-lg">
+ <div className="p-6 bg-white rounded-2xl border border-border-default shadow-sm mb-8 relative group/tip hover:border-indigo-600 transition-colors">
+ <p className="text-heading font-medium leading-relaxed italic text-lg">
  &quot;{county.localTip}&quot;
  </p>
  </div>
@@ -82,12 +82,10 @@ const LocalInsight: React.FC<LocalInsightProps> = ({ county }) => {
  href={`https://www.google.com/search?q=${encodeURIComponent(county.court + ' ' + county.name + ' Washington')}`}
  target="_blank"
  rel="noopener noreferrer"
- className="inline-flex items-center justify-between p-6 bg-gray-900 rounded-2xl text-white font-medium text-sm transition-all hover:bg-gray-100 hover:shadow-sm active:scale-95 group"
+ className="btn-primary w-full shadow-lg"
  >
  <span>Visit Official Court Portal</span>
- <div className="w-8 h-8 bg-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-colors">
- <ExternalLink className="w-4 h-4 text-white" />
- </div>
+ <ExternalLink className="w-4 h-4 ml-1" />
  </a>
  </div>
  </div>

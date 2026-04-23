@@ -25,11 +25,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
  </div>
 
  <div className="flex items-center gap-3 mb-4">
- <span className=" text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <span className=" label-metadata ">
  {post.category}
  </span>
  <span className="w-1 h-1 bg-gray-300 rounded-full" />
- <div className="flex items-center gap-1.5 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <div className="flex items-center gap-1.5 label-metadata ">
  {post.readTime}
  </div>
  </div>
@@ -43,7 +43,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
  </p>
 
  <div className="pt-6 border-t border-gray-50 flex items-center justify-between">
- <div className="flex items-center gap-2 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">
+ <div className="flex items-center gap-2 label-metadata ">
  <Calendar size={12}  />
  {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
  </div>

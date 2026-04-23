@@ -43,10 +43,10 @@ const ProgressBar = ({ currentStep, totalSteps }: { currentStep: number; totalSt
  return (
  <div className="w-full mb-8">
  <div className="flex justify-between items-center mb-3 px-1">
- <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase font-sans">
+ <span className="label-metadata font-sans">
  Step {currentStep + 1} of {totalSteps}
  </span>
- <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase font-sans">
+ <span className="label-metadata font-sans">
  {Math.round(progress)}% Complete
  </span>
  </div>
@@ -99,7 +99,7 @@ const MobileStepNav = ({
  key={idx}
  data-active={isActive ? "true" : "false"}
  onClick={() => onStepClick(idx)}
- className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold whitespace-nowrap transition-all shrink-0 border ${
+ className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full label-metadata whitespace-nowrap transition-all shrink-0 border ${
  isActive
  ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm shadow-indigo-200'
  : isDone
@@ -149,7 +149,7 @@ const InputField = ({
  }`}
  >
  {val ? <CheckCircle2 className="w-4 h-4 mr-2" /> : <Circle className="w-4 h-4 mr-2" />}
- <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">{val ? 'Yes' : 'No'}</span>
+ <span className="label-metadata ">{val ? 'Yes' : 'No'}</span>
  </button>
  );
  }
@@ -180,14 +180,14 @@ const InputField = ({
  return (
  <div className="mb-8 last:mb-0 animate-in fade-in slide-in-from-bottom-2 duration-500 font-sans">
  <div className="flex items-start gap-2 mb-3">
- <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest bg-gray-100 font-medium px-1.5 py-0.5 rounded uppercase mt-0.5">{field.id}</span>
+ <span className="label-metadata bg-gray-100 font-medium px-1.5 py-0.5 rounded uppercase mt-0.5">{field.id}</span>
  <label className="text-sm font-medium leading-snug">
  {field.label}
  </label>
  {field.description && (
  <div className="group relative">
  <Info className="w-3.5 h-3.5 cursor-help" />
- <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-3 bg-gray-900 text-white text-[10px] uppercase font-bold text-gray-500 tracking-widest rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-sm">
+ <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-3 bg-gray-900 text-white label-metadata rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-sm">
  {field.description}
  <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-gray-900" />
  </div>
@@ -197,11 +197,11 @@ const InputField = ({
 
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
  <div className="space-y-1.5">
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ml-1">Parent 1</p>
+ <p className="label-metadata ml-1">Parent 1</p>
  {renderInput('p1')}
  </div>
  <div className="space-y-1.5">
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ml-1">Parent 2</p>
+ <p className="label-metadata ml-1">Parent 2</p>
  {renderInput('p2')}
  </div>
  </div>
@@ -324,10 +324,10 @@ export default function WorksheetWizard() {
  <div className="w-full">
  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-2">
  <h1 className="font-bold tracking-tight font-heading">Worksheet Summary</h1>
- <span className=" font-bold text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase font-heading">WCSSC</span>
+ <span className=" label-metadata font-heading">WCSSC</span>
  </div>
  <p className=" font-medium">Official calculation results based on the 2026 Washington State Child Support Schedule.</p>
- <p className=" text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mt-4">Date of Calculation: {new Date().toLocaleDateString()}</p>
+ <p className=" label-metadata mt-4">Date of Calculation: {new Date().toLocaleDateString()}</p>
  </div>
  <button
  id="pdf-edit-btn"
@@ -342,19 +342,19 @@ export default function WorksheetWizard() {
  {/* Result Cards */}
  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
  <div className="bg-gray-900 rounded-2xl p-6 md:p-6 text-white shadow-sm">
- <p className=" text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-2">Total Combined Net</p>
+ <p className=" label-metadata mb-2">Total Combined Net</p>
  <h3 className="font-semibold mb-1 font-heading">{curFormatter.format(calculation.combinedIncome)}</h3>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-medium uppercase ">Combined Monthly Income</p>
+ <p className="label-metadata font-medium uppercase ">Combined Monthly Income</p>
  </div>
  <div className="bg-white rounded-2xl p-6 md:p-6 border border-gray-100 shadow-sm">
- <p className=" text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-2">Parent 1 Transfer</p>
+ <p className=" label-metadata mb-2">Parent 1 Transfer</p>
  <h3 className="font-semibold mb-1 font-heading">{curFormatter.format(derivedData['17']?.p1 || 0)}</h3>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-medium uppercase ">Presumptive Payment</p>
+ <p className="label-metadata font-medium uppercase ">Presumptive Payment</p>
  </div>
  <div className="bg-white rounded-2xl p-6 md:p-6 border border-gray-100 shadow-sm">
- <p className=" text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-2">Parent 2 Transfer</p>
+ <p className=" label-metadata mb-2">Parent 2 Transfer</p>
  <h3 className="font-semibold mb-1 font-heading">{curFormatter.format(derivedData['17']?.p2 || 0)}</h3>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-medium uppercase ">Presumptive Payment</p>
+ <p className="label-metadata font-medium uppercase ">Presumptive Payment</p>
  </div>
  </div>
 
@@ -363,9 +363,9 @@ export default function WorksheetWizard() {
  <table className="w-full text-left border-collapse min-w-[400px] border border-gray-100 rounded-xl overflow-hidden"><caption className="sr-only">Official Worksheet Data</caption>
  <thead>
  <tr className="bg-gray-50 border-b border-gray-100">
- <th className="px-5 md:px-8 py-5 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase font-sans">Part / Field</th>
- <th className="px-5 md:px-8 py-5 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase font-sans">P1</th>
- <th className="px-5 md:px-8 py-5 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase font-sans">P2</th>
+ <th className="px-5 md:px-8 py-5 label-metadata font-sans">Part / Field</th>
+ <th className="px-5 md:px-8 py-5 label-metadata font-sans">P1</th>
+ <th className="px-5 md:px-8 py-5 label-metadata font-sans">P2</th>
  </tr>
  </thead>
  <tbody className="divide-y divide-gray-50">
@@ -386,7 +386,7 @@ export default function WorksheetWizard() {
  {row.label}
  </td>
  {row.isReason ? (
- <td colSpan={2} className="px-5 md:px-6 py-3 min-h-[48px] text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold italic">
+ <td colSpan={2} className="px-5 md:px-6 py-3 min-h-[48px] label-metadata italic">
  {(derivedData[row.id] as unknown as { reason?: string })?.reason}
  </td>
  ) : row.value !== undefined ? (
@@ -410,7 +410,7 @@ export default function WorksheetWizard() {
  </div>
 
  <div className="pt-6 md:pt-8 border-t border-gray-100 text-center">
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-medium leading-relaxed max-w-2xl mx-auto">
+ <p className="label-metadata font-medium leading-relaxed max-w-2xl mx-auto">
  Disclaimer: This is an estimate based on the 2026 Washington State Child Support Schedule. Actual support amounts may vary based on judicial deviations, custody arrangements, and localized court rules. Generated via WCSSC.
  </p>
  </div>
@@ -442,7 +442,7 @@ export default function WorksheetWizard() {
  </div>
  <div>
  <h2 className="font-semibold tracking-tight leading-none mb-1 font-heading">Worksheet Pro</h2>
- <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">2026 Guidelines</span>
+ <span className="label-metadata ">2026 Guidelines</span>
  </div>
  </div>
 
@@ -456,7 +456,7 @@ export default function WorksheetWizard() {
  : ' hover:bg-gray-50 hover:'
  }`}
  >
- <div className={`w-6 h-6 rounded-lg flex items-center justify-center text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold border transition-colors ${
+ <div className={`w-6 h-6 rounded-lg flex items-center justify-center label-metadata border transition-colors ${
  currentStep === idx
  ? 'bg-indigo-600 border-indigo-600 text-white'
  : idx < currentStep
@@ -478,9 +478,9 @@ export default function WorksheetWizard() {
  <div className="p-1.5 bg-gray-800 rounded-lg">
  <LayoutDashboard className="w-4 h-4 text-indigo-400" />
  </div>
- <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">Est. Base Support</span>
+ <span className="label-metadata ">Est. Base Support</span>
  </div>
- <p className="text-2xl md:text-3xl font-medium text-white leading-tight relative z-10 font-heading">
+ <p className="text-2xl font-medium text-white leading-tight relative z-10 font-heading">
  {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
  </p>
  </motion.div>
@@ -509,11 +509,11 @@ export default function WorksheetWizard() {
 
  {/* Form Card */}
  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6 md:p-6 lg:p-12">
- <div className="mb-8 md:mb-12 text-center sm:text-left">
- <span className="inline-block px-3 py-1 bg-gray-50 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase rounded-full mb-3 md:mb-4">
+ <div className="mb-8 md:mb-12 text-center text-left">
+ <span className="inline-block px-3 py-1 bg-gray-50 label-metadata rounded-full mb-3 md:mb-4">
  Requirement Step {currentStep + 1}
  </span>
- <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-3 md:mb-4 font-heading">
+ <h1 className="text-2xl font-bold tracking-tight mb-3 md:mb-4 font-heading">
  {currentPartKey}
  </h1>
  <p className=" text-sm md:text-base font-medium leading-relaxed max-w-2xl">
@@ -529,7 +529,7 @@ export default function WorksheetWizard() {
  exit={{ opacity: 0, scale: 0.99, x: -10 }}
  transition={{ duration: 0.3, ease: "easeOut" }}
  >
- <div className="space-y-6">
+ <div className="stack-space">
  {currentFields.map((field: WorksheetField) => {
  const isCalculated = ['1g', '2j', '3', '4', '6'].includes(field.id);
  const values = isCalculated
@@ -543,7 +543,7 @@ export default function WorksheetWizard() {
  onChange={(parent, val) => handleInputChange(field.id, parent, val)}
  />
  {isCalculated && (
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold text-indigo-600 uppercase -mt-6 ml-11 mb-8 animate-pulse">
+ <p className="label-metadata text-indigo-600 uppercase -mt-6 ml-11 mb-8 animate-pulse">
  Auto-Calculating...
  </p>
  )}
@@ -584,11 +584,11 @@ export default function WorksheetWizard() {
  <div className="max-w-3xl mx-auto mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 md:gap-6 px-4 pb-6">
  <div className="flex items-center gap-3">
  <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
- <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase ">AOC-Certified Worksheet v01/2026</span>
+ <span className="label-metadata ">AOC-Certified Worksheet v01/2026</span>
  </div>
  <div className="flex gap-4">
- <Link href="/privacy" className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase hover: transition-colors">Privacy Policy</Link>
- <Link href="/terms" className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase hover: transition-colors">Terms of Service</Link>
+ <Link href="/privacy" className="label-metadata hover: transition-colors">Privacy Policy</Link>
+ <Link href="/terms" className="label-metadata hover: transition-colors">Terms of Service</Link>
  </div>
  </div>
  )}
@@ -600,14 +600,14 @@ export default function WorksheetWizard() {
  {!showSummary && (
  <div className="lg:hidden fixed bottom-0 left-0 right-0 p-3 sm:p-4 bg-white/95 backdrop-blur-xl border-t border-gray-100 z-50 flex items-center justify-between shadow-sm">
  <div>
- <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase mb-0.5">Est. Support</p>
- <p className="text-lg sm:text-xl font-medium font-heading">
+ <p className="label-metadata mb-0.5">Est. Support</p>
+ <p className="text-lg  font-medium font-heading">
  {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
  </p>
  </div>
  <button
  onClick={() => nextStep()}
- className="bg-gray-900 text-white px-6 sm:px-6 py-3 min-h-[48px] sm:py-3  rounded-xl font-bold text-[10px] uppercase font-bold text-gray-500 tracking-widest flex items-center shadow-sm font-heading gap-2 min-h-[44px]"
+ className="bg-gray-900 text-white px-6 sm:px-6 py-3 min-h-[48px] sm:py-3  rounded-xl label-metadata flex items-center shadow-sm font-heading gap-2 min-h-[48px]"
  >
  {currentStep === PARTS.length - 1 ? 'Get Report' : 'Next Step'}
  <ArrowRight className="w-4 h-4" />

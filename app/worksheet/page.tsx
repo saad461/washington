@@ -26,7 +26,7 @@ export default function WorksheetPage() {
  <WorksheetWizard />
 
  {/* AI Search Optimization (AEO) Section */}
- <div className="max-w-7xl mx-auto px-4 py-24 md:py-3  sm:px-6 lg:px-8 border-t border-gray-100">
+ <div className="max-w-7xl mx-auto px-4 section-default  sm:px-6 lg:px-8 border-t border-gray-100">
  <div className="max-w-3xl mx-auto">
  <h2 className="text-3xl mb-8 ">Example Calculation</h2>
  <h3 className=" mb-4">Support Scenario: $5,000 Income in King County</h3>
@@ -38,7 +38,7 @@ export default function WorksheetPage() {
  </p>
  </div>
 
- <div className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase flex items-center gap-2">
+ <div className="label-metadata flex items-center gap-2">
  Want to know how we arrived at these figures?
  <Link href="/editorial-methodology" className=" underline decoration-indigo-200 underline-offset-4 hover:text-indigo-700">
  Read our Editorial Methodology

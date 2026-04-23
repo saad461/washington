@@ -273,9 +273,9 @@ export default async function CountyCourtPage({ params }: Props) {
 
       {/* ── 1. HERO ──────────────────────────────────────────────────────────── */}
       <section className="bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 py-14 md:py-20 text-center">
+        <div className="max-w-7xl mx-auto px-6 section-hero text-center">
           {/* Breadcrumb */}
-          <nav className="flex items-center justify-center gap-2 mb-8 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
+          <nav className="flex items-center justify-center gap-2 mb-8 label-metadata">
             <Link href="/" className="hover: transition-colors">
               Home
             </Link>
@@ -295,7 +295,7 @@ export default async function CountyCourtPage({ params }: Props) {
             <br className="hidden sm:block" /> Washington <span>(2026)</span>
           </h1>
 
-          <p className="text-base md:text-lg leading-relaxed text-gray-700 max-w-3xl mx-auto mb-8">
+          <p className="text-body leading-relaxed text-body max-w-3xl mx-auto mb-8">
             Official 2026 child support estimates for {county!.name} residents.
             Based on the Washington State Income Shares Model with the updated
             SSR of <strong>approximately $2,394</strong> and economic tables
@@ -304,7 +304,7 @@ export default async function CountyCourtPage({ params }: Props) {
           </p>
 
           {/* Quick stats strip */}
-          <div className="inline-flex flex-wrap justify-center gap-4 text-[10px] uppercase font-bold text-gray-500 tracking-widest">
+          <div className="inline-flex flex-wrap justify-center gap-4 label-metadata">
             <span className="bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full">
               SSR: approximately $2,394
             </span>
@@ -337,7 +337,7 @@ export default async function CountyCourtPage({ params }: Props) {
             <HomeCalculator />
           </div>
           <div className="max-w-lg mx-auto mt-8">
-            <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest text-center italic">
+            <p className="label-metadata text-center italic">
               Low-income protections may apply below approximately $2,394/month
               (180% of the federal poverty level). Estimates are based on
               Washington State guidelines (RCW 26.19).
@@ -356,7 +356,7 @@ export default async function CountyCourtPage({ params }: Props) {
                 Child Support in {county!.name}: A 2026 Guide
               </h2>
               {content.introduction.map((para, i) => (
-                <p key={i} className=" mb-5 text-[17px]">
+                <p key={i} className=" mb-5 text-body">
                   {para}
                 </p>
               ))}
@@ -381,7 +381,7 @@ export default async function CountyCourtPage({ params }: Props) {
               {content.howItWorks.map((para, i) => (
                 <p
                   key={i}
-                  className=" mb-5 text-[17px]"
+                  className=" mb-5 text-body"
                   dangerouslySetInnerHTML={{ __html: para }}
                 />
               ))}
@@ -390,7 +390,7 @@ export default async function CountyCourtPage({ params }: Props) {
               <div className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm mt-8">
                 <div className="bg-gray-900 text-white px-6 py-3 min-h-[48px] flex items-center gap-2">
                   <Info className="w-4 h-4 text-indigo-400" />
-                  <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase ">
+                  <span className="label-metadata ">
                     2026 Key Figures — Statewide
                   </span>
                 </div>
@@ -433,13 +433,13 @@ export default async function CountyCourtPage({ params }: Props) {
               {content.filingProcess.map((para, i) => (
                 <p
                   key={i}
-                  className=" mb-5 text-[17px]"
+                  className=" mb-5 text-body"
                   dangerouslySetInnerHTML={{ __html: para }}
                 />
               ))}
 
               {/* Numbered filing steps */}
-              <div className="mt-8 space-y-6">
+              <div className="mt-8 stack-space">
                 {content.filingSteps.map((step, i) => (
                   <div
                     key={i}
@@ -470,7 +470,7 @@ export default async function CountyCourtPage({ params }: Props) {
                 {content.localInsightExpanded.map((para, i) => (
                   <p
                     key={i}
-                    className="text-amber-900 mb-4 last:mb-0 text-[16px] "
+                    className="text-amber-900 mb-4 last:mb-0 text-body "
                   >
                     {para}
                   </p>
@@ -509,36 +509,36 @@ export default async function CountyCourtPage({ params }: Props) {
               {content.exampleNarrative.map((para, i) => (
                 <p
                   key={i}
-                  className=" mb-5 text-[17px]"
+                  className=" mb-5 text-body"
                   dangerouslySetInnerHTML={{ __html: para }}
                 />
               ))}
               {/* Visual calc breakdown */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
                 <div className="bg-gray-900 text-white rounded-xl p-5 text-center">
-                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-2">
+                  <p className="label-metadata mb-2">
                     Parent A Net
                   </p>
-                  <p className="text-2xl md:text-3xl ">$5,000</p>
-                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest text-indigo-400 mt-1 ">
+                  <p className="text-2xl ">$5,000</p>
+                  <p className="label-metadata text-indigo-400 mt-1 ">
                     62.5%
                   </p>
                 </div>
                 <div className="bg-gray-200 rounded-xl p-5 text-center">
-                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-2">
+                  <p className="label-metadata mb-2">
                     Parent B Net
                   </p>
-                  <p className="text-2xl md:text-3xl ">$3,000</p>
-                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mt-1 ">
+                  <p className="text-2xl ">$3,000</p>
+                  <p className="label-metadata mt-1 ">
                     37.5%
                   </p>
                 </div>
                 <div className="bg-indigo-600 text-white rounded-xl p-5 text-center">
-                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase text-indigo-200 mb-2">
+                  <p className="label-metadata text-indigo-200 mb-2">
                     2 Children Total
                   </p>
-                  <p className="text-2xl md:text-3xl ">≈$1,883</p>
-                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest text-indigo-200 mt-1 ">
+                  <p className="text-2xl ">≈$1,883</p>
+                  <p className="label-metadata text-indigo-200 mt-1 ">
                     Presumptive Obligation
                   </p>
                 </div>
@@ -590,7 +590,7 @@ export default async function CountyCourtPage({ params }: Props) {
 
               <div className="space-y-5 mb-6">
                 <div>
-                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-1">
+                  <p className="label-metadata mb-1">
                     Physical Address
                   </p>
                   <p className="flex items-start gap-2 text-sm ">
@@ -599,7 +599,7 @@ export default async function CountyCourtPage({ params }: Props) {
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-1">
+                  <p className="label-metadata mb-1">
                     Clerk Phone
                   </p>
                   <p className="flex items-center gap-2 text-sm ">
@@ -608,14 +608,14 @@ export default async function CountyCourtPage({ params }: Props) {
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-1">
+                  <p className="label-metadata mb-1">
                     Standard Filing Fee
                   </p>
                   <p className="text-sm ">{county!.filingFee}</p>
                 </div>
                 <div className="flex items-start gap-2 bg-white/5 p-3 rounded-xl border border-white/10">
                   <Clock className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest ">
+                  <p className="label-metadata ">
                     Call ahead to verify current clerk hours before visiting.
                   </p>
                 </div>
@@ -635,7 +635,7 @@ export default async function CountyCourtPage({ params }: Props) {
             <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
               <div className="bg-gray-800 text-white px-5 py-3 min-h-[48px] flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-indigo-400" />
-                <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest uppercase ">
+                <span className="label-metadata ">
                   Courthouse Location
                 </span>
               </div>
@@ -656,7 +656,7 @@ export default async function CountyCourtPage({ params }: Props) {
                   href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[10px] uppercase font-bold text-gray-500 tracking-widest hover:text-indigo-800 transition-colors flex items-center justify-center gap-1"
+                  className="label-metadata hover:text-indigo-800 transition-colors flex items-center justify-center gap-1"
                 >
                   Open in Google Maps <ExternalLink className="w-3 h-3" />
                 </a>
@@ -665,7 +665,7 @@ export default async function CountyCourtPage({ params }: Props) {
 
             {/* INTERNAL LINKS */}
             <div className="bg-white border border-gray-200 rounded-xl p-7 shadow-sm">
-              <h4 className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-5 flex items-center gap-2">
+              <h4 className="label-metadata mb-5 flex items-center gap-2">
                 <BookOpen className="w-4 h-4" /> Related Legal Resources
               </h4>
               <nav className="flex flex-col space-y-2.5">
@@ -706,7 +706,7 @@ export default async function CountyCourtPage({ params }: Props) {
 
             {/* OTHER COUNTIES */}
             <div className="bg-white border border-gray-200 rounded-xl p-7 shadow-sm">
-              <h4 className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-5">
+              <h4 className="label-metadata mb-5">
                 Other County Guides
               </h4>
               <nav className="flex flex-col space-y-2.5">
@@ -722,7 +722,7 @@ export default async function CountyCourtPage({ params }: Props) {
                 ))}
                 <Link
                   href="/washington-courts"
-                  className="text-[10px] uppercase font-bold text-gray-500 tracking-widest hover:text-indigo-800 mt-2 block"
+                  className="label-metadata hover:text-indigo-800 mt-2 block"
                 >
                   View All 39 Counties →
                 </Link>
@@ -737,7 +737,7 @@ export default async function CountyCourtPage({ params }: Props) {
         <div className="max-w-3xl mx-auto px-6">
           <div className="flex items-start gap-4">
             <AlertTriangle className="w-6 h-6 shrink-0 mt-0.5" />
-            <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest ">
+            <p className="label-metadata ">
               <strong>Legal Disclaimer:</strong> This content is for
               informational purposes only and does not constitute legal advice.
               The estimates produced by this calculator are based on the 2026

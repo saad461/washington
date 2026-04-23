@@ -9,7 +9,7 @@ import { Calculator, ArrowLeft, Search } from 'lucide-react';
  */
 export default function NotFound() {
  return (
- <div className="flex-1 flex flex-col items-center justify-center bg-white px-6 text-center py-24 md:py-3  relative overflow-hidden font-sans">
+ <div className="flex-1 flex flex-col items-center justify-center bg-white px-6 text-center section-default  relative overflow-hidden font-sans">
  <div className="max-w-md w-full relative z-10">
  <div className="w-20 h-20 bg-gray-900 rounded-2xl flex items-center justify-center mx-auto mb-10 shadow-sm rotate-3 group hover:rotate-0 transition-transform duration-300">
  <Calculator className="w-10 h-10 text-indigo-400" />
@@ -46,7 +46,7 @@ export default function NotFound() {
  </Link>
  </div>
 
- <div className="mt-16 text-[10px] uppercase font-bold text-gray-500 tracking-widest font-bold uppercase">
+ <div className="mt-16 label-metadata">
  Official 2026 WA State Guidelines Index
  </div>
  </div>
