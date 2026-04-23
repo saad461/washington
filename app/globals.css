@@ -86,7 +86,7 @@
 
   /* Labels / Metadata */
   .label-metadata {
-    @apply text-[10px] uppercase font-bold tracking-widest text-muted;
+    @apply text-xs uppercase font-semibold text-gray-500 tracking-wide;
   }
 }
 
@@ -121,7 +121,7 @@
   }
 
   .btn-primary {
-    @apply h-12 px-6 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-purple-500 hover:opacity-90 shadow-sm transition-all flex items-center justify-center gap-2;
+    @apply h-12 px-6 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-500 to-purple-500 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-2;
   }
 
   .btn-secondary {
