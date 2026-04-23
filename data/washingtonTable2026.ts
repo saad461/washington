@@ -1,3 +1,14 @@
+export type WashingtonTableRow = {
+  income: number;
+  supportByChildren: {
+    1: number;
+    2: number;
+    3: number;
+    4: number;
+    5: number;
+  };
+};
+
 export const washingtonTable2026: Record<number, Record<number, number>> = {
   2200: { 1: 477, 2: 367, 3: 298, 4: 250, 5: 220 },
   2300: { 1: 499, 2: 384, 3: 311, 4: 261, 5: 230 },
@@ -154,9 +165,28 @@ export const washingtonTable2026: Record<number, Record<number, number>> = {
  * @returns Base support amount or null if beyond table range
  */
 export function getExactSupport(income: number, children: number): number | null {
-  const roundedIncome = Math.round(income / 100) * 100;
-  const row = washingtonTable2026[roundedIncome];
-  if (!row) return null;
-  const childKey = Math.min(children, 5);
+  // 1. Income below 2200 returns null
+  if (income < 2200) {
+    return null;
+  }
+
+  // 2. Clamp income to a maximum of 50,000
+  const effectiveIncome = Math.min(income, 50000);
+
+  // 3. Find the nearest LOWER income bracket using floor logic
+  const availableBrackets = Object.keys(washingtonTable2026)
+    .map(Number)
+    .sort((a, b) => b - a);
+
+  const bracket = availableBrackets.find(b => b <= effectiveIncome);
+
+  if (!bracket) return null;
+
+  const row = washingtonTable2026[bracket];
+
+  // 4. Clamp children between 1 and 5
+  const childKey = Math.max(1, Math.min(children, 5));
+
+  // 5. Return the per-child amount from the table
   return row[childKey] || null;
 }
