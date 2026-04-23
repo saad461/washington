@@ -26,7 +26,7 @@ export default function HomeCalculator() {
  const [childrenCount, setChildrenCount] = useState(1);
  const [incomeType, setIncomeType] = useState("monthly");
  const [payingParent, setPayingParent] = useState("P1");
- const [parentingTime, setParentingTime] = useState(20);
+ const [parentingTime, setParentingTime] = useState(0);
 
  // Advanced Options
  const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
@@ -181,31 +181,37 @@ export default function HomeCalculator() {
  <label htmlFor="parenting-time" className="label-metadata">
  Parenting Time (Paying Parent)
  </label>
- <span className="label-metadata text-indigo-600">{parentingTime}%</span>
+ <div className="flex gap-4">
+ <span className="label-metadata text-indigo-600 font-bold">Paying: {parentingTime}%</span>
+ <span className="label-metadata text-gray-400">Other: {100 - parentingTime}%</span>
  </div>
-
- <div className="flex gap-2 mb-4">
- {[10, 20, 30, 40, 50].map((val) => (
- <button
- key={val}
- type="button"
- onClick={() => setParentingTime(val)}
- className={`flex-1 py-2 label-metadata rounded-lg border transition-all ${parentingTime === val ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' : 'bg-white border-border-default text-body hover:bg-gray-50'}`}
- >
- {val}%
- </button>
- ))}
  </div>
 
  <input
  id="parenting-time"
  type="range"
  min="0"
- max="50"
+ max="100"
  value={parentingTime}
  onChange={(e) => setParentingTime(Number(e.target.value))}
- className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+ className="w-full h-1.5 mb-4 bg-gray-200 rounded-lg cursor-pointer accent-indigo-600"
  />
+
+ <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden mb-6">
+ <div
+ className="h-full bg-indigo-500 transition-all duration-300"
+ style={{ width: `${parentingTime}%` }}
+ />
+ </div>
+
+ <div className="space-y-2 p-4 bg-gray-50 rounded-xl border border-gray-100">
+ <p className="text-sm text-body leading-snug">
+ Enter the percentage of time the paying parent spends with the children.
+ </p>
+ <p className="text-[10px] font-bold uppercase tracking-wider text-muted">
+ Hint: Most cases fall between 20%–40%
+ </p>
+ </div>
  </div>
 
  {/* Advanced Options Collapsible */}
@@ -320,6 +326,9 @@ export default function HomeCalculator() {
  </Link>
  </div>
  </div>
+ <p className="text-xs text-gray-500 mt-4 text-center px-4">
+ Parenting time adjustments may affect final support amounts under Washington guidelines.
+ </p>
  </div>
 
  <div className="stack-space pt-8 border-t border-border-default">
