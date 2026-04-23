@@ -103,6 +103,10 @@ The color system is managed via CSS variables and Tailwind theme tokens.
 *   **Inconsistency**: Label styles are `block label-metadata mb-2 ml-1`, which includes a left margin (`ml-1`) not found in other labels.
 *   **Recommendation**: Standardize label margins across all forms.
 
+### **Blog CTA Component**
+*   **Inconsistency**: Uses `text-2xl md:text-4xl` for its main heading, which is larger than the global H2 standard.
+*   **Recommendation**: Keep as-is if the "Extra Large" CTA style is intended, otherwise align with H2 (`text-2xl md:text-3xl`).
+
 ---
 
 ## 6. Page-by-Page Typography & Color Usage
@@ -120,6 +124,7 @@ The color system is managed via CSS variables and Tailwind theme tokens.
 | **Extra Expenses**| Poppins, Inter | `<h1>` (No classes) | `text-lg` | `heading`, `body`, `primary` | ❌ Inconsistent |
 | **Contact** | Poppins, Inter | `<h1>` (No classes) | `text-body` | `heading`, `body`, `primary` | ❌ Inconsistent |
 | **Prog. SEO** | Poppins, Inter | `leading-[1.1]` | `text-body` | `heading`, `body`, `primary` | ⚠️ Minor |
+| **404 Page** | Poppins, Inter | `<h1>` (No classes) | `text-lg` | `heading`, `body`, `primary` | ❌ Inconsistent |
 
 ---
 
