@@ -348,16 +348,12 @@ export default function WorksheetWizard() {
  </div>
  <div className="bg-white rounded-2xl p-6 md:p-6 border border-gray-100 shadow-sm">
  <p className=" label-metadata mb-2">Parent 1 Transfer</p>
- <h3 className="font-semibold mb-1 font-heading">
- {calculation.status === "SUCCESS" ? curFormatter.format(derivedData['17']?.p1 || 0) : 'Manual Review'}
- </h3>
+ <h3 className="font-semibold mb-1 font-heading">{curFormatter.format(derivedData['17']?.p1 || 0)}</h3>
  <p className="label-metadata font-medium uppercase ">Presumptive Payment</p>
  </div>
  <div className="bg-white rounded-2xl p-6 md:p-6 border border-gray-100 shadow-sm">
  <p className=" label-metadata mb-2">Parent 2 Transfer</p>
- <h3 className="font-semibold mb-1 font-heading">
- {calculation.status === "SUCCESS" ? curFormatter.format(derivedData['17']?.p2 || 0) : 'Manual Review'}
- </h3>
+ <h3 className="font-semibold mb-1 font-heading">{curFormatter.format(derivedData['17']?.p2 || 0)}</h3>
  <p className="label-metadata font-medium uppercase ">Presumptive Payment</p>
  </div>
  </div>
@@ -485,10 +481,7 @@ export default function WorksheetWizard() {
  <span className="label-metadata ">Est. Base Support</span>
  </div>
  <p className="text-2xl font-medium text-white leading-tight relative z-10 font-heading">
- {calculation.status === "SUCCESS"
- ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)
- : "Review Required"
- }
+ {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
  </p>
  </motion.div>
  </div>
@@ -609,10 +602,7 @@ export default function WorksheetWizard() {
  <div>
  <p className="label-metadata mb-0.5">Est. Support</p>
  <p className="text-lg  font-medium font-heading">
- {calculation.status === "SUCCESS"
- ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)
- : "Manual Review"
- }
+ {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
  </p>
  </div>
  <button
