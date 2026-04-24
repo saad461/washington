@@ -56,7 +56,12 @@ export default function HomeCalculator() {
       "daycare": { p1: 0 }
     });
 
-    setResult(calcResult);
+    if (calcResult.status !== "SUCCESS") {
+      setResult(null);
+      setError(calcResult.adjustmentReason || "An error occurred during calculation.");
+    } else {
+      setResult(calcResult);
+    }
   }, [parent1Income, parent2Income, childrenCount, incomeType, payingParent, parentingTime]);
 
   // Live calculation with debounce

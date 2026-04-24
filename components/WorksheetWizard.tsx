@@ -220,6 +220,15 @@ export default function WorksheetWizard() {
  const calculation = React.useMemo(() => calculateChildSupport(formData), [formData]);
 
  const derivedData: Record<string, { p1: number; p2: number }> = React.useMemo(() => {
+ if (calculation.status !== "SUCCESS") {
+ return {
+ '1g': { p1: calculation.grossP1 || 0, p2: calculation.grossP2 || 0 },
+ '3': { p1: calculation.netP1 || 0, p2: calculation.netP2 || 0 },
+ '4': { p1: calculation.combinedIncome || 0, p2: calculation.combinedIncome || 0 },
+ '8_reason': { p1: 0, p2: 0, reason: calculation.adjustmentReason } as never,
+ } as Record<string, any>;
+ }
+
  return {
  '1g': { p1: calculation.grossP1, p2: calculation.grossP2 },
  '2j': { p1: calculation.deductionsP1, p2: calculation.deductionsP2 },
@@ -374,7 +383,7 @@ export default function WorksheetWizard() {
  { label: 'Total Deductions (2j)', id: '2j' },
  { label: 'Monthly Net Income (3)', id: '3', highlight: true },
  { label: 'Proportional Share (6)', id: '6', type: 'per' },
- { label: 'Basic Support (Table)', id: 'base', value: calculation.baseSupport },
+ { label: 'Basic Support (Table)', id: 'base', value: calculation.status === "SUCCESS" ? calculation.baseSupport : undefined },
  { label: 'Adjustment Reason', id: '8_reason', isReason: true },
  { label: 'Final Basic Support (9)', id: '9', highlight: true },
  { label: 'Extra Expenses (14)', id: '14' },
@@ -392,6 +401,10 @@ export default function WorksheetWizard() {
  ) : row.value !== undefined ? (
  <td colSpan={2} className="px-5 md:px-6 py-3 min-h-[48px] text-sm font-medium ">
  {curFormatter.format(row.value)}
+ </td>
+ ) : calculation.status !== "SUCCESS" && ['6', '7', '9', '14', '16d', '17'].includes(row.id) ? (
+ <td colSpan={2} className="px-5 md:px-6 py-3 min-h-[48px] text-sm font-medium text-amber-600 italic">
+ --
  </td>
  ) : (
  <>
@@ -481,7 +494,9 @@ export default function WorksheetWizard() {
  <span className="label-metadata ">Est. Base Support</span>
  </div>
  <p className="text-2xl font-medium text-white leading-tight relative z-10 font-heading">
- {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
+ {calculation.status === "SUCCESS"
+ ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)
+ : "--"}
  </p>
  </motion.div>
  </div>
@@ -602,7 +617,9 @@ export default function WorksheetWizard() {
  <div>
  <p className="label-metadata mb-0.5">Est. Support</p>
  <p className="text-lg  font-medium font-heading">
- {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
+ {calculation.status === "SUCCESS"
+ ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)
+ : "--"}
  </p>
  </div>
  <button
