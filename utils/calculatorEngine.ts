@@ -1,12 +1,18 @@
 import { getExactSupport } from '../data/washingtonTable2026';
 
 // LEGAL CONSTANTS
-const MIN_SUPPORT_PER_CHILD = 50;
 const SELF_SUPPORT_RESERVE = 2394;
 
 /**
  * 2026 Washington State Child Support Calculation Engine
  */
+
+export type CalculationStatus =
+  | "SUCCESS"
+  | "MANUAL_DETERMINATION_REQUIRED"
+  | "MANUAL_REVIEW_REQUIRED"
+  | "INVALID_INPUT"
+  | "ERROR";
 
 interface ParentValues {
   p1?: string | number | boolean;
@@ -29,7 +35,7 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   const otherChildren = parseFloat(String(formData["otherChildren"]?.p1 || 0)) || 0;
   const healthInsurance = parseFloat(String(formData["healthInsurance"]?.p1 || 0)) || 0;
   const daycare = parseFloat(String(formData["daycare"]?.p1 || 0)) || 0;
-  const children = parseInt(String(formData["5_children"]?.p1 || 1), 10) || 1;
+  const children = Number(formData["5_children"]?.p1);
 
   // STEP 1 & 2: GROSS & DEDUCTIONS
   let grossP1 = sum([formData["1a"], formData["1b"], formData["1c"], formData["1d"], formData["1e"], formData["1f"]], "p1");
@@ -62,34 +68,41 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   // ✅ (B) RULE ENGINE LOOKUP
   const lookup = getExactSupport(combinedIncome, children);
 
-  if (lookup.status === "manual_determination") {
-    // Handling cases below $2,200 threshold
-    const totalObligation = MIN_SUPPORT_PER_CHILD * children;
-    baseTableSupport = totalObligation;
-    adjustmentReason = lookup.reason || "Low income minimum rule applied ($50/child)";
-
-    if (payingParent === "P1") {
-      obligationP1 = totalObligation;
-      obligationP2 = 0;
-    } else {
-      obligationP1 = 0;
-      obligationP2 = totalObligation;
-    }
-  } else if (lookup.status === "calculated") {
+  if (lookup.status === "MANUAL_DETERMINATION_REQUIRED") {
+    return {
+      status: "MANUAL_DETERMINATION_REQUIRED" as CalculationStatus,
+      adjustmentReason: lookup.reason,
+      combinedIncome,
+      netP1, netP2,
+      grossP1, grossP2,
+      children
+    };
+  } else if (lookup.status === "INVALID_INPUT") {
+    return {
+      status: "INVALID_INPUT" as CalculationStatus,
+      adjustmentReason: lookup.reason,
+      combinedIncome,
+      children
+    };
+  } else if (lookup.status === "SUCCESS") {
     baseTableSupport = lookup.totalSupport;
     obligationP1 = baseTableSupport * shareP1;
     obligationP2 = baseTableSupport * shareP2;
   } else {
-    // Error status or fallback
-    adjustmentReason = lookup.status === "error" ? lookup.message : "Error in support calculation";
+    // ERROR status
+    return {
+      status: "ERROR" as CalculationStatus,
+      adjustmentReason: lookup.status === "ERROR" ? lookup.message : "Internal engine error",
+      combinedIncome,
+      children
+    };
   }
 
-  // TRACK BREAKDOWN
+  // Apply further adjustments ONLY if combined income is above $2,200
   let parentingAdjustment = 0;
   let otherChildrenAdjustment = 0;
   let extraCostsAdjustment = 0;
 
-  // Apply further adjustments ONLY if combined income is above $2,200
   if (combinedIncome >= 2200) {
     // OTHER CHILDREN ADJUSTMENT
     if (otherChildren > 0) {
@@ -133,20 +146,35 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
     }
   }
 
-  // ✅ (C) Apply SSR Protection
-  const applySSRCap = (obligation: number, netIncome: number) => {
+  // ✅ (C) Apply SSR Protection (Self-Support Reserve)
+  // If maxAffordable is 0 or less, the rule requires manual judicial review.
+  const checkSSR = (obligation: number, netIncome: number) => {
     const maxAffordable = netIncome - SELF_SUPPORT_RESERVE;
     if (maxAffordable <= 0) {
-      return Math.min(MIN_SUPPORT_PER_CHILD * children, obligation);
+      return { status: "MANUAL_REVIEW_REQUIRED", value: obligation };
     }
-    return Math.min(obligation, maxAffordable);
+    return { status: "SUCCESS", value: Math.min(obligation, maxAffordable) };
   };
 
   const originalObligationP1 = obligationP1;
   const originalObligationP2 = obligationP2;
 
-  obligationP1 = applySSRCap(obligationP1, netP1);
-  obligationP2 = applySSRCap(obligationP2, netP2);
+  const ssrP1 = checkSSR(obligationP1, netP1);
+  const ssrP2 = checkSSR(obligationP2, netP2);
+
+  if (ssrP1.status === "MANUAL_REVIEW_REQUIRED" || ssrP2.status === "MANUAL_REVIEW_REQUIRED") {
+    return {
+      status: "MANUAL_REVIEW_REQUIRED" as CalculationStatus,
+      adjustmentReason: "Self-support reserve requires manual judicial review",
+      combinedIncome,
+      netP1, netP2,
+      grossP1, grossP2,
+      children
+    };
+  }
+
+  obligationP1 = ssrP1.value;
+  obligationP2 = ssrP2.value;
 
   if (obligationP1 !== originalObligationP1 || obligationP2 !== originalObligationP2) {
     const isP1Capped = payingParent === "P1" && obligationP1 !== originalObligationP1;
@@ -157,6 +185,7 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   }
 
   // ✅ (F) Apply 45% Rule (Safety Cap)
+  // This is a mandatory Washington State legal limit.
   const pre45P1 = obligationP1;
   const pre45P2 = obligationP2;
   const apply45Rule = (obligation: number, netIncome: number) => {
@@ -173,6 +202,7 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   let finalObligation = payingParent === "P1" ? obligationP1 : obligationP2;
 
   // ✅ (H) Safety Clamp for Extreme Cases
+  // Final safety check to ensure obligation does not exceed 60% of combined income.
   const MAX_REASONABLE_SUPPORT = combinedIncome * 0.6;
   finalObligation = Math.min(finalObligation, MAX_REASONABLE_SUPPORT);
 
@@ -181,6 +211,7 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   const isLowIncome = combinedIncome < 2200;
 
   return {
+    status: "SUCCESS" as CalculationStatus,
     grossP1, grossP2,
     deductionsP1, deductionsP2,
     netP1, netP2,
