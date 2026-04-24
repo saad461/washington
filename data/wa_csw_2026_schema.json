@@ -124,13 +124,13 @@
       "id": "5_per_child",
       "label": "Basic Support Per Child",
       "type": "currency",
-      "description": "The amount per child from the Economic Table based on Combined Net Income."
+      "description": "The total amount from the Economic Table based on Combined Net Income and number of children."
     },
     {
       "id": "5",
       "label": "Basic Child Support Obligation",
       "type": "currency",
-      "description": "Total calculated basic support (Number of children x Amount per child)."
+      "description": "Total calculated basic support from the economic table."
     },
     {
       "id": "6",
@@ -156,13 +156,13 @@
       "id": "8a",
       "label": "Presumptive Minimum ($2,200 Combined)",
       "type": "currency",
-      "description": "Presumptive $50 per child if combined net income is less than $2,200."
+      "description": "Possible manual determination if combined net income is less than $2,200."
     },
     {
       "id": "8b",
       "label": "Self-Support Reserve Limit (Individual)",
       "type": "currency",
-      "description": "Presumptive $50 per child if parent's net income is less than self-support reserve."
+      "description": "Self-support reserve applies if parent's net income is less than threshold."
     },
     {
       "id": "8c",

@@ -245,60 +245,86 @@ export default function HomeCalculator() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="space-y-6"
               >
-                <div className="bg-heading rounded-3xl p-8 md:p-10 text-center relative overflow-hidden shadow-2xl ring-1 ring-white/10">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                  <div className="relative z-10">
-                    <h3 className="label-metadata text-white/50 mb-6 tracking-[0.2em]">Estimated Monthly Transfer</h3>
-                    <div className="text-5xl md:text-6xl font-bold text-white font-heading mb-8 tracking-tight">
-                      <AnimatedNumber value={result.finalSupport} />
+                {result.status === 'SUCCESS' ? (
+                  <>
+                    <div className="bg-heading rounded-3xl p-8 md:p-10 text-center relative overflow-hidden shadow-2xl ring-1 ring-white/10">
+                      <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                      <div className="relative z-10">
+                        <h3 className="label-metadata text-white/50 mb-6 tracking-[0.2em]">Estimated Monthly Transfer</h3>
+                        <div className="text-5xl md:text-6xl font-bold text-white font-heading mb-8 tracking-tight">
+                          <AnimatedNumber value={result.finalSupport} />
+                        </div>
+                        <div className="flex flex-wrap justify-center gap-2 mb-10">
+                          {result.ssrApplied && <span className="px-3 py-1 bg-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase tracking-wider rounded-full border border-indigo-500/30 flex items-center gap-1.5"><AlertCircle size={12} /> SSR Protection</span>}
+                          {result.isLowIncome && <span className="px-3 py-1 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider rounded-full border border-emerald-500/30 flex items-center gap-1.5"><Info size={12} /> Low Income Minimum</span>}
+                          {result.is45PercentCapped && <span className="px-3 py-1 bg-amber-500/20 text-amber-300 text-[10px] font-bold uppercase tracking-wider rounded-full border border-amber-500/30 flex items-center gap-1.5"><AlertCircle size={12} /> 45% Net Cap</span>}
+                        </div>
+                        <Link href="/worksheet" className="btn-primary !bg-white !text-heading hover:!bg-gray-100 !h-14 !px-8 !rounded-2xl group w-full sm:w-auto">
+                          <span>Get Official PDF</span>
+                          <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </div>
                     </div>
-                    <div className="flex flex-wrap justify-center gap-2 mb-10">
-                      {result.ssrApplied && <span className="px-3 py-1 bg-indigo-500/20 text-indigo-300 text-[10px] font-bold uppercase tracking-wider rounded-full border border-indigo-500/30 flex items-center gap-1.5"><AlertCircle size={12} /> SSR Protection</span>}
-                      {result.isLowIncome && <span className="px-3 py-1 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider rounded-full border border-emerald-500/30 flex items-center gap-1.5"><Info size={12} /> Low Income Minimum</span>}
-                      {result.is45PercentCapped && <span className="px-3 py-1 bg-amber-500/20 text-amber-300 text-[10px] font-bold uppercase tracking-wider rounded-full border border-amber-500/30 flex items-center gap-1.5"><AlertCircle size={12} /> 45% Net Cap</span>}
+
+                    <div className="card-standard !p-8 space-y-6 shadow-lg">
+                      <h4 className="label-metadata text-heading font-bold border-b border-gray-100 pb-4">Calculation Breakdown</h4>
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-center group">
+                          <span className="text-sm font-medium text-body">Combined Family Income</span>
+                          <span className="font-bold text-heading"><AnimatedNumber value={result.combinedIncome} /></span>
+                        </div>
+                        <div className="py-2">
+                          <div className="flex justify-between mb-1.5">
+                            <span className="text-[10px] font-bold text-indigo-600 uppercase">P1: {Math.round(result.shareP1 * 100)}%</span>
+                            <span className="text-[10px] font-bold text-purple-600 uppercase">P2: {Math.round(result.shareP2 * 100)}%</span>
+                          </div>
+                          <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden flex">
+                            <motion.div initial={{ width: 0 }} animate={{ width: `${result.shareP1 * 100}%` }} className="h-full bg-indigo-500" />
+                            <motion.div initial={{ width: 0 }} animate={{ width: `${result.shareP2 * 100}%` }} className="h-full bg-purple-500" />
+                          </div>
+                        </div>
+                        <div className="pt-4 space-y-4 border-t border-gray-50">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-body">Base Support (Payer Share)</span>
+                            <span className="font-bold text-heading"><AnimatedNumber value={result.breakdown.baseSupport} /></span>
+                          </div>
+                          {result.breakdown.parentingAdjustment !== 0 && (
+                            <div className="flex justify-between items-center text-emerald-600">
+                              <span className="text-sm font-medium">Parenting Time Credit</span>
+                              <span className="font-bold"><AnimatedNumber value={result.breakdown.parentingAdjustment} /></span>
+                            </div>
+                          )}
+                          <div className="pt-4 border-t border-gray-100 flex justify-between items-center">
+                            <span className="font-bold text-heading">Presumptive Total</span>
+                            <span className="text-xl font-bold text-indigo-600"><AnimatedNumber value={result.finalSupport} /></span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <Link href="/worksheet" className="btn-primary !bg-white !text-heading hover:!bg-gray-100 !h-14 !px-8 !rounded-2xl group w-full sm:w-auto">
-                      <span>Get Official PDF</span>
-                      <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </>
+                ) : (
+                  <div className="card-standard !p-8 md:!p-10 space-y-6 shadow-xl border-amber-100 bg-amber-50/30">
+                    <div className="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 mb-2">
+                      <AlertCircle size={24} />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold text-heading mb-2">Legal Notice</h4>
+                      <p className="text-body text-sm leading-relaxed">
+                        {result.adjustmentReason || "A precise calculation cannot be performed with the current inputs."}
+                      </p>
+                    </div>
+                    <div className="p-4 bg-white/60 rounded-xl border border-amber-100/50">
+                      <p className="text-xs text-muted leading-relaxed">
+                        Per Washington State Law (RCW 26.19), certain financial situations require a manual judicial determination to ensure fair support obligations.
+                        We recommend consulting with a legal professional or using the full worksheet wizard for detailed documentation.
+                      </p>
+                    </div>
+                    <Link href="/worksheet" className="btn-primary w-full !h-14 !rounded-2xl flex items-center justify-center gap-2">
+                      <span>Launch Full Wizard</span>
+                      <ArrowRight size={18} />
                     </Link>
                   </div>
-                </div>
-
-                <div className="card-standard !p-8 space-y-6 shadow-lg">
-                  <h4 className="label-metadata text-heading font-bold border-b border-gray-100 pb-4">Calculation Breakdown</h4>
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center group">
-                      <span className="text-sm font-medium text-body">Combined Family Income</span>
-                      <span className="font-bold text-heading"><AnimatedNumber value={result.combinedIncome} /></span>
-                    </div>
-                    <div className="py-2">
-                      <div className="flex justify-between mb-1.5">
-                        <span className="text-[10px] font-bold text-indigo-600 uppercase">P1: {Math.round(result.shareP1 * 100)}%</span>
-                        <span className="text-[10px] font-bold text-purple-600 uppercase">P2: {Math.round(result.shareP2 * 100)}%</span>
-                      </div>
-                      <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden flex">
-                        <motion.div initial={{ width: 0 }} animate={{ width: `${result.shareP1 * 100}%` }} className="h-full bg-indigo-500" />
-                        <motion.div initial={{ width: 0 }} animate={{ width: `${result.shareP2 * 100}%` }} className="h-full bg-purple-500" />
-                      </div>
-                    </div>
-                    <div className="pt-4 space-y-4 border-t border-gray-50">
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm text-body">Base Support (Payer Share)</span>
-                        <span className="font-bold text-heading"><AnimatedNumber value={result.breakdown.baseSupport} /></span>
-                      </div>
-                      {result.breakdown.parentingAdjustment !== 0 && (
-                        <div className="flex justify-between items-center text-emerald-600">
-                          <span className="text-sm font-medium">Parenting Time Credit</span>
-                          <span className="font-bold"><AnimatedNumber value={result.breakdown.parentingAdjustment} /></span>
-                        </div>
-                      )}
-                      <div className="pt-4 border-t border-gray-100 flex justify-between items-center">
-                        <span className="font-bold text-heading">Presumptive Total</span>
-                        <span className="text-xl font-bold text-indigo-600"><AnimatedNumber value={result.finalSupport} /></span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
@@ -409,7 +435,9 @@ export default function HomeCalculator() {
             <div className="max-w-md mx-auto flex items-center justify-between gap-4">
               <div>
                 <span className="label-metadata !text-[9px] block">Estimated Support</span>
-                <span className="text-2xl font-bold text-heading font-heading"><AnimatedNumber value={result.finalSupport} /></span>
+                <span className="text-2xl font-bold text-heading font-heading">
+                  {result.status === 'SUCCESS' ? <AnimatedNumber value={result.finalSupport} /> : "Manual"}
+                </span>
               </div>
               <button
                 onClick={() => resultsRef.current?.scrollIntoView({ behavior: 'smooth' })}

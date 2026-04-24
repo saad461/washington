@@ -23,7 +23,7 @@ export default function Home() {
   const homeFaqs = [
     {
       question: "What is the minimum child support in Washington state?",
-      answer: "The statutory minimum child support in Washington is $50 per child per month. Judges may deviate below this amount in extraordinary circumstances only, to ensure the paying parent’s self-support reserve is protected."
+      answer: "The statutory minimum child support in Washington is statutory minimum. Judges may deviate below this amount in extraordinary circumstances only, to ensure the paying parent’s self-support reserve is protected."
     },
     {
       question: "How is Washington child support calculated in 2026?",
@@ -193,7 +193,7 @@ export default function Home() {
                   </p>
                   <ul className="space-y-3">
                     {[
-                      "Statutory minimum: $50 per child per month.",
+                      "Statutory minimum: statutory minimum.",
                       "Calculations cover all 39 Washington counties.",
                       "Updated for 2026 economic standards."
                     ].map((li, i) => (
