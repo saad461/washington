@@ -291,6 +291,8 @@ export default function HomeCalculator() {
  </h3>
 
  <div className="text-center relative z-10">
+ {result.status === "SUCCESS" ? (
+ <>
  <div className="text-4xl md:text-5xl font-bold text-white font-heading mb-6">
  <AnimatedNumber value={result.finalSupport} />
  </div>
@@ -302,12 +304,6 @@ export default function HomeCalculator() {
  Protected by Self-Support Reserve
  </span>
  )}
- {result.isLowIncome && (
- <span className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/20 text-emerald-200 label-metadata rounded-full border border-emerald-500/30">
- <Info size={12} />
- Minimum Support Applied ($50/child)
- </span>
- )}
  {result.is45PercentCapped && (
  <span className="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/20 text-amber-200 label-metadata rounded-full border border-amber-500/30">
  <AlertCircle size={12} />
@@ -315,6 +311,21 @@ export default function HomeCalculator() {
  </span>
  )}
  </div>
+ </>
+ ) : (
+ <div className="mb-8">
+ <div className="flex items-center justify-center gap-2 text-amber-400 mb-2">
+ <AlertCircle size={24} />
+ <span className="font-bold uppercase tracking-wider text-xs">Manual Review Required</span>
+ </div>
+ <p className="text-white text-lg font-medium leading-tight">
+ {result.adjustmentReason || "Judicial determination required"}
+ </p>
+ <p className="text-white/60 text-xs mt-3 max-w-xs mx-auto">
+ Standard table calculations do not apply to this financial scenario. A judge must determine the final obligation.
+ </p>
+ </div>
+ )}
 
  <div className="mt-4">
  <Link
