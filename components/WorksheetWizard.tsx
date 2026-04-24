@@ -481,7 +481,9 @@ export default function WorksheetWizard() {
  <span className="label-metadata ">Est. Base Support</span>
  </div>
  <p className="text-2xl font-medium text-white leading-tight relative z-10 font-heading">
- {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
+ {calculation.status === 'SUCCESS'
+   ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)
+   : "Manual"}
  </p>
  </motion.div>
  </div>
@@ -602,7 +604,9 @@ export default function WorksheetWizard() {
  <div>
  <p className="label-metadata mb-0.5">Est. Support</p>
  <p className="text-lg  font-medium font-heading">
- {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)}
+ {calculation.status === 'SUCCESS'
+   ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculation.baseSupport)
+   : "Manual"}
  </p>
  </div>
  <button

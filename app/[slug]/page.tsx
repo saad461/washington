@@ -128,10 +128,10 @@ function generateDynamicContent(
     incomeBlock = `
  <div class="bg-indigo-50 p-6 md:p-6 rounded-xl border border-indigo-100/50 my-10">
  <h3 class=" flex items-center gap-2 mt-0 "><svg class="w-6 h-6 " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg> Low-Income Protective Measures</h3>
- <p class=" ">For families with a combined monthly income of <strong>${formattedIncome}</strong>, Washington's 2026 guidelines trigger automatic poverty protections. At this level, the standard ${formattedSupport} obligation is often reduced to the statutory minimum of $50 per child.</p>
+ <p class=" ">For families with a combined monthly income of <strong>${formattedIncome}</strong>, Washington's 2026 guidelines trigger automatic poverty protections. At this level, the standard ${formattedSupport} obligation is often reduced to the statutory minimum determined by the court.</p>
  <ul class=" mt-5 space-y-2 list-disc pl-5 ">
  <li><strong>SSR Protection:</strong> The approximately $2,394 reserve is strictly applied.</li>
- <li><strong>Statutory Minimum:</strong> Usually $50/month per child.</li>
+ <li><strong>Judicial Review:</strong> Cases below $2,200 income require manual judicial determination.</li>
  <li><strong>Deviation Probability:</strong> High at the ${formattedIncome} income tier.</li>
  </ul>
  </div>`;
@@ -165,7 +165,7 @@ function generateDynamicContent(
     familyBlock = `
  <div class="bg-indigo-50/50 p-6 md:p-6 rounded-xl border border-indigo-100/50 my-10">
  <h4 class="text-indigo-950 flex items-center gap-2 mt-0 "><svg class="w-6 h-6 " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 15h6"/><path d="M9 11h6"/><path d="M9 19h1"/></svg> Large Family Analysis</h4>
- <p class=" ">Raising ${childrenText} involves 'economies of scale'. The multiplier applied to the base income accounts for shared household costs. While the total of ${formattedSupport} is higher than for one child, the per-child cost is lower, reflecting common shared resources.</p>
+ <p class=" ">Raising ${childrenText} involves 'economies of scale'. The total obligation accounts for shared household costs. While the total of ${formattedSupport} is higher than for one child, the overall cost is lower, reflecting common shared resources.</p>
  </div>`;
   }
 

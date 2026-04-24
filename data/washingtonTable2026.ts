@@ -3,7 +3,7 @@
  *
  * IMPORTANT LEGAL NOTE:
  * These values represent the FINAL BASIC SUPPORT OBLIGATION for the case.
- * They are NOT "per-child" multipliers.
+ * They are NOT multipliers.
  *
  * Example: Income 2200, 2 Children = 367.
  * This 367 is the TOTAL amount for the whole case.
@@ -186,9 +186,10 @@ export const washingtonTable2026: Record<number, Record<number, number>> = Objec
 const availableBrackets = washingtonSupportTable2026.map(e => e.income).sort((a, b) => b - a);
 
 export type SupportCalculationResult =
-  | { status: "calculated"; income: number; bracketUsed: number; childrenUsed: number; totalSupport: number; lookupType: "floor_match"; source: "WASHINGTON_TABLE_2026"; debug?: any }
-  | { status: "manual_determination"; income: number; children: number; reason: string; debug?: any }
-  | { status: "error"; message: string; debug?: any };
+  | { status: "SUCCESS"; income: number; bracketUsed: number; childrenUsed: number; totalSupport: number; lookupType: "floor_match"; source: "WASHINGTON_TABLE_2026"; debug?: any }
+  | { status: "MANUAL_DETERMINATION_REQUIRED"; income: number; children: number; reason: string; debug?: any }
+  | { status: "INVALID_INPUT"; reason: string; debug?: any }
+  | { status: "ERROR"; message: string; debug?: any };
 
 /**
  * PRODUCTION-SAFE LOOKUP HELPER
@@ -197,7 +198,7 @@ export type SupportCalculationResult =
  */
 export function getSupport(income: number, children: number): number | null {
   const result = getExactSupport(income, children);
-  return result.status === "calculated" ? result.totalSupport : null;
+  return result.status === "SUCCESS" ? result.totalSupport : null;
 }
 
 /**
@@ -213,61 +214,61 @@ export function getExactSupport(income: number, children: number, debug: boolean
   const debugInfo: any = debug ? { inputIncome: income, inputChildren: children } : undefined;
 
   // 1. Handle safely invalid inputs
-  if (income === null || income === undefined || isNaN(income) || income < 0 ||
-      children === null || children === undefined || isNaN(children)) {
-    return { status: "error", message: "Invalid input parameters", debug: debugInfo };
+  if (income === null || income === undefined || isNaN(income) || income < 0) {
+    return { status: "INVALID_INPUT", reason: "Income must be a non-negative number", debug: debugInfo };
   }
 
-  // 2. Legal Rule: Income < 2200 requires manual determination
+  // 2. Children Handling: MUST be an integer between 1 and 5
+  if (children === null || children === undefined || isNaN(children) || !Number.isInteger(children) || children < 1 || children > 5) {
+    return { status: "INVALID_INPUT", reason: "Children must be an integer between 1 and 5", debug: debugInfo };
+  }
+
+  // 3. Legal Rule: Income < 2200 requires manual determination
   if (income < 2200) {
     return {
-      status: "manual_determination",
+      status: "MANUAL_DETERMINATION_REQUIRED",
       income,
       children,
-      reason: "Income below statutory table threshold ($2,200)",
+      reason: "Income below $2,200 — court determines support",
       debug: debugInfo
     };
   }
 
-  // 3. Income Handling: Max usable income = 50000
+  // 4. Income Handling: Max usable income = 50000
   const effectiveIncome = Math.min(income, 50000);
-
-  // 4. Children Handling: Clamp between 1-5
-  const childrenUsed = Math.max(1, Math.min(Math.round(children), 5)) as 1 | 2 | 3 | 4 | 5;
 
   // 5. Bracket Selection: Use floor matching logic
   const bracketUsed = availableBrackets.find(b => b <= effectiveIncome);
 
   if (bracketUsed === undefined) {
-    // This should technically never happen given the < 2200 check above
-    return { status: "error", message: "No suitable income bracket found", debug: debugInfo };
+    return { status: "ERROR", message: "No suitable income bracket found", debug: debugInfo };
   }
 
   // 6. Lookup Logic
   const row = washingtonTable2026[bracketUsed];
   if (!row) {
-    return { status: "error", message: "Internal Data Error: Bracket not found in table", debug: debugInfo };
+    return { status: "ERROR", message: "Internal Data Error: Bracket not found in table", debug: debugInfo };
   }
 
-  const totalSupport = row[childrenUsed];
+  const totalSupport = row[children];
   if (totalSupport === undefined || isNaN(totalSupport)) {
-    return { status: "error", message: "Internal Data Error: Invalid support value", debug: debugInfo };
+    return { status: "ERROR", message: "Internal Data Error: Invalid support value", debug: debugInfo };
   }
 
   if (debug) {
     debugInfo.effectiveIncome = effectiveIncome;
     debugInfo.selectedBracket = bracketUsed;
-    debugInfo.childrenUsed = childrenUsed;
-    debugInfo.rawValue = totalSupport;
+    debugInfo.childrenUsed = children;
     debugInfo.lookupStrategy = "floor_match";
+    // We do NOT expose internal transformation logic as per audit rules
   }
 
   // 7. Success Output
   return {
-    status: "calculated",
+    status: "SUCCESS",
     income,
     bracketUsed,
-    childrenUsed,
+    childrenUsed: children as 1 | 2 | 3 | 4 | 5,
     totalSupport,
     lookupType: "floor_match",
     source: "WASHINGTON_TABLE_2026",

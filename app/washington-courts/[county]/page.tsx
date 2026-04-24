@@ -101,7 +101,7 @@ function generateCountyContent(county: WashingtonCounty): {
     `Washington's Income Shares Model — the legal framework used in ${county.name} and every county in the state — starts with a simple but powerful premise: both parents are financially responsible for their children. The court determines each parent's monthly net income (gross income minus mandatory deductions like income taxes, Social Security, and state-mandated insurance premiums). These two incomes are added together to form the Combined Monthly Net Income (CMNI).`,
     `Next, the court looks up the applicable basic support obligation from the Washington 2026 economic table based on the CMNI and the number of children. For example, two parents earning a combined $8,000 per month with 2 children would have a presumptive basic support obligation of around $1,600 to $1,700 per month total. This total amount is then divided proportionally based on each parent's share of the combined income.`,
     `Beyond the base obligation, the 2026 guidelines require parents in ${county.name} to proportionally split additional "extraordinary expenses" such as work-related childcare, health insurance premiums for the child, and approved educational costs. These are calculated separately using the same income-share formula. Use our <strong>Extra Expense Splitter</strong> at <a href="/extra-expenses">/extra-expenses</a> to calculate these add-on costs.`,
-    `A crucial protection in every ${county.name} child support case is the Self-Support Reserve (SSR). Under 2026 rules, the SSR is set at <strong>approximately $2,394 per month</strong> — equal to 180% of the federal poverty level for a single person. If the paying parent's remaining monthly income after paying child support falls below approximately $2,394, the court must limit the support amount to protect them. The absolute minimum support obligation per child is $50 per month regardless of income.`,
+    `A crucial protection in every ${county.name} child support case is the Self-Support Reserve (SSR). Under 2026 rules, the SSR is set at <strong>approximately $2,394 per month</strong> — equal to 180% of the federal poverty level for a single person. If the paying parent's remaining monthly income after paying child support falls below approximately $2,394, the court must limit the support amount to protect them. The absolute minimum support obligation is subject to statutory minimums regardless of income.`,
   ];
 
   const filingProcess = [
@@ -199,7 +199,7 @@ export default async function CountyCourtPage({ params }: Props) {
     },
     {
       q: "What is the minimum child support in Washington State?",
-      a: `The presumptive minimum is $50 per child per month. This floor exists even for very low-income paying parents. In 2026, judges in ${county!.name} may deviate below this minimum only in extraordinary circumstances documented in court findings.`,
+      a: `The presumptive minimum is statutory minimum. This floor exists even for very low-income paying parents. In 2026, judges in ${county!.name} may deviate below this minimum only in extraordinary circumstances documented in court findings.`,
     },
     {
       q: `Where do I file child support paperwork in ${county!.name}?`,
@@ -405,7 +405,7 @@ export default async function CountyCourtPage({ params }: Props) {
                         "Self-Support Reserve (SSR)",
                         "approximately $2,394 / month",
                       ],
-                      ["Minimum Support", "$50 per child / month"],
+                      ["Minimum Support", "Statutory Min"],
                       [
                         "Economic Table Coverage",
                         "Up to $50,000 combined income",
