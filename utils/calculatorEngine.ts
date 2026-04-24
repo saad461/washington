@@ -1,4 +1,4 @@
-import { washingtonTable2026 } from '../data/washingtonTable2026';
+import { getExactSupport } from '../data/washingtonTable2026';
 
 // LEGAL CONSTANTS
 const MIN_SUPPORT_PER_CHILD = 50;
@@ -59,13 +59,15 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   let baseTableSupport = 0;
   let adjustmentReason = "Standard calculation";
 
-  // ✅ (B) Apply Low-Income Rule FIRST
-  if (combinedIncome < 2200) {
+  // ✅ (B) RULE ENGINE LOOKUP
+  const lookup = getExactSupport(combinedIncome, children);
+
+  if (lookup.status === "manual_determination") {
+    // Handling cases below $2,200 threshold
     const totalObligation = MIN_SUPPORT_PER_CHILD * children;
     baseTableSupport = totalObligation;
-    adjustmentReason = "Low income minimum rule applied ($50/child)";
+    adjustmentReason = lookup.reason || "Low income minimum rule applied ($50/child)";
 
-    // Assign to paying parent as per Answer 6
     if (payingParent === "P1") {
       obligationP1 = totalObligation;
       obligationP2 = 0;
@@ -73,14 +75,13 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
       obligationP1 = 0;
       obligationP2 = totalObligation;
     }
-  } else {
-    // STEP 5: LOOKUP TABLE
-    const roundedIncome = Math.round(combinedIncome / 100) * 100;
-    const row = washingtonTable2026[roundedIncome];
-    baseTableSupport = row ? (row[Math.min(children, 5)] || 0) : 0;
-
+  } else if (lookup.status === "calculated") {
+    baseTableSupport = lookup.totalSupport;
     obligationP1 = baseTableSupport * shareP1;
     obligationP2 = baseTableSupport * shareP2;
+  } else {
+    // Error status or fallback
+    adjustmentReason = lookup.status === "error" ? lookup.message : "Error in support calculation";
   }
 
   // TRACK BREAKDOWN

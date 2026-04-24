@@ -85,7 +85,8 @@ function generateDynamicContent(
   county: WashingtonCounty | null,
 ) {
   const formattedIncome = formatter.format(income);
-  const supportNum = getExactSupport(income, children);
+  const result = getExactSupport(income, children);
+  const supportNum = result.status === "calculated" ? result.totalSupport : null;
   const formattedSupport =
     supportNum !== null ? formatter.format(supportNum) : "Court Discretion";
   const childrenText = children === 1 ? "one child" : `${children} children`;
@@ -292,7 +293,8 @@ const Breadcrumbs = ({
 export default async function ProgrammaticSEOPage({ params }: Props) {
   const { slug } = await params;
   const { county, income, children } = parseSlug(slug);
-  const supportNum = getExactSupport(income, children);
+  const result = getExactSupport(income, children);
+  const supportNum = result.status === "calculated" ? result.totalSupport : null;
 
   const formattedIncome = formatter.format(income);
   const formattedSupport =

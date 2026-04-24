@@ -12,7 +12,8 @@ export default function ComparisonTool() {
  const parsedIncome = parseFloat(income) || 0;
 
  // Calculate 2026 Value
- const actual2026 = getExactSupport(parsedIncome, children);
+ const res2026 = getExactSupport(parsedIncome, children);
+ const actual2026 = res2026.status === "calculated" ? res2026.totalSupport : null;
 
  // Custom Logic for 2024 vs 2026 Comparison
  let actual2024: number | null = null;
@@ -26,7 +27,8 @@ export default function ComparisonTool() {
  } else if (parsedIncome >= 2201 && parsedIncome <= 12000) {
  actual2024 = actual2026; // Exactly the same
  } else if (parsedIncome > 12000) {
- actual2024 = getExactSupport(12000, children); // Frozen at 12000 cap for 2024
+ const res2024 = getExactSupport(12000, children);
+ actual2024 = res2024.status === "calculated" ? res2024.totalSupport : null; // Frozen at 12000 cap for 2024
  }
 
  const difference = (actual2026 || 0) - (actual2024 || 0);
