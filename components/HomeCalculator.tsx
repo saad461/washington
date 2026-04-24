@@ -525,7 +525,6 @@ export default function HomeCalculator() {
  </div>
  </>
  );
-=======
   // Core Inputs
   const [parent1Income, setParent1Income] = useState("");
   const [parent2Income, setParent2Income] = useState("");
