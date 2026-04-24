@@ -185,30 +185,92 @@ export const washingtonTable2026: Record<number, Record<number, number>> = Objec
 // PERFORMANCE OPTIMIZATION: Memoize sorted brackets outside function
 const availableBrackets = washingtonSupportTable2026.map(e => e.income).sort((a, b) => b - a);
 
+export type SupportCalculationResult =
+  | { status: "calculated"; income: number; bracketUsed: number; childrenUsed: number; totalSupport: number; lookupType: "floor_match"; source: "WASHINGTON_TABLE_2026"; debug?: any }
+  | { status: "manual_determination"; income: number; children: number; reason: string; debug?: any }
+  | { status: "error"; message: string; debug?: any };
+
 /**
  * PRODUCTION-SAFE LOOKUP HELPER
  * Returns the TOTAL OBLIGATION for the case.
+ * @deprecated Use getExactSupport() for structured results
  */
 export function getSupport(income: number, children: number): number | null {
-  if (income < 2200) return null;
-  const effectiveIncome = Math.min(income, 50000);
-  const bracket = availableBrackets.find(b => b <= effectiveIncome);
-  if (!bracket) return null;
-
-  const entry = washingtonSupportTable2026.find(e => e.income === bracket);
-  if (!entry) return null;
-
-  const childCount = Math.max(1, Math.min(children, 5));
-  const obligation = entry.totalObligation.find(o => o.children === childCount);
-
-  return obligation ? obligation.amount : null;
+  const result = getExactSupport(income, children);
+  return result.status === "calculated" ? result.totalSupport : null;
 }
 
 /**
- * Official Washington State Child Support Schedule Lookup (2026)
- * @deprecated Use getSupport() for new implementations
- * @returns Total base support amount for the case or null if below threshold
+ * DETERMINISTIC RULE ENGINE FOR WASHINGTON CHILD SUPPORT (2026)
+ * Handles all legal rules, clamping, and edge cases.
+ *
+ * @param income - Combined Monthly Net Income
+ * @param children - Number of Children in case
+ * @param debug - Optional flag to include trace info
+ * @returns SupportCalculationResult object
  */
-export function getExactSupport(income: number, children: number): number | null {
-  return getSupport(income, children);
+export function getExactSupport(income: number, children: number, debug: boolean = false): SupportCalculationResult {
+  const debugInfo: any = debug ? { inputIncome: income, inputChildren: children } : undefined;
+
+  // 1. Handle safely invalid inputs
+  if (income === null || income === undefined || isNaN(income) || income < 0 ||
+      children === null || children === undefined || isNaN(children)) {
+    return { status: "error", message: "Invalid input parameters", debug: debugInfo };
+  }
+
+  // 2. Legal Rule: Income < 2200 requires manual determination
+  if (income < 2200) {
+    return {
+      status: "manual_determination",
+      income,
+      children,
+      reason: "Income below statutory table threshold ($2,200)",
+      debug: debugInfo
+    };
+  }
+
+  // 3. Income Handling: Max usable income = 50000
+  const effectiveIncome = Math.min(income, 50000);
+
+  // 4. Children Handling: Clamp between 1-5
+  const childrenUsed = Math.max(1, Math.min(Math.round(children), 5)) as 1 | 2 | 3 | 4 | 5;
+
+  // 5. Bracket Selection: Use floor matching logic
+  const bracketUsed = availableBrackets.find(b => b <= effectiveIncome);
+
+  if (bracketUsed === undefined) {
+    // This should technically never happen given the < 2200 check above
+    return { status: "error", message: "No suitable income bracket found", debug: debugInfo };
+  }
+
+  // 6. Lookup Logic
+  const row = washingtonTable2026[bracketUsed];
+  if (!row) {
+    return { status: "error", message: "Internal Data Error: Bracket not found in table", debug: debugInfo };
+  }
+
+  const totalSupport = row[childrenUsed];
+  if (totalSupport === undefined || isNaN(totalSupport)) {
+    return { status: "error", message: "Internal Data Error: Invalid support value", debug: debugInfo };
+  }
+
+  if (debug) {
+    debugInfo.effectiveIncome = effectiveIncome;
+    debugInfo.selectedBracket = bracketUsed;
+    debugInfo.childrenUsed = childrenUsed;
+    debugInfo.rawValue = totalSupport;
+    debugInfo.lookupStrategy = "floor_match";
+  }
+
+  // 7. Success Output
+  return {
+    status: "calculated",
+    income,
+    bracketUsed,
+    childrenUsed,
+    totalSupport,
+    lookupType: "floor_match",
+    source: "WASHINGTON_TABLE_2026",
+    debug: debugInfo
+  };
 }
