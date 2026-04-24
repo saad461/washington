@@ -1,41 +1,74 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS
+   All values live here. Never hardcode elsewhere.
+───────────────────────────────────────────────*/
 :root {
   --background: #F8FAFC;
-  --foreground: #475569; /* Body text */
+  --foreground: #475569;
 
-  /* Design System Tokens */
+  /* Surface palette */
   --color-page-bg: #F8FAFC;
   --color-section-alt: #F1F5F9;
   --color-card-bg: #FFFFFF;
-
   --color-border-default: #E2E8F0;
 
+  /* Text palette */
   --color-heading: #0F172A;
   --color-body: #475569;
   --color-muted: #94A3B8;
 
+  /* Brand */
   --color-primary-indigo: #6366F1;
   --color-primary-hover: #4F46E5;
 
-  --min-label-size: 0.625rem; /* 10px */
+  /* Spacing scale — use these for consistent rhythm */
+  --space-section-sm: 3rem;      /* 48px  — mobile sections */
+  --space-section-md: 5rem;      /* 80px  — tablet sections */
+  --space-section-lg: 6rem;      /* 96px  — desktop sections */
+
+  /* Container widths */
+  --container-max: 80rem;        /* 1280px — wide layouts */
+  --container-prose: 48rem;      /* 768px  — reading width */
+  --container-narrow: 36rem;     /* 576px  — forms, centered CTAs */
+
+  /* Border radius scale */
+  --radius-sm: 0.5rem;           /* 8px   — tags, chips */
+  --radius-md: 0.75rem;          /* 12px  — inputs on mobile */
+  --radius-lg: 1rem;             /* 16px  — buttons, inputs desktop */
+  --radius-xl: 1.25rem;          /* 20px  — cards mobile */
+  --radius-2xl: 1.5rem;          /* 24px  — cards tablet */
+  --radius-3xl: 2rem;            /* 32px  — cards desktop */
+
+  /* Elevation system — layered shadows for realism */
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 0.05), 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-raised:
+    0 4px 6px -1px rgb(0 0 0 / 0.07),
+    0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-float:
+    0 10px 15px -3px rgb(0 0 0 / 0.07),
+    0 4px 6px -4px rgb(0 0 0 / 0.05),
+    0 0 0 1px rgb(0 0 0 / 0.02);
+  --shadow-hover:
+    0 20px 25px -5px rgb(0 0 0 / 0.08),
+    0 8px 10px -6px rgb(0 0 0 / 0.05),
+    0 0 0 1px rgb(0 0 0 / 0.02);
+  --shadow-brand: 0 8px 24px -4px rgb(99 102 241 / 0.35);
+  --shadow-brand-hover: 0 12px 32px -4px rgb(99 102 241 / 0.45);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
   --color-page: var(--color-page-bg);
   --color-section-alt: var(--color-section-alt);
   --color-card: var(--color-card-bg);
-
   --color-border-default: var(--color-border-default);
-
   --color-heading: var(--color-heading);
   --color-body: var(--color-body);
   --color-muted: var(--color-muted);
-
   --color-primary: var(--color-primary-indigo);
   --color-primary-hover: var(--color-primary-hover);
 
@@ -43,134 +76,435 @@
   --font-heading: "Poppins", var(--font-poppins);
   --font-mono: var(--font-geist-mono);
 
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-
-  --radius-xl: 0.75rem;
-  --radius-2xl: 1rem;
-  --radius-3xl: 1.5rem;
+  /* Wire our custom tokens into Tailwind's shadow system */
+  --shadow-card: var(--shadow-card);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-float: var(--shadow-float);
+  --shadow-hover: var(--shadow-hover);
+  --shadow-brand: var(--shadow-brand);
 }
 
+
+/* ─────────────────────────────────────────────
+   BASE LAYER — element defaults
+───────────────────────────────────────────────*/
 @layer base {
+  html {
+    /* Prevent layout shift from scrollbar appearing */
+    scrollbar-gutter: stable;
+    /* Smooth scroll for anchor links */
+    scroll-behavior: smooth;
+  }
+
   body {
     background: var(--color-page-bg);
     color: var(--color-body);
     font-family: var(--font-sans);
     font-size: 1rem;
-    line-height: 1.625; /* leading-relaxed */
+    line-height: 1.625;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-display: swap;
+    /* Prevent horizontal overflow on mobile */
+    overflow-x: hidden;
   }
 
+  /* ── Typography scale with 3 breakpoints ──────
+     FIX: was 2 breakpoints (abrupt jump). Now smooth.
+  ──────────────────────────────────────────────*/
   h1 {
-    @apply text-3xl md:text-5xl font-bold font-heading text-heading leading-[1.1] tracking-tight;
+    /* 30px → 36px → 48px */
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold font-heading text-heading leading-[1.1] tracking-tight;
   }
 
   h2 {
-    @apply text-2xl md:text-4xl font-bold font-heading text-heading tracking-tight;
+    /* 24px → 30px → 36px */
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold font-heading text-heading leading-[1.15] tracking-tight;
   }
 
   h3 {
-    @apply text-xl md:text-2xl font-bold font-heading text-heading tracking-tight;
+    /* 20px → 22px → 24px */
+    @apply text-xl sm:text-[1.375rem] lg:text-2xl font-semibold font-heading text-heading leading-snug tracking-tight;
   }
 
-  /* Body text scaling globally */
+  h4 {
+    @apply text-lg font-semibold font-heading text-heading leading-snug;
+  }
+
+  /* Body text: 16px mobile → 18px desktop */
   p, li {
     @apply text-base md:text-lg text-body leading-relaxed;
   }
 
-  /* Small text */
-  .text-small {
-    @apply text-sm text-muted;
+  /* Tighten list spacing */
+  ul, ol {
+    @apply space-y-1.5;
   }
 
-  /* Labels / Metadata */
-  .label-metadata {
-    @apply text-[11px] uppercase font-bold text-gray-500 tracking-[0.1em];
+  /* Links */
+  a {
+    @apply text-indigo-600 underline-offset-2 hover:text-indigo-700 transition-colors duration-200;
+  }
+
+  /* Reset link style inside buttons/nav */
+  .no-underline-link, button a, nav a {
+    @apply no-underline text-inherit;
+  }
+
+  /* Horizontal rules */
+  hr {
+    @apply border-gray-200/70 my-8;
+  }
+
+  /* Focus ring for keyboard nav — visible but not intrusive */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-indigo-500 rounded-sm;
   }
 }
 
-/* ── Global Component Classes ── */
+
+/* ─────────────────────────────────────────────
+   UTILITY CLASSES — reusable helpers
+───────────────────────────────────────────────*/
+@layer utilities {
+  /* ── Text helpers ── */
+  .text-small {
+    @apply text-sm text-muted leading-relaxed;
+  }
+
+  /* Labels / metadata — "all-caps micro-text" SaaS pattern */
+  .label-metadata {
+    @apply text-[10px] sm:text-[11px] uppercase font-bold text-muted tracking-[0.12em];
+  }
+
+  /* Gradient heading — use sparingly on hero text only */
+  .text-gradient {
+    @apply bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent;
+  }
+
+  /* ── Balance text for headings ── */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+   COMPONENT LAYER — reusable UI classes
+───────────────────────────────────────────────*/
 @layer components {
+
+  /* ══ LAYOUT ══════════════════════════════════*/
+
+  /* Section wrapper — 3-step spacing scale
+     FIX: was 2-step (64px → 96px). Now: 48→80→96. */
   .section-default {
-    @apply py-16 md:py-24;
+    @apply py-12 md:py-20 lg:py-24;
   }
 
+  /* Alternate section background */
+  .section-alt {
+    @apply py-12 md:py-20 lg:py-24 bg-[--color-section-alt];
+  }
+
+  /* Wide container — for dashboards, full layouts
+     FIX: added px-4 as the true mobile-first baseline.
+     Old: px-6 sm:px-10 lg:px-12 (too tight on 320px screens)
+     New: px-4 sm:px-6 lg:px-8 (standard, proven scale) */
   .container-wide {
-    @apply max-w-7xl mx-auto px-6 sm:px-10 lg:px-12;
+    @apply w-full max-w-[--container-max] mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  /* Reading container — for blog posts, long-form content */
   .container-reading {
-    @apply max-w-3xl mx-auto px-6 sm:px-10;
+    @apply w-full max-w-[--container-prose] mx-auto px-4 sm:px-6;
   }
 
-  .stack-space {
-    @apply space-y-8;
+  /* Narrow container — for forms, CTAs, centered content */
+  .container-narrow {
+    @apply w-full max-w-[--container-narrow] mx-auto px-4 sm:px-6;
   }
 
+  /* Stack spacing — named sizes instead of one-size-fits-all
+     FIX: was a single space-y-8 for everything. */
+  .stack-sm  { @apply space-y-3; }  /* 12px — form fields */
+  .stack-md  { @apply space-y-6; }  /* 24px — card content */
+  .stack-lg  { @apply space-y-10; } /* 40px — sections */
+  .stack-xl  { @apply space-y-16; } /* 64px — page regions */
+
+
+  /* ══ CARDS ════════════════════════════════════*/
+
+  /* Standard card — responsive radius + padding
+     FIX: was p-8 md:p-12 rounded-[2rem] always.
+     On mobile p-8 (32px) inside a ~300px card is too tight.
+     New: p-5 sm:p-7 md:p-10 + radius scales too. */
   .card-standard {
-    @apply bg-white border border-gray-200/60 rounded-[2rem] p-8 md:p-12 shadow-sm;
+    background: var(--color-card-bg);
+    border: 1px solid rgb(226 232 240 / 0.7);
+    box-shadow: var(--shadow-card);
+    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-5 sm:p-7 md:p-10;
   }
 
+  /* Interactive card — lifts on hover */
   .card-interactive {
-    @apply bg-white border border-gray-200/60 rounded-[2rem] p-8 md:p-12 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-500 ease-out;
+    background: var(--color-card-bg);
+    border: 1px solid rgb(226 232 240 / 0.7);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.3s ease;
+    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-5 sm:p-7 md:p-10 cursor-pointer;
   }
 
+  .card-interactive:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: rgb(99 102 241 / 0.15);
+    @apply -translate-y-1;
+  }
+
+  /* Featured/highlighted card — subtle brand tint */
+  .card-featured {
+    background: linear-gradient(135deg, rgb(238 242 255 / 0.8), rgb(245 243 255 / 0.6));
+    border: 1px solid rgb(99 102 241 / 0.2);
+    box-shadow: var(--shadow-float);
+    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-5 sm:p-7 md:p-10;
+  }
+
+
+  /* ══ BUTTONS ══════════════════════════════════*/
+
+  /* Primary CTA button
+     FIX: was always h-14 (56px). Now scales: 44px mobile → 52px desktop.
+     Also fixed: rounded-2xl is now responsive too. */
   .btn-primary {
-    @apply h-14 px-8 rounded-2xl font-bold text-white bg-indigo-600 shadow-lg shadow-indigo-200/50 hover:bg-indigo-700 hover:shadow-indigo-300/50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center justify-center gap-2;
+    height: 44px;
+    box-shadow: var(--shadow-brand);
+    transition: box-shadow 0.25s ease, transform 0.2s ease, background-color 0.2s ease;
+    @apply
+      px-5 sm:px-7
+      rounded-xl sm:rounded-2xl
+      font-bold text-sm sm:text-base text-white
+      bg-indigo-600
+      flex items-center justify-center gap-2
+      whitespace-nowrap select-none;
   }
 
+  @media (min-width: 640px) {
+    .btn-primary { height: 52px; }
+  }
+
+  .btn-primary:hover {
+    box-shadow: var(--shadow-brand-hover);
+    @apply bg-indigo-700 -translate-y-px;
+  }
+
+  .btn-primary:active {
+    @apply translate-y-0 bg-indigo-800;
+    box-shadow: var(--shadow-brand);
+  }
+
+  /* Secondary / outline button — matches primary sizing */
   .btn-secondary {
-    @apply h-14 px-8 rounded-2xl border-2 border-gray-200 text-heading font-bold bg-white hover:border-indigo-600 hover:text-indigo-600 transition-all duration-300 flex items-center justify-center gap-2;
+    height: 44px;
+    transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    @apply
+      px-5 sm:px-7
+      rounded-xl sm:rounded-2xl
+      border-2 border-gray-200
+      font-bold text-sm sm:text-base text-heading
+      bg-white
+      flex items-center justify-center gap-2
+      whitespace-nowrap select-none;
   }
 
+  @media (min-width: 640px) {
+    .btn-secondary { height: 52px; }
+  }
+
+  .btn-secondary:hover {
+    @apply border-indigo-400 text-indigo-700;
+    box-shadow: 0 0 0 4px rgb(99 102 241 / 0.08);
+  }
+
+  /* Ghost button — text-only, minimal chrome */
+  .btn-ghost {
+    height: 44px;
+    transition: color 0.2s ease, background 0.2s ease;
+    @apply
+      px-4
+      rounded-xl
+      font-semibold text-sm sm:text-base text-body
+      flex items-center justify-center gap-1.5
+      whitespace-nowrap select-none;
+  }
+
+  @media (min-width: 640px) {
+    .btn-ghost { height: 52px; }
+  }
+
+  .btn-ghost:hover {
+    @apply text-indigo-700 bg-indigo-50;
+  }
+
+  /* Small button variant — for inline actions, table rows */
+  .btn-sm {
+    @apply h-9 px-4 rounded-lg font-semibold text-sm flex items-center justify-center gap-1.5 whitespace-nowrap;
+  }
+
+  /* Icon-only button */
+  .btn-icon {
+    @apply h-10 w-10 sm:h-11 sm:w-11 rounded-xl flex items-center justify-center text-muted hover:text-body hover:bg-gray-100 transition-colors duration-200;
+  }
+
+
+  /* ══ INPUTS ════════════════════════════════════*/
+
+  /* Standard input — matches button sizing
+     FIX: was always h-14 (56px). Now 44px → 52px. */
   .input-standard {
-    @apply h-14 px-5 rounded-2xl border-2 border-gray-100 text-heading font-semibold bg-white placeholder-gray-400 focus:outline-none focus:border-indigo-600 focus:ring-4 focus:ring-indigo-600/5 transition-all duration-300;
+    height: 44px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    @apply
+      w-full px-4 sm:px-5
+      rounded-xl sm:rounded-2xl
+      border-2 border-gray-100
+      text-sm sm:text-base text-heading font-medium
+      bg-white
+      placeholder:text-gray-400
+      focus:outline-none focus:border-indigo-500;
   }
 
+  @media (min-width: 640px) {
+    .input-standard { height: 52px; }
+  }
+
+  .input-standard:focus {
+    box-shadow: 0 0 0 4px rgb(99 102 241 / 0.08);
+  }
+
+  /* Textarea — no fixed height */
+  .textarea-standard {
+    @apply
+      w-full px-4 sm:px-5 py-3 sm:py-4
+      rounded-xl sm:rounded-2xl
+      border-2 border-gray-100
+      text-sm sm:text-base text-heading font-medium
+      bg-white leading-relaxed
+      placeholder:text-gray-400
+      focus:outline-none focus:border-indigo-500
+      transition-all duration-200 resize-y;
+  }
+
+  .textarea-standard:focus {
+    box-shadow: 0 0 0 4px rgb(99 102 241 / 0.08);
+  }
+
+  /* Input label */
+  .input-label {
+    @apply block text-sm font-semibold text-heading mb-1.5;
+  }
+
+  /* Hint / helper text below input */
+  .input-hint {
+    @apply text-xs text-muted mt-1.5 leading-relaxed;
+  }
+
+  /* Error state */
+  .input-error {
+    @apply border-red-400 focus:border-red-500;
+  }
+
+  .input-error:focus {
+    box-shadow: 0 0 0 4px rgb(239 68 68 / 0.08);
+  }
+
+
+  /* ══ TABLES ════════════════════════════════════*/
+
+  /* Table wrapper — scrollable on mobile
+     FIX: was rounded-[2rem] always, overflowed on small screens. */
   .table-container {
-    @apply overflow-x-auto border border-gray-200 rounded-[2rem] bg-white;
+    @apply overflow-x-auto border border-gray-200 rounded-xl sm:rounded-2xl bg-white;
+    /* Smooth momentum scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
   }
 
+  /* FIX: was px-8 py-5 always (32px). Now responsive. */
   .table-header {
-    @apply text-[11px] uppercase font-bold tracking-[0.15em] text-muted bg-gray-50/50 px-8 py-5;
+    @apply text-[10px] sm:text-[11px] uppercase font-bold tracking-[0.12em] text-muted bg-gray-50/60;
+    @apply px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-5;
+    white-space: nowrap;
   }
 
   .table-cell {
-    @apply text-base text-body px-8 py-5;
+    @apply text-sm sm:text-base text-body;
+    @apply px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-5;
   }
 
   .table-row {
-    @apply border-b border-gray-100 hover:bg-gray-50/80 transition-colors;
+    @apply border-b border-gray-100 last:border-0 hover:bg-gray-50/70 transition-colors duration-150;
+  }
+
+
+  /* ══ BADGES & TAGS ════════════════════════════*/
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold;
+  }
+
+  .badge-indigo  { @apply badge bg-indigo-50 text-indigo-700 ring-1 ring-indigo-200/60; }
+  .badge-green   { @apply badge bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200/60; }
+  .badge-amber   { @apply badge bg-amber-50 text-amber-700 ring-1 ring-amber-200/60; }
+  .badge-red     { @apply badge bg-red-50 text-red-600 ring-1 ring-red-200/60; }
+  .badge-neutral { @apply badge bg-gray-100 text-gray-600 ring-1 ring-gray-200/60; }
+
+
+  /* ══ DIVIDERS ════════════════════════════════*/
+
+  .divider {
+    @apply border-t border-gray-200/80 my-6 md:my-8;
+  }
+
+  .divider-light {
+    @apply border-t border-gray-100 my-4 md:my-6;
   }
 }
 
-/* ── Touch target enforcement ── */
+
+/* ─────────────────────────────────────────────
+   TOUCH TARGETS — surgical fix
+   FIX: was applying min-height: 56px to ALL
+   interactive elements including inline <a> tags.
+   Now ONLY applies to standalone interactive
+   elements that need to be tappable.
+───────────────────────────────────────────────*/
 @media (pointer: coarse) {
-  button,
-  a,
-  input,
-  select,
-  textarea,
-  [role="button"] {
-    min-height: 56px;
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost,
+  .btn-icon,
+  .input-standard,
+  .textarea-standard,
+  select {
+    min-height: 44px; /* Apple HIG minimum */
   }
 }
 
+
+/* ─────────────────────────────────────────────
+   PRINT STYLES
+───────────────────────────────────────────────*/
 @layer utilities {
   @media print {
     .no-print {
       display: none !important;
     }
-    
+
     body {
       background: white !important;
       color: black !important;
       padding: 0 !important;
       margin: 0 !important;
+      font-size: 11pt;
     }
 
     main {
@@ -180,7 +514,9 @@
       max-width: none !important;
     }
 
-    aside, header, footer, .ProgressBar, button, .ProgressBar-container {
+    aside, header, footer,
+    .ProgressBar, button,
+    .ProgressBar-container {
       display: none !important;
     }
 
@@ -189,22 +525,39 @@
       border-color: #eee !important;
     }
 
-    .shadow-sm, .shadow-lg, .shadow-xl, .shadow-2xl {
+    .shadow-card, .shadow-raised, .shadow-float,
+    .shadow-hover, .shadow-brand,
+    [class*="shadow"] {
       box-shadow: none !important;
     }
 
     table {
       border: 1px solid #ddd !important;
+      border-collapse: collapse;
     }
 
     th, td {
       border-bottom: 1px solid #eee !important;
       color: black !important;
+      padding: 6pt 8pt !important;
     }
 
-    h1, h2, h3 {
+    h1, h2, h3, h4 {
       color: black !important;
       page-break-after: avoid;
+    }
+
+    p, li {
+      color: black !important;
+      font-size: 11pt;
+      line-height: 1.5;
+    }
+
+    /* Avoid breaking cards across pages */
+    .card-standard, .card-interactive {
+      break-inside: avoid;
+      box-shadow: none !important;
+      border: 1px solid #ddd !important;
     }
   }
 }
