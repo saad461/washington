@@ -47,7 +47,7 @@ export default function HomeCalculator() {
   // ── NEW: parenting deviation toggle — OFF by default ──
   const [useParentingDeviation,  setUseParentingDeviation]  = useState(false);
   const [error,  setError]  = useState("");
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<ReturnType<typeof calculateChildSupport> | null>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const handleCalculate = useCallback(() => {

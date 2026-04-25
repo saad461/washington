@@ -36,7 +36,8 @@ const perFormatter = new Intl.NumberFormat("en-US", { style: "percent", minimumF
 /* ─────────────────────────────────────────────
    PROGRESS BAR
 ───────────────────────────────────────────── */
-const ProgressBar = ({ currentStep, totalSteps }: { currentStep: number; totalSteps: number }) => {
+const ProgressBar = ({ currentStep }: { currentStep: number }) => {
+  const totalSteps = Object.keys(worksheetSchema).length;
   const progress = ((currentStep + 1) / totalSteps) * 100;
   return (
     <div className="w-full mb-6 md:mb-8">
@@ -61,9 +62,9 @@ const ProgressBar = ({ currentStep, totalSteps }: { currentStep: number; totalSt
    MOBILE STEP PILLS
 ───────────────────────────────────────────── */
 const MobileStepNav = ({
-  currentStep, totalSteps, onStepClick,
+  currentStep, onStepClick,
 }: {
-  currentStep: number; totalSteps: number; onStepClick: (idx: number) => void;
+  currentStep: number; onStepClick: (idx: number) => void;
 }) => {
   const scrollRef  = useRef<HTMLDivElement>(null);
   // FIX: added mounted ref so auto-scroll doesn't fire on first render
@@ -538,7 +539,6 @@ export default function WorksheetWizard() {
         {!showSummary && (
           <MobileStepNav
             currentStep={currentStep}
-            totalSteps={PARTS.length}
             onStepClick={goToStep}
           />
         )}

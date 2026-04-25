@@ -447,15 +447,20 @@
 
   /* ══ BADGES & TAGS ════════════════════════════*/
 
-  .badge {
+  .badge,
+  .badge-indigo,
+  .badge-green,
+  .badge-amber,
+  .badge-red,
+  .badge-neutral {
     @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold;
   }
 
-  .badge-indigo  { @apply badge bg-indigo-50 text-indigo-700 ring-1 ring-indigo-200/60; }
-  .badge-green   { @apply badge bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200/60; }
-  .badge-amber   { @apply badge bg-amber-50 text-amber-700 ring-1 ring-amber-200/60; }
-  .badge-red     { @apply badge bg-red-50 text-red-600 ring-1 ring-red-200/60; }
-  .badge-neutral { @apply badge bg-gray-100 text-gray-600 ring-1 ring-gray-200/60; }
+  .badge-indigo  { @apply bg-indigo-50 text-indigo-700 ring-1 ring-indigo-200/60; }
+  .badge-green   { @apply bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200/60; }
+  .badge-amber   { @apply bg-amber-50 text-amber-700 ring-1 ring-amber-200/60; }
+  .badge-red     { @apply bg-red-50 text-red-600 ring-1 ring-red-200/60; }
+  .badge-neutral { @apply bg-gray-100 text-gray-600 ring-1 ring-gray-200/60; }
 
 
   /* ══ DIVIDERS ════════════════════════════════*/

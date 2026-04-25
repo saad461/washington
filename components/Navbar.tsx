@@ -17,7 +17,10 @@ export default function Navbar() {
   }, []);
 
   // Close drawer on route change
-  useEffect(() => { setMobileOpen(false); }, [pathname]);
+  useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
+    setMobileOpen(false);
+  }, [pathname]);
 
   // Lock body scroll when drawer is open
   useEffect(() => {
