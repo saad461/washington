@@ -405,10 +405,10 @@ export default function HomeCalculator() {
                 className="space-y-4 sm:space-y-5"
               >
                 {/* Result hero */}
-                <div className="bg-heading rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 text-center relative overflow-hidden shadow-2xl ring-1 ring-white/10">
-                  <div className="absolute top-0 right-0 w-56 h-56 bg-indigo-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 text-center relative overflow-hidden shadow-2xl ring-1 ring-white/10">
+                  <div className="absolute top-0 right-0 w-56 h-56 bg-white/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
                   <div className="relative z-10">
-                    <p className="label-metadata text-white/50 mb-4 tracking-[0.18em]">
+                    <p className="label-metadata text-white/70 mb-4 tracking-[0.18em]">
                       Estimated Monthly Transfer
                     </p>
 
