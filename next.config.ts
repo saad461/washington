@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import path from "path";
 
 const nextConfig: NextConfig = {
   images: {
@@ -10,9 +9,6 @@ const nextConfig: NextConfig = {
 
   // Bypass Windows path-casing collision that crashes _error.js prerender locally.
   // Vercel Linux builds are unaffected.
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },

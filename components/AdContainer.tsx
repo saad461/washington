@@ -1,6 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
-import { AlertCircle } from 'lucide-react';
+import React from 'react';
 
 declare global {
  interface Window {
