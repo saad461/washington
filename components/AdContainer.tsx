@@ -12,7 +12,7 @@ interface AdContainerProps {
  wordCount?: number;
 }
 
-const AdContainer: React.FC<AdContainerProps> = ({ slot, wordCount = 600 }) => {
+const AdContainer: React.FC<AdContainerProps> = () => {
  // --- PRE-APPROVAL LAUNCH MODE ---
  // Return null to hide manual ad boxes while waiting for AdSense approval.
  // Rendering <ins> with invalid slots ("XXXXXXXXXX") causes console errors

@@ -357,12 +357,15 @@ export default function WorksheetWizard() {
           FIX: h3 inside cards was rendering at global h3 (xl/2xl) — too large.
           Now using explicit text sizes for the currency values inside cards. */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
-        <div className="bg-heading rounded-xl sm:rounded-2xl p-5 sm:p-6 text-white">
-          <p className="label-metadata text-white/50 mb-2">Total Combined Net</p>
-          <p className="text-xl sm:text-2xl font-bold font-heading tabular-nums">
-            {curFormatter.format(calculation.combinedIncome)}
-          </p>
-          <p className="label-metadata text-white/40 mt-1">Combined Monthly</p>
+        <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800 rounded-xl sm:rounded-2xl p-5 sm:p-6 text-white relative overflow-hidden shadow-lg">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+          <div className="relative z-10">
+            <p className="label-metadata text-white/70 mb-2">Total Combined Net</p>
+            <p className="text-xl sm:text-2xl font-bold font-heading tabular-nums">
+              {curFormatter.format(calculation.combinedIncome)}
+            </p>
+            <p className="label-metadata text-white/50 mt-1">Combined Monthly</p>
+          </div>
         </div>
         <div className="card-standard">
           <p className="label-metadata text-muted mb-2">Parent 1 Transfer</p>
@@ -456,9 +459,9 @@ export default function WorksheetWizard() {
         <button
           id="pdf-download-btn"
           onClick={handleDownloadPDF}
-          className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-gray-900 text-white font-semibold rounded-xl shadow-sm hover:bg-gray-800 active:scale-[0.98] transition-all"
+          className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 active:scale-[0.98] transition-all"
         >
-          <CheckCircle2 className="w-5 h-5 text-indigo-400 shrink-0" />
+          <CheckCircle2 className="w-5 h-5 text-white/80 shrink-0" />
           Download Official PDF
         </button>
       </div>
@@ -516,18 +519,21 @@ export default function WorksheetWizard() {
 
             {/* Live support estimate widget */}
             <motion.div
-              className="mt-6 p-5 bg-gray-900 rounded-2xl relative overflow-hidden shadow-sm"
+              className="mt-6 p-5 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl relative overflow-hidden shadow-md"
               layout
             >
-              <div className="flex items-center gap-2.5 mb-3">
-                <div className="p-1.5 bg-gray-800 rounded-lg shrink-0">
-                  <LayoutDashboard className="w-4 h-4 text-indigo-400" />
+              <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-2.5 mb-3">
+                  <div className="p-1.5 bg-white/10 rounded-lg shrink-0">
+                    <LayoutDashboard className="w-4 h-4 text-indigo-100" />
+                  </div>
+                  <span className="label-metadata text-white/70">Est. Base Support</span>
                 </div>
-                <span className="label-metadata text-white/50">Est. Base Support</span>
+                <p className="text-2xl font-bold text-white font-heading tabular-nums">
+                  {curFormatter.format(calculation.baseSupport)}
+                </p>
               </div>
-              <p className="text-2xl font-bold text-white font-heading tabular-nums">
-                {curFormatter.format(calculation.baseSupport)}
-              </p>
             </motion.div>
           </div>
         </aside>
@@ -625,7 +631,7 @@ export default function WorksheetWizard() {
 
                     <button
                       onClick={nextStep}
-                      className="flex items-center justify-center w-full sm:w-auto bg-gray-900 text-white px-7 py-3 rounded-xl font-semibold text-sm hover:bg-gray-800 active:scale-[0.98] transition-all group"
+                      className="flex items-center justify-center w-full sm:w-auto bg-indigo-600 text-white px-7 py-3 rounded-xl font-semibold text-sm hover:bg-indigo-700 active:scale-[0.98] transition-all group shadow-md shadow-indigo-100"
                     >
                       {currentStep === PARTS.length - 1 ? "Generate Report" : "Save & Continue"}
                       <ChevronRight className="w-4 h-4 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
@@ -672,7 +678,7 @@ export default function WorksheetWizard() {
           </div>
           <button
             onClick={nextStep}
-            className="flex items-center gap-2 bg-gray-900 text-white px-5 py-3 min-h-[44px] rounded-xl text-sm font-semibold hover:bg-gray-800 active:scale-[0.98] transition-all shrink-0"
+            className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-3 min-h-[44px] rounded-xl text-sm font-semibold hover:bg-indigo-700 active:scale-[0.98] transition-all shrink-0 shadow-md shadow-indigo-100"
           >
             {currentStep === PARTS.length - 1 ? "Get Report" : "Next Step"}
             <ArrowRight className="w-4 h-4" />
