@@ -4,12 +4,37 @@ import { ChevronRight } from "lucide-react";
 import HomeCalculator from "@/components/HomeCalculator";
 import CalculatorSchema from "@/components/CalculatorSchema";
 import FAQAccordion from "@/components/FAQAccordion";
+import { getSupport } from "@/data/washingtonTable2026";
 
 export const metadata: Metadata = {
   title: "WCSSC — Washington Child Support Calculator 2026",
   description: "Washington's most accurate 2026 child support calculator. Instantly estimate monthly obligations for all 39 counties using the official AOC economic table. Free, fast, court-compliant.",
   alternates: { canonical: "https://wcssc.site/" },
 };
+
+// ─── Live benchmark data driven from the actual 2026 economic table ───────────
+// FIX: was hardcoded strings like "$700–$900" — now real values from getSupport().
+// If the table ever updates, these numbers update automatically.
+function formatSupport(income: number, children: number): string {
+  const val = getSupport(income, children);
+  if (val === null) return "—";
+  return `$${val.toLocaleString()}`;
+}
+
+const BENCHMARK_ROWS = [3000, 5000, 8000].map((income) => ({
+  income: `$${income.toLocaleString()}`,
+  one:    formatSupport(income, 1),
+  two:    formatSupport(income, 2),
+}));
+
+// ─── Case study constants — driven from table so they stay accurate ───────────
+// FIX: was hardcoded $1,155 which was wrong. Real value: getSupport(5000, 2) = $1,446.
+const CASE_STUDY_INCOME   = 5000;
+const CASE_STUDY_CHILDREN = 2;
+const CASE_STUDY_SUPPORT  = getSupport(CASE_STUDY_INCOME, CASE_STUDY_CHILDREN);
+const CASE_STUDY_DISPLAY  = CASE_STUDY_SUPPORT !== null
+  ? `$${CASE_STUDY_SUPPORT.toLocaleString()}`
+  : "—";
 
 export default function Home() {
   const jsonLd = {
@@ -47,7 +72,7 @@ export default function Home() {
       />
       <CalculatorSchema url="https://wcssc.site" />
 
-      {/* Decorative blobs — pointer-events-none, purely visual */}
+      {/* Decorative blobs */}
       <div
         className="absolute inset-0 pointer-events-none overflow-hidden z-0"
         aria-hidden="true"
@@ -56,13 +81,7 @@ export default function Home() {
         <div className="w-[32rem] h-[32rem] sm:w-[40rem] sm:h-[40rem] bg-purple-100/40 rounded-full blur-[100px] absolute -bottom-[10%] -right-[10%]" />
       </div>
 
-      {/* ── HERO ──────────────────────────────────────────────────────────
-          FIX: was py-20 md:py-32 (128px) — way too tall, doubly so with
-          the mb-20 inside. Now py-12 md:py-20 + mb-10 md:mb-14 inside.
-          FIX: h1 was hardcoded text-4xl md:text-6xl, bypassing globals
-          and jumping 40px→60px with no sm: step. Now uses 3-step scale
-          matching global h1 styles (text-3xl sm:text-4xl lg:text-5xl).
-      ──────────────────────────────────────────────────────────────────── */}
+      {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="pt-12 pb-0 md:pt-20 w-full relative z-10">
         <div className="container-wide">
           <div className="text-center mb-10 md:mb-14 space-y-4 md:space-y-5">
@@ -71,7 +90,6 @@ export default function Home() {
               <br className="hidden sm:block" />
               <span className="text-gradient">Washington Child Support</span>
             </h1>
-            {/* FIX: had px-4 inline on a paragraph — handled by container */}
             <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
               Precision-engineered for the 2026 AOC economic schedule. Fast,
               private, and 100% compliant with Washington State guidelines.
@@ -81,18 +99,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── KEY FIGURES ───────────────────────────────────────────────────
-          FIX: was rounded-2xl p-6 hardcoded. Using card-standard now.
-          FIX: grid gap-6 is fine; cards scale with card-standard padding.
-      ──────────────────────────────────────────────────────────────────── */}
+      {/* ── KEY FIGURES ──────────────────────────────────────────────────── */}
       <section className="section-default w-full bg-[#F1F5F9]/50 border-y border-gray-100 relative z-10">
         <div className="container-wide">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full">
             {[
-              { label: "2026 SSR",    value: "~$2,394 / mo"    },
-              { label: "Min Support", value: "$50 / child"      },
-              { label: "Table Limit", value: "$50,000"          },
-              { label: "Jurisdiction",value: "Washington State" },
+              { label: "2026 SSR",     value: "~$2,394 / mo"    },
+              { label: "Min Support",  value: "$50 / child"      },
+              { label: "Table Limit",  value: "$50,000"          },
+              { label: "Jurisdiction", value: "Washington State" },
             ].map((fig, i) => (
               <div key={i} className="card-standard text-center">
                 <div className="label-metadata mb-2">{fig.label}</div>
@@ -105,21 +120,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── BENCHMARK TABLE ───────────────────────────────────────────────
-          FIX: px-8 py-6 on td/th forced unnecessary horizontal scroll.
-          Now uses .table-header and .table-cell classes (responsive padding).
-          FIX: rounded-3xl on the wrapper → using .table-container class.
-          FIX: h2 hardcoded text-3xl → let global h2 style apply.
-          FIX: CTA button was !h-14 !px-10 !text-lg (all !important overrides).
-          Now btn-primary used cleanly; sm:w-auto handles width.
-      ──────────────────────────────────────────────────────────────────── */}
+      {/* ── BENCHMARK TABLE ──────────────────────────────────────────────── */}
       <section className="section-default w-full relative z-10" id="benchmark-table">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8 md:mb-12 space-y-3">
               <h2>Benchmark Support Estimates</h2>
               <p className="text-muted text-base sm:text-lg">
-                Standard monthly estimates based on the 2026 economic table.
+                Standard monthly totals based on the 2026 economic table.
               </p>
             </div>
 
@@ -130,17 +138,14 @@ export default function Home() {
                 </caption>
                 <thead>
                   <tr className="border-b border-gray-200">
-                    <th className="table-header">Monthly Net Income</th>
+                    <th className="table-header">Combined Monthly Net Income</th>
                     <th className="table-header">1 Child</th>
                     <th className="table-header">2 Children</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {[
-                    { income: "$3,000", one: "$400–$600",    two: "$700–$900"    },
-                    { income: "$5,000", one: "$700–$900",    two: "$1,000–$1,300"},
-                    { income: "$8,000", one: "$1,100–$1,400",two: "$1,400–$1,800"},
-                  ].map((row, i) => (
+                  {/* FIX: rows are now driven from getSupport() — always accurate */}
+                  {BENCHMARK_ROWS.map((row, i) => (
                     <tr key={i} className="table-row">
                       <td className="table-cell font-bold text-heading">{row.income}</td>
                       <td className="table-cell font-medium">{row.one}</td>
@@ -152,9 +157,9 @@ export default function Home() {
             </div>
 
             <p className="text-center mt-8 text-sm text-muted italic leading-relaxed max-w-2xl mx-auto">
-              These estimates are based on the 2026 Washington State child support
-              guidelines. Actual support amounts may vary depending on custody
-              arrangements, healthcare costs, and judicial decisions.
+              These figures are the presumptive basic support obligation from the
+              2026 Washington State economic table. Actual court orders may differ
+              based on custody arrangements, healthcare costs, and judicial decisions.
             </p>
 
             <div className="mt-8 flex justify-center">
@@ -167,12 +172,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CASE STUDY ────────────────────────────────────────────────────
-          FIX: text-6xl on the dollar figure is 60px — enormous on mobile.
-          Now text-4xl sm:text-5xl md:text-6xl (3-step).
-          FIX: p-8 md:p-12 on the inner card → p-6 sm:p-8 md:p-12.
-          FIX: mb-12 on h2 was too tight on mobile; now mb-8 md:mb-12.
-      ──────────────────────────────────────────────────────────────────── */}
+      {/* ── CASE STUDY ───────────────────────────────────────────────────── */}
       <section className="section-default w-full bg-heading text-white relative z-10">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
@@ -182,14 +182,14 @@ export default function Home() {
 
             <div className="bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 backdrop-blur-sm space-y-8 md:space-y-10">
               <h3 className="text-white text-center">
-                Income Case: $5,000 Net Monthly
+                Income Case: ${CASE_STUDY_INCOME.toLocaleString()} Net Monthly
               </h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
-                  { label: "Net Monthly Income", value: "$5,000"     },
-                  { label: "Number of Children", value: "2"          },
-                  { label: "Location",           value: "King County"},
+                  { label: "Net Monthly Income", value: `$${CASE_STUDY_INCOME.toLocaleString()}` },
+                  { label: "Number of Children", value: String(CASE_STUDY_CHILDREN)             },
+                  { label: "Location",           value: "King County"                           },
                 ].map((item, i) => (
                   <div
                     key={i}
@@ -201,35 +201,30 @@ export default function Home() {
                 ))}
               </div>
 
-              {/* Result highlight */}
+              {/* Result highlight — FIX: was hardcoded $1,155 (wrong). Now from getSupport(). */}
               <div className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl sm:rounded-2xl px-6 py-8 sm:px-8 sm:py-10 text-center shadow-2xl ring-1 ring-white/20">
                 <div className="label-metadata text-white/70 mb-3">
-                  Estimated Base Support
+                  Presumptive Base Support
                 </div>
-                {/* FIX: was text-6xl always — 60px on a 390px phone is huge */}
                 <div className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white">
-                  $1,155
+                  {CASE_STUDY_DISPLAY}
                   <span className="text-base sm:text-lg font-normal ml-2 opacity-60">/ mo</span>
                 </div>
               </div>
 
               <p className="text-sm sm:text-base md:text-lg text-white/70 leading-relaxed text-center max-w-2xl mx-auto">
                 In King County, courts apply the standard Washington economic
-                schedule. For a combined net income of $5,000 with 2 children,
-                the base presumptive support is $1,155. This amount is typically
-                shared between parents based on their proportional income share.
+                schedule. For a combined net income of ${CASE_STUDY_INCOME.toLocaleString()} with{" "}
+                {CASE_STUDY_CHILDREN} children, the presumptive base support is{" "}
+                {CASE_STUDY_DISPLAY} per month. This amount is typically shared
+                between parents based on their proportional income share.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── EDUCATIONAL CONTENT ───────────────────────────────────────────
-          FIX: h2 mb-16 (64px) — too large on mobile. Now mb-10 md:mb-16.
-          FIX: inner card p-8 rounded-3xl → card-standard (responsive).
-          FIX: gap-12 on 2-col grid → gap-8 md:gap-12.
-          FIX: h3 hardcoded text-2xl/text-xl → global h3 applies.
-      ──────────────────────────────────────────────────────────────────── */}
+      {/* ── EDUCATIONAL CONTENT ──────────────────────────────────────────── */}
       <section className="section-default w-full relative z-10">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
@@ -247,7 +242,6 @@ export default function Home() {
                   spent if the household remained together.
                 </p>
 
-                {/* FIX: was p-8 rounded-3xl hardcoded — now card-standard */}
                 <div className="card-standard space-y-4">
                   <h3>The 2026 Schedule</h3>
                   <p className="text-sm sm:text-base text-muted">
@@ -296,7 +290,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FAQ ─────────────────────────────────────────────────────────── */}
+      {/* ── FAQ ──────────────────────────────────────────────────────────── */}
       <section className="section-default w-full bg-[#F1F5F9]/50 border-y border-gray-100 relative z-10">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
@@ -306,11 +300,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── COUNTY QUICKLINKS ─────────────────────────────────────────────
-          FIX: was rounded-2xl p-6 hardcoded inline on every card.
-          Now uses .card-interactive for consistent hover/shadow/radius.
-          FIX: gap-6 kept; grid now sm:grid-cols-2 (was missing sm step).
-      ──────────────────────────────────────────────────────────────────── */}
+      {/* ── COUNTY QUICKLINKS ────────────────────────────────────────────── */}
       <section className="section-default w-full relative z-10">
         <div className="container-wide">
           <div className="text-center mb-8 md:mb-10">
@@ -337,11 +327,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── BLOG QUICKLINKS ───────────────────────────────────────────────
-          FIX: was rounded-3xl p-8 hardcoded — now card-interactive.
-          FIX: header mb-12 → mb-8 md:mb-12.
-          FIX: "View all" link now also visible on mobile (was hidden md:flex).
-      ──────────────────────────────────────────────────────────────────── */}
+      {/* ── BLOG QUICKLINKS ──────────────────────────────────────────────── */}
       <section className="section-default border-t border-gray-100 w-full bg-white relative z-10">
         <div className="container-wide">
           <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-3 mb-8 md:mb-12">
