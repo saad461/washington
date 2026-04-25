@@ -82,7 +82,7 @@ export default function Home() {
       </div>
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="pt-12 pb-0 md:pt-20 w-full relative z-10">
+      <section className="pt-12 pb-0 md:pt-20 w-full relative">
         <div className="container-wide">
           <div className="text-center mb-10 md:mb-14 space-y-4 md:space-y-5">
             <h1 className="text-balance">
@@ -100,7 +100,7 @@ export default function Home() {
       </section>
 
       {/* ── KEY FIGURES ──────────────────────────────────────────────────── */}
-      <section className="section-default w-full bg-[#F1F5F9]/50 border-y border-gray-100 relative z-10">
+      <section className="section-default w-full bg-[#F1F5F9]/50 border-y border-gray-100 relative">
         <div className="container-wide">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full">
             {[
@@ -121,7 +121,7 @@ export default function Home() {
       </section>
 
       {/* ── BENCHMARK TABLE ──────────────────────────────────────────────── */}
-      <section className="section-default w-full relative z-10" id="benchmark-table">
+      <section className="section-default w-full relative" id="benchmark-table">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8 md:mb-12 space-y-3">
@@ -173,15 +173,15 @@ export default function Home() {
       </section>
 
       {/* ── CASE STUDY ───────────────────────────────────────────────────── */}
-      <section className="section-default w-full bg-heading text-white relative z-10">
+      <section className="section-default w-full bg-[#F1F5F9]/50 border-y border-gray-100 relative">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-white text-center mb-8 md:mb-12">
+            <h2 className="text-heading text-center mb-8 md:mb-12">
               Real-World Case Study
             </h2>
 
-            <div className="bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 backdrop-blur-sm space-y-8 md:space-y-10">
-              <h3 className="text-white text-center">
+            <div className="card-standard shadow-xl space-y-8 md:space-y-10">
+              <h3 className="text-heading text-center">
                 Income Case: ${CASE_STUDY_INCOME.toLocaleString()} Net Monthly
               </h3>
 
@@ -193,30 +193,35 @@ export default function Home() {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="text-center p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10"
+                    className="text-center p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-gray-50/50 border border-gray-100"
                   >
-                    <div className="label-metadata text-white/40 mb-2">{item.label}</div>
-                    <div className="text-lg sm:text-xl font-bold text-white">{item.value}</div>
+                    <div className="label-metadata text-muted mb-1.5">{item.label}</div>
+                    <div className="text-lg font-bold text-heading">{item.value}</div>
                   </div>
                 ))}
               </div>
 
-              {/* Result highlight — FIX: was hardcoded $1,155 (wrong). Now from getSupport(). */}
-              <div className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl sm:rounded-2xl px-6 py-8 sm:px-8 sm:py-10 text-center shadow-2xl ring-1 ring-white/20">
-                <div className="label-metadata text-white/70 mb-3">
-                  Presumptive Base Support
-                </div>
-                <div className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-white">
-                  {CASE_STUDY_DISPLAY}
-                  <span className="text-base sm:text-lg font-normal ml-2 opacity-60">/ mo</span>
+              {/* Result highlight — REDESIGNED to look less like a button, more like a clean data card */}
+              <div className="max-w-md mx-auto">
+                <div className="bg-white border-2 border-indigo-600 rounded-2xl p-6 sm:p-8 text-center shadow-lg relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-indigo-100 transition-colors" />
+                  <div className="relative z-10">
+                    <div className="label-metadata text-indigo-600 mb-2">
+                      Presumptive Base Support
+                    </div>
+                    <div className="text-4xl sm:text-5xl font-bold tracking-tight text-heading">
+                      {CASE_STUDY_DISPLAY}
+                      <span className="text-base sm:text-lg font-medium text-muted ml-2">/ month</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <p className="text-sm sm:text-base md:text-lg text-white/70 leading-relaxed text-center max-w-2xl mx-auto">
+              <p className="text-sm sm:text-base md:text-lg text-body leading-relaxed text-center max-w-2xl mx-auto">
                 In King County, courts apply the standard Washington economic
                 schedule. For a combined net income of ${CASE_STUDY_INCOME.toLocaleString()} with{" "}
                 {CASE_STUDY_CHILDREN} children, the presumptive base support is{" "}
-                {CASE_STUDY_DISPLAY} per month. This amount is typically shared
+                <strong className="text-heading">{CASE_STUDY_DISPLAY}</strong> per month. This amount is typically shared
                 between parents based on their proportional income share.
               </p>
             </div>
@@ -225,7 +230,7 @@ export default function Home() {
       </section>
 
       {/* ── EDUCATIONAL CONTENT ──────────────────────────────────────────── */}
-      <section className="section-default w-full relative z-10">
+      <section className="section-default w-full relative">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-center mb-10 md:mb-16">
@@ -291,7 +296,7 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-      <section className="section-default w-full bg-[#F1F5F9]/50 border-y border-gray-100 relative z-10">
+      <section className="section-default w-full bg-[#F1F5F9]/50 border-y border-gray-100 relative">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-center mb-8 md:mb-12">Common Questions</h2>
@@ -301,7 +306,7 @@ export default function Home() {
       </section>
 
       {/* ── COUNTY QUICKLINKS ────────────────────────────────────────────── */}
-      <section className="section-default w-full relative z-10">
+      <section className="section-default w-full relative">
         <div className="container-wide">
           <div className="text-center mb-8 md:mb-10">
             <h2>County Guides</h2>
@@ -328,7 +333,7 @@ export default function Home() {
       </section>
 
       {/* ── BLOG QUICKLINKS ──────────────────────────────────────────────── */}
-      <section className="section-default border-t border-gray-100 w-full bg-white relative z-10">
+      <section className="section-default border-t border-gray-100 w-full bg-white relative">
         <div className="container-wide">
           <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-3 mb-8 md:mb-12">
             <div>

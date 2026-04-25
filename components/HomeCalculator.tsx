@@ -640,7 +640,7 @@ export default function HomeCalculator() {
           <motion.div
             initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100 }}
             transition={{ type: "spring", stiffness: 260, damping: 28 }}
-            className="lg:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pt-3 bg-white/95 backdrop-blur-lg border-t border-indigo-100 shadow-[0_-8px_24px_rgba(99,102,241,0.12)]"
+            className="lg:hidden fixed bottom-0 left-0 right-0 z-[70] px-4 pt-3 bg-white/95 backdrop-blur-lg border-t border-indigo-100 shadow-[0_-8px_24px_rgba(99,102,241,0.12)]"
             style={{ paddingBottom: "max(1rem, env(safe-area-inset-bottom))" }}
           >
             <div className="max-w-md mx-auto flex items-center justify-between gap-3">
