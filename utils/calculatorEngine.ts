@@ -13,25 +13,51 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
 
   function sum(fields: (ParentValues | undefined)[], parentKey: 'p1' | 'p2') {
     return fields.reduce((acc, field) => {
-      const value = parseFloat(String(field?.[parentKey] || 0)) || 0;
-      return acc + value;
+      const raw = field?.[parentKey];
+      const value = parseFloat(String(raw ?? 0)) || 0;
+      return acc + (isFinite(value) ? value : 0);
     }, 0);
   }
 
   // ── INPUTS ────────────────────────────────────────────────────────────────
-  const incomeType    = String(formData["incomeType"]?.p1 || "monthly");
-  const payingParent  = String(formData["payingParent"]?.p1 || "P1");
-  const parentingTime = parseFloat(String(formData["parentingTime"]?.p1 ?? 20));
-  const otherChildren = parseFloat(String(formData["otherChildren"]?.p1 || 0)) || 0;
+  const incomeType      = String(formData["incomeType"]?.p1 || "monthly");
+  const payingParent    = String(formData["payingParent"]?.p1 || "P1");
+  const parentingTime   = parseFloat(String(formData["parentingTime"]?.p1 ?? 0));
+  const otherChildren   = parseFloat(String(formData["otherChildren"]?.p1 || 0)) || 0;
   const healthInsurance = parseFloat(String(formData["healthInsurance"]?.p1 || 0)) || 0;
-  const daycare       = parseFloat(String(formData["daycare"]?.p1 || 0)) || 0;
-  const children      = parseInt(String(formData["5_children"]?.p1 || 1), 10) || 1;
+  const daycare         = parseFloat(String(formData["daycare"]?.p1 || 0)) || 0;
+  const children        = Math.max(1, Math.min(5, parseInt(String(formData["5_children"]?.p1 || 1), 10) || 1));
+
+  /**
+   * PARENTING DEVIATION TOGGLE
+   * ─────────────────────────────────────────────────────────────────────────
+   * When false (default): parentingTime is ignored entirely. The result is
+   * the pure table-based presumptive obligation — fully court-defensible.
+   *
+   * When true: an estimated deviation credit is calculated per
+   * RCW 26.19.075(1)(d). IMPORTANT — this is an APPROXIMATION.
+   * Washington courts apply parenting time deviation case-by-case with no
+   * fixed statutory formula. The estimate uses a proportional scale above
+   * the 25% overnight baseline, capped at 50% reduction at 100% parenting.
+   * Label this clearly in any UI that exposes it.
+   */
+  const useParentingDeviation = formData["useParentingDeviation"]?.p1 === true;
 
   // ── STEP 1 & 2: GROSS INCOME & DEDUCTIONS ────────────────────────────────
-  let grossP1 = sum([formData["1a"], formData["1b"], formData["1c"], formData["1d"], formData["1e"], formData["1f"]], "p1");
-  let grossP2 = sum([formData["1a"], formData["1b"], formData["1c"], formData["1d"], formData["1e"], formData["1f"]], "p2");
-  let deductionsP1 = sum([formData["2a"], formData["2b"], formData["2c"], formData["2d"], formData["2e"], formData["2f"], formData["2g"], formData["2h"], formData["2i"]], "p1");
-  let deductionsP2 = sum([formData["2a"], formData["2b"], formData["2c"], formData["2d"], formData["2e"], formData["2f"], formData["2g"], formData["2h"], formData["2i"]], "p2");
+  const incomeFields = [
+    formData["1a"], formData["1b"], formData["1c"],
+    formData["1d"], formData["1e"], formData["1f"],
+  ];
+  const deductionFields = [
+    formData["2a"], formData["2b"], formData["2c"],
+    formData["2d"], formData["2e"], formData["2f"],
+    formData["2g"], formData["2h"], formData["2i"],
+  ];
+
+  let grossP1 = sum(incomeFields, "p1");
+  let grossP2 = sum(incomeFields, "p2");
+  let deductionsP1 = sum(deductionFields, "p1");
+  let deductionsP2 = sum(deductionFields, "p2");
 
   // Convert yearly → monthly
   if (incomeType === "yearly") {
@@ -45,25 +71,23 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
 
   // ── STEP 4: COMBINED NET INCOME & INCOME SHARES ───────────────────────────
   const combinedIncome = netP1 + netP2;
-  const shareP1 = combinedIncome > 0 ? netP1 / combinedIncome : 0;
-  const shareP2 = combinedIncome > 0 ? netP2 / combinedIncome : 0;
+  const shareP1 = combinedIncome > 0 ? netP1 / combinedIncome : 0.5;
+  const shareP2 = combinedIncome > 0 ? netP2 / combinedIncome : 0.5;
 
   let obligationP1 = 0;
   let obligationP2 = 0;
   let baseTableSupport = 0;
   let adjustmentReason = "Standard calculation";
 
-  // ── STEP 5: TABLE LOOKUP (getExactSupport) ────────────────────────────────
+  // ── STEP 5: TABLE LOOKUP ──────────────────────────────────────────────────
   const lookup = getExactSupport(combinedIncome, children);
 
   if (lookup.status === "calculated") {
-    // Normal case — per-child × children = total, split by income share
     baseTableSupport = lookup.totalSupport;
     obligationP1 = baseTableSupport * shareP1;
     obligationP2 = baseTableSupport * shareP2;
 
   } else if (lookup.status === "manual_determination") {
-    // Below $2,200 — minimum $50/child/month (RCW 26.19.065(2)(a))
     baseTableSupport = MIN_SUPPORT_PER_CHILD * children;
     adjustmentReason = "Low income minimum: $50/child/month (RCW 26.19.065(2)(a))";
     if (payingParent === "P1") {
@@ -75,19 +99,18 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
     }
 
   } else if (lookup.status === "above_maximum") {
-    // Above $50,000 — use table max as floor; court may exceed with written findings
-    // (RCW 26.19.065(3))
     baseTableSupport = lookup.tableMaxTotal;
     obligationP1 = baseTableSupport * shareP1;
     obligationP2 = baseTableSupport * shareP2;
-    adjustmentReason = "Income exceeds $50,000 table maximum — presumptive amount applied. Court may order more with written findings. (RCW 26.19.065(3))";
+    adjustmentReason =
+      "Income exceeds $50,000 table maximum — presumptive amount applied. " +
+      "Court may order more with written findings. (RCW 26.19.065(3))";
 
   } else {
-    // Error fallback
     adjustmentReason = lookup.status === "error" ? lookup.message : "Calculation error";
   }
 
-  // ── ADJUSTMENTS (only when above $2,200 threshold) ────────────────────────
+  // ── ADJUSTMENTS ───────────────────────────────────────────────────────────
   let parentingAdjustment = 0;
   let otherChildrenAdjustment = 0;
   let extraCostsAdjustment = 0;
@@ -106,22 +129,32 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
         : obligationP2 - prevP2;
     }
 
-    // Parenting time adjustment (RCW 26.19.075(1)(d))
-    // Court may deviate when payer has significant residential time (>25% baseline)
-    const BASELINE = 25;
-    let parentingAdjustmentAmount = 0;
-    if (parentingTime > BASELINE) {
-      const extraTime = parentingTime - BASELINE;
-      const reductionRate = Math.min(extraTime / 100, 0.5); // max 50% reduction
-      if (payingParent === "P1") {
-        parentingAdjustmentAmount = obligationP1 * reductionRate;
-        obligationP1 -= parentingAdjustmentAmount;
-      } else {
-        parentingAdjustmentAmount = obligationP2 * reductionRate;
-        obligationP2 -= parentingAdjustmentAmount;
+    // ── PARENTING TIME DEVIATION (OPTIONAL / ESTIMATED) ───────────────────
+    // Gated behind useParentingDeviation toggle — OFF by default.
+    // When OFF: parentingTime has zero effect on the result.
+    // When ON:  estimated deviation per RCW 26.19.075(1)(d) — approximation only.
+    if (useParentingDeviation) {
+      const BASELINE_PCT = 25;
+      let parentingAdjustmentAmount = 0;
+      if (parentingTime > BASELINE_PCT) {
+        const extraTime = parentingTime - BASELINE_PCT;
+        const reductionRate = Math.min((extraTime / 75) * 0.5, 0.5);
+        if (payingParent === "P1") {
+          parentingAdjustmentAmount = obligationP1 * reductionRate;
+          obligationP1 -= parentingAdjustmentAmount;
+        } else {
+          parentingAdjustmentAmount = obligationP2 * reductionRate;
+          obligationP2 -= parentingAdjustmentAmount;
+        }
+      }
+      parentingAdjustment = -parentingAdjustmentAmount;
+
+      if (parentingAdjustmentAmount > 0) {
+        adjustmentReason =
+          "Estimated parenting time deviation applied (RCW 26.19.075(1)(d)) — " +
+          "court discretion applies, actual amount may differ";
       }
     }
-    parentingAdjustment = -parentingAdjustmentAmount;
 
     // Healthcare & daycare — proportional share (RCW 26.19.080(2)(3))
     const totalExtra = healthInsurance + daycare;
@@ -149,8 +182,8 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   obligationP2 = applySSRCap(obligationP2, netP2);
 
   const ssrApplied =
-    (payingParent === "P1" && obligationP1 !== originalObligationP1) ||
-    (payingParent === "P2" && obligationP2 !== originalObligationP2);
+    (payingParent === "P1" && obligationP1 < originalObligationP1) ||
+    (payingParent === "P2" && obligationP2 < originalObligationP2);
 
   if (ssrApplied) {
     adjustmentReason = "Self-support reserve protection applied (RCW 26.19.065(2)(b))";
@@ -159,8 +192,8 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   // ── 45% NET INCOME CAP (RCW 26.19.065(1)) ────────────────────────────────
   const pre45P1 = obligationP1;
   const pre45P2 = obligationP2;
-  obligationP1 = Math.min(obligationP1, netP1 * 0.45);
-  obligationP2 = Math.min(obligationP2, netP2 * 0.45);
+  if (netP1 > 0) obligationP1 = Math.min(obligationP1, netP1 * 0.45);
+  if (netP2 > 0) obligationP2 = Math.min(obligationP2, netP2 * 0.45);
 
   const is45PercentCapped =
     (payingParent === "P1" && obligationP1 < pre45P1) ||
@@ -173,8 +206,9 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   // ── FINAL TRANSFER PAYMENT ────────────────────────────────────────────────
   let finalObligation = payingParent === "P1" ? obligationP1 : obligationP2;
 
-  // Safety clamp — transfer cannot exceed 60% of combined income
-  finalObligation = Math.min(finalObligation, combinedIncome * 0.6);
+  if (combinedIncome > 0) {
+    finalObligation = Math.min(finalObligation, combinedIncome * 0.6);
+  }
 
   return {
     // Income
@@ -201,10 +235,11 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
       extraCosts: extraCostsAdjustment,
     },
 
-    // Status flags for UI badges
+    // Status flags
     ssrApplied,
     is45PercentCapped,
     isLowIncome: combinedIncome < 2200,
     isAboveMaximum: lookup.status === "above_maximum",
+    parentingDeviationApplied: useParentingDeviation && parentingAdjustment < 0,
   };
 }
