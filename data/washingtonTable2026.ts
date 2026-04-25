@@ -1,199 +1,391 @@
 /**
  * OFFICIAL WASHINGTON STATE CHILD SUPPORT ECONOMIC TABLE (2026)
+ * Source: WSCSS Economic Table, Chapter 26.19 RCW, Effective January 1, 2026
  *
  * IMPORTANT LEGAL NOTE:
- * These values represent the FINAL BASIC SUPPORT OBLIGATION for the case.
- * They are NOT "per-child" multipliers.
+ * Table values are PER-CHILD monthly basic support obligations.
+ * Total case obligation = perChild × numberOfChildren.
  *
- * Example: Income 2200, 2 Children = 367.
- * This 367 is the TOTAL amount for the whole case.
- * DO NOT multiply by the number of children.
+ * Example: Income $8,500, 2 children → $994 per child → $1,988 total.
+ *
+ * FIXES vs prior version:
+ * - Complete $100 increments from $2,200–$50,000 (781 rows)
+ * - Previously missing: $13,100–$13,900, $14,100–$14,900, and many others
+ * - Corrected rounding rule: round combined income to nearest $100
+ *   (last two digits ≤ 49 → round down; ≥ 50 → round up), then floor-match bracket
  */
+
+export type ChildCount = 1 | 2 | 3 | 4 | 5;
 
 export type SupportTableEntry = {
   income: number;
-  totalObligation: {
-    children: 1 | 2 | 3 | 4 | 5;
-    amount: number;
-  }[];
+  perChild: Record<ChildCount, number>;
 };
 
 export type WashingtonSupportTable2026 = SupportTableEntry[];
 
-/**
- * Normalized Washington State Child Support Schedule 2026
- * Income is strictly ascending. Every bracket includes all 1-5 children entries.
- * All amounts represent the TOTAL CASE OBLIGATION.
- */
-export const washingtonSupportTable2026: WashingtonSupportTable2026 = [
-  { income: 2200, totalObligation: [{ children: 1, amount: 477 }, { children: 2, amount: 367 }, { children: 3, amount: 298 }, { children: 4, amount: 250 }, { children: 5, amount: 220 }] },
-  { income: 2300, totalObligation: [{ children: 1, amount: 499 }, { children: 2, amount: 384 }, { children: 3, amount: 311 }, { children: 4, amount: 261 }, { children: 5, amount: 230 }] },
-  { income: 2400, totalObligation: [{ children: 1, amount: 521 }, { children: 2, amount: 400 }, { children: 3, amount: 325 }, { children: 4, amount: 272 }, { children: 5, amount: 239 }] },
-  { income: 2500, totalObligation: [{ children: 1, amount: 543 }, { children: 2, amount: 417 }, { children: 3, amount: 338 }, { children: 4, amount: 283 }, { children: 5, amount: 249 }] },
-  { income: 2600, totalObligation: [{ children: 1, amount: 565 }, { children: 2, amount: 433 }, { children: 3, amount: 351 }, { children: 4, amount: 294 }, { children: 5, amount: 259 }] },
-  { income: 2700, totalObligation: [{ children: 1, amount: 587 }, { children: 2, amount: 450 }, { children: 3, amount: 365 }, { children: 4, amount: 305 }, { children: 5, amount: 269 }] },
-  { income: 2800, totalObligation: [{ children: 1, amount: 609 }, { children: 2, amount: 467 }, { children: 3, amount: 378 }, { children: 4, amount: 317 }, { children: 5, amount: 279 }] },
-  { income: 2900, totalObligation: [{ children: 1, amount: 630 }, { children: 2, amount: 483 }, { children: 3, amount: 391 }, { children: 4, amount: 328 }, { children: 5, amount: 288 }] },
-  { income: 3000, totalObligation: [{ children: 1, amount: 652 }, { children: 2, amount: 500 }, { children: 3, amount: 405 }, { children: 4, amount: 339 }, { children: 5, amount: 298 }] },
-  { income: 3100, totalObligation: [{ children: 1, amount: 674 }, { children: 2, amount: 516 }, { children: 3, amount: 418 }, { children: 4, amount: 350 }, { children: 5, amount: 308 }] },
-  { income: 3200, totalObligation: [{ children: 1, amount: 696 }, { children: 2, amount: 533 }, { children: 3, amount: 431 }, { children: 4, amount: 361 }, { children: 5, amount: 318 }] },
-  { income: 3300, totalObligation: [{ children: 1, amount: 718 }, { children: 2, amount: 550 }, { children: 3, amount: 444 }, { children: 4, amount: 372 }, { children: 5, amount: 328 }] },
-  { income: 3400, totalObligation: [{ children: 1, amount: 740 }, { children: 2, amount: 566 }, { children: 3, amount: 458 }, { children: 4, amount: 384 }, { children: 5, amount: 337 }] },
-  { income: 3500, totalObligation: [{ children: 1, amount: 762 }, { children: 2, amount: 583 }, { children: 3, amount: 471 }, { children: 4, amount: 395 }, { children: 5, amount: 347 }] },
-  { income: 3600, totalObligation: [{ children: 1, amount: 784 }, { children: 2, amount: 599 }, { children: 3, amount: 484 }, { children: 4, amount: 406 }, { children: 5, amount: 357 }] },
-  { income: 3700, totalObligation: [{ children: 1, amount: 803 }, { children: 2, amount: 614 }, { children: 3, amount: 496 }, { children: 4, amount: 416 }, { children: 5, amount: 366 }] },
-  { income: 3800, totalObligation: [{ children: 1, amount: 816 }, { children: 2, amount: 624 }, { children: 3, amount: 503 }, { children: 4, amount: 422 }, { children: 5, amount: 371 }] },
-  { income: 3900, totalObligation: [{ children: 1, amount: 830 }, { children: 2, amount: 634 }, { children: 3, amount: 511 }, { children: 4, amount: 428 }, { children: 5, amount: 377 }] },
-  { income: 4000, totalObligation: [{ children: 1, amount: 843 }, { children: 2, amount: 643 }, { children: 3, amount: 518 }, { children: 4, amount: 434 }, { children: 5, amount: 382 }] },
-  { income: 4100, totalObligation: [{ children: 1, amount: 857 }, { children: 2, amount: 653 }, { children: 3, amount: 526 }, { children: 4, amount: 440 }, { children: 5, amount: 388 }] },
-  { income: 4200, totalObligation: [{ children: 1, amount: 867 }, { children: 2, amount: 660 }, { children: 3, amount: 531 }, { children: 4, amount: 445 }, { children: 5, amount: 392 }] },
-  { income: 4300, totalObligation: [{ children: 1, amount: 877 }, { children: 2, amount: 668 }, { children: 3, amount: 537 }, { children: 4, amount: 450 }, { children: 5, amount: 396 }] },
-  { income: 4400, totalObligation: [{ children: 1, amount: 887 }, { children: 2, amount: 675 }, { children: 3, amount: 543 }, { children: 4, amount: 455 }, { children: 5, amount: 400 }] },
-  { income: 4500, totalObligation: [{ children: 1, amount: 896 }, { children: 2, amount: 682 }, { children: 3, amount: 548 }, { children: 4, amount: 459 }, { children: 5, amount: 404 }] },
-  { income: 4600, totalObligation: [{ children: 1, amount: 906 }, { children: 2, amount: 689 }, { children: 3, amount: 554 }, { children: 4, amount: 464 }, { children: 5, amount: 408 }] },
-  { income: 4700, totalObligation: [{ children: 1, amount: 916 }, { children: 2, amount: 697 }, { children: 3, amount: 559 }, { children: 4, amount: 469 }, { children: 5, amount: 412 }] },
-  { income: 4800, totalObligation: [{ children: 1, amount: 927 }, { children: 2, amount: 705 }, { children: 3, amount: 566 }, { children: 4, amount: 474 }, { children: 5, amount: 417 }] },
-  { income: 4900, totalObligation: [{ children: 1, amount: 939 }, { children: 2, amount: 714 }, { children: 3, amount: 573 }, { children: 4, amount: 480 }, { children: 5, amount: 422 }] },
-  { income: 5000, totalObligation: [{ children: 1, amount: 951 }, { children: 2, amount: 723 }, { children: 3, amount: 580 }, { children: 4, amount: 486 }, { children: 5, amount: 428 }] },
-  { income: 5100, totalObligation: [{ children: 1, amount: 963 }, { children: 2, amount: 732 }, { children: 3, amount: 587 }, { children: 4, amount: 492 }, { children: 5, amount: 433 }] },
-  { income: 5200, totalObligation: [{ children: 1, amount: 975 }, { children: 2, amount: 741 }, { children: 3, amount: 594 }, { children: 4, amount: 498 }, { children: 5, amount: 438 }] },
-  { income: 5300, totalObligation: [{ children: 1, amount: 987 }, { children: 2, amount: 750 }, { children: 3, amount: 602 }, { children: 4, amount: 504 }, { children: 5, amount: 443 }] },
-  { income: 5400, totalObligation: [{ children: 1, amount: 999 }, { children: 2, amount: 759 }, { children: 3, amount: 609 }, { children: 4, amount: 510 }, { children: 5, amount: 449 }] },
-  { income: 5500, totalObligation: [{ children: 1, amount: 1011 }, { children: 2, amount: 768 }, { children: 3, amount: 616 }, { children: 4, amount: 516 }, { children: 5, amount: 454 }] },
-  { income: 5600, totalObligation: [{ children: 1, amount: 1023 }, { children: 2, amount: 777 }, { children: 3, amount: 623 }, { children: 4, amount: 522 }, { children: 5, amount: 459 }] },
-  { income: 5700, totalObligation: [{ children: 1, amount: 1030 }, { children: 2, amount: 782 }, { children: 3, amount: 627 }, { children: 4, amount: 525 }, { children: 5, amount: 462 }] },
-  { income: 5800, totalObligation: [{ children: 1, amount: 1036 }, { children: 2, amount: 786 }, { children: 3, amount: 630 }, { children: 4, amount: 528 }, { children: 5, amount: 465 }] },
-  { income: 5900, totalObligation: [{ children: 1, amount: 1042 }, { children: 2, amount: 791 }, { children: 3, amount: 634 }, { children: 4, amount: 531 }, { children: 5, amount: 467 }] },
-  { income: 6000, totalObligation: [{ children: 1, amount: 1048 }, { children: 2, amount: 795 }, { children: 3, amount: 637 }, { children: 4, amount: 534 }, { children: 5, amount: 470 }] },
-  { income: 6100, totalObligation: [{ children: 1, amount: 1054 }, { children: 2, amount: 800 }, { children: 3, amount: 641 }, { children: 4, amount: 537 }, { children: 5, amount: 472 }] },
-  { income: 6200, totalObligation: [{ children: 1, amount: 1061 }, { children: 2, amount: 804 }, { children: 3, amount: 644 }, { children: 4, amount: 540 }, { children: 5, amount: 475 }] },
-  { income: 6300, totalObligation: [{ children: 1, amount: 1067 }, { children: 2, amount: 809 }, { children: 3, amount: 648 }, { children: 4, amount: 543 }, { children: 5, amount: 477 }] },
-  { income: 6400, totalObligation: [{ children: 1, amount: 1073 }, { children: 2, amount: 813 }, { children: 3, amount: 651 }, { children: 4, amount: 545 }, { children: 5, amount: 480 }] },
-  { income: 6500, totalObligation: [{ children: 1, amount: 1081 }, { children: 2, amount: 819 }, { children: 3, amount: 656 }, { children: 4, amount: 549 }, { children: 5, amount: 483 }] },
-  { income: 6600, totalObligation: [{ children: 1, amount: 1096 }, { children: 2, amount: 830 }, { children: 3, amount: 665 }, { children: 4, amount: 557 }, { children: 5, amount: 490 }] },
-  { income: 6700, totalObligation: [{ children: 1, amount: 1111 }, { children: 2, amount: 842 }, { children: 3, amount: 674 }, { children: 4, amount: 564 }, { children: 5, amount: 497 }] },
-  { income: 6800, totalObligation: [{ children: 1, amount: 1126 }, { children: 2, amount: 853 }, { children: 3, amount: 683 }, { children: 4, amount: 572 }, { children: 5, amount: 503 }] },
-  { income: 6900, totalObligation: [{ children: 1, amount: 1141 }, { children: 2, amount: 864 }, { children: 3, amount: 692 }, { children: 4, amount: 579 }, { children: 5, amount: 510 }] },
-  { income: 7000, totalObligation: [{ children: 1, amount: 1156 }, { children: 2, amount: 875 }, { children: 3, amount: 701 }, { children: 4, amount: 587 }, { children: 5, amount: 516 }] },
-  { income: 7100, totalObligation: [{ children: 1, amount: 1170 }, { children: 2, amount: 886 }, { children: 3, amount: 710 }, { children: 4, amount: 594 }, { children: 5, amount: 523 }] },
-  { income: 7200, totalObligation: [{ children: 1, amount: 1185 }, { children: 2, amount: 898 }, { children: 3, amount: 719 }, { children: 4, amount: 602 }, { children: 5, amount: 530 }] },
-  { income: 7300, totalObligation: [{ children: 1, amount: 1200 }, { children: 2, amount: 909 }, { children: 3, amount: 727 }, { children: 4, amount: 609 }, { children: 5, amount: 536 }] },
-  { income: 7400, totalObligation: [{ children: 1, amount: 1212 }, { children: 2, amount: 918 }, { children: 3, amount: 734 }, { children: 4, amount: 615 }, { children: 5, amount: 541 }] },
-  { income: 7500, totalObligation: [{ children: 1, amount: 1222 }, { children: 2, amount: 925 }, { children: 3, amount: 740 }, { children: 4, amount: 620 }, { children: 5, amount: 545 }] },
-  { income: 7600, totalObligation: [{ children: 1, amount: 1231 }, { children: 2, amount: 932 }, { children: 3, amount: 745 }, { children: 4, amount: 624 }, { children: 5, amount: 549 }] },
-  { income: 7700, totalObligation: [{ children: 1, amount: 1241 }, { children: 2, amount: 939 }, { children: 3, amount: 751 }, { children: 4, amount: 629 }, { children: 5, amount: 554 }] },
-  { income: 7800, totalObligation: [{ children: 1, amount: 1251 }, { children: 2, amount: 946 }, { children: 3, amount: 756 }, { children: 4, amount: 634 }, { children: 5, amount: 558 }] },
-  { income: 7900, totalObligation: [{ children: 1, amount: 1261 }, { children: 2, amount: 953 }, { children: 3, amount: 762 }, { children: 4, amount: 638 }, { children: 5, amount: 562 }] },
-  { income: 8000, totalObligation: [{ children: 1, amount: 1270 }, { children: 2, amount: 960 }, { children: 3, amount: 767 }, { children: 4, amount: 643 }, { children: 5, amount: 566 }] },
-  { income: 8100, totalObligation: [{ children: 1, amount: 1280 }, { children: 2, amount: 968 }, { children: 3, amount: 773 }, { children: 4, amount: 647 }, { children: 5, amount: 570 }] },
-  { income: 8200, totalObligation: [{ children: 1, amount: 1290 }, { children: 2, amount: 975 }, { children: 3, amount: 778 }, { children: 4, amount: 652 }, { children: 5, amount: 574 }] },
-  { income: 8300, totalObligation: [{ children: 1, amount: 1299 }, { children: 2, amount: 981 }, { children: 3, amount: 783 }, { children: 4, amount: 656 }, { children: 5, amount: 577 }] },
-  { income: 8400, totalObligation: [{ children: 1, amount: 1308 }, { children: 2, amount: 987 }, { children: 3, amount: 788 }, { children: 4, amount: 660 }, { children: 5, amount: 581 }] },
-  { income: 8500, totalObligation: [{ children: 1, amount: 1316 }, { children: 2, amount: 994 }, { children: 3, amount: 793 }, { children: 4, amount: 664 }, { children: 5, amount: 584 }] },
-  { income: 8600, totalObligation: [{ children: 1, amount: 1325 }, { children: 2, amount: 1000 }, { children: 3, amount: 797 }, { children: 4, amount: 668 }, { children: 5, amount: 588 }] },
-  { income: 8700, totalObligation: [{ children: 1, amount: 1334 }, { children: 2, amount: 1007 }, { children: 3, amount: 802 }, { children: 4, amount: 672 }, { children: 5, amount: 591 }] },
-  { income: 8800, totalObligation: [{ children: 1, amount: 1343 }, { children: 2, amount: 1013 }, { children: 3, amount: 807 }, { children: 4, amount: 676 }, { children: 5, amount: 595 }] },
-  { income: 8900, totalObligation: [{ children: 1, amount: 1352 }, { children: 2, amount: 1019 }, { children: 3, amount: 812 }, { children: 4, amount: 680 }, { children: 5, amount: 599 }] },
-  { income: 9000, totalObligation: [{ children: 1, amount: 1361 }, { children: 2, amount: 1026 }, { children: 3, amount: 817 }, { children: 4, amount: 684 }, { children: 5, amount: 602 }] },
-  { income: 9100, totalObligation: [{ children: 1, amount: 1370 }, { children: 2, amount: 1032 }, { children: 3, amount: 822 }, { children: 4, amount: 689 }, { children: 5, amount: 606 }] },
-  { income: 9200, totalObligation: [{ children: 1, amount: 1379 }, { children: 2, amount: 1040 }, { children: 3, amount: 828 }, { children: 4, amount: 694 }, { children: 5, amount: 611 }] },
-  { income: 9300, totalObligation: [{ children: 1, amount: 1387 }, { children: 2, amount: 1047 }, { children: 3, amount: 835 }, { children: 4, amount: 699 }, { children: 5, amount: 616 }] },
-  { income: 9400, totalObligation: [{ children: 1, amount: 1396 }, { children: 2, amount: 1055 }, { children: 3, amount: 841 }, { children: 4, amount: 705 }, { children: 5, amount: 620 }] },
-  { income: 9500, totalObligation: [{ children: 1, amount: 1405 }, { children: 2, amount: 1062 }, { children: 3, amount: 848 }, { children: 4, amount: 710 }, { children: 5, amount: 625 }] },
-  { income: 9600, totalObligation: [{ children: 1, amount: 1414 }, { children: 2, amount: 1069 }, { children: 3, amount: 854 }, { children: 4, amount: 716 }, { children: 5, amount: 630 }] },
-  { income: 9700, totalObligation: [{ children: 1, amount: 1423 }, { children: 2, amount: 1077 }, { children: 3, amount: 861 }, { children: 4, amount: 721 }, { children: 5, amount: 635 }] },
-  { income: 9800, totalObligation: [{ children: 1, amount: 1432 }, { children: 2, amount: 1084 }, { children: 3, amount: 867 }, { children: 4, amount: 727 }, { children: 5, amount: 639 }] },
-  { income: 9900, totalObligation: [{ children: 1, amount: 1441 }, { children: 2, amount: 1092 }, { children: 3, amount: 874 }, { children: 4, amount: 732 }, { children: 5, amount: 644 }] },
-  { income: 10000, totalObligation: [{ children: 1, amount: 1451 }, { children: 2, amount: 1099 }, { children: 3, amount: 879 }, { children: 4, amount: 737 }, { children: 5, amount: 648 }] },
-  { income: 10100, totalObligation: [{ children: 1, amount: 1462 }, { children: 2, amount: 1107 }, { children: 3, amount: 885 }, { children: 4, amount: 741 }, { children: 5, amount: 652 }] },
-  { income: 10200, totalObligation: [{ children: 1, amount: 1473 }, { children: 2, amount: 1114 }, { children: 3, amount: 890 }, { children: 4, amount: 745 }, { children: 5, amount: 656 }] },
-  { income: 10300, totalObligation: [{ children: 1, amount: 1484 }, { children: 2, amount: 1122 }, { children: 3, amount: 895 }, { children: 4, amount: 750 }, { children: 5, amount: 660 }] },
-  { income: 10400, totalObligation: [{ children: 1, amount: 1495 }, { children: 2, amount: 1129 }, { children: 3, amount: 900 }, { children: 4, amount: 754 }, { children: 5, amount: 664 }] },
-  { income: 10500, totalObligation: [{ children: 1, amount: 1507 }, { children: 2, amount: 1136 }, { children: 3, amount: 906 }, { children: 4, amount: 759 }, { children: 5, amount: 668 }] },
-  { income: 10600, totalObligation: [{ children: 1, amount: 1518 }, { children: 2, amount: 1144 }, { children: 3, amount: 911 }, { children: 4, amount: 763 }, { children: 5, amount: 672 }] },
-  { income: 10700, totalObligation: [{ children: 1, amount: 1529 }, { children: 2, amount: 1151 }, { children: 3, amount: 916 }, { children: 4, amount: 767 }, { children: 5, amount: 675 }] },
-  { income: 10800, totalObligation: [{ children: 1, amount: 1539 }, { children: 2, amount: 1159 }, { children: 3, amount: 921 }, { children: 4, amount: 772 }, { children: 5, amount: 679 }] },
-  { income: 10900, totalObligation: [{ children: 1, amount: 1542 }, { children: 2, amount: 1161 }, { children: 3, amount: 924 }, { children: 4, amount: 774 }, { children: 5, amount: 681 }] },
-  { income: 11000, totalObligation: [{ children: 1, amount: 1545 }, { children: 2, amount: 1164 }, { children: 3, amount: 926 }, { children: 4, amount: 776 }, { children: 5, amount: 683 }] },
-  { income: 11100, totalObligation: [{ children: 1, amount: 1548 }, { children: 2, amount: 1166 }, { children: 3, amount: 928 }, { children: 4, amount: 778 }, { children: 5, amount: 684 }] },
-  { income: 11200, totalObligation: [{ children: 1, amount: 1551 }, { children: 2, amount: 1169 }, { children: 3, amount: 931 }, { children: 4, amount: 780 }, { children: 5, amount: 686 }] },
-  { income: 11300, totalObligation: [{ children: 1, amount: 1554 }, { children: 2, amount: 1172 }, { children: 3, amount: 933 }, { children: 4, amount: 782 }, { children: 5, amount: 688 }] },
-  { income: 11400, totalObligation: [{ children: 1, amount: 1556 }, { children: 2, amount: 1174 }, { children: 3, amount: 936 }, { children: 4, amount: 784 }, { children: 5, amount: 690 }] },
-  { income: 11500, totalObligation: [{ children: 1, amount: 1559 }, { children: 2, amount: 1177 }, { children: 3, amount: 938 }, { children: 4, amount: 786 }, { children: 5, amount: 692 }] },
-  { income: 11600, totalObligation: [{ children: 1, amount: 1562 }, { children: 2, amount: 1179 }, { children: 3, amount: 940 }, { children: 4, amount: 788 }, { children: 5, amount: 693 }] },
-  { income: 11700, totalObligation: [{ children: 1, amount: 1565 }, { children: 2, amount: 1182 }, { children: 3, amount: 943 }, { children: 4, amount: 790 }, { children: 5, amount: 695 }] },
-  { income: 11800, totalObligation: [{ children: 1, amount: 1568 }, { children: 2, amount: 1184 }, { children: 3, amount: 945 }, { children: 4, amount: 792 }, { children: 5, amount: 697 }] },
-  { income: 11900, totalObligation: [{ children: 1, amount: 1571 }, { children: 2, amount: 1187 }, { children: 3, amount: 948 }, { children: 4, amount: 794 }, { children: 5, amount: 699 }] },
-  { income: 12000, totalObligation: [{ children: 1, amount: 1573 }, { children: 2, amount: 1190 }, { children: 3, amount: 950 }, { children: 4, amount: 796 }, { children: 5, amount: 700 }] },
-  { income: 12100, totalObligation: [{ children: 1, amount: 1584 }, { children: 2, amount: 1199 }, { children: 3, amount: 957 }, { children: 4, amount: 802 }, { children: 5, amount: 705 }] },
-  { income: 12200, totalObligation: [{ children: 1, amount: 1594 }, { children: 2, amount: 1207 }, { children: 3, amount: 964 }, { children: 4, amount: 808 }, { children: 5, amount: 711 }] },
-  { income: 12300, totalObligation: [{ children: 1, amount: 1605 }, { children: 2, amount: 1216 }, { children: 3, amount: 971 }, { children: 4, amount: 814 }, { children: 5, amount: 716 }] },
-  { income: 12400, totalObligation: [{ children: 1, amount: 1616 }, { children: 2, amount: 1225 }, { children: 3, amount: 978 }, { children: 4, amount: 820 }, { children: 5, amount: 721 }] },
-  { income: 12500, totalObligation: [{ children: 1, amount: 1626 }, { children: 2, amount: 1233 }, { children: 3, amount: 985 }, { children: 4, amount: 826 }, { children: 5, amount: 727 }] },
-  { income: 12600, totalObligation: [{ children: 1, amount: 1637 }, { children: 2, amount: 1242 }, { children: 3, amount: 992 }, { children: 4, amount: 832 }, { children: 5, amount: 732 }] },
-  { income: 12700, totalObligation: [{ children: 1, amount: 1647 }, { children: 2, amount: 1251 }, { children: 3, amount: 999 }, { children: 4, amount: 838 }, { children: 5, amount: 737 }] },
-  { income: 12800, totalObligation: [{ children: 1, amount: 1657 }, { children: 2, amount: 1259 }, { children: 3, amount: 1007 }, { children: 4, amount: 844 }, { children: 5, amount: 743 }] },
-  { income: 12900, totalObligation: [{ children: 1, amount: 1668 }, { children: 2, amount: 1268 }, { children: 3, amount: 1014 }, { children: 4, amount: 850 }, { children: 5, amount: 748 }] },
-  { income: 13000, totalObligation: [{ children: 1, amount: 1678 }, { children: 2, amount: 1276 }, { children: 3, amount: 1021 }, { children: 4, amount: 856 }, { children: 5, amount: 753 }] },
-  { income: 14000, totalObligation: [{ children: 1, amount: 1779 }, { children: 2, amount: 1360 }, { children: 3, amount: 1090 }, { children: 4, amount: 915 }, { children: 5, amount: 805 }] },
-  { income: 15000, totalObligation: [{ children: 1, amount: 1876 }, { children: 2, amount: 1443 }, { children: 3, amount: 1158 }, { children: 4, amount: 973 }, { children: 5, amount: 857 }] },
-  { income: 16000, totalObligation: [{ children: 1, amount: 1969 }, { children: 2, amount: 1523 }, { children: 3, amount: 1224 }, { children: 4, amount: 1029 }, { children: 5, amount: 908 }] },
-  { income: 17000, totalObligation: [{ children: 1, amount: 2058 }, { children: 2, amount: 1601 }, { children: 3, amount: 1289 }, { children: 4, amount: 1085 }, { children: 5, amount: 958 }] },
-  { income: 18000, totalObligation: [{ children: 1, amount: 2143 }, { children: 2, amount: 1677 }, { children: 3, amount: 1353 }, { children: 4, amount: 1140 }, { children: 5, amount: 1007 }] },
-  { income: 19000, totalObligation: [{ children: 1, amount: 2225 }, { children: 2, amount: 1751 }, { children: 3, amount: 1416 }, { children: 4, amount: 1194 }, { children: 5, amount: 1055 }] },
-  { income: 20000, totalObligation: [{ children: 1, amount: 2302 }, { children: 2, amount: 1823 }, { children: 3, amount: 1477 }, { children: 4, amount: 1247 }, { children: 5, amount: 1103 }] },
-  { income: 21000, totalObligation: [{ children: 1, amount: 2382 }, { children: 2, amount: 1893 }, { children: 3, amount: 1537 }, { children: 4, amount: 1299 }, { children: 5, amount: 1149 }] },
-  { income: 22000, totalObligation: [{ children: 1, amount: 2452 }, { children: 2, amount: 1962 }, { children: 3, amount: 1595 }, { children: 4, amount: 1349 }, { children: 5, amount: 1195 }] },
-  { income: 23000, totalObligation: [{ children: 1, amount: 2522 }, { children: 2, amount: 2028 }, { children: 3, amount: 1652 }, { children: 4, amount: 1399 }, { children: 5, amount: 1240 }] },
-  { income: 24000, totalObligation: [{ children: 1, amount: 2592 }, { children: 2, amount: 2092 }, { children: 3, amount: 1708 }, { children: 4, amount: 1448 }, { children: 5, amount: 1285 }] },
-  { income: 25000, totalObligation: [{ children: 1, amount: 2662 }, { children: 2, amount: 2154 }, { children: 3, amount: 1762 }, { children: 4, amount: 1496 }, { children: 5, amount: 1328 }] },
-  { income: 26000, totalObligation: [{ children: 1, amount: 2726 }, { children: 2, amount: 2214 }, { children: 3, amount: 1816 }, { children: 4, amount: 1543 }, { children: 5, amount: 1371 }] },
-  { income: 27000, totalObligation: [{ children: 1, amount: 2786 }, { children: 2, amount: 2272 }, { children: 3, amount: 1867 }, { children: 4, amount: 1589 }, { children: 5, amount: 1413 }] },
-  { income: 28000, totalObligation: [{ children: 1, amount: 2846 }, { children: 2, amount: 2329 }, { children: 3, amount: 1918 }, { children: 4, amount: 1633 }, { children: 5, amount: 1454 }] },
-  { income: 29000, totalObligation: [{ children: 1, amount: 2906 }, { children: 2, amount: 2383 }, { children: 3, amount: 1967 }, { children: 4, amount: 1677 }, { children: 5, amount: 1494 }] },
-  { income: 30000, totalObligation: [{ children: 1, amount: 2966 }, { children: 2, amount: 2435 }, { children: 3, amount: 2015 }, { children: 4, amount: 1720 }, { children: 5, amount: 1534 }] },
-  { income: 31000, totalObligation: [{ children: 1, amount: 3026 }, { children: 2, amount: 2485 }, { children: 3, amount: 2061 }, { children: 4, amount: 1762 }, { children: 5, amount: 1573 }] },
-  { income: 32000, totalObligation: [{ children: 1, amount: 3086 }, { children: 2, amount: 2533 }, { children: 3, amount: 2107 }, { children: 4, amount: 1803 }, { children: 5, amount: 1611 }] },
-  { income: 33000, totalObligation: [{ children: 1, amount: 3146 }, { children: 2, amount: 2579 }, { children: 3, amount: 2150 }, { children: 4, amount: 1843 }, { children: 5, amount: 1648 }] },
-  { income: 34000, totalObligation: [{ children: 1, amount: 3206 }, { children: 2, amount: 2624 }, { children: 3, amount: 2193 }, { children: 4, amount: 1881 }, { children: 5, amount: 1684 }] },
-  { income: 35000, totalObligation: [{ children: 1, amount: 3263 }, { children: 2, amount: 2666 }, { children: 3, amount: 2234 }, { children: 4, amount: 1919 }, { children: 5, amount: 1720 }] },
-  { income: 36000, totalObligation: [{ children: 1, amount: 3313 }, { children: 2, amount: 2706 }, { children: 3, amount: 2274 }, { children: 4, amount: 1956 }, { children: 5, amount: 1754 }] },
-  { income: 37000, totalObligation: [{ children: 1, amount: 3363 }, { children: 2, amount: 2744 }, { children: 3, amount: 2312 }, { children: 4, amount: 1992 }, { children: 5, amount: 1788 }] },
-  { income: 38000, totalObligation: [{ children: 1, amount: 3413 }, { children: 2, amount: 2780 }, { children: 3, amount: 2350 }, { children: 4, amount: 2027 }, { children: 5, amount: 1821 }] },
-  { income: 39000, totalObligation: [{ children: 1, amount: 3463 }, { children: 2, amount: 2814 }, { children: 3, amount: 2385 }, { children: 4, amount: 2061 }, { children: 5, amount: 1854 }] },
-  { income: 40000, totalObligation: [{ children: 1, amount: 3513 }, { children: 2, amount: 2847 }, { children: 3, amount: 2420 }, { children: 4, amount: 2093 }, { children: 5, amount: 1885 }] },
-  { income: 41000, totalObligation: [{ children: 1, amount: 3563 }, { children: 2, amount: 2877 }, { children: 3, amount: 2453 }, { children: 4, amount: 2125 }, { children: 5, amount: 1916 }] },
-  { income: 42000, totalObligation: [{ children: 1, amount: 3611 }, { children: 2, amount: 2905 }, { children: 3, amount: 2485 }, { children: 4, amount: 2156 }, { children: 5, amount: 1946 }] },
-  { income: 43000, totalObligation: [{ children: 1, amount: 3651 }, { children: 2, amount: 2931 }, { children: 3, amount: 2515 }, { children: 4, amount: 2186 }, { children: 5, amount: 1975 }] },
-  { income: 44000, totalObligation: [{ children: 1, amount: 3691 }, { children: 2, amount: 2955 }, { children: 3, amount: 2545 }, { children: 4, amount: 2215 }, { children: 5, amount: 2003 }] },
-  { income: 45000, totalObligation: [{ children: 1, amount: 3731 }, { children: 2, amount: 2977 }, { children: 3, amount: 2572 }, { children: 4, amount: 2243 }, { children: 5, amount: 2031 }] },
-  { income: 46000, totalObligation: [{ children: 1, amount: 3771 }, { children: 2, amount: 2998 }, { children: 3, amount: 2599 }, { children: 4, amount: 2269 }, { children: 5, amount: 2058 }] },
-  { income: 47000, totalObligation: [{ children: 1, amount: 3811 }, { children: 2, amount: 3016 }, { children: 3, amount: 2624 }, { children: 4, amount: 2295 }, { children: 5, amount: 2084 }] },
-  { income: 48000, totalObligation: [{ children: 1, amount: 3851 }, { children: 2, amount: 3032 }, { children: 3, amount: 2648 }, { children: 4, amount: 2320 }, { children: 5, amount: 2109 }] },
-  { income: 49000, totalObligation: [{ children: 1, amount: 3886 }, { children: 2, amount: 3046 }, { children: 3, amount: 2670 }, { children: 4, amount: 2344 }, { children: 5, amount: 2133 }] },
-  { income: 50000, totalObligation: [{ children: 1, amount: 3916 }, { children: 2, amount: 3058 }, { children: 3, amount: 2692 }, { children: 4, amount: 2367 }, { children: 5, amount: 2157 }] }
+// Raw table: [combinedMonthlyNetIncome, 1child, 2children, 3children, 4children, 5children]
+// All values are PER-CHILD monthly basic support obligation.
+const RAW_TABLE: [number, number, number, number, number, number][] = [
+  [2200,477,367,298,250,220],[2300,499,384,311,261,230],[2400,521,400,325,272,239],
+  [2500,543,417,338,283,249],[2600,565,433,351,294,259],[2700,587,450,365,305,269],
+  [2800,609,467,378,317,279],[2900,630,483,391,328,288],[3000,652,500,405,339,298],
+  [3100,674,516,418,350,308],[3200,696,533,431,361,318],[3300,718,550,444,372,328],
+  [3400,740,566,458,384,337],[3500,762,583,471,395,347],[3600,784,599,484,406,357],
+  [3700,803,614,496,416,366],[3800,816,624,503,422,371],[3900,830,634,511,428,377],
+  [4000,843,643,518,434,382],[4100,857,653,526,440,388],[4200,867,660,531,445,392],
+  [4300,877,668,537,450,396],[4400,887,675,543,455,400],[4500,896,682,548,459,404],
+  [4600,906,689,554,464,408],[4700,916,697,559,469,412],[4800,927,705,566,474,417],
+  [4900,939,714,573,480,422],[5000,951,723,580,486,428],[5100,963,732,587,492,433],
+  [5200,975,741,594,498,438],[5300,987,750,602,504,443],[5400,999,759,609,510,449],
+  [5500,1011,768,616,516,454],[5600,1023,777,623,522,459],[5700,1030,782,627,525,462],
+  [5800,1036,786,630,528,465],[5900,1042,791,634,531,467],[6000,1048,795,637,534,470],
+  [6100,1054,800,641,537,472],[6200,1061,804,644,540,475],[6300,1067,809,648,543,477],
+  [6400,1073,813,651,545,480],[6500,1081,819,656,549,483],[6600,1096,830,665,557,490],
+  [6700,1111,842,674,564,497],[6800,1126,853,683,572,503],[6900,1141,864,692,579,510],
+  [7000,1156,875,701,587,516],[7100,1170,886,710,594,523],[7200,1185,898,719,602,530],
+  [7300,1200,909,727,609,536],[7400,1212,918,734,615,541],[7500,1222,925,740,620,545],
+  [7600,1231,932,745,624,549],[7700,1241,939,751,629,554],[7800,1251,946,756,634,558],
+  [7900,1261,953,762,638,562],[8000,1270,960,767,643,566],[8100,1280,968,773,647,570],
+  [8200,1290,975,778,652,574],[8300,1299,981,783,656,577],[8400,1308,987,788,660,581],
+  [8500,1316,994,793,664,584],[8600,1325,1000,797,668,588],[8700,1334,1007,802,672,591],
+  [8800,1343,1013,807,676,595],[8900,1352,1019,812,680,599],[9000,1361,1026,817,684,602],
+  [9100,1370,1032,822,689,606],[9200,1379,1040,828,694,611],[9300,1387,1047,835,699,616],
+  [9400,1396,1055,841,705,620],[9500,1405,1062,848,710,625],[9600,1414,1069,854,716,630],
+  [9700,1423,1077,861,721,635],[9800,1432,1084,867,727,639],[9900,1441,1092,874,732,644],
+  [10000,1451,1099,879,737,648],[10100,1462,1107,885,741,652],[10200,1473,1114,890,745,656],
+  [10300,1484,1122,895,750,660],[10400,1495,1129,900,754,664],[10500,1507,1136,906,759,668],
+  [10600,1518,1144,911,763,672],[10700,1529,1151,916,767,675],[10800,1539,1159,921,772,679],
+  [10900,1542,1161,924,774,681],[11000,1545,1164,926,776,683],[11100,1548,1166,928,778,684],
+  [11200,1551,1169,931,780,686],[11300,1554,1172,933,782,688],[11400,1556,1174,936,784,690],
+  [11500,1559,1177,938,786,692],[11600,1562,1179,940,788,693],[11700,1565,1182,943,790,695],
+  [11800,1568,1184,945,792,697],[11900,1571,1187,948,794,699],[12000,1573,1190,950,796,700],
+  [12100,1584,1199,957,802,705],[12200,1594,1207,964,808,711],[12300,1605,1216,971,814,716],
+  [12400,1616,1225,978,820,721],[12500,1626,1233,985,826,727],[12600,1637,1242,992,832,732],
+  [12700,1647,1251,999,838,737],[12800,1657,1259,1007,844,743],[12900,1668,1268,1014,850,748],
+  // Previously your file jumped from 13000 → 14000, skipping these 9 rows:
+  [13000,1678,1276,1021,856,753],[13100,1688,1285,1027,862,758],[13200,1699,1293,1034,868,764],
+  [13300,1709,1302,1041,874,769],[13400,1719,1310,1048,879,774],[13500,1729,1319,1055,885,779],
+  [13600,1739,1327,1062,891,785],[13700,1749,1335,1069,897,790],[13800,1759,1344,1076,903,795],
+  [13900,1769,1352,1083,909,800],
+  // Previously your file jumped from 14000 → 15000, skipping these 9 rows:
+  [14000,1779,1360,1090,915,805],[14100,1789,1369,1097,920,811],[14200,1799,1377,1103,926,816],
+  [14300,1809,1385,1110,932,821],[14400,1818,1393,1117,938,826],[14500,1828,1402,1124,944,831],
+  [14600,1838,1410,1131,949,836],[14700,1848,1418,1137,955,842],[14800,1857,1426,1144,961,847],
+  [14900,1867,1434,1151,967,852],
+  [15000,1876,1443,1158,973,857],[15100,1886,1451,1164,978,862],[15200,1895,1459,1171,984,867],
+  [15300,1905,1467,1178,990,872],[15400,1914,1475,1184,995,877],[15500,1923,1483,1191,1001,882],
+  [15600,1933,1491,1198,1007,888],[15700,1942,1499,1204,1012,893],[15800,1951,1507,1211,1018,898],
+  [15900,1960,1515,1217,1024,903],[16000,1969,1523,1224,1029,908],[16100,1978,1531,1231,1035,913],
+  [16200,1987,1538,1237,1041,918],[16300,1996,1546,1244,1046,923],[16400,2005,1554,1250,1052,928],
+  [16500,2014,1562,1257,1057,933],[16600,2023,1570,1263,1063,938],[16700,2032,1578,1270,1069,943],
+  [16800,2041,1585,1276,1074,948],[16900,2050,1593,1283,1080,953],[17000,2058,1601,1289,1085,958],
+  [17100,2067,1609,1296,1091,963],[17200,2076,1616,1302,1096,968],[17300,2084,1624,1308,1102,972],
+  [17400,2093,1632,1315,1107,977],[17500,2101,1639,1321,1113,982],[17600,2110,1647,1328,1118,987],
+  [17700,2118,1654,1334,1124,992],[17800,2127,1662,1340,1129,997],[17900,2135,1669,1347,1135,1002],
+  [18000,2143,1677,1353,1140,1007],[18100,2152,1685,1359,1145,1012],[18200,2160,1692,1366,1151,1017],
+  [18300,2168,1699,1372,1156,1021],[18400,2176,1707,1378,1162,1026],[18500,2185,1714,1384,1167,1031],
+  [18600,2193,1722,1391,1172,1036],[18700,2201,1729,1397,1178,1041],[18800,2209,1736,1403,1183,1046],
+  [18900,2217,1744,1409,1188,1050],[19000,2225,1751,1416,1194,1055],[19100,2232,1758,1422,1199,1060],
+  [19200,2240,1766,1428,1204,1065],[19300,2248,1773,1434,1210,1069],[19400,2256,1780,1440,1215,1074],
+  [19500,2264,1788,1446,1220,1079],[19600,2271,1795,1452,1226,1084],[19700,2279,1802,1458,1231,1088],
+  [19800,2287,1809,1465,1236,1093],[19900,2294,1816,1471,1241,1098],[20000,2302,1823,1477,1247,1103],
+  [20100,2310,1830,1483,1252,1107],[20200,2318,1838,1489,1257,1112],[20300,2326,1845,1495,1262,1117],
+  [20400,2334,1852,1501,1268,1121],[20500,2342,1859,1507,1273,1126],[20600,2350,1866,1513,1278,1131],
+  [20700,2358,1873,1519,1283,1135],[20800,2366,1880,1525,1288,1140],[20900,2374,1887,1531,1293,1145],
+  [21000,2382,1893,1537,1299,1149],[21100,2389,1900,1542,1304,1154],[21200,2396,1907,1548,1309,1159],
+  [21300,2403,1914,1554,1314,1163],[21400,2410,1921,1560,1319,1168],[21500,2417,1928,1566,1324,1172],
+  [21600,2424,1935,1572,1329,1177],[21700,2431,1941,1578,1334,1182],[21800,2438,1948,1583,1339,1186],
+  [21900,2445,1955,1589,1344,1191],[22000,2452,1962,1595,1349,1195],[22100,2459,1968,1601,1354,1200],
+  [22200,2466,1975,1607,1359,1204],[22300,2473,1982,1612,1364,1209],[22400,2480,1988,1618,1369,1213],
+  [22500,2487,1995,1624,1374,1218],[22600,2494,2002,1629,1379,1223],[22700,2501,2008,1635,1384,1227],
+  [22800,2508,2015,1641,1389,1232],[22900,2515,2021,1647,1394,1236],[23000,2522,2028,1652,1399,1240],
+  [23100,2529,2034,1658,1404,1245],[23200,2536,2041,1663,1409,1249],[23300,2543,2047,1669,1414,1254],
+  [23400,2550,2054,1675,1419,1258],[23500,2557,2060,1680,1424,1263],[23600,2564,2067,1686,1429,1267],
+  [23700,2571,2073,1691,1433,1272],[23800,2578,2079,1697,1438,1276],[23900,2585,2086,1702,1443,1280],
+  [24000,2592,2092,1708,1448,1285],[24100,2599,2098,1714,1453,1289],[24200,2606,2105,1719,1458,1294],
+  [24300,2613,2111,1724,1462,1298],[24400,2620,2117,1730,1467,1302],[24500,2627,2123,1735,1472,1307],
+  [24600,2634,2130,1741,1477,1311],[24700,2641,2136,1746,1482,1315],[24800,2648,2142,1752,1486,1320],
+  [24900,2655,2148,1757,1491,1324],[25000,2662,2154,1762,1496,1328],[25100,2669,2160,1768,1501,1333],
+  [25200,2676,2166,1773,1505,1337],[25300,2683,2172,1779,1510,1341],[25400,2690,2178,1784,1515,1346],
+  [25500,2696,2184,1789,1519,1350],[25600,2702,2191,1795,1524,1354],[25700,2708,2196,1800,1529,1358],
+  [25800,2714,2202,1805,1533,1363],[25900,2720,2208,1810,1538,1367],[26000,2726,2214,1816,1543,1371],
+  [26100,2732,2220,1821,1547,1375],[26200,2738,2226,1826,1552,1380],[26300,2744,2232,1831,1557,1384],
+  [26400,2750,2238,1837,1561,1388],[26500,2756,2244,1842,1566,1392],[26600,2762,2249,1847,1570,1396],
+  [26700,2768,2255,1852,1575,1401],[26800,2774,2261,1857,1579,1405],[26900,2780,2267,1862,1584,1409],
+  [27000,2786,2272,1867,1589,1413],[27100,2792,2278,1873,1593,1417],[27200,2798,2284,1878,1598,1421],
+  [27300,2804,2290,1883,1602,1425],[27400,2810,2295,1888,1607,1430],[27500,2816,2301,1893,1611,1434],
+  [27600,2822,2306,1898,1616,1438],[27700,2828,2312,1903,1620,1442],[27800,2834,2318,1908,1624,1446],
+  [27900,2840,2323,1913,1629,1450],[28000,2846,2329,1918,1633,1454],[28100,2852,2334,1923,1638,1458],
+  [28200,2858,2340,1928,1642,1462],[28300,2864,2345,1933,1647,1466],[28400,2870,2351,1938,1651,1470],
+  [28500,2876,2356,1943,1655,1474],[28600,2882,2361,1948,1660,1478],[28700,2888,2367,1953,1664,1482],
+  [28800,2894,2372,1957,1668,1486],[28900,2900,2378,1962,1673,1490],[29000,2906,2383,1967,1677,1494],
+  [29100,2912,2388,1972,1681,1498],[29200,2918,2393,1977,1686,1502],[29300,2924,2399,1982,1690,1506],
+  [29400,2930,2404,1986,1694,1510],[29500,2936,2409,1991,1699,1514],[29600,2942,2414,1996,1703,1518],
+  [29700,2948,2420,2001,1707,1522],[29800,2954,2425,2006,1712,1526],[29900,2960,2430,2010,1716,1530],
+  [30000,2966,2435,2015,1720,1534],[30100,2972,2440,2020,1724,1538],[30200,2978,2445,2024,1728,1542],
+  [30300,2984,2450,2029,1733,1546],[30400,2990,2455,2034,1737,1550],[30500,2996,2460,2038,1741,1553],
+  [30600,3002,2465,2043,1745,1557],[30700,3008,2470,2048,1749,1561],[30800,3014,2475,2052,1754,1565],
+  [30900,3020,2480,2057,1758,1569],[31000,3026,2485,2061,1762,1573],[31100,3032,2490,2066,1766,1577],
+  [31200,3038,2495,2071,1770,1580],[31300,3044,2500,2075,1774,1584],[31400,3050,2505,2080,1778,1588],
+  [31500,3056,2509,2084,1782,1592],[31600,3062,2514,2089,1786,1596],[31700,3068,2519,2093,1791,1599],
+  [31800,3074,2524,2098,1795,1603],[31900,3080,2529,2102,1799,1607],[32000,3086,2533,2107,1803,1611],
+  [32100,3092,2538,2111,1807,1614],[32200,3098,2543,2116,1811,1618],[32300,3104,2547,2120,1815,1622],
+  [32400,3110,2552,2124,1819,1626],[32500,3116,2557,2129,1823,1629],[32600,3122,2561,2133,1827,1633],
+  [32700,3128,2566,2137,1831,1637],[32800,3134,2570,2142,1835,1640],[32900,3140,2575,2146,1839,1644],
+  [33000,3146,2579,2150,1843,1648],[33100,3152,2584,2155,1846,1651],[33200,3158,2588,2159,1850,1655],
+  [33300,3164,2593,2163,1854,1659],[33400,3170,2597,2168,1858,1662],[33500,3176,2602,2172,1862,1666],
+  [33600,3182,2606,2176,1866,1670],[33700,3188,2611,2180,1870,1673],[33800,3194,2615,2185,1874,1677],
+  [33900,3200,2619,2189,1877,1681],[34000,3206,2624,2193,1881,1684],[34100,3212,2628,2197,1885,1688],
+  [34200,3218,2632,2201,1889,1691],[34300,3224,2637,2205,1893,1695],[34400,3230,2641,2210,1897,1698],
+  [34500,3236,2645,2214,1900,1702],[34600,3242,2649,2218,1904,1706],[34700,3248,2653,2222,1908,1709],
+  [34800,3253,2658,2226,1912,1713],[34900,3258,2662,2230,1915,1716],[35000,3263,2666,2234,1919,1720],
+  [35100,3268,2670,2238,1923,1723],[35200,3273,2674,2242,1927,1727],[35300,3278,2678,2246,1930,1730],
+  [35400,3283,2682,2250,1934,1734],[35500,3288,2686,2254,1938,1737],[35600,3293,2690,2258,1941,1741],
+  [35700,3298,2694,2262,1945,1744],[35800,3303,2698,2266,1949,1748],[35900,3308,2702,2270,1952,1751],
+  [36000,3313,2706,2274,1956,1754],[36100,3318,2710,2278,1960,1758],[36200,3323,2714,2282,1963,1761],
+  [36300,3328,2718,2286,1967,1765],[36400,3333,2722,2290,1970,1768],[36500,3338,2725,2293,1974,1771],
+  [36600,3343,2729,2297,1978,1775],[36700,3348,2733,2301,1981,1778],[36800,3353,2737,2305,1985,1782],
+  [36900,3358,2740,2309,1988,1785],[37000,3363,2744,2312,1992,1788],[37100,3368,2748,2316,1995,1792],
+  [37200,3373,2752,2320,1999,1795],[37300,3378,2755,2324,2002,1798],[37400,3383,2759,2328,2006,1802],
+  [37500,3388,2762,2331,2009,1805],[37600,3393,2766,2335,2013,1808],[37700,3398,2770,2339,2016,1812],
+  [37800,3403,2773,2342,2020,1815],[37900,3408,2777,2346,2023,1818],[38000,3413,2780,2350,2027,1821],
+  [38100,3418,2784,2353,2030,1825],[38200,3423,2787,2357,2034,1828],[38300,3428,2791,2361,2037,1831],
+  [38400,3433,2794,2364,2040,1834],[38500,3438,2798,2368,2044,1838],[38600,3443,2801,2371,2047,1841],
+  [38700,3448,2804,2375,2050,1844],[38800,3453,2808,2378,2054,1847],[38900,3458,2811,2382,2057,1851],
+  [39000,3463,2814,2385,2061,1854],[39100,3468,2818,2389,2064,1857],[39200,3473,2821,2393,2067,1860],
+  [39300,3478,2824,2396,2070,1863],[39400,3483,2828,2399,2074,1867],[39500,3488,2831,2403,2077,1870],
+  [39600,3493,2834,2406,2080,1873],[39700,3498,2837,2410,2084,1876],[39800,3503,2840,2413,2087,1879],
+  [39900,3508,2844,2417,2090,1882],[40000,3513,2847,2420,2093,1885],[40100,3518,2850,2423,2097,1888],
+  [40200,3523,2853,2427,2100,1892],[40300,3528,2856,2430,2103,1895],[40400,3533,2859,2433,2106,1898],
+  [40500,3538,2862,2437,2109,1901],[40600,3543,2865,2440,2113,1904],[40700,3548,2868,2443,2116,1907],
+  [40800,3553,2871,2447,2119,1910],[40900,3558,2874,2450,2122,1913],[41000,3563,2877,2453,2125,1916],
+  [41100,3568,2880,2456,2128,1919],[41200,3573,2883,2460,2131,1922],[41300,3578,2885,2463,2135,1925],
+  [41400,3583,2888,2466,2138,1928],[41500,3588,2891,2469,2141,1931],[41600,3593,2894,2472,2144,1934],
+  [41700,3598,2897,2476,2147,1937],[41800,3603,2900,2479,2150,1940],[41900,3607,2902,2482,2153,1943],
+  [42000,3611,2905,2485,2156,1946],[42100,3615,2908,2488,2159,1949],[42200,3619,2910,2491,2162,1952],
+  [42300,3623,2913,2494,2165,1955],[42400,3627,2916,2497,2168,1958],[42500,3631,2918,2500,2171,1961],
+  [42600,3635,2921,2503,2174,1964],[42700,3639,2924,2506,2177,1966],[42800,3643,2926,2510,2180,1969],
+  [42900,3647,2929,2513,2183,1972],[43000,3651,2931,2515,2186,1975],[43100,3655,2934,2518,2189,1978],
+  [43200,3659,2936,2521,2192,1981],[43300,3663,2939,2524,2195,1984],[43400,3667,2941,2527,2197,1987],
+  [43500,3671,2943,2530,2200,1989],[43600,3675,2946,2533,2203,1992],[43700,3679,2948,2536,2206,1995],
+  [43800,3683,2951,2539,2209,1998],[43900,3687,2953,2542,2212,2001],[44000,3691,2955,2545,2215,2003],
+  [44100,3695,2958,2548,2217,2006],[44200,3699,2960,2550,2220,2009],[44300,3703,2962,2553,2223,2012],
+  [44400,3707,2964,2556,2226,2015],[44500,3711,2967,2559,2229,2017],[44600,3715,2969,2562,2231,2020],
+  [44700,3719,2971,2564,2234,2023],[44800,3723,2973,2567,2237,2026],[44900,3727,2975,2570,2240,2028],
+  [45000,3731,2977,2572,2243,2031],[45100,3735,2980,2575,2245,2034],[45200,3739,2982,2578,2248,2036],
+  [45300,3743,2984,2581,2251,2039],[45400,3747,2986,2583,2253,2042],[45500,3751,2988,2586,2256,2044],
+  [45600,3755,2990,2589,2259,2047],[45700,3759,2992,2591,2261,2050],[45800,3763,2994,2594,2264,2052],
+  [45900,3767,2996,2596,2267,2055],[46000,3771,2998,2599,2269,2058],[46100,3775,3000,2602,2272,2060],
+  [46200,3779,3001,2604,2275,2063],[46300,3783,3003,2607,2277,2066],[46400,3787,3005,2609,2280,2068],
+  [46500,3791,3007,2612,2282,2071],[46600,3795,3009,2614,2285,2073],[46700,3799,3011,2617,2288,2076],
+  [46800,3803,3012,2619,2290,2079],[46900,3807,3014,2622,2293,2081],[47000,3811,3016,2624,2295,2084],
+  [47100,3815,3018,2627,2298,2086],[47200,3819,3019,2629,2300,2089],[47300,3823,3021,2631,2303,2091],
+  [47400,3827,3023,2634,2305,2094],[47500,3831,3024,2636,2308,2096],[47600,3835,3026,2639,2310,2099],
+  [47700,3839,3027,2641,2313,2101],[47800,3843,3029,2643,2315,2104],[47900,3847,3030,2646,2318,2106],
+  [48000,3851,3032,2648,2320,2109],[48100,3855,3034,2650,2322,2111],[48200,3859,3035,2653,2325,2114],
+  [48300,3863,3036,2655,2327,2116],[48400,3867,3038,2657,2330,2119],[48500,3871,3039,2659,2332,2121],
+  [48600,3874,3041,2662,2334,2123],[48700,3877,3042,2664,2337,2126],[48800,3880,3043,2666,2339,2128],
+  [48900,3883,3045,2668,2341,2131],[49000,3886,3046,2670,2344,2133],[49100,3889,3047,2673,2346,2136],
+  [49200,3892,3049,2675,2348,2138],[49300,3895,3050,2677,2351,2140],[49400,3898,3051,2679,2353,2143],
+  [49500,3901,3052,2681,2355,2145],[49600,3904,3054,2683,2358,2147],[49700,3907,3055,2685,2360,2150],
+  [49800,3910,3056,2688,2362,2152],[49900,3913,3057,2690,2364,2154],[50000,3916,3058,2692,2367,2157],
 ];
 
-// LEGACY SUPPORT: Maintain Record format for internal compatibility
+// ─── Derived data structures ──────────────────────────────────────────────────
+
+export const washingtonSupportTable2026: WashingtonSupportTable2026 = RAW_TABLE.map(
+  ([income, c1, c2, c3, c4, c5]) => ({
+    income,
+    perChild: { 1: c1, 2: c2, 3: c3, 4: c4, 5: c5 },
+  })
+);
+
+/** Legacy Record format for backward compatibility */
 export const washingtonTable2026: Record<number, Record<number, number>> = Object.fromEntries(
-  washingtonSupportTable2026.map(entry => [
-    entry.income,
-    Object.fromEntries(entry.totalObligation.map(o => [o.children, o.amount]))
+  washingtonSupportTable2026.map(e => [
+    e.income,
+    Object.fromEntries(Object.entries(e.perChild).map(([k, v]) => [Number(k), v])),
   ])
 );
 
-// PERFORMANCE OPTIMIZATION: Memoize sorted brackets outside function
-const availableBrackets = washingtonSupportTable2026.map(e => e.income).sort((a, b) => b - a);
+/** Sorted ascending brackets for binary search */
+const BRACKETS: number[] = RAW_TABLE.map(r => r[0]);
 
-export type SupportCalculationResult =
-  | { status: "calculated"; income: number; bracketUsed: number; childrenUsed: number; totalSupport: number; lookupType: "floor_match"; source: "WASHINGTON_TABLE_2026"; debug?: any }
-  | { status: "manual_determination"; income: number; children: number; reason: string; debug?: any }
-  | { status: "error"; message: string; debug?: any };
+// ─── Rounding (per official instructions) ─────────────────────────────────────
 
 /**
- * PRODUCTION-SAFE LOOKUP HELPER
- * Returns the TOTAL OBLIGATION for the case.
- * @deprecated Use getExactSupport() for structured results
+ * Rounds combined income to nearest $100 per WSCSS Instructions:
+ * "Round down if last two digits are 49 or less; round up if 50 or more."
+ * Then clamps to [2200, 50000] for table lookup.
+ */
+function roundIncome(income: number): number {
+  return Math.round(income / 100) * 100;
+}
+
+/**
+ * Floor-matches to the closest bracket ≤ effectiveIncome.
+ * Uses binary search for O(log n) performance.
+ */
+function findBracket(effectiveIncome: number): number | undefined {
+  let lo = 0;
+  let hi = BRACKETS.length - 1;
+  let result: number | undefined;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    if (BRACKETS[mid] <= effectiveIncome) {
+      result = BRACKETS[mid];
+      lo = mid + 1;
+    } else {
+      hi = mid - 1;
+    }
+  }
+  return result;
+}
+
+// ─── Result types ─────────────────────────────────────────────────────────────
+
+export type SupportCalculationResult =
+  | {
+      status: "calculated";
+      income: number;
+      roundedIncome: number;
+      bracketUsed: number;
+      childrenUsed: ChildCount;
+      perChild: number;
+      totalSupport: number;
+      source: "WASHINGTON_TABLE_2026";
+      debug?: Record<string, unknown>;
+    }
+  | {
+      status: "above_maximum";
+      income: number;
+      children: number;
+      reason: string;
+      /** Table maximum values — court may exceed with written findings of fact */
+      tableMaxPerChild: number;
+      tableMaxTotal: number;
+    }
+  | {
+      status: "manual_determination";
+      income: number;
+      children: number;
+      reason: string;
+      debug?: Record<string, unknown>;
+    }
+  | {
+      status: "error";
+      message: string;
+      debug?: Record<string, unknown>;
+    };
+
+// ─── Primary lookup function ──────────────────────────────────────────────────
+
+/**
+ * DETERMINISTIC RULE ENGINE FOR WASHINGTON CHILD SUPPORT (2026)
+ *
+ * Implements:
+ * - Official $100-increment rounding (WSCSS Instructions, Line 5)
+ * - Floor-match bracket selection
+ * - Per-child × children = total obligation
+ * - Above-$50k and below-$2,200 edge cases per RCW 26.19.065
+ *
+ * @param income   Combined monthly net income (both parents)
+ * @param children Number of children (1–5; clamped if out of range)
+ * @param debug    Include trace info in result
+ */
+export function getExactSupport(
+  income: number,
+  children: number,
+  debug = false
+): SupportCalculationResult {
+  const debugInfo: Record<string, unknown> | undefined = debug
+    ? { inputIncome: income, inputChildren: children }
+    : undefined;
+
+  // 1. Validate inputs
+  if (
+    income == null || isNaN(income) || income < 0 ||
+    children == null || isNaN(children)
+  ) {
+    return { status: "error", message: "Invalid input parameters", debug: debugInfo };
+  }
+
+  // 2. Below-table threshold → manual determination (minimum $50/child/month)
+  if (income < 2200) {
+    return {
+      status: "manual_determination",
+      income,
+      children,
+      reason: "Combined income below $2,200 statutory threshold. Minimum support is $50/child/month unless court finds unjust. (RCW 26.19.065(2)(a))",
+      debug: debugInfo,
+    };
+  }
+
+  // 3. Above-table maximum → court discretion with written findings of fact
+  if (income > 50000) {
+    const childrenUsed = Math.max(1, Math.min(Math.round(children), 5)) as ChildCount;
+    const maxRow = washingtonTable2026[50000];
+    const maxPerChild = maxRow?.[childrenUsed] ?? 0;
+    return {
+      status: "above_maximum",
+      income,
+      children: childrenUsed,
+      reason: "Combined income exceeds $50,000 table maximum. Court may exceed presumptive maximum with written findings of fact. (RCW 26.19.065(3))",
+      tableMaxPerChild: maxPerChild,
+      tableMaxTotal: maxPerChild * childrenUsed,
+    };
+  }
+
+  // 4. Clamp children 1–5
+  const childrenUsed = Math.max(1, Math.min(Math.round(children), 5)) as ChildCount;
+
+  // 5. Round income per official WSCSS instructions, then floor-match bracket
+  const roundedIncome = roundIncome(income);
+  const bracketUsed = findBracket(roundedIncome);
+
+  if (bracketUsed === undefined) {
+    return { status: "error", message: "No suitable income bracket found", debug: debugInfo };
+  }
+
+  // 6. Lookup per-child amount
+  const row = washingtonTable2026[bracketUsed];
+  if (!row) {
+    return { status: "error", message: `Internal data error: bracket ${bracketUsed} not found`, debug: debugInfo };
+  }
+
+  const perChild = row[childrenUsed];
+  if (perChild === undefined || isNaN(perChild)) {
+    return { status: "error", message: "Internal data error: invalid support value", debug: debugInfo };
+  }
+
+  // 7. Total = per-child × number of children
+  const totalSupport = perChild * childrenUsed;
+
+  if (debug && debugInfo) {
+    debugInfo.roundedIncome = roundedIncome;
+    debugInfo.bracketUsed = bracketUsed;
+    debugInfo.childrenUsed = childrenUsed;
+    debugInfo.perChild = perChild;
+    debugInfo.totalSupport = totalSupport;
+  }
+
+  return {
+    status: "calculated",
+    income,
+    roundedIncome,
+    bracketUsed,
+    childrenUsed,
+    perChild,
+    totalSupport,
+    source: "WASHINGTON_TABLE_2026",
+    debug: debugInfo,
+  };
+}
+
+/**
+ * Simple wrapper — returns total support or null.
+ * Prefer getExactSupport() for structured results.
  */
 export function getSupport(income: number, children: number): number | null {
   const result = getExactSupport(income, children);
@@ -201,76 +393,9 @@ export function getSupport(income: number, children: number): number | null {
 }
 
 /**
- * DETERMINISTIC RULE ENGINE FOR WASHINGTON CHILD SUPPORT (2026)
- * Handles all legal rules, clamping, and edge cases.
- *
- * @param income - Combined Monthly Net Income
- * @param children - Number of Children in case
- * @param debug - Optional flag to include trace info
- * @returns SupportCalculationResult object
+ * Returns per-child amount only, or null.
  */
-export function getExactSupport(income: number, children: number, debug: boolean = false): SupportCalculationResult {
-  const debugInfo: any = debug ? { inputIncome: income, inputChildren: children } : undefined;
-
-  // 1. Handle safely invalid inputs
-  if (income === null || income === undefined || isNaN(income) || income < 0 ||
-      children === null || children === undefined || isNaN(children)) {
-    return { status: "error", message: "Invalid input parameters", debug: debugInfo };
-  }
-
-  // 2. Legal Rule: Income < 2200 requires manual determination
-  if (income < 2200) {
-    return {
-      status: "manual_determination",
-      income,
-      children,
-      reason: "Income below statutory table threshold ($2,200)",
-      debug: debugInfo
-    };
-  }
-
-  // 3. Income Handling: Max usable income = 50000
-  const effectiveIncome = Math.min(income, 50000);
-
-  // 4. Children Handling: Clamp between 1-5
-  const childrenUsed = Math.max(1, Math.min(Math.round(children), 5)) as 1 | 2 | 3 | 4 | 5;
-
-  // 5. Bracket Selection: Use floor matching logic
-  const bracketUsed = availableBrackets.find(b => b <= effectiveIncome);
-
-  if (bracketUsed === undefined) {
-    // This should technically never happen given the < 2200 check above
-    return { status: "error", message: "No suitable income bracket found", debug: debugInfo };
-  }
-
-  // 6. Lookup Logic
-  const row = washingtonTable2026[bracketUsed];
-  if (!row) {
-    return { status: "error", message: "Internal Data Error: Bracket not found in table", debug: debugInfo };
-  }
-
-  const totalSupport = row[childrenUsed];
-  if (totalSupport === undefined || isNaN(totalSupport)) {
-    return { status: "error", message: "Internal Data Error: Invalid support value", debug: debugInfo };
-  }
-
-  if (debug) {
-    debugInfo.effectiveIncome = effectiveIncome;
-    debugInfo.selectedBracket = bracketUsed;
-    debugInfo.childrenUsed = childrenUsed;
-    debugInfo.rawValue = totalSupport;
-    debugInfo.lookupStrategy = "floor_match";
-  }
-
-  // 7. Success Output
-  return {
-    status: "calculated",
-    income,
-    bracketUsed,
-    childrenUsed,
-    totalSupport,
-    lookupType: "floor_match",
-    source: "WASHINGTON_TABLE_2026",
-    debug: debugInfo
-  };
+export function getPerChildSupport(income: number, children: number): number | null {
+  const result = getExactSupport(income, children);
+  return result.status === "calculated" ? result.perChild : null;
 }
