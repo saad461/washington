@@ -25,14 +25,13 @@
   --color-primary-hover: #4F46E5;
 
   /* Spacing scale — use these for consistent rhythm */
-  --space-section-sm: 3rem;      /* 48px  — mobile sections */
-  --space-section-md: 5rem;      /* 80px  — tablet sections */
-  --space-section-lg: 6rem;      /* 96px  — desktop sections */
+  --space-section-sm: 2rem;      /* 32px  — mobile sections */
+  --space-section-md: 3rem;      /* 48px  — tablet sections */
+  --space-section-lg: 4rem;      /* 64px  — desktop sections */
 
   /* Container widths */
   --container-max: 80rem;        /* 1280px — wide layouts */
-  --container-prose: 48rem;      /* 768px  — reading width */
-  --container-narrow: 36rem;     /* 576px  — forms, centered CTAs */
+  --container-prose: 42rem;      /* 672px  — reading width (max-w-2xl) */
 
   /* Border radius scale */
   --radius-sm: 0.5rem;           /* 8px   — tags, chips */
@@ -114,12 +113,12 @@
   ──────────────────────────────────────────────*/
   h1 {
     /* 30px → 36px → 48px */
-    @apply text-3xl sm:text-4xl lg:text-5xl font-bold font-heading text-heading leading-[1.1] tracking-tight;
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold font-heading text-heading leading-[1.2] tracking-tight;
   }
 
   h2 {
     /* 24px → 30px → 36px */
-    @apply text-2xl sm:text-3xl lg:text-4xl font-bold font-heading text-heading leading-[1.15] tracking-tight;
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold font-heading text-heading leading-[1.2] tracking-tight;
   }
 
   h3 {
@@ -138,7 +137,7 @@
 
   /* Tighten list spacing */
   ul, ol {
-    @apply space-y-1.5;
+    @apply space-y-2;
   }
 
   /* Links */
@@ -197,53 +196,43 @@
   /* ══ LAYOUT ══════════════════════════════════*/
 
   /* Section wrapper — 3-step spacing scale
-     FIX: was 2-step (64px → 96px). Now: 48→80→96. */
+     Strict 8px scale: 32px (mobile) -> 48px (tablet) -> 64px (desktop) */
   .section-default {
-    @apply py-12 md:py-20 lg:py-24;
+    @apply py-8 md:py-12 lg:py-16;
   }
 
   /* Alternate section background */
   .section-alt {
-    @apply py-12 md:py-20 lg:py-24 bg-[--color-section-alt];
+    @apply py-8 md:py-12 lg:py-16 bg-[--color-section-alt];
   }
 
   /* Wide container — for dashboards, full layouts
-     FIX: added px-4 as the true mobile-first baseline.
-     Old: px-6 sm:px-10 lg:px-12 (too tight on 320px screens)
-     New: px-4 sm:px-6 lg:px-8 (standard, proven scale) */
+     Max-width: 1280px, Horizontal padding: 16px (mob) / 24px (tab) / 32px (desk) */
   .container-wide {
     @apply w-full max-w-[--container-max] mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Reading container — for blog posts, long-form content */
+  /* Reading container — for blog posts, long-form content (max-w-2xl) */
   .container-reading {
     @apply w-full max-w-[--container-prose] mx-auto px-4 sm:px-6;
   }
 
-  /* Narrow container — for forms, CTAs, centered content */
-  .container-narrow {
-    @apply w-full max-w-[--container-narrow] mx-auto px-4 sm:px-6;
-  }
-
-  /* Stack spacing — named sizes instead of one-size-fits-all
-     FIX: was a single space-y-8 for everything. */
-  .stack-sm  { @apply space-y-3; }  /* 12px — form fields */
-  .stack-md  { @apply space-y-6; }  /* 24px — card content */
-  .stack-lg  { @apply space-y-10; } /* 40px — sections */
-  .stack-xl  { @apply space-y-16; } /* 64px — page regions */
+  /* Stack spacing — 8px-base scale */
+  .stack-sm  { @apply space-y-2; }  /* 8px */
+  .stack-md  { @apply space-y-4; }  /* 16px */
+  .stack-lg  { @apply space-y-6; }  /* 24px */
+  .stack-xl  { @apply space-y-8; }  /* 32px */
 
 
   /* ══ CARDS ════════════════════════════════════*/
 
   /* Standard card — responsive radius + padding
-     FIX: was p-8 md:p-12 rounded-[2rem] always.
-     On mobile p-8 (32px) inside a ~300px card is too tight.
-     New: p-5 sm:p-7 md:p-10 + radius scales too. */
+     Strict 8px scale: p-4 (16px), sm:p-6 (24px), md:p-8 (32px) */
   .card-standard {
     background: var(--color-card-bg);
     border: 1px solid rgb(226 232 240 / 0.7);
     box-shadow: var(--shadow-card);
-    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-5 sm:p-7 md:p-10;
+    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-4 sm:p-6 md:p-8;
   }
 
   /* Interactive card — lifts on hover */
@@ -252,7 +241,7 @@
     border: 1px solid rgb(226 232 240 / 0.7);
     box-shadow: var(--shadow-card);
     transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.3s ease;
-    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-5 sm:p-7 md:p-10 cursor-pointer;
+    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-4 sm:p-6 md:p-8 cursor-pointer;
   }
 
   .card-interactive:hover {
@@ -266,21 +255,21 @@
     background: linear-gradient(135deg, rgb(238 242 255 / 0.8), rgb(245 243 255 / 0.6));
     border: 1px solid rgb(99 102 241 / 0.2);
     box-shadow: var(--shadow-float);
-    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-5 sm:p-7 md:p-10;
+    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-4 sm:p-6 md:p-8;
   }
 
 
   /* ══ BUTTONS ══════════════════════════════════*/
 
   /* Primary CTA button
-     FIX: was always h-14 (56px). Now scales: 44px mobile → 52px desktop.
-     Also fixed: rounded-2xl is now responsive too. */
+     Strict 8px scale: h-11 (44px mobile) -> h-12 (48px desktop).
+     Padding: px-4 (16px) -> px-6 (24px). */
   .btn-primary {
     height: 44px;
     box-shadow: var(--shadow-brand);
     transition: box-shadow 0.25s ease, transform 0.2s ease, background-color 0.2s ease;
     @apply
-      px-5 sm:px-7
+      px-4 sm:px-6
       rounded-xl sm:rounded-2xl
       font-bold text-sm sm:text-base text-white
       bg-indigo-600
@@ -289,7 +278,7 @@
   }
 
   @media (min-width: 640px) {
-    .btn-primary { height: 52px; }
+    .btn-primary { height: 48px; }
   }
 
   .btn-primary:hover {
@@ -307,7 +296,7 @@
     height: 44px;
     transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
     @apply
-      px-5 sm:px-7
+      px-4 sm:px-6
       rounded-xl sm:rounded-2xl
       border-2 border-gray-200
       font-bold text-sm sm:text-base text-heading
@@ -317,7 +306,7 @@
   }
 
   @media (min-width: 640px) {
-    .btn-secondary { height: 52px; }
+    .btn-secondary { height: 48px; }
   }
 
   .btn-secondary:hover {
@@ -333,12 +322,12 @@
       px-4
       rounded-xl
       font-semibold text-sm sm:text-base text-body
-      flex items-center justify-center gap-1.5
+      flex items-center justify-center gap-2
       whitespace-nowrap select-none;
   }
 
   @media (min-width: 640px) {
-    .btn-ghost { height: 52px; }
+    .btn-ghost { height: 48px; }
   }
 
   .btn-ghost:hover {
@@ -359,12 +348,12 @@
   /* ══ INPUTS ════════════════════════════════════*/
 
   /* Standard input — matches button sizing
-     FIX: was always h-14 (56px). Now 44px → 52px. */
+     Strict 8px scale: h-11 (44px mobile) -> h-12 (48px desktop). */
   .input-standard {
     height: 44px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     @apply
-      w-full px-4 sm:px-5
+      w-full px-4 sm:px-6
       rounded-xl sm:rounded-2xl
       border-2 border-gray-100
       text-sm sm:text-base text-heading font-medium
@@ -374,7 +363,7 @@
   }
 
   @media (min-width: 640px) {
-    .input-standard { height: 52px; }
+    .input-standard { height: 48px; }
   }
 
   .input-standard:focus {
@@ -384,7 +373,7 @@
   /* Textarea — no fixed height */
   .textarea-standard {
     @apply
-      w-full px-4 sm:px-5 py-3 sm:py-4
+      w-full px-4 sm:px-6 py-4
       rounded-xl sm:rounded-2xl
       border-2 border-gray-100
       text-sm sm:text-base text-heading font-medium
@@ -400,12 +389,12 @@
 
   /* Input label */
   .input-label {
-    @apply block text-sm font-semibold text-heading mb-1.5;
+    @apply block text-sm font-semibold text-heading mb-2;
   }
 
   /* Hint / helper text below input */
   .input-hint {
-    @apply text-xs text-muted mt-1.5 leading-relaxed;
+    @apply text-xs text-muted mt-2 leading-relaxed;
   }
 
   /* Error state */
@@ -466,7 +455,7 @@
   /* ══ DIVIDERS ════════════════════════════════*/
 
   .divider {
-    @apply border-t border-gray-200/80 my-6 md:my-8;
+    @apply border-t border-gray-200/80 my-8 md:my-12;
   }
 
   .divider-light {

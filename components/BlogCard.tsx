@@ -12,7 +12,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
  return (
  <Link
  href={`/blog/${post.slug}`}
- className="group bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:border-indigo-200 hover:bg-gray-50 transition-all duration-300 flex flex-col h-full overflow-hidden"
+ className="group card-interactive flex flex-col h-full overflow-hidden"
  >
  <div className="relative w-full aspect-[16/10] mb-6 rounded-xl overflow-hidden bg-gray-50 border border-gray-100">
  <Image
@@ -24,7 +24,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
  />
  </div>
 
- <div className="flex items-center gap-3 mb-4">
+ <div className="flex items-center gap-4 mb-4">
  <span className=" label-metadata ">
  {post.category}
  </span>
@@ -42,7 +42,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
  {post.excerpt}
  </p>
 
- <div className="pt-6 border-t border-gray-50 flex items-center justify-between">
+ <div className="pt-6 border-t border-gray-100 flex items-center justify-between">
  <div className="flex items-center gap-2 label-metadata ">
  <Calendar size={12}  />
  {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}

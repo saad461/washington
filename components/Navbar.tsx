@@ -45,8 +45,8 @@ export default function Navbar() {
 
   // Single source of truth for nav height — used for both the header
   // and the drawer top offset so they never mismatch.
-  const navH      = scrolled ? "h-16" : "h-20";
-  const drawerTop = scrolled ? "top-16" : "top-20";
+  const navH      = scrolled ? "h-16" : "h-16 lg:h-20";
+  const drawerTop = scrolled ? "top-16" : "top-16";
 
   return (
     <>
@@ -107,7 +107,7 @@ export default function Navbar() {
               <span className="hidden md:inline">Print</span>
             </button>
 
-            <Link href="/worksheet" className="hidden sm:flex btn-primary">
+          <Link href="/worksheet" className="hidden sm:flex btn-primary !h-10 !px-4 !text-xs">
               <span className="hidden md:inline">Launch</span> Wizard
               <ChevronRight className="w-4 h-4" />
             </Link>
