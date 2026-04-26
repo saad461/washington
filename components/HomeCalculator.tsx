@@ -84,13 +84,13 @@ export default function HomeCalculator() {
     <div className="w-full">
 
       {/* ══ CALCULATOR GRID ══════════════════════════════════════════════ */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mb-12 md:mb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mb-8 md:mb-12">
 
         {/* ── LEFT: Input panel ──────────────────────────────────────── */}
         <div className="lg:col-span-7">
           <div className="card-standard shadow-xl" style={{ borderColor: "rgb(238 242 255 / 0.8)" }}>
 
-            <div className="flex items-center gap-3 mb-6 md:mb-8">
+            <div className="flex items-center gap-4 mb-8">
               <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white shadow-md shadow-indigo-200 shrink-0">
                 <Calculator size={20} />
               </div>
@@ -100,10 +100,10 @@ export default function HomeCalculator() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-6 md:gap-8">
+            <div className="flex flex-col gap-8">
 
               {/* Income cycle + children count */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
                 <div className="flex flex-col">
                   <label htmlFor="income-type" className="input-label">Income Cycle</label>
                   <select
@@ -132,7 +132,7 @@ export default function HomeCalculator() {
               </div>
 
               {/* Parent income inputs */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 p-4 sm:p-6 bg-gray-50/60 rounded-xl sm:rounded-2xl border border-gray-100">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 bg-gray-50/60 rounded-xl sm:rounded-2xl border border-gray-100">
                 <div className="flex flex-col">
                   <label htmlFor="parent1-income" className="input-label" style={{ color: "#6366f1" }}>
                     Parent 1 Net Income
@@ -185,20 +185,20 @@ export default function HomeCalculator() {
               </div>
 
               {/* Net income hint */}
-              <div className="flex items-start gap-2.5 px-4 py-3 bg-blue-50 border border-blue-100 rounded-xl">
-                <Info size={15} className="text-blue-500 shrink-0 mt-0.5" />
-                <p className="text-[12px] text-blue-700 leading-relaxed">
+              <div className="flex items-start gap-4 px-4 py-4 bg-blue-50 border border-blue-100 rounded-xl">
+                <Info size={16} className="text-blue-500 shrink-0 mt-0.5" />
+                <p className="text-xs text-blue-700 leading-relaxed">
                   <strong>Court standard:</strong> Enter each parent&apos;s monthly net income — gross wages minus mandatory deductions (taxes, FICA, required union dues, mandatory retirement). Do not enter gross income.
                 </p>
               </div>
 
-              <div className="space-y-6 md:space-y-8">
+              <div className="space-y-8">
 
                 {/* Payer toggle */}
                 <div className="flex flex-col">
-                  <span className="input-label mb-1">Designated Payer</span>
-                  <p className="text-[11px] text-muted mb-3">Which parent pays support to the other?</p>
-                  <div className="grid grid-cols-2 gap-3">
+                  <span className="input-label mb-2">Designated Payer</span>
+                  <p className="text-[11px] text-muted mb-4">Which parent pays support to the other?</p>
+                  <div className="grid grid-cols-2 gap-4">
                     <button type="button" onClick={() => setPayingParent("P1")} className={toggleBtn(payingParent === "P1", "indigo")}>
                       {payingParent === "P1" && <CheckCircle size={15} className="shrink-0" />}
                       Parent 1
@@ -266,11 +266,11 @@ export default function HomeCalculator() {
                         transition={{ duration: 0.25, ease: "easeInOut" }}
                         style={{ overflow: "hidden" }}
                       >
-                        <div className="pt-4 space-y-4">
+                        <div className="pt-6 space-y-6">
 
                           {/* Approximation warning */}
-                          <div className="flex items-start gap-2.5 px-3 py-3 bg-amber-50 border border-amber-200 rounded-xl">
-                            <AlertCircle size={14} className="text-amber-500 shrink-0 mt-0.5" />
+                          <div className="flex items-start gap-4 px-4 py-4 bg-amber-50 border border-amber-200 rounded-xl">
+                            <AlertCircle size={16} className="text-amber-500 shrink-0 mt-0.5" />
                             <p className="text-[11px] text-amber-800 leading-relaxed">
                               <strong>Approximation only.</strong> Washington courts apply parenting time deviations on a case-by-case basis under RCW 26.19.075(1)(d). There is no fixed statutory formula. This estimate may differ significantly from a court order.
                             </p>
@@ -304,14 +304,14 @@ export default function HomeCalculator() {
                                 type="button"
                                 title={p.sub}
                                 onClick={() => setParentingTime(p.value)}
-                                className={`px-2.5 py-1.5 rounded-lg border transition-all flex flex-col items-center ${
+                                className={`px-4 py-2 rounded-lg border transition-all flex flex-col items-center min-w-[80px] ${
                                   parentingTime === p.value
                                     ? "bg-indigo-600 border-indigo-600 text-white"
                                     : "bg-white border-gray-200 text-body hover:border-indigo-300"
                                 }`}
                               >
-                                <span className="text-[12px] font-bold">{p.label}</span>
-                                <span className={`text-[9px] mt-0.5 ${parentingTime === p.value ? "text-white/70" : "text-muted"}`}>
+                                <span className="text-xs font-bold">{p.label}</span>
+                                <span className={`text-[9px] mt-1 ${parentingTime === p.value ? "text-white/70" : "text-muted"}`}>
                                   {p.sub}
                                 </span>
                               </button>
@@ -405,7 +405,7 @@ export default function HomeCalculator() {
                 className="space-y-4 sm:space-y-5"
               >
                 {/* Result hero */}
-                <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 text-center relative overflow-hidden shadow-2xl ring-1 ring-white/10">
+                <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800 rounded-2xl sm:rounded-3xl p-6 md:p-8 text-center relative overflow-hidden shadow-2xl ring-1 ring-white/10">
                   <div className="absolute top-0 right-0 w-56 h-56 bg-white/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
                   <div className="relative z-10">
                     <p className="label-metadata text-white/70 mb-4 tracking-[0.18em]">
@@ -418,7 +418,7 @@ export default function HomeCalculator() {
 
                     {/* Status badges */}
                     {(result.ssrApplied || result.isLowIncome || result.is45PercentCapped || result.parentingDeviationApplied) && (
-                      <div className="flex flex-wrap justify-center gap-2 mb-6">
+                      <div className="flex flex-wrap justify-center gap-2 mb-8">
                         {result.ssrApplied              && <span className="badge bg-indigo-500/20 text-indigo-300 border border-indigo-500/30"><AlertCircle size={11} /> SSR Protection</span>}
                         {result.isLowIncome             && <span className="badge bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"><Info size={11} /> Low Income Min.</span>}
                         {result.is45PercentCapped       && <span className="badge bg-amber-500/20 text-amber-300 border border-amber-500/30"><AlertCircle size={11} /> 45% Cap</span>}
@@ -428,7 +428,7 @@ export default function HomeCalculator() {
 
                     <Link
                       href="/worksheet"
-                      className="btn-primary w-full sm:w-auto group"
+                      className="btn-primary w-full sm:w-fit mx-auto group"
                       style={{ background: "white", color: "var(--color-heading)", boxShadow: "0 4px 14px rgba(0,0,0,0.15)" }}
                       onMouseEnter={(e) => (e.currentTarget.style.background = "#f1f5f9")}
                       onMouseLeave={(e) => (e.currentTarget.style.background = "white")}
@@ -535,18 +535,18 @@ export default function HomeCalculator() {
       </div>
 
       {/* ══ BELOW-CALCULATOR SECTIONS ════════════════════════════════════ */}
-      <div className="max-w-4xl mx-auto space-y-12 md:space-y-20">
+      <div className="max-w-2xl mx-auto space-y-16">
 
         {/* Why Legal Pros Trust WCSSC */}
         <div>
-          <div className="text-center mb-8 md:mb-12 space-y-3">
+          <div className="text-center mb-8 md:mb-12 space-y-4">
             <h2>Why Legal Pros Trust WCSSC</h2>
             <p className="text-base sm:text-lg text-body leading-relaxed max-w-2xl mx-auto">
               Unlike generic calculators, WCSSC is engineered to the exact 2026 Washington statutory logic.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="grid grid-cols-1 gap-8 items-center">
             <div className="space-y-3 sm:space-y-4">
               {[
                 "Compliant with RCW 26.19 standards",
@@ -597,7 +597,7 @@ export default function HomeCalculator() {
         {/* Feature cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           <div className="card-interactive group text-center flex flex-col items-center">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-5 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm shrink-0">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-sm shrink-0">
               <Scale size={24} />
             </div>
             <h3 className="text-lg font-bold text-heading mb-3">Legal Precision</h3>
@@ -626,7 +626,7 @@ export default function HomeCalculator() {
             </p>
             <Link
               href="/worksheet"
-              className="btn-secondary w-full sm:w-auto group-hover:border-purple-500 group-hover:text-purple-600"
+              className="btn-secondary w-full sm:w-fit group-hover:border-purple-500 group-hover:text-purple-600"
             >
               Launch Wizard <ChevronRight size={15} />
             </Link>

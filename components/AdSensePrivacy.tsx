@@ -4,8 +4,8 @@ import { ShieldCheck, Lock, Eye, Globe, UserCheck, Database, Clock, FileText } f
 
 const AdSensePrivacy = () => {
  return (
- <div className="max-w-3xl mx-auto px-6 py-20 font-sans leading-relaxed">
- <div className="text-center mb-16">
+ <div className="w-full font-sans leading-relaxed">
+ <div className="text-center mb-12 md:mb-16">
  <ShieldCheck className="w-16 h-16 mx-auto mb-6" />
  <h1 className="font-bold tracking-tight mb-4">Privacy Policy &amp; Ad Disclosure</h1>
  <p className=" font-medium italic">Last Updated: April 2026</p>
@@ -67,7 +67,7 @@ const AdSensePrivacy = () => {
  <h2 className="font-semibold ">Data Sharing &amp; Cookies</h2>
  </div>
  <p className="mb-6 font-medium label-metadata ">Mandatory Third-Party Disclosure:</p>
- <ul className="list-disc pl-6 stack-space mb-6">
+ <ul className="list-disc pl-6 space-y-2 mb-6">
  <li>Third-party vendors, including Google, use cookies to serve ads based on a user&apos;s prior visits to your website or other websites.</li>
  <li>Google&apos;s use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</li>
  <li>Users may opt out of personalized advertising by visiting <Link href="https://www.google.com/settings/ads" className=" underline">Ads Settings</Link>.</li>

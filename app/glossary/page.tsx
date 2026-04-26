@@ -1,54 +1,55 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { glossaryTerms } from '@/data/glossary';
-import { ArrowRight, BookA } from 'lucide-react';
+import { ChevronRight, BookA } from 'lucide-react';
 
 export const metadata: Metadata = {
- title: 'Washington Child Support Glossary (2026) | Terms Defined',
- description: 'Understand complete legal terms including Self-Support Reserve, Transfer Payment, Deviation, and Imputed Income in the 2026 Washington State Child Support law.',
- alternates: { canonical: 'https://wcssc.site/glossary' },
+  title: 'Washington Child Support Glossary (2026) | Terms Defined',
+  description: 'Understand complete legal terms including Self-Support Reserve, Transfer Payment, Deviation, and Imputed Income in the 2026 Washington State Child Support law.',
+  alternates: { canonical: 'https://wcssc.site/glossary' },
 };
 
 export default function GlossaryIndex() {
- return (
- <div className="flex-1 bg-white relative w-full overflow-hidden font-sans">
- <div className="container-wide section-default  relative z-10">
- <div className="max-w-3xl mx-auto mb-20 text-center">
- <div className="inline-flex p-3 bg-indigo-50 rounded-xl mb-8">
- <BookA className="w-8 h-8" />
- </div>
- <h1 className=" mb-6 ">
- Washington Child Support Glossary (2026)
- </h1>
- <p className="text-body leading-relaxed text-body max-w-2xl mx-auto ">
- Understanding family court requires learning a new legal language. We break down complex terms into simple, actionable definitions to help you navigate your 2026 payments.
- </p>
- </div>
+  return (
+    <main className="flex-1 bg-page relative w-full overflow-hidden">
+      <div className="container-wide section-default relative z-10">
+        <header className="max-w-3xl mx-auto mb-16 md:mb-24 text-center">
+          <div className="inline-flex p-4 bg-indigo-50 text-indigo-600 rounded-2xl mb-8 shadow-sm">
+            <BookA className="w-8 h-8" />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8">
+            Washington Child Support Glossary (2026)
+          </h1>
+          <p className="text-xl text-gray-600 leading-relaxed">
+            Understanding family court requires learning a new legal language. We break down complex terms into simple, actionable definitions to help you navigate your 2026 payments.
+          </p>
+        </header>
 
- <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
- {glossaryTerms.map((term) => (
- <Link
- key={term.slug}
- href={`/glossary/${term.slug}`}
- className="block p-6 bg-white border border-gray-100 rounded-xl hover:border-indigo-200 transition-all group shadow-sm hover:shadow-sm active:scale-[0.99]"
- >
- <div className="flex justify-between items-start gap-4">
- <div>
- <h2 className=" mb-3 group-hover: transition-colors ">
- {term.term}
- </h2>
- <p className=" line-clamp-3 text-sm">
- {term.definition}
- </p>
- </div>
- <div className="p-2 group-hover: transition-colors shrink-0">
- <ArrowRight className="w-5 h-5" />
- </div>
- </div>
- </Link>
- ))}
- </div>
- </div>
- </div>
- );
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
+          {glossaryTerms.map((term) => (
+            <Link
+              key={term.slug}
+              href={`/glossary/${term.slug}`}
+              className="group card-standard flex flex-col p-8 hover:border-indigo-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
+                  {term.term}
+                </h2>
+                <div className="p-2 rounded-full bg-gray-50 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
+                  <ChevronRight className="w-5 h-5" />
+                </div>
+              </div>
+              <p className="text-gray-600 leading-relaxed line-clamp-3 mb-6">
+                {term.definition}
+              </p>
+              <div className="mt-auto text-indigo-600 font-bold label-metadata tracking-widest uppercase text-[10px]">
+                Read full guide
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
 }

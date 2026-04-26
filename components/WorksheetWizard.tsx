@@ -324,10 +324,10 @@ export default function WorksheetWizard() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       // FIX: was p-6 sm:p-6 md:p-12 (sm and default identical). Now 3-step.
-      className="space-y-8 md:space-y-12 pb-12 md:pb-20 bg-white p-5 sm:p-7 md:p-10 rounded-xl"
+      className="space-y-8 md:space-y-12 pb-8 md:pb-16 bg-white p-4 sm:p-8 rounded-xl"
     >
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 border-b border-gray-100 pb-6 md:pb-8">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 border-b border-gray-100 pb-8">
         <div>
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
             {/* h1 with no classes — global h1 styles apply correctly here */}
@@ -459,7 +459,7 @@ export default function WorksheetWizard() {
         <button
           id="pdf-download-btn"
           onClick={handleDownloadPDF}
-          className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 active:scale-[0.98] transition-all"
+          className="w-full sm:w-fit flex items-center justify-center gap-4 px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 active:scale-[0.98] transition-all"
         >
           <CheckCircle2 className="w-5 h-5 text-white/80 shrink-0" />
           Download Official PDF
@@ -550,26 +550,26 @@ export default function WorksheetWizard() {
         )}
 
         <div className="flex-1 w-full">
-          <div className="max-w-7xl mx-auto w-full py-8 px-4 sm:px-6 lg:px-8 lg:py-16">
+          <div className="container-wide py-8 lg:py-16">
 
             {showSummary ? renderSummaryContent() : (
-              <div className="max-w-3xl mx-auto">
-                <ProgressBar currentStep={currentStep} totalSteps={PARTS.length} />
+              <div className="max-w-2xl mx-auto">
+                <ProgressBar currentStep={currentStep} />
 
                 {/* Form card
                     FIX: removed redundant md:p-6 (identical to sm:p-6) */}
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6 lg:p-12">
+                <div className="card-standard p-4 sm:p-8 md:p-12">
 
                   {/* Step header
                       FIX: was "text-center text-left" — conflicting classes, last wins.
                       Intent is center on mobile, left on desktop.
                       FIX: <h1 text-2xl> → <h2> so global h2 styles apply. */}
-                  <div className="mb-8 md:mb-10 text-center md:text-left">
-                    <span className="inline-block px-3 py-1 bg-gray-50 label-metadata rounded-full mb-3">
+                  <div className="mb-8 md:mb-12 text-center md:text-left">
+                    <span className="inline-block px-4 py-1.5 bg-gray-50 label-metadata rounded-full mb-4">
                       Step {currentStep + 1}
                     </span>
-                    <h2 className="mb-3">{currentPartKey}</h2>
-                    <p className="text-sm sm:text-base text-body leading-relaxed max-w-2xl">
+                    <h2 className="mb-4">{currentPartKey}</h2>
+                    <p className="text-base text-body leading-relaxed max-w-2xl">
                       Fill in the mandatory fields below. Your live support estimate updates
                       automatically as you input income and deduction details.
                     </p>

@@ -10,8 +10,10 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
  return (
- <main className="min-h-screen bg-white">
+ <main className="flex-1 bg-page">
+ <div className="container-reading section-default">
  <AdSensePrivacy />
+ </div>
  </main>
  );
 }
