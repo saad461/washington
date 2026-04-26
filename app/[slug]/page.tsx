@@ -256,7 +256,18 @@ const Breadcrumbs = ({
       <span className="opacity-30 shrink-0 sm:hidden">...</span>
       <span className="mx-2 opacity-30 shrink-0 sm:hidden">/</span>
       <span className="opacity-80 truncate hidden sm:inline">Washington</span>
-      {county && <span className="mx-2 opacity-30 shrink-0 hidden sm:inline">/</span>}
+      {county && (
+        <>
+          <span className="mx-2 opacity-30 shrink-0 hidden sm:inline">/</span>
+          <Link
+            href={`/${county.slug}-income-5000-2-children`}
+            className="hover:text-indigo-600 transition-colors truncate hidden sm:inline"
+          >
+            {county.name}
+          </Link>
+        </>
+      )}
+      <span className="mx-2 opacity-30 shrink-0">/</span>
       <span className="truncate">${income.toLocaleString()} Calculation</span>
     </div>
   </nav>
@@ -449,7 +460,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
               <p className="mb-12 text-lg text-indigo-100 max-w-lg mx-auto leading-relaxed">
                 Get a full breakdown using our Washington Child Support Worksheet Wizard. Calculate precise income splits and extraordinary expenses.
               </p>
-              <Link href="/worksheet" className="btn-primary w-full md:w-fit px-8 py-4 inline-flex items-center justify-center gap-4">
+              <Link href="/worksheet" className="btn-primary w-auto px-8 btn-h-44 inline-flex items-center justify-center gap-4">
                 Launch Complete Wizard <ArrowRight className="w-5 h-5" />
               </Link>
             </div>

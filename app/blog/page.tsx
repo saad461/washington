@@ -96,10 +96,10 @@ export default function BlogListingPage() {
             Our expert tools are updated for the 2026 Washington State Child Support Schedule. Start your local county calculation now.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link href="/" className="btn-primary w-full sm:w-fit px-8 h-14 flex items-center justify-center gap-3">
+            <Link href="/" className="btn-primary w-auto px-8 btn-h-44 flex items-center justify-center gap-3">
               Launch Estimator <ArrowRight size={18} />
             </Link>
-            <Link href="/worksheet" className="btn-secondary w-full sm:w-fit px-8 h-14 flex items-center justify-center gap-3 text-white border-white/20 hover:bg-white/10">
+            <Link href="/worksheet" className="btn-secondary w-auto px-8 btn-h-44 flex items-center justify-center gap-3 text-white border-white/20 hover:bg-white/10">
               Pro Wizard
             </Link>
           </div>

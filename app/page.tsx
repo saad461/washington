@@ -163,7 +163,7 @@ export default function Home() {
             </p>
 
             <div className="mt-12 flex justify-center">
-              <Link href="/worksheet" className="btn-primary w-full sm:w-fit px-8 h-14">
+              <Link href="/worksheet" className="btn-primary btn-h-44 w-auto !px-8 !rounded-full !text-sm !font-semibold">
                 Calculate Exact Support
                 <ChevronRight className="w-5 h-5" />
               </Link>
@@ -344,7 +344,7 @@ export default function Home() {
             </div>
             <Link
               href="/blog"
-              className="flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors shrink-0 no-underline px-6 h-12 rounded-xl bg-gray-50 border border-gray-100"
+              className="flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors shrink-0 no-underline px-6 btn-h-44 rounded-xl bg-gray-50 border border-gray-100"
             >
               View all articles <ChevronRight size={16} />
             </Link>

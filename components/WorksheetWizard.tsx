@@ -344,7 +344,7 @@ export default function WorksheetWizard() {
         <button
           id="pdf-edit-btn"
           onClick={resetWizard}
-          className="btn-secondary shrink-0"
+          className="btn-secondary btn-h-36 px-4 shrink-0"
         >
           <Calculator className="w-4 h-4" />
           Edit Data
@@ -459,7 +459,7 @@ export default function WorksheetWizard() {
         <button
           id="pdf-download-btn"
           onClick={handleDownloadPDF}
-          className="w-full sm:w-fit flex items-center justify-center gap-4 px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 active:scale-[0.98] transition-all"
+          className="btn-primary btn-h-44 w-auto px-8 flex items-center justify-center gap-4"
         >
           <CheckCircle2 className="w-5 h-5 text-white/80 shrink-0" />
           Download Official PDF
@@ -620,10 +620,10 @@ export default function WorksheetWizard() {
                     <button
                       onClick={prevStep}
                       disabled={currentStep === 0}
-                      className={`flex items-center justify-center w-full sm:w-auto px-6 py-3 rounded-xl font-semibold text-sm transition-all ${
+                      className={`btn-secondary btn-h-44 w-auto px-6 ${
                         currentStep === 0
-                          ? "text-gray-300 pointer-events-none"
-                          : "text-body hover:bg-gray-50 hover:text-heading active:scale-[0.98]"
+                          ? "!text-gray-300 !border-gray-100 pointer-events-none"
+                          : "active:scale-[0.98]"
                       }`}
                     >
                       <ChevronLeft className="w-4 h-4 mr-1.5" />
@@ -632,7 +632,7 @@ export default function WorksheetWizard() {
 
                     <button
                       onClick={nextStep}
-                      className="flex items-center justify-center w-full sm:w-auto bg-indigo-600 text-white px-7 py-3 rounded-xl font-semibold text-sm hover:bg-indigo-700 active:scale-[0.98] transition-all group shadow-md shadow-indigo-100"
+                      className="btn-primary btn-h-44 w-auto px-8 group"
                     >
                       {currentStep === PARTS.length - 1 ? "Generate Report" : "Save & Continue"}
                       <ChevronRight className="w-4 h-4 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
@@ -679,7 +679,7 @@ export default function WorksheetWizard() {
           </div>
           <button
             onClick={nextStep}
-            className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-3 min-h-[44px] rounded-xl text-sm font-semibold hover:bg-indigo-700 active:scale-[0.98] transition-all shrink-0 shadow-md shadow-indigo-100"
+            className="btn-primary btn-h-44 w-auto px-6 shrink-0"
           >
             {currentStep === PARTS.length - 1 ? "Get Report" : "Next Step"}
             <ArrowRight className="w-4 h-4" />

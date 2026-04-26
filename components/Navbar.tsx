@@ -107,7 +107,7 @@ export default function Navbar() {
               <span className="hidden md:inline">Print</span>
             </button>
 
-          <Link href="/worksheet" className="hidden sm:flex btn-primary !h-10 !px-4 !text-xs">
+          <Link href="/worksheet" className="hidden sm:flex btn-primary !h-9 !px-4 !text-[13px] !rounded-lg !font-semibold">
               <span className="hidden md:inline">Launch</span> Wizard
               <ChevronRight className="w-4 h-4" />
             </Link>

@@ -428,7 +428,7 @@ export default function HomeCalculator() {
 
                     <Link
                       href="/worksheet"
-                      className="btn-primary w-full sm:w-fit mx-auto group"
+                      className="btn-primary w-auto sm:w-fit mx-auto group"
                       style={{ background: "white", color: "var(--color-heading)", boxShadow: "0 4px 14px rgba(0,0,0,0.15)" }}
                       onMouseEnter={(e) => (e.currentTarget.style.background = "#f1f5f9")}
                       onMouseLeave={(e) => (e.currentTarget.style.background = "white")}
@@ -626,9 +626,9 @@ export default function HomeCalculator() {
             </p>
             <Link
               href="/worksheet"
-              className="btn-secondary w-full sm:w-fit group-hover:border-purple-500 group-hover:text-purple-600"
+              className="text-purple-600 font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all no-underline"
             >
-              Launch Wizard <ChevronRight size={15} />
+              Launch Wizard <ChevronRight size={16} />
             </Link>
           </div>
         </div>
