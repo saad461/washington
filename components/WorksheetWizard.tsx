@@ -189,7 +189,7 @@ const InputField = ({
 
   return (
     <div className="mb-6 last:mb-0 animate-in fade-in slide-in-from-bottom-2 duration-500">
-      <div className="flex items-start gap-2 mb-3">
+      <div className="flex items-start gap-2 mb-4">
         <span className="label-metadata bg-gray-100 px-1.5 py-0.5 rounded mt-0.5 shrink-0">
           {field.id}
         </span>
@@ -208,12 +208,12 @@ const InputField = ({
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-        <div className="space-y-1.5">
-          <p className="label-metadata ml-0.5">Parent 1</p>
+        <div className="space-y-2">
+          <p className="worksheet-column-label ml-0.5">Parent 1</p>
           {renderInput("p1")}
         </div>
-        <div className="space-y-1.5">
-          <p className="label-metadata ml-0.5">Parent 2</p>
+        <div className="space-y-2">
+          <p className="worksheet-column-label ml-0.5">Parent 2</p>
           {renderInput("p2")}
         </div>
       </div>
@@ -497,7 +497,7 @@ export default function WorksheetWizard() {
                   key={part}
                   onClick={() => goToStep(idx)}
                   // FIX: removed trailing 'hover:' broken class from both states
-                  className={`w-full group flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-sm font-medium ${
+                  className={`w-full group flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-sm font-medium pl-6 ${
                     currentStep === idx
                       ? "bg-gray-50 text-heading"
                       : "text-body hover:bg-gray-50 hover:text-heading"
@@ -519,7 +519,8 @@ export default function WorksheetWizard() {
 
             {/* Live support estimate widget */}
             <motion.div
-              className="mt-6 p-5 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl relative overflow-hidden shadow-md"
+              className="mt-6 p-5 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl relative overflow-hidden shadow-lg"
+              style={{ boxShadow: '0 4px 16px rgba(99,102,241,0.25)' }}
               layout
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />

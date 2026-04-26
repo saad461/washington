@@ -40,7 +40,7 @@ export default function BlogListingPage() {
             <div className="mb-24">
               <Link
                 href={`/blog/${featuredPost.slug}`}
-                className="group card-standard block p-8 md:p-12 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500"
+                className="group card-interactive block md:p-12"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   <div className="lg:col-span-8">

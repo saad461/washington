@@ -30,7 +30,7 @@ export default function GlossaryIndex() {
             <Link
               key={term.slug}
               href={`/glossary/${term.slug}`}
-              className="group card-standard flex flex-col p-8 hover:border-indigo-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="group card-interactive flex flex-col hover:border-indigo-500"
             >
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">

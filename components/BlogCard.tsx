@@ -25,7 +25,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
  </div>
 
  <div className="flex items-center gap-4 mb-4">
- <span className=" label-metadata ">
+ <span className="badge badge-indigo !h-[22px] !text-[11px]">
  {post.category}
  </span>
  <span className="w-1 h-1 bg-gray-300 rounded-full" />
@@ -34,13 +34,15 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
  </div>
  </div>
 
- <h3 className="font-semibold mb-4 group-hover: transition-colors leading-tight font-heading">
+ <h3 className="font-semibold mb-4 group-hover:text-indigo-600 transition-colors leading-tight font-heading">
  {post.title}
  </h3>
 
- <p className="text-sm font-medium leading-relaxed mb-8 flex-1 line-clamp-3">
+ <div className="flex-1">
+ <p className="text-sm font-medium leading-relaxed mb-8 line-clamp-3">
  {post.excerpt}
  </p>
+ </div>
 
  <div className="pt-6 border-t border-gray-100 flex items-center justify-between">
  <div className="flex items-center gap-2 label-metadata ">

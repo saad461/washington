@@ -29,9 +29,9 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
  <p className=" text-sm leading-relaxed mb-8">
  This calculator is calibrated to the official 2026 Washington State Child Support Schedule.
  </p>
- <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-800 rounded-full label-metadata text-emerald-400 border border-gray-700">
+ <div className="inline-flex items-center gap-2 px-2 py-1 bg-gray-800 rounded-[4px] label-metadata !text-emerald-400 border border-gray-700">
  <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
- Status: Live 2026
+ Status: LIVE 2026
  </div>
  </div>
 
@@ -60,13 +60,13 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
  href={link.url}
  target="_blank"
  rel="noopener noreferrer"
- className="group flex items-center justify-between p-4 bg-white rounded-2xl border border-gray-100 hover:border-indigo-400 transition-all hover:shadow-sm"
+ className="group flex items-center justify-between p-[10px_0] bg-white border-b border-gray-100 hover:border-indigo-400 transition-all"
  >
- <div className="flex items-center gap-4">
- <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center group-hover:bg-indigo-50 transition-colors">
- <ExternalLink size={14} className=" group-hover:" />
+ <div className="flex items-center gap-[10px]">
+ <div className="w-5 h-5 rounded-lg bg-gray-50 flex items-center justify-center group-hover:bg-indigo-50 transition-colors shrink-0">
+ <ExternalLink size={14} className=" group-hover:text-indigo-600" />
  </div>
- <span className="label-metadata group-hover: transition-colors">{link.label}</span>
+ <span className="label-metadata group-hover:text-indigo-600 transition-colors">{link.label}</span>
  </div>
  </a>
  ))}

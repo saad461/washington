@@ -18,7 +18,7 @@ export default function Footer() {
          * New: single column mobile → 2-col tablet → 4-col desktop.
          * Gap scaled down on mobile: gap-8 sm:gap-10 md:gap-12 lg:gap-16.
          */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-16 mb-12 md:mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-start gap-8 sm:gap-10 lg:gap-16 mb-12 md:mb-16">
 
           {/* ── Brand ── */}
           {/* FIX: was col-span-2 md:col-span-1 — full width on mobile now */}
@@ -48,7 +48,7 @@ export default function Footer() {
           {/* ── Calculators ── */}
           <div>
             {/* FIX: was text-[10px] — kept at minimum readable size */}
-            <h4 className="text-[10px] uppercase font-bold tracking-[0.18em] text-gray-500 mb-5">
+            <h4 className="label-metadata text-gray-500 mb-5">
               Calculators
             </h4>
             <ul className="space-y-3 text-sm text-gray-400 font-medium">
@@ -77,7 +77,7 @@ export default function Footer() {
 
           {/* ── Resources ── */}
           <div>
-            <h4 className="text-[10px] uppercase font-bold tracking-[0.18em] text-gray-500 mb-5">
+            <h4 className="label-metadata text-gray-500 mb-5">
               Resources
             </h4>
             <ul className="space-y-3 text-sm text-gray-400 font-medium">
@@ -116,7 +116,7 @@ export default function Footer() {
 
           {/* ── Legal ── */}
           <div>
-            <h4 className="text-[10px] uppercase font-bold tracking-[0.18em] text-gray-500 mb-5">
+            <h4 className="label-metadata text-gray-500 mb-5">
               Legal
             </h4>
             <ul className="space-y-3 text-sm text-gray-400 font-medium">

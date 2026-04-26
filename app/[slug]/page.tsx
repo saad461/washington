@@ -242,32 +242,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const Breadcrumbs = ({
   county,
   income,
-  childCount,
 }: {
   county: { name: string; slug: string } | null;
   income: number;
-  childCount: number;
 }) => (
   <nav
     aria-label="Breadcrumb"
     className="flex mb-8 label-metadata no-print flex-wrap gap-y-2"
   >
-    <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
-    <span className="mx-2 opacity-30">/</span>
-    <span className="opacity-80">Washington</span>
-    {county && (
-      <>
-        <span className="mx-2 opacity-30">/</span>
-        <Link
-          href={`/${county.slug}-income-5000-${childCount}-${childCount === 1 ? "child" : "children"}`}
-          className="hover:text-indigo-600 transition-colors"
-        >
-          {county.name}
-        </Link>
-      </>
-    )}
-    <span className="mx-2 opacity-30">/</span>
-    <span>${income.toLocaleString()} Calculation</span>
+    <Link href="/" className="hover:text-indigo-600 transition-colors shrink-0">Home</Link>
+    <span className="mx-2 opacity-30 shrink-0">/</span>
+    <div className="flex items-center min-w-0">
+      <span className="opacity-30 shrink-0 sm:hidden">...</span>
+      <span className="mx-2 opacity-30 shrink-0 sm:hidden">/</span>
+      <span className="opacity-80 truncate hidden sm:inline">Washington</span>
+      {county && <span className="mx-2 opacity-30 shrink-0 hidden sm:inline">/</span>}
+      <span className="truncate">${income.toLocaleString()} Calculation</span>
+    </div>
   </nav>
 );
 
@@ -353,7 +344,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
       <CalculatorSchema income={income} childCount={children} county={countyName} url={`https://wcssc.site/${slug}`} resultAmount={supportNum !== null ? supportNum : undefined} />
 
       <div className="container-wide section-default relative z-10">
-        <Breadcrumbs county={county} income={income} childCount={children} />
+        <Breadcrumbs county={county} income={income} />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
           <div className="lg:col-span-8">
@@ -366,7 +357,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
             </div>
 
             <div className="mb-16">
-              <div className="card-standard text-center">
+              <div className="card-standard text-center md:py-16">
                 <p className="label-metadata mb-8 text-gray-500">2026 Monthly Presumptive Payment</p>
                 <div className="mb-8">
                   <span className="text-5xl md:text-6xl font-bold tracking-tighter text-indigo-600">{formattedSupport}</span>

@@ -57,7 +57,7 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <div className="container-wide h-full flex items-center justify-between gap-4">
+        <div className="container-wide px-6 h-full flex items-center justify-between">
 
           {/* ── Logo ── */}
           <Link
@@ -97,7 +97,7 @@ export default function Navbar() {
           </nav>
 
           {/* ── Actions ── */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-4 sm:gap-3 shrink-0">
             <button
               onClick={handlePrint}
               aria-label="Print this page"
