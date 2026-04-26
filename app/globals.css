@@ -25,9 +25,8 @@
   --color-primary-hover: #4F46E5;
 
   /* Spacing scale — use these for consistent rhythm */
-  --space-section-sm: 2rem;      /* 32px  — mobile sections */
-  --space-section-md: 3rem;      /* 48px  — tablet sections */
-  --space-section-lg: 4rem;      /* 64px  — desktop sections */
+  --space-section-sm: 3rem;      /* 48px  — mobile sections */
+  --space-section-lg: 5rem;      /* 80px  — desktop sections */
 
   /* Container widths */
   --container-max: 80rem;        /* 1280px — wide layouts */
@@ -173,7 +172,7 @@
 
   /* Labels / metadata — "all-caps micro-text" SaaS pattern */
   .label-metadata {
-    @apply text-[10px] sm:text-[11px] uppercase font-bold text-muted tracking-[0.12em];
+    @apply text-[11px] uppercase font-bold text-indigo-500 tracking-[0.1em];
   }
 
   /* Gradient heading — use sparingly on hero text only */
@@ -195,15 +194,15 @@
 
   /* ══ LAYOUT ══════════════════════════════════*/
 
-  /* Section wrapper — 3-step spacing scale
-     Strict 8px scale: 32px (mobile) -> 48px (tablet) -> 64px (desktop) */
+  /* Section wrapper — 2-step spacing scale
+     Strict 8px scale: 48px (mobile) -> 80px (desktop) */
   .section-default {
-    @apply py-8 md:py-12 lg:py-16;
+    @apply py-12 lg:py-20;
   }
 
   /* Alternate section background */
   .section-alt {
-    @apply py-8 md:py-12 lg:py-16 bg-[--color-section-alt];
+    @apply py-12 lg:py-20 bg-[--color-section-alt];
   }
 
   /* Wide container — for dashboards, full layouts
@@ -227,21 +226,21 @@
   /* ══ CARDS ════════════════════════════════════*/
 
   /* Standard card — responsive radius + padding
-     Strict 8px scale: p-4 (16px), sm:p-6 (24px), md:p-8 (32px) */
+     Strict 8px scale: p-6 (24px) min, sm:p-6 (24px), md:p-8 (32px) */
   .card-standard {
     background: var(--color-card-bg);
-    border: 1px solid rgb(226 232 240 / 0.7);
+    border: 1px solid #E5E7EB;
     box-shadow: var(--shadow-card);
-    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-4 sm:p-6 md:p-8;
+    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-6 md:p-8;
   }
 
   /* Interactive card — lifts on hover */
   .card-interactive {
     background: var(--color-card-bg);
-    border: 1px solid rgb(226 232 240 / 0.7);
+    border: 1px solid #E5E7EB;
     box-shadow: var(--shadow-card);
     transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.3s ease;
-    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-4 sm:p-6 md:p-8 cursor-pointer;
+    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-6 md:p-8 cursor-pointer;
   }
 
   .card-interactive:hover {
@@ -261,13 +260,34 @@
 
   /* ══ BUTTONS ══════════════════════════════════*/
 
+  /* Button tiers - Defined using standard CSS to avoid @apply recursion issues in v4 */
+  .btn-sm {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+  .btn-md {
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .btn-lg {
+    height: 48px;
+    padding: 0 28px;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+
+  /* Specific height variants requested */
+  .btn-h-36 { height: 36px; padding: 0 16px; font-size: 13px; border-radius: 8px; }
+  .btn-h-44 { height: 44px; padding: 0 24px; font-size: 14px; border-radius: 8px; }
+
   /* Primary CTA button
      Strict 8px scale: h-11 (44px mobile) -> h-12 (48px desktop).
      Padding: px-4 (16px) -> px-6 (24px). */
   .btn-primary {
-    height: 44px;
-    box-shadow: var(--shadow-brand);
-    transition: box-shadow 0.25s ease, transform 0.2s ease, background-color 0.2s ease;
     @apply
       px-4 sm:px-6
       rounded-xl sm:rounded-2xl
@@ -275,10 +295,11 @@
       bg-indigo-600
       flex items-center justify-center gap-2
       whitespace-nowrap select-none;
-  }
-
-  @media (min-width: 640px) {
-    .btn-primary { height: 48px; }
+    /* Use selector grouping or individual properties instead of @apply for custom classes */
+    height: 40px;
+    @apply lg:h-12;
+    box-shadow: var(--shadow-brand);
+    transition: box-shadow 0.25s ease, transform 0.2s ease, background-color 0.2s ease;
   }
 
   .btn-primary:hover {
@@ -293,8 +314,6 @@
 
   /* Secondary / outline button — matches primary sizing */
   .btn-secondary {
-    height: 44px;
-    transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
     @apply
       px-4 sm:px-6
       rounded-xl sm:rounded-2xl
@@ -303,10 +322,9 @@
       bg-white
       flex items-center justify-center gap-2
       whitespace-nowrap select-none;
-  }
-
-  @media (min-width: 640px) {
-    .btn-secondary { height: 48px; }
+    height: 40px;
+    @apply lg:h-12;
+    transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
   }
 
   .btn-secondary:hover {
@@ -316,27 +334,19 @@
 
   /* Ghost button — text-only, minimal chrome */
   .btn-ghost {
-    height: 44px;
-    transition: color 0.2s ease, background 0.2s ease;
     @apply
       px-4
       rounded-xl
       font-semibold text-sm sm:text-base text-body
       flex items-center justify-center gap-2
       whitespace-nowrap select-none;
-  }
-
-  @media (min-width: 640px) {
-    .btn-ghost { height: 48px; }
+    height: 40px;
+    @apply lg:h-12;
+    transition: color 0.2s ease, background 0.2s ease;
   }
 
   .btn-ghost:hover {
     @apply text-indigo-700 bg-indigo-50;
-  }
-
-  /* Small button variant — for inline actions, table rows */
-  .btn-sm {
-    @apply h-9 px-4 rounded-lg font-semibold text-sm flex items-center justify-center gap-1.5 whitespace-nowrap;
   }
 
   /* Icon-only button */
@@ -350,8 +360,6 @@
   /* Standard input — matches button sizing
      Strict 8px scale: h-11 (44px mobile) -> h-12 (48px desktop). */
   .input-standard {
-    height: 44px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
     @apply
       w-full px-4 sm:px-6
       rounded-xl sm:rounded-2xl
@@ -359,11 +367,9 @@
       text-sm sm:text-base text-heading font-medium
       bg-white
       placeholder:text-gray-400
-      focus:outline-none focus:border-indigo-500;
-  }
-
-  @media (min-width: 640px) {
-    .input-standard { height: 48px; }
+      focus:outline-none focus:border-indigo-500
+      min-h-[48px];
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
   .input-standard:focus {
@@ -390,6 +396,15 @@
   /* Input label */
   .input-label {
     @apply block text-sm font-semibold text-heading mb-2;
+  }
+
+  /* Worksheet specific column labels */
+  .worksheet-column-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #6B7280;
+    text-transform: uppercase;
   }
 
   /* Hint / helper text below input */
@@ -445,7 +460,7 @@
     @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold;
   }
 
-  .badge-indigo  { @apply bg-indigo-50 text-indigo-700 ring-1 ring-indigo-200/60; }
+  .badge-indigo  { @apply bg-[#EEF2FF] text-[#4338CA] ring-1 ring-indigo-200/60; }
   .badge-green   { @apply bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200/60; }
   .badge-amber   { @apply bg-amber-50 text-amber-700 ring-1 ring-amber-200/60; }
   .badge-red     { @apply bg-red-50 text-red-600 ring-1 ring-red-200/60; }

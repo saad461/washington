@@ -88,7 +88,7 @@ export default function HomeCalculator() {
 
         {/* ── LEFT: Input panel ──────────────────────────────────────── */}
         <div className="lg:col-span-7">
-          <div className="card-standard shadow-xl" style={{ borderColor: "rgb(238 242 255 / 0.8)" }}>
+          <div className="card-standard shadow-xl !p-6 md:!p-10" style={{ borderColor: "rgb(238 242 255 / 0.8)" }}>
 
             <div className="flex items-center gap-4 mb-8">
               <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center text-white shadow-md shadow-indigo-200 shrink-0">
@@ -152,7 +152,7 @@ export default function HomeCalculator() {
                       step="1"
                       inputMode="decimal"
                       autoComplete="off"
-                      className="input-standard pl-8 w-full"
+                      className="input-standard pl-8 w-full !h-12"
                     />
                   </div>
                   <p className="text-[11px] text-muted mt-1.5">After taxes &amp; mandatory deductions</p>
@@ -177,7 +177,7 @@ export default function HomeCalculator() {
                       step="1"
                       inputMode="decimal"
                       autoComplete="off"
-                      className="input-standard pl-8 w-full"
+                      className="input-standard pl-8 w-full !h-12"
                     />
                   </div>
                   <p className="text-[11px] text-muted mt-1.5">After taxes &amp; mandatory deductions</p>
@@ -428,7 +428,7 @@ export default function HomeCalculator() {
 
                     <Link
                       href="/worksheet"
-                      className="btn-primary w-full sm:w-fit mx-auto group"
+                      className="btn-primary w-auto sm:w-fit mx-auto group"
                       style={{ background: "white", color: "var(--color-heading)", boxShadow: "0 4px 14px rgba(0,0,0,0.15)" }}
                       onMouseEnter={(e) => (e.currentTarget.style.background = "#f1f5f9")}
                       onMouseLeave={(e) => (e.currentTarget.style.background = "white")}
@@ -626,9 +626,9 @@ export default function HomeCalculator() {
             </p>
             <Link
               href="/worksheet"
-              className="btn-secondary w-full sm:w-fit group-hover:border-purple-500 group-hover:text-purple-600"
+              className="text-purple-600 font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all no-underline"
             >
-              Launch Wizard <ChevronRight size={15} />
+              Launch Wizard <ChevronRight size={16} />
             </Link>
           </div>
         </div>

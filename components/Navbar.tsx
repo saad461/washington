@@ -57,7 +57,7 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <div className="container-wide h-full flex items-center justify-between gap-4">
+        <div className="container-wide px-6 h-full flex items-center justify-between">
 
           {/* ── Logo ── */}
           <Link
@@ -97,7 +97,7 @@ export default function Navbar() {
           </nav>
 
           {/* ── Actions ── */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-4 sm:gap-3 shrink-0">
             <button
               onClick={handlePrint}
               aria-label="Print this page"
@@ -107,7 +107,7 @@ export default function Navbar() {
               <span className="hidden md:inline">Print</span>
             </button>
 
-          <Link href="/worksheet" className="hidden sm:flex btn-primary !h-10 !px-4 !text-xs">
+          <Link href="/worksheet" className="hidden sm:flex btn-primary !h-9 !px-4 !text-[13px] !rounded-lg !font-semibold">
               <span className="hidden md:inline">Launch</span> Wizard
               <ChevronRight className="w-4 h-4" />
             </Link>

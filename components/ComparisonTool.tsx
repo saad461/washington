@@ -89,7 +89,7 @@ export default function ComparisonTool() {
                     <button
                       key={num}
                       onClick={() => setChildren(num)}
-                      className={`flex-1 h-12 rounded-xl text-sm font-bold border-2 transition-all ${
+                      className={`flex-1 h-10 rounded-xl text-sm font-bold border-2 transition-all ${
                         children === num
                           ? 'border-indigo-600 bg-indigo-600 text-white shadow-lg shadow-indigo-100'
                           : 'border-gray-100 bg-white hover:border-indigo-200 text-gray-600'
@@ -102,15 +102,15 @@ export default function ComparisonTool() {
               </div>
             </div>
 
-            <div className={`p-6 rounded-2xl border text-center font-bold text-sm tracking-widest uppercase ${statusColor}`}>
+            <div className={`p-6 rounded-2xl border text-center font-bold tracking-widest uppercase text-[13px] tracking-[0.05em] text-[#374151] ${statusColor}`}>
               {statusText}
             </div>
           </div>
         </div>
 
         <div className="lg:col-span-7 space-y-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gray-50 border border-gray-100 rounded-3xl p-8 shadow-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+            <div className="bg-gray-50 border border-gray-100 rounded-3xl p-8 md:px-6 md:py-8 shadow-sm flex flex-col justify-center min-h-[160px]">
               <p className="label-metadata mb-6 text-gray-400">Old 2024 Presumptive</p>
               <p className="text-4xl font-bold text-gray-900 mb-2">
                 {actual2024 !== null ? curFormatter.format(actual2024) : 'Court Discretion'}
@@ -118,7 +118,7 @@ export default function ComparisonTool() {
               <p className="label-metadata text-gray-400">Legacy Estimate</p>
             </div>
 
-            <div className="bg-gray-900 border border-gray-800 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl">
+            <div className="bg-gray-900 border border-gray-800 rounded-3xl p-8 md:px-6 md:py-8 text-white relative overflow-hidden shadow-xl flex flex-col justify-center min-h-[160px]">
               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl -translate-y-16 translate-x-16" />
               <p className="label-metadata mb-6 text-indigo-400">New 2026 Presumptive</p>
               <p className="text-4xl font-bold text-white mb-2">
@@ -170,7 +170,7 @@ export default function ComparisonTool() {
             </div>
 
             <div className="mt-12 pt-12 border-t border-gray-100">
-              <Link href="/worksheet" className="btn-primary !bg-gray-900 w-full md:w-fit px-8 h-14 flex items-center justify-center gap-3">
+              <Link href="/worksheet" className="btn-primary !bg-gray-900 w-auto px-8 btn-h-44 flex items-center justify-center gap-3">
                 Use Full 2026 Worksheet Pro <ChevronRight size={18} />
               </Link>
             </div>

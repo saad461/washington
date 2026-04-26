@@ -82,7 +82,7 @@ export default function Home() {
       </div>
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="pt-8 md:pt-12 lg:pt-16 w-full relative">
+      <section className="pt-12 lg:pt-20 w-full relative">
         <div className="container-wide">
           <div className="text-center mb-8 md:mb-16 space-y-6">
             <h1 className="text-balance">
@@ -109,8 +109,8 @@ export default function Home() {
               { label: "Table Limit",  value: "$50,000"          },
               { label: "Jurisdiction", value: "Washington State" },
             ].map((fig, i) => (
-              <div key={i} className="card-standard text-center">
-                <div className="label-metadata mb-2">{fig.label}</div>
+              <div key={i} className="card-standard text-center flex flex-col items-center justify-center h-full">
+                <div className="label-metadata mb-2 text-indigo-500">{fig.label}</div>
                 <div className="text-base sm:text-lg md:text-xl font-bold text-heading leading-snug">
                   {fig.value}
                 </div>
@@ -131,7 +131,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="table-container shadow-xl">
+            <div className="table-container shadow-xl border border-gray-200">
               <table className="w-full text-left border-collapse">
                 <caption className="sr-only">
                   Benchmark Child Support Estimates for Washington State 2026
@@ -163,7 +163,7 @@ export default function Home() {
             </p>
 
             <div className="mt-12 flex justify-center">
-              <Link href="/worksheet" className="btn-primary w-full sm:w-fit px-8 h-14">
+              <Link href="/worksheet" className="btn-primary btn-h-44 w-auto !px-8 !rounded-full !text-sm !font-semibold">
                 Calculate Exact Support
                 <ChevronRight className="w-5 h-5" />
               </Link>
@@ -230,7 +230,7 @@ export default function Home() {
       </section>
 
       {/* ── EDUCATIONAL CONTENT ──────────────────────────────────────────── */}
-      <section className="section-default w-full relative">
+      <section className="section-default w-full relative border-b border-gray-100">
         <div className="container-wide">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-center mb-12 md:mb-16">
@@ -344,7 +344,7 @@ export default function Home() {
             </div>
             <Link
               href="/blog"
-              className="flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors shrink-0 no-underline px-6 h-12 rounded-xl bg-gray-50 border border-gray-100"
+              className="flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors shrink-0 no-underline px-6 btn-h-44 rounded-xl bg-gray-50 border border-gray-100"
             >
               View all articles <ChevronRight size={16} />
             </Link>
@@ -368,13 +368,20 @@ export default function Home() {
                 cat:   "Local Rules",
               },
             ].map((p) => (
-              <Link key={p.href} href={p.href} className="card-interactive group flex flex-col p-8 md:p-10">
-                <span className="label-metadata text-indigo-600 mb-4">{p.cat}</span>
-                <h3 className="text-base sm:text-lg font-bold text-heading group-hover:text-indigo-700 transition-colors leading-snug flex-1">
-                  {p.label}
-                </h3>
-                <div className="mt-8 flex items-center gap-2 text-sm font-bold text-muted group-hover:text-indigo-600 transition-colors">
-                  Read Article <ChevronRight size={14} />
+              <Link key={p.href} href={p.href} className="card-interactive group flex flex-col">
+                <span className="badge badge-indigo !h-[22px] !text-[11px] mb-4 w-fit">{p.cat}</span>
+                <div className="flex-1">
+                  <h3 className="text-base sm:text-lg font-bold text-heading group-hover:text-indigo-700 transition-colors leading-snug">
+                    {p.label}
+                  </h3>
+                </div>
+                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
+                  <div className="text-sm font-bold text-muted group-hover:text-indigo-600 transition-colors">
+                    Read Article
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all transform group-hover:translate-x-1 border border-gray-100">
+                    <ChevronRight size={14} />
+                  </div>
                 </div>
               </Link>
             ))}
