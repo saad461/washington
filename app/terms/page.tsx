@@ -10,27 +10,27 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main className="flex-1 bg-page">
-      <div className="container-reading section-default">
+    <main className="flex-1">
+      <div className="container-reading section">
 
         {/* Back Link */}
-        <Link href="/" className="btn-ghost !h-10 !px-0 w-fit mb-8 md:mb-12">
+        <Link href="/" className="btn btn-ghost btn-sm mb-8 md:mb-12">
           <ArrowLeft size={14} />
           Back to Calculator
         </Link>
 
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8 md:mb-12">
-          <div className="p-4 bg-indigo-600 rounded-2xl shadow-sm shadow-indigo-600/20">
+          <div className="p-4 bg-brand rounded-2xl shadow-sm">
             <FileText className="w-8 h-8 text-white" />
           </div>
           <div>
-            <p className="label-metadata mb-1">Legal Agreement</p>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Terms of Service</h1>
+            <p className="text-overline mb-1">Legal Agreement</p>
+            <h1 className="text-h1">Terms of Service</h1>
           </div>
         </div>
 
-        <p className="mb-10 md:mb-14 text-lg leading-relaxed">
+        <p className="text-body-lg mb-10 md:mb-14">
           By accessing or using the Washington Child Support Schedule Center (WCSSC) website, you agree to be bound by the following Terms of Service. If you do not agree, please do not use our services.
         </p>
 
@@ -78,26 +78,26 @@ export default function TermsPage() {
               body: "If you have questions about these Terms, please contact us at: support@wcssc.site."
             }
           ].map((section, i) => (
-            <section key={i} className="card-standard">
+            <section key={i} className="card">
               <div className="flex items-center gap-4 mb-4">
-                <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0" />
-                <h2 className="text-xl font-semibold">{section.title}</h2>
+                <CheckCircle2 className="w-5 h-5 text-brand flex-shrink-0" />
+                <h2 className="text-h3">{section.title}</h2>
               </div>
               <div className="md:pl-9">
-                <p className="leading-relaxed text-gray-700">{section.body}</p>
+                <p className="text-body">{section.body}</p>
               </div>
             </section>
           ))}
         </div>
 
         {/* Footer info */}
-        <div className="mt-16 pt-12 border-t border-gray-100 text-center">
-          <p className="label-metadata mb-6 text-gray-400">Effective Date: January 1, 2026</p>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-4 label-metadata">
-            <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
-            <Link href="/disclaimer" className="hover:text-indigo-600 transition-colors">Legal Disclaimer</Link>
-            <Link href="/about" className="hover:text-indigo-600 transition-colors">About Us</Link>
-            <Link href="/" className="hover:text-indigo-600 transition-colors">Calculator</Link>
+        <div className="mt-16 pt-12 border-t border-border-default text-center">
+          <p className="text-overline mb-6 text-text-muted">Effective Date: January 1, 2026</p>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-4 text-overline">
+            <Link href="/privacy" className="hover:text-brand transition-colors">Privacy Policy</Link>
+            <Link href="/disclaimer" className="hover:text-brand transition-colors">Legal Disclaimer</Link>
+            <Link href="/about" className="hover:text-brand transition-colors">About Us</Link>
+            <Link href="/" className="hover:text-brand transition-colors">Calculator</Link>
           </div>
         </div>
       </div>

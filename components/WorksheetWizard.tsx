@@ -32,7 +32,6 @@ const PARTS = Object.keys(worksheetSchema);
 const curFormatter = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" });
 const perFormatter = new Intl.NumberFormat("en-US", { style: "percent", minimumFractionDigits: 1 });
 
-
 /* ─────────────────────────────────────────────
    PROGRESS BAR
 ───────────────────────────────────────────── */
@@ -40,26 +39,24 @@ const ProgressBar = ({ currentStep }: { currentStep: number }) => {
   const totalSteps = Object.keys(worksheetSchema).length;
   const progress = ((currentStep + 1) / totalSteps) * 100;
   return (
-    <div className="w-full mb-6 md:mb-8">
-      <div className="flex justify-between items-center mb-2.5 px-0.5">
-        <span className="label-metadata">Step {currentStep + 1} of {totalSteps}</span>
-        <span className="label-metadata">{Math.round(progress)}% Complete</span>
+    <div className="w-full mb-8">
+      <div className="flex justify-between items-center mb-2.5">
+        <span className="text-overline">Step {currentStep + 1} of {totalSteps}</span>
+        <span className="text-overline">{Math.round(progress)}%</span>
       </div>
-      <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+      <div className="h-2 w-full bg-surface-subtle rounded-full overflow-hidden">
         <motion.div
-          className="h-full bg-indigo-600 rounded-full"
+          className="h-full bg-brand"
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
         />
       </div>
     </div>
   );
 };
 
-
 /* ─────────────────────────────────────────────
-   MOBILE STEP PILLS
+   MOBILE STEP NAV
 ───────────────────────────────────────────── */
 const MobileStepNav = ({
   currentStep, onStepClick,
@@ -67,28 +64,17 @@ const MobileStepNav = ({
   currentStep: number; onStepClick: (idx: number) => void;
 }) => {
   const scrollRef  = useRef<HTMLDivElement>(null);
-  // FIX: added mounted ref so auto-scroll doesn't fire on first render
-  const mountedRef = useRef(false);
-
   useEffect(() => {
-    if (!mountedRef.current) { mountedRef.current = true; return; }
     if (!scrollRef.current) return;
     const active = scrollRef.current.querySelector('[data-active="true"]') as HTMLElement;
     if (active) active.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   }, [currentStep]);
 
   return (
-    /*
-     * FIX: was sticky top-[80px] — hardcoded and mismatched nav height.
-     * Nav is h-20 unscrolled / h-16 scrolled. Using top-20 (80px) always
-     * matches the tallest state; on scroll the pill bar lifts with the nav.
-     */
-    <div className="lg:hidden no-print w-full bg-white border-b border-gray-100 shadow-sm sticky top-20 z-30">
+    <div className="lg:hidden no-print w-full bg-white border-b border-border-default sticky top-[60px] z-30">
       <div
         ref={scrollRef}
-        // FIX: removed min-h-[48px] from container — pills set their own height
-        className="flex gap-2 overflow-x-auto px-4 py-3 scrollbar-none"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className="flex gap-2 overflow-x-auto px-4 py-3 scrollbar-hide"
       >
         {PARTS.map((part, idx) => {
           const isActive = idx === currentStep;
@@ -99,22 +85,15 @@ const MobileStepNav = ({
               key={idx}
               data-active={isActive ? "true" : "false"}
               onClick={() => onStepClick(idx)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full whitespace-nowrap transition-all shrink-0 border text-[10px] font-bold uppercase tracking-[0.08em] ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full whitespace-nowrap transition-all shrink-0 border text-[10px] font-bold uppercase tracking-widest ${
                 isActive
-                  ? "bg-indigo-600 text-white border-indigo-600 shadow-sm shadow-indigo-200"
+                  ? "bg-brand text-white border-brand"
                   : isDone
-                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-                  // FIX: removed trailing 'hover:' broken class
-                  : "bg-white border-gray-200 text-gray-500 hover:border-gray-300"
+                  ? "bg-success-light text-success border-success"
+                  : "bg-white border-border-default text-text-muted"
               }`}
             >
-              {/* FIX: was label-metadata (9px inside 16px circle = unreadable). Now text-[10px] */}
-              <span className={`flex items-center justify-center w-4 h-4 rounded-full text-[10px] font-bold ${
-                isActive ? "bg-white/20" : isDone ? "bg-emerald-200 text-emerald-800" : "bg-gray-100 text-gray-500"
-              }`}>
-                {isDone ? "✓" : idx + 1}
-              </span>
-              <span className="max-w-[80px] truncate">{label}</span>
+              {label}
             </button>
           );
         })}
@@ -122,7 +101,6 @@ const MobileStepNav = ({
     </div>
   );
 };
-
 
 /* ─────────────────────────────────────────────
    INPUT FIELD
@@ -134,93 +112,62 @@ const InputField = ({
   values: ParentValue;
   onChange: (parent: "p1" | "p2", val: FieldValue) => void;
 }) => {
-  const isCurrency   = field.type === "currency";
-  const isPercentage = field.type === "percentage";
-  const isBoolean    = field.type === "boolean";
-
   const renderInput = (parent: "p1" | "p2") => {
     const val = values[parent];
+    const inputId = `field-${field.id}-${parent}`;
 
-    if (isBoolean) {
+    if (field.type === "boolean") {
       return (
         <button
+          id={inputId}
           type="button"
           onClick={() => onChange(parent, !val)}
-          // h-12 (48px) on boolean toggle is intentional and correct
-          className={`flex items-center justify-center w-full h-12 rounded-xl border transition-all ${
-            val
-              ? "bg-indigo-50 border-indigo-500 text-indigo-700 shadow-sm"
-              : "bg-white border-gray-200 hover:border-gray-300"
-          }`}
+          className={`btn btn-md w-full ${val ? "btn-primary" : "btn-secondary"}`}
         >
-          {val
-            ? <CheckCircle2 className="w-4 h-4 mr-2 shrink-0" />
-            : <Circle       className="w-4 h-4 mr-2 shrink-0" />
-          }
-          <span className="text-[11px] font-bold uppercase tracking-[0.1em]">
-            {val ? "Yes" : "No"}
-          </span>
+          {val ? "Yes" : "No"}
         </button>
       );
     }
 
     return (
-      <div className="relative group">
-        {isCurrency && (
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 font-medium text-heading/40 pointer-events-none select-none">
-            $
-          </span>
+      <div className="relative">
+        {field.type === "currency" && (
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted/50 font-bold">$</span>
         )}
         <input
-          type={field.type === "number" || isCurrency || isPercentage ? "number" : "text"}
+          id={inputId}
+          type={field.type === "number" || field.type === "currency" || field.type === "percentage" ? "number" : "text"}
           value={val as string}
           onChange={(e) => onChange(parent, e.target.value)}
           placeholder="0.00"
-          className={`input-standard w-full ${isCurrency ? "pl-8" : ""} ${isPercentage ? "pr-8" : ""}`}
+          className={`input ${field.type === "currency" ? "pl-8" : ""}`}
         />
-        {isPercentage && (
-          <span className="absolute right-4 top-1/2 -translate-y-1/2 font-medium text-heading/40 pointer-events-none select-none">
-            %
-          </span>
-        )}
       </div>
     );
   };
 
   return (
-    <div className="mb-6 last:mb-0 animate-in fade-in slide-in-from-bottom-2 duration-500">
-      <div className="flex items-start gap-2 mb-4">
-        <span className="label-metadata bg-gray-100 px-1.5 py-0.5 rounded mt-0.5 shrink-0">
-          {field.id}
-        </span>
-        <label className="text-sm font-semibold text-heading leading-snug">
-          {field.label}
-        </label>
-        {field.description && (
-          <div className="group relative shrink-0">
-            <Info className="w-3.5 h-3.5 text-muted cursor-help mt-0.5" />
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-3 bg-gray-900 text-white text-[11px] leading-relaxed rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-lg">
-              {field.description}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-gray-900" />
-            </div>
-          </div>
-        )}
+    <div className="wizard-row">
+      <div className="wizard-row-label">
+        <span className="wizard-row-number">{field.id}</span>
+        <div>
+           <span className="wizard-row-name">{field.label}</span>
+           {field.description && <p className="text-xs text-text-muted mt-1">{field.description}</p>}
+        </div>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-        <div className="space-y-2">
-          <p className="worksheet-column-label ml-0.5">Parent 1</p>
+      <div className="input-row-2">
+        <div className="field">
+          <label htmlFor={`field-${field.id}-p1`}>Parent 1</label>
           {renderInput("p1")}
         </div>
-        <div className="space-y-2">
-          <p className="worksheet-column-label ml-0.5">Parent 2</p>
+        <div className="field">
+          <label htmlFor={`field-${field.id}-p2`}>Parent 2</label>
           {renderInput("p2")}
         </div>
       </div>
     </div>
   );
 };
-
 
 /* ─────────────────────────────────────────────
    MAIN COMPONENT
@@ -247,25 +194,6 @@ export default function WorksheetWizard() {
     "16d":     { p1: 0, p2: 0 },
     "17":      { p1: calculation.obligationP1,  p2: calculation.obligationP2  },
   }), [calculation]);
-
-  if (!currentFields || !Array.isArray(currentFields)) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FDFDFE] px-4">
-        <div className="text-center p-8 sm:p-12 bg-white rounded-2xl border border-gray-100 shadow-sm max-w-md w-full">
-          <Calculator className="w-10 h-10 mx-auto mb-6 text-muted" />
-          <h2 className="font-semibold text-heading mb-3">Step Not Found</h2>
-          <p className="text-muted text-sm mb-8">The requested worksheet step could not be loaded.</p>
-          <button
-            onClick={() => setCurrentStep(0)}
-            // FIX: hover:bg-gray-100 on dark bg was causing white flash. Now hover:bg-gray-800.
-            className="btn-primary w-full"
-          >
-            Back to Start
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   const handleInputChange = (fieldId: string, parent: "p1" | "p2", value: FieldValue) => {
     const calculatedIds = ["1g","2j","3","4","5","6","7","9","10c","10d","11e","12","13","14","15","16d","17"];
@@ -296,396 +224,186 @@ export default function WorksheetWizard() {
   const handleDownloadPDF = async () => {
     const element  = document.getElementById("pdf-summary-content");
     if (!element) return;
-    const printBtn = document.getElementById("pdf-download-btn");
-    const editBtn  = document.getElementById("pdf-edit-btn");
-    if (printBtn) printBtn.style.display = "none";
-    if (editBtn)  editBtn.style.display  = "none";
     try {
-      const canvas  = await html2canvas(element, { scale: 2, useCORS: true });
+      const canvas  = await html2canvas(element, { scale: 2 });
       const imgData = canvas.toDataURL("image/png");
       const pdf     = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
       const w       = pdf.internal.pageSize.getWidth();
       pdf.addImage(imgData, "PNG", 0, 0, w, (canvas.height * w) / canvas.width);
       pdf.save(`WCSSC_Worksheet_${new Date().toISOString().split("T")[0]}.pdf`);
     } catch (err) {
-      console.error("PDF generation failed", err);
-      alert("Could not generate PDF. Try printing the page directly.");
-    } finally {
-      if (printBtn) printBtn.style.display = "flex";
-      if (editBtn)  editBtn.style.display  = "flex";
+      console.error(err);
     }
   };
 
-
-  /* ── SUMMARY VIEW ────────────────────────────────────────────────── */
-  const renderSummaryContent = () => (
-    <motion.div
-      id="pdf-summary-content"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      // FIX: was p-6 sm:p-6 md:p-12 (sm and default identical). Now 3-step.
-      className="space-y-8 md:space-y-12 pb-8 md:pb-16 bg-white p-4 sm:p-8 rounded-xl"
-    >
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 border-b border-gray-100 pb-8">
-        <div>
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-            {/* h1 with no classes — global h1 styles apply correctly here */}
-            <h1>Worksheet Summary</h1>
-            <span className="label-metadata text-muted sm:ml-2">WCSSC</span>
-          </div>
-          <p className="text-sm sm:text-base text-body">
-            Official results based on the 2026 Washington State Child Support Schedule.
-          </p>
-          <p className="label-metadata text-muted mt-3">
-            Date of Calculation: {new Date().toLocaleDateString()}
-          </p>
-        </div>
-        <button
-          id="pdf-edit-btn"
-          onClick={resetWizard}
-          className="btn-secondary btn-h-36 px-4 shrink-0"
-        >
-          <Calculator className="w-4 h-4" />
-          Edit Data
-        </button>
-      </div>
-
-      {/* Result Cards
-          FIX: was rounded-2xl p-6 hardcoded — inconsistent with site.
-          Now: dark card uses explicit bg-heading; light cards use card-standard.
-          FIX: h3 inside cards was rendering at global h3 (xl/2xl) — too large.
-          Now using explicit text sizes for the currency values inside cards. */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
-        <div className="bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-800 rounded-xl sm:rounded-2xl p-5 sm:p-6 text-white relative overflow-hidden shadow-lg">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-          <div className="relative z-10">
-            <p className="label-metadata text-white/70 mb-2">Total Combined Net</p>
-            <p className="text-xl sm:text-2xl font-bold font-heading tabular-nums">
-              {curFormatter.format(calculation.combinedIncome)}
-            </p>
-            <p className="label-metadata text-white/50 mt-1">Combined Monthly</p>
-          </div>
-        </div>
-        <div className="card-standard">
-          <p className="label-metadata text-muted mb-2">Parent 1 Transfer</p>
-          <p className="text-xl sm:text-2xl font-bold text-heading font-heading tabular-nums">
-            {curFormatter.format(derivedData["17"]?.p1 || 0)}
-          </p>
-          <p className="label-metadata text-muted mt-1">Presumptive Payment</p>
-        </div>
-        <div className="card-standard">
-          <p className="label-metadata text-muted mb-2">Parent 2 Transfer</p>
-          <p className="text-xl sm:text-2xl font-bold text-heading font-heading tabular-nums">
-            {curFormatter.format(derivedData["17"]?.p2 || 0)}
-          </p>
-          <p className="label-metadata text-muted mt-1">Presumptive Payment</p>
-        </div>
-      </div>
-
-      {/* Breakdown Table
-          FIX: was px-5 md:px-8 hardcoded — now uses .table-header/.table-cell.
-          FIX: min-w-[400px] forces scroll on phones <400px — now min-w-[300px]. */}
-      <div className="table-container shadow-sm">
-        <table className="w-full text-left border-collapse min-w-[300px]">
-          <caption className="sr-only">Official Worksheet Data Breakdown</caption>
-          <thead>
-            <tr className="border-b border-gray-100">
-              <th className="table-header">Part / Field</th>
-              <th className="table-header">P1</th>
-              <th className="table-header">P2</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-50">
-            {[
-              { label: "Total Gross Income (1g)",   id: "1g"       },
-              { label: "Total Deductions (2j)",      id: "2j"       },
-              { label: "Monthly Net Income (3)",     id: "3",  highlight: true },
-              { label: "Proportional Share (6)",     id: "6",  type: "per"     },
-              { label: "Basic Support (Table)",      id: "base", value: calculation.baseSupport },
-              { label: "Adjustment Reason",          id: "8_reason", isReason: true },
-              { label: "Final Basic Support (9)",    id: "9",  highlight: true },
-              { label: "Extra Expenses (14)",        id: "14"       },
-              { label: "Total Credits (16d)",        id: "16d"      },
-              { label: "Presumptive Transfer (17)",  id: "17", highlight: true, bold: true },
-            ].map((row) => (
-              <tr
-                key={row.id}
-                className={`${row.highlight ? "bg-indigo-50/40" : ""} hover:bg-gray-50/60 transition-colors`}
-              >
-                <td className={`table-cell ${row.bold ? "font-bold text-heading" : ""}`}>
-                  {row.label}
-                </td>
-                {row.isReason ? (
-                  <td colSpan={2} className="table-cell label-metadata italic text-muted">
-                    {(derivedData[row.id] as unknown as { reason?: string })?.reason}
-                  </td>
-                ) : row.value !== undefined ? (
-                  <td colSpan={2} className={`table-cell tabular-nums ${row.bold ? "font-bold text-heading" : ""}`}>
-                    {curFormatter.format(row.value)}
-                  </td>
-                ) : (
-                  <>
-                    <td className={`table-cell tabular-nums ${row.bold ? "font-bold text-indigo-600" : ""}`}>
-                      {row.type === "per"
-                        ? perFormatter.format(derivedData[row.id]?.p1 || 0)
-                        : curFormatter.format(derivedData[row.id]?.p1 || 0)}
-                    </td>
-                    <td className={`table-cell tabular-nums ${row.bold ? "font-bold text-indigo-600" : ""}`}>
-                      {row.type === "per"
-                        ? perFormatter.format(derivedData[row.id]?.p2 || 0)
-                        : curFormatter.format(derivedData[row.id]?.p2 || 0)}
-                    </td>
-                  </>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Disclaimer */}
-      <div className="pt-5 border-t border-gray-100 text-center">
-        <p className="text-xs text-muted leading-relaxed max-w-2xl mx-auto">
-          Disclaimer: This is an estimate based on the 2026 Washington State Child Support
-          Schedule. Actual support amounts may vary based on judicial deviations, custody
-          arrangements, and localized court rules. Generated via WCSSC.
-        </p>
-      </div>
-
-      {/* Download PDF
-          FIX: hover:bg-gray-100 on dark bg-gray-900 was white flash — now hover:bg-gray-800 */}
-      <div className="flex justify-center">
-        <button
-          id="pdf-download-btn"
-          onClick={handleDownloadPDF}
-          className="btn-primary btn-h-44 w-auto px-8 flex items-center justify-center gap-4"
-        >
-          <CheckCircle2 className="w-5 h-5 text-white/80 shrink-0" />
-          Download Official PDF
-        </button>
-      </div>
-    </motion.div>
-  );
-
-
-  /* ── MAIN RENDER ─────────────────────────────────────────────────── */
-  return (
-    <div className="min-h-screen bg-white flex flex-col lg:flex-row selection:bg-indigo-50 selection:text-indigo-700">
-
-      {/* ── Desktop Sidebar ────────────────────────────────────────── */}
-      {!showSummary && (
-        <aside className="no-print hidden lg:flex w-72 shrink-0 flex-col border-r border-gray-100 bg-white sticky top-0 h-screen overflow-y-auto">
-          <div className="flex flex-col h-full p-6">
-            {/* Sidebar header */}
-            <div className="mb-8 mt-4 flex items-center gap-3">
-              <div className="p-2.5 bg-gray-900 rounded-2xl shadow-sm shrink-0">
-                <Calculator className="w-5 h-5 text-indigo-400" />
-              </div>
+  if (showSummary) {
+    return (
+      <div className="section">
+        <div className="container">
+          <div id="pdf-summary-content" className="card card-elevated p-8 md:p-12 space-y-12">
+            <div className="flex justify-between items-start border-b border-border-default pb-8">
               <div>
-                <p className="font-bold text-heading tracking-tight leading-none mb-1 font-heading">
-                  Worksheet Pro
-                </p>
-                <span className="label-metadata text-muted">2026 Guidelines</span>
+                <h1 className="text-h1 mb-2">Worksheet Summary</h1>
+                <p className="text-body">Official estimates for Washington State 2026.</p>
               </div>
+              <button onClick={resetWizard} className="btn btn-secondary btn-sm">Edit Data</button>
             </div>
 
-            {/* Step nav */}
-            <nav className="flex-1 space-y-0.5 overflow-y-auto pr-1" aria-label="Worksheet steps">
-              {PARTS.map((part, idx) => (
-                <button
-                  key={part}
-                  onClick={() => goToStep(idx)}
-                  // FIX: removed trailing 'hover:' broken class from both states
-                  className={`w-full group flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 text-sm font-medium pl-6 ${
-                    currentStep === idx
-                      ? "bg-gray-50 text-heading"
-                      : "text-body hover:bg-gray-50 hover:text-heading"
-                  }`}
-                >
-                  <span className={`w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-bold border transition-colors shrink-0 ${
-                    currentStep === idx
-                      ? "bg-indigo-600 border-indigo-600 text-white"
-                      : idx < currentStep
-                      ? "bg-emerald-50 border-emerald-200 text-emerald-600"
-                      : "bg-white border-gray-200 text-muted group-hover:border-gray-300"
-                  }`}>
-                    {idx < currentStep ? "✓" : idx + 1}
-                  </span>
-                  <span className="truncate">{part.split(":")[1]?.trim() || part}</span>
-                </button>
-              ))}
-            </nav>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+               <div className="calc-result">
+                  <p className="calc-result-label">Combined Net</p>
+                  <p className="text-h2 !text-white">{curFormatter.format(calculation.combinedIncome)}</p>
+               </div>
+               <div className="card">
+                  <p className="label text-text-muted">P1 Transfer</p>
+                  <p className="text-h3">{curFormatter.format(derivedData["17"]?.p1 || 0)}</p>
+               </div>
+               <div className="card">
+                  <p className="label text-text-muted">P2 Transfer</p>
+                  <p className="text-h3">{curFormatter.format(derivedData["17"]?.p2 || 0)}</p>
+               </div>
+            </div>
 
-            {/* Live support estimate widget */}
-            <motion.div
-              className="mt-6 p-5 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl relative overflow-hidden shadow-lg"
-              style={{ boxShadow: '0 4px 16px rgba(99,102,241,0.25)' }}
-              layout
-            >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-              <div className="relative z-10">
-                <div className="flex items-center gap-2.5 mb-3">
-                  <div className="p-1.5 bg-white/10 rounded-lg shrink-0">
-                    <LayoutDashboard className="w-4 h-4 text-indigo-100" />
-                  </div>
-                  <span className="label-metadata text-white/70">Est. Base Support</span>
-                </div>
-                <p className="text-2xl font-bold text-white font-heading tabular-nums">
-                  {curFormatter.format(calculation.baseSupport)}
-                </p>
-              </div>
-            </motion.div>
+            <div className="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Line Item</th>
+                    <th>Parent 1</th>
+                    <th>Parent 2</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { label: "Total Gross Income (1g)",   id: "1g" },
+                    { label: "Net Income (3)",             id: "3" },
+                    { label: "Proportional Share (6)",     id: "6", type: "per" },
+                    { label: "Transfer Amount (17)",       id: "17", bold: true },
+                  ].map((row) => (
+                    <tr key={row.id}>
+                      <td className={row.bold ? "font-bold" : ""}>{row.label}</td>
+                      <td className="cell-numeric">{row.type === 'per' ? perFormatter.format(derivedData[row.id]?.p1) : curFormatter.format(derivedData[row.id]?.p1)}</td>
+                      <td className="cell-numeric">{row.type === 'per' ? perFormatter.format(derivedData[row.id]?.p2) : curFormatter.format(derivedData[row.id]?.p2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="flex justify-center pt-8 border-t border-border-default">
+               <button onClick={handleDownloadPDF} className="btn btn-primary btn-lg">Download PDF</button>
+            </div>
           </div>
-        </aside>
-      )}
+        </div>
+      </div>
+    );
+  }
 
-      {/* ── Main Content ───────────────────────────────────────────── */}
-      <main className="flex-1 flex flex-col min-w-0 w-full">
+  return (
+    <div className="flex-1 flex flex-col lg:flex-row bg-white">
+      {/* Sidebar Desktop */}
+      <aside className="hidden lg:flex w-72 shrink-0 flex-col border-r border-border-default bg-surface-subtle sticky top-[60px] h-[calc(100vh-60px)] p-6">
+        <div className="mb-8 flex items-center gap-3">
+          <Calculator className="w-6 h-6 text-brand" />
+          <span className="text-h4">Worksheet Pro</span>
+        </div>
 
-        {!showSummary && (
-          <MobileStepNav
-            currentStep={currentStep}
-            onStepClick={goToStep}
-          />
-        )}
+        <nav className="flex-1 space-y-1 overflow-y-auto pr-2">
+          {PARTS.map((part, idx) => (
+            <button
+              key={part}
+              onClick={() => goToStep(idx)}
+              className={`w-full text-left px-4 py-3 rounded-lg text-sm font-semibold transition-all border border-transparent ${
+                currentStep === idx
+                  ? "bg-white shadow-sm text-brand border-border-default"
+                  : "text-text-muted hover:bg-white/50"
+              }`}
+            >
+              <div className="text-[10px] uppercase tracking-wider opacity-60 mb-1">Step {idx + 1}</div>
+              <div className="truncate">{part.split(":")[1]?.trim() || part}</div>
+            </button>
+          ))}
+        </nav>
 
-        <div className="flex-1 w-full">
-          <div className="container-wide py-8 lg:py-16">
+        {/* Desktop Sticky Result in Sidebar */}
+        <div className="mt-8 pt-8 border-t border-border-default">
+           <div className="card-brand !p-4 rounded-xl shadow-sm">
+              <p className="text-[10px] uppercase font-bold text-brand mb-2 tracking-widest">Base Support</p>
+              <div className="text-numeric text-2xl font-bold text-text-primary">
+                {curFormatter.format(calculation.baseSupport)}
+              </div>
+              <p className="text-[10px] text-text-muted mt-1">Presumptive Estimate</p>
+           </div>
+        </div>
+      </aside>
 
-            {showSummary ? renderSummaryContent() : (
-              <div className="max-w-2xl mx-auto">
-                <ProgressBar currentStep={currentStep} />
+      <main className="flex-1 min-w-0">
+        <MobileStepNav currentStep={currentStep} onStepClick={goToStep} />
 
-                {/* Form card
-                    FIX: removed redundant md:p-6 (identical to sm:p-6) */}
-                <div className="card-standard p-4 sm:p-8 md:p-12">
+        <div className="section">
+          <div className="container">
+            <div className="max-w-3xl mx-auto">
+              <ProgressBar currentStep={currentStep} />
 
-                  {/* Step header
-                      FIX: was "text-center text-left" — conflicting classes, last wins.
-                      Intent is center on mobile, left on desktop.
-                      FIX: <h1 text-2xl> → <h2> so global h2 styles apply. */}
-                  <div className="mb-8 md:mb-12 text-center md:text-left">
-                    <span className="inline-block px-4 py-1.5 bg-gray-50 label-metadata rounded-full mb-4">
-                      Step {currentStep + 1}
-                    </span>
-                    <h2 className="mb-4">{currentPartKey}</h2>
-                    <p className="text-base text-body leading-relaxed max-w-2xl">
-                      Fill in the mandatory fields below. Your live support estimate updates
-                      automatically as you input income and deduction details.
-                    </p>
-                  </div>
-
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentStep}
-                      initial={{ opacity: 0, x: 12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -12 }}
-                      transition={{ duration: 0.25, ease: "easeOut" }}
-                    >
-                      {/* FIX: stack-space no longer exists in new globals. Use space-y-6 md:space-y-8 */}
-                      <div className="space-y-6 md:space-y-8">
-                        {currentFields.map((field: WorksheetField) => {
-                          const isCalculated = ["1g","2j","3","4","6"].includes(field.id);
-                          const values = isCalculated
-                            ? { p1: derivedData[field.id]?.p1 ?? 0, p2: derivedData[field.id]?.p2 ?? 0 }
-                            : (formData[field.id] || { p1: "", p2: "" });
-                          return (
-                            <div
-                              key={field.id}
-                              className={isCalculated ? "opacity-75 pointer-events-none select-none" : ""}
-                            >
-                              <InputField
-                                field={field}
-                                values={values as ParentValue}
-                                onChange={(parent, val) => handleInputChange(field.id, parent, val)}
-                              />
-                              {isCalculated && (
-                                <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-indigo-500 -mt-4 ml-11 mb-6">
-                                  Auto-Calculating…
-                                </p>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-
-                  {/* Step navigation
-                      FIX: "Next" button hover:bg-gray-100 on bg-gray-900 caused white flash.
-                      Now hover:bg-gray-800 — correct dark-to-slightly-lighter behavior. */}
-                  <div className="mt-10 md:mt-14 flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 md:pt-8 border-t border-gray-100">
-                    <button
-                      onClick={prevStep}
-                      disabled={currentStep === 0}
-                      className={`btn-secondary btn-h-44 w-auto px-6 ${
-                        currentStep === 0
-                          ? "!text-gray-300 !border-gray-100 pointer-events-none"
-                          : "active:scale-[0.98]"
-                      }`}
-                    >
-                      <ChevronLeft className="w-4 h-4 mr-1.5" />
-                      Previous Step
-                    </button>
-
-                    <button
-                      onClick={nextStep}
-                      className="btn-primary btn-h-44 w-auto px-8 group"
-                    >
-                      {currentStep === PARTS.length - 1 ? "Generate Report" : "Save & Continue"}
-                      <ChevronRight className="w-4 h-4 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
-                    </button>
-                  </div>
+              <div className="card card-elevated !p-6 md:!p-10">
+                <div className="mb-10">
+                  <span className="badge badge-brand mb-4">Step {currentStep + 1}</span>
+                  <h2 className="text-h2">{currentPartKey}</h2>
                 </div>
 
-                {/* Footer strip */}
-                <div className="mt-6 md:mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 px-1 pb-6">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shrink-0" />
-                    <span className="label-metadata text-muted">AOC-Certified Worksheet v01/2026</span>
-                  </div>
-                  <div className="flex gap-5">
-                    <Link href="/privacy" className="label-metadata text-muted hover:text-heading transition-colors">
-                      Privacy Policy
-                    </Link>
-                    <Link href="/terms" className="label-metadata text-muted hover:text-heading transition-colors">
-                      Terms of Service
-                    </Link>
-                  </div>
+                <div className="space-y-4">
+                  {currentFields.map((field) => {
+                    const isCalculated = ["1g","2j","3","4","6"].includes(field.id);
+                    const values = isCalculated
+                      ? { p1: derivedData[field.id]?.p1 ?? 0, p2: derivedData[field.id]?.p2 ?? 0 }
+                      : (formData[field.id] || { p1: "", p2: "" });
+                    return (
+                      <div key={field.id} className={isCalculated ? "wizard-row-auto" : ""}>
+                         <InputField
+                           field={field}
+                           values={values as ParentValue}
+                           onChange={(parent, val) => handleInputChange(field.id, parent, val)}
+                         />
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-12 flex justify-between pt-8 border-t border-border-default">
+                  <button
+                    onClick={prevStep}
+                    disabled={currentStep === 0}
+                    className="btn btn-secondary btn-md"
+                  >
+                    Previous
+                  </button>
+                  <button onClick={nextStep} className="btn btn-primary btn-md">
+                    {currentStep === PARTS.length - 1 ? "Review" : "Continue"}
+                  </button>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </main>
 
-      {/* ── Mobile Floating Bar ────────────────────────────────────────
-          FIX: duplicate min-h-[48px] on button removed.
-          FIX: hover:bg-gray-100 on bg-gray-900 (white flash) → hover:bg-gray-800.
-          FIX: safe-area-inset-bottom for iPhone home indicator.
-      ──────────────────────────────────────────────────────────────── */}
-      {!showSummary && (
-        <div
-          className="lg:hidden fixed bottom-0 left-0 right-0 px-4 pt-3 bg-white/95 backdrop-blur-xl border-t border-gray-100 z-50 flex items-center justify-between shadow-sm"
-          style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
-        >
-          <div>
-            <p className="label-metadata text-muted mb-0.5">Est. Support</p>
-            <p className="text-lg font-bold text-heading font-heading tabular-nums">
-              {curFormatter.format(calculation.baseSupport)}
-            </p>
-          </div>
-          <button
-            onClick={nextStep}
-            className="btn-primary btn-h-44 w-auto px-6 shrink-0"
+      {/* Mobile Sticky Bar (Relocated to top) */}
+      <AnimatePresence>
+        {!showSummary && (
+          <motion.div
+            initial={{ y: -100 }} animate={{ y: 60 }} exit={{ y: -100 }}
+            className="lg:hidden fixed top-0 left-0 right-0 z-40 h-14 bg-bg-inverse text-text-inverse px-4 border-b border-white/10 flex justify-between items-center shadow-xl"
           >
-            {currentStep === PARTS.length - 1 ? "Get Report" : "Next Step"}
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-      )}
+             <div className="flex items-baseline gap-2">
+                <span className="text-[10px] uppercase font-bold text-white/40">Base</span>
+                <span className="text-numeric text-xl">{curFormatter.format(calculation.baseSupport)}</span>
+             </div>
+             <button onClick={nextStep} className="btn btn-primary !h-8 !px-3 !text-xs">
+                {currentStep === PARTS.length - 1 ? "Review" : "Continue"} <ChevronRight size={14} className="ml-1" />
+             </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

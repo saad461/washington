@@ -15,22 +15,16 @@ export default function BlogListingPage() {
   const featuredPost = blogs.find(p => p.featured) || blogs[0];
 
   return (
-    <main className="flex-1 bg-page relative overflow-hidden w-full">
-      {/* Background Gradients */}
-      <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
-        <div className="absolute top-0 right-0 w-[60rem] h-[60rem] bg-indigo-50/50 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 opacity-60" />
-        <div className="absolute bottom-0 left-0 w-[50rem] h-[50rem] bg-blue-50/50 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 opacity-60" />
-      </div>
-
+    <main className="flex-1 w-full">
       {/* Hero Header */}
-      <section className="section-default relative z-10">
-        <div className="container-wide">
+      <section className="section">
+        <div className="container">
           <header className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
-            <p className="label-metadata mb-6 text-indigo-600 tracking-widest uppercase">Resource Center</p>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-8">
+            <p className="text-overline mb-6">Resource Center</p>
+            <h1 className="text-display mb-8">
               Expert Insights for Washington Parents
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-body-lg">
               Deep-dives into Washington&apos;s 2026 Child Support tables, courthouse-specific filing guides, and legal analysis from the WCSSC team.
             </p>
           </header>
@@ -40,39 +34,39 @@ export default function BlogListingPage() {
             <div className="mb-24">
               <Link
                 href={`/blog/${featuredPost.slug}`}
-                className="group card-interactive block md:p-12"
+                className="group card card-elevated block md:p-12"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                   <div className="lg:col-span-8">
                     <div className="flex flex-wrap items-center gap-4 mb-8">
-                      <span className="px-4 py-1.5 bg-indigo-600 text-white rounded-full label-metadata text-[10px]">
+                      <span className="badge badge-brand">
                         Featured Article
                       </span>
-                      <div className="flex items-center gap-4 text-gray-400">
+                      <div className="flex items-center gap-4 text-text-muted">
                         <Clock size={14} />
-                        <span className="label-metadata">{featuredPost.readTime} Read</span>
+                        <span className="text-overline">{featuredPost.readTime} Read</span>
                       </div>
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 group-hover:text-indigo-600 transition-colors leading-tight">
+                    <h2 className="text-h1 mb-6 group-hover:text-brand transition-colors">
                       {featuredPost.title}
                     </h2>
-                    <p className="text-lg text-gray-600 mb-12 line-clamp-3 leading-relaxed">
+                    <p className="text-body-lg mb-12 line-clamp-3">
                       {featuredPost.excerpt}
                     </p>
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:bg-indigo-50 transition-colors">
-                        <User size={20} className="text-gray-400 group-hover:text-indigo-600" />
+                      <div className="w-12 h-12 rounded-2xl bg-surface-subtle flex items-center justify-center border border-border-default group-hover:border-brand transition-colors">
+                        <User size={20} className="text-text-muted group-hover:text-brand" />
                       </div>
                       <div>
-                        <p className="font-bold text-gray-900 leading-none mb-2">{featuredPost.author}</p>
-                        <p className="label-metadata text-gray-400">Editorial & Legal Audit</p>
+                        <p className="text-body font-bold mb-1">{featuredPost.author}</p>
+                        <p className="text-overline">Editorial & Legal Audit</p>
                       </div>
                     </div>
                   </div>
 
                   <div className="hidden lg:flex lg:col-span-4 justify-end">
-                    <div className="p-16 bg-gray-50 border border-gray-100 rounded-3xl group-hover:bg-indigo-50 transition-all duration-500">
-                      <TrendingUp className="w-24 h-24 text-gray-200 group-hover:text-indigo-200 group-hover:scale-110 transition-all" />
+                    <div className="p-16 bg-surface-subtle border border-border-default rounded-3xl group-hover:bg-brand-light group-hover:border-brand-border transition-all duration-500">
+                      <TrendingUp className="w-24 h-24 text-border-default group-hover:text-brand-border group-hover:scale-110 transition-all" />
                     </div>
                   </div>
                 </div>
@@ -83,23 +77,23 @@ export default function BlogListingPage() {
       </section>
 
       {/* Grid Section */}
-      <section className="container-wide pb-24 md:pb-32 relative z-10">
+      <section className="container pb-24 relative z-10">
         <BlogGridClient initialBlogs={blogs} />
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gray-900 py-24 md:py-32">
-        <div className="container-reading text-center">
-          <p className="label-metadata mb-6 text-indigo-400 tracking-widest uppercase">Start Your Estimate</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">Ready for a Precise Calculation?</h2>
-          <p className="text-lg text-indigo-100 mb-12 leading-relaxed opacity-80">
+      <section className="section section-inverse text-center">
+        <div className="container-reading">
+          <p className="text-overline mb-6 !text-brand-light">Start Your Estimate</p>
+          <h2 className="text-h1 !text-white mb-8">Ready for a Precise Calculation?</h2>
+          <p className="text-body-lg !text-white opacity-80 mb-12">
             Our expert tools are updated for the 2026 Washington State Child Support Schedule. Start your local county calculation now.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link href="/" className="btn-primary w-auto px-8 btn-h-44 flex items-center justify-center gap-3">
+            <Link href="/" className="btn btn-primary btn-lg">
               Launch Estimator <ArrowRight size={18} />
             </Link>
-            <Link href="/worksheet" className="btn-secondary w-auto px-8 btn-h-44 flex items-center justify-center gap-3 text-white border-white/20 hover:bg-white/10">
+            <Link href="/worksheet" className="btn btn-secondary btn-lg !bg-white/10 !text-white !border-white/20 hover:!bg-white/20">
               Pro Wizard
             </Link>
           </div>

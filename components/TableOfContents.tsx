@@ -54,9 +54,9 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
  }}
  className={`block py-2 text-sm transition-all duration-300 ${
  activeId === heading.id
- ? ' font-medium border-l-2 border-indigo-600 pl-4 bg-indigo-50/30'
- : ' hover: border-l-2 border-transparent pl-4 hover:border-gray-200'
- } ${heading.level === 3 ? 'ml-4 label-metadata' : ''}`}
+ ? ' font-bold border-l-2 border-brand pl-4 bg-brand-light text-brand'
+ : ' hover: border-l-2 border-border-default pl-4 hover:border-brand hover:text-brand text-text-muted'
+ } ${heading.level === 3 ? 'ml-4' : ''}`}
  >
  {heading.text}
  </a>
@@ -66,25 +66,23 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
 
  return (
  <>
- {/* Desktop: Sticky Sidebar TOC */}
- <div className="hidden lg:block bg-white border border-gray-100 rounded-xl p-6 shadow-sm sticky top-28">
- <h3 className="label-metadata mb-6 flex items-center gap-2">
- <svg className="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+ <div className="hidden lg:block card section-subtle !p-6 sticky top-28">
+ <h3 className="text-overline mb-6 flex items-center gap-2">
+ <svg className="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
  Table of Contents
  </h3>
  {tocContent}
  </div>
 
- {/* Mobile: Collapsible Dropdown TOC */}
  <div className="lg:hidden mb-8">
  <button
  onClick={() => setIsOpen(!isOpen)}
- className="w-full flex items-center justify-between bg-gray-50 border border-gray-100 rounded-xl px-5 py-4 min-h-[48px] text-left min-h-[48px]"
+ className="w-full flex items-center justify-between bg-bg-subtle border border-border-default rounded-xl px-5 py-4 text-left"
  aria-expanded={isOpen}
  aria-controls="toc-mobile-panel"
  >
- <span className="label-metadata flex items-center gap-2">
- <svg className="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+ <span className="text-overline flex items-center gap-2">
+ <svg className="w-4 h-4 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
  In this guide
  </span>
  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
@@ -92,7 +90,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
  {isOpen && (
  <div
  id="toc-mobile-panel"
- className="mt-3 bg-white border border-gray-100 rounded-xl p-5 shadow-sm animate-in fade-in slide-in-from-top-2 duration-200"
+ className="mt-3 card !p-5 animate-in fade-in slide-in-from-top-2 duration-200"
  >
  {tocContent}
  </div>

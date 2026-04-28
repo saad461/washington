@@ -14,7 +14,6 @@ interface FAQProps {
 }
 
 export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) {
- // Initialize state based on the defaultOpenCount (normally the first 2 items)
  const [openIndexes, setOpenIndexes] = useState<number[]>(
  items.slice(0, defaultOpenCount).map((_, i) => i)
  );
@@ -27,7 +26,6 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  );
  };
 
- // Generate JSON-LD Schema
  const jsonLd = {
  "@context": "https://schema.org",
  "@type": "FAQPage",
@@ -58,7 +56,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  return (
  <div
  key={index}
- className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm"
+ className="card !p-4"
  >
  <h3>
  <button
@@ -69,11 +67,11 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  onClick={() => toggleAccordion(index)}
  className="w-full flex items-center justify-between cursor-pointer outline-none group"
  >
- <span className="text-xl font-semibold text-heading text-left pr-4 leading-tight">
+ <span className="text-h4 text-left pr-4">
  {item.question}
  </span>
  <ChevronDown
- className={`w-5 h-5 shrink-0 transition-transform duration-300 ease-in-out ${isOpen ? 'rotate-180 text-indigo-600' : ''}`}
+ className={`w-5 h-5 shrink-0 transition-transform duration-300 ease-in-out ${isOpen ? 'rotate-180 text-brand' : ''}`}
  />
  </button>
  </h3>
@@ -85,8 +83,8 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
  >
  <div className="overflow-hidden">
- <div className="pt-4 text-body text-body leading-relaxed">
- <p>{item.answer}</p>
+ <div className="pt-4 text-body mb-0">
+ <p className="mb-0">{item.answer}</p>
  </div>
  </div>
  </div>

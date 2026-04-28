@@ -13,17 +13,16 @@ export default function MobileTOC({ headings }: MobileTOCProps) {
  e.preventDefault();
  const el = document.getElementById(id);
  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
- // Close the details element
  const details = (e.currentTarget.closest('details') as HTMLDetailsElement | null);
  if (details) details.open = false;
  };
 
  return (
- <details className="lg:hidden mb-8 bg-indigo-50 border border-indigo-100 rounded-xl overflow-hidden group">
- <summary className="flex items-center justify-between px-5 py-4 min-h-[48px] cursor-pointer font-medium text-sm text-indigo-700 uppercase select-none list-none">
+ <details className="lg:hidden mb-8 bg-brand-light border border-brand-border rounded-xl overflow-hidden group">
+ <summary className="flex items-center justify-between px-5 py-4 cursor-pointer text-overline !text-brand select-none list-none">
  <span>📑 Table of Contents</span>
  <svg
- className="w-4 h-4 text-indigo-400 transition-transform duration-300 group-open:rotate-180"
+ className="w-4 h-4 text-brand transition-transform duration-300 group-open:rotate-180"
  fill="none"
  stroke="currentColor"
  viewBox="0 0 24 24"
@@ -31,16 +30,16 @@ export default function MobileTOC({ headings }: MobileTOCProps) {
  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
  </svg>
  </summary>
- <nav className="px-5 pb-5 pt-2 space-y-2 border-t border-indigo-100">
+ <nav className="px-5 pb-5 pt-2 space-y-2 border-t border-brand-border">
  {headings.map(h => (
  <a
  key={h.id}
  href={`#${h.id}`}
  onClick={(e) => handleClick(e, h.id)}
- className={`block transition-colors leading-snug hover:text-indigo-800 ${
+ className={`block transition-colors leading-snug hover:text-brand-hover ${
  h.level === 3
- ? 'pl-4 label-metadata text-indigo-600'
- : 'text-sm font-medium '
+ ? 'pl-4 text-xs uppercase font-bold text-brand'
+ : 'text-sm font-bold text-text-primary'
  }`}
  >
  {h.text}
