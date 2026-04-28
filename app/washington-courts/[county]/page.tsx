@@ -105,114 +105,101 @@ export default async function CountyCourtPage({ params }: Props) {
   ];
 
   return (
-    <main className="flex-1 bg-page">
+    <main className="flex-1 w-full">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": [{ "@type": "GovernmentOffice", name: county.court, address: { "@type": "PostalAddress", streetAddress: county.courtAddress, addressRegion: "WA", addressCountry: "US" }, telephone: county.clerkPhone, url: county.website }] }) }} />
       <CalculatorSchema county={county.name} url={`https://wcssc.site/washington-courts/${county.slug}`} />
 
-      {/* 1. HERO */}
-      <section className="bg-white border-b border-gray-100">
-        <div className="container-wide section-default text-center">
-          <nav className="flex items-center justify-center gap-4 mb-8 label-metadata">
-            <Link href="/" className="hover:text-indigo-600 transition-colors">Home</Link>
+      <section className="bg-white border-b border-border-default">
+        <div className="container section text-center">
+          <nav className="flex items-center justify-center gap-4 mb-8 text-overline">
+            <Link href="/" className="hover:text-brand transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4 opacity-30" />
-            <Link href="/washington-courts" className="hover:text-indigo-600 transition-colors">Courts</Link>
+            <Link href="/washington-courts" className="hover:text-brand transition-colors">Courts</Link>
             <ChevronRight className="w-4 h-4 opacity-30" />
-            <span className="text-gray-900">{county.name}</span>
+            <span className="text-text-primary">{county.name}</span>
           </nav>
 
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 max-w-3xl mx-auto">
-            Child Support Calculator – <span className="text-indigo-600">{county.name}</span>, WA (2026)
+          <h1 className="text-display mb-8 max-w-3xl mx-auto">
+            Child Support – <span className="text-brand">{county.name}</span>, WA
           </h1>
 
-          <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mb-12">
+          <p className="text-body-lg max-w-2xl mx-auto mb-12">
             Official 2026 estimates for {county.name} residents. Based on the Washington Income Shares Model with updated SSR of <strong>approximately $2,394</strong>.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
             {["SSR: ~$2,394", "2026 Guidelines", "All 39 Counties", "Min: $50/child"].map(tag => (
-              <span key={tag} className="px-6 py-2 bg-gray-50 border border-gray-100 rounded-full label-metadata text-gray-600">{tag}</span>
+              <span key={tag} className="badge badge-neutral !px-6 !py-2">{tag}</span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 2. CALCULATOR SECTION */}
-      <section className="bg-gray-50 border-b border-gray-100">
-        <div className="container-wide section-default">
+      <section className="section-subtle border-b border-border-default">
+        <div className="container section">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-6">Calculate {county.name} Support</h2>
-            <p className="text-gray-600">Enter both parents&apos; net incomes. Based on official RCW 26.19 tables.</p>
+            <h2 className="text-h2 mb-6">Calculate {county.name} Support</h2>
+            <p className="text-body">Enter both parents&apos; net incomes. Based on official RCW 26.19 tables.</p>
           </div>
-          <div className="flex flex-col items-center">
-            <HomeCalculator />
-          </div>
-          <p className="mt-12 text-center text-sm italic text-gray-500 max-w-lg mx-auto">
-            Low-income protections may apply below approximately $2,394/month. Estimates are for educational purposes.
-          </p>
+          <HomeCalculator />
         </div>
       </section>
 
-      {/* 3. MAIN CONTENT GRID */}
-      <div className="container-wide section-default">
+      <div className="container section">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          <div className="lg:col-span-7 space-y-16 md:space-y-24">
-            {/* A. Intro */}
-            <article className="prose prose-gray prose-lg max-w-none">
-              <h2 className="text-3xl font-bold mb-8">Child Support in {county.name}: A 2026 Guide</h2>
-              {content.introduction.map((p, i) => <p key={i} className="leading-relaxed mb-6">{p}</p>)}
+          <div className="lg:col-span-7 space-y-16">
+            <article className="prose max-w-none">
+              <h2 className="text-h2">Child Support in {county.name}</h2>
+              {content.introduction.map((p, i) => <p key={i} className="text-body">{p}</p>)}
             </article>
 
-            {/* B. Filing Steps */}
             <section>
-              <h2 className="text-3xl font-bold mb-12">Filing Process in {county.name}</h2>
+              <h2 className="text-h2 mb-12">Filing Process in {county.name}</h2>
               <div className="grid gap-8">
                 {content.filingSteps.map((step, i) => (
-                  <div key={i} className="flex gap-8 p-8 bg-white border border-gray-100 rounded-2xl shadow-sm hover:border-indigo-200 transition-all">
-                    <div className="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold shrink-0">{i + 1}</div>
+                  <div key={i} className="flex gap-8 p-8 card hover:border-brand transition-all">
+                    <div className="w-12 h-12 rounded-xl bg-brand text-white flex items-center justify-center font-bold shrink-0">{i + 1}</div>
                     <div>
-                      <h4 className="font-bold text-gray-900 mb-4">{step.step}</h4>
-                      <p className="text-gray-600 text-sm leading-relaxed">{step.detail}</p>
+                      <h4 className="text-h4 !mb-4">{step.step}</h4>
+                      <p className="text-body text-sm mb-0">{step.detail}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </section>
 
-            {/* C. Local Insight */}
-            <section className="p-8 bg-amber-50 border border-amber-200 rounded-3xl">
+            <section className="badge-warning !p-8 rounded-3xl block">
               <div className="flex items-center gap-4 mb-8">
-                <Lightbulb className="w-8 h-8 text-amber-600" />
-                <span className="label-metadata text-amber-800 font-bold">Local Filing Insight</span>
+                <Lightbulb className="w-8 h-8 text-warning" />
+                <span className="text-overline !text-warning font-bold">Local Filing Insight</span>
               </div>
-              <p className="text-amber-900 text-lg leading-relaxed">{content.localTip}</p>
+              <p className="text-warning text-lg font-medium italic mb-0">{content.localTip}</p>
             </section>
 
-            {/* D. FAQs */}
             <section>
-              <h2 className="text-3xl font-bold mb-12">Frequently Asked Questions</h2>
+              <h2 className="text-h2 mb-12">Common Questions</h2>
               <FAQAccordion items={faqs.map(f => ({ question: f.q, answer: f.a }))} />
             </section>
           </div>
 
-          {/* 4. SIDEBAR */}
           <aside className="lg:col-span-5 space-y-8">
-            <div className="bg-gray-900 text-white p-8 md:p-12 rounded-3xl shadow-xl relative overflow-hidden lg:sticky lg:top-24">
-              <Building2 className="w-12 h-12 text-indigo-400 mb-12" />
-              <h3 className="text-2xl font-bold mb-12">{county.court}</h3>
+            <div className="section-inverse p-8 md:p-12 rounded-3xl shadow-xl relative overflow-hidden lg:sticky lg:top-24">
+              <Building2 className="w-12 h-12 text-brand mb-12" />
+              <h3 className="text-h3 !text-white mb-12">{county.court}</h3>
 
               <div className="space-y-8">
                 <div className="flex gap-4">
-                  <MapPin className="w-6 h-6 text-indigo-400 shrink-0" />
+                  <MapPin className="w-6 h-6 text-brand shrink-0" />
                   <div>
-                    <p className="label-metadata text-gray-400 mb-2">Address</p>
-                    <p className="text-sm font-medium leading-relaxed">{county.courtAddress}</p>
+                    <p className="text-overline !text-white/50 mb-2">Address</p>
+                    <p className="text-sm font-medium !text-white mb-0 leading-relaxed">{county.courtAddress}</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <Phone className="w-6 h-6 text-indigo-400 shrink-0" />
+                  <Phone className="w-6 h-6 text-brand shrink-0" />
                   <div>
-                    <p className="label-metadata text-gray-400 mb-2">Clerk Phone</p>
-                    <p className="text-sm font-medium">{county.clerkPhone}</p>
+                    <p className="text-overline !text-white/50 mb-2">Clerk Phone</p>
+                    <p className="text-sm font-medium !text-white mb-0">{county.clerkPhone}</p>
                   </div>
                 </div>
               </div>
@@ -220,27 +207,26 @@ export default async function CountyCourtPage({ params }: Props) {
               <div className="my-12 h-px bg-white/10" />
 
               <div className="space-y-4">
-                <a href={county.website} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full h-14 bg-white/10 hover:bg-white/20 rounded-xl font-semibold transition-all">
+                <a href={county.website} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-lg !bg-white/10 !text-white !border-white/20 w-full">
                   Court Website <ExternalLink className="w-4 h-4" />
                 </a>
-                <a href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 w-full h-14 bg-indigo-600 hover:bg-indigo-700 rounded-xl font-semibold transition-all shadow-lg shadow-indigo-600/20">
+                <a href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg w-full">
                   Get Directions <MapPin className="w-4 h-4" />
                 </a>
               </div>
 
               <div className="mt-12 p-6 bg-white/5 rounded-xl border border-white/10 flex gap-4">
-                <Clock className="w-6 h-6 text-amber-400 shrink-0" />
-                <p className="text-xs text-gray-400 leading-relaxed">Call ahead to verify current clerk hours before visiting {county.seat}.</p>
+                <Clock className="w-6 h-6 text-warning shrink-0" />
+                <p className="text-xs text-white/50 mb-0">Call ahead to verify current clerk hours before visiting {county.seat}.</p>
               </div>
             </div>
 
-            {/* Related Links */}
-            <div className="card-standard p-8 md:p-12">
-              <h4 className="label-metadata text-gray-400 mb-8 flex items-center gap-2"><BookOpen className="w-4 h-4" /> Resources</h4>
+            <div className="card !p-8 md:!p-12">
+              <h4 className="text-overline mb-8 flex items-center gap-2"><BookOpen className="w-4 h-4" /> Resources</h4>
               <nav className="grid gap-6">
                 {[{ href: "/worksheet", label: "2026 Worksheet Wizard" }, { href: "/how-to-file-child-support-washington", label: "Filing Guide" }, { href: "/washington-courts", label: "All WA Courthouses" }].map(link => (
-                  <Link key={link.href} href={link.href} className="flex items-center justify-between group py-4 border-b border-gray-50 last:border-0 hover:text-indigo-600 transition-colors">
-                    <span className="font-medium">{link.label}</span>
+                  <Link key={link.href} href={link.href} className="flex items-center justify-between group py-4 border-b border-border-default last:border-0 hover:text-brand transition-colors">
+                    <span className="text-body font-bold">{link.label}</span>
                     <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all" />
                   </Link>
                 ))}
@@ -250,12 +236,11 @@ export default async function CountyCourtPage({ params }: Props) {
         </div>
       </div>
 
-      {/* 5. FOOTER DISCLAIMER */}
-      <footer className="bg-gray-50 border-t border-gray-100 py-16 md:py-24">
+      <footer className="section-subtle border-t border-border-default py-16">
         <div className="container-reading">
-          <div className="flex gap-6 p-8 bg-white border border-gray-100 rounded-2xl shadow-sm">
-            <AlertTriangle className="w-8 h-8 text-gray-400 shrink-0" />
-            <p className="text-xs text-gray-500 leading-relaxed uppercase tracking-widest font-semibold">
+          <div className="flex gap-6 p-8 card !bg-white">
+            <AlertTriangle className="w-8 h-8 text-text-muted shrink-0" />
+            <p className="text-xs text-text-muted leading-relaxed uppercase tracking-widest font-bold mb-0">
               <strong>Legal Disclaimer:</strong> Information for {county.name} is for educational use. The 2026 SSR is approximately $2,394. WCSSC is not a law firm. Consult a family law attorney for advice specific to your case.
             </p>
           </div>

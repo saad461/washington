@@ -12,9 +12,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://wcssc.site/" },
 };
 
-// ─── Live benchmark data driven from the actual 2026 economic table ───────────
-// FIX: was hardcoded strings like "$700–$900" — now real values from getSupport().
-// If the table ever updates, these numbers update automatically.
 function formatSupport(income: number, children: number): string {
   const val = getSupport(income, children);
   if (val === null) return "—";
@@ -27,8 +24,6 @@ const BENCHMARK_ROWS = [3000, 5000, 8000].map((income) => ({
   two:    formatSupport(income, 2),
 }));
 
-// ─── Case study constants — driven from table so they stay accurate ───────────
-// FIX: was hardcoded $1,155 which was wrong. Real value: getSupport(5000, 2) = $1,446.
 const CASE_STUDY_INCOME   = 5000;
 const CASE_STUDY_CHILDREN = 2;
 const CASE_STUDY_SUPPORT  = getSupport(CASE_STUDY_INCOME, CASE_STUDY_CHILDREN);
@@ -65,55 +60,41 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex-1 flex flex-col bg-[#F8FAFC] relative overflow-hidden w-full">
+    <div className="flex-1 flex flex-col w-full relative">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <CalculatorSchema url="https://wcssc.site" />
 
-      {/* Decorative blobs */}
-      <div
-        className="absolute inset-0 pointer-events-none overflow-hidden z-0"
-        aria-hidden="true"
-      >
-        <div className="w-[32rem] h-[32rem] sm:w-[40rem] sm:h-[40rem] bg-indigo-100/40 rounded-full blur-[100px] absolute -top-[10%] -left-[10%]" />
-        <div className="w-[32rem] h-[32rem] sm:w-[40rem] sm:h-[40rem] bg-purple-100/40 rounded-full blur-[100px] absolute -bottom-[10%] -right-[10%]" />
-      </div>
-
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="pt-12 lg:pt-20 w-full relative">
-        <div className="container-wide">
-          <div className="text-center mb-8 md:mb-16 space-y-6">
-            <h1 className="text-balance">
-              The Modern Standard for{" "}
-              <br className="hidden sm:block" />
-              <span className="text-gradient">Washington Child Support</span>
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
-              Precision-engineered for the 2026 AOC economic schedule. Fast,
-              private, and 100% compliant with Washington State guidelines.
-            </p>
-          </div>
+      <section className="hero">
+        <div className="container">
+          <div className="hero-eyebrow">The Modern Standard for</div>
+          <h1 className="text-display mb-6">
+            <span>Washington Child Support</span>
+          </h1>
+          <p className="hero-subtitle">
+            Precision-engineered for the 2026 AOC economic schedule. Fast,
+            private, and 100% compliant with Washington State guidelines.
+          </p>
           <HomeCalculator />
         </div>
       </section>
 
       {/* ── KEY FIGURES ──────────────────────────────────────────────────── */}
-      <section className="section-alt w-full border-y border-gray-100 relative">
-        <div className="container-wide">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 w-full">
+      <section className="section section-subtle border-y border-border-default">
+        <div className="container">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { label: "2026 SSR",     value: "~$2,394 / mo"    },
               { label: "Min Support",  value: "$50 / child"      },
               { label: "Table Limit",  value: "$50,000"          },
               { label: "Jurisdiction", value: "Washington State" },
             ].map((fig, i) => (
-              <div key={i} className="card-standard text-center flex flex-col items-center justify-center h-full">
-                <div className="label-metadata mb-2 text-indigo-500">{fig.label}</div>
-                <div className="text-base sm:text-lg md:text-xl font-bold text-heading leading-snug">
-                  {fig.value}
-                </div>
+              <div key={i} className="card text-center">
+                <div className="text-overline mb-2">{fig.label}</div>
+                <div className="text-h3">{fig.value}</div>
               </div>
             ))}
           </div>
@@ -121,49 +102,45 @@ export default function Home() {
       </section>
 
       {/* ── BENCHMARK TABLE ──────────────────────────────────────────────── */}
-      <section className="section-default w-full relative" id="benchmark-table">
-        <div className="container-wide">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-12 md:mb-16 space-y-4">
+      <section className="section">
+        <div className="container">
+          <div className="max-w-[800px] mx-auto">
+            <div className="text-center mb-12">
               <h2>Benchmark Support Estimates</h2>
-              <p className="text-muted text-base sm:text-lg">
+              <p className="text-body-lg text-text-muted">
                 Standard monthly totals based on the 2026 economic table.
               </p>
             </div>
 
-            <div className="table-container shadow-xl border border-gray-200">
-              <table className="w-full text-left border-collapse">
-                <caption className="sr-only">
-                  Benchmark Child Support Estimates for Washington State 2026
-                </caption>
+            <div className="table-wrapper card-elevated">
+              <table>
                 <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="table-header">Combined Monthly Net Income</th>
-                    <th className="table-header">1 Child</th>
-                    <th className="table-header">2 Children</th>
+                  <tr>
+                    <th>Combined Monthly Net Income</th>
+                    <th>1 Child</th>
+                    <th>2 Children</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {/* FIX: rows are now driven from getSupport() — always accurate */}
+                <tbody>
                   {BENCHMARK_ROWS.map((row, i) => (
-                    <tr key={i} className="table-row">
-                      <td className="table-cell font-bold text-heading">{row.income}</td>
-                      <td className="table-cell font-medium">{row.one}</td>
-                      <td className="table-cell font-medium">{row.two}</td>
+                    <tr key={i}>
+                      <td className="text-h4">{row.income}</td>
+                      <td className="cell-numeric">{row.one}</td>
+                      <td className="cell-numeric">{row.two}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
-            <p className="text-center mt-8 text-sm text-muted italic leading-relaxed max-w-2xl mx-auto">
+            <p className="text-center mt-8 text-sm italic">
               These figures are the presumptive basic support obligation from the
               2026 Washington State economic table. Actual court orders may differ
               based on custody arrangements, healthcare costs, and judicial decisions.
             </p>
 
             <div className="mt-12 flex justify-center">
-              <Link href="/worksheet" className="btn-primary btn-h-44 w-auto !px-8 !rounded-full !text-sm !font-semibold">
+              <Link href="/worksheet" className="btn btn-primary btn-lg">
                 Calculate Exact Support
                 <ChevronRight className="w-5 h-5" />
               </Link>
@@ -173,55 +150,42 @@ export default function Home() {
       </section>
 
       {/* ── CASE STUDY ───────────────────────────────────────────────────── */}
-      <section className="section-alt w-full border-y border-gray-100 relative">
-        <div className="container-wide">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-heading text-center mb-12 md:mb-16">
-              Real-World Case Study
-            </h2>
+      <section className="section section-muted border-y border-border-default">
+        <div className="container">
+          <div className="max-w-[800px] mx-auto">
+            <h2 className="text-center mb-12">Real-World Case Study</h2>
 
-            <div className="card-standard shadow-xl space-y-8 md:space-y-12">
-              <h3 className="text-heading text-center">
+            <div className="card card-elevated space-y-8">
+              <h3 className="text-center">
                 Income Case: ${CASE_STUDY_INCOME.toLocaleString()} Net Monthly
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
                   { label: "Net Monthly Income", value: `$${CASE_STUDY_INCOME.toLocaleString()}` },
                   { label: "Number of Children", value: String(CASE_STUDY_CHILDREN)             },
                   { label: "Location",           value: "King County"                           },
                 ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="text-center p-6 sm:p-8 rounded-xl sm:rounded-2xl bg-gray-50/50 border border-gray-100"
-                  >
-                    <div className="label-metadata text-muted mb-2">{item.label}</div>
-                    <div className="text-lg font-bold text-heading">{item.value}</div>
+                  <div key={i} className="text-center p-6 rounded-lg bg-bg-subtle border border-border-default">
+                    <div className="label mb-2">{item.label}</div>
+                    <div className="text-h3">{item.value}</div>
                   </div>
                 ))}
               </div>
 
-              {/* Result highlight — REDESIGNED to look less like a button, more like a clean data card */}
               <div className="max-w-sm mx-auto w-full">
-                <div className="bg-white border-2 border-indigo-600 rounded-2xl p-8 text-center shadow-lg relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-indigo-100 transition-colors" />
-                  <div className="relative z-10">
-                    <div className="label-metadata text-indigo-600 mb-2">
-                      Presumptive Base Support
-                    </div>
-                    <div className="text-4xl sm:text-5xl font-bold tracking-tight text-heading">
-                      {CASE_STUDY_DISPLAY}
-                      <span className="text-base sm:text-lg font-medium text-muted ml-2">/ month</span>
-                    </div>
-                  </div>
+                <div className="calc-result">
+                  <div className="calc-result-label">Presumptive Base Support</div>
+                  <div className="calc-result-amount">{CASE_STUDY_DISPLAY}</div>
+                  <div className="calc-result-period">per month</div>
                 </div>
               </div>
 
-              <p className="text-sm sm:text-base md:text-lg text-body leading-relaxed text-center max-w-2xl mx-auto">
+              <p className="text-body text-center max-w-2xl mx-auto">
                 In King County, courts apply the standard Washington economic
                 schedule. For a combined net income of ${CASE_STUDY_INCOME.toLocaleString()} with{" "}
                 {CASE_STUDY_CHILDREN} children, the presumptive base support is{" "}
-                <strong className="text-heading">{CASE_STUDY_DISPLAY}</strong> per month. This amount is typically shared
+                <strong className="text-text-primary">{CASE_STUDY_DISPLAY}</strong> per month. This amount is typically shared
                 between parents based on their proportional income share.
               </p>
             </div>
@@ -230,38 +194,34 @@ export default function Home() {
       </section>
 
       {/* ── EDUCATIONAL CONTENT ──────────────────────────────────────────── */}
-      <section className="section-default w-full relative border-b border-gray-100">
-        <div className="container-wide">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-center mb-12 md:mb-16">
-              Understanding the 2026 Guidelines
-            </h2>
+      <section className="section">
+        <div className="container">
+          <div className="max-w-[900px] mx-auto">
+            <h2 className="text-center mb-12">Understanding the 2026 Guidelines</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 text-body">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div className="space-y-8">
-                <p className="text-base sm:text-lg leading-relaxed">
-                  Washington State uses the{" "}
-                  <strong>Income Shares Model</strong>, where both parents&apos;
+                <p className="text-body-lg">
+                  Washington State uses the <strong>Income Shares Model</strong>, where both parents&apos;
                   monthly net incomes are combined. A proportional share is
                   dedicated to the children, reflecting what would have been
                   spent if the household remained together.
                 </p>
 
-                <div className="card-standard space-y-6">
+                <div className="card space-y-6">
                   <h3>The 2026 Schedule</h3>
-                  <p className="text-sm sm:text-base text-muted">
-                    The 2026 economic tables, published by the{" "}
-                    <strong>AOC</strong>, cover combined monthly net incomes
+                  <p className="text-sm">
+                    The 2026 economic tables, published by the <strong>AOC</strong>, cover combined monthly net incomes
                     from $0 to $50,000.
                   </p>
-                  <ul className="space-y-4">
+                  <ul className="space-y-4 list-none p-0">
                     {[
                       "Statutory minimum: $50 per child per month.",
                       "Calculations cover all 39 Washington counties.",
                       "Updated for 2026 economic standards.",
                     ].map((li, i) => (
-                      <li key={i} className="flex items-start gap-4 text-sm font-medium">
-                        <span className="w-2 h-2 rounded-full bg-indigo-600 mt-2 shrink-0" />
+                      <li key={i} className="flex items-start gap-4 text-sm font-semibold text-text-primary">
+                        <span className="w-2 h-2 rounded-full bg-brand mt-2 shrink-0" />
                         {li}
                       </li>
                     ))}
@@ -269,13 +229,12 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="space-y-12 md:space-y-16">
+              <div className="space-y-12">
                 <div className="space-y-4">
                   <h3>The Self-Support Reserve (SSR)</h3>
-                  <p className="text-base sm:text-lg leading-relaxed text-muted">
-                    Washington&apos;s primary low-income protection is the{" "}
-                    <strong>SSR</strong>, set at{" "}
-                    <strong>approximately $2,394 per month for 2026</strong>.
+                  <p className="text-body">
+                    Washington&apos;s primary low-income protection is the <strong>SSR</strong>, set at
+                    <strong> approximately $2,394 per month for 2026</strong>.
                     If a payment would leave the payer with less than this, the
                     court may deviate the payment downward.
                   </p>
@@ -283,7 +242,7 @@ export default function Home() {
 
                 <div className="space-y-4">
                   <h3>The 45% Net Income Cap</h3>
-                  <p className="text-base sm:text-lg leading-relaxed text-muted">
+                  <p className="text-body">
                     Total support obligations typically cannot legally exceed 45%
                     of a parent&apos;s monthly net income without explicit
                     judicial approval for good cause.
@@ -296,36 +255,34 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-      <section className="section-alt w-full border-y border-gray-100 relative">
-        <div className="container-wide">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-center mb-12 md:mb-16">Common Questions</h2>
+      <section className="section section-subtle border-y border-border-default">
+        <div className="container">
+          <div className="max-w-[800px] mx-auto">
+            <h2 className="text-center mb-12">Common Questions</h2>
             <FAQAccordion items={homeFaqs} />
           </div>
         </div>
       </section>
 
       {/* ── COUNTY QUICKLINKS ────────────────────────────────────────────── */}
-      <section className="section-default w-full relative">
-        <div className="container-wide">
-          <div className="text-center mb-12 md:mb-16">
+      <section className="section">
+        <div className="container">
+          <div className="text-center mb-12">
             <h2>County Guides</h2>
-            <p className="text-muted mt-4 text-base">
+            <p className="text-text-muted mt-4">
               Local rules and benchmarks for Washington&apos;s major counties.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 w-full">
+          <div className="card-grid-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { label: "King County",      href: "/king-county-income-5000-2-children"      },
               { label: "Pierce County",    href: "/pierce-county-income-5000-2-children"    },
               { label: "Snohomish County", href: "/snohomish-county-income-5000-2-children" },
               { label: "Spokane County",   href: "/spokane-county-income-5000-2-children"   },
             ].map((c) => (
-              <Link key={c.href} href={c.href} className="card-interactive text-center group">
-                <span className="label-metadata block mb-2">County Guide</span>
-                <span className="text-sm font-bold text-heading group-hover:text-indigo-700 transition-colors">
-                  {c.label}
-                </span>
+              <Link key={c.href} href={c.href} className="card group hover:border-brand transition-colors text-center">
+                <span className="label mb-2 text-text-muted group-hover:text-brand">County Guide</span>
+                <span className="text-h4 group-hover:text-brand">{c.label}</span>
               </Link>
             ))}
           </div>
@@ -333,24 +290,21 @@ export default function Home() {
       </section>
 
       {/* ── BLOG QUICKLINKS ──────────────────────────────────────────────── */}
-      <section className="section-default border-t border-gray-100 w-full bg-white relative">
-        <div className="container-wide">
-          <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12 md:mb-16">
+      <section className="section border-t border-border-default">
+        <div className="container">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12">
             <div>
               <h2>Latest Resources</h2>
-              <p className="text-muted mt-4 text-base">
+              <p className="text-text-muted mt-4">
                 Legal guides and economic analysis for Washington State.
               </p>
             </div>
-            <Link
-              href="/blog"
-              className="flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors shrink-0 no-underline px-6 btn-h-44 rounded-xl bg-gray-50 border border-gray-100"
-            >
+            <Link href="/blog" className="btn btn-secondary btn-md">
               View all articles <ChevronRight size={16} />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="card-grid-3">
             {[
               {
                 label: "2026 WA Guidelines: Complete Handbook",
@@ -368,18 +322,18 @@ export default function Home() {
                 cat:   "Local Rules",
               },
             ].map((p) => (
-              <Link key={p.href} href={p.href} className="card-interactive group flex flex-col">
-                <span className="badge badge-indigo !h-[22px] !text-[11px] mb-4 w-fit">{p.cat}</span>
+              <Link key={p.href} href={p.href} className="card group flex flex-col hover:border-brand transition-colors">
+                <span className="badge badge-brand mb-4 w-fit">{p.cat}</span>
                 <div className="flex-1">
-                  <h3 className="text-base sm:text-lg font-bold text-heading group-hover:text-indigo-700 transition-colors leading-snug">
+                  <h3 className="text-h4 group-hover:text-brand transition-colors">
                     {p.label}
                   </h3>
                 </div>
-                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
-                  <div className="text-sm font-bold text-muted group-hover:text-indigo-600 transition-colors">
+                <div className="mt-8 pt-6 border-t border-border-default flex items-center justify-between">
+                  <div className="text-sm font-bold text-text-muted group-hover:text-brand transition-colors">
                     Read Article
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all transform group-hover:translate-x-1 border border-gray-100">
+                  <div className="w-8 h-8 rounded-full bg-bg-subtle flex items-center justify-center group-hover:bg-brand group-hover:text-white transition-all">
                     <ChevronRight size={14} />
                   </div>
                 </div>

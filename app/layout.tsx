@@ -1,33 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import React, { Suspense } from "react";
 import Script from "next/script";
-import { Inter, Poppins, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { 
  NavbarClient as Navbar,
  FooterClient as Footer,
  CookieBannerClient as CookieBanner
 } from "@/components/ClientDynamic";
-
-const inter = Inter({
- variable: "--font-inter",
- subsets: ["latin"],
- display: "swap",
-});
-
-const poppins = Poppins({
- variable: "--font-poppins",
- subsets: ["latin"],
- weight: ["400", "500", "600", "700", "800", "900"],
- display: "swap",
-});
-
-const geistMono = Geist_Mono({
- variable: "--font-geist-mono",
- subsets: ["latin"],
- display: "swap",
-});
-
 
 export const metadata: Metadata = {
  metadataBase: new URL('https://wcssc.site'),
@@ -59,8 +38,10 @@ export const metadata: Metadata = {
  }
 };
 
-export const viewport = {
- themeColor: '#6366F1',
+export const viewport: Viewport = {
+ themeColor: '#4F46E5',
+ width: 'device-width',
+ initialScale: 1,
 };
 
 export default function RootLayout({
@@ -69,7 +50,7 @@ export default function RootLayout({
  children: React.ReactNode;
 }>) {
  return (
- <html lang="en" className={`${inter.variable} ${poppins.variable} ${geistMono.variable} h-full antialiased`}>
+ <html lang="en" className="h-full antialiased">
  <head>
  {/* Performance: preconnect to ad & analytics origins for faster load */}
  <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
@@ -77,7 +58,7 @@ export default function RootLayout({
  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
  </head>
- <body className="min-h-full flex flex-col bg-page">
+ <body className="min-h-full flex flex-col">
 
  {/* Google AdSense — Publisher ID: ca-pub-9902783604679065 */}
  <Script
@@ -111,7 +92,7 @@ export default function RootLayout({
  </Script>
  <Navbar />
  <main className="flex-1 flex flex-col">
- <Suspense fallback={<div className="min-h-screen bg-section-alt" />}>
+ <Suspense fallback={<div className="min-h-screen bg-subtle" />}>
  {children}
  </Suspense>
  </main>

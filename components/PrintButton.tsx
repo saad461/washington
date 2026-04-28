@@ -7,9 +7,9 @@ export default function PrintButton() {
  return (
  <button
  onClick={() => window.print()}
- className="mt-10 inline-flex items-center gap-2 label-metadata hover:text-indigo-700 transition-colors no-print border-t border-indigo-50 pt-6 w-full justify-center min-h-[48px]"
+ className="btn btn-ghost btn-md w-full border-t border-border-default !rounded-none !pt-8 mt-8"
  >
- <Printer size={14} />
+ <Printer size={16} />
  Print Calculation for Court
  </button>
  );
