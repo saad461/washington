@@ -68,10 +68,10 @@ export default function Home() {
       <CalculatorSchema url="https://wcssc.site" />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="pt-12 lg:pt-20 pb-12 lg:pb-20 w-full relative">
+      <section className="pt-12 lg:pt-20 pb-12 lg:pb-20 w-full relative bg-white">
         <div className="container-wide">
           <div className="text-center mb-12 md:mb-16 space-y-6">
-            <span className="eyebrow mx-auto">Washington State Standards</span>
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Washington State Standards</p>
             <h1 className="text-balance max-w-4xl mx-auto">
               The Modern Standard for <span className="text-[var(--color-brand-primary)]">Washington Child Support</span>
             </h1>
@@ -79,16 +79,21 @@ export default function Home() {
               Precision-engineered for the 2026 AOC economic schedule. Fast,
               private, and 100% compliant with Washington State guidelines.
             </p>
+              <div className="mt-8 flex justify-center">
+                <Link href="/worksheet" className="btn-primary-lg btn-primary !rounded-full !px-8 !py-4 !text-base">
+                  Start Free Calculation →
+                </Link>
+              </div>
           </div>
           <HomeCalculator />
         </div>
       </section>
 
       {/* ── STAT BAR ────────────────────────────────────────────────────── */}
-      <section className="section-default bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative">
+      <section className="py-16 md:py-20 bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative">
         <div className="container-wide">
           {/* Desktop view: Single row with dividers */}
-          <div className="hidden lg:flex items-center bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] px-7 py-5 divide-x divide-[var(--color-bg-border)]">
+          <div className="hidden md:flex items-center bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] px-7 py-5 divide-x divide-[var(--color-bg-border)]">
             {[
               { label: "2026 SSR",     value: "~$2,394 / mo"    },
               { label: "Min Support",  value: "$50 / child"      },
@@ -103,7 +108,7 @@ export default function Home() {
           </div>
 
           {/* Mobile/Tablet view: 2x2 Grid */}
-          <div className="lg:hidden grid grid-cols-2 gap-4">
+          <div className="md:hidden grid grid-cols-2 gap-4">
             {[
               { label: "2026 SSR",     value: "~$2,394 / mo"    },
               { label: "Min Support",  value: "$50 / child"      },
@@ -111,7 +116,7 @@ export default function Home() {
               { label: "Jurisdiction", value: "Washington State" },
             ].map((fig, i) => (
               <div key={i} className="bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] p-5 text-center flex flex-col items-center justify-center">
-                <div className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-[0.03em] mb-1">{fig.label}</div>
+                <div className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-[0.03em] mb-1">{fig.label}</div>
                 <div className="text-lg font-bold text-[var(--color-text-primary)] leading-tight">{fig.value}</div>
               </div>
             ))}
@@ -120,14 +125,14 @@ export default function Home() {
       </section>
 
       {/* ── TRUST & FEATURES ────────────────────────────────────────────── */}
-      <section className="section-default w-full bg-white relative">
+      <section className="py-16 md:py-20 w-full bg-white relative">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto space-y-24">
 
             {/* Why Legal Pros Trust WCSSC */}
             <div>
               <div className="text-center mb-12 space-y-4">
-                <span className="eyebrow mx-auto">The Professional Standard</span>
+                <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">The Professional Standard</p>
                 <h2>Why Legal Pros Trust WCSSC</h2>
                 <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
                   Unlike generic calculators, WCSSC is engineered to the exact 2026 Washington statutory logic.
@@ -155,7 +160,7 @@ export default function Home() {
                       <tr>
                         <th className="table-header-cell">Engine Logic</th>
                         <th className="table-header-cell text-center">WCSSC</th>
-                        <th className="table-header-cell text-center">Standard</th>
+                        <th className="table-header-cell text-center">Other Calculators</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -223,11 +228,11 @@ export default function Home() {
       </section>
 
       {/* ── BENCHMARK TABLE ──────────────────────────────────────────────── */}
-      <section className="section-default w-full relative bg-white" id="benchmark-table">
+      <section className="py-16 md:py-20 w-full relative bg-[var(--color-bg-subtle)]" id="benchmark-table">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
-              <span className="eyebrow">Quick Reference</span>
+              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Quick Reference</p>
               <h2>Benchmark Support Estimates</h2>
               <p className="text-[var(--color-text-secondary)] text-lg">
                 Standard monthly totals based on the 2026 economic table.
@@ -275,11 +280,11 @@ export default function Home() {
       </section>
 
       {/* ── CASE STUDY ───────────────────────────────────────────────────── */}
-      <section className="section-default w-full bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative">
+      <section className="py-16 md:py-20 w-full bg-white relative">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
-              <span className="eyebrow">Real-World Case Study</span>
+              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Real-World Case Study</p>
               <h2 className="text-[var(--color-text-primary)]">
                 Application of 2026 Guidelines
               </h2>
@@ -328,7 +333,7 @@ export default function Home() {
       </section>
 
       {/* ── EDUCATIONAL CONTENT ──────────────────────────────────────────── */}
-      <section className="section-default w-full relative bg-white border-b border-[var(--color-bg-border)]">
+      <section className="py-16 md:py-20 w-full relative bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)]">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-center mb-12 md:mb-16">
@@ -393,20 +398,19 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-      <section className="section-default w-full bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative">
+      <section className="py-16 md:py-20 w-full bg-white relative">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-center mb-12 md:mb-16">Common Questions</h2>
             <FAQAccordion items={homeFaqs} />
           </div>
         </div>
       </section>
 
       {/* ── COUNTY QUICKLINKS ────────────────────────────────────────────── */}
-      <section className="section-default w-full relative bg-white">
+      <section className="py-16 md:py-20 w-full relative bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)]">
         <div className="container-wide">
           <div className="text-center mb-12 md:mb-16">
-            <span className="eyebrow">Local Guides</span>
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Local Guides</p>
             <h2>Regional Resource Centers</h2>
             <p className="text-[var(--color-text-secondary)] mt-4 text-lg">
               Local rules and benchmarks for Washington&apos;s major counties.
@@ -419,11 +423,14 @@ export default function Home() {
               { label: "Snohomish County", href: "/snohomish-county-income-5000-2-children" },
               { label: "Spokane County",   href: "/spokane-county-income-5000-2-children"   },
             ].map((c) => (
-              <Link key={c.href} href={c.href} className="card-standard text-center group">
-                <span className="text-[12px] font-bold font-bold text-[var(--color-brand-accent)] uppercase tracking-[0.06em] block mb-2">County Guide</span>
-                <span className="text-lg font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-brand-primary)] transition-colors">
-                  {c.label}
-                </span>
+              <Link key={c.href} href={c.href} className="rounded-xl border border-gray-200 p-5 hover:shadow-md transition bg-white group flex flex-col items-start text-left">
+                <span className="badge-category mb-3 !bg-blue-50 !text-blue-700">County Guide</span>
+                <div className="flex items-center justify-between w-full mt-auto">
+                  <span className="text-lg font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-brand-primary)] transition-colors">
+                    {c.label}
+                  </span>
+                  <ChevronRight size={18} className="text-gray-400 group-hover:text-[var(--color-brand-primary)] transition-colors" />
+                </div>
               </Link>
             ))}
           </div>
@@ -431,11 +438,11 @@ export default function Home() {
       </section>
 
       {/* ── BLOG QUICKLINKS ──────────────────────────────────────────────── */}
-      <section className="section-default border-t border-[var(--color-bg-border)] w-full bg-white relative">
+      <section className="py-16 md:py-20 w-full bg-white relative">
         <div className="container-wide">
           <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12 md:mb-16">
             <div>
-              <span className="eyebrow">Resource Center</span>
+              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">Resource Center</p>
               <h2 className="mt-2">Latest Legal Resources</h2>
               <p className="text-[var(--color-text-secondary)] mt-4 text-lg">
                 Legal guides and economic analysis for Washington State.
@@ -467,7 +474,11 @@ export default function Home() {
                 cat:   "Local Rules",
               },
             ].map((p) => (
-              <Link key={p.href} href={p.href} className="card-standard group flex flex-col">
+              <Link key={p.href} href={p.href} className="card-standard group flex flex-col !p-0 overflow-hidden">
+                <div className="h-40 w-full bg-gray-100 flex items-center justify-center border-b border-gray-100">
+                  <Scale size={40} className="text-gray-300 group-hover:scale-110 transition-transform duration-500" />
+                </div>
+                <div className="p-6 flex flex-col flex-1">
                 <span className="badge-category mb-4 w-fit">{p.cat}</span>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-brand-primary)] transition-colors leading-snug">
@@ -481,6 +492,7 @@ export default function Home() {
                   <div className="w-8 h-8 rounded-full bg-[var(--color-bg-subtle)] flex items-center justify-center group-hover:bg-[var(--color-brand-primary)] group-hover:text-white transition-all transform group-hover:translate-x-1 border border-[var(--color-bg-border)]">
                     <ChevronRight size={14} />
                   </div>
+                </div>
                 </div>
               </Link>
             ))}
