@@ -38,7 +38,7 @@ const AdContainer: React.FC<AdContainerProps> = () => {
 
  if (!shouldRenderAd()) {
  return (
- <div className="w-full py-10 px-8 border-2 border-dashed border-gray-50 rounded-xl flex flex-col items-center justify-center opacity-30 grayscale no-print my-10">
+ <div className="w-full py-10 px-8 border-2 border-dashed border-gray-50 rounded-xl flex flex-col items-center justify-center grayscale no-print my-10">
  <AlertCircle className="w-5 h-5 mb-2" />
  <p className="label-metadata italic">Inventory Held: Awaiting Content Depth</p>
  </div>

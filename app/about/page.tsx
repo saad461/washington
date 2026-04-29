@@ -20,7 +20,7 @@ export default function AboutPage() {
 
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8 md:mb-16">
-          <div className="p-4 bg-indigo-600 rounded-2xl shadow-sm shadow-indigo-600/20">
+          <div className="p-4 bg-indigo-600 rounded-2xl shadow-[var(--shadow-card)] shadow-indigo-600/20">
             <Users className="w-8 h-8 text-white" />
           </div>
           <div>
@@ -37,7 +37,7 @@ export default function AboutPage() {
           {/* Mission */}
           <section className="card-standard">
             <div className="flex items-center gap-4 mb-4">
-              <Scale className="w-5 h-5 text-indigo-600 flex-shrink-0" />
+              <Scale className="w-5 h-5 text-[var(--color-brand-primary)] flex-shrink-0" />
               <h2 className="text-xl font-semibold">Our Mission</h2>
             </div>
             <div className="md:pl-10">
@@ -50,7 +50,7 @@ export default function AboutPage() {
           {/* Data Sources */}
           <section className="card-standard">
             <div className="flex items-center gap-4 mb-4">
-              <Database className="w-5 h-5 text-indigo-600 flex-shrink-0" />
+              <Database className="w-5 h-5 text-[var(--color-brand-primary)] flex-shrink-0" />
               <h2 className="text-xl font-semibold">Data Sources & Methodology</h2>
             </div>
             <div className="md:pl-10 space-y-4">
@@ -68,7 +68,7 @@ export default function AboutPage() {
           {/* Review Process */}
           <section className="card-standard">
             <div className="flex items-center gap-4 mb-4">
-              <ShieldCheck className="w-5 h-5 text-indigo-600 flex-shrink-0" />
+              <ShieldCheck className="w-5 h-5 text-[var(--color-brand-primary)] flex-shrink-0" />
               <h2 className="text-xl font-semibold">Editorial & Legal Review</h2>
             </div>
             <div className="md:pl-10 space-y-6">
@@ -81,10 +81,10 @@ export default function AboutPage() {
                   { step: "02", label: "Legal Review", desc: "Content reviewed for compliance with RCW 26.19 and current case law" },
                   { step: "03", label: "Technical Audit", desc: "Calculation engine tested against known edge cases and SSR thresholds" },
                 ].map((s) => (
-                  <div key={s.step} className="p-6 bg-gray-50 rounded-2xl border border-gray-100">
+                  <div key={s.step} className="p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]">
                     <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white label-metadata mb-4">{s.step}</div>
-                    <p className="label-metadata mb-2 font-bold text-gray-900">{s.label}</p>
-                    <p className="text-sm text-gray-600 leading-relaxed">{s.desc}</p>
+                    <p className="label-metadata mb-2 font-bold text-[var(--color-text-primary)]">{s.label}</p>
+                    <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">{s.desc}</p>
                   </div>
                 ))}
               </div>
@@ -94,7 +94,7 @@ export default function AboutPage() {
           {/* Coverage */}
           <section className="card-standard">
             <div className="flex items-center gap-4 mb-4">
-              <Globe className="w-5 h-5 text-indigo-600 flex-shrink-0" />
+              <Globe className="w-5 h-5 text-[var(--color-brand-primary)] flex-shrink-0" />
               <h2 className="text-xl font-semibold">Coverage</h2>
             </div>
             <div className="md:pl-10">
@@ -107,7 +107,7 @@ export default function AboutPage() {
           {/* Disclaimer */}
           <section className="card-standard">
             <div className="flex items-center gap-4 mb-4">
-              <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0" />
+              <CheckCircle2 className="w-5 h-5 text-[var(--color-brand-primary)] flex-shrink-0" />
               <h2 className="text-xl font-semibold">Important Disclaimer</h2>
             </div>
             <div className="md:pl-10">
@@ -120,27 +120,27 @@ export default function AboutPage() {
           {/* Contact */}
           <section className="card-standard">
             <div className="flex items-center gap-4 mb-4">
-              <Mail className="w-5 h-5 text-indigo-600 flex-shrink-0" />
+              <Mail className="w-5 h-5 text-[var(--color-brand-primary)] flex-shrink-0" />
               <h2 className="text-xl font-semibold">Contact Us</h2>
             </div>
             <div className="md:pl-10">
               <p className="mb-6 leading-relaxed">Have questions, feedback, or data correction requests? We&apos;d love to hear from you.</p>
-              <div className="p-8 bg-gray-50 rounded-2xl border border-gray-100 inline-block w-full sm:w-fit">
+              <div className="p-8 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)] inline-block w-full sm:w-fit">
                 <p className="label-metadata mb-2">General Inquiries & Support</p>
-                <a href="mailto:support@wcssc.site" className="text-indigo-600 hover:underline font-medium break-all sm:break-normal">support@wcssc.site</a>
+                <a href="mailto:support@wcssc.site" className="text-[var(--color-brand-primary)] hover:underline font-medium break-all sm:break-normal">support@wcssc.site</a>
               </div>
             </div>
           </section>
         </div>
 
         {/* Mini Footer */}
-        <div className="mt-16 pt-12 border-t border-gray-100 text-center">
-          <p className="label-metadata mb-6 text-gray-400">Washington Child Support Schedule Center &copy; 2026</p>
+        <div className="mt-16 pt-12 border-t border-[var(--color-bg-border-soft)] text-center">
+          <p className="label-metadata mb-6 text-[var(--color-text-secondary)]">Washington Child Support Schedule Center &copy; 2026</p>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-4 label-metadata">
-            <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</Link>
-            <Link href="/disclaimer" className="hover:text-indigo-600 transition-colors">Disclaimer</Link>
-            <Link href="/" className="hover:text-indigo-600 transition-colors">Calculator</Link>
+            <Link href="/privacy" className="hover:text-[var(--color-brand-primary)] transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-[var(--color-brand-primary)] transition-colors">Terms of Service</Link>
+            <Link href="/disclaimer" className="hover:text-[var(--color-brand-primary)] transition-colors">Disclaimer</Link>
+            <Link href="/" className="hover:text-[var(--color-brand-primary)] transition-colors">Calculator</Link>
           </div>
         </div>
       </div>

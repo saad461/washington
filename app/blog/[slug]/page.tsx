@@ -82,15 +82,11 @@ export default async function BlogPostPage({ params }: Props) {
   const { headings, updatedHtml } = parseTOC(cleanedContent);
 
   return (
-    <main className="flex-1 bg-page relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
-        <div className="absolute top-0 right-0 w-[50rem] h-[50rem] bg-indigo-50/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-      </div>
-
+    <main className="flex-1 bg-white relative overflow-hidden">
       <div className="container-reading section-default relative z-10">
         <nav className="mb-12">
-          <Link href="/blog" className="btn-ghost !h-10 !px-0 w-fit">
-            <ArrowLeft size={14} className="mr-2" />
+          <Link href="/blog" className="cta-link !font-bold">
+            <ArrowLeft size={14} className="mr-1" />
             Back to Resource Center
           </Link>
         </nav>
@@ -98,41 +94,41 @@ export default async function BlogPostPage({ params }: Props) {
         <article>
           <header className="mb-12 md:mb-20">
             <div className="flex flex-wrap items-center gap-4 mb-6">
-              <span className="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full label-metadata font-bold">
+              <span className="badge-category !px-4 !py-1.5 !text-[12px] !font-bold">
                 {post.category}
               </span>
-              <span className="label-metadata text-gray-400">
+              <span className="text-[13px] font-medium text-[var(--color-text-secondary)]">
                 Updated {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 leading-tight text-[var(--color-text-primary)]">
               {post.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-8 py-8 border-y border-gray-100">
+            <div className="flex flex-wrap items-center gap-8 py-8 border-y border-[var(--color-bg-border-soft)]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center border border-gray-100">
-                  <User size={18} className="text-gray-400" />
+                <div className="w-10 h-10 rounded-xl bg-[var(--color-bg-subtle)] flex items-center justify-center border border-[var(--color-bg-border)]">
+                  <User size={18} className="text-[var(--color-text-secondary)]" />
                 </div>
                 <div>
-                  <p className="label-metadata text-gray-400 mb-0.5">Author</p>
-                  <p className="font-bold text-gray-900 leading-none">{post.author}</p>
+                  <p className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-widest mb-1">Author</p>
+                  <p className="font-bold text-[var(--color-text-primary)] leading-none">{post.author}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center border border-gray-100">
-                  <Clock size={18} className="text-gray-400" />
+                <div className="w-10 h-10 rounded-xl bg-[var(--color-bg-subtle)] flex items-center justify-center border border-[var(--color-bg-border)]">
+                  <Clock size={18} className="text-[var(--color-text-secondary)]" />
                 </div>
                 <div>
-                  <p className="label-metadata text-gray-400 mb-0.5">Reading Time</p>
-                  <p className="font-bold text-gray-900 leading-none">{post.readTime}</p>
+                  <p className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-widest mb-1">Reading Time</p>
+                  <p className="font-bold text-[var(--color-text-primary)] leading-none">{post.readTime}</p>
                 </div>
               </div>
             </div>
 
             {post.image?.url && (
-              <div className="relative w-full aspect-[16/9] md:aspect-[2/1] rounded-3xl overflow-hidden mt-12 shadow-xl border border-gray-100">
+              <div className="relative w-full aspect-[16/9] md:aspect-[2/1] rounded-3xl overflow-hidden mt-12 shadow-[var(--shadow-card-md)] border border-[var(--color-bg-border)]">
                 <Image src={post.image.url} alt={post.image.alt || post.title} fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 800px" />
               </div>
             )}
@@ -144,14 +140,27 @@ export default async function BlogPostPage({ params }: Props) {
 
           <AdContainer slot="top" wordCount={updatedHtml.split(' ').length} />
 
-          <div className="prose-reading mb-20" dangerouslySetInnerHTML={{ __html: updatedHtml }} />
+          {/* Article prose */}
+          <div className="prose prose-gray max-w-none mb-20 text-[16px] leading-[1.8] text-[var(--color-text-body)]">
+             <style dangerouslySetInnerHTML={{ __html: `
+               .prose h2 { font-size: 24px; font-weight: 700; color: var(--color-text-primary); margin-top: 48px; margin-bottom: 24px; line-height: 1.3; }
+               .prose h3 { font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin-top: 32px; margin-bottom: 16px; line-height: 1.4; }
+               .prose p { font-size: 16px; line-height: 1.8; color: var(--color-text-body); margin-bottom: 24px; }
+               .prose strong { color: var(--color-text-primary); font-weight: 700; }
+               .prose a { color: var(--color-brand-primary); font-weight: 500; text-decoration: none; }
+               .prose a:hover { text-decoration: underline; }
+               .prose ul, .prose ol { margin-bottom: 24px; }
+               .prose li { font-size: 16px; line-height: 1.8; margin-bottom: 8px; }
+             `}} />
+             <div dangerouslySetInnerHTML={{ __html: updatedHtml }} />
+          </div>
 
           <AdContainer slot="mid" wordCount={updatedHtml.split(' ').length} />
 
           {post.faqs && post.faqs.length > 0 && (
             <section className="mt-24 md:mt-32">
-              <h2 className="text-3xl font-bold mb-12 flex items-center gap-4">
-                <HelpCircle className="w-8 h-8 text-indigo-600" />
+              <h2 className="text-3xl font-bold mb-12 flex items-center gap-4 text-[var(--color-text-primary)]">
+                <HelpCircle className="w-8 h-8 text-[var(--color-brand-primary)]" />
                 Common Questions
               </h2>
               <FAQAccordion items={post.faqs.map(f => ({ question: f.question, answer: f.answer }))} />
@@ -162,22 +171,22 @@ export default async function BlogPostPage({ params }: Props) {
             <BlogCTA />
           </div>
 
-          <div className="mt-24 border-t border-gray-100 pt-16">
+          <div className="mt-24 border-t border-[var(--color-bg-border-soft)] pt-16">
             <AuthorBox />
           </div>
 
-          <div className="mt-16 p-8 bg-gray-50 rounded-3xl border border-gray-100">
-            <p className="label-metadata mb-4 flex items-center gap-2 text-indigo-600">
-              <Scale className="w-4 h-4" /> E-E-A-T Disclosure
+          <div className="callout-gray mt-16 !p-8 md:!p-10 border-2">
+            <p className="text-[12px] font-bold text-[var(--color-brand-primary)] uppercase tracking-widest mb-4 flex items-center gap-2">
+              <Scale className="w-5 h-5" /> E-E-A-T Disclosure
             </p>
-            <p className="text-sm text-gray-600 leading-relaxed mb-6">
-              All WCSSC insights are reviewed for compliance with RCW 26.19.065 and official Washington State guidelines. Our team cross-references all data with official AOC publications.
+            <p className="text-sm text-[var(--color-text-body)] leading-relaxed mb-6">
+              All WCSSC insights are reviewed for compliance with <strong className="text-[var(--color-text-primary)]">RCW 26.19.065</strong> and official Washington State guidelines. Our team cross-references all data with official AOC publications.
             </p>
             <div className="flex flex-wrap gap-8">
-              <Link href="/editorial-methodology" className="font-semibold text-gray-900 hover:text-indigo-600 transition-colors inline-flex items-center gap-2">
+              <Link href="/editorial-methodology" className="cta-link !font-bold">
                 Our methodology <ChevronRight size={14} />
               </Link>
-              <Link href="/disclaimer" className="font-semibold text-gray-900 hover:text-indigo-600 transition-colors inline-flex items-center gap-2">
+              <Link href="/disclaimer" className="cta-link !font-bold">
                 Legal Disclaimer <ChevronRight size={14} />
               </Link>
             </div>

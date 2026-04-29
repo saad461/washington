@@ -21,21 +21,21 @@ export default function DisclaimerPage() {
 
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8 md:mb-12">
-          <div className="p-4 bg-amber-500 rounded-2xl shadow-sm shadow-amber-500/20">
+          <div className="p-4 bg-amber-500 rounded-2xl shadow-[var(--shadow-card)] shadow-amber-500/20">
             <Scale className="w-8 h-8 text-white" />
           </div>
           <div>
-            <p className="label-metadata text-amber-600 mb-1">Important Notice</p>
+            <p className="label-metadata text-[var(--color-warning)] mb-1">Important Notice</p>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Legal Disclaimer</h1>
           </div>
         </div>
 
         {/* Not a Law Firm Banner */}
         <section className="p-6 md:p-8 bg-amber-50 border border-amber-200 rounded-2xl mb-8 md:mb-12 flex flex-col sm:flex-row items-start gap-4 md:gap-6">
-          <ShieldCheck className="w-8 h-8 text-amber-600 flex-shrink-0 mt-1" />
+          <ShieldCheck className="w-8 h-8 text-[var(--color-warning)] flex-shrink-0 mt-1" />
           <div>
             <h2 className="text-xl font-bold text-amber-900 mb-2">WCSSC Is Not a Law Firm</h2>
-            <p className="text-amber-800 leading-relaxed">
+            <p className="text-[var(--color-highlight)] leading-relaxed">
               The Washington Child Support Schedule Center (WCSSC) is an independent educational resource. We are NOT a law firm, attorney, legal aid organization, or government agency. Nothing on this website constitutes legal advice, legal representation, or a professional legal opinion.
             </p>
           </div>
@@ -71,19 +71,19 @@ export default function DisclaimerPage() {
           ].map((section, i) => (
             <section key={i} className="card-standard">
               <h2 className="text-xl font-semibold mb-4">{section.title}</h2>
-              <p className="leading-relaxed text-gray-700">{section.body}</p>
+              <p className="leading-relaxed text-[var(--color-text-secondary)]">{section.body}</p>
             </section>
           ))}
         </div>
 
         {/* Footer info */}
-        <div className="mt-16 pt-12 border-t border-gray-100 text-center">
-          <p className="label-metadata mb-6 text-gray-400">Last Updated: January 2026</p>
+        <div className="mt-16 pt-12 border-t border-[var(--color-bg-border-soft)] text-center">
+          <p className="label-metadata mb-6 text-[var(--color-text-secondary)]">Last Updated: January 2026</p>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-4 label-metadata">
-            <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</Link>
-            <Link href="/about" className="hover:text-indigo-600 transition-colors">About Us</Link>
-            <Link href="/" className="hover:text-indigo-600 transition-colors">Calculator</Link>
+            <Link href="/privacy" className="hover:text-[var(--color-brand-primary)] transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-[var(--color-brand-primary)] transition-colors">Terms of Service</Link>
+            <Link href="/about" className="hover:text-[var(--color-brand-primary)] transition-colors">About Us</Link>
+            <Link href="/" className="hover:text-[var(--color-brand-primary)] transition-colors">Calculator</Link>
           </div>
         </div>
       </div>
