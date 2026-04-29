@@ -53,21 +53,21 @@ export default function CookieBanner() {
       aria-label="Cookie consent"
       className="fixed bottom-8 left-8 right-8 md:left-auto md:max-w-sm z-[100] no-print animate-in fade-in slide-in-from-bottom-8 duration-500"
     >
-      <div className="section-inverse rounded-3xl p-8 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl">
+      <div className="bg-gray-900 text-white rounded-[2rem] p-8 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl bg-opacity-95">
         <div className="flex items-start gap-4 mb-8">
-          <div className="p-2.5 bg-brand-light/10 rounded-2xl flex-shrink-0">
-            <Shield className="w-6 h-6 text-brand" />
+          <div className="p-2.5 bg-indigo-500/20 rounded-2xl flex-shrink-0">
+            <Shield className="w-6 h-6 text-indigo-400" />
           </div>
           <div className="flex-1">
-            <h3 className="text-h4 !text-white !mb-1">Privacy Notice</h3>
-            <p className="text-xs !text-white opacity-60 mb-0">
+            <h3 className="text-base font-bold mb-1 leading-tight">Privacy Notice</h3>
+            <p className="text-xs text-indigo-100/60 leading-relaxed font-medium">
               We use cookies for analytics. No personal calculation data is ever stored. {' '}
-              <Link href="/privacy" className="text-brand hover:underline font-bold">
+              <Link href="/privacy" className="text-indigo-400 hover:underline font-bold">
                 Details
               </Link>
             </p>
           </div>
-          <button onClick={() => setShow(false)} className="text-white opacity-20 hover:opacity-100 transition-opacity p-1">
+          <button onClick={() => setShow(false)} className="text-white/20 hover:text-white transition-colors p-1">
             <X size={18} />
           </button>
         </div>
@@ -75,13 +75,13 @@ export default function CookieBanner() {
         <div className="flex items-center gap-3">
           <button
             onClick={handleDecline}
-            className="btn btn-secondary btn-md flex-1 !bg-white/5 !text-white !border-white/10 hover:!bg-white/10"
+            className="flex-1 h-12 text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-white hover:bg-white/5 rounded-xl transition-all border border-white/5"
           >
             Decline
           </button>
           <button
             onClick={handleAccept}
-            className="btn btn-primary btn-md flex-1"
+            className="flex-1 h-12 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-600/20"
           >
             Accept
           </button>

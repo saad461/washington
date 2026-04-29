@@ -10,32 +10,32 @@ export const metadata: Metadata = {
 
 export default function DisclaimerPage() {
   return (
-    <main className="flex-1">
-      <div className="container-reading section">
+    <main className="flex-1 bg-page">
+      <div className="container-reading section-default">
 
         {/* Back Link */}
-        <Link href="/" className="btn btn-ghost btn-sm mb-8 md:mb-12">
+        <Link href="/" className="btn-ghost !h-10 !px-0 w-fit mb-8 md:mb-12">
           <ArrowLeft size={14} />
           Back to Calculator
         </Link>
 
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8 md:mb-12">
-          <div className="p-4 bg-amber-500 rounded-2xl shadow-sm">
+          <div className="p-4 bg-amber-500 rounded-2xl shadow-sm shadow-amber-500/20">
             <Scale className="w-8 h-8 text-white" />
           </div>
           <div>
-            <p className="text-overline mb-1 !text-amber-600">Important Notice</p>
-            <h1 className="text-h1">Legal Disclaimer</h1>
+            <p className="label-metadata text-amber-600 mb-1">Important Notice</p>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Legal Disclaimer</h1>
           </div>
         </div>
 
         {/* Not a Law Firm Banner */}
-        <section className="badge-warning !p-6 md:!p-8 rounded-2xl mb-8 md:mb-12 flex flex-col sm:flex-row items-start gap-4 md:gap-6">
+        <section className="p-6 md:p-8 bg-amber-50 border border-amber-200 rounded-2xl mb-8 md:mb-12 flex flex-col sm:flex-row items-start gap-4 md:gap-6">
           <ShieldCheck className="w-8 h-8 text-amber-600 flex-shrink-0 mt-1" />
           <div>
-            <h2 className="text-h3 !text-amber-900 mb-2">WCSSC Is Not a Law Firm</h2>
-            <p className="text-amber-800 text-body mb-0">
+            <h2 className="text-xl font-bold text-amber-900 mb-2">WCSSC Is Not a Law Firm</h2>
+            <p className="text-amber-800 leading-relaxed">
               The Washington Child Support Schedule Center (WCSSC) is an independent educational resource. We are NOT a law firm, attorney, legal aid organization, or government agency. Nothing on this website constitutes legal advice, legal representation, or a professional legal opinion.
             </p>
           </div>
@@ -69,21 +69,21 @@ export default function DisclaimerPage() {
               body: "WCSSC, its operators, employees, and contributors shall not be liable for any damages arising from the use or reliance on information provided on this website. This includes direct, indirect, incidental, and consequential damages."
             }
           ].map((section, i) => (
-            <section key={i} className="card">
-              <h2 className="text-h3 mb-4">{section.title}</h2>
-              <p className="text-body mb-0">{section.body}</p>
+            <section key={i} className="card-standard">
+              <h2 className="text-xl font-semibold mb-4">{section.title}</h2>
+              <p className="leading-relaxed text-gray-700">{section.body}</p>
             </section>
           ))}
         </div>
 
         {/* Footer info */}
-        <div className="mt-16 pt-12 border-t border-border-default text-center">
-          <p className="text-overline mb-6 text-text-muted">Last Updated: January 2026</p>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-4 text-overline">
-            <Link href="/privacy" className="hover:text-brand transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-brand transition-colors">Terms of Service</Link>
-            <Link href="/about" className="hover:text-brand transition-colors">About Us</Link>
-            <Link href="/" className="hover:text-brand transition-colors">Calculator</Link>
+        <div className="mt-16 pt-12 border-t border-gray-100 text-center">
+          <p className="label-metadata mb-6 text-gray-400">Last Updated: January 2026</p>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-4 label-metadata">
+            <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</Link>
+            <Link href="/about" className="hover:text-indigo-600 transition-colors">About Us</Link>
+            <Link href="/" className="hover:text-indigo-600 transition-colors">Calculator</Link>
           </div>
         </div>
       </div>
