@@ -53,21 +53,21 @@ export default function CookieBanner() {
       aria-label="Cookie consent"
       className="fixed bottom-8 left-8 right-8 md:left-auto md:max-w-sm z-[100] no-print animate-in fade-in slide-in-from-bottom-8 duration-500"
     >
-      <div className="bg-gray-900 text-white rounded-[2rem] p-8 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl bg-opacity-95">
+      <div className="bg-[#111827] text-white rounded-[2rem] p-8 shadow-[var(--shadow-card-hover)] ring-1 ring-white/10 backdrop-blur-2xl">
         <div className="flex items-start gap-4 mb-8">
           <div className="p-2.5 bg-indigo-500/20 rounded-2xl flex-shrink-0">
-            <Shield className="w-6 h-6 text-indigo-400" />
+            <Shield className="w-6 h-6 text-[var(--color-brand-primary-hover)]" />
           </div>
           <div className="flex-1">
             <h3 className="text-base font-bold mb-1 leading-tight">Privacy Notice</h3>
-            <p className="text-xs text-indigo-100/60 leading-relaxed font-medium">
+            <p className="text-[12px] text-[var(--color-text-disabled)] leading-relaxed font-medium">
               We use cookies for analytics. No personal calculation data is ever stored. {' '}
-              <Link href="/privacy" className="text-indigo-400 hover:underline font-bold">
+              <Link href="/privacy" className="text-[var(--color-brand-primary-hover)] hover:underline font-bold">
                 Details
               </Link>
             </p>
           </div>
-          <button onClick={() => setShow(false)} className="text-white/20 hover:text-white transition-colors p-1">
+          <button onClick={() => setShow(false)} className="text-white/20 hover:text-white transition-colors p-1 cursor-pointer">
             <X size={18} />
           </button>
         </div>
@@ -75,13 +75,13 @@ export default function CookieBanner() {
         <div className="flex items-center gap-3">
           <button
             onClick={handleDecline}
-            className="flex-1 h-12 text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-white hover:bg-white/5 rounded-xl transition-all border border-white/5"
+            className="flex-1 h-12 text-[12px] font-bold uppercase tracking-widest text-white/40 hover:text-white hover:bg-white/5 rounded-xl transition-all border border-white/5 cursor-pointer"
           >
             Decline
           </button>
           <button
             onClick={handleAccept}
-            className="flex-1 h-12 bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-600/20"
+            className="flex-1 h-12 bg-indigo-600 text-white text-[12px] font-bold uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition-all shadow-[var(--shadow-card-md)] shadow-indigo-600/20 cursor-pointer"
           >
             Accept
           </button>

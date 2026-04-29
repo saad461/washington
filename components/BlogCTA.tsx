@@ -3,10 +3,10 @@ import { ArrowRight, Calculator } from 'lucide-react';
 
 export default function BlogCTA() {
  return (
- <div className="mt-16 sm:mt-24 bg-gray-50 rounded-2xl p-6 sm:p-12 text-center border border-gray-100 shadow-sm relative overflow-hidden group">
+ <div className="mt-16 sm:mt-24 bg-[var(--color-bg-subtle)] rounded-2xl p-6 sm:p-12 text-center border border-[var(--color-bg-border-soft)] shadow-[var(--shadow-card)] relative overflow-hidden group">
 
  <div className="relative z-10 flex flex-col items-center">
- <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 border border-gray-100 shadow-sm">
+ <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-6 border border-[var(--color-bg-border-soft)] shadow-[var(--shadow-card)]">
  <Calculator className="w-8 h-8 " />
  </div>
 
@@ -20,7 +20,7 @@ export default function BlogCTA() {
 
  <Link
  href="/worksheet"
- className="inline-flex items-center gap-2 px-6 py-3 min-h-[48px] bg-indigo-600 hover:bg-gray-100 text-white font-medium text-base rounded-xl shadow-sm shadow-indigo-100 transition-all duration-300 hover:-translate-y-1"
+ className="inline-flex items-center gap-2 px-6 py-3 min-h-[48px] bg-indigo-600 hover:bg-[var(--color-bg-muted)] text-white font-medium text-base rounded-xl shadow-[var(--shadow-card)] shadow-indigo-100 transition-all duration-300 hover:-translate-y-1"
  >
  Calculate Your Child Support
  <ArrowRight className="w-5 h-5" />

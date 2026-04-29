@@ -5,7 +5,7 @@ import {
 } from "@/data/washingtonCounties";
 import { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Calculator, Info, Landmark, Scale } from "lucide-react";
+import { ArrowRight, Calculator, Info, Landmark, Scale, ChevronRight } from "lucide-react";
 import {
   AdContainerClient as AdContainer,
   AuthoritySidebarClient as AuthoritySidebar,
@@ -19,7 +19,6 @@ import { getVariantIndices, formatVariant } from "@/lib/getVariant";
 
 type Props = { params: Promise<{ slug: string }> };
 
-// ISR: All slug pages are built on-demand and cached for 30 days.
 export const dynamicParams = true;
 export const revalidate = 2592000; // 30 days ISR cache
 
@@ -119,10 +118,10 @@ function generateDynamicContent(
   let incomeBlock = "";
   if (income < 2200) {
     incomeBlock = `
- <div class="bg-indigo-50 p-8 md:p-12 rounded-2xl border border-indigo-100/50 my-16">
- <h3 class="flex items-center gap-2 mt-0 font-bold text-xl"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg> Low-Income Protective Measures</h3>
- <p class="leading-relaxed text-gray-700">For families with a combined monthly income of <strong>${formattedIncome}</strong>, Washington's 2026 guidelines trigger automatic poverty protections. At this level, the standard ${formattedSupport} obligation is often reduced to the statutory minimum of $50 per child.</p>
- <ul class="mt-6 space-y-4 list-disc pl-6 text-gray-700">
+ <div class="callout-blue my-12">
+ <h3 class="flex items-center gap-3 mt-0 font-bold text-lg text-[var(--color-brand-primary)]"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/></svg> Low-Income Protective Measures</h3>
+ <p class="leading-relaxed text-[var(--color-text-body)]">For families with a combined monthly income of <strong>${formattedIncome}</strong>, Washington's 2026 guidelines trigger automatic poverty protections. At this level, the standard ${formattedSupport} obligation is often reduced to the statutory minimum of $50 per child.</p>
+ <ul class="mt-6 space-y-4 list-disc pl-6 text-[var(--color-text-body)]">
  <li><strong>SSR Protection:</strong> The approximately $2,394 reserve is strictly applied.</li>
  <li><strong>Statutory Minimum:</strong> Usually $50/month per child.</li>
  <li><strong>Deviation Probability:</strong> High at the ${formattedIncome} income tier.</li>
@@ -130,35 +129,35 @@ function generateDynamicContent(
  </div>`;
   } else if (income <= 12000) {
     incomeBlock = `
- <div class="bg-gray-50 p-8 md:p-12 rounded-2xl border border-gray-100 my-16">
- <h3 class="flex items-center gap-2 mt-0 font-bold text-xl"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg> Standard Mid-Income Calculation</h3>
- <p class="leading-relaxed text-gray-700">Your ${formattedIncome} income falls within the standard economic schedule. This means the <strong>${formattedSupport}</strong> figure is the presumptive legal standard. In ${countyName}, the court assumes this basic obligation is sufficient for ${childrenText}.</p>
+ <div class="card-subtle my-12">
+ <h3 class="flex items-center gap-3 mt-0 font-bold text-lg text-[var(--color-text-primary)]"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg> Standard Mid-Income Calculation</h3>
+ <p class="leading-relaxed text-[var(--color-text-body)]">Your ${formattedIncome} income falls within the standard economic schedule. This means the <strong>${formattedSupport}</strong> figure is the presumptive legal standard. In ${countyName}, the court assumes this basic obligation is sufficient for ${childrenText}.</p>
  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
- <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
- <p class="label-metadata mb-2 text-gray-500">Presumptive Amount</p>
- <p class="text-2xl font-bold text-indigo-600">${formattedSupport}</p>
+ <div class="bg-white p-6 rounded-xl border border-[var(--color-bg-border)] shadow-[var(--shadow-card)]">
+ <p class="text-[12px] font-semibold text-[var(--color-text-secondary)] font-bold text-[var(--color-text-secondary)] uppercase tracking-wider mb-2">Presumptive Amount</p>
+ <p class="text-2xl font-bold text-[var(--color-brand-primary)]">${formattedSupport}</p>
  </div>
- <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
- <p class="label-metadata mb-2 text-gray-500">Schedule Bracket</p>
- <p class="text-2xl font-bold text-gray-900">Standard Limit</p>
+ <div class="bg-white p-6 rounded-xl border border-[var(--color-bg-border)] shadow-[var(--shadow-card)]">
+ <p class="text-[12px] font-semibold text-[var(--color-text-secondary)] font-bold text-[var(--color-text-secondary)] uppercase tracking-wider mb-2">Schedule Bracket</p>
+ <p class="text-2xl font-bold text-[var(--color-text-primary)]">Standard Limit</p>
  </div>
  </div>
  </div>`;
   } else {
     incomeBlock = `
- <div class="bg-gray-900 p-8 md:p-12 rounded-2xl my-16 text-white shadow-xl">
- <h3 class="text-white flex items-center gap-2 mt-0 font-bold text-xl"><svg class="w-6 h-6 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> High-Income Notice</h3>
- <p class="leading-relaxed text-indigo-50">Because your combined income of <strong>${formattedIncome}</strong> exceeds the $12,000 statutory ceiling, the ${formattedSupport} base is a minimum starting point. Judges in ${locationName} have discretion to increase support proportional to the family's standard of living.</p>
- <p class="mt-6 text-sm italic text-indigo-300">Note: The 45% net income cap remains a vital legal defense.</p>
+ <div class="callout-amber my-12">
+ <h3 class="flex items-center gap-3 mt-0 font-bold text-lg text-[var(--color-highlight)]"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> High-Income Notice</h3>
+ <p class="leading-relaxed text-[var(--color-highlight)]">Because your combined income of <strong>${formattedIncome}</strong> exceeds the $12,000 statutory ceiling, the ${formattedSupport} base is a minimum starting point. Judges in ${locationName} have discretion to increase support proportional to the family's standard of living.</p>
+ <p class="mt-4 text-sm italic text-[var(--color-highlight)]">Note: The 45% net income cap remains a vital legal defense.</p>
  </div>`;
   }
 
   let familyBlock = "";
   if (children >= 3) {
     familyBlock = `
- <div class="bg-indigo-50/50 p-8 md:p-12 rounded-2xl border border-indigo-100/50 my-16">
- <h4 class="text-indigo-950 flex items-center gap-2 mt-0 font-bold text-lg"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 15h6"/><path d="M9 11h6"/><path d="M9 19h1"/></svg> Large Family Analysis</h4>
- <p class="leading-relaxed text-gray-700">Raising ${childrenText} involves 'economies of scale'. The multiplier applied to the base income accounts for shared household costs. While the total of ${formattedSupport} is higher than for one child, the per-child cost is lower, reflecting common shared resources.</p>
+ <div class="card-highlighted my-12">
+ <h4 class="text-[var(--color-brand-primary)] flex items-center gap-3 mt-0 font-bold text-lg"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 15h6"/><path d="M9 11h6"/><path d="M9 19h1"/></svg> Large Family Analysis</h4>
+ <p class="leading-relaxed text-[var(--color-text-body)]">Raising ${childrenText} involves 'economies of scale'. The multiplier applied to the base income accounts for shared household costs. While the total of ${formattedSupport} is higher than for one child, the per-child cost is lower, reflecting common shared resources.</p>
  </div>`;
   }
 
@@ -246,29 +245,26 @@ const Breadcrumbs = ({
   county: { name: string; slug: string } | null;
   income: number;
 }) => (
-  <nav
-    aria-label="Breadcrumb"
-    className="flex mb-8 label-metadata no-print flex-wrap gap-y-2"
-  >
-    <Link href="/" className="hover:text-indigo-600 transition-colors shrink-0">Home</Link>
-    <span className="mx-2 opacity-30 shrink-0">/</span>
+  <nav aria-label="Breadcrumb" className="breadcrumbs-container no-print flex-wrap">
+    <Link href="/" className="breadcrumb-link">Home</Link>
+    <span className="breadcrumb-separator">/</span>
     <div className="flex items-center min-w-0">
-      <span className="opacity-30 shrink-0 sm:hidden">...</span>
-      <span className="mx-2 opacity-30 shrink-0 sm:hidden">/</span>
-      <span className="opacity-80 truncate hidden sm:inline">Washington</span>
+      <span className="breadcrumb-separator sm:hidden">...</span>
+      <span className="breadcrumb-separator mx-2 sm:hidden">/</span>
+      <span className="text-[var(--color-text-secondary)] truncate hidden sm:inline">Washington</span>
       {county && (
         <>
-          <span className="mx-2 opacity-30 shrink-0 hidden sm:inline">/</span>
+          <span className="breadcrumb-separator mx-2 hidden sm:inline">/</span>
           <Link
             href={`/${county.slug}-income-5000-2-children`}
-            className="hover:text-indigo-600 transition-colors truncate hidden sm:inline"
+            className="breadcrumb-link truncate hidden sm:inline"
           >
             {county.name}
           </Link>
         </>
       )}
-      <span className="mx-2 opacity-30 shrink-0">/</span>
-      <span className="truncate">${income.toLocaleString()} Calculation</span>
+      <span className="breadcrumb-separator mx-2">/</span>
+      <span className="breadcrumb-current truncate">${income.toLocaleString()} Calculation</span>
     </div>
   </nav>
 );
@@ -316,7 +312,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
     { label: "Combined Monthly Net Income", value: formattedIncome, icon: <Calculator className="w-4 h-4" /> },
     { label: "Number of Children", value: children.toString(), icon: <Info className="w-4 h-4" /> },
     { label: "Presumptive Basic Support", value: formattedSupport, icon: <Landmark className="w-4 h-4" /> },
-    { label: "Self-Support Reserve (2026)", value: "approximately $2,394", icon: <Scale className="w-4 h-4" /> },
+    { label: "Self-Support Reserve (2026)", value: "approximately $2,394", icon: <Scale className="w-4 h-4" />, isSSR: true },
     { label: "Jurisdiction", value: locationName, icon: <Landmark className="w-4 h-4" /> },
   ];
 
@@ -350,65 +346,66 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
   };
 
   return (
-    <main className="flex-1 bg-page relative w-full">
+    <main className="flex-1 bg-white relative w-full">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <CalculatorSchema income={income} childCount={children} county={countyName} url={`https://wcssc.site/${slug}`} resultAmount={supportNum !== null ? supportNum : undefined} />
 
-      <div className="container-wide section-default relative z-10">
-        <Breadcrumbs county={county} income={income} />
+      <div className="bg-white border-b border-[var(--color-bg-border)] py-12 lg:pt-12 lg:pb-10">
+        <div className="container-wide">
+          <Breadcrumbs county={county} income={income} />
 
+          <div className="max-w-4xl">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-8">
+              {formattedIncome} Child Support in <span className="text-[var(--color-brand-primary)]">{locationName}</span>
+            </h1>
+
+            <div className="flex flex-col gap-2">
+              <span className="text-[13px] font-medium text-[var(--color-text-secondary)] uppercase tracking-[0.04em]">2026 Monthly Presumptive Payment</span>
+              <span className="text-5xl md:text-7xl font-bold tracking-tight text-[var(--color-text-primary)]">{formattedSupport}</span>
+            </div>
+
+            <div className="flex gap-8 md:gap-12 mt-10 pt-8 border-t border-[var(--color-bg-border)]">
+              <div className="stat-block">
+                <span className="stat-label">Net Income</span>
+                <span className="stat-value text-xl">{formattedIncome}</span>
+              </div>
+              <div className="stat-block">
+                <span className="stat-label">Children</span>
+                <span className="stat-value text-xl">{children}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-wide section-default">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
           <div className="lg:col-span-8">
             <AdContainer slot="top" wordCount={wordCount} />
 
-            <div className="mb-12">
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-                {formattedIncome} Child Support in <span className="text-indigo-600">{locationName}</span>
-              </h1>
-            </div>
-
-            <div className="mb-16">
-              <div className="card-standard text-center md:py-16">
-                <p className="label-metadata mb-8 text-gray-500">2026 Monthly Presumptive Payment</p>
-                <div className="mb-8">
-                  <span className="text-5xl md:text-6xl font-bold tracking-tighter text-indigo-600">{formattedSupport}</span>
-                </div>
-                <div className="flex justify-center items-center gap-8 md:gap-16 border-t border-gray-100 pt-8">
-                  <div>
-                    <p className="label-metadata mb-2 text-gray-400">Net Income</p>
-                    <p className="text-xl font-semibold">{formattedIncome}</p>
-                  </div>
-                  <div className="w-px h-8 bg-gray-200" />
-                  <div>
-                    <p className="label-metadata mb-2 text-gray-400">Children</p>
-                    <p className="text-xl font-semibold">{children}</p>
-                  </div>
-                </div>
-                <div className="mt-8">
-                  <PrintButton />
-                </div>
-              </div>
-            </div>
-
             <div className="mb-16">
               <h2 className="text-2xl font-bold mb-8 flex items-center gap-4">
-                <Landmark className="w-8 h-8 text-indigo-600" /> Key Calculation Figures
+                <Landmark className="w-8 h-8 text-[var(--color-brand-primary)]" /> Key Calculation Figures
               </h2>
-              <div className="table-container shadow-sm border border-gray-100 rounded-2xl overflow-hidden">
+              <div className="table-container shadow-[var(--shadow-card)]">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="bg-gray-50 border-b border-gray-100">
-                      <th className="px-6 h-14 label-metadata text-gray-500">Metric</th>
-                      <th className="px-6 h-14 label-metadata text-gray-500">Value</th>
+                    <tr>
+                      <th className="table-header-cell">Metric</th>
+                      <th className="table-header-cell">Value</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <tbody className="divide-y divide-[var(--color-bg-border-soft)]">
                     {keyFigures.map((item, idx) => (
-                      <tr key={idx} className="hover:bg-gray-50 transition-colors">
-                        <td className="px-6 h-14 flex items-center gap-4 text-sm font-medium">
-                          <span className="text-indigo-600">{item.icon}</span> {item.label}
+                      <tr key={idx} className="table-row">
+                        <td className="table-body-cell font-medium flex items-center gap-4">
+                          <span className="text-[var(--color-brand-primary)]">{item.icon}</span> {item.label}
                         </td>
-                        <td className="px-6 h-14 text-sm text-gray-600">{item.value}</td>
+                        <td className="table-body-cell font-bold text-[var(--color-text-primary)]">
+                          {item.isSSR ? (
+                            <span className="badge-warning">{item.value}</span>
+                          ) : item.value}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -416,57 +413,57 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
               </div>
             </div>
 
-            <article className="prose prose-gray prose-lg max-w-none mb-16">
-              <h2 className="text-3xl font-bold">Washington Child Support Guidelines (2026 Updates)</h2>
+            <article className="prose prose-gray prose-lg max-w-none mb-16 text-[var(--color-text-body)]">
+              <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)]">Washington Child Support Guidelines (2026 Updates)</h2>
               <p className="leading-relaxed">{intro}</p>
 
               <div className="my-16 not-prose">
                 <AdContainer slot="mid" wordCount={wordCount} />
               </div>
 
-              <h2 className="text-3xl font-bold">Breakdown of the {formattedIncome} Calculation</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)]">Breakdown of the {formattedIncome} Calculation</h2>
               <p className="leading-relaxed">{calculation}</p>
 
               <div className="not-prose" dangerouslySetInnerHTML={{ __html: incomeBlock }} />
               <div className="not-prose" dangerouslySetInnerHTML={{ __html: familyBlock }} />
 
-              <h2 className="text-3xl font-bold">The SSR and Low-Income Safeguards</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)]">The SSR and Low-Income Safeguards</h2>
               <p className="leading-relaxed">{ssr}</p>
 
               {county && (
                 <>
-                  <h2 className="text-3xl font-bold">Application in {countyName} Superior Court</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)]">Application in {countyName} Superior Court</h2>
                   <p className="leading-relaxed">
                     While the 2026 economic schedule is uniform statewide, the <strong>{county.court}</strong> handles procedural enforcement. In <strong>{countyName}</strong>, judges may require additional proof of income before finalizing the {formattedSupport} order.
                   </p>
                 </>
               )}
 
-              <h2 className="text-3xl font-bold">Calculation Summary & Requirements</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)]">Calculation Summary & Requirements</h2>
               <p className="leading-relaxed">{conclusion}</p>
 
-              <div className="bg-gray-50 p-8 md:p-12 rounded-2xl border border-gray-100 mt-16 not-prose">
-                <p className="label-metadata mb-4 flex items-center gap-2 text-indigo-600">
-                  <Scale className="w-6 h-6" /> Accuracy & Legal Status
+              <div className="callout-gray mt-16 not-prose">
+                <p className="text-[12px] font-bold text-[var(--color-brand-primary)] uppercase tracking-wider mb-4 flex items-center gap-3">
+                  <Scale className="w-5 h-5" /> Accuracy & Legal Status
                 </p>
-                <p className="text-sm italic text-gray-600 leading-relaxed">{legal}</p>
+                <p className="text-sm italic text-[var(--color-text-secondary)] leading-relaxed">{legal}</p>
               </div>
 
-              <p className="label-metadata mt-16 text-gray-400">{timestamp}</p>
+              <p className="text-[12px] font-semibold text-[var(--color-text-secondary)] uppercase tracking-widest mt-12">{timestamp}</p>
             </article>
 
-            <div className="mb-16 p-8 md:p-12 bg-gray-900 rounded-3xl text-center shadow-xl relative overflow-hidden">
-              <h3 className="text-3xl text-white mb-8 font-bold">Advanced Estimator Wizard</h3>
-              <p className="mb-12 text-lg text-indigo-100 max-w-lg mx-auto leading-relaxed">
+            <div className="card-highlighted !p-12 text-center shadow-[var(--shadow-card-md)] relative overflow-hidden mb-16">
+              <h3 className="text-3xl text-[var(--color-text-primary)] mb-6 font-bold">Advanced Estimator Wizard</h3>
+              <p className="mb-10 text-lg text-[var(--color-text-body)] max-w-lg mx-auto leading-relaxed">
                 Get a full breakdown using our Washington Child Support Worksheet Wizard. Calculate precise income splits and extraordinary expenses.
               </p>
-              <Link href="/worksheet" className="btn-primary w-auto px-8 btn-h-44 inline-flex items-center justify-center gap-4">
+              <Link href="/worksheet" className="btn-primary-lg btn-primary !rounded-full">
                 Launch Complete Wizard <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
 
             <section className="mb-16">
-              <h2 className="text-2xl font-bold mb-12">Common Support Questions</h2>
+              <h2 className="text-2xl font-bold mb-10">Common Support Questions</h2>
               <FAQAccordion items={dynamicFAQs.map((f) => ({ question: f.q, answer: f.a }))} />
             </section>
           </div>
@@ -479,9 +476,9 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
               </div>
             </div>
             <div className="lg:hidden">
-              <details className="bg-white border border-gray-200 rounded-2xl shadow-sm group overflow-hidden">
-                <summary className="flex items-center justify-between px-6 h-14 cursor-pointer select-none list-none font-semibold text-gray-900">
-                  <span>📚 Resources & Legal Sources</span>
+              <details className="bg-white border border-[var(--color-bg-border)] rounded-2xl shadow-[var(--shadow-card)] group overflow-hidden">
+                <summary className="flex items-center justify-between px-6 h-14 cursor-pointer select-none list-none font-semibold text-[var(--color-text-primary)]">
+                  <span className="flex items-center gap-2"><Scale size={18} className="text-[var(--color-brand-primary)]" /> Resources & Legal Sources</span>
                   <svg className="w-5 h-5 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                 </summary>
                 <div className="px-6 pb-6 pt-2">
@@ -492,16 +489,19 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                 <AuthorBox />
               </div>
             </div>
+            <div className="not-print">
+               <PrintButton />
+            </div>
           </aside>
         </div>
 
-        <div className="border-t border-gray-100 pt-16 mt-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+        <div className="border-t border-[var(--color-bg-border-soft)] pt-16 mt-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
             {internalLinks.map((link, idx) => (
-              <Link key={idx} href={link.href} className="group p-8 bg-white border border-gray-100 rounded-2xl hover:border-indigo-600 hover:shadow-md transition-all">
-                <p className="label-metadata mb-4 text-gray-400">Resource</p>
-                <h4 className="font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors flex items-center gap-2">
-                  {link.label} <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all -translate-x-4 group-hover:translate-x-0" />
+              <Link key={idx} href={link.href} className="group card-standard !p-8 shadow-none hover:shadow-[var(--shadow-card-md)]">
+                <p className="eyebrow !text-[var(--color-text-secondary)] mb-4">Resource</p>
+                <h4 className="font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-brand-primary)] transition-colors flex items-center justify-between">
+                  {link.label} <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                 </h4>
               </Link>
             ))}
@@ -510,15 +510,15 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
           <h2 className="text-3xl font-bold mb-16 text-center">Explore Related Calculations</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-5xl mx-auto">
             <div>
-              <h3 className="label-metadata mb-8 text-gray-500 uppercase tracking-widest">Nearby Income Tiers ({countyName})</h3>
-              <div className="space-y-6">
+              <h3 className="eyebrow mb-8 !text-[var(--color-text-secondary)]">Nearby Income Tiers ({countyName})</h3>
+              <div className="space-y-4">
                 {[-1000, -500, 500, 1000].map((diff) => {
                   const newInc = income + diff;
                   if (newInc <= 0) return null;
                   const pf = county?.slug ? `${county.slug}-income` : "income";
                   const nChildren = children === 1 ? "1-child" : `${children}-children`;
                   return (
-                    <Link key={diff} href={`/${pf}-${newInc}-${nChildren}`} className="block p-6 bg-white border border-gray-100 rounded-xl hover:border-indigo-600 hover:shadow-sm transition-all group font-medium text-gray-700">
+                    <Link key={diff} href={`/${pf}-${newInc}-${nChildren}`} className="cta-link !text-lg !font-medium hover:!text-[var(--color-brand-primary-hover)] block py-1">
                       Estimate {formatter.format(newInc)} for {children} {children === 1 ? "Child" : "Children"}
                     </Link>
                   );
@@ -526,10 +526,10 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
               </div>
             </div>
             <div>
-              <h3 className="label-metadata mb-8 text-gray-500 uppercase tracking-widest">Compare Washington Counties</h3>
-              <div className="space-y-6">
+              <h3 className="eyebrow mb-8 !text-[var(--color-text-secondary)]">Compare Washington Counties</h3>
+              <div className="space-y-4">
                 {siblingCounties.map((c) => (
-                  <Link key={c.slug} href={`/${c.slug}-income-${income}-${children === 1 ? "1-child" : `${children}-children`}`} className="block p-6 bg-white border border-gray-100 rounded-xl hover:border-indigo-600 hover:shadow-sm transition-all group font-medium text-gray-700">
+                  <Link key={c.slug} href={`/${c.slug}-income-${income}-${children === 1 ? "1-child" : `${children}-children`}`} className="cta-link !text-lg !font-medium hover:!text-[var(--color-brand-primary-hover)] block py-1">
                     {c.name} Child Support for {formattedIncome}
                   </Link>
                 ))}

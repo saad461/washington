@@ -24,19 +24,19 @@ const SearchMock = ({ isSidebar = false }: { isSidebar?: boolean }) => {
  value={query}
  onChange={(e) => setQuery(e.target.value)}
  placeholder="Search your WA county..."
- className={`w-full ${isSidebar ? 'py-4 min-h-[48px] px-14 text-sm' : 'py-6 px-16 text-lg'} bg-white border-2 border-gray-100 rounded-xl shadow-sm shadow-indigo-900/5 focus:border-indigo-600 focus:ring-0 transition-all outline-none font-medium placeholder:`}
+ className={`w-full ${isSidebar ? 'py-4 min-h-[48px] px-14 text-sm' : 'py-6 px-16 text-lg'} bg-white border-2 border-[var(--color-bg-border-soft)] rounded-xl shadow-[var(--shadow-card)] shadow-indigo-900/5 focus:border-indigo-600 focus:ring-0 transition-all outline-none font-medium placeholder:`}
  />
  </div>
 
  {query.length > 0 && (
- <div className="absolute z-50 mt-4 w-full bg-white border border-gray-100 rounded-xl shadow-sm p-4 overflow-hidden animate-in fade-in slide-in-from-top-2">
+ <div className="absolute z-50 mt-4 w-full bg-white border border-[var(--color-bg-border-soft)] rounded-xl shadow-[var(--shadow-card)] p-4 overflow-hidden animate-in fade-in slide-in-from-top-2">
  {filtered.length > 0 ? (
  <div className="space-y-1">
  {filtered.map((county) => (
  <Link
  key={county.slug}
  href={`/${county.slug}-income-5000-2-children`}
- className="flex items-center justify-between p-4 hover:bg-gray-50 rounded-2xl transition-all group"
+ className="flex items-center justify-between p-4 hover:bg-[var(--color-bg-subtle)] rounded-2xl transition-all group"
  onClick={() => setQuery('')}
  >
  <div className="flex items-center gap-4">
@@ -57,7 +57,7 @@ const SearchMock = ({ isSidebar = false }: { isSidebar?: boolean }) => {
  </div>
  ) : (
  <div className="p-6 text-center">
- <Calculator className="w-10 h-10 text-gray-200 mx-auto mb-4" />
+ <Calculator className="w-10 h-10 text-[var(--color-text-disabled)] mx-auto mb-4" />
  <p className=" font-medium text-sm">No Washington county found matching &quot;{query}&quot;</p>
  </div>
  )}

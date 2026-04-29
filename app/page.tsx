@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, CheckCircle, Calculator, Scale, Shield } from "lucide-react";
 import HomeCalculator from "@/components/HomeCalculator";
 import CalculatorSchema from "@/components/CalculatorSchema";
 import FAQAccordion from "@/components/FAQAccordion";
@@ -12,9 +12,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://wcssc.site/" },
 };
 
-// ─── Live benchmark data driven from the actual 2026 economic table ───────────
-// FIX: was hardcoded strings like "$700–$900" — now real values from getSupport().
-// If the table ever updates, these numbers update automatically.
 function formatSupport(income: number, children: number): string {
   const val = getSupport(income, children);
   if (val === null) return "—";
@@ -27,8 +24,6 @@ const BENCHMARK_ROWS = [3000, 5000, 8000].map((income) => ({
   two:    formatSupport(income, 2),
 }));
 
-// ─── Case study constants — driven from table so they stay accurate ───────────
-// FIX: was hardcoded $1,155 which was wrong. Real value: getSupport(5000, 2) = $1,446.
 const CASE_STUDY_INCOME   = 5000;
 const CASE_STUDY_CHILDREN = 2;
 const CASE_STUDY_SUPPORT  = getSupport(CASE_STUDY_INCOME, CASE_STUDY_CHILDREN);
@@ -65,32 +60,22 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex-1 flex flex-col bg-[#F8FAFC] relative overflow-hidden w-full">
+    <div className="flex-1 flex flex-col bg-white relative overflow-hidden w-full">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <CalculatorSchema url="https://wcssc.site" />
 
-      {/* Decorative blobs */}
-      <div
-        className="absolute inset-0 pointer-events-none overflow-hidden z-0"
-        aria-hidden="true"
-      >
-        <div className="w-[32rem] h-[32rem] sm:w-[40rem] sm:h-[40rem] bg-indigo-100/40 rounded-full blur-[100px] absolute -top-[10%] -left-[10%]" />
-        <div className="w-[32rem] h-[32rem] sm:w-[40rem] sm:h-[40rem] bg-purple-100/40 rounded-full blur-[100px] absolute -bottom-[10%] -right-[10%]" />
-      </div>
-
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="pt-12 lg:pt-20 w-full relative">
+      <section className="pt-12 lg:pt-20 pb-12 lg:pb-20 w-full relative">
         <div className="container-wide">
-          <div className="text-center mb-8 md:mb-16 space-y-6">
-            <h1 className="text-balance">
-              The Modern Standard for{" "}
-              <br className="hidden sm:block" />
-              <span className="text-gradient">Washington Child Support</span>
+          <div className="text-center mb-12 md:mb-16 space-y-6">
+            <span className="eyebrow mx-auto">Washington State Standards</span>
+            <h1 className="text-balance max-w-4xl mx-auto">
+              The Modern Standard for <span className="text-[var(--color-brand-primary)]">Washington Child Support</span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed max-w-2xl mx-auto">
               Precision-engineered for the 2026 AOC economic schedule. Fast,
               private, and 100% compliant with Washington State guidelines.
             </p>
@@ -99,71 +84,188 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── KEY FIGURES ──────────────────────────────────────────────────── */}
-      <section className="section-alt w-full border-y border-gray-100 relative">
+      {/* ── STAT BAR ────────────────────────────────────────────────────── */}
+      <section className="section-default bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative">
         <div className="container-wide">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 w-full">
+          {/* Desktop view: Single row with dividers */}
+          <div className="hidden lg:flex items-center bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] px-7 py-5 divide-x divide-[var(--color-bg-border)]">
             {[
               { label: "2026 SSR",     value: "~$2,394 / mo"    },
               { label: "Min Support",  value: "$50 / child"      },
               { label: "Table Limit",  value: "$50,000"          },
               { label: "Jurisdiction", value: "Washington State" },
             ].map((fig, i) => (
-              <div key={i} className="card-standard text-center flex flex-col items-center justify-center h-full">
-                <div className="label-metadata mb-2 text-indigo-500">{fig.label}</div>
-                <div className="text-base sm:text-lg md:text-xl font-bold text-heading leading-snug">
-                  {fig.value}
-                </div>
+              <div key={i} className="flex-1 px-8 text-center flex flex-col items-center justify-center">
+                <div className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-[0.03em] mb-1">{fig.label}</div>
+                <div className="text-xl font-bold text-[var(--color-text-primary)] leading-tight">{fig.value}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile/Tablet view: 2x2 Grid */}
+          <div className="lg:hidden grid grid-cols-2 gap-4">
+            {[
+              { label: "2026 SSR",     value: "~$2,394 / mo"    },
+              { label: "Min Support",  value: "$50 / child"      },
+              { label: "Table Limit",  value: "$50,000"          },
+              { label: "Jurisdiction", value: "Washington State" },
+            ].map((fig, i) => (
+              <div key={i} className="bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] p-5 text-center flex flex-col items-center justify-center">
+                <div className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-[0.03em] mb-1">{fig.label}</div>
+                <div className="text-lg font-bold text-[var(--color-text-primary)] leading-tight">{fig.value}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── BENCHMARK TABLE ──────────────────────────────────────────────── */}
-      <section className="section-default w-full relative" id="benchmark-table">
+      {/* ── TRUST & FEATURES ────────────────────────────────────────────── */}
+      <section className="section-default w-full bg-white relative">
         <div className="container-wide">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-4xl mx-auto space-y-24">
+
+            {/* Why Legal Pros Trust WCSSC */}
+            <div>
+              <div className="text-center mb-12 space-y-4">
+                <span className="eyebrow mx-auto">The Professional Standard</span>
+                <h2>Why Legal Pros Trust WCSSC</h2>
+                <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+                  Unlike generic calculators, WCSSC is engineered to the exact 2026 Washington statutory logic.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="space-y-4">
+                  {[
+                    "Compliant with RCW 26.19 standards",
+                    "Includes Self-Support Reserve (SSR) logic",
+                    "Applies the 45% net income safety cap",
+                    "Live updates as you adjust inputs",
+                  ].map((text, i) => (
+                    <div key={i} className="flex items-center gap-4">
+                      <CheckCircle size={20} className="text-[var(--color-success)] shrink-0" />
+                      <span className="text-base font-semibold text-[var(--color-text-body)]">{text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="table-container shadow-[var(--shadow-card-md)]">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr>
+                        <th className="table-header-cell">Engine Logic</th>
+                        <th className="table-header-cell text-center">WCSSC</th>
+                        <th className="table-header-cell text-center">Standard</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {["2026 SSR Protection","45% Net Income Cap","Parenting Credit","RCW 26.19 Compliant"].map((name, i) => (
+                        <tr key={i} className="table-row">
+                          <td className="table-body-cell font-semibold">{name}</td>
+                          <td className="table-body-cell text-center">
+                            <CheckCircle size={20} className="mx-auto text-[var(--color-brand-primary)]" />
+                          </td>
+                          <td className="table-body-cell text-center">
+                            <div className="w-4 h-0.5 bg-[var(--color-bg-border)] mx-auto rounded-full" />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            {/* Feature cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div className="card-standard text-center flex flex-col items-center group">
+                <div className="w-12 h-12 bg-[var(--color-brand-primary-light)] text-[var(--color-brand-primary)] rounded-[12px] flex items-center justify-center mb-0 shadow-[var(--shadow-card)] group-hover:bg-[var(--color-brand-primary)] group-hover:text-white transition-all">
+                  <Scale size={24} />
+                </div>
+                <h3 className="text-[17px] font-semibold text-[var(--color-text-primary)] mt-4 mb-3">Legal Precision</h3>
+                <p className="text-[15px] text-[var(--color-text-body)] leading-[1.65] mb-6">
+                  Mapped exactly to the 2026 Washington State Economic Tables and statutory updates.
+                </p>
+                <Link href="/editorial-methodology" className="cta-link mt-auto">
+                  View methodology <ChevronRight size={16} />
+                </Link>
+              </div>
+
+              <div className="card-standard text-center flex flex-col items-center group">
+                <div className="w-12 h-12 bg-[var(--color-success-bg)] text-[var(--color-success)] rounded-[12px] flex items-center justify-center mb-0 shadow-[var(--shadow-card)] group-hover:bg-[var(--color-success)] group-hover:text-white transition-all">
+                  <Shield size={24} />
+                </div>
+                <h3 className="text-[17px] font-semibold text-[var(--color-text-primary)] mt-4 mb-3">Privacy First</h3>
+                <p className="text-[15px] text-[var(--color-text-body)] leading-[1.65] mb-6">
+                  No data is stored. All processing stays local in your browser session for 100% privacy.
+                </p>
+                <Link href="/privacy" className="cta-link mt-auto">
+                  Learn more <ChevronRight size={16} />
+                </Link>
+              </div>
+
+              <div className="card-standard text-center flex flex-col items-center group sm:col-span-2 md:col-span-1">
+                <div className="w-12 h-12 bg-[var(--color-warning-bg)] text-[var(--color-warning)] rounded-[12px] flex items-center justify-center mb-0 shadow-[var(--shadow-card)] group-hover:bg-[var(--color-warning)] group-hover:text-white transition-all">
+                  <Calculator size={24} />
+                </div>
+                <h3 className="text-[17px] font-semibold text-[var(--color-text-primary)] mt-4 mb-3">Worksheet Wizard</h3>
+                <p className="text-[15px] text-[var(--color-text-body)] leading-[1.65] mb-6">
+                  Generate the mandatory 8-part official PDF worksheet using our advanced automated wizard.
+                </p>
+                <Link href="/worksheet" className="cta-link mt-auto">
+                  Launch Wizard <ChevronRight size={16} />
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── BENCHMARK TABLE ──────────────────────────────────────────────── */}
+      <section className="section-default w-full relative bg-white" id="benchmark-table">
+        <div className="container-wide">
+          <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
+              <span className="eyebrow">Quick Reference</span>
               <h2>Benchmark Support Estimates</h2>
-              <p className="text-muted text-base sm:text-lg">
+              <p className="text-[var(--color-text-secondary)] text-lg">
                 Standard monthly totals based on the 2026 economic table.
               </p>
             </div>
 
-            <div className="table-container shadow-xl border border-gray-200">
+            <div className="table-container shadow-[var(--shadow-card-md)]">
               <table className="w-full text-left border-collapse">
                 <caption className="sr-only">
                   Benchmark Child Support Estimates for Washington State 2026
                 </caption>
                 <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="table-header">Combined Monthly Net Income</th>
-                    <th className="table-header">1 Child</th>
-                    <th className="table-header">2 Children</th>
+                  <tr>
+                    <th className="table-header-cell">Combined Monthly Net Income</th>
+                    <th className="table-header-cell">1 Child</th>
+                    <th className="table-header-cell">2 Children</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
-                  {/* FIX: rows are now driven from getSupport() — always accurate */}
+                <tbody className="divide-y divide-[var(--color-bg-border-soft)]">
                   {BENCHMARK_ROWS.map((row, i) => (
                     <tr key={i} className="table-row">
-                      <td className="table-cell font-bold text-heading">{row.income}</td>
-                      <td className="table-cell font-medium">{row.one}</td>
-                      <td className="table-cell font-medium">{row.two}</td>
+                      <td className="table-body-cell font-medium text-[var(--color-text-secondary)]">{row.income}</td>
+                      <td className="table-body-cell font-bold text-[var(--color-text-primary)]">{row.one}</td>
+                      <td className="table-body-cell font-bold text-[var(--color-text-primary)]">{row.two}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
 
-            <p className="text-center mt-8 text-sm text-muted italic leading-relaxed max-w-2xl mx-auto">
+            <p className="text-center mt-8 text-[13px] text-[var(--color-text-secondary)] leading-relaxed max-w-2xl mx-auto">
               These figures are the presumptive basic support obligation from the
               2026 Washington State economic table. Actual court orders may differ
               based on custody arrangements, healthcare costs, and judicial decisions.
             </p>
 
             <div className="mt-12 flex justify-center">
-              <Link href="/worksheet" className="btn-primary btn-h-44 w-auto !px-8 !rounded-full !text-sm !font-semibold">
+              <Link href="/worksheet" className="btn-primary-lg btn-primary !rounded-full">
                 Calculate Exact Support
                 <ChevronRight className="w-5 h-5" />
               </Link>
@@ -173,55 +275,51 @@ export default function Home() {
       </section>
 
       {/* ── CASE STUDY ───────────────────────────────────────────────────── */}
-      <section className="section-alt w-full border-y border-gray-100 relative">
+      <section className="section-default w-full bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative">
         <div className="container-wide">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-heading text-center mb-12 md:mb-16">
-              Real-World Case Study
-            </h2>
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12 md:mb-16 space-y-4">
+              <span className="eyebrow">Real-World Case Study</span>
+              <h2 className="text-[var(--color-text-primary)]">
+                Application of 2026 Guidelines
+              </h2>
+            </div>
 
-            <div className="card-standard shadow-xl space-y-8 md:space-y-12">
-              <h3 className="text-heading text-center">
+            <div className="card-highlighted shadow-[var(--shadow-card)] space-y-8">
+              <h3 className="text-[var(--color-text-primary)] text-center">
                 Income Case: ${CASE_STUDY_INCOME.toLocaleString()} Net Monthly
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
                 {[
                   { label: "Net Monthly Income", value: `$${CASE_STUDY_INCOME.toLocaleString()}` },
                   { label: "Number of Children", value: String(CASE_STUDY_CHILDREN)             },
                   { label: "Location",           value: "King County"                           },
                 ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="text-center p-6 sm:p-8 rounded-xl sm:rounded-2xl bg-gray-50/50 border border-gray-100"
-                  >
-                    <div className="label-metadata text-muted mb-2">{item.label}</div>
-                    <div className="text-lg font-bold text-heading">{item.value}</div>
+                  <div key={i} className="stat-block p-4">
+                    <div className="stat-label">{item.label}</div>
+                    <div className="stat-value text-[15px] font-semibold">{item.value}</div>
                   </div>
                 ))}
               </div>
 
-              {/* Result highlight — REDESIGNED to look less like a button, more like a clean data card */}
-              <div className="max-w-sm mx-auto w-full">
-                <div className="bg-white border-2 border-indigo-600 rounded-2xl p-8 text-center shadow-lg relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-indigo-100 transition-colors" />
-                  <div className="relative z-10">
-                    <div className="label-metadata text-indigo-600 mb-2">
-                      Presumptive Base Support
-                    </div>
-                    <div className="text-4xl sm:text-5xl font-bold tracking-tight text-heading">
-                      {CASE_STUDY_DISPLAY}
-                      <span className="text-base sm:text-lg font-medium text-muted ml-2">/ month</span>
-                    </div>
+              <div className="max-w-md mx-auto w-full">
+                <div className="bg-white border border-[var(--color-brand-primary-mid)] rounded-xl p-8 text-center shadow-sm">
+                  <div className="text-[13px] font-medium text-[var(--color-text-secondary)] mb-2 uppercase tracking-wide">
+                    Presumptive Base Support
+                  </div>
+                  <div className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--color-text-primary)]">
+                    {CASE_STUDY_DISPLAY}
+                    <span className="text-lg font-medium text-[var(--color-text-secondary)] ml-2">/ mo</span>
                   </div>
                 </div>
               </div>
 
-              <p className="text-sm sm:text-base md:text-lg text-body leading-relaxed text-center max-w-2xl mx-auto">
+              <p className="text-base text-[var(--color-text-body)] leading-relaxed text-center max-w-2xl mx-auto">
                 In King County, courts apply the standard Washington economic
                 schedule. For a combined net income of ${CASE_STUDY_INCOME.toLocaleString()} with{" "}
                 {CASE_STUDY_CHILDREN} children, the presumptive base support is{" "}
-                <strong className="text-heading">{CASE_STUDY_DISPLAY}</strong> per month. This amount is typically shared
+                <strong className="text-[var(--color-text-primary)] font-bold">{CASE_STUDY_DISPLAY}</strong> per month. This amount is typically shared
                 between parents based on their proportional income share.
               </p>
             </div>
@@ -230,28 +328,27 @@ export default function Home() {
       </section>
 
       {/* ── EDUCATIONAL CONTENT ──────────────────────────────────────────── */}
-      <section className="section-default w-full relative border-b border-gray-100">
+      <section className="section-default w-full relative bg-white border-b border-[var(--color-bg-border)]">
         <div className="container-wide">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <h2 className="text-center mb-12 md:mb-16">
               Understanding the 2026 Guidelines
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 text-body">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 text-[var(--color-text-body)]">
               <div className="space-y-8">
-                <p className="text-base sm:text-lg leading-relaxed">
+                <p className="text-lg leading-relaxed">
                   Washington State uses the{" "}
-                  <strong>Income Shares Model</strong>, where both parents&apos;
+                  <strong className="text-[var(--color-text-primary)] font-bold">Income Shares Model</strong>, where both parents&apos;
                   monthly net incomes are combined. A proportional share is
                   dedicated to the children, reflecting what would have been
                   spent if the household remained together.
                 </p>
 
                 <div className="card-standard space-y-6">
-                  <h3>The 2026 Schedule</h3>
-                  <p className="text-sm sm:text-base text-muted">
-                    The 2026 economic tables, published by the{" "}
-                    <strong>AOC</strong>, cover combined monthly net incomes
+                  <h3 className="mb-0">The 2026 Schedule</h3>
+                  <p className="text-[var(--color-text-body)]">
+                    The 2026 economic tables cover combined monthly net incomes
                     from $0 to $50,000.
                   </p>
                   <ul className="space-y-4">
@@ -260,8 +357,8 @@ export default function Home() {
                       "Calculations cover all 39 Washington counties.",
                       "Updated for 2026 economic standards.",
                     ].map((li, i) => (
-                      <li key={i} className="flex items-start gap-4 text-sm font-medium">
-                        <span className="w-2 h-2 rounded-full bg-indigo-600 mt-2 shrink-0" />
+                      <li key={i} className="flex items-start gap-4 text-base">
+                        <CheckCircle className="text-[var(--color-success)] w-5 h-5 mt-1 shrink-0" />
                         {li}
                       </li>
                     ))}
@@ -271,19 +368,19 @@ export default function Home() {
 
               <div className="space-y-12 md:space-y-16">
                 <div className="space-y-4">
-                  <h3>The Self-Support Reserve (SSR)</h3>
-                  <p className="text-base sm:text-lg leading-relaxed text-muted">
+                  <h3 className="text-[var(--color-text-primary)]">The Self-Support Reserve (SSR)</h3>
+                  <p className="text-lg leading-relaxed text-[var(--color-text-body)]">
                     Washington&apos;s primary low-income protection is the{" "}
-                    <strong>SSR</strong>, set at{" "}
-                    <strong>approximately $2,394 per month for 2026</strong>.
+                    <strong className="text-[var(--color-text-primary)] font-bold">SSR</strong>, set at{" "}
+                    <strong className="text-[var(--color-text-primary)] font-bold">approximately $2,394 per month for 2026</strong>.
                     If a payment would leave the payer with less than this, the
                     court may deviate the payment downward.
                   </p>
                 </div>
 
                 <div className="space-y-4">
-                  <h3>The 45% Net Income Cap</h3>
-                  <p className="text-base sm:text-lg leading-relaxed text-muted">
+                  <h3 className="text-[var(--color-text-primary)]">The 45% Net Income Cap</h3>
+                  <p className="text-lg leading-relaxed text-[var(--color-text-body)]">
                     Total support obligations typically cannot legally exceed 45%
                     of a parent&apos;s monthly net income without explicit
                     judicial approval for good cause.
@@ -296,9 +393,9 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-      <section className="section-alt w-full border-y border-gray-100 relative">
+      <section className="section-default w-full bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative">
         <div className="container-wide">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <h2 className="text-center mb-12 md:mb-16">Common Questions</h2>
             <FAQAccordion items={homeFaqs} />
           </div>
@@ -306,24 +403,25 @@ export default function Home() {
       </section>
 
       {/* ── COUNTY QUICKLINKS ────────────────────────────────────────────── */}
-      <section className="section-default w-full relative">
+      <section className="section-default w-full relative bg-white">
         <div className="container-wide">
           <div className="text-center mb-12 md:mb-16">
-            <h2>County Guides</h2>
-            <p className="text-muted mt-4 text-base">
+            <span className="eyebrow">Local Guides</span>
+            <h2>Regional Resource Centers</h2>
+            <p className="text-[var(--color-text-secondary)] mt-4 text-lg">
               Local rules and benchmarks for Washington&apos;s major counties.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {[
               { label: "King County",      href: "/king-county-income-5000-2-children"      },
               { label: "Pierce County",    href: "/pierce-county-income-5000-2-children"    },
               { label: "Snohomish County", href: "/snohomish-county-income-5000-2-children" },
               { label: "Spokane County",   href: "/spokane-county-income-5000-2-children"   },
             ].map((c) => (
-              <Link key={c.href} href={c.href} className="card-interactive text-center group">
-                <span className="label-metadata block mb-2">County Guide</span>
-                <span className="text-sm font-bold text-heading group-hover:text-indigo-700 transition-colors">
+              <Link key={c.href} href={c.href} className="card-standard text-center group">
+                <span className="text-[12px] font-bold font-bold text-[var(--color-brand-accent)] uppercase tracking-[0.06em] block mb-2">County Guide</span>
+                <span className="text-lg font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-brand-primary)] transition-colors">
                   {c.label}
                 </span>
               </Link>
@@ -333,18 +431,19 @@ export default function Home() {
       </section>
 
       {/* ── BLOG QUICKLINKS ──────────────────────────────────────────────── */}
-      <section className="section-default border-t border-gray-100 w-full bg-white relative">
+      <section className="section-default border-t border-[var(--color-bg-border)] w-full bg-white relative">
         <div className="container-wide">
           <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12 md:mb-16">
             <div>
-              <h2>Latest Resources</h2>
-              <p className="text-muted mt-4 text-base">
+              <span className="eyebrow">Resource Center</span>
+              <h2 className="mt-2">Latest Legal Resources</h2>
+              <p className="text-[var(--color-text-secondary)] mt-4 text-lg">
                 Legal guides and economic analysis for Washington State.
               </p>
             </div>
             <Link
               href="/blog"
-              className="flex items-center gap-2 text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors shrink-0 no-underline px-6 btn-h-44 rounded-xl bg-gray-50 border border-gray-100"
+              className="btn-tertiary-ghost"
             >
               View all articles <ChevronRight size={16} />
             </Link>
@@ -368,18 +467,18 @@ export default function Home() {
                 cat:   "Local Rules",
               },
             ].map((p) => (
-              <Link key={p.href} href={p.href} className="card-interactive group flex flex-col">
-                <span className="badge badge-indigo !h-[22px] !text-[11px] mb-4 w-fit">{p.cat}</span>
+              <Link key={p.href} href={p.href} className="card-standard group flex flex-col">
+                <span className="badge-category mb-4 w-fit">{p.cat}</span>
                 <div className="flex-1">
-                  <h3 className="text-base sm:text-lg font-bold text-heading group-hover:text-indigo-700 transition-colors leading-snug">
+                  <h3 className="text-lg font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-brand-primary)] transition-colors leading-snug">
                     {p.label}
                   </h3>
                 </div>
-                <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
-                  <div className="text-sm font-bold text-muted group-hover:text-indigo-600 transition-colors">
+                <div className="mt-8 pt-6 border-t border-[var(--color-bg-border-soft)] flex items-center justify-between">
+                  <div className="cta-link">
                     Read Article
                   </div>
-                  <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all transform group-hover:translate-x-1 border border-gray-100">
+                  <div className="w-8 h-8 rounded-full bg-[var(--color-bg-subtle)] flex items-center justify-center group-hover:bg-[var(--color-brand-primary)] group-hover:text-white transition-all transform group-hover:translate-x-1 border border-[var(--color-bg-border)]">
                     <ChevronRight size={14} />
                   </div>
                 </div>

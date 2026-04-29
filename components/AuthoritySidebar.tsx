@@ -19,25 +19,25 @@ interface AuthoritySidebarProps {
 const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
  return (
  <aside className="w-full space-y-10 no-print font-sans">
- {/* 1. Verified Status Badge */}
- <div className="bg-gray-900 rounded-2xl p-6 text-white relative overflow-hidden shadow-sm">
+ {/* 1. Verified Status Badge - Tinted card variant */}
+ <div className="card-highlighted !p-8 shadow-[var(--shadow-card)]">
  <div className="flex items-center gap-3 mb-6 relative z-10">
- <ShieldCheck className="w-6 h-6 text-indigo-400" />
- <span className="label-metadata">Verified Legal Source</span>
+ <ShieldCheck className="w-6 h-6 text-[var(--color-brand-primary)]" />
+ <span className="eyebrow !mb-0">Verified Legal Source</span>
  </div>
- <h3 className="font-semibold mb-4 relative z-10 leading-tight font-heading">2026 Data Synchronized</h3>
- <p className=" text-sm leading-relaxed mb-8">
+ <h3 className="font-bold mb-4 relative z-10 leading-tight text-[var(--color-text-primary)]">2026 Data Synchronized</h3>
+ <p className="text-sm leading-relaxed mb-8 text-[var(--color-text-body)]">
  This calculator is calibrated to the official 2026 Washington State Child Support Schedule.
  </p>
- <div className="inline-flex items-center gap-2 px-2 py-1 bg-gray-800 rounded-[4px] label-metadata !text-emerald-400 border border-gray-700">
- <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+ <div className="badge-success !px-3 !py-1.5 !rounded-lg !text-[12px] font-bold !font-bold">
+ <div className="w-1.5 h-1.5 bg-[var(--color-success)] rounded-full animate-pulse mr-2" />
  Status: LIVE 2026
  </div>
  </div>
 
  {/* 2. Interactive Search */}
- <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm relative overflow-visible">
- <h3 className="label-metadata font-semibold uppercase mb-6 flex items-center gap-2">
+ <div className="card-standard !p-6 relative overflow-visible">
+ <h3 className="eyebrow !mb-6 flex items-center gap-2">
  <Gavel className="w-4 h-4 " />
  Change Location
  </h3>
@@ -47,8 +47,8 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
  </div>
 
  {/* 3. Official Source Links (E-E-A-T) */}
- <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
- <h3 className="label-metadata font-semibold uppercase mb-8">Official Authorities</h3>
+ <div className="card-subtle !p-6">
+ <h3 className="eyebrow !mb-8">Official Authorities</h3>
  <div className="space-y-3">
  {[
  { label: "WA DSHS Support Center", url: "https://www.dshs.wa.gov/esa/division-child-support", icon: Globe },
@@ -60,13 +60,13 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
  href={link.url}
  target="_blank"
  rel="noopener noreferrer"
- className="group flex items-center justify-between p-[10px_0] bg-white border-b border-gray-100 hover:border-indigo-400 transition-all"
+ className="group flex items-center justify-between py-4 border-b border-[var(--color-bg-border-soft)] hover:border-[var(--color-brand-primary)] transition-all"
  >
- <div className="flex items-center gap-[10px]">
- <div className="w-5 h-5 rounded-lg bg-gray-50 flex items-center justify-center group-hover:bg-indigo-50 transition-colors shrink-0">
- <ExternalLink size={14} className=" group-hover:text-indigo-600" />
+ <div className="flex items-center gap-3">
+ <div className="w-5 h-5 rounded-lg bg-[var(--color-bg-subtle)] flex items-center justify-center group-hover:bg-[var(--color-brand-primary-light)] transition-colors shrink-0">
+ <ExternalLink size={14} className="group-hover:text-[var(--color-brand-primary)]" />
  </div>
- <span className="label-metadata group-hover:text-indigo-600 transition-colors">{link.label}</span>
+ <span className="text-[13px] font-semibold text-[var(--color-text-body)] group-hover:text-[var(--color-brand-primary)] transition-colors uppercase tracking-wider">{link.label}</span>
  </div>
  </a>
  ))}
@@ -75,16 +75,18 @@ const AuthoritySidebar: React.FC<AuthoritySidebarProps> = ({ county }) => {
 
  {/* 4. Local Quick Info (If county exists) */}
  {county && (
- <div className="p-6 border border-gray-100 rounded-xl border-dashed bg-white">
+ <div className="p-6 border border-[var(--color-bg-border)] rounded-xl border-dashed bg-white">
  <div className="flex items-center gap-3 mb-6">
- <MapPin className="w-5 h-5 text-indigo-600" />
- <h4 className="label-metadata font-semibold uppercase ">{county.name} Filing Info</h4>
+ <MapPin className="w-5 h-5 text-[var(--color-brand-primary)]" />
+ <h4 className="eyebrow !mb-0">{county.name} Filing Info</h4>
  </div>
- <p className="label-metadata mb-2">Primary Seat: {county.seat}</p>
- <p className="label-metadata leading-relaxed mb-6">{county.courtAddress}</p>
- <div className="flex items-center gap-2 label-metadata ">
+ <div className="space-y-2">
+ <p className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-widest">Primary Seat: {county.seat}</p>
+ <p className="text-[13px] font-medium leading-relaxed text-[var(--color-text-body)] mb-4">{county.courtAddress}</p>
+ <div className="flex items-center gap-2 text-[var(--color-brand-primary)] font-bold text-[12px]">
  <Clock className="w-3 h-3" />
  Clerk: {county.clerkPhone}
+ </div>
  </div>
  </div>
  )}

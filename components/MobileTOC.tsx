@@ -23,7 +23,7 @@ export default function MobileTOC({ headings }: MobileTOCProps) {
  <summary className="flex items-center justify-between px-5 py-4 min-h-[48px] cursor-pointer font-medium text-sm text-indigo-700 uppercase select-none list-none">
  <span>📑 Table of Contents</span>
  <svg
- className="w-4 h-4 text-indigo-400 transition-transform duration-300 group-open:rotate-180"
+ className="w-4 h-4 text-[var(--color-brand-primary-hover)] transition-transform duration-300 group-open:rotate-180"
  fill="none"
  stroke="currentColor"
  viewBox="0 0 24 24"
@@ -39,7 +39,7 @@ export default function MobileTOC({ headings }: MobileTOCProps) {
  onClick={(e) => handleClick(e, h.id)}
  className={`block transition-colors leading-snug hover:text-indigo-800 ${
  h.level === 3
- ? 'pl-4 label-metadata text-indigo-600'
+ ? 'pl-4 label-metadata text-[var(--color-brand-primary)]'
  : 'text-sm font-medium '
  }`}
  >

@@ -21,7 +21,7 @@ export default function TermsPage() {
 
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8 md:mb-12">
-          <div className="p-4 bg-indigo-600 rounded-2xl shadow-sm shadow-indigo-600/20">
+          <div className="p-4 bg-indigo-600 rounded-2xl shadow-[var(--shadow-card)] shadow-indigo-600/20">
             <FileText className="w-8 h-8 text-white" />
           </div>
           <div>
@@ -80,24 +80,24 @@ export default function TermsPage() {
           ].map((section, i) => (
             <section key={i} className="card-standard">
               <div className="flex items-center gap-4 mb-4">
-                <CheckCircle2 className="w-5 h-5 text-indigo-600 flex-shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-[var(--color-brand-primary)] flex-shrink-0" />
                 <h2 className="text-xl font-semibold">{section.title}</h2>
               </div>
               <div className="md:pl-9">
-                <p className="leading-relaxed text-gray-700">{section.body}</p>
+                <p className="leading-relaxed text-[var(--color-text-secondary)]">{section.body}</p>
               </div>
             </section>
           ))}
         </div>
 
         {/* Footer info */}
-        <div className="mt-16 pt-12 border-t border-gray-100 text-center">
-          <p className="label-metadata mb-6 text-gray-400">Effective Date: January 1, 2026</p>
+        <div className="mt-16 pt-12 border-t border-[var(--color-bg-border-soft)] text-center">
+          <p className="label-metadata mb-6 text-[var(--color-text-secondary)]">Effective Date: January 1, 2026</p>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-4 label-metadata">
-            <Link href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</Link>
-            <Link href="/disclaimer" className="hover:text-indigo-600 transition-colors">Legal Disclaimer</Link>
-            <Link href="/about" className="hover:text-indigo-600 transition-colors">About Us</Link>
-            <Link href="/" className="hover:text-indigo-600 transition-colors">Calculator</Link>
+            <Link href="/privacy" className="hover:text-[var(--color-brand-primary)] transition-colors">Privacy Policy</Link>
+            <Link href="/disclaimer" className="hover:text-[var(--color-brand-primary)] transition-colors">Legal Disclaimer</Link>
+            <Link href="/about" className="hover:text-[var(--color-brand-primary)] transition-colors">About Us</Link>
+            <Link href="/" className="hover:text-[var(--color-brand-primary)] transition-colors">Calculator</Link>
           </div>
         </div>
       </div>

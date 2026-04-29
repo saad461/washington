@@ -2,571 +2,581 @@
 @plugin "@tailwindcss/typography";
 
 /* ─────────────────────────────────────────────
-   DESIGN TOKENS
-   All values live here. Never hardcode elsewhere.
+   DESIGN TOKENS — TAILWIND V4
 ───────────────────────────────────────────────*/
-:root {
-  --background: #F8FAFC;
-  --foreground: #475569;
-
-  /* Surface palette */
-  --color-page-bg: #F8FAFC;
-  --color-section-alt: #F1F5F9;
-  --color-card-bg: #FFFFFF;
-  --color-border-default: #E2E8F0;
-
-  /* Text palette */
-  --color-heading: #0F172A;
-  --color-body: #475569;
-  --color-muted: #94A3B8;
+@theme {
+  /* Backgrounds */
+  --color-bg-page: #FFFFFF;
+  --color-bg-subtle: #F9FAFB;
+  --color-bg-muted: #F3F4F6;
+  --color-bg-border: #E5E7EB;
+  --color-bg-border-soft: #F3F4F6;
 
   /* Brand */
-  --color-primary-indigo: #6366F1;
-  --color-primary-hover: #4F46E5;
+  --color-brand-primary: #2563EB;
+  --color-brand-primary-hover: #1D4ED8;
+  --color-brand-primary-light: #EFF6FF;
+  --color-brand-primary-mid: #DBEAFE;
+  --color-brand-accent: #6366F1;
+  --color-brand-accent-light: #EEF2FF;
 
-  /* Spacing scale — use these for consistent rhythm */
-  --space-section-sm: 3rem;      /* 48px  — mobile sections */
-  --space-section-lg: 5rem;      /* 80px  — desktop sections */
+  /* Text */
+  --color-text-primary: #111827;
+  --color-text-body: #1F2937;
+  --color-text-secondary: #374151;
+  --color-text-tertiary: #4B5563;
+  --color-text-placeholder: #9CA3AF;
+  --color-text-disabled: #D1D5DB;
 
-  /* Container widths */
-  --container-max: 80rem;        /* 1280px — wide layouts */
-  --container-prose: 42rem;      /* 672px  — reading width (max-w-2xl) */
+  /* Semantic */
+  --color-success: #15803D;
+  --color-success-bg: #F0FDF4;
+  --color-warning: #B45309;
+  --color-warning-bg: #FFFBEB;
+  --color-warning-border: #FCD34D;
+  --color-info: #1D4ED8;
+  --color-info-bg: #EFF6FF;
+  --color-highlight: #92400E;
+  --color-highlight-bg: #FEF3C7;
 
-  /* Border radius scale */
-  --radius-sm: 0.5rem;           /* 8px   — tags, chips */
-  --radius-md: 0.75rem;          /* 12px  — inputs on mobile */
-  --radius-lg: 1rem;             /* 16px  — buttons, inputs desktop */
-  --radius-xl: 1.25rem;          /* 20px  — cards mobile */
-  --radius-2xl: 1.5rem;          /* 24px  — cards tablet */
-  --radius-3xl: 2rem;            /* 32px  — cards desktop */
+  /* Interactive States */
+  --color-focus-ring: #93C5FD;
+  --color-hover-bg: #F8FAFF;
 
-  /* Elevation system — layered shadows for realism */
-  --shadow-card: 0 1px 3px rgb(0 0 0 / 0.05), 0 1px 2px rgb(0 0 0 / 0.04);
-  --shadow-raised:
-    0 4px 6px -1px rgb(0 0 0 / 0.07),
-    0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-float:
-    0 10px 15px -3px rgb(0 0 0 / 0.07),
-    0 4px 6px -4px rgb(0 0 0 / 0.05),
-    0 0 0 1px rgb(0 0 0 / 0.02);
-  --shadow-hover:
-    0 20px 25px -5px rgb(0 0 0 / 0.08),
-    0 8px 10px -6px rgb(0 0 0 / 0.05),
-    0 0 0 1px rgb(0 0 0 / 0.02);
-  --shadow-brand: 0 8px 24px -4px rgb(99 102 241 / 0.35);
-  --shadow-brand-hover: 0 12px 32px -4px rgb(99 102 241 / 0.45);
+  /* Typography Scale — tokens */
+  --font-size-label-xs: 11px;
+  --font-size-label-sm: 12px;
+  --font-size-label: 13px;
+  --font-size-body-sm: 13px;
+  --font-size-body: 15px;
+  --font-size-body-lg: 16px;
+  --font-size-body-xl: 17px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-card-md: 0 4px 12px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.09), 0 2px 6px rgba(0,0,0,0.05);
+  --shadow-button: 0 1px 2px rgba(0,0,0,0.1);
+  --shadow-input: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-input-focus: 0 0 0 3px rgba(147,197,253,0.4);
+
+  /* Border Radius */
+  --radius-card: 14px;
+  --radius-button: 10px;
+  --radius-input: 10px;
+  --radius-badge: 6px;
+
+  /* Default theme overrides */
+  --color-background: var(--color-bg-page);
+  --color-foreground: var(--color-text-body);
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-page: var(--color-page-bg);
-  --color-section-alt: var(--color-section-alt);
-  --color-card: var(--color-card-bg);
-  --color-border-default: var(--color-border-default);
-  --color-heading: var(--color-heading);
-  --color-body: var(--color-body);
-  --color-muted: var(--color-muted);
-  --color-primary: var(--color-primary-indigo);
-  --color-primary-hover: var(--color-primary-hover);
-
-  --font-sans: "Inter", var(--font-inter);
-  --font-heading: "Poppins", var(--font-poppins);
-  --font-mono: var(--font-geist-mono);
-
-  /* Wire our custom tokens into Tailwind's shadow system */
-  --shadow-card: var(--shadow-card);
-  --shadow-raised: var(--shadow-raised);
-  --shadow-float: var(--shadow-float);
-  --shadow-hover: var(--shadow-hover);
-  --shadow-brand: var(--shadow-brand);
-}
-
 
 /* ─────────────────────────────────────────────
    BASE LAYER — element defaults
 ───────────────────────────────────────────────*/
 @layer base {
   html {
-    /* Prevent layout shift from scrollbar appearing */
     scrollbar-gutter: stable;
-    /* Smooth scroll for anchor links */
     scroll-behavior: smooth;
   }
 
   body {
-    background: var(--color-page-bg);
-    color: var(--color-body);
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.625;
+    background: var(--color-bg-page);
+    color: var(--color-text-body);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-size: var(--font-size-body);
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-display: swap;
-    /* Prevent horizontal overflow on mobile */
     overflow-x: hidden;
   }
 
-  /* ── Typography scale with 3 breakpoints ──────
-     FIX: was 2 breakpoints (abrupt jump). Now smooth.
-  ──────────────────────────────────────────────*/
   h1 {
-    /* 30px → 36px → 48px */
-    @apply text-3xl sm:text-4xl lg:text-5xl font-bold font-heading text-heading leading-[1.2] tracking-tight;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1.2;
   }
 
   h2 {
-    /* 24px → 30px → 36px */
-    @apply text-2xl sm:text-3xl lg:text-4xl font-bold font-heading text-heading leading-[1.2] tracking-tight;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1.25;
   }
 
   h3 {
-    /* 20px → 22px → 24px */
-    @apply text-xl sm:text-[1.375rem] lg:text-2xl font-semibold font-heading text-heading leading-snug tracking-tight;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.35;
   }
 
   h4 {
-    @apply text-lg font-semibold font-heading text-heading leading-snug;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-body);
+    line-height: 1.4;
   }
 
-  /* Body text: 16px mobile → 18px desktop */
   p, li {
-    @apply text-base md:text-lg text-body leading-relaxed;
+    font-size: var(--font-size-body);
+    color: var(--color-text-body);
+    line-height: 1.7;
   }
 
-  /* Tighten list spacing */
-  ul, ol {
-    @apply space-y-2;
-  }
-
-  /* Links */
   a {
-    @apply text-indigo-600 underline-offset-2 hover:text-indigo-700 transition-colors duration-200;
+    color: var(--color-brand-primary);
+    text-decoration: none;
+    transition: color 120ms ease;
   }
 
-  /* Reset link style inside buttons/nav */
-  .no-underline-link, button a, nav a {
-    @apply no-underline text-inherit;
+  a:hover {
+    color: var(--color-brand-primary-hover);
+    text-decoration: underline;
   }
 
-  /* Horizontal rules */
   hr {
-    @apply border-gray-200/70 my-8;
+    border: none;
+    border-top: 1px solid var(--color-bg-border);
+    margin: 0;
   }
 
-  /* Focus ring for keyboard nav — visible but not intrusive */
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-indigo-500 rounded-sm;
+    outline: none;
+    box-shadow: var(--shadow-input-focus);
   }
 }
 
-
 /* ─────────────────────────────────────────────
-   UTILITY CLASSES — reusable helpers
+   UTILITY CLASSES
 ───────────────────────────────────────────────*/
 @layer utilities {
-  /* ── Text helpers ── */
-  .text-small {
-    @apply text-sm text-muted leading-relaxed;
+  .section-padding {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  @media (max-width: 640px) {
+    .section-padding {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
   }
 
-  /* Labels / metadata — "all-caps micro-text" SaaS pattern */
-  .label-metadata {
-    @apply text-[11px] uppercase font-bold text-indigo-500 tracking-[0.1em];
+  .container-wide {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  @media (max-width: 640px) {
+    .container-wide {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
   }
 
-  /* Gradient heading — use sparingly on hero text only */
-  .text-gradient {
-    @apply bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent;
-  }
-
-  /* ── Balance text for headings ── */
-  .text-balance {
-    text-wrap: balance;
-  }
+  /* Specific typography utilities */
+  .text-label-xs { font-size: 11px; font-weight: 600; line-height: 1.4; letter-spacing: 0.05em; }
+  .text-label-sm { font-size: 12px; font-weight: 600; line-height: 1.4; letter-spacing: 0.03em; }
+  .text-label    { font-size: 13px; font-weight: 500; line-height: 1.4; letter-spacing: 0.01em; }
+  .text-body-sm  { font-size: 13px; font-weight: 400; line-height: 1.65; }
+  .text-body     { font-size: 15px; font-weight: 400; line-height: 1.7;  }
+  .text-body-lg  { font-size: 16px; font-weight: 400; line-height: 1.7;  }
+  .text-body-xl  { font-size: 17px; font-weight: 400; line-height: 1.65; }
 }
 
-
 /* ─────────────────────────────────────────────
-   COMPONENT LAYER — reusable UI classes
+   COMPONENT LAYER
 ───────────────────────────────────────────────*/
 @layer components {
-
-  /* ══ LAYOUT ══════════════════════════════════*/
-
-  /* Section wrapper — 2-step spacing scale
-     Strict 8px scale: 48px (mobile) -> 80px (desktop) */
-  .section-default {
-    @apply py-12 lg:py-20;
-  }
-
-  /* Alternate section background */
-  .section-alt {
-    @apply py-12 lg:py-20 bg-[--color-section-alt];
-  }
-
-  /* Wide container — for dashboards, full layouts
-     Max-width: 1280px, Horizontal padding: 16px (mob) / 24px (tab) / 32px (desk) */
-  .container-wide {
-    @apply w-full max-w-[--container-max] mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  /* Reading container — for blog posts, long-form content (max-w-2xl) */
-  .container-reading {
-    @apply w-full max-w-[--container-prose] mx-auto px-4 sm:px-6;
-  }
-
-  /* Stack spacing — 8px-base scale */
-  .stack-sm  { @apply space-y-2; }  /* 8px */
-  .stack-md  { @apply space-y-4; }  /* 16px */
-  .stack-lg  { @apply space-y-6; }  /* 24px */
-  .stack-xl  { @apply space-y-8; }  /* 32px */
-
-
-  /* ══ CARDS ════════════════════════════════════*/
-
-  /* Standard card — responsive radius + padding
-     Strict 8px scale: p-6 (24px) min, sm:p-6 (24px), md:p-8 (32px) */
-  .card-standard {
-    background: var(--color-card-bg);
-    border: 1px solid #E5E7EB;
-    box-shadow: var(--shadow-card);
-    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-6 md:p-8;
-  }
-
-  /* Interactive card — lifts on hover */
-  .card-interactive {
-    background: var(--color-card-bg);
-    border: 1px solid #E5E7EB;
-    box-shadow: var(--shadow-card);
-    transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.3s ease;
-    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-6 md:p-8 cursor-pointer;
-  }
-
-  .card-interactive:hover {
-    box-shadow: var(--shadow-hover);
-    border-color: rgb(99 102 241 / 0.15);
-    @apply -translate-y-1;
-  }
-
-  /* Featured/highlighted card — subtle brand tint */
-  .card-featured {
-    background: linear-gradient(135deg, rgb(238 242 255 / 0.8), rgb(245 243 255 / 0.6));
-    border: 1px solid rgb(99 102 241 / 0.2);
-    box-shadow: var(--shadow-float);
-    @apply rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-4 sm:p-6 md:p-8;
-  }
-
-
-  /* ══ BUTTONS ══════════════════════════════════*/
-
-  /* Button tiers - Defined using standard CSS to avoid @apply recursion issues in v4 */
-  .btn-sm {
-    height: 32px;
-    padding: 0 12px;
-    border-radius: 6px;
-    font-size: 12px;
-  }
-  .btn-md {
-    height: 40px;
-    padding: 0 20px;
-    border-radius: 8px;
-    font-size: 14px;
-  }
-  .btn-lg {
-    height: 48px;
-    padding: 0 28px;
-    border-radius: 12px;
-    font-size: 15px;
-  }
-
-  /* Specific height variants requested */
-  .btn-h-36 { height: 36px; padding: 0 16px; font-size: 13px; border-radius: 8px; }
-  .btn-h-44 { height: 44px; padding: 0 24px; font-size: 14px; border-radius: 8px; }
-
-  /* Primary CTA button
-     Strict 8px scale: h-11 (44px mobile) -> h-12 (48px desktop).
-     Padding: px-4 (16px) -> px-6 (24px). */
-  .btn-primary {
-    @apply
-      px-4 sm:px-6
-      rounded-xl sm:rounded-2xl
-      font-bold text-sm sm:text-base text-white
-      bg-indigo-600
-      flex items-center justify-center gap-2
-      whitespace-nowrap select-none;
-    /* Use selector grouping or individual properties instead of @apply for custom classes */
-    height: 40px;
-    @apply lg:h-12;
-    box-shadow: var(--shadow-brand);
-    transition: box-shadow 0.25s ease, transform 0.2s ease, background-color 0.2s ease;
-  }
-
-  .btn-primary:hover {
-    box-shadow: var(--shadow-brand-hover);
-    @apply bg-indigo-700 -translate-y-px;
-  }
-
-  .btn-primary:active {
-    @apply translate-y-0 bg-indigo-800;
-    box-shadow: var(--shadow-brand);
-  }
-
-  /* Secondary / outline button — matches primary sizing */
-  .btn-secondary {
-    @apply
-      px-4 sm:px-6
-      rounded-xl sm:rounded-2xl
-      border-2 border-gray-200
-      font-bold text-sm sm:text-base text-heading
-      bg-white
-      flex items-center justify-center gap-2
-      whitespace-nowrap select-none;
-    height: 40px;
-    @apply lg:h-12;
-    transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .btn-secondary:hover {
-    @apply border-indigo-400 text-indigo-700;
-    box-shadow: 0 0 0 4px rgb(99 102 241 / 0.08);
-  }
-
-  /* Ghost button — text-only, minimal chrome */
-  .btn-ghost {
-    @apply
-      px-4
-      rounded-xl
-      font-semibold text-sm sm:text-base text-body
-      flex items-center justify-center gap-2
-      whitespace-nowrap select-none;
-    height: 40px;
-    @apply lg:h-12;
-    transition: color 0.2s ease, background 0.2s ease;
-  }
-
-  .btn-ghost:hover {
-    @apply text-indigo-700 bg-indigo-50;
-  }
-
-  /* Icon-only button */
-  .btn-icon {
-    @apply h-10 w-10 sm:h-11 sm:w-11 rounded-xl flex items-center justify-center text-muted hover:text-body hover:bg-gray-100 transition-colors duration-200;
-  }
-
-
-  /* ══ INPUTS ════════════════════════════════════*/
-
-  /* Standard input — matches button sizing
-     Strict 8px scale: h-11 (44px mobile) -> h-12 (48px desktop). */
+  /* ══ INPUT FIELDS (2A) ════════════════════════ */
   .input-standard {
-    @apply
-      w-full px-4 sm:px-6
-      rounded-xl sm:rounded-2xl
-      border-2 border-gray-100
-      text-sm sm:text-base text-heading font-medium
-      bg-white
-      placeholder:text-gray-400
-      focus:outline-none focus:border-indigo-500
-      min-h-[48px];
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    height: 48px;
+    padding: 12px 16px;
+    background: #FFFFFF;
+    border: 1.5px solid #D1D5DB; /* gray-300 */
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-input);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    width: 100%;
+    outline: none;
   }
-
+  .input-standard::placeholder {
+    color: var(--color-text-placeholder);
+    font-weight: 400;
+  }
   .input-standard:focus {
-    box-shadow: 0 0 0 4px rgb(99 102 241 / 0.08);
+    border-color: var(--color-focus-ring);
+    box-shadow: var(--shadow-input-focus);
   }
-
-  /* Textarea — no fixed height */
-  .textarea-standard {
-    @apply
-      w-full px-4 sm:px-6 py-4
-      rounded-xl sm:rounded-2xl
-      border-2 border-gray-100
-      text-sm sm:text-base text-heading font-medium
-      bg-white leading-relaxed
-      placeholder:text-gray-400
-      focus:outline-none focus:border-indigo-500
-      transition-all duration-200 resize-y;
+  .input-standard:hover:not(:focus) {
+    border-color: #9CA3AF; /* gray-400 */
   }
-
-  .textarea-standard:focus {
-    box-shadow: 0 0 0 4px rgb(99 102 241 / 0.08);
+  .input-error {
+    border-color: #F87171;
+    box-shadow: 0 0 0 3px rgba(248,113,113,0.2);
   }
-
-  /* Input label */
   .input-label {
-    @apply block text-sm font-semibold text-heading mb-2;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-body);
+    margin-bottom: 6px;
+    display: block;
+  }
+  .input-helper {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    margin-top: 5px;
+    display: block;
   }
 
-  /* Worksheet specific column labels */
-  .worksheet-column-label {
+  /* ══ BUTTONS (2B) ═════════════════════════════ */
+  .btn-primary {
+    height: 44px;
+    padding: 0 24px;
+    background: var(--color-brand-primary);
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 1px 4px rgba(37,99,235,0.25);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 150ms ease;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    text-decoration: none !important;
+  }
+  .btn-primary:hover {
+    background: var(--color-brand-primary-hover);
+    box-shadow: 0 3px 10px rgba(37,99,235,0.35);
+    transform: translateY(-1px);
+    text-decoration: none !important;
+  }
+  .btn-primary:active {
+    background: #1E40AF;
+    transform: translateY(0);
+  }
+  .btn-primary-lg {
+    height: 52px;
+    padding: 0 32px;
+    font-size: 16px;
+  }
+
+  .btn-secondary {
+    height: 44px;
+    padding: 0 24px;
+    background: #FFFFFF;
+    color: var(--color-brand-primary);
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1.5px solid var(--color-brand-primary);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 150ms ease;
+    cursor: pointer;
+    text-decoration: none !important;
+  }
+  .btn-secondary:hover {
+    background: var(--color-brand-primary-light);
+    border-color: var(--color-brand-primary-hover);
+    text-decoration: none !important;
+  }
+  .btn-secondary:active {
+    background: var(--color-brand-primary-mid);
+  }
+
+  .btn-ghost {
+    height: 40px;
+    padding: 0 16px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1.5px solid var(--color-bg-border);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 150ms ease;
+    cursor: pointer;
+    text-decoration: none !important;
+  }
+  .btn-ghost:hover {
+    background: var(--color-bg-subtle);
+    border-color: var(--color-text-disabled);
+    color: var(--color-text-primary);
+    text-decoration: none !important;
+  }
+
+  .btn-tertiary-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-brand-primary);
+    font-weight: 500;
+    padding: 10px 20px;
+    border: 1.5px solid var(--color-brand-primary-mid);
+    border-radius: 10px;
+    background: var(--color-brand-primary-light);
+    transition: all 150ms ease;
+    text-decoration: none !important;
+    cursor: pointer;
+  }
+  .btn-tertiary-ghost:hover {
+    background: var(--color-brand-primary-mid);
+    text-decoration: none !important;
+  }
+
+  .cta-link {
+    color: var(--color-brand-primary);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 120ms ease;
+  }
+  .cta-link:hover {
+    color: var(--color-brand-primary-hover);
+    text-decoration: underline;
+  }
+
+  /* ══ CARDS (2C) ═══════════════════════════════ */
+  .card-standard {
+    background: #FFFFFF;
+    border: 1px solid var(--color-bg-border);
+    border-radius: 14px;
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+    transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  }
+  @media (max-width: 640px) {
+    .card-standard { padding: 20px; }
+  }
+  .card-standard:hover {
+    border-color: var(--color-focus-ring);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+  .card-standard:focus-within {
+    border-color: var(--color-focus-ring);
+    box-shadow: var(--shadow-input-focus);
+  }
+
+  .card-subtle {
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-bg-border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  .card-highlighted {
+    background: var(--color-brand-primary-light);
+    border: 1px solid var(--color-brand-primary-mid);
+    border-radius: 14px;
+    padding: 24px;
+  }
+
+  /* ══ BADGES & EYEBROWS (2D) ═══════════════════ */
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-brand-accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .badge-category {
+    background: var(--color-brand-primary-mid);
+    color: var(--color-brand-primary-hover);
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    color: #6B7280;
+    padding: 3px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .badge-meta {
+    background: var(--color-bg-muted);
+    color: var(--color-text-secondary);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .badge-success {
+    background: #DCFCE7;
+    color: var(--color-success);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .badge-warning {
+    background: #FEF3C7;
+    color: var(--color-highlight);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* ══ TABLES (2E) ══════════════════════════════ */
+  .table-container {
+    border: 1px solid var(--color-bg-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .table-header-cell {
+    background: var(--color-bg-subtle);
+    padding: 13px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-body);
+    border-bottom: 1px solid var(--color-bg-border);
+  }
+  .table-body-cell {
+    padding: 13px 18px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--color-bg-border-soft);
+  }
+  .table-row:last-child .table-body-cell {
+    border-bottom: none;
+  }
+  .table-row:nth-child(odd) { background: #FFFFFF; }
+  .table-row:nth-child(even) { background: #FAFAFA; }
+  .table-row:hover { background: #F3F4F6; }
+
+  /* ══ STAT BLOCKS (2H) ═════════════════════════ */
+  .stat-block {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
     text-transform: uppercase;
   }
-
-  /* Hint / helper text below input */
-  .input-hint {
-    @apply text-xs text-muted mt-2 leading-relaxed;
+  .stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1.2;
   }
 
-  /* Error state */
-  .input-error {
-    @apply border-red-400 focus:border-red-500;
+  /* ══ FAQ / ACCORDION (2I) ═════════════════════ */
+  .faq-item {
+    border-bottom: 1px solid var(--color-bg-border-soft);
+    padding: 20px 0;
+  }
+  .faq-question {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    background: none;
+    width: 100%;
+    padding: 0;
+    text-align: left;
+    outline: none;
+    border-radius: 4px;
+    transition: box-shadow 150ms ease;
+  }
+  .faq-question:focus-visible {
+    box-shadow: var(--shadow-input-focus);
+  }
+  .faq-answer {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-text-body);
+    line-height: 1.7;
+    padding-top: 12px;
   }
 
-  .input-error:focus {
-    box-shadow: 0 0 0 4px rgb(239 68 68 / 0.08);
+  /* ══ BREADCRUMBS (2J) ═════════════════════════ */
+  .breadcrumbs-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .breadcrumb-link {
+    color: var(--color-text-secondary);
+    font-weight: 400;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin: -2px -4px;
+  }
+  .breadcrumb-link:hover {
+    color: var(--color-brand-primary);
+    text-decoration: underline;
+  }
+  .breadcrumb-link:focus-visible {
+    box-shadow: var(--shadow-input-focus);
+  }
+  .breadcrumb-separator {
+    color: var(--color-text-disabled);
+  }
+  .breadcrumb-current {
+    color: var(--color-text-primary);
+    font-weight: 500;
   }
 
-
-  /* ══ TABLES ════════════════════════════════════*/
-
-  /* Table wrapper — scrollable on mobile
-     FIX: was rounded-[2rem] always, overflowed on small screens. */
-  .table-container {
-    @apply overflow-x-auto border border-gray-200 rounded-xl sm:rounded-2xl bg-white;
-    /* Smooth momentum scrolling on iOS */
-    -webkit-overflow-scrolling: touch;
+  /* ══ CALLOUT BOXES (2K) ═══════════════════════ */
+  .callout-blue {
+    background: var(--color-brand-primary-light);
+    border-left: 3px solid #3B82F6;
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
   }
-
-  /* FIX: was px-8 py-5 always (32px). Now responsive. */
-  .table-header {
-    @apply text-[10px] sm:text-[11px] uppercase font-bold tracking-[0.12em] text-muted bg-gray-50/60;
-    @apply px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-5;
-    white-space: nowrap;
+  .callout-amber {
+    background: var(--color-warning-bg);
+    border: 1px solid var(--color-warning-border);
+    border-radius: 10px;
+    padding: 16px 20px;
   }
-
-  .table-cell {
-    @apply text-sm sm:text-base text-body;
-    @apply px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-5;
-  }
-
-  .table-row {
-    @apply border-b border-gray-100 last:border-0 hover:bg-gray-50/70 transition-colors duration-150;
-  }
-
-
-  /* ══ BADGES & TAGS ════════════════════════════*/
-
-  .badge,
-  .badge-indigo,
-  .badge-green,
-  .badge-amber,
-  .badge-red,
-  .badge-neutral {
-    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold;
-  }
-
-  .badge-indigo  { @apply bg-[#EEF2FF] text-[#4338CA] ring-1 ring-indigo-200/60; }
-  .badge-green   { @apply bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200/60; }
-  .badge-amber   { @apply bg-amber-50 text-amber-700 ring-1 ring-amber-200/60; }
-  .badge-red     { @apply bg-red-50 text-red-600 ring-1 ring-red-200/60; }
-  .badge-neutral { @apply bg-gray-100 text-gray-600 ring-1 ring-gray-200/60; }
-
-
-  /* ══ DIVIDERS ════════════════════════════════*/
-
-  .divider {
-    @apply border-t border-gray-200/80 my-8 md:my-12;
-  }
-
-  .divider-light {
-    @apply border-t border-gray-100 my-4 md:my-6;
-  }
-}
-
-
-/* ─────────────────────────────────────────────
-   TOUCH TARGETS — surgical fix
-   FIX: was applying min-height: 56px to ALL
-   interactive elements including inline <a> tags.
-   Now ONLY applies to standalone interactive
-   elements that need to be tappable.
-───────────────────────────────────────────────*/
-@media (pointer: coarse) {
-  .btn-primary,
-  .btn-secondary,
-  .btn-ghost,
-  .btn-icon,
-  .input-standard,
-  .textarea-standard,
-  select {
-    min-height: 44px; /* Apple HIG minimum */
-  }
-}
-
-
-/* ─────────────────────────────────────────────
-   PRINT STYLES
-───────────────────────────────────────────────*/
-@layer utilities {
-  @media print {
-    .no-print {
-      display: none !important;
-    }
-
-    body {
-      background: white !important;
-      color: black !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      font-size: 11pt;
-    }
-
-    main {
-      padding: 0 !important;
-      margin: 0 !important;
-      width: 100% !important;
-      max-width: none !important;
-    }
-
-    aside, header, footer,
-    .ProgressBar, button,
-    .ProgressBar-container {
-      display: none !important;
-    }
-
-    .bg-white, .bg-gray-50, .bg-indigo-50 {
-      background-color: transparent !important;
-      border-color: #eee !important;
-    }
-
-    .shadow-card, .shadow-raised, .shadow-float,
-    .shadow-hover, .shadow-brand,
-    [class*="shadow"] {
-      box-shadow: none !important;
-    }
-
-    table {
-      border: 1px solid #ddd !important;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      border-bottom: 1px solid #eee !important;
-      color: black !important;
-      padding: 6pt 8pt !important;
-    }
-
-    h1, h2, h3, h4 {
-      color: black !important;
-      page-break-after: avoid;
-    }
-
-    p, li {
-      color: black !important;
-      font-size: 11pt;
-      line-height: 1.5;
-    }
-
-    /* Avoid breaking cards across pages */
-    .card-standard, .card-interactive {
-      break-inside: avoid;
-      box-shadow: none !important;
-      border: 1px solid #ddd !important;
-    }
+  .callout-gray {
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-bg-border);
+    border-radius: 10px;
+    padding: 16px 20px;
   }
 }
