@@ -47,7 +47,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  type="application/ld+json"
  dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
  />
- <h2 className="text-center mb-12 md:mb-16">Frequently Asked Questions</h2>
+ <h2 className="text-center mb-12 md:mb-16">Frequently Asked Questions About Washington Child Support</h2>
 
  <div className="divide-y divide-[var(--color-bg-border-soft)]">
  {items.map((item, index) => {

@@ -16,12 +16,12 @@ export const AdContainerClient = dynamic(
 
 export const AuthoritySidebarClient = dynamic(
  () => import('@/components/AuthoritySidebar'),
- { ssr: false, loading: () => <div className="w-full h-48 animate-pulse bg-[var(--color-bg-muted)] rounded-xl" /> }
+ { ssr: true, loading: () => <div className="w-full h-48 animate-pulse bg-[var(--color-bg-muted)] rounded-xl" /> }
 );
 
 export const AuthorBoxClient = dynamic(
  () => import('@/components/AuthorBox'),
- { ssr: false, loading: () => <div className="w-full h-32 animate-pulse bg-[var(--color-bg-muted)] rounded-xl" /> }
+ { ssr: true, loading: () => <div className="w-full h-32 animate-pulse bg-[var(--color-bg-muted)] rounded-xl" /> }
 );
 
 export const HomeCalculatorClient = dynamic(

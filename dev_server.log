@@ -5,10 +5,15 @@
 ▲ Next.js 16.2.3 (Turbopack)
 - Local:         http://localhost:3000
 - Network:       http://192.168.0.2:3000
-✓ Ready in 575ms
+✓ Ready in 553ms
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
 
-○ Compiling / ...
- GET / 200 in 12.4s (next.js: 9.7s, application-code: 2.7s)
+
+○ Compiling /[slug] ...
+ GET /king-county-income-5000-2-children 200 in 14.2s (next.js: 11.5s, application-code: 2.7s)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -28,7 +33,7 @@
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /about 200 in 1828ms (next.js: 1578ms, application-code: 249ms)
+ GET /king-county-income-5000-2-children 200 in 250ms (next.js: 31ms, application-code: 219ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -48,7 +53,7 @@
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /blog 200 in 1484ms (next.js: 1036ms, application-code: 448ms)
+ GET /king-county-income-5000-2-children 200 in 245ms (next.js: 28ms, application-code: 217ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -68,7 +73,7 @@
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /blog/washington-child-support-guidelines-2026 200 in 4.8s (next.js: 3.2s, generate-params: 1310ms, application-code: 1541ms)
+ GET /king-county-income-5000-2-children 200 in 243ms (next.js: 26ms, application-code: 218ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -88,7 +93,7 @@
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /washington-courts/king-county 200 in 2.1s (next.js: 1612ms, application-code: 474ms)
+ GET /king-county-income-5000-2-children 200 in 219ms (next.js: 26ms, application-code: 193ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -108,7 +113,7 @@
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /worksheet 200 in 950ms (next.js: 836ms, application-code: 114ms)
+ GET /king-county-income-5000-2-children 200 in 366ms (next.js: 33ms, application-code: 334ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -128,7 +133,7 @@
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /king-county-income-5000-2-children 200 in 2.6s (next.js: 1650ms, application-code: 994ms)
+ GET /king-county-income-5000-2-children 200 in 337ms (next.js: 25ms, application-code: 311ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -148,3 +153,7 @@
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
+✓ Compiled in 113ms
+✓ Compiled in 94ms
+✓ Compiled in 84ms
+✓ Compiled in 135ms
