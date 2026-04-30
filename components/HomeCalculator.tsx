@@ -289,71 +289,41 @@ export default function HomeCalculator() {
                           {/* Time percentage display + label */}
                           <div className="flex justify-between items-end">
                             <div>
-                              <label htmlFor="parenting-time" className="input-label block">
+                              <label className="input-label block">
                                 Payer&apos;s Overnight Parenting Time
                               </label>
                               <p className="input-helper mt-0.5">
-                                % of overnights with the paying parent
+                                Select the applicable tier based on overnights per year
                               </p>
                             </div>
-                            <span className="text-xl sm:text-2xl font-bold text-[var(--color-brand-primary)] leading-none tabular-nums ml-4 shrink-0">
-                              {parentingTime}%
-                            </span>
                           </div>
 
-                          {/* Quick-select presets */}
-                          <div className="flex gap-2 flex-wrap">
+                          {/* Quick-select presets — Discrete Selector */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {[
-                              { label: "0%",  value: 0,  sub: "No overnights"   },
-                              { label: "20%", value: 20, sub: "~73 nights/yr"   },
-                              { label: "35%", value: 35, sub: "~128 nights/yr"  },
-                              { label: "50%", value: 50, sub: "Equal (183 nights)" },
+                              { label: "0% — No overnights",    value: 0,   nights: "0 nights" },
+                              { label: "25% — ~91 nights/yr",   value: 91,  nights: "91 nights" },
+                              { label: "35% — ~128 nights/yr",  value: 128, nights: "128 nights" },
+                              { label: "50% — Equal (183 nights)", value: 183, nights: "183 nights" },
                             ].map((p) => (
                               <button
                                 key={p.value}
                                 type="button"
-                                title={p.sub}
                                 onClick={() => setParentingTime(p.value)}
-                                className={`px-4 py-2 rounded-lg border transition-all flex flex-col items-center min-w-[80px] ${
+                                className={`px-4 py-3 rounded-xl border-2 transition-all flex flex-col items-start ${
                                   parentingTime === p.value
-                                    ? "bg-[var(--color-brand-primary)] border-[var(--color-brand-primary)] text-white"
+                                    ? "bg-[var(--color-brand-primary-light)] border-[var(--color-brand-primary)] text-[var(--color-brand-primary-hover)] shadow-[var(--shadow-card)]"
                                     : "bg-white border-[var(--color-bg-border)] text-[var(--color-text-body)] hover:border-[var(--color-brand-primary)]"
                                 }`}
                               >
-                                <span className="text-xs font-bold text-[var(--color-text-secondary)]">{p.label}</span>
-                                <span className={`text-[12px] mt-1 font-medium ${parentingTime === p.value ? "text-white/70" : "text-[var(--color-text-secondary)]"}`}>
-                                  {p.sub}
+                                <span className={`text-sm font-bold ${parentingTime === p.value ? "text-[var(--color-brand-primary-hover)]" : "text-[var(--color-text-primary)]"}`}>
+                                  {p.label}
+                                </span>
+                                <span className={`text-[12px] mt-0.5 font-semibold ${parentingTime === p.value ? "text-[var(--color-brand-primary)]/70" : "text-[var(--color-text-secondary)]"}`}>
+                                  {p.nights}
                                 </span>
                               </button>
                             ))}
-                          </div>
-
-                          {/* Range slider */}
-                          <input
-                            id="parenting-time"
-                            type="range"
-                            min="0"
-                            max="100"
-                            step="5"
-                            value={parentingTime}
-                            onChange={(e) => setParentingTime(Number(e.target.value))}
-                            className="w-full h-2 bg-[var(--color-bg-muted)] rounded-lg cursor-pointer accent-[var(--color-brand-primary)]"
-                          />
-
-                          {/* Visual progress bar */}
-                          <div>
-                            <div className="h-3 w-full bg-[var(--color-bg-muted)] rounded-full overflow-hidden flex shadow-inner border border-[var(--color-bg-border-soft)]">
-                              <motion.div
-                                initial={false}
-                                animate={{ width: `${parentingTime}%` }}
-                                transition={{ type: "spring", stiffness: 120, damping: 20 }}
-                                className="h-full bg-gradient-to-r from-[var(--color-brand-primary)] to-[var(--color-brand-primary-hover)]"
-                              />
-                            </div>
-                            <div className="flex justify-between mt-1.5">
-                              <span className="text-[12px] font-semibold text-[var(--color-text-secondary)] font-bold text-[var(--color-brand-accent)] uppercase tracking-tight">Paying Parent</span>
-                              <span className="text-[12px] font-semibold text-[var(--color-text-secondary)] font-bold text-[var(--color-text-secondary)] uppercase tracking-tight">Custodial</span>
-                            </div>
                           </div>
                         </div>
                       </motion.div>
@@ -484,7 +454,9 @@ export default function HomeCalculator() {
                         <div className="flex justify-between items-start text-[var(--color-highlight)]">
                           <div className="flex flex-col pr-2">
                             <span className="text-sm font-medium">Parenting Time Credit</span>
-                            <span className="text-[12px] font-semibold text-[var(--color-text-secondary)] mt-0.5">Estimated per RCW 26.19.075</span>
+                            <span className="text-[12px] font-semibold text-[var(--color-text-secondary)] mt-0.5 line-clamp-1 overflow-hidden text-ellipsis">
+                              {result.adjustmentReason}
+                            </span>
                           </div>
                           <span className="font-bold tabular-nums shrink-0">
                             <AnimatedNumber value={result.breakdown.parentingAdjustment} />
