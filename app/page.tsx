@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, CheckCircle, Calculator, Scale, Shield } from "lucide-react";
 import HomeCalculator from "@/components/HomeCalculator";
+import HeroCard from "@/components/hero/HeroCard";
 import CalculatorSchema from "@/components/CalculatorSchema";
 import FAQSchema from "@/components/seo/FAQSchema";
 import FAQAccordion from "@/components/FAQAccordion";
@@ -72,29 +73,81 @@ export default function Home() {
       <FAQSchema faqs={homeFaqs} />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="pt-12 lg:pt-20 pb-12 lg:pb-20 w-full relative bg-white">
-        <div className="container-wide">
-          <div className="text-center mb-12 md:mb-16 space-y-6">
-            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Washington State Standards</p>
-            <h1 className="text-balance max-w-4xl mx-auto">
-              Washington Child Support Calculator 2026
-            </h1>
-            <p className="text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed max-w-2xl mx-auto">
-              Precision-engineered for the 2026 AOC economic schedule. Fast,
-              private, and 100% compliant with Washington State guidelines.
-            </p>
-              <div className="mt-8 flex justify-center">
-                <Link href="/worksheet" className="btn-primary-lg btn-primary !rounded-full !px-8 !py-4 !text-base">
+      <section
+        aria-label="Washington Child Support Calculator Hero"
+        className="bg-white py-20 lg:py-28 relative overflow-hidden"
+      >
+        {/* Background Decoration */}
+        <div
+          aria-hidden="true"
+          className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+
+            {/* Left Column */}
+            <div className="flex-1 text-center lg:text-left">
+              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-3">
+                Free · No Sign-up · 2026 Guidelines
+              </p>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                Washington Child Support Calculator <span className="text-blue-600">2026</span>
+              </h1>
+
+              <p className="text-lg text-gray-500 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+                Calculate your exact monthly obligation using the official 2026 RCW 26.19 economic tables.
+                Trusted by Washington parents and family law attorneys across all 39 counties.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                <Link
+                  href="/#calculator"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl text-base transition-colors duration-200"
+                >
                   Start Free Calculation →
                 </Link>
+                <Link
+                  href="/washington-child-support-guidelines-2026"
+                  className="border border-gray-200 hover:border-blue-300 text-gray-700 hover:text-blue-600 font-medium px-8 py-4 rounded-xl text-base transition-colors duration-200"
+                >
+                  View 2026 Guidelines
+                </Link>
               </div>
-          </div>
 
+              <ul role="list" className="flex flex-wrap gap-x-6 gap-y-2 justify-center lg:justify-start">
+                {[
+                  "No sign-up required",
+                  "Instant results",
+                  "Court-accurate 2026 tables"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-1.5 text-sm text-gray-500">
+                    <span className="text-green-500 font-bold" aria-hidden="true">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Right Column */}
+            <div className="flex-shrink-0 w-full lg:w-96">
+              <HeroCard />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CALCULATOR SECTION ────────────────────────────────────────── */}
+      <section className="py-16 md:py-20 w-full bg-white">
+        <div className="container-wide">
           <div className="space-y-12">
-            <h2 className="text-center scroll-mt-20" id="calculator">
+            <h2 className="text-center">
               Calculate Your Child Support Obligation Instantly
             </h2>
-            <HomeCalculator />
+            <div id="calculator" className="scroll-mt-20">
+              <HomeCalculator />
+            </div>
           </div>
         </div>
       </section>
