@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { glossaryTerms } from '@/data/glossary';
-import { BookA, ChevronRight, Calculator, ArrowLeft } from 'lucide-react';
+import { BookA, ChevronRight, Calculator, ArrowLeft, Scale } from 'lucide-react';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -31,74 +31,87 @@ export default async function GlossaryTermPage({ params }: Props) {
 
   return (
     <main className="flex-1 bg-white">
-      <div className="container-reading section-default relative z-10">
+      {/* ── MINI HERO ────────────────────────────────────────────────────── */}
+      <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+        <div
+          aria-hidden="true"
+          className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
+        />
 
-        <nav className="mb-8">
-          <Link href="/glossary" className="cta-link !font-bold">
-            <ArrowLeft size={14} className="mr-1" />
+        <div className="container-reading relative z-10">
+          <Link href="/glossary" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-8">
+            <ArrowLeft size={16} />
             Back to Glossary
           </Link>
-        </nav>
 
-        <article className="card-standard !p-8 md:!p-16 mb-16 shadow-[var(--shadow-card-md)]">
-          <header className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-12">
-            <div className="p-4 bg-[var(--color-brand-accent-light)] text-[var(--color-brand-accent)] rounded-2xl shadow-sm">
-              <BookA className="w-10 h-10" />
-            </div>
-            <div>
-              <span className="eyebrow mb-1">Legal Term</span>
-              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-[var(--color-text-primary)]">
-                {termData.term}
-              </h1>
-            </div>
+          <header className="flex flex-col gap-6">
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
+              Legal Definition
+            </p>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight">
+              {termData.term}
+            </h1>
           </header>
+        </div>
+      </section>
 
-          <div className="space-y-12">
-            <section>
-              <h3 className="text-[12px] font-bold text-[var(--color-text-secondary)] mb-6 uppercase tracking-widest">Definition</h3>
-              <p className="text-2xl md:text-3xl text-[var(--color-text-primary)] font-medium leading-tight border-l-4 border-[var(--color-brand-accent)] pl-8 py-2">
-                {termData.definition}
-              </p>
-            </section>
+      {/* ── DEFINITION & EXAMPLE ───────────────────────────────────────── */}
+      <section className="section-default bg-[var(--color-bg-subtle)]">
+        <div className="container-reading">
+          <article className="card-standard !p-8 md:!p-12 shadow-xl border-none">
+            <div className="space-y-12">
+              <section>
+                <p className="text-xs font-bold text-gray-400 mb-6 uppercase tracking-widest">Formal Definition</p>
+                <p className="text-2xl md:text-4xl text-gray-900 font-bold leading-tight border-l-4 border-blue-600 pl-8 py-2">
+                  {termData.definition}
+                </p>
+              </section>
 
-            <section className="bg-[var(--color-success-bg)] rounded-2xl p-8 md:p-10 border border-[var(--color-bg-border)]">
-              <h4 className="text-xl font-bold text-[var(--color-text-primary)] mb-4">Real-World Example</h4>
-              <p className="text-lg text-[var(--color-text-body)] leading-relaxed italic">
-                &ldquo;{termData.example}&rdquo;
-              </p>
-            </section>
+              <section className="bg-blue-50/50 rounded-3xl p-8 md:p-10 border border-blue-100">
+                <div className="flex items-center gap-3 mb-6">
+                  <Scale className="w-5 h-5 text-blue-600" />
+                  <h4 className="text-xl font-bold text-gray-900 uppercase tracking-tight">Real-World Application</h4>
+                </div>
+                <p className="text-lg text-gray-700 leading-relaxed italic">
+                  &ldquo;{termData.example}&rdquo;
+                </p>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
 
-            <section className="pt-12 border-t border-[var(--color-bg-border-soft)]">
-              <h3 className="text-[12px] font-bold text-[var(--color-text-secondary)] mb-8 uppercase tracking-widest">Related Tools & Resources</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {termData.relatedLinks.map((link, idx) => (
-                  <Link
-                    key={idx}
-                    href={link.href}
-                    className="flex items-center justify-between p-6 bg-[var(--color-bg-subtle)] hover:bg-[var(--color-brand-primary-light)] text-[var(--color-text-primary)] rounded-xl transition-all group border border-[var(--color-bg-border)]"
-                  >
-                    <span className="flex items-center gap-3 font-bold">
-                      <Calculator className="w-5 h-5 text-[var(--color-brand-primary)]" />
-                      {link.label}
-                    </span>
-                    <ChevronRight className="w-5 h-5 text-[var(--color-text-secondary)] -translate-x-2 group-hover:translate-x-0 transition-all" />
-                  </Link>
-                ))}
-              </div>
-            </section>
+      {/* ── RELATED RESOURCES ──────────────────────────────────────────── */}
+      <section className="section-default bg-white">
+        <div className="container-reading">
+          <h3 className="text-xs font-bold text-gray-400 mb-10 uppercase tracking-widest text-center">Related Tools & Resources</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {termData.relatedLinks.map((link, idx) => (
+              <Link
+                key={idx}
+                href={link.href}
+                className="flex items-center justify-between p-8 bg-[var(--color-bg-subtle)] hover:bg-white hover:border-blue-300 hover:shadow-lg text-gray-900 rounded-3xl transition-all group border border-gray-100"
+              >
+                <span className="flex items-center gap-4 font-bold text-lg">
+                  <Calculator className="w-6 h-6 text-blue-600" />
+                  {link.label}
+                </span>
+                <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-blue-600 transition-colors" />
+              </Link>
+            ))}
           </div>
-        </article>
 
-        <section className="card-standard bg-[var(--color-bg-subtle)] border-dashed border-2 border-[var(--color-bg-border)] !p-12 text-center shadow-none">
-          <h2 className="text-2xl font-bold mb-6 text-[var(--color-text-primary)]">Need a full calculation?</h2>
-          <p className="text-[var(--color-text-secondary)] mb-8 max-w-lg mx-auto leading-relaxed">
-            Use our 2026 Washington State estimator to see how these legal terms impact your support amount.
-          </p>
-          <Link href="/" className="btn-primary-lg btn-primary !rounded-full">
-            Start Free Estimate
-          </Link>
-        </section>
-      </div>
+          <div className="mt-24 card-standard border-dashed border-2 border-gray-200 !p-12 text-center shadow-none bg-[var(--color-bg-subtle)]">
+            <h2 className="text-2xl font-bold mb-6 text-gray-900">Need a full calculation?</h2>
+            <p className="text-lg text-gray-500 mb-8 max-w-lg mx-auto leading-relaxed">
+              Use our 2026 Washington State estimator to see how these legal terms impact your support amount.
+            </p>
+            <Link href="/" className="btn-primary-lg btn-primary !rounded-full">
+              Start Free Estimate
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

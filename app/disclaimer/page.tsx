@@ -10,80 +10,95 @@ export const metadata: Metadata = {
 
 export default function DisclaimerPage() {
   return (
-    <main className="flex-1 bg-page">
-      <div className="container-reading section-default">
+    <main className="flex-1 bg-white">
+      {/* ── MINI HERO ────────────────────────────────────────────────────── */}
+      <section className="bg-white py-16 md:py-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+        <div
+          aria-hidden="true"
+          className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
+        />
 
-        {/* Back Link */}
-        <Link href="/" className="btn-ghost !h-10 !px-0 w-fit mb-8 md:mb-12">
-          <ArrowLeft size={14} />
-          Back to Calculator
-        </Link>
+        <div className="container-reading relative z-10">
+          <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-8">
+            <ArrowLeft size={16} />
+            Back to Calculator
+          </Link>
 
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8 md:mb-12">
-          <div className="p-4 bg-amber-500 rounded-2xl shadow-[var(--shadow-card)] shadow-amber-500/20">
-            <Scale className="w-8 h-8 text-white" />
-          </div>
-          <div>
-            <p className="label-metadata text-[var(--color-warning)] mb-1">Important Notice</p>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Legal Disclaimer</h1>
-          </div>
-        </div>
-
-        {/* Not a Law Firm Banner */}
-        <section className="p-6 md:p-8 bg-amber-50 border border-amber-200 rounded-2xl mb-8 md:mb-12 flex flex-col sm:flex-row items-start gap-4 md:gap-6">
-          <ShieldCheck className="w-8 h-8 text-[var(--color-warning)] flex-shrink-0 mt-1" />
-          <div>
-            <h2 className="text-xl font-bold text-amber-900 mb-2">WCSSC Is Not a Law Firm</h2>
-            <p className="text-[var(--color-highlight)] leading-relaxed">
-              The Washington Child Support Schedule Center (WCSSC) is an independent educational resource. We are NOT a law firm, attorney, legal aid organization, or government agency. Nothing on this website constitutes legal advice, legal representation, or a professional legal opinion.
+          <div className="flex flex-col gap-6">
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
+              Important Notice
+            </p>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+              Legal <span className="text-blue-600">Disclaimer</span>
+            </h1>
+            <p className="text-lg text-gray-500 leading-relaxed">
+              WCSSC provides estimates based on 2026 Washington State guidelines. This is an educational resource and is not a substitute for legal advice.
             </p>
           </div>
-        </section>
-
-        {/* Content Sections */}
-        <div className="space-y-6 md:space-y-8">
-          {[
-            {
-              title: "1. Educational Purpose Only",
-              body: "All calculations, estimates, and information provided by WCSSC are for educational and informational purposes only. Our calculator uses the 2026 Washington State Child Support Schedule as published by the Washington State Administrative Office of the Courts (AOC). Results are estimates and may differ from actual court-ordered support amounts."
-            },
-            {
-              title: "2. No Attorney-Client Relationship",
-              body: "Using this website or its tools does not create an attorney-client relationship between you and WCSSC, its operators, or any associated parties. For legal advice specific to your situation, you should consult with a licensed family law attorney in Washington State."
-            },
-            {
-              title: "3. Accuracy of Information",
-              body: "While we make every effort to keep our data accurate and current with the latest 2026 WA State Guidelines, WCSSC makes no guarantees regarding the accuracy, completeness, or timeliness of any calculation or legal information provided on this site. Laws and guidelines change; always verify with official sources."
-            },
-            {
-              title: "4. Court Discretion",
-              body: "Washington courts have the discretion to deviate from the standard child support schedule based on case-specific factors including but not limited to: deviation petitions, extraordinary expenses, split custody arrangements, and significant disparities in parent income or wealth. Our calculator cannot account for all such factors."
-            },
-            {
-              title: "5. Official Resources",
-              body: "For official Washington State child support information, please visit the Washington State Department of Social & Health Services (DSHS) Division of Child Support at dshs.wa.gov, or the Washington State Courts at courts.wa.gov."
-            },
-            {
-              title: "6. Limitation of Liability",
-              body: "WCSSC, its operators, employees, and contributors shall not be liable for any damages arising from the use or reliance on information provided on this website. This includes direct, indirect, incidental, and consequential damages."
-            }
-          ].map((section, i) => (
-            <section key={i} className="card-standard">
-              <h2 className="text-xl font-semibold mb-4">{section.title}</h2>
-              <p className="leading-relaxed text-[var(--color-text-secondary)]">{section.body}</p>
-            </section>
-          ))}
         </div>
+      </section>
 
-        {/* Footer info */}
-        <div className="mt-16 pt-12 border-t border-[var(--color-bg-border-soft)] text-center">
-          <p className="label-metadata mb-6 text-[var(--color-text-secondary)]">Last Updated: January 2026</p>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-4 label-metadata">
-            <Link href="/privacy" className="hover:text-[var(--color-brand-primary)] transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-[var(--color-brand-primary)] transition-colors">Terms of Service</Link>
-            <Link href="/about" className="hover:text-[var(--color-brand-primary)] transition-colors">About Us</Link>
-            <Link href="/" className="hover:text-[var(--color-brand-primary)] transition-colors">Calculator</Link>
+      {/* ── BANNER ──────────────────────────────────────────────────────── */}
+      <section className="section-default bg-[var(--color-bg-subtle)]">
+        <div className="container-reading">
+          <div className="p-6 md:p-10 bg-amber-50 border border-amber-200 rounded-2xl flex flex-col sm:flex-row items-start gap-4 md:gap-6 shadow-sm">
+            <ShieldCheck className="w-10 h-10 text-amber-600 flex-shrink-0 mt-1" />
+            <div>
+              <h2 className="text-2xl font-bold text-amber-900 mb-3">WCSSC Is Not a Law Firm</h2>
+              <p className="text-amber-800 leading-relaxed text-lg">
+                The Washington Child Support Schedule Center (WCSSC) is an independent educational resource. We are NOT a law firm, attorney, legal aid organization, or government agency. Nothing on this website constitutes legal advice.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTIONS ────────────────────────────────────────────────────── */}
+      {[
+        {
+          title: "1. Educational Purpose Only",
+          body: "All calculations, estimates, and information provided by WCSSC are for educational and informational purposes only. Our calculator uses the 2026 Washington State Child Support Schedule as published by the Washington State Administrative Office of the Courts (AOC). Results are estimates and may differ from actual court-ordered support amounts."
+        },
+        {
+          title: "2. No Attorney-Client Relationship",
+          body: "Using this website or its tools does not create an attorney-client relationship between you and WCSSC, its operators, or any associated parties. For legal advice specific to your situation, you should consult with a licensed family law attorney in Washington State."
+        },
+        {
+          title: "3. Accuracy of Information",
+          body: "While we make every effort to keep our data accurate and current with the latest 2026 WA State Guidelines, WCSSC makes no guarantees regarding the accuracy, completeness, or timeliness of any calculation or legal information provided on this site."
+        },
+        {
+          title: "4. Court Discretion",
+          body: "Washington courts have the discretion to deviate from the standard child support schedule based on case-specific factors including but not limited to: deviation petitions, extraordinary expenses, and split custody arrangements."
+        },
+        {
+          title: "5. Official Resources",
+          body: "For official Washington State child support information, please visit the Washington State Department of Social & Health Services (DSHS) Division of Child Support at dshs.wa.gov, or the Washington State Courts at courts.wa.gov."
+        },
+        {
+          title: "6. Limitation of Liability",
+          body: "WCSSC, its operators, employees, and contributors shall not be liable for any damages arising from the use or reliance on information provided on this website. This includes direct, indirect, incidental, and consequential damages."
+        }
+      ].map((section, i) => (
+        <section key={i} className={`section-default ${i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-bg-subtle)]'}`}>
+          <div className="container-reading">
+            <div className="card-standard">
+              <h2 className="text-2xl font-bold mb-4">{section.title}</h2>
+              <p className="leading-relaxed text-[var(--color-text-secondary)] text-lg">{section.body}</p>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* ── MINI FOOTER ─────────────────────────────────────────────────── */}
+      <div className="py-12 border-t border-[var(--color-bg-border-soft)] bg-white">
+        <div className="container-reading text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6">Last Updated: January 2026</p>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-gray-500">
+            <Link href="/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-blue-600 transition-colors">Terms of Service</Link>
+            <Link href="/about" className="hover:text-blue-600 transition-colors">About Us</Link>
+            <Link href="/" className="hover:text-blue-600 transition-colors">Calculator</Link>
           </div>
         </div>
       </div>

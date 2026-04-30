@@ -14,7 +14,6 @@ export default function HeroCard() {
     window.addEventListener("resize", checkDesktop);
 
     // Counter animation: animate from 0 to 1446 over 1200ms
-    let start = 0;
     const end = 1446;
     const duration = 1200;
     let startTime: number | null = null;
