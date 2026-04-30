@@ -142,7 +142,7 @@ export default function Home() {
             {/* Why Washington Families and Attorneys Trust WCSSC */}
             <div>
               <div className="text-center mb-12 space-y-4">
-                <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">The Professional Standard</p>
+                <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">RCW 26.19 Certified</p>
                 <h2>Why Washington Families and Attorneys Trust WCSSC</h2>
                 <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
                   Unlike generic calculators, WCSSC is engineered to the exact 2026 Washington statutory logic.
@@ -242,7 +242,7 @@ export default function Home() {
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
-              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Quick Reference</p>
+              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Updated January 2026</p>
               <h2>2026 Washington Child Support Amounts by Income</h2>
               <p className="text-[var(--color-text-secondary)] text-lg">
                 Standard monthly totals based on the 2026 economic table.
@@ -297,7 +297,7 @@ export default function Home() {
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
-              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Real-World Case Study</p>
+              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Real Calculation Example</p>
               <h2 className="text-[var(--color-text-primary)]">
                 Real Example: $5,000 Income, 2 Children in Washington State
               </h2>
@@ -349,9 +349,10 @@ export default function Home() {
       <section className="py-16 md:py-20 w-full relative bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)]">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-center mb-12 md:mb-16">
-              How Washington State Calculates Child Support in 2026
-            </h2>
+            <div className="text-center mb-12 md:mb-16 space-y-4">
+              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">2026 EHB 1014 Guidelines</p>
+              <h2>How Washington State Calculates Child Support in 2026</h2>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 text-[var(--color-text-body)]">
               <div className="space-y-8">
@@ -414,9 +415,10 @@ export default function Home() {
       <section className="py-16 md:py-20 w-full bg-white relative">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-center mb-12 md:mb-16">
-              Frequently Asked Questions About Washington Child Support
-            </h2>
+            <div className="text-center mb-12 md:mb-16 space-y-4">
+              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Common Parent Questions</p>
+              <h2>Frequently Asked Questions About Washington Child Support</h2>
+            </div>
             <FAQAccordion items={homeFaqs} />
           </div>
         </div>
@@ -426,7 +428,7 @@ export default function Home() {
       <section className="py-16 md:py-20 w-full relative bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)]">
         <div className="container-wide">
           <div className="text-center mb-12 md:mb-16">
-            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Local Guides</p>
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">All 39 Washington Counties</p>
             <h2>Child Support Calculators by Washington County</h2>
             <p className="text-[var(--color-text-secondary)] mt-4 text-lg">
               Local rules and benchmarks for Washington&apos;s major counties.
@@ -458,7 +460,7 @@ export default function Home() {
         <div className="container-wide">
           <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12 md:mb-16">
             <div>
-              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">Resource Center</p>
+              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">Legal Guides & Updates</p>
               <h2 className="mt-2">2026 Washington Child Support Guides and Legal Resources</h2>
               <p className="text-[var(--color-text-secondary)] mt-4 text-lg">
                 Legal guides and economic analysis for Washington State.
