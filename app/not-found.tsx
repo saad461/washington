@@ -5,10 +5,10 @@ import { Calculator, ArrowLeft, Search, ChevronRight } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <main className="flex-1 flex flex-col items-center justify-center bg-page px-8 text-center section-default relative overflow-hidden">
+    <main className="flex-1 flex flex-col items-center justify-center bg-white px-8 text-center section-default relative overflow-hidden min-h-[70vh]">
       <div className="max-w-md w-full relative z-10">
-        <div className="w-24 h-24 bg-[var(--color-text-primary)] rounded-[2rem] flex items-center justify-center mx-auto mb-10 shadow-xl rotate-3">
-          <Calculator className="w-12 h-12 text-indigo-400" />
+        <div className="w-24 h-24 bg-gray-900 rounded-[2rem] flex items-center justify-center mx-auto mb-10 shadow-xl rotate-3">
+          <Calculator className="w-12 h-12 text-blue-400" />
         </div>
 
         <h1 className="text-4xl font-bold tracking-tight mb-6">Page Not Found</h1>
@@ -19,7 +19,7 @@ export default function NotFound() {
         <div className="grid gap-4">
           <Link
             href="/"
-            className="btn-primary w-full h-14 flex items-center justify-center gap-3"
+            className="btn-primary w-full h-14 flex items-center justify-center gap-3 !rounded-full"
           >
             <ArrowLeft className="w-5 h-5" />
             Back to Calculator
@@ -27,22 +27,22 @@ export default function NotFound() {
 
           <Link
             href="/worksheet"
-            className="btn-secondary w-full h-14 flex items-center justify-center gap-3"
+            className="btn-secondary w-full h-14 flex items-center justify-center gap-3 !rounded-full"
           >
-            <Search className="w-5 h-5 text-indigo-600" />
+            <Search className="w-5 h-5 text-blue-600" />
             Worksheet Pro Wizard
           </Link>
 
           <Link
             href="/blog"
-            className="btn-ghost w-full h-14 flex items-center justify-center gap-3 font-bold"
+            className="btn-ghost w-full h-14 flex items-center justify-center gap-3 font-bold !rounded-full"
           >
             Read Legal Guides <ChevronRight className="w-5 h-5" />
           </Link>
         </div>
 
         <footer className="mt-20 pt-10 border-t border-gray-100">
-          <p className="label-metadata text-gray-700 uppercase tracking-widest">Official 2026 WA State Guidelines Index</p>
+          <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Official 2026 WA State Guidelines Index</p>
         </footer>
       </div>
     </main>

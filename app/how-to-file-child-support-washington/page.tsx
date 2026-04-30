@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { FileText, CheckCircle2, AlertTriangle, Building2, ChevronRight, ArrowRight } from 'lucide-react';
+import { FileText, CheckCircle2, AlertTriangle, Building2, ChevronRight, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'How to File Child Support in Washington State (2026 Guide)',
@@ -26,132 +26,165 @@ export default function HowToFileGuide() {
     <main className="flex-1 bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className="container-reading section-default relative z-10">
+      {/* ── MINI HERO ────────────────────────────────────────────────────── */}
+      <section className="bg-white py-16 md:py-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+        <div
+          aria-hidden="true"
+          className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
+        />
 
-        <header className="mb-16 md:mb-24 text-center max-w-3xl mx-auto">
-          <div className="inline-flex p-4 bg-[var(--color-brand-primary-light)] text-[var(--color-brand-primary)] rounded-2xl mb-8 shadow-[var(--shadow-card)]">
-            <FileText className="w-8 h-8" />
+        <div className="container-reading relative z-10">
+          <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-8">
+            <ArrowLeft size={16} />
+            Back to Calculator
+          </Link>
+
+          <div className="flex flex-col gap-6">
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
+              Step-by-Step Guide
+            </p>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+              How to File Child Support in <span className="text-blue-600">Washington State</span>
+            </h1>
+            <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
+              Navigating the family court system can be overwhelming. This guide breaks down the exact 2026 process for petitioning or modifying a child support order.
+            </p>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 text-[var(--color-text-primary)]">
-            How to File Child Support in Washington State
-          </h1>
-          <p className="text-xl text-[var(--color-text-secondary)] leading-relaxed">
-            Navigating the family court system can be overwhelming. This guide breaks down the exact 2026 process for petitioning or modifying a child support order.
-          </p>
-        </header>
+        </div>
+      </section>
 
-        <div className="space-y-12 md:space-y-20">
-          <section className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card-md)]">
+      {/* ── STEP 1 ──────────────────────────────────────────────────────── */}
+      <section className="section-default bg-[var(--color-bg-subtle)]">
+        <div className="container-reading">
+          <div className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card-md)]">
             <div className="flex items-center gap-6 mb-8">
-              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-[var(--color-brand-primary)] text-white font-bold text-xl shrink-0 shadow-[var(--shadow-card-md)] shadow-[var(--color-brand-primary)]/20">1</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)]">Calculate Your Presumptive Amount</h2>
+              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-600 text-white font-bold text-xl shrink-0 shadow-lg shadow-blue-200">1</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Calculate Your Presumptive Amount</h2>
             </div>
-            <div className="prose prose-gray prose-lg max-w-none text-[var(--color-text-body)] mb-10">
-              <p>
-                Before you file any paperwork, you must know what the state presumes your support amount should be. Washington law requires all child support petitions to include a formally calculated <strong className="text-[var(--color-text-primary)]">Washington State Child Support Worksheet (v2026)</strong>.
+            <div className="prose prose-gray prose-lg max-w-none text-gray-600 mb-10">
+              <p className="text-lg leading-relaxed">
+                Before you file any paperwork, you must know what the state presumes your support amount should be. Washington law requires all child support petitions to include a formally calculated <strong className="text-gray-900">Washington State Child Support Worksheet (v2026)</strong>.
               </p>
             </div>
-            <div className="bg-[var(--color-bg-subtle)] p-8 rounded-2xl border border-[var(--color-bg-border)] flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="bg-white p-8 rounded-2xl border border-gray-200 flex flex-col md:flex-row items-center justify-between gap-8">
               <div>
-                <h4 className="text-xl font-bold text-[var(--color-text-primary)] mb-2">Generate Your Free Worksheet</h4>
-                <p className="text-[var(--color-text-secondary)]">Includes the mandatory 2026 economic table updates.</p>
+                <h4 className="text-xl font-bold text-gray-900 mb-2">Generate Your Free Worksheet</h4>
+                <p className="text-gray-500">Includes the mandatory 2026 economic table updates.</p>
               </div>
               <Link href="/worksheet" className="btn-primary-lg btn-primary w-full md:w-fit !rounded-full">
                 Start Calculator <ArrowRight size={18} />
               </Link>
             </div>
-          </section>
+          </div>
+        </div>
+      </section>
 
-          <section className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card-md)]">
+      {/* ── STEP 2 ──────────────────────────────────────────────────────── */}
+      <section className="section-default bg-white">
+        <div className="container-reading">
+          <div className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card-md)]">
             <div className="flex items-center gap-6 mb-8">
-              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-[var(--color-brand-primary)] text-white font-bold text-xl shrink-0 shadow-[var(--shadow-card-md)] shadow-[var(--color-brand-primary)]/20">2</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)]">Complete Mandatory Court Forms</h2>
+              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-600 text-white font-bold text-xl shrink-0 shadow-lg shadow-blue-200">2</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Complete Mandatory Court Forms</h2>
             </div>
-            <div className="prose prose-gray prose-lg max-w-none text-[var(--color-text-body)] mb-10">
-              <p>
+            <div className="prose prose-gray prose-lg max-w-none text-gray-600 mb-10">
+              <p className="text-lg leading-relaxed">
                 You must complete the specific mandatory forms prescribed by the Washington State Administrative Office of the Courts (AOC). The core forms include:
               </p>
-              <ul className="list-none space-y-6 pl-0 not-prose">
+              <ul className="list-none space-y-6 pl-0 not-prose mt-8">
                 {[
                   { title: "FL All Family 130", desc: "Child Support Worksheet." },
                   { title: "FL All Family 131", desc: "Financial Declaration. You must swear under penalty of perjury regarding your income, expenses, and debts." },
                   { title: "Sealed Financial Documents", desc: "You must attach at least two years of full tax returns and your last six months of pay stubs." }
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-4 p-4 bg-white border border-[var(--color-bg-border)] rounded-xl">
-                    <CheckCircle2 className="w-6 h-6 text-[var(--color-success)] shrink-0" />
+                  <li key={i} className="flex items-start gap-4 p-5 bg-[var(--color-bg-subtle)] border border-gray-200 rounded-xl">
+                    <CheckCircle2 className="w-6 h-6 text-green-600 shrink-0 mt-0.5" />
                     <div>
-                      <span className="font-bold text-[var(--color-text-primary)] block mb-1">{item.title}</span>
-                      <span className="text-[var(--color-text-body)] leading-relaxed">{item.desc}</span>
+                      <span className="font-bold text-gray-900 block mb-1 text-lg">{item.title}</span>
+                      <span className="text-gray-600 leading-relaxed">{item.desc}</span>
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="callout-amber !p-8 border-2">
-              <div className="flex items-start gap-4">
-                <AlertTriangle className="w-6 h-6 text-[var(--color-warning)] shrink-0" />
-                <p className="text-sm text-[var(--color-highlight)] leading-relaxed font-semibold">
-                  <strong className="text-[var(--color-highlight)]">Warning:</strong> Failure to provide sealed financial source documents can lead a judge to impute your income at an unfavorably high rate.
-                </p>
-              </div>
+            <div className="p-8 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-4">
+              <AlertTriangle className="w-6 h-6 text-amber-600 shrink-0" />
+              <p className="text-sm text-amber-900 leading-relaxed font-semibold">
+                <strong className="text-amber-900">Warning:</strong> Failure to provide sealed financial source documents can lead a judge to impute your income at an unfavorably high rate.
+              </p>
             </div>
-          </section>
+          </div>
+        </div>
+      </section>
 
-          <section className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card-md)]">
+      {/* ── STEP 3 ──────────────────────────────────────────────────────── */}
+      <section className="section-default bg-[var(--color-bg-subtle)]">
+        <div className="container-reading">
+          <div className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card-md)]">
             <div className="flex items-center gap-6 mb-8">
-              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-[var(--color-brand-primary)] text-white font-bold text-xl shrink-0 shadow-[var(--shadow-card-md)] shadow-[var(--color-brand-primary)]/20">3</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)]">File with the County Clerk</h2>
+              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-600 text-white font-bold text-xl shrink-0 shadow-lg shadow-blue-200">3</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">File with the County Clerk</h2>
             </div>
-            <div className="prose prose-gray prose-lg max-w-none text-[var(--color-text-body)] mb-10">
-              <p>
+            <div className="prose prose-gray prose-lg max-w-none text-gray-600 mb-10">
+              <p className="text-lg leading-relaxed">
                 Child support is handled at the county level. You must file your forms at the Superior Court Clerk&apos;s office in the county where the child resides.
               </p>
             </div>
-            <div className="card-highlighted !bg-[var(--color-text-primary)] !border-none !p-10 shadow-[var(--shadow-card-hover)] flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+            <div className="bg-gray-900 !p-10 rounded-3xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-32 translate-x-32" />
               <div className="flex items-center gap-4 text-white relative z-10">
                 <div className="p-3 bg-white/10 rounded-2xl border border-white/10">
-                  <Building2 className="w-8 h-8 text-[var(--color-brand-primary-mid)]" />
+                  <Building2 className="w-8 h-8 text-blue-400" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold mb-1 text-white">Find Your Courthouse</h4>
-                  <p className="text-white/60 text-sm font-medium uppercase tracking-widest">Get addresses for all 39 WA counties.</p>
+                  <p className="text-white/60 text-sm font-medium uppercase tracking-widest">Addresses for all 39 counties.</p>
                 </div>
               </div>
-              <Link href="/washington-courts" className="btn-primary !bg-white !text-[var(--color-text-primary)] hover:!bg-[var(--color-bg-subtle)] !rounded-full relative z-10">
+              <Link href="/washington-courts" className="btn-primary !bg-white !text-gray-900 hover:!bg-gray-100 !rounded-full relative z-10">
                 View Directory <ChevronRight size={18} />
               </Link>
             </div>
-          </section>
+          </div>
+        </div>
+      </section>
 
-          <section className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card-md)]">
+      {/* ── STEP 4 ──────────────────────────────────────────────────────── */}
+      <section className="section-default bg-white">
+        <div className="container-reading">
+          <div className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card-md)]">
             <div className="flex items-center gap-6 mb-8">
-              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-[var(--color-brand-primary)] text-white font-bold text-xl shrink-0 shadow-[var(--shadow-card-md)] shadow-[var(--color-brand-primary)]/20">4</div>
-              <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)]">Serve the Other Parent</h2>
+              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-600 text-white font-bold text-xl shrink-0 shadow-lg shadow-blue-200">4</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Serve the Other Parent</h2>
             </div>
-            <div className="prose prose-gray prose-lg max-w-none text-[var(--color-text-body)]">
-              <p className="leading-relaxed">
+            <div className="prose prose-gray prose-lg max-w-none text-gray-600">
+              <p className="text-lg leading-relaxed">
                 Washington strictly enforces &quot;due process.&quot; The court cannot issue a child support order against someone who hasn&apos;t been properly notified. You must serve the other parent with copies of everything you filed.
               </p>
-              <div className="callout-blue mt-8">
-                <p className="text-[var(--color-info)] font-semibold m-0">
-                  <strong className="text-[var(--color-info)]">Important:</strong> You cannot serve the papers yourself. They must be served by a neutral third party over the age of 18, or formally via certified mail with a return receipt if allowed by the court.
+              <div className="mt-8 p-8 bg-blue-50 border border-blue-100 rounded-2xl">
+                <p className="text-blue-900 font-semibold m-0 text-lg leading-relaxed">
+                  <strong className="text-blue-600">Important:</strong> You cannot serve the papers yourself. They must be served by a neutral third party over the age of 18, or formally via certified mail if allowed by the court.
                 </p>
               </div>
             </div>
-          </section>
+          </div>
         </div>
+      </section>
 
-        <section className="card-standard bg-[var(--color-bg-subtle)] border-dashed border-2 border-[var(--color-bg-border)] !p-12 text-center shadow-none mt-24 md:mt-32">
-          <h2 className="text-3xl font-bold text-[var(--color-text-primary)] mb-6">Need legal help?</h2>
-          <p className="text-[var(--color-text-secondary)] text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
-            While WCSSC provides estimates, complex cases often require a professional. We recommend consulting a licensed Washington State family law attorney.
-          </p>
-          <Link href="/contact" className="btn-primary-lg btn-secondary !rounded-full">
-            Contact Editorial Team
-          </Link>
-        </section>
-      </div>
+      {/* ── CTA ─────────────────────────────────────────────────────────── */}
+      <section className="section-default bg-[var(--color-bg-subtle)] border-t border-gray-200">
+        <div className="container-reading text-center">
+          <div className="card-standard border-dashed border-2 border-gray-200 !p-12 shadow-none">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Need legal help?</h2>
+            <p className="text-lg text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+              While WCSSC provides estimates, complex cases often require a professional. We recommend consulting a licensed Washington State family law attorney.
+            </p>
+            <Link href="/contact" className="btn-primary-lg btn-secondary !rounded-full">
+              Contact Editorial Team
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

@@ -10,94 +10,110 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main className="flex-1 bg-page">
-      <div className="container-reading section-default">
+    <main className="flex-1 bg-white">
+      {/* ── MINI HERO ────────────────────────────────────────────────────── */}
+      <section className="bg-white py-16 md:py-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+        <div
+          aria-hidden="true"
+          className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
+        />
 
-        {/* Back Link */}
-        <Link href="/" className="btn-ghost !h-10 !px-0 w-fit mb-8 md:mb-12">
-          <ArrowLeft size={14} />
-          Back to Calculator
-        </Link>
+        <div className="container-reading relative z-10">
+          <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-8">
+            <ArrowLeft size={16} />
+            Back to Calculator
+          </Link>
 
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8 md:mb-12">
-          <div className="p-4 bg-indigo-600 rounded-2xl shadow-[var(--shadow-card)] shadow-indigo-600/20">
-            <FileText className="w-8 h-8 text-white" />
-          </div>
-          <div>
-            <p className="label-metadata mb-1">Legal Agreement</p>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Terms of Service</h1>
+          <div className="flex flex-col gap-6">
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
+              Legal Agreement
+            </p>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+              Terms of <span className="text-blue-600">Service</span>
+            </h1>
+            <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
+              By accessing or using WCSSC, you agree to be bound by the following Terms of Service. These terms govern your use of our 2026 Washington child support tools.
+            </p>
           </div>
         </div>
+      </section>
 
-        <p className="mb-10 md:mb-14 text-lg leading-relaxed">
-          By accessing or using the Washington Child Support Schedule Center (WCSSC) website, you agree to be bound by the following Terms of Service. If you do not agree, please do not use our services.
-        </p>
+      {/* ── INTRO ───────────────────────────────────────────────────────── */}
+      <section className="section-default bg-[var(--color-bg-subtle)]">
+        <div className="container-reading">
+          <p className="text-xl leading-relaxed text-[var(--color-text-secondary)] text-center max-w-2xl mx-auto">
+            Please read these terms carefully. If you do not agree with any part of these terms, please do not use our services.
+          </p>
+        </div>
+      </section>
 
-        {/* Terms Sections */}
-        <div className="space-y-6 md:space-y-8">
-          {[
-            {
-              title: "1. Acceptance of Terms",
-              body: "By accessing this website, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and our Privacy Policy. These terms apply to all visitors, users, and others who access or use the service."
-            },
-            {
-              title: "2. Description of Service",
-              body: "WCSSC provides an online educational calculator to estimate Washington State child support obligations based on the 2026 official schedule. Our service is provided 'as-is' for informational purposes only. We do not provide legal, financial, or professional advice."
-            },
-            {
-              title: "3. Permitted Use",
-              body: "You may use WCSSC's tools for personal, non-commercial, educational purposes only. You agree not to: (a) use the service for any unlawful purpose; (b) reproduce or redistribute our content without permission; (c) attempt to reverse-engineer or interfere with the website's technical systems."
-            },
-            {
-              title: "4. Accuracy Disclaimer",
-              body: "Our calculations are based on the 2026 Washington State Child Support Schedule and are updated to the best of our ability. However, we make no warranty as to the accuracy or completeness of any calculation. Always verify critical decisions with a licensed Washington State family law attorney."
-            },
-            {
-              title: "5. Intellectual Property",
-              body: "All content, design, code, and data on this website are the intellectual property of WCSSC unless otherwise noted. The underlying Washington State child support tables are public domain government data. The WCSSC branding, design system, and proprietary calculation logic are protected."
-            },
-            {
-              title: "6. Third-Party Advertising",
-              body: "WCSSC displays advertisements provided by Google AdSense. These ads are governed by Google's own terms of service and privacy policies. WCSSC does not control the content of these advertisements and is not responsible for any third-party products or services advertised."
-            },
-            {
-              title: "7. Limitation of Liability",
-              body: "To the fullest extent permitted by law, WCSSC and its operators are not liable for any direct, indirect, incidental, or consequential damages arising from your use of, or inability to use, this service."
-            },
-            {
-              title: "8. Changes to Terms",
-              body: "We reserve the right to update these Terms of Service at any time. Changes will be effective immediately upon posting. Continued use of the service following a change constitutes your acceptance of the new terms."
-            },
-            {
-              title: "9. Governing Law",
-              body: "These Terms are governed by the laws of the State of Washington, United States, without regard to its conflict of law provisions."
-            },
-            {
-              title: "10. Contact",
-              body: "If you have questions about these Terms, please contact us at: support@wcssc.site."
-            }
-          ].map((section, i) => (
-            <section key={i} className="card-standard">
+      {/* ── TERMS ───────────────────────────────────────────────────────── */}
+      {[
+        {
+          title: "1. Acceptance of Terms",
+          body: "By accessing this website, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and our Privacy Policy. These terms apply to all visitors, users, and others who access or use the service."
+        },
+        {
+          title: "2. Description of Service",
+          body: "WCSSC provides an online educational calculator to estimate Washington State child support obligations based on the 2026 official schedule. Our service is provided 'as-is' for informational purposes only."
+        },
+        {
+          title: "3. Permitted Use",
+          body: "You may use WCSSC's tools for personal, non-commercial, educational purposes only. You agree not to reproduce or redistribute our content without permission or attempt to interfere with the website's technical systems."
+        },
+        {
+          title: "4. Accuracy Disclaimer",
+          body: "Our calculations are based on the 2026 Washington State Child Support Schedule and are updated to the best of our ability. However, we make no warranty as to the accuracy or completeness of any calculation."
+        },
+        {
+          title: "5. Intellectual Property",
+          body: "All content, design, code, and data on this website are the intellectual property of WCSSC unless otherwise noted. The underlying Washington State child support tables are public domain government data."
+        },
+        {
+          title: "6. Third-Party Advertising",
+          body: "WCSSC displays advertisements provided by Google AdSense. These ads are governed by Google's own terms of service and privacy policies. WCSSC does not control the content of these advertisements."
+        },
+        {
+          title: "7. Limitation of Liability",
+          body: "To the fullest extent permitted by law, WCSSC and its operators are not liable for any direct, indirect, incidental, or consequential damages arising from your use of this service."
+        },
+        {
+          title: "8. Changes to Terms",
+          body: "We reserve the right to update these Terms of Service at any time. Changes will be effective immediately upon posting. Continued use constitutes acceptance of the new terms."
+        },
+        {
+          title: "9. Governing Law",
+          body: "These Terms are governed by the laws of the State of Washington, United States, without regard to its conflict of law provisions."
+        },
+        {
+          title: "10. Contact",
+          body: "If you have questions about these Terms, please contact us at: support@wcssc.site."
+        }
+      ].map((section, i) => (
+        <section key={i} className={`section-default ${i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-bg-subtle)]'}`}>
+          <div className="container-reading">
+            <div className="card-standard">
               <div className="flex items-center gap-4 mb-4">
-                <CheckCircle2 className="w-5 h-5 text-[var(--color-brand-primary)] flex-shrink-0" />
-                <h2 className="text-xl font-semibold">{section.title}</h2>
+                <CheckCircle2 className="w-6 h-6 text-blue-600 flex-shrink-0" />
+                <h2 className="text-2xl font-bold">{section.title}</h2>
               </div>
-              <div className="md:pl-9">
-                <p className="leading-relaxed text-[var(--color-text-secondary)]">{section.body}</p>
+              <div className="md:pl-10">
+                <p className="leading-relaxed text-[var(--color-text-secondary)] text-lg">{section.body}</p>
               </div>
-            </section>
-          ))}
-        </div>
+            </div>
+          </div>
+        </section>
+      ))}
 
-        {/* Footer info */}
-        <div className="mt-16 pt-12 border-t border-[var(--color-bg-border-soft)] text-center">
-          <p className="label-metadata mb-6 text-[var(--color-text-secondary)]">Effective Date: January 1, 2026</p>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-4 label-metadata">
-            <Link href="/privacy" className="hover:text-[var(--color-brand-primary)] transition-colors">Privacy Policy</Link>
-            <Link href="/disclaimer" className="hover:text-[var(--color-brand-primary)] transition-colors">Legal Disclaimer</Link>
-            <Link href="/about" className="hover:text-[var(--color-brand-primary)] transition-colors">About Us</Link>
-            <Link href="/" className="hover:text-[var(--color-brand-primary)] transition-colors">Calculator</Link>
+      {/* ── MINI FOOTER ─────────────────────────────────────────────────── */}
+      <div className="py-12 border-t border-[var(--color-bg-border-soft)] bg-white">
+        <div className="container-reading text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6">Effective Date: January 1, 2026</p>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-gray-500">
+            <Link href="/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</Link>
+            <Link href="/disclaimer" className="hover:text-blue-600 transition-colors">Legal Disclaimer</Link>
+            <Link href="/about" className="hover:text-blue-600 transition-colors">About Us</Link>
+            <Link href="/" className="hover:text-blue-600 transition-colors">Calculator</Link>
           </div>
         </div>
       </div>

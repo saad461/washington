@@ -16,6 +16,7 @@ import {
   AlertTriangle,
   Clock,
   BookOpen,
+  ArrowLeft,
 } from "lucide-react";
 import CalculatorSchema from "@/components/CalculatorSchema";
 import FAQAccordion from "@/components/FAQAccordion";
@@ -109,10 +110,15 @@ export default async function CountyCourtPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": [{ "@type": "GovernmentOffice", name: county.court, address: { "@type": "PostalAddress", streetAddress: county.courtAddress, addressRegion: "WA", addressCountry: "US" }, telephone: county.clerkPhone, url: county.website }] }) }} />
       <CalculatorSchema county={county.name} url={`https://wcssc.site/washington-courts/${county.slug}`} />
 
-      {/* 1. HERO */}
-      <section className="bg-white border-b border-[var(--color-bg-border)]">
-        <div className="container-wide section-default text-center">
-          <nav className="breadcrumbs-container justify-center">
+      {/* 1. MINI HERO */}
+      <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+        <div
+          aria-hidden="true"
+          className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
+        />
+
+        <div className="container-wide relative z-10">
+          <nav className="breadcrumbs-container mb-8">
             <Link href="/" className="breadcrumb-link">Home</Link>
             <span className="breadcrumb-separator">/</span>
             <Link href="/washington-courts" className="breadcrumb-link">Courts</Link>
@@ -120,29 +126,32 @@ export default async function CountyCourtPage({ params }: Props) {
             <span className="breadcrumb-current">{county.name}</span>
           </nav>
 
-          <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-8 max-w-4xl mx-auto text-[var(--color-text-primary)]">
-            Child Support Calculator – <span className="text-[var(--color-brand-primary)]">{county.name}</span>, WA (2026)
-          </h1>
-
-          <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-2xl mx-auto mb-12">
-            Official 2026 estimates for {county.name} residents. Based on the Washington Income Shares Model with updated SSR of <strong className="text-[var(--color-text-primary)]">approximately $2,394</strong>.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4">
-            {["SSR: ~$2,394", "2026 Guidelines", "All 39 Counties", "Min: $50/child"].map(tag => (
-              <span key={tag} className="badge-meta !px-6 !py-2 !rounded-full !text-[12px] !font-bold">{tag}</span>
-            ))}
+          <div className="flex flex-col gap-6">
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
+              County Calculator & Guide
+            </p>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+              Child Support – <span className="text-blue-600">{county.name}</span>, WA
+            </h1>
+            <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
+              Official 2026 estimates for {county.name} residents. Based on the Washington Income Shares Model with updated SSR of <strong className="text-gray-900 font-bold">approximately $2,394</strong>.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {["SSR: ~$2,394", "2026 Guidelines", "RCW 26.19 Certified"].map(tag => (
+                <span key={tag} className="badge-meta !px-4 !py-1.5 !rounded-lg !text-[11px] !font-bold !uppercase tracking-wider">{tag}</span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* 2. CALCULATOR SECTION */}
-      <section className="bg-[var(--color-bg-subtle)] border-b border-[var(--color-bg-border)]">
-        <div className="container-wide section-default">
-          <div className="text-center mb-16">
-            <span className="eyebrow">Washington State Certified Engine</span>
-            <h2 className="text-3xl font-bold mb-6 mt-4">Calculate {county.name} Support</h2>
-            <p className="text-[var(--color-text-secondary)] text-lg">Enter both parents&apos; net incomes. Based on official RCW 26.19 tables.</p>
+      <section className="section-default bg-[var(--color-bg-subtle)] border-b border-[var(--color-bg-border)]">
+        <div className="container-wide">
+          <div className="text-center mb-12">
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Washington State Certified Engine</p>
+            <h2 className="text-3xl font-bold mb-4">Calculate {county.name} Support</h2>
+            <p className="text-[var(--color-text-secondary)] text-lg">Enter both parents&apos; net incomes below to get your 2026 estimate.</p>
           </div>
           <div className="flex flex-col items-center">
             <HomeCalculator />
@@ -151,112 +160,116 @@ export default async function CountyCourtPage({ params }: Props) {
       </section>
 
       {/* 3. MAIN CONTENT GRID */}
-      <div className="container-wide section-default">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          <div className="lg:col-span-7 space-y-16">
-            {/* A. Intro */}
-            <article className="prose prose-gray prose-lg max-w-none text-[var(--color-text-body)]">
-              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-[var(--color-text-primary)]">Child Support in {county.name}: A 2026 Guide</h2>
-              {content.introduction.map((p, i) => <p key={i} className="leading-relaxed mb-6">{p}</p>)}
-            </article>
+      <section className="section-default bg-white">
+        <div className="container-wide">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            <div className="lg:col-span-7 space-y-16">
+              {/* A. Intro */}
+              <article className="prose prose-gray prose-lg max-w-none text-[var(--color-text-body)]">
+                <h2 className="text-2xl md:text-3xl font-bold mb-8 text-[var(--color-text-primary)]">Child Support in {county.name}: A 2026 Guide</h2>
+                {content.introduction.map((p, i) => <p key={i} className="leading-relaxed mb-6 text-lg">{p}</p>)}
+              </article>
 
-            {/* B. Filing Steps */}
-            <section>
-              <h2 className="text-2xl md:text-3xl font-bold mb-12 text-[var(--color-text-primary)]">Filing Process in {county.name}</h2>
-              <div className="grid gap-6">
-                {content.filingSteps.map((step, i) => (
-                  <div key={i} className="flex gap-6 p-8 bg-white border border-[var(--color-bg-border)] rounded-2xl shadow-sm">
-                    <div className="w-10 h-10 rounded-lg bg-[var(--color-brand-primary)] text-white flex items-center justify-center font-bold shrink-0">{i + 1}</div>
-                    <div>
-                      <h4 className="font-bold text-[var(--color-text-primary)] mb-4">{step.step}</h4>
-                      <p className="text-[var(--color-text-body)] text-sm leading-relaxed">{step.detail}</p>
+              {/* B. Filing Steps */}
+              <section>
+                <h2 className="text-2xl md:text-3xl font-bold mb-12 text-[var(--color-text-primary)]">Filing Process in {county.name}</h2>
+                <div className="grid gap-6">
+                  {content.filingSteps.map((step, i) => (
+                    <div key={i} className="flex gap-6 p-8 bg-white border border-[var(--color-bg-border)] rounded-2xl shadow-sm">
+                      <div className="w-10 h-10 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold shrink-0">{i + 1}</div>
+                      <div>
+                        <h4 className="font-bold text-[var(--color-text-primary)] mb-2">{step.step}</h4>
+                        <p className="text-[var(--color-text-body)] text-base leading-relaxed">{step.detail}</p>
+                      </div>
                     </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* C. Local Insight */}
+              <section className="p-8 md:p-10 bg-amber-50 border border-amber-200 rounded-2xl shadow-sm">
+                <div className="flex items-center gap-4 mb-6">
+                  <Lightbulb className="w-8 h-8 text-amber-600" />
+                  <span className="text-[12px] font-bold text-amber-900 uppercase tracking-widest">Local Filing Insight</span>
+                </div>
+                <p className="text-amber-900 text-lg font-medium leading-relaxed italic">&ldquo;{content.localTip}&rdquo;</p>
+              </section>
+
+              {/* D. FAQs */}
+              <section>
+                <h2 className="text-2xl md:text-3xl font-bold mb-12 text-[var(--color-text-primary)]">Frequently Asked Questions</h2>
+                <FAQAccordion items={faqs.map(f => ({ question: f.q, answer: f.a }))} />
+              </section>
+            </div>
+
+            {/* 4. SIDEBAR */}
+            <aside className="lg:col-span-5 space-y-8">
+              <div className="bg-gray-900 text-white p-8 md:p-12 rounded-[var(--radius-card)] shadow-xl relative overflow-hidden lg:sticky lg:top-24">
+                <Building2 className="w-12 h-12 text-blue-400 mb-12" />
+                <h3 className="text-2xl font-bold mb-12 text-white">{county.court}</h3>
+
+                <div className="space-y-10">
+                  <div className="stat-block">
+                    <div className="flex items-center gap-2 mb-2">
+                      <MapPin className="w-4 h-4 text-white/50" />
+                      <span className="text-[12px] font-bold text-white/60 uppercase tracking-widest">Address</span>
+                    </div>
+                    <p className="text-[15px] font-medium leading-relaxed text-white">{county.courtAddress}</p>
                   </div>
-                ))}
-              </div>
-            </section>
+                  <div className="stat-block">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Phone className="w-4 h-4 text-white/50" />
+                      <span className="text-[12px] font-bold text-white/60 uppercase tracking-widest">Clerk Phone</span>
+                    </div>
+                    <p className="text-lg font-bold text-white">{county.clerkPhone}</p>
+                  </div>
+                </div>
 
-            {/* C. Local Insight */}
-            <section className="callout-amber !p-8 md:!p-10 border-2">
-              <div className="flex items-center gap-4 mb-6">
-                <Lightbulb className="w-8 h-8 text-[var(--color-warning)]" />
-                <span className="text-[12px] font-bold text-[var(--color-highlight)] uppercase tracking-widest">Local Filing Insight</span>
-              </div>
-              <p className="text-[var(--color-highlight)] text-lg font-medium leading-relaxed italic">&ldquo;{content.localTip}&rdquo;</p>
-            </section>
+                <div className="my-12 h-px bg-white/10" />
 
-            {/* D. FAQs */}
-            <section>
-              <h2 className="text-2xl md:text-3xl font-bold mb-12 text-[var(--color-text-primary)]">Frequently Asked Questions</h2>
-              <FAQAccordion items={faqs.map(f => ({ question: f.q, answer: f.a }))} />
-            </section>
+                <div className="space-y-4">
+                  <a href={county.website} target="_blank" rel="noopener noreferrer" className="btn-secondary w-full !bg-white/10 !border-white/20 !text-white hover:!bg-white/20">
+                    Court Website <ExternalLink className="w-4 h-4" />
+                  </a>
+                  <a href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} target="_blank" rel="noopener noreferrer" className="btn-primary w-full shadow-lg shadow-blue-500/20">
+                    Get Directions <MapPin className="w-4 h-4" />
+                  </a>
+                </div>
+
+                <div className="mt-12 p-6 bg-white/5 rounded-xl border border-white/10 flex gap-4">
+                  <Clock className="w-5 h-5 text-white/40 shrink-0" />
+                  <p className="text-[12px] font-bold text-white/60 leading-relaxed uppercase">Call ahead to verify current clerk hours before visiting {county.seat}.</p>
+                </div>
+              </div>
+
+              {/* Related Links */}
+              <div className="card-standard">
+                <p aria-hidden="true" className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-8 flex items-center gap-2">
+                  <BookOpen className="w-4 h-4" /> Resources
+                </p>
+                <nav className="divide-y divide-[var(--color-bg-border-soft)]">
+                  {[{ href: "/worksheet", label: "2026 Worksheet Wizard" }, { href: "/how-to-file-child-support-washington", label: "Filing Guide" }, { href: "/washington-courts", label: "All WA Courthouses" }].map(link => (
+                    <Link key={link.href} href={link.href} className="flex items-center justify-between group py-5 hover:text-blue-600 transition-colors">
+                      <span className="font-semibold text-[var(--color-text-body)] group-hover:text-blue-600 transition-colors">{link.label}</span>
+                      <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-all" />
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+            </aside>
           </div>
-
-          {/* 4. SIDEBAR */}
-          <aside className="lg:col-span-5 space-y-8">
-            <div className="bg-[var(--color-text-primary)] text-white p-8 md:p-12 rounded-[var(--radius-card)] shadow-xl relative overflow-hidden lg:sticky lg:top-24">
-              <Building2 className="w-12 h-12 text-[var(--color-brand-primary-light)] mb-12" />
-              <h3 className="text-2xl font-bold mb-12 text-white">{county.court}</h3>
-
-              <div className="space-y-10">
-                <div className="stat-block">
-                  <div className="flex items-center gap-2 mb-2">
-                    <MapPin className="w-4 h-4 text-white/50" />
-                    <span className="text-[12px] font-bold font-bold text-white/60 uppercase tracking-widest">Address</span>
-                  </div>
-                  <p className="text-[15px] font-medium leading-relaxed text-white">{county.courtAddress}</p>
-                </div>
-                <div className="stat-block">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Phone className="w-4 h-4 text-white/50" />
-                    <span className="text-[12px] font-bold font-bold text-white/60 uppercase tracking-widest">Clerk Phone</span>
-                  </div>
-                  <p className="text-lg font-bold text-white">{county.clerkPhone}</p>
-                </div>
-              </div>
-
-              <div className="my-12 h-px bg-white/10" />
-
-              <div className="space-y-4">
-                <a href={county.website} target="_blank" rel="noopener noreferrer" className="btn-secondary w-full !bg-white/10 !border-white/20 !text-white hover:!bg-white/20">
-                  Court Website <ExternalLink className="w-4 h-4" />
-                </a>
-                <a href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} target="_blank" rel="noopener noreferrer" className="btn-primary w-full shadow-lg shadow-[var(--color-brand-primary)]/20">
-                  Get Directions <MapPin className="w-4 h-4" />
-                </a>
-              </div>
-
-              <div className="mt-12 p-6 bg-white/5 rounded-xl border border-white/10 flex gap-4">
-                <Clock className="w-5 h-5 text-white/40 shrink-0" />
-                <p className="text-[12px] font-bold text-white/60 leading-relaxed uppercase font-semibold">Call ahead to verify current clerk hours before visiting {county.seat}.</p>
-              </div>
-            </div>
-
-            {/* Related Links */}
-            <div className="card-standard">
-              <h4 className="eyebrow mb-8 flex items-center gap-2"><BookOpen className="w-4 h-4" /> Resources</h4>
-              <nav className="divide-y divide-[var(--color-bg-border-soft)]">
-                {[{ href: "/worksheet", label: "2026 Worksheet Wizard" }, { href: "/how-to-file-child-support-washington", label: "Filing Guide" }, { href: "/washington-courts", label: "All WA Courthouses" }].map(link => (
-                  <Link key={link.href} href={link.href} className="flex items-center justify-between group py-5 hover:text-[var(--color-brand-primary)] transition-colors">
-                    <span className="font-semibold text-[var(--color-text-body)] group-hover:text-[var(--color-brand-primary)] transition-colors">{link.label}</span>
-                    <ChevronRight className="w-4 h-4 text-[var(--color-text-secondary)] group-hover:text-[var(--color-brand-primary)] transition-all" />
-                  </Link>
-                ))}
-              </nav>
-            </div>
-          </aside>
         </div>
-      </div>
+      </section>
 
       {/* 5. FOOTER DISCLAIMER */}
-      <footer className="bg-[var(--color-bg-subtle)] border-t border-[var(--color-bg-border)] py-16 md:py-24">
+      <section className="bg-[var(--color-bg-subtle)] border-t border-[var(--color-bg-border)] section-default">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
-             <div className="callout-gray border-2">
+             <div className="p-8 bg-white border border-gray-200 rounded-3xl shadow-sm">
                 <div className="flex gap-6">
-                  <AlertTriangle className="w-8 h-8 text-[var(--color-text-secondary)] shrink-0" />
+                  <AlertTriangle className="w-8 h-8 text-gray-400 shrink-0" />
                   <div>
-                    <p className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest mb-4">
+                    <p className="text-[12px] font-bold text-gray-500 uppercase tracking-widest mb-4">
                       Legal Disclaimer
                     </p>
                     <p className="text-sm text-[var(--color-text-body)] leading-relaxed">
@@ -267,7 +280,7 @@ export default async function CountyCourtPage({ params }: Props) {
               </div>
           </div>
         </div>
-      </footer>
+      </section>
     </main>
   );
 }
