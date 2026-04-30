@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import worksheetSchema from "@/data/wa_csw_2026_schema.json";
 import { calculateChildSupport } from "@/utils/calculatorEngine";
+import ParentingTimeSelector from "@/components/calculator/ParentingTimeSelector";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
@@ -216,11 +217,17 @@ const InputField = ({
 export default function WorksheetWizard() {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData,    setFormData]    = useState<FormData>({});
+  const [useParentingDeviation, setUseParentingDeviation] = useState(false);
+  const [parentingTime, setParentingTime] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
 
   const currentPartKey = PARTS[currentStep];
   const currentFields  = (worksheetSchema as Record<string, WorksheetField[]>)[currentPartKey];
-  const calculation    = React.useMemo(() => calculateChildSupport(formData), [formData]);
+  const calculation    = React.useMemo(() => calculateChildSupport({
+    ...formData,
+    "useParentingDeviation": { p1: useParentingDeviation, p2: useParentingDeviation },
+    "parentingTime": { p1: parentingTime, p2: parentingTime },
+  }), [formData, useParentingDeviation, parentingTime]);
 
   const derivedData: Record<string, { p1: number; p2: number }> = React.useMemo(() => ({
     "1g":      { p1: calculation.grossP1,       p2: calculation.grossP2       },
@@ -546,6 +553,17 @@ export default function WorksheetWizard() {
                       className="relative z-10"
                     >
                       <div className="space-y-10">
+                        {currentPartKey === "Part II: Basic Child Support Obligation" && (
+                          <div className="mb-10 pb-10 border-b border-[var(--color-bg-border-soft)]">
+                            <ParentingTimeSelector
+                              useParentingDeviation={useParentingDeviation}
+                              setUseParentingDeviation={setUseParentingDeviation}
+                              parentingTime={parentingTime}
+                              setParentingTime={setParentingTime}
+                            />
+                          </div>
+                        )}
+
                         {currentFields.map((field: WorksheetField) => {
                           const isCalculated = ["1g","2j","3","4","6"].includes(field.id);
                           const values = isCalculated
