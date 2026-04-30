@@ -132,13 +132,24 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
     // ── PARENTING TIME DEVIATION (OPTIONAL / ESTIMATED) ───────────────────
     // Gated behind useParentingDeviation toggle — OFF by default.
     // When OFF: parentingTime has zero effect on the result.
-    // When ON:  estimated deviation per RCW 26.19.075(1)(d) — approximation only.
+    // When ON:  estimated deviation per RCW 26.19.075(1)(d) — Tier-based logic.
     if (useParentingDeviation) {
-      const BASELINE_PCT = 25;
+      let reductionRate = 0;
+      let tierLabel = "";
+
+      if (parentingTime >= 183) {
+        reductionRate = 0.25;
+        tierLabel = "Equal Parenting Time — RCW 26.19.075(1)(d)";
+      } else if (parentingTime >= 128) {
+        reductionRate = 0.1667;
+        tierLabel = "Substantial Shared Time — RCW 26.19.075(1)(d)";
+      } else if (parentingTime >= 91) {
+        reductionRate = 0.0667;
+        tierLabel = "Significant Residential Time — RCW 26.19.075(1)(d)";
+      }
+
       let parentingAdjustmentAmount = 0;
-      if (parentingTime > BASELINE_PCT) {
-        const extraTime = parentingTime - BASELINE_PCT;
-        const reductionRate = Math.min((extraTime / 75) * 0.5, 0.5);
+      if (reductionRate > 0) {
         if (payingParent === "P1") {
           parentingAdjustmentAmount = obligationP1 * reductionRate;
           obligationP1 -= parentingAdjustmentAmount;
@@ -146,14 +157,9 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
           parentingAdjustmentAmount = obligationP2 * reductionRate;
           obligationP2 -= parentingAdjustmentAmount;
         }
+        adjustmentReason = tierLabel;
       }
       parentingAdjustment = -parentingAdjustmentAmount;
-
-      if (parentingAdjustmentAmount > 0) {
-        adjustmentReason =
-          "Estimated parenting time deviation applied (RCW 26.19.075(1)(d)) — " +
-          "court discretion applies, actual amount may differ";
-      }
     }
 
     // Healthcare & daycare — proportional share (RCW 26.19.080(2)(3))
