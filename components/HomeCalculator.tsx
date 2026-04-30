@@ -23,8 +23,8 @@ function AnimatedNumber({ value }: { value: number }) {
 
 /* ─── Shared toggle button styles ─── */
 function toggleBtn(active: boolean) {
-  const base = "h-11 sm:h-12 px-4 rounded-xl border-2 font-bold transition-all flex items-center justify-center gap-2 text-sm select-none";
-  if (active) return `${base} bg-[var(--color-brand-primary-light)] border-[var(--color-brand-primary)] text-[var(--color-brand-primary-hover)] shadow-[var(--shadow-card)]`;
+  const base = "h-11 sm:h-12 px-4 rounded-xl border-2 font-bold transition-all flex items-center justify-center gap-2 text-sm select-none w-full";
+  if (active) return `${base} bg-[var(--color-brand-primary)] border-[var(--color-brand-primary)] text-white shadow-[var(--shadow-card)]`;
   return `${base} bg-white border-[var(--color-bg-border)] text-[var(--color-text-body)] hover:border-[var(--color-text-disabled)]`;
 }
 
@@ -103,17 +103,31 @@ export default function HomeCalculator() {
               {/* Income cycle + children count */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
                 <div className="flex flex-col">
-                  <label htmlFor="income-type" className="input-label">Income Cycle</label>
-                  <select
-                    id="income-type"
-                    value={incomeType}
-                    onChange={(e) => setIncomeType(e.target.value)}
-                    className="input-standard appearance-none"
-                    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23374151' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center', backgroundSize: '16px' }}
-                  >
-                    <option value="monthly">Monthly Net</option>
-                    <option value="yearly">Yearly Net</option>
-                  </select>
+                  <span className="input-label mb-2">Income Cycle</span>
+                  <div className="flex bg-white border border-[var(--color-bg-border)] rounded-xl p-1 gap-1 h-12">
+                    <button
+                      type="button"
+                      onClick={() => setIncomeType("monthly")}
+                      className={`flex-1 flex items-center justify-center rounded-lg text-sm font-bold transition-all ${
+                        incomeType === "monthly"
+                          ? "bg-[var(--color-brand-primary)] text-white shadow-sm"
+                          : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-subtle)]"
+                      }`}
+                    >
+                      Monthly Net
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIncomeType("yearly")}
+                      className={`flex-1 flex items-center justify-center rounded-lg text-sm font-bold transition-all ${
+                        incomeType === "yearly"
+                          ? "bg-[var(--color-brand-primary)] text-white shadow-sm"
+                          : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-subtle)]"
+                      }`}
+                    >
+                      Yearly Net
+                    </button>
+                  </div>
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="children-count" className="input-label">Number of Children</label>
@@ -198,15 +212,15 @@ export default function HomeCalculator() {
 
                 {/* Payer toggle */}
                 <div className="flex flex-col">
-                  <span className="input-label mb-2">Designated Payer</span>
-                  <p className="input-helper mb-4">Which parent pays support to the other?</p>
+                  <span className="input-label mb-0">Designated Payer</span>
+                  <p className="text-sm text-gray-500 mb-4">Which parent will make monthly payments to the other?</p>
                   <div className="grid grid-cols-2 gap-4">
                     <button type="button" onClick={() => setPayingParent("P1")} className={toggleBtn(payingParent === "P1")}>
-                      {payingParent === "P1" && <CheckCircle size={15} className="shrink-0 text-[var(--color-brand-primary)]" />}
+                      {payingParent === "P1" && <CheckCircle size={15} className="shrink-0 text-white" />}
                       Parent 1
                     </button>
                     <button type="button" onClick={() => setPayingParent("P2")} className={toggleBtn(payingParent === "P2")}>
-                      {payingParent === "P2" && <CheckCircle size={15} className="shrink-0 text-[var(--color-brand-primary)]" />}
+                      {payingParent === "P2" && <CheckCircle size={15} className="shrink-0 text-white" />}
                       Parent 2
                     </button>
                   </div>
@@ -229,15 +243,15 @@ export default function HomeCalculator() {
                       }
                       <div className="min-w-0">
                         <p className="text-sm font-bold text-[var(--color-text-primary)] leading-snug">
-                          Parenting Time Deviation
+                          Apply Parenting Time Credit
                           <span className="ml-2 badge-warning">
                             Estimated
                           </span>
                         </p>
                         <p className="text-[12px] font-semibold text-[var(--color-text-secondary)] text-[var(--color-text-secondary)] mt-0.5">
                           {useParentingDeviation
-                            ? "ON — estimated credit applied (RCW 26.19.075(1)(d))"
-                            : "OFF — table-only amount (court-defensible default)"}
+                            ? "On — parenting time deviation will be applied"
+                            : "Off — using standard table amount"}
                         </p>
                       </div>
                     </div>
@@ -362,12 +376,13 @@ export default function HomeCalculator() {
 
         {/* ── RIGHT: Results panel ──────────────────────────────────────── */}
         <div className="lg:col-span-5 lg:sticky lg:top-24">
+          <div className="bg-[#F3F4F6] border border-gray-200 rounded-xl p-4 sm:p-6 h-full min-h-[500px]">
           <AnimatePresence mode="wait">
             {!result ? (
               <motion.div
                 key="empty"
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}
-                className="bg-[var(--color-bg-subtle)] border-dashed border-2 border-[var(--color-text-disabled)] rounded-[var(--radius-card)] flex flex-col items-center justify-center py-16 text-center gap-4"
+                className="bg-white border-dashed border-2 border-gray-300 rounded-[var(--radius-card)] flex flex-col items-center justify-center py-16 text-center gap-4 h-full"
               >
                 <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center text-[var(--color-text-secondary)] shadow-[var(--shadow-card)]">
                   <Calculator size={28} />
@@ -493,6 +508,7 @@ export default function HomeCalculator() {
               </motion.div>
             )}
           </AnimatePresence>
+          </div>
         </div>
       </div>
 
