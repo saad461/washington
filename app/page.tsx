@@ -462,21 +462,29 @@ export default function Home() {
                 label: "2026 WA Guidelines: Complete Handbook",
                 href:  "/blog/washington-child-support-guidelines-2026",
                 cat:   "Legal",
+                img:   "/img/wa_guidelines_2026.png"
               },
               {
                 label: "Self-Support Reserve (SSR) Explained",
                 href:  "/blog/washington-ssr-self-support-reserve-explained",
                 cat:   "Analysis",
+                img:   "/img/ssr_explained.png"
               },
               {
                 label: "King County Child Support Rules",
                 href:  "/blog/king-county-child-support-rules",
                 cat:   "Local Rules",
+                img:   "/img/king_county_rules.png"
               },
             ].map((p) => (
               <Link key={p.href} href={p.href} className="card-standard group flex flex-col !p-0 overflow-hidden">
-                <div className="h-40 w-full bg-gray-100 flex items-center justify-center border-b border-gray-100">
-                  <Scale size={40} className="text-gray-300 group-hover:scale-110 transition-transform duration-500" />
+                <div className="h-40 w-full bg-gray-100 flex items-center justify-center border-b border-gray-100 relative overflow-hidden">
+                  <img
+                    src={p.img}
+                    alt={p.label}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                 <span className="badge-category mb-4 w-fit">{p.cat}</span>
