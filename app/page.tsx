@@ -3,12 +3,15 @@ import Link from "next/link";
 import { ChevronRight, CheckCircle, Calculator, Scale, Shield } from "lucide-react";
 import HomeCalculator from "@/components/HomeCalculator";
 import CalculatorSchema from "@/components/CalculatorSchema";
+import FAQSchema from "@/components/seo/FAQSchema";
 import FAQAccordion from "@/components/FAQAccordion";
 import { getSupport } from "@/data/washingtonTable2026";
 
 export const metadata: Metadata = {
-  title: "WCSSC — Washington Child Support Calculator 2026",
-  description: "Washington's most accurate 2026 child support calculator. Instantly estimate monthly obligations for all 39 counties using the official AOC economic table. Free, fast, court-compliant.",
+  title: {
+    absolute: "Washington Child Support Calculator 2026 — Free Instant Estimate | WCSSC"
+  },
+  description: "Calculate Washington child support in seconds using the official 2026 RCW 26.19 economic tables. Free, private, and updated for EHB 1014 — covers all 39 counties.",
   alternates: { canonical: "https://wcssc.site/" },
 };
 
@@ -66,6 +69,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <CalculatorSchema url="https://wcssc.site" />
+      <FAQSchema faqs={homeFaqs} />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="pt-12 lg:pt-20 pb-12 lg:pb-20 w-full relative bg-white">
@@ -73,7 +77,7 @@ export default function Home() {
           <div className="text-center mb-12 md:mb-16 space-y-6">
             <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Washington State Standards</p>
             <h1 className="text-balance max-w-4xl mx-auto">
-              The Modern Standard for <span className="text-[var(--color-brand-primary)]">Washington Child Support</span>
+              Washington Child Support Calculator 2026
             </h1>
             <p className="text-lg md:text-xl text-[var(--color-text-secondary)] leading-relaxed max-w-2xl mx-auto">
               Precision-engineered for the 2026 AOC economic schedule. Fast,
@@ -85,7 +89,13 @@ export default function Home() {
                 </Link>
               </div>
           </div>
-          <HomeCalculator />
+
+          <div className="space-y-12">
+            <h2 className="text-center scroll-mt-20" id="calculator">
+              Calculate Your Child Support Obligation Instantly
+            </h2>
+            <HomeCalculator />
+          </div>
         </div>
       </section>
 
@@ -98,7 +108,7 @@ export default function Home() {
               { label: "2026 SSR",     value: "~$2,394 / mo"    },
               { label: "Min Support",  value: "$50 / child"      },
               { label: "Table Limit",  value: "$50,000"          },
-              { label: "Jurisdiction", value: "Washington State" },
+              { label: "Covers All 39 WA Counties", value: "Washington State" },
             ].map((fig, i) => (
               <div key={i} className="flex-1 px-8 text-center flex flex-col items-center justify-center">
                 <div className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-[0.03em] mb-1">{fig.label}</div>
@@ -113,7 +123,7 @@ export default function Home() {
               { label: "2026 SSR",     value: "~$2,394 / mo"    },
               { label: "Min Support",  value: "$50 / child"      },
               { label: "Table Limit",  value: "$50,000"          },
-              { label: "Jurisdiction", value: "Washington State" },
+              { label: "Covers All 39 WA Counties", value: "Washington State" },
             ].map((fig, i) => (
               <div key={i} className="bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] p-5 text-center flex flex-col items-center justify-center">
                 <div className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-[0.03em] mb-1">{fig.label}</div>
@@ -129,11 +139,11 @@ export default function Home() {
         <div className="container-wide">
           <div className="max-w-4xl mx-auto space-y-24">
 
-            {/* Why Legal Pros Trust WCSSC */}
+            {/* Why Washington Families and Attorneys Trust WCSSC */}
             <div>
               <div className="text-center mb-12 space-y-4">
                 <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">The Professional Standard</p>
-                <h2>Why Legal Pros Trust WCSSC</h2>
+                <h2>Why Washington Families and Attorneys Trust WCSSC</h2>
                 <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
                   Unlike generic calculators, WCSSC is engineered to the exact 2026 Washington statutory logic.
                 </p>
@@ -233,7 +243,7 @@ export default function Home() {
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
               <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Quick Reference</p>
-              <h2>Benchmark Support Estimates</h2>
+              <h2>2026 Washington Child Support Amounts by Income</h2>
               <p className="text-[var(--color-text-secondary)] text-lg">
                 Standard monthly totals based on the 2026 economic table.
               </p>
@@ -254,7 +264,10 @@ export default function Home() {
                 <tbody className="divide-y divide-[var(--color-bg-border-soft)]">
                   {BENCHMARK_ROWS.map((row, i) => (
                     <tr key={i} className="table-row">
-                      <td className="table-body-cell font-medium text-[var(--color-text-secondary)]">{row.income}</td>
+                      <td className="table-body-cell font-medium text-[var(--color-text-secondary)]">
+                        {/* TODO: link when slug page exists */}
+                        {row.income}
+                      </td>
                       <td className="table-body-cell font-bold text-[var(--color-text-primary)]">{row.one}</td>
                       <td className="table-body-cell font-bold text-[var(--color-text-primary)]">{row.two}</td>
                     </tr>
@@ -286,7 +299,7 @@ export default function Home() {
             <div className="text-center mb-12 md:mb-16 space-y-4">
               <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Real-World Case Study</p>
               <h2 className="text-[var(--color-text-primary)]">
-                Application of 2026 Guidelines
+                Real Example: $5,000 Income, 2 Children in Washington State
               </h2>
             </div>
 
@@ -337,7 +350,7 @@ export default function Home() {
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-center mb-12 md:mb-16">
-              Understanding the 2026 Guidelines
+              How Washington State Calculates Child Support in 2026
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 text-[var(--color-text-body)]">
@@ -401,6 +414,9 @@ export default function Home() {
       <section className="py-16 md:py-20 w-full bg-white relative">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
+            <h2 className="text-center mb-12 md:mb-16">
+              Frequently Asked Questions About Washington Child Support
+            </h2>
             <FAQAccordion items={homeFaqs} />
           </div>
         </div>
@@ -411,7 +427,7 @@ export default function Home() {
         <div className="container-wide">
           <div className="text-center mb-12 md:mb-16">
             <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Local Guides</p>
-            <h2>Regional Resource Centers</h2>
+            <h2>Child Support Calculators by Washington County</h2>
             <p className="text-[var(--color-text-secondary)] mt-4 text-lg">
               Local rules and benchmarks for Washington&apos;s major counties.
             </p>
@@ -443,7 +459,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12 md:mb-16">
             <div>
               <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">Resource Center</p>
-              <h2 className="mt-2">Latest Legal Resources</h2>
+              <h2 className="mt-2">2026 Washington Child Support Guides and Legal Resources</h2>
               <p className="text-[var(--color-text-secondary)] mt-4 text-lg">
                 Legal guides and economic analysis for Washington State.
               </p>
@@ -462,26 +478,29 @@ export default function Home() {
                 label: "2026 WA Guidelines: Complete Handbook",
                 href:  "/blog/washington-child-support-guidelines-2026",
                 cat:   "Legal",
-                img:   "/img/wa_guidelines_2026.png"
+                img:   "/img/wa_guidelines_2026.png",
+                alt:   "Washington child support guidelines 2026 legal handbook"
               },
               {
                 label: "Self-Support Reserve (SSR) Explained",
                 href:  "/blog/washington-ssr-self-support-reserve-explained",
                 cat:   "Analysis",
-                img:   "/img/ssr_explained.png"
+                img:   "/img/ssr_explained.png",
+                alt:   "Washington self-support reserve 2026 explanation"
               },
               {
                 label: "King County Child Support Rules",
                 href:  "/blog/king-county-child-support-rules",
                 cat:   "Local Rules",
-                img:   "/img/king_county_rules.png"
+                img:   "/img/king_county_rules.png",
+                alt:   "King County child support rules and calculator guide"
               },
             ].map((p) => (
               <Link key={p.href} href={p.href} className="card-standard group flex flex-col !p-0 overflow-hidden">
                 <div className="h-40 w-full bg-gray-100 flex items-center justify-center border-b border-gray-100 relative overflow-hidden">
                   <img
                     src={p.img}
-                    alt={p.label}
+                    alt={p.alt}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
