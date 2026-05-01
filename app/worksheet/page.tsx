@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import WorksheetWizard from "@/components/WorksheetWizard";
 import CalculatorSchema from "@/components/CalculatorSchema";
 import FAQAccordion from "@/components/FAQAccordion";
-import FAQSchema from "@/components/seo/FAQSchema";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft, ChevronRight, FileText } from "lucide-react";
 
@@ -67,7 +66,6 @@ export default function WorksheetPage() {
   return (
     <div className="flex-1 w-full bg-white">
       <CalculatorSchema url="https://wcssc.site/worksheet" />
-      <FAQSchema faqs={worksheetFAQs} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
