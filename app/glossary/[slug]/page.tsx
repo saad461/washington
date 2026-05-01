@@ -30,7 +30,7 @@ export default async function GlossaryTermPage({ params }: Props) {
   }
 
   return (
-    <main className="flex-1 bg-white">
+    <div className="flex-1 bg-white">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div
@@ -112,6 +112,6 @@ export default async function GlossaryTermPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -39,7 +39,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-gray-300 font-medium">
               <li>
                 <Link href="/" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
-                  Quick Estimator
+                  Calculator
                 </Link>
               </li>
               <li>
@@ -55,6 +55,16 @@ export default function Footer() {
               <li>
                 <Link href="/pierce-county-income-5000-2-children" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
                   Pierce County Guide
+                </Link>
+              </li>
+              <li>
+                <Link href="/snohomish-county-income-5000-2-children" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
+                  Snohomish County Guide
+                </Link>
+              </li>
+              <li>
+                <Link href="/spokane-county-income-5000-2-children" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
+                  Spokane County Guide
                 </Link>
               </li>
             </ul>

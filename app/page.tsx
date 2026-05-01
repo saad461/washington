@@ -145,7 +145,7 @@ export default function Home() {
             <h2 className="text-center">
               Calculate Your Child Support Obligation Instantly
             </h2>
-            <div id="calculator" className="scroll-mt-20">
+            <div id="calculator" className="scroll-mt-24">
               <HomeCalculator />
             </div>
           </div>
@@ -171,7 +171,7 @@ export default function Home() {
           </div>
 
           {/* Mobile/Tablet view: 2x2 Grid */}
-          <div className="md:hidden grid grid-cols-2 gap-4">
+          <div className="grid md:hidden grid-cols-2 gap-4">
             {[
               { label: "2026 SSR",     value: "~$2,394 / mo"    },
               { label: "Min Support",  value: "$50 / child"      },

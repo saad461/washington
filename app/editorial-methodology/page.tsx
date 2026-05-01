@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function EditorialMethodology() {
   return (
-    <main className="flex-1 bg-white">
+    <div className="flex-1 bg-white">
       <CalculatorSchema url="https://wcssc.site/editorial-methodology" />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
@@ -120,6 +120,6 @@ export default function EditorialMethodology() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

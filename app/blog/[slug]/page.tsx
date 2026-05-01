@@ -95,7 +95,7 @@ export default async function BlogPostPage({ params }: Props) {
   const nextArticle = currentIndex < blogs.length - 1 ? blogs[currentIndex + 1] : null;
 
   return (
-    <main className="flex-1 bg-white relative overflow-hidden">
+    <div className="flex-1 bg-white relative overflow-hidden">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div
@@ -201,6 +201,10 @@ export default async function BlogPostPage({ params }: Props) {
       {post.faqs && post.faqs.length > 0 && (
         <section className="section-default bg-[var(--color-bg-subtle)] border-y border-gray-100">
           <div className="container-reading">
+            <div className="text-center mb-12 space-y-4">
+              <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Common Parent Questions</p>
+              <h2 className="text-3xl font-bold text-gray-900">Frequently Asked Questions About Washington Child Support</h2>
+            </div>
             <FAQAccordion items={post.faqs.map(f => ({ question: f.question, answer: f.answer }))} />
           </div>
         </section>
@@ -256,6 +260,6 @@ export default async function BlogPostPage({ params }: Props) {
           </nav>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -1,74 +1,53 @@
 
 > wcssc@0.1.0 dev
-> next dev --turbopack
+> next dev --turbopack -p 3001
 
-▲ Next.js 16.2.4 (Turbopack)
-- Local:         http://localhost:3000
-- Network:       http://192.168.0.2:3000
-✓ Ready in 518ms
+▲ Next.js 16.2.3 (Turbopack)
+- Local:         http://localhost:3001
+- Network:       http://192.168.0.2:3001
+✓ Ready in 2.7s
 
-○ Compiling /blog ...
-⨯ Error: Event handlers cannot be passed to Client Component props.
-  <... src=... alt="WCSSC" width={24} height=... className=... onError={function onError}>
-                                                                       ^^^^^^^^^^^^^^^^^^
-If you need interactivity, consider converting part of this to a Client Component.
-    at stringify (<anonymous>)
-    at stringify (<anonymous>) {
-  digest: '2622101538'
-}
- GET /blog 200 in 10.4s (next.js: 7.2s, application-code: 3.2s)
-[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
-[browser] Uncaught Error: Event handlers cannot be passed to Client Component props.
-  <... src=... alt="WCSSC" width={24} height=... className=... onError={function onError}>
-                                                                       ^^^^^^^^^^^^^^^^^^
-If you need interactivity, consider converting part of this to a Client Component.
-    at stringify (<anonymous>:1:18)
-    at stringify (<anonymous>:1:18)
+ GET / 200 in 3.3s (next.js: 511ms, application-code: 2.8s)
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:290:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
-    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
-    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
-    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
-    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
-    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
-    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
-    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
-    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
-    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
-    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
-    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
-    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
-✓ Compiled in 98ms
- GET /blog 200 in 580ms (next.js: 11ms, application-code: 569ms)
-[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
+    at xq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:244:145)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:289:93)
+    at Ss (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:289:213)
+    at ct (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:301:282)
+    at Ts (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:298:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:290:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:140:674)
+    at fl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:141:1134)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:290:33)
+    at Ns (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:312:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:140:674)
+    at fl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:141:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:312:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:313:4)
+ GET /compare-2024-2026 200 in 247ms (next.js: 51ms, application-code: 196ms)
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:290:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
-    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
-    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
-    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
-    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
-    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
-    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
-    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
-    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
-    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
-    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
-    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
-    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /img/wcssc-icon.png 404 in 1809ms (next.js: 1715ms, application-code: 93ms)
-⨯ The requested resource isn't a valid image for /img/wcssc-icon.png received null
- GET /blog?category=Legal+Guide 200 in 62ms (next.js: 5ms, application-code: 57ms)
- GET /blog 200 in 253ms (next.js: 8ms, application-code: 244ms)
- GET /img/wcssc-icon.png 404 in 120ms (next.js: 21ms, application-code: 99ms)
-⨯ The requested resource isn't a valid image for /img/wcssc-icon.png received null
+    at xq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:244:145)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:289:93)
+    at Ss (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:289:213)
+    at ct (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:301:282)
+    at Ts (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:298:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:290:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:140:674)
+    at fl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:141:1134)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:290:33)
+    at Ns (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:312:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:140:674)
+    at fl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:141:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:312:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:313:4)
+ GET / 200 in 253ms (next.js: 6ms, application-code: 247ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -88,13 +67,7 @@ If you need interactivity, consider converting part of this to a Client Componen
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
-[browser] Image with src "/img/wcssc-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
- GET /blog/washington-child-support-guidelines-2026 200 in 2.4s (next.js: 2.2s, generate-params: 1069ms, application-code: 209ms)
- GET /blog/washington-child-support-guidelines-2026 200 in 138ms (next.js: 35ms, generate-params: 29ms, application-code: 104ms)
-[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
- GET /blog 200 in 234ms (next.js: 6ms, application-code: 229ms)
- GET /img/wcssc-icon.png 404 in 120ms (next.js: 13ms, application-code: 107ms)
-⨯ The requested resource isn't a valid image for /img/wcssc-icon.png received null
+ GET / 200 in 290ms (next.js: 5ms, application-code: 285ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -114,11 +87,7 @@ If you need interactivity, consider converting part of this to a Client Componen
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
-[browser] Image with src "/img/wcssc-icon.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
- GET /blog?category=Legal+Guide 200 in 59ms (next.js: 6ms, application-code: 53ms)
- GET /blog/washington-child-support-guidelines-2026 200 in 135ms (next.js: 34ms, generate-params: 30ms, application-code: 100ms)
-[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
- GET /blog/child-support-calculation-washington-2026 200 in 1125ms (next.js: 34ms, generate-params: 30ms, application-code: 1091ms)
+ GET / 200 in 218ms (next.js: 5ms, application-code: 213ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -138,29 +107,140 @@ If you need interactivity, consider converting part of this to a Client Componen
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /blog/child-support-calculation-washington-2026 200 in 211ms (next.js: 34ms, generate-params: 29ms, application-code: 177ms)
-✓ Compiled in 1972ms
-✓ Compiled in 333ms
- GET /blog/child-support-calculation-washington-2026 200 in 1489ms (next.js: 616ms, generate-params: 512ms, application-code: 873ms)
- GET /blog/child-support-calculation-washington-2026 200 in 249ms (next.js: 41ms, generate-params: 36ms, application-code: 208ms)
- GET /blog/child-support-calculation-washington-2026 200 in 1418ms (next.js: 37ms, generate-params: 32ms, application-code: 1381ms)
- GET /blog/child-support-calculation-washington-2026 200 in 238ms (next.js: 45ms, generate-params: 39ms, application-code: 193ms)
- GET /blog 200 in 206ms (next.js: 15ms, application-code: 191ms)
- GET /blog 200 in 103ms (next.js: 5ms, application-code: 98ms)
-✓ Compiled in 140ms
- GET /blog 200 in 162ms (next.js: 9ms, application-code: 153ms)
- GET /blog 200 in 143ms (next.js: 5ms, application-code: 138ms)
- GET /blog 200 in 200ms (next.js: 5ms, application-code: 194ms)
- GET /blog 200 in 171ms (next.js: 6ms, application-code: 165ms)
- GET /blog 200 in 161ms (next.js: 4ms, application-code: 157ms)
- GET /blog?category=Legal%20Guide 200 in 102ms (next.js: 4ms, application-code: 98ms)
- GET /blog 200 in 134ms (next.js: 4ms, application-code: 129ms)
- GET /blog/child-support-calculation-washington-2026 200 in 192ms (next.js: 41ms, generate-params: 35ms, application-code: 151ms)
- GET /blog/child-support-calculation-washington-2026 200 in 217ms (next.js: 36ms, generate-params: 31ms, application-code: 182ms)
- GET /blog/child-support-calculation-washington-2026 200 in 197ms (next.js: 34ms, generate-params: 30ms, application-code: 163ms)
- GET /blog/child-support-calculation-washington-2026 200 in 192ms (next.js: 37ms, generate-params: 32ms, application-code: 155ms)
- GET /blog/child-support-calculation-washington-2026 200 in 182ms (next.js: 36ms, generate-params: 32ms, application-code: 146ms)
-✓ Compiled in 112ms
- GET /blog/child-support-calculation-washington-2026 200 in 182ms (next.js: 41ms, generate-params: 34ms, application-code: 141ms)
- GET /blog 200 in 136ms (next.js: 7ms, application-code: 129ms)
- GET /blog 200 in 162ms (next.js: 7ms, application-code: 155ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="page" pagePath="page.tsx">
+      <SegmentTrieNode>
+      <Home>
+        <div className="flex-1 fle...">
+          <script>
+          <script>
+          <script>
+          <section>
+          ...
+            <div className="space-y-12">
+              <h2>
+              <div id="calculator" className="scroll-mt-24">
+                <HomeCalculator>
+                  <div className="w-full">
+                    <div className="grid grid-...">
+                      <div className="lg:col-span-7">
+                        <div className="card-stand...">
+                          <div>
+                          <div className="flex flex-...">
+                            <div>
+                            <div className="grid grid-...">
+                              <div className="flex flex-col">
+                                <label>
+                                <div className="relative">
+                                  <span>
+                                  <input
+                                    type="number"
+                                    id="parent1-income"
+                                    value=""
+                                    onChange={function onChange}
+                                    onBlur={function onBlur}
+                                    placeholder="0"
+                                    min="0"
+                                    step="1"
+                                    inputMode="decimal"
+                                    autoComplete="off"
+                                    className="input-standard pl-8 w-full"
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                                ...
+                              <div className="flex flex-col">
+                                <label>
+                                <div className="relative">
+                                  <span>
+                                  <input
+                                    type="number"
+                                    id="parent2-income"
+                                    value=""
+                                    onChange={function onChange}
+                                    onBlur={function onBlur}
+                                    placeholder="0"
+                                    min="0"
+                                    step="1"
+                                    inputMode="decimal"
+                                    autoComplete="off"
+                                    className="input-standard pl-8 w-full"
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                                ...
+                            ...
+                      ...
+                    ...
+          ...
+
+ GET / 200 in 567ms (next.js: 5ms, application-code: 563ms)
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
+[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
+    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
+    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
+    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
+    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
+ GET / 200 in 240ms (next.js: 16ms, application-code: 224ms)
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
+[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
+    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
+    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
+    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
+    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
+ GET /compare-2024-2026 200 in 93ms (next.js: 11ms, application-code: 83ms)
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
+[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
+    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
+    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
+    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
+    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
