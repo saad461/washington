@@ -114,10 +114,22 @@ export default function Navbar() {
               </button>
             )}
 
-          <Link href="/worksheet" className="hidden sm:flex btn-primary !h-9 !px-4 !text-[13px] !rounded-lg !font-semibold">
-              <span className="hidden md:inline">Launch</span> Wizard
-              <ChevronRight className="w-4 h-4" />
-            </Link>
+            {pathname === "/worksheet" ? (
+              <a
+                href="#wizard"
+                className="hidden sm:flex bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-[13px] hover:bg-blue-700 transition-colors items-center gap-1"
+              >
+                Back to Top ↑
+              </a>
+            ) : (
+              <Link
+                href="/worksheet"
+                className="hidden sm:flex btn-primary !h-9 !px-4 !text-[13px] !rounded-lg !font-semibold"
+              >
+                <span className="hidden md:inline">Launch</span> Wizard
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            )}
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -169,10 +181,20 @@ export default function Navbar() {
 
             {/* CTAs */}
             <div className="px-4 pt-4 pb-2 flex flex-col gap-3">
-              <Link href="/worksheet" onClick={() => setMobileOpen(false)} className="btn-primary w-full">
-                Launch Wizard
-                <ChevronRight className="w-5 h-5" />
-              </Link>
+              {pathname === "/worksheet" ? (
+                <a
+                  href="#wizard"
+                  onClick={() => setMobileOpen(false)}
+                  className="bg-blue-600 text-white px-4 py-3 rounded-xl font-semibold text-center transition-colors"
+                >
+                  Back to Top ↑
+                </a>
+              ) : (
+                <Link href="/worksheet" onClick={() => setMobileOpen(false)} className="btn-primary w-full">
+                  Launch Wizard
+                  <ChevronRight className="w-5 h-5" />
+                </Link>
+              )}
             </div>
 
             {/* Legal links */}
