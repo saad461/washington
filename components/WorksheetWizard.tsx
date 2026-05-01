@@ -10,8 +10,6 @@ import {
 import worksheetSchema from "@/data/wa_csw_2026_schema.json";
 import { calculateChildSupport } from "@/utils/calculatorEngine";
 import ParentingTimeSelector from "@/components/calculator/ParentingTimeSelector";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 
 type FieldValue  = string | number | boolean;
 type ParentValue = { p1: FieldValue; p2: FieldValue };
@@ -43,8 +41,8 @@ const ProgressBar = ({ currentStep }: { currentStep: number }) => {
   return (
     <div className="w-full mb-8">
       <div className="flex justify-between items-center mb-3">
-        <span className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-wider">Step {currentStep + 1} of {totalSteps}</span>
-        <span className="text-[12px] font-bold font-bold text-[var(--color-brand-primary)] uppercase tracking-wider">{Math.round(progress)}% Complete</span>
+        <span className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-wider">Step {currentStep + 1} of {totalSteps}</span>
+        <span className="text-[12px] font-bold text-[var(--color-brand-primary)] uppercase tracking-wider">{Math.round(progress)}% Complete</span>
       </div>
       <div className="h-1.5 w-full bg-[var(--color-bg-muted)] rounded-full overflow-hidden">
         <motion.div
@@ -93,7 +91,7 @@ const MobileStepNav = ({
               key={idx}
               data-active={isActive ? "true" : "false"}
               onClick={() => onStepClick(idx)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full whitespace-nowrap transition-all shrink-0 border text-[12px] font-bold font-bold uppercase tracking-wider ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full whitespace-nowrap transition-all shrink-0 border text-[12px] font-bold uppercase tracking-wider ${
                 isActive
                   ? "bg-[var(--color-brand-primary)] text-white border-[var(--color-brand-primary)] shadow-[var(--shadow-card-md)] shadow-[var(--color-brand-primary)]/20"
                   : isDone
@@ -101,7 +99,7 @@ const MobileStepNav = ({
                   : "bg-white border-[var(--color-bg-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-brand-primary)]"
               }`}
             >
-              <span className={`flex items-center justify-center w-4 h-4 rounded-full text-[12px] font-bold font-bold ${
+              <span className={`flex items-center justify-center w-4 h-4 rounded-full text-[12px] font-bold ${
                 isActive ? "bg-white/20" : isDone ? "bg-[var(--color-success)] text-white" : "bg-[var(--color-bg-muted)] text-[var(--color-text-secondary)]"
               }`}>
                 {isDone ? "✓" : idx + 1}
@@ -198,11 +196,11 @@ const InputField = ({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <p className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-widest ml-1">Parent 1</p>
+          <p className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest ml-1">Parent 1</p>
           {renderInput("p1")}
         </div>
         <div className="space-y-2">
-          <p className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-widest ml-1">Parent 2</p>
+          <p className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest ml-1">Parent 2</p>
           {renderInput("p2")}
         </div>
       </div>
@@ -217,6 +215,14 @@ const InputField = ({
 export default function WorksheetWizard() {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData,    setFormData]    = useState<FormData>({});
+
+  const hasIncomeInput = React.useMemo(() => {
+    const incomeFields = ["1a", "1b", "1c", "1d", "1e", "1f"];
+    return incomeFields.some((id) => {
+      const val = formData[id];
+      return Number(val?.p1) > 0 || Number(val?.p2) > 0;
+    });
+  }, [formData]);
   const [useParentingDeviation, setUseParentingDeviation] = useState(false);
   const [parentingTime, setParentingTime] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
@@ -290,6 +296,10 @@ export default function WorksheetWizard() {
   const handleDownloadPDF = async () => {
     const element  = document.getElementById("pdf-summary-content");
     if (!element) return;
+
+    const jsPDF = (await import("jspdf")).default;
+    const html2canvas = (await import("html2canvas")).default;
+
     const printBtn = document.getElementById("pdf-download-btn");
     const editBtn  = document.getElementById("pdf-edit-btn");
     if (printBtn) printBtn.style.display = "none";
@@ -348,20 +358,20 @@ export default function WorksheetWizard() {
         <div className="card-highlighted !bg-[var(--color-text-primary)] !border-none !p-8 shadow-[var(--shadow-card-hover)] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
           <div className="relative z-10">
-            <span className="text-[12px] font-bold font-bold text-white/60 uppercase tracking-widest block mb-4">Total Combined Net</span>
+            <span className="text-[12px] font-bold text-white/60 uppercase tracking-widest block mb-4">Total Combined Net</span>
             <p className="text-3xl font-bold text-white tabular-nums">
               {curFormatter.format(calculation.combinedIncome)}
             </p>
           </div>
         </div>
         <div className="card-standard !p-8 shadow-[var(--shadow-card)]">
-          <span className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-widest block mb-4">Parent 1 Transfer</span>
+          <span className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest block mb-4">Parent 1 Transfer</span>
           <p className="text-3xl font-bold text-[var(--color-text-primary)] tabular-nums">
             {curFormatter.format(derivedData["17"]?.p1 || 0)}
           </p>
         </div>
         <div className="card-standard !p-8 shadow-[var(--shadow-card)]">
-          <span className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-widest block mb-4">Parent 2 Transfer</span>
+          <span className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest block mb-4">Parent 2 Transfer</span>
           <p className="text-3xl font-bold text-[var(--color-text-primary)] tabular-nums">
             {curFormatter.format(derivedData["17"]?.p2 || 0)}
           </p>
@@ -448,12 +458,12 @@ export default function WorksheetWizard() {
 
   /* ── MAIN RENDER ─────────────────────────────────────────────────── */
   return (
-    <div className="min-h-screen bg-white flex flex-col lg:flex-row selection:bg-[var(--color-brand-primary-light)] selection:text-[var(--color-brand-primary-hover)]">
+    <div id="wizard" className="scroll-mt-24 min-h-screen bg-white flex flex-col lg:flex-row selection:bg-[var(--color-brand-primary-light)] selection:text-[var(--color-brand-primary-hover)]">
 
       {/* ── Desktop Sidebar ────────────────────────────────────────── */}
       {!showSummary && (
         <aside className="no-print hidden lg:flex w-80 shrink-0 flex-col border-r border-[var(--color-bg-border)] bg-white sticky top-0 h-screen overflow-y-auto">
-          <div className="flex flex-col h-full p-8">
+          <div className="flex flex-col h-full p-6">
             <div className="mb-10 flex items-center gap-4">
               <div className="p-2.5 bg-[var(--color-text-primary)] rounded-xl shadow-[var(--shadow-card-md)] shrink-0">
                 <Calculator className="w-6 h-6 text-[var(--color-brand-primary-light)]" />
@@ -462,7 +472,7 @@ export default function WorksheetWizard() {
                 <p className="font-bold text-[var(--color-text-primary)] text-lg tracking-tight leading-none mb-1.5">
                   Worksheet Pro
                 </p>
-                <span className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-widest">2026 Guidelines</span>
+                <span className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest">2026 Guidelines</span>
               </div>
             </div>
 
@@ -471,13 +481,13 @@ export default function WorksheetWizard() {
                 <button
                   key={part}
                   onClick={() => goToStep(idx)}
-                  className={`w-full group flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-sm font-semibold ${
+                  className={`w-full group flex items-start gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-sm font-semibold text-left ${
                     currentStep === idx
                       ? "bg-[var(--color-bg-subtle)] text-[var(--color-text-primary)]"
                       : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-text-primary)]"
                   }`}
                 >
-                  <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-[12px] font-bold border-2 transition-colors shrink-0 ${
+                  <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-[12px] font-bold border-2 transition-colors shrink-0 mt-0.5 ${
                     currentStep === idx
                       ? "bg-[var(--color-brand-primary)] border-[var(--color-brand-primary)] text-white shadow-[var(--shadow-card-md)] shadow-[var(--color-brand-primary)]/20"
                       : idx < currentStep
@@ -486,13 +496,15 @@ export default function WorksheetWizard() {
                   }`}>
                     {idx < currentStep ? "✓" : idx + 1}
                   </span>
-                  <span className="truncate">{part.split(":")[1]?.trim() || part}</span>
+                  <span className="whitespace-normal leading-snug">{part}</span>
                 </button>
               ))}
             </nav>
 
             <motion.div
-              className="mt-10 p-6 bg-gradient-to-br from-indigo-600 to-purple-800 rounded-2xl relative overflow-hidden shadow-[var(--shadow-card-hover)]"
+              className={`mt-10 p-6 rounded-2xl relative overflow-hidden shadow-[var(--shadow-card-hover)] transition-all duration-300 ${
+                hasIncomeInput ? "bg-gradient-to-br from-indigo-600 to-purple-800" : "bg-purple-600/70"
+              }`}
               layout
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
@@ -501,11 +513,18 @@ export default function WorksheetWizard() {
                   <div className="p-1.5 bg-white/10 rounded-lg shrink-0">
                     <LayoutDashboard className="w-4 h-4 text-indigo-100" />
                   </div>
-                  <span className="text-[12px] font-bold font-bold text-white/70 uppercase tracking-widest">Est. Base Support</span>
+                  <span className={`text-[12px] font-bold text-white/70 uppercase tracking-widest ${!hasIncomeInput && "opacity-75"}`}>
+                    {hasIncomeInput ? "Est. Base Support" : "Base Support"}
+                  </span>
                 </div>
                 <p className="text-3xl font-bold text-white tabular-nums">
-                  {curFormatter.format(calculation.baseSupport)}
+                  {hasIncomeInput ? curFormatter.format(calculation.baseSupport) : "—"}
                 </p>
+                {!hasIncomeInput && (
+                  <p className="text-[12px] font-bold text-white/60 uppercase tracking-widest mt-2">
+                    Enter income above
+                  </p>
+                )}
               </div>
             </motion.div>
           </div>
@@ -533,7 +552,7 @@ export default function WorksheetWizard() {
                    <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-brand-primary-light)]/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
                   <div className="mb-12 md:mb-16 text-center md:text-left relative z-10">
-                    <span className="inline-block px-4 py-1.5 bg-white border border-[var(--color-bg-border)] text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-widest rounded-full mb-6">
+                    <span className="inline-block px-4 py-1.5 bg-white border border-[var(--color-bg-border)] text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest rounded-full mb-6">
                       Step {currentStep + 1} OF {PARTS.length}
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6">{currentPartKey}</h2>
@@ -580,7 +599,7 @@ export default function WorksheetWizard() {
                                 onChange={(parent, val) => handleInputChange(field.id, parent, val)}
                               />
                               {isCalculated && (
-                                <div className="flex items-center gap-2 text-[12px] font-bold font-bold text-[var(--color-brand-primary)] uppercase tracking-widest mt-6 bg-white w-fit px-3 py-1 rounded-full border border-[var(--color-brand-primary-mid)]">
+                                <div className="flex items-center gap-2 text-[12px] font-bold text-[var(--color-brand-primary)] uppercase tracking-widest mt-6 bg-white w-fit px-3 py-1 rounded-full border border-[var(--color-brand-primary-mid)]">
                                   <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}>
                                     <Calculator className="w-3 h-3" />
                                   </motion.div>
@@ -643,10 +662,12 @@ export default function WorksheetWizard() {
           className="lg:hidden fixed bottom-0 left-0 right-0 px-6 pt-4 bg-white/95 backdrop-blur-2xl border-t border-[var(--color-bg-border)] z-50 flex items-center justify-between shadow-[0_-8px_30px_rgba(0,0,0,0.08)]"
           style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
         >
-          <div>
-            <p className="text-[12px] font-bold font-bold text-[var(--color-text-secondary)] uppercase tracking-widest mb-1">Est. Support</p>
+          <div className={`transition-opacity duration-300 ${!hasIncomeInput ? "opacity-70" : "opacity-100"}`}>
+            <p className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest mb-1">
+              {hasIncomeInput ? "Est. Support" : "Enter income"}
+            </p>
             <p className="text-2xl font-bold text-[var(--color-text-primary)] tabular-nums">
-              {curFormatter.format(calculation.baseSupport)}
+              {hasIncomeInput ? curFormatter.format(calculation.baseSupport) : "—"}
             </p>
           </div>
           <button

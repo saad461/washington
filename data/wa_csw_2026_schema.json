@@ -1,5 +1,5 @@
 {
-  "Part I: Income": [
+  "Part 1: Income": [
     {
       "id": "1a",
       "label": "Wages and Salaries",
@@ -139,7 +139,7 @@
       "description": "Each parent's share of the combined net income (Line 3 divided by Line 4)."
     }
   ],
-  "Part II: Basic Child Support Obligation": [
+  "Part 2: Basic Child Support Obligation": [
     {
       "id": "7",
       "label": "Basic Obligation (No limitations)",
@@ -183,7 +183,7 @@
       "description": "Final basic support after applying low-income limitations."
     }
   ],
-  "Part III: Healthcare, Daycare, and Special Child Rearing Expenses": [
+  "Part 3: Healthcare, Daycare & Education": [
     {
       "id": "10a",
       "label": "Health Insurance Premiums Paid for Child(ren)",
@@ -257,7 +257,7 @@
       "description": "Line 6 multiplied by Line 13."
     }
   ],
-  "Part IV: Gross Child Support Obligation": [
+  "Part 4: Gross Child Support Obligation": [
     {
       "id": "15",
       "label": "Gross Child Support Obligation",
@@ -265,7 +265,7 @@
       "description": "Final basic support (Line 9) plus share of special expenses (Line 14)."
     }
   ],
-  "Part V: Child Support Credits": [
+  "Part 5: Child Support Credits": [
     {
       "id": "16a",
       "label": "Monthly Healthcare Expenses Credit",
@@ -291,7 +291,7 @@
       "description": "Total of lines 16a through 16c."
     }
   ],
-  "Part VI: Standard Calculation/Presumptive Transfer Payment": [
+  "Part 6: Standard Calculation & Presumptive Amount": [
     {
       "id": "17",
       "label": "Standard Calculation",
@@ -299,7 +299,7 @@
       "description": "Gross obligation minus credits (Line 15 - 16d). Presumptive minimum $50/child applies."
     }
   ],
-  "Part VII: Additional Informational Calculations": [
+  "Part 7: Additional Informational Factors": [
     {
       "id": "18",
       "label": "45% of Net Income Limit",
@@ -313,7 +313,7 @@
       "description": "25 percent of the basic support obligation (Line 9 reference check)."
     }
   ],
-  "Part VIII: Additional Factors for Consideration": [
+  "Part 8: Additional Factors for Court": [
     {
       "id": "20a",
       "label": "Real Estate Value",

@@ -35,11 +35,6 @@ export const ComparisonToolClient = dynamic(
  { ssr: false, loading: () => <div className="w-full h-96 animate-pulse bg-[var(--color-bg-muted)] rounded-xl" /> }
 );
 
-export const WorksheetWizardClient = dynamic(
- () => import('@/components/WorksheetWizard'),
- { ssr: false, loading: () => <div className="w-full min-h-screen animate-pulse bg-[var(--color-bg-subtle)] rounded-2xl" /> }
-);
-
 export const NavbarClient = dynamic(
  () => import('@/components/Navbar'),
  { ssr: true }
