@@ -7,8 +7,8 @@ const AdSensePrivacy = () => {
  <div className="w-full font-sans leading-relaxed">
  <div className="text-center mb-12 md:mb-16">
  <ShieldCheck className="w-16 h-16 mx-auto mb-6" />
- <h1 className="font-bold tracking-tight mb-4">Privacy Policy &amp; Ad Disclosure</h1>
- <p className=" font-medium italic">Last Updated: April 2026</p>
+ <h1 className="font-bold tracking-tight mb-4 text-3xl md:text-4xl">Privacy Policy &amp; Ad Disclosure</h1>
+ <p className=" font-medium italic">Last Updated: April 9, 2026</p>
  </div>
 
  {/* Section 1: What Data We Collect */}
