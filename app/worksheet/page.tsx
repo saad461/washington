@@ -6,20 +6,25 @@ import { ArrowRight, ArrowLeft, ChevronRight, FileText } from "lucide-react";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Washington State Child Support Worksheet Wizard 2026 | WCSSC",
+    absolute: "Washington Child Support Worksheet 2026 — Free Online Generator | WCSSC",
   },
   description:
-    "Complete the official 8-part Washington State child support worksheet online. Auto-calculates all figures using 2026 RCW 26.19 economic tables. Free for all 39 Washington counties.",
-  alternates: { canonical: "https://wcssc.site/worksheet" },
+    "Complete the official 8-part Washington State child support worksheet online. Auto-calculates all figures using 2026 RCW 26.19 economic tables. Free for all 39 Washington counties. No sign-up needed.",
+  keywords: [
+    "Washington child support worksheet",
+    "Washington child support worksheet 2026",
+    "WA child support worksheet calculator",
+    "RCW 26.19 worksheet",
+    "AOC child support worksheet 2026",
+    "child support worksheet Washington State online",
+  ],
   openGraph: {
-    title: "Worksheet Pro Wizard — 2026 WA Child Support",
+    title: "Washington Child Support Worksheet 2026 | WCSSC",
     description:
-      "Step-by-step 2026 Washington Child Support Worksheet. Covers all 8 mandatory parts: income, deductions, net income, proportional share, and final transfer payment.",
+      "Complete the official 8-part AOC child support worksheet online — free, instant, 2026 compliant.",
     url: "https://wcssc.site/worksheet",
-    siteName: "WCSSC",
-    images: [{ url: "/wcssc-og.jpg", width: 1200, height: 630, alt: "WCSSC Worksheet Pro Wizard" }],
-    locale: "en_US",
     type: "website",
+    siteName: "WCSSC",
   },
 };
 
@@ -43,13 +48,13 @@ export default function WorksheetPage() {
 
           <div className="flex flex-col gap-4">
             <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
-              Pro Worksheet Wizard
+              Free · Official AOC Format · 2026 Guidelines
             </p>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
-              Official Washington State <span className="text-blue-600">Worksheet Generator</span>
+              Washington State <span className="text-blue-600">Child Support Worksheet 2026</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              Complete the mandatory 8-part 2026 child support worksheet online. Our wizard performs all calculations automatically for any Washington county.
+              Complete the official 8-part AOC child support worksheet online. Auto-calculates all figures using the 2026 RCW 26.19 economic tables — free for all 39 Washington counties.
             </p>
           </div>
         </div>
@@ -67,8 +72,7 @@ export default function WorksheetPage() {
               <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">
                 Real Calculation Example
               </p>
-              <h2 className="mt-2">How it Works: Real Scenario</h2>
-              <p className="text-[var(--color-text-secondary)] text-lg mt-4">Support Scenario: $5,000 Combined Income in King County</p>
+              <h2 className="mt-2">Real Calculation Example: $5,000 Income, 2 Children in King County</h2>
             </header>
 
             <div className="card-standard !p-8 md:!p-10 mb-12 shadow-[var(--shadow-card-md)]">
@@ -120,7 +124,7 @@ export default function WorksheetPage() {
           About This Tool
         </p>
         <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          Washington State Child Support Worksheet — 2026 Official Format
+          Washington State Child Support Worksheet — 8-Part 2026 Official Format
         </h2>
         <p className="text-gray-600 leading-relaxed mb-6">
           This wizard generates the official Washington State child support worksheet as required by RCW 26.19 and the
