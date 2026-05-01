@@ -205,7 +205,7 @@ export default async function BlogPostPage({ params }: Props) {
               <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Common Parent Questions</p>
               <h2 className="text-3xl font-bold text-gray-900">Frequently Asked Questions About Washington Child Support</h2>
             </div>
-            <FAQAccordion items={post.faqs.map(f => ({ question: f.question, answer: f.answer }))} />
+            <FAQAccordion faqs={post.faqs.map(f => ({ question: f.question, answer: f.answer }))} />
           </div>
         </section>
       )}

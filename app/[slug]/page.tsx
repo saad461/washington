@@ -542,7 +542,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   </p>
                   <h2 className="text-3xl font-bold text-gray-900">Frequently Asked Questions About Washington Child Support</h2>
                 </div>
-                <FAQAccordion items={dynamicFAQs.map((f) => ({ question: f.q, answer: f.a }))} />
+                <FAQAccordion faqs={dynamicFAQs.map((f) => ({ question: f.q, answer: f.a }))} />
               </section>
             </div>
 

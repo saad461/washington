@@ -9,14 +9,14 @@ export type FAQItem = {
 };
 
 interface FAQProps {
- items: FAQItem[];
+ faqs: FAQItem[];
  defaultOpenCount?: number;
 }
 
-export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) {
+export default function FAQAccordion({ faqs, defaultOpenCount = 2 }: FAQProps) {
  // Initialize state based on the defaultOpenCount (normally the first 2 items)
  const [openIndexes, setOpenIndexes] = useState<number[]>(
- items.slice(0, defaultOpenCount).map((_, i) => i)
+ faqs.slice(0, defaultOpenCount).map((_, i) => i)
  );
 
  const toggleAccordion = (index: number) => {
@@ -31,7 +31,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  const jsonLd = {
  "@context": "https://schema.org",
  "@type": "FAQPage",
- "mainEntity": items.map(item => ({
+ "mainEntity": faqs.map(item => ({
  "@type": "Question",
  "name": item.question,
  "acceptedAnswer": {
@@ -48,7 +48,7 @@ export default function FAQAccordion({ items, defaultOpenCount = 2 }: FAQProps) 
  dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
  />
  <div className="divide-y divide-[var(--color-bg-border-soft)]">
- {items.map((item, index) => {
+ {faqs.map((item, index) => {
  const isOpen = openIndexes.includes(index);
  const controlId = `faq-content-${index}`;
  const buttonId = `faq-control-${index}`;
