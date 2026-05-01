@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import WorksheetWizard from "@/components/WorksheetWizard";
 import CalculatorSchema from "@/components/CalculatorSchema";
 import FAQAccordion from "@/components/FAQAccordion";
+import FAQSchema from "@/components/seo/FAQSchema";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft, ChevronRight, FileText } from "lucide-react";
 
@@ -66,6 +67,30 @@ export default function WorksheetPage() {
   return (
     <div className="flex-1 w-full bg-white">
       <CalculatorSchema url="https://wcssc.site/worksheet" />
+      <FAQSchema faqs={worksheetFAQs} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "https://wcssc.site",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Child Support Worksheet",
+                item: "https://wcssc.site/worksheet",
+              },
+            ],
+          }),
+        }}
+      />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
@@ -79,6 +104,20 @@ export default function WorksheetPage() {
             <ArrowLeft size={16} />
             Back to Calculator
           </Link>
+
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
+              <li>
+                <a href="/" className="hover:text-blue-600">
+                  Home
+                </a>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li className="text-gray-900 font-medium" aria-current="page">
+                Child Support Worksheet
+              </li>
+            </ol>
+          </nav>
 
           <div className="flex flex-col gap-4">
             <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
@@ -225,6 +264,22 @@ export default function WorksheetPage() {
             </span>
           </li>
         </ul>
+
+        <p className="text-sm text-gray-600 mt-6">
+          For a quick estimate without the full worksheet, use our{" "}
+          <a href="/" className="text-blue-600 hover:underline">
+            Washington child support calculator
+          </a>
+          . For county-specific guidance, see our{" "}
+          <a href="/king-county-income-5000-2-children" className="text-blue-600 hover:underline">
+            King County child support guide
+          </a>{" "}
+          or review the{" "}
+          <a href="/editorial-methodology" className="text-blue-600 hover:underline">
+            2026 calculation methodology
+          </a>
+          .
+        </p>
 
         <div className="mt-8 p-4 bg-amber-50 border border-amber-100 rounded-xl">
           <p className="text-sm text-amber-800">
