@@ -5,13 +5,14 @@ import {
 } from "@/data/washingtonCounties";
 import { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Calculator, Info, Landmark, Scale, ChevronRight, ArrowLeft } from "lucide-react";
+import { ArrowRight, Calculator, Info, Landmark, Scale, ChevronRight, MapPin } from "lucide-react";
 import {
   AdContainerClient as AdContainer,
   AuthoritySidebarClient as AuthoritySidebar,
   AuthorBoxClient as AuthorBox,
   PrintButtonClient as PrintButton,
 } from "@/components/ClientDynamic";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import CalculatorSchema from "@/components/CalculatorSchema";
 import FAQAccordion from "@/components/FAQAccordion";
 import { contentVariants } from "@/lib/contentVariants";
@@ -199,7 +200,7 @@ function generateDynamicFAQs(
       a: `The 2026 Self-Support Reserve (SSR) is approximately $2,394. If the parent paying support would be left with less than this amount in monthly net income, the court must consider a downward deviation.`,
     },
     {
-      q: `How does $${formattedSupport} include health insurance for ${childrenText}?`,
+      q: `Does the ${formattedSupport} include health insurance for ${childrenText}?`,
       a: `No, the ${formattedSupport} basic obligation covers only food, shelter, and basic clothing. Costs for health insurance premiums and work-related daycare are shared proportionally on top of the base.`,
     },
   ];
@@ -246,23 +247,37 @@ const Breadcrumbs = ({
   county: { name: string; slug: string } | null;
   income: number;
 }) => (
-  <nav aria-label="Breadcrumb" className="breadcrumbs-container mb-8">
-    <Link href="/" className="breadcrumb-link">Home</Link>
-    <span className="breadcrumb-separator">/</span>
-    <span className="text-gray-400">Washington</span>
-    {county && (
-      <>
-        <span className="breadcrumb-separator">/</span>
-        <Link
-          href={`/${county.slug}-income-5000-2-children`}
-          className="breadcrumb-link"
-        >
-          {county.name}
+  <nav aria-label="Breadcrumb" className="mb-8">
+    <ol className="flex items-center gap-2 text-sm text-gray-500 flex-wrap">
+      <li>
+        <Link href="/" className="hover:text-blue-600">
+          Home
         </Link>
-      </>
-    )}
-    <span className="breadcrumb-separator">/</span>
-    <span className="breadcrumb-current truncate font-bold text-gray-900">${income.toLocaleString()} Calculation</span>
+      </li>
+      <li aria-hidden="true">/</li>
+      <li>
+        <Link href="/washington-courts" className="hover:text-blue-600">
+          Washington
+        </Link>
+      </li>
+      {county && (
+        <>
+          <li aria-hidden="true">/</li>
+          <li>
+            <Link
+              href={`/washington-courts/${county.slug}`}
+              className="hover:text-blue-600"
+            >
+              {county.name}
+            </Link>
+          </li>
+        </>
+      )}
+      <li aria-hidden="true">/</li>
+      <li className="text-gray-900 font-medium" aria-current="page">
+        ${income.toLocaleString()} Calculation
+      </li>
+    </ol>
   </nav>
 );
 
@@ -298,7 +313,11 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
   const totalText = `${intro} ${calculation} ${ssr} ${conclusion} ${incomeBlock} ${familyBlock}`;
   const wordCount = totalText.split(/\s+/).filter((word) => word.length > 0).length;
 
-  const timestamp = `Last Updated: ${new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })}`;
+  if (!county && process.env.NODE_ENV === 'development') {
+    console.warn('County name is null on calculation page — check slug data');
+  }
+
+  const timestamp = `Last Updated: ${county?.lastUpdated || "April 9, 2026"}`;
 
   const targetCounties = ["king-county", "pierce-county", "snohomish-county", "spokane-county"];
   const siblingCounties = washingtonCounties.filter(
@@ -389,16 +408,23 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             <div className="lg:col-span-8">
-              <AdContainer slot="top" wordCount={wordCount} />
+              <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
+                <AdContainer slot="top" wordCount={wordCount} />
+              </div>
 
-              <div className="mb-16">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
-                    <Landmark className="w-8 h-8 text-blue-600" />
+              <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
+                <div className="flex flex-col mb-8">
+                  <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+                    2026 Data · {countyName}
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
+                      <Landmark className="w-8 h-8 text-blue-600" />
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Key Calculation Figures</h2>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Key Calculation Figures</h2>
                 </div>
-                <div className="table-container shadow-xl bg-white">
+                <div className="table-container shadow-xl bg-white overflow-x-auto">
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr>
@@ -424,82 +450,137 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                 </div>
               </div>
 
-              <article className="prose prose-gray prose-lg max-w-none mb-16 text-gray-700">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Washington Child Support Guidelines (2026)</h2>
+              <article className="prose prose-gray prose-lg max-w-none text-gray-700 pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
+                <div className="flex flex-col not-prose">
+                  <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+                    Official Guidelines
+                  </p>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-8">Washington Child Support Guidelines (2026 Updates)</h2>
+                </div>
                 <p className="text-lg leading-relaxed">{intro}</p>
 
                 <div className="my-16 not-prose">
                   <AdContainer slot="mid" wordCount={wordCount} />
                 </div>
 
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Breakdown of the {formattedIncome} Calculation</h2>
+                <div className="flex flex-col not-prose">
+                  <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+                    Step by Step
+                  </p>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-8">Breakdown of the {formattedIncome} Calculation</h2>
+                </div>
                 <p className="text-lg leading-relaxed">{calculation}</p>
 
                 <div className="not-prose" dangerouslySetInnerHTML={{ __html: incomeBlock }} />
                 <div className="not-prose" dangerouslySetInnerHTML={{ __html: familyBlock }} />
 
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">SSR and Low-Income Safeguards</h2>
+                <div className="flex flex-col not-prose">
+                  <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+                    Low-Income Protection
+                  </p>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-8">The SSR and Low-Income Safeguards</h2>
+                </div>
                 <p className="text-lg leading-relaxed">{ssr}</p>
 
                 {county && (
                   <>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-8">Superior Court Protocol in {countyName}</h2>
+                    <div className="flex flex-col not-prose">
+                      <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+                        Local Court Process
+                      </p>
+                      <h2 className="text-3xl font-bold text-gray-900 mb-8">Application in {countyName} Superior Court</h2>
+                    </div>
                     <p className="text-lg leading-relaxed">
                       While the 2026 economic schedule is uniform statewide, the <strong>{county.court}</strong> handles procedural enforcement. In <strong>{countyName}</strong>, judges may require additional proof of income before finalizing the {formattedSupport} order.
                     </p>
                   </>
                 )}
 
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Summary & Legal Requirements</h2>
+                <div className="flex flex-col not-prose">
+                  <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+                    Summary
+                  </p>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-8">Calculation Summary & Requirements</h2>
+                </div>
                 <p className="text-lg leading-relaxed">{conclusion}</p>
 
-                <div className="mt-16 p-8 bg-gray-100 border border-gray-200 rounded-3xl not-prose">
-                  <p className="text-[12px] font-bold text-blue-600 uppercase tracking-widest mb-4 flex items-center gap-3">
-                    <Scale className="w-5 h-5" /> Accuracy & Legal Status
-                  </p>
-                  <p className="text-sm italic text-gray-500 leading-relaxed">{legal}</p>
+                <div className="flex gap-3 p-4 rounded-xl bg-amber-50 border border-amber-200 my-6 not-prose">
+                  <Info aria-hidden="true" className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold text-amber-800 mb-1">
+                      Accuracy & Legal Status
+                    </p>
+                    <p className="text-sm text-amber-700">
+                      {legal}
+                    </p>
+                  </div>
                 </div>
 
                 <p className="text-[12px] font-bold text-gray-400 uppercase tracking-widest mt-12">{timestamp}</p>
               </article>
 
-              <div className="bg-blue-600 !p-12 text-center shadow-2xl rounded-3xl relative overflow-hidden mb-16">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32" />
-                <h3 className="text-3xl text-white mb-6 font-bold relative z-10">Advanced Estimator Wizard</h3>
-                <p className="mb-10 text-lg text-blue-50 max-w-lg mx-auto leading-relaxed relative z-10">
-                  Get a full breakdown using our Washington Child Support Worksheet Wizard. Calculate precise income splits and extraordinary expenses.
-                </p>
-                <Link href="/worksheet" className="btn-primary-lg !bg-white !text-blue-600 hover:!bg-blue-50 !rounded-full relative z-10">
-                  Launch Complete Wizard <ArrowRight className="w-5 h-5" />
-                </Link>
+              <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
+                <div className="bg-blue-600 p-8 md:p-12 text-center shadow-2xl rounded-3xl relative overflow-hidden border border-blue-100">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32" />
+                  <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-100 mb-2 relative z-10">
+                    Full Worksheet Tool
+                  </p>
+                  <h3 className="text-3xl text-white mb-6 font-bold relative z-10">Advanced Estimator Wizard</h3>
+                  <p className="mb-10 text-lg text-blue-50 max-w-lg mx-auto leading-relaxed relative z-10">
+                    Get a full breakdown using our Washington Child Support Worksheet Wizard. Calculate precise income splits and extraordinary expenses.
+                  </p>
+                  <Link href="/worksheet" className="btn-primary-lg !bg-white !text-blue-600 hover:!bg-blue-50 !rounded-full relative z-10">
+                    Launch Complete Wizard <ArrowRight className="w-5 h-5" />
+                  </Link>
+                </div>
               </div>
 
-              <section className="mb-16">
-                <h2 className="text-3xl font-bold text-gray-900 mb-10">Common Support Questions</h2>
+              <section className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
+                <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+                  Common Parent Questions
+                </p>
                 <FAQAccordion items={dynamicFAQs.map((f) => ({ question: f.q, answer: f.a }))} />
               </section>
             </div>
 
-            <aside className="lg:col-span-4 space-y-8">
-              <div className="hidden lg:block">
-                <AuthoritySidebar county={county} />
-                <div className="mt-8">
+            <aside className="lg:col-span-4 space-y-4">
+              <div className="hidden lg:block space-y-4">
+                <ErrorBoundary fallback={<div className="p-6 bg-gray-50 border border-gray-200 rounded-2xl text-sm text-gray-500">Legal resources temporarily unavailable</div>}>
+                  <AuthoritySidebar county={county} />
+                </ErrorBoundary>
+                <ErrorBoundary fallback={<div className="p-6 bg-gray-50 border border-gray-200 rounded-2xl text-sm text-gray-500">Editorial info unavailable</div>}>
                   <AuthorBox />
-                </div>
+                </ErrorBoundary>
               </div>
-              <div className="lg:hidden">
+              <div className="lg:hidden space-y-4">
                 <details className="bg-white border border-gray-200 rounded-2xl shadow-sm group overflow-hidden">
                   <summary className="flex items-center justify-between px-6 h-14 cursor-pointer select-none list-none font-bold text-gray-900">
-                    <span className="flex items-center gap-2"><Scale size={18} className="text-blue-600" /> Resources & Legal Sources</span>
-                    <svg className="w-5 h-5 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <span className="flex items-center gap-2">
+                      <Scale size={18} className="text-blue-600" /> Resources & Legal Sources
+                    </span>
+                    <svg
+                      className="w-5 h-5 transition-transform duration-300 group-open:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      ></path>
+                    </svg>
                   </summary>
                   <div className="px-6 pb-6 pt-2">
-                    <AuthoritySidebar county={county} />
+                    <ErrorBoundary>
+                      <AuthoritySidebar county={county} />
+                    </ErrorBoundary>
                   </div>
                 </details>
-                <div className="mt-8">
+                <ErrorBoundary>
                   <AuthorBox />
-                </div>
+                </ErrorBoundary>
               </div>
               <div className="not-print">
                  <PrintButton />
@@ -523,29 +604,48 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
             ))}
           </div>
 
-          <h2 className="text-4xl font-bold mb-16 text-center text-gray-900">Explore Related Calculations</h2>
+          <div className="flex flex-col items-center mb-8">
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+              More Calculations
+            </p>
+            <h2 className="text-4xl font-bold text-center text-gray-900">Explore Related Calculations</h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 max-w-5xl mx-auto">
             <div className="p-10 bg-[var(--color-bg-subtle)] rounded-3xl border border-gray-100">
               <h3 className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-8">Nearby Income Tiers</h3>
-              <div className="space-y-6">
+              <div className="flex flex-wrap gap-3">
                 {[-1000, -500, 500, 1000].map((diff) => {
                   const newInc = income + diff;
                   if (newInc <= 0) return null;
                   const pf = county?.slug ? `${county.slug}-income` : "income";
                   const nChildren = children === 1 ? "1-child" : `${children}-children`;
                   return (
-                    <Link key={diff} href={`/${pf}-${newInc}-${nChildren}`} className="text-lg font-bold text-gray-700 hover:text-blue-600 block transition-colors border-b border-gray-200/50 pb-4 last:border-0 last:pb-0">
-                      Estimate {formatter.format(newInc)} for {children} {children === 1 ? "Child" : "Children"}
+                    <Link
+                      key={diff}
+                      href={`/${pf}-${newInc}-${nChildren}`}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-sm text-gray-700 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-150"
+                    >
+                      Estimate {formatter.format(newInc)} for {children}{" "}
+                      {children === 1 ? "Child" : "Children"} →
                     </Link>
                   );
                 })}
               </div>
             </div>
             <div className="p-10 bg-[var(--color-bg-subtle)] rounded-3xl border border-gray-100">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-8">Compare Counties</h3>
-              <div className="space-y-6">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-8">Compare Washington Counties</h3>
+              <div className="flex flex-wrap gap-3">
                 {siblingCounties.map((c) => (
-                  <Link key={c.slug} href={`/${c.slug}-income-${income}-${children === 1 ? "1-child" : `${children}-children`}`} className="text-lg font-bold text-gray-700 hover:text-blue-600 block transition-colors border-b border-gray-200/50 pb-4 last:border-0 last:pb-0">
+                  <Link
+                    key={c.slug}
+                    href={`/${c.slug}-income-${income}-${children === 1 ? "1-child" : `${children}-children`}`}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-sm text-gray-700 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-150"
+                  >
+                    <MapPin
+                      size={14}
+                      className="text-gray-400 flex-shrink-0"
+                      aria-hidden="true"
+                    />
                     {c.name} Support for {formattedIncome}
                   </Link>
                 ))}

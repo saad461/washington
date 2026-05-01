@@ -3,7 +3,7 @@ import { ShieldCheck as Shield, Mail as MailIcon, CheckCircle2 as Check } from '
 
 const AuthorBox = () => {
   return (
-    <section className="w-full max-w-3xl mx-auto py-16 border-t border-[var(--color-bg-border)] no-print">
+    <section className="w-full max-w-3xl mx-auto py-4 border-t border-[var(--color-bg-border)] no-print">
       <div className="card-standard !p-8 md:!p-12 group overflow-hidden shadow-[var(--shadow-card-md)]">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-brand-primary-light)] rounded-full blur-3xl -translate-y-32 translate-x-32" />
 
@@ -19,7 +19,7 @@ const AuthorBox = () => {
 
           <div className="flex-1 text-center md:text-left">
             <span className="eyebrow mb-2">Academic & Legal Entity</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)] mb-6 tracking-tight">WCSSC Editorial & Legal Team</h2>
+            <h3 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6 tracking-tight">WCSSC Editorial & Legal Team</h3>
 
             <p className="text-[var(--color-text-body)] text-sm md:text-base leading-relaxed mb-8 max-w-2xl">
               Our calculations and guides are rigorously audited by family law advocates and technical developers to ensure compliance with <strong className="text-[var(--color-text-primary)]">RCW 26.19</strong> and the latest 2026 economic table updates. We maintain a strict editorial protocol based on official AOC mandatory forms and WAC guidelines.
@@ -43,7 +43,7 @@ const AuthorBox = () => {
         </div>
       </div>
 
-      <div className="mt-12 text-center px-6">
+      <div className="mt-4 text-center px-6">
         <p className="text-[12px] font-medium text-[var(--color-text-secondary)] uppercase tracking-widest leading-loose">
           Transparency Disclosure: WCSSC is an independent resource center. We are not a government agency or a law firm. Our calculations are provided for educational and estimation purposes based on the latest 2026 guidelines.
         </p>
