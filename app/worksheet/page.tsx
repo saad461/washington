@@ -1,20 +1,29 @@
 import { Metadata } from "next";
 import WorksheetWizard from "@/components/WorksheetWizard";
 import CalculatorSchema from "@/components/CalculatorSchema";
+import FAQSchema from "@/components/seo/FAQSchema";
+import FAQAccordion from "@/components/FAQAccordion";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft, ChevronRight, FileText } from "lucide-react";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Washington State Child Support Worksheet Wizard 2026 | WCSSC",
+    absolute: "Washington Child Support Worksheet 2026 — Free Online Generator | WCSSC",
   },
   description:
-    "Complete the official 8-part Washington State child support worksheet online. Auto-calculates all figures using 2026 RCW 26.19 economic tables. Free for all 39 Washington counties.",
+    "Complete the official 8-part Washington State child support worksheet online. Auto-calculates all figures using 2026 RCW 26.19 economic tables. Free for all 39 Washington counties. No sign-up needed.",
+  keywords: [
+    "Washington child support worksheet",
+    "Washington child support worksheet 2026",
+    "WA child support worksheet calculator",
+    "RCW 26.19 worksheet",
+    "AOC child support worksheet 2026",
+    "child support worksheet Washington State online",
+  ],
   alternates: { canonical: "https://wcssc.site/worksheet" },
   openGraph: {
-    title: "Worksheet Pro Wizard — 2026 WA Child Support",
-    description:
-      "Step-by-step 2026 Washington Child Support Worksheet. Covers all 8 mandatory parts: income, deductions, net income, proportional share, and final transfer payment.",
+    title: "Washington Child Support Worksheet 2026 | WCSSC",
+    description: "Complete the official 8-part AOC child support worksheet online — free, instant, 2026 compliant.",
     url: "https://wcssc.site/worksheet",
     siteName: "WCSSC",
     images: [{ url: "/wcssc-og.jpg", width: 1200, height: 630, alt: "WCSSC Worksheet Pro Wizard" }],
@@ -23,10 +32,127 @@ export const metadata: Metadata = {
   },
 };
 
+const worksheetFAQs = [
+  {
+    question: "What is the Washington State child support worksheet?",
+    answer:
+      "The Washington State child support worksheet is an official 8-part form required by RCW 26.19 that calculates the presumptive monthly child support obligation for both parents based on their combined net income, number of children, and additional expenses such as healthcare and daycare.",
+  },
+  {
+    question: "Do I need to complete a worksheet for child support in Washington?",
+    answer:
+      "Yes. Washington courts require a completed child support worksheet for all child support orders, modifications, and reviews. The worksheet must follow the 2026 AOC format to be accepted by any Washington State court.",
+  },
+  {
+    question: "How do I fill out Part 1 (Income) of the Washington child support worksheet?",
+    answer:
+      "Part 1 requires each parent's monthly net income — meaning gross wages minus mandatory deductions including federal and state income taxes, FICA, mandatory union dues, and required retirement contributions. Do not enter gross income. Our wizard auto-calculates the mandatory deductions based on your inputs.",
+  },
+  {
+    question: "Can I use this worksheet for a child support modification in Washington?",
+    answer:
+      "Yes. The same 8-part worksheet is used for new child support orders, modifications, and annual reviews. A substantial change in either parent's income of 15% or more typically qualifies for modification under Washington law.",
+  },
+  {
+    question: "Is this worksheet accepted by Washington courts?",
+    answer:
+      "This wizard produces calculations based on the official 2026 Washington State Child Support Schedule (RCW 26.19). The output figures match the AOC mandatory forms. However all calculations are estimates — final orders are determined by a Washington State court.",
+  },
+  {
+    question: "How is the worksheet different from the quick calculator?",
+    answer:
+      "The quick calculator gives an instant estimate based on combined income and number of children only. The full 8-part worksheet accounts for healthcare costs, daycare, educational expenses, parenting time credits, and existing child support obligations — producing a complete court-ready figure.",
+  },
+];
+
 export default function WorksheetPage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://wcssc.site",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Child Support Worksheet",
+        item: "https://wcssc.site/worksheet",
+      },
+    ],
+  };
+
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "How to Complete the Washington State Child Support Worksheet 2026",
+    description: "Complete the official 8-part Washington State child support worksheet using the 2026 RCW 26.19 economic tables",
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: "Part 1: Income",
+        text: "Enter gross monthly wages, business income, maintenance received, and imputed income for both parents",
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: "Part 2: Basic Child Support Obligation",
+        text: "Calculate the basic support obligation from the 2026 Washington State economic table",
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: "Part 3: Healthcare, Daycare & Education",
+        text: "Enter monthly healthcare premiums, work-related daycare costs, and approved educational expenses",
+      },
+      {
+        "@type": "HowToStep",
+        position: 4,
+        name: "Part 4: Gross Child Support Obligation",
+        text: "Calculate total gross support obligation combining basic support and additional expenses",
+      },
+      {
+        "@type": "HowToStep",
+        position: 5,
+        name: "Part 5: Child Support Credits",
+        text: "Apply credits for health insurance, daycare paid directly, and other qualifying payments",
+      },
+      {
+        "@type": "HowToStep",
+        position: 6,
+        name: "Part 6: Standard Calculation & Presumptive Amount",
+        text: "Determine the final presumptive monthly transfer payment between parents",
+      },
+      {
+        "@type": "HowToStep",
+        position: 7,
+        name: "Part 7: Additional Informational Factors",
+        text: "Document relevant additional factors including existing support obligations and other children",
+      },
+      {
+        "@type": "HowToStep",
+        position: 8,
+        name: "Part 8: Additional Factors for Court",
+        text: "Include any deviation factors, special circumstances, or requests for judicial deviation from the presumptive amount",
+      },
+    ],
+  };
+
   return (
     <div className="flex-1 w-full bg-white">
       <CalculatorSchema url="https://wcssc.site/worksheet" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
@@ -36,20 +162,38 @@ export default function WorksheetPage() {
         />
 
         <div className="container-wide relative z-10">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-6">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-6"
+          >
             <ArrowLeft size={16} />
             Back to Calculator
           </Link>
 
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
+              <li>
+                <Link href="/" className="hover:text-blue-600">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li className="text-gray-900 font-medium" aria-current="page">
+                Child Support Worksheet
+              </li>
+            </ol>
+          </nav>
+
           <div className="flex flex-col gap-4">
             <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
-              Pro Worksheet Wizard
+              Free · Official AOC Format · 2026 Guidelines
             </p>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
-              Official Washington State <span className="text-blue-600">Worksheet Generator</span>
+              Washington State Child Support <span className="text-blue-600">Worksheet 2026</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              Complete the mandatory 8-part 2026 child support worksheet online. Our wizard performs all calculations automatically for any Washington county.
+              Complete the official 8-part AOC child support worksheet online. Auto-calculates all figures using the
+              2026 RCW 26.19 economic tables — free for all 39 Washington counties.
             </p>
           </div>
         </div>
@@ -67,7 +211,7 @@ export default function WorksheetPage() {
               <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">
                 Real Calculation Example
               </p>
-              <h2 className="mt-2">How it Works: Real Scenario</h2>
+              <h2 className="mt-2">Real Calculation Example: $5,000 Income, 2 Children in King County</h2>
               <p className="text-[var(--color-text-secondary)] text-lg mt-4">Support Scenario: $5,000 Combined Income in King County</p>
             </header>
 
@@ -120,7 +264,7 @@ export default function WorksheetPage() {
           About This Tool
         </p>
         <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          Washington State Child Support Worksheet — 2026 Official Format
+          Washington State Child Support Worksheet — 8-Part 2026 Official Format
         </h2>
         <p className="text-gray-600 leading-relaxed mb-6">
           This wizard generates the official Washington State child support worksheet as required by RCW 26.19 and the
@@ -188,6 +332,37 @@ export default function WorksheetPage() {
           </li>
         </ul>
 
+        <p className="text-sm text-gray-600 leading-relaxed mt-6">
+          This 2026 child support worksheet replaces the older 2024 versions to
+          comply with new Washington State laws. If you are not ready for the
+          full 8-part wizard, you can use our{" "}
+          <Link href="/" className="text-blue-600 hover:underline font-medium">
+            Quick Estimator
+          </Link>{" "}
+          or browse{" "}
+          <Link
+            href="/washington-courts"
+            className="text-blue-600 hover:underline font-medium"
+          >
+            County Specific Guides
+          </Link>{" "}
+          for locations like{" "}
+          <Link
+            href="/king-county-income-5000-2-children"
+            className="text-blue-600 hover:underline font-medium"
+          >
+            King County
+          </Link>
+          . For a full breakdown of how these figures are calculated, see our{" "}
+          <Link
+            href="/editorial-methodology"
+            className="text-blue-600 hover:underline font-medium"
+          >
+            2026 Methodology
+          </Link>
+          .
+        </p>
+
         <div className="mt-8 p-4 bg-amber-50 border border-amber-100 rounded-xl">
           <p className="text-sm text-amber-800">
             <strong>Legal Note:</strong> This wizard produces estimates based on the 2026 Washington State Child Support
@@ -195,6 +370,17 @@ export default function WorksheetPage() {
           </p>
         </div>
       </section>
+
+      {/* ── FAQ SECTION ────────────────────────────────────────────────── */}
+      <section className="max-w-4xl mx-auto px-4 py-16 border-t border-gray-100">
+        <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">Worksheet Questions</p>
+        <h2 className="text-2xl font-bold text-gray-900 mb-8">
+          Frequently Asked Questions About the Washington Child Support Worksheet
+        </h2>
+        <FAQAccordion items={worksheetFAQs} />
+      </section>
+
+      <FAQSchema faqs={worksheetFAQs} />
     </div>
   );
 }

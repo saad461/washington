@@ -1,0 +1,172 @@
+
+> wcssc@0.1.0 dev
+> next dev --turbopack
+
+▲ Next.js 16.2.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+✓ Ready in 1384ms
+
+⨯ TypeError: Cannot read properties of undefined (reading 'slice')
+    at FAQAccordion (components/FAQAccordion.tsx:19:8)
+  17 |  // Initialize state based on the defaultOpenCount (normally the first 2 items)
+  18 |  const [openIndexes, setOpenIndexes] = useState<number[]>(
+> 19 |  items.slice(0, defaultOpenCount).map((_, i) => i)
+     |        ^
+  20 |  );
+  21 |
+  22 |  const toggleAccordion = (index: number) => { {
+  digest: '223886911'
+}
+ GET /worksheet 200 in 1817ms (next.js: 635ms, application-code: 1182ms)
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
+[browser] Uncaught TypeError: Cannot read properties of undefined (reading 'slice')
+    at FAQAccordion (components/FAQAccordion.tsx:19:8)
+    at WorksheetPage (app/worksheet/page.tsx:380:9)
+  17 |  // Initialize state based on the defaultOpenCount (normally the first 2 items)
+  18 |  const [openIndexes, setOpenIndexes] = useState<number[]>(
+> 19 |  items.slice(0, defaultOpenCount).map((_, i) => i)
+     |        ^
+  20 |  );
+  21 |
+  22 |  const toggleAccordion = (index: number) => {
+[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
+    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
+    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
+    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
+    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
+⨯ TypeError: Cannot read properties of undefined (reading 'slice')
+    at FAQAccordion (components/FAQAccordion.tsx:19:8)
+  17 |  // Initialize state based on the defaultOpenCount (normally the first 2 items)
+  18 |  const [openIndexes, setOpenIndexes] = useState<number[]>(
+> 19 |  items.slice(0, defaultOpenCount).map((_, i) => i)
+     |        ^
+  20 |  );
+  21 |
+  22 |  const toggleAccordion = (index: number) => { {
+  digest: '223886911'
+}
+ GET /worksheet 200 in 207ms (next.js: 6ms, application-code: 202ms)
+[browser] Uncaught TypeError: Cannot read properties of undefined (reading 'slice')
+    at FAQAccordion (components/FAQAccordion.tsx:19:8)
+    at WorksheetPage (app/worksheet/page.tsx:380:9)
+  17 |  // Initialize state based on the defaultOpenCount (normally the first 2 items)
+  18 |  const [openIndexes, setOpenIndexes] = useState<number[]>(
+> 19 |  items.slice(0, defaultOpenCount).map((_, i) => i)
+     |        ^
+  20 |  );
+  21 |
+  22 |  const toggleAccordion = (index: number) => {
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
+[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
+    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
+    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
+    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
+    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
+✓ Compiled in 851ms
+ GET /worksheet 200 in 378ms (next.js: 9ms, application-code: 369ms)
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
+[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
+    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
+    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
+    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
+    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
+ GET /worksheet 200 in 219ms (next.js: 5ms, application-code: 214ms)
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
+[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
+    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
+    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
+    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
+    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
+ GET /worksheet 200 in 190ms (next.js: 7ms, application-code: 183ms)
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
+[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
+    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
+    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
+    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
+    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
+ GET /worksheet 200 in 156ms (next.js: 5ms, application-code: 151ms)
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
+[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
+    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
+    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
+    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
+    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
+    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
