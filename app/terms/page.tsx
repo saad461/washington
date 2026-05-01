@@ -19,10 +19,19 @@ export default function TermsPage() {
         />
 
         <div className="container-reading relative z-10">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-8">
-            <ArrowLeft size={16} />
-            Back to Calculator
-          </Link>
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
+              <li>
+                <Link href="/" className="hover:text-blue-600 transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li className="text-gray-900 font-medium" aria-current="page">
+                Terms of Service
+              </li>
+            </ol>
+          </nav>
 
           <div className="flex flex-col gap-6">
             <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
@@ -39,7 +48,7 @@ export default function TermsPage() {
       </section>
 
       {/* ── INTRO ───────────────────────────────────────────────────────── */}
-      <section className="section-default bg-[var(--color-bg-subtle)]">
+      <section className="section-default bg-[var(--color-bg-subtle)] py-10 border-b border-gray-100">
         <div className="container-reading">
           <p className="text-xl leading-relaxed text-[var(--color-text-secondary)] text-center max-w-2xl mx-auto">
             Please read these terms carefully. If you do not agree with any part of these terms, please do not use our services.
@@ -89,8 +98,8 @@ export default function TermsPage() {
           title: "10. Contact",
           body: "If you have questions about these Terms, please contact us at: support@wcssc.site."
         }
-      ].map((section, i) => (
-        <section key={i} className={`section-default ${i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-bg-subtle)]'}`}>
+      ].map((section, i, arr) => (
+        <section key={i} className={`section-default ${i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-bg-subtle)]'} py-10 border-b border-gray-100 ${i === arr.length - 1 ? 'last:border-0' : ''}`}>
           <div className="container-reading">
             <div className="card-standard">
               <div className="flex items-center gap-4 mb-4">
@@ -105,18 +114,6 @@ export default function TermsPage() {
         </section>
       ))}
 
-      {/* ── MINI FOOTER ─────────────────────────────────────────────────── */}
-      <div className="py-12 border-t border-[var(--color-bg-border-soft)] bg-white">
-        <div className="container-reading text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6">Effective Date: January 1, 2026</p>
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-gray-500">
-            <Link href="/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</Link>
-            <Link href="/disclaimer" className="hover:text-blue-600 transition-colors">Legal Disclaimer</Link>
-            <Link href="/about" className="hover:text-blue-600 transition-colors">About Us</Link>
-            <Link href="/" className="hover:text-blue-600 transition-colors">Calculator</Link>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

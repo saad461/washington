@@ -19,13 +19,22 @@ export default function DisclaimerPage() {
         />
 
         <div className="container-reading relative z-10">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-8">
-            <ArrowLeft size={16} />
-            Back to Calculator
-          </Link>
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
+              <li>
+                <Link href="/" className="hover:text-blue-600 transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li className="text-gray-900 font-medium" aria-current="page">
+                Legal Disclaimer
+              </li>
+            </ol>
+          </nav>
 
           <div className="flex flex-col gap-6">
-            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
               Important Notice
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
@@ -39,7 +48,7 @@ export default function DisclaimerPage() {
       </section>
 
       {/* ── BANNER ──────────────────────────────────────────────────────── */}
-      <section className="section-default bg-[var(--color-bg-subtle)]">
+      <section className="section-default bg-[var(--color-bg-subtle)] py-10 border-b border-gray-100">
         <div className="container-reading">
           <div className="p-6 md:p-10 bg-amber-50 border border-amber-200 rounded-2xl flex flex-col sm:flex-row items-start gap-4 md:gap-6 shadow-sm">
             <ShieldCheck className="w-10 h-10 text-amber-600 flex-shrink-0 mt-1" />
@@ -54,6 +63,12 @@ export default function DisclaimerPage() {
       </section>
 
       {/* ── SECTIONS ────────────────────────────────────────────────────── */}
+      <div className="bg-white py-10 border-b border-gray-100">
+        <div className="container-reading text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">Last Updated: April 9, 2026</p>
+        </div>
+      </div>
+
       {[
         {
           title: "1. Educational Purpose Only",
@@ -79,8 +94,8 @@ export default function DisclaimerPage() {
           title: "6. Limitation of Liability",
           body: "WCSSC, its operators, employees, and contributors shall not be liable for any damages arising from the use or reliance on information provided on this website. This includes direct, indirect, incidental, and consequential damages."
         }
-      ].map((section, i) => (
-        <section key={i} className={`section-default ${i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-bg-subtle)]'}`}>
+      ].map((section, i, arr) => (
+        <section key={i} className={`section-default ${i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-bg-subtle)]'} py-10 border-b border-gray-100 ${i === arr.length - 1 ? 'last:border-0' : ''}`}>
           <div className="container-reading">
             <div className="card-standard">
               <h2 className="text-2xl font-bold mb-4">{section.title}</h2>
@@ -90,18 +105,6 @@ export default function DisclaimerPage() {
         </section>
       ))}
 
-      {/* ── MINI FOOTER ─────────────────────────────────────────────────── */}
-      <div className="py-12 border-t border-[var(--color-bg-border-soft)] bg-white">
-        <div className="container-reading text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6">Last Updated: January 2026</p>
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-gray-500">
-            <Link href="/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-blue-600 transition-colors">Terms of Service</Link>
-            <Link href="/about" className="hover:text-blue-600 transition-colors">About Us</Link>
-            <Link href="/" className="hover:text-blue-600 transition-colors">Calculator</Link>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

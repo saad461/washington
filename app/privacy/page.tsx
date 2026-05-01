@@ -21,14 +21,23 @@ export default function PrivacyPage() {
       />
 
       <div className="container-reading relative z-10">
-        <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-8">
-          <ArrowLeft size={16} />
-          Back to Calculator
-        </Link>
+        <nav aria-label="Breadcrumb">
+          <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
+            <li>
+              <Link href="/" className="hover:text-blue-600 transition-colors">
+                Home
+              </Link>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li className="text-gray-900 font-medium" aria-current="page">
+              Privacy Policy
+            </li>
+          </ol>
+        </nav>
 
         <div className="flex flex-col gap-6">
-          <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
-            Privacy & Data Security
+          <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+            Legal & Privacy
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
             Privacy <span className="text-blue-600">Policy</span>
@@ -41,24 +50,21 @@ export default function PrivacyPage() {
     </section>
 
     {/* ── PRIVACY CONTENT ─────────────────────────────────────────────── */}
-    <section className="section-default bg-[var(--color-bg-subtle)]">
+    <section className="section-default bg-[var(--color-bg-subtle)] py-10 border-b border-gray-100 last:border-0">
       <div className="container-reading">
+        <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl mb-8">
+          <p className="text-sm font-semibold text-blue-900 mb-1">
+            About Your Calculator Data
+          </p>
+          <p className="text-sm text-blue-800">
+            Income figures and family details you enter into our calculator are never transmitted to our servers or stored anywhere. All calculations happen locally in your browser. This policy covers standard website analytics and advertising cookies only.
+          </p>
+        </div>
+
         <AdSensePrivacy />
       </div>
     </section>
 
-    {/* ── MINI FOOTER ─────────────────────────────────────────────────── */}
-    <div className="py-12 border-t border-[var(--color-bg-border-soft)] bg-white">
-      <div className="container-reading text-center">
-        <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6">Last Updated: January 2026</p>
-        <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-gray-500">
-          <Link href="/terms" className="hover:text-blue-600 transition-colors">Terms of Service</Link>
-          <Link href="/disclaimer" className="hover:text-blue-600 transition-colors">Legal Disclaimer</Link>
-          <Link href="/about" className="hover:text-blue-600 transition-colors">About Us</Link>
-          <Link href="/" className="hover:text-blue-600 transition-colors">Calculator</Link>
-        </div>
-      </div>
-    </div>
   </div>
  );
 }

@@ -1,11 +1,14 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { washingtonCounties } from '@/data/washingtonCounties';
-import { MapPin, Phone, Building2, ChevronRight, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import CountyList from '@/components/courts/CountyList';
 
 export const metadata: Metadata = {
-  title: 'Washington Child Support Courthouses & Filing Directory (2026)',
-  description: 'Find official local filing addresses, clerk phone numbers, and family court addresses for all 39 Washington counties. Verified 2026 data.',
+  title: {
+    absolute: "Washington State Court Directory — All 39 Counties | WCSSC"
+  },
+  description: "Find courthouse addresses, phone numbers, and filing information for all 39 Washington State counties. Updated 2026 court directory for child support filings.",
   alternates: { canonical: 'https://wcssc.site/washington-courts' },
 };
 
@@ -20,79 +23,60 @@ export default function CourtsIndex() {
         />
 
         <div className="container-wide relative z-10">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-8">
-            <ArrowLeft size={16} />
-            Back to Calculator
-          </Link>
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
+              <li>
+                <Link href="/" className="hover:text-blue-600 transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li className="text-gray-900 font-medium" aria-current="page">
+                Washington Courts
+              </li>
+            </ol>
+          </nav>
 
           <div className="flex flex-col gap-6">
-            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
-              Statewide Directory
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2" aria-hidden="true">
+              All 39 Washington Counties
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              Washington Child Support <span className="text-blue-600">Filing Directory</span>
+              Washington State Court Directory
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              While the economic tables are statewide, enforcing and filing your order is localized. Find your specific county courthouse and clerk contact information.
+              Find courthouse addresses, phone numbers, and filing links for every Washington State county — updated for 2026 child support filings.
             </p>
           </div>
         </div>
       </section>
 
       {/* ── COURTS GRID ─────────────────────────────────────────────────── */}
-      <section className="section-default bg-[var(--color-bg-subtle)] relative z-10">
+      <section className="section-default bg-[var(--color-bg-subtle)] relative z-10 py-10 border-b border-gray-100">
         <div className="container-wide">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {washingtonCounties.map((court) => (
-              <Link
-                key={court.slug}
-                href={`/washington-courts/${court.slug}`}
-                className="group card-standard flex flex-col hover:border-blue-500"
-              >
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold text-[var(--color-text-primary)] group-hover:text-blue-600 transition-colors">
-                    {court.name}
-                  </h2>
-                  <div className="p-2 rounded-full bg-[var(--color-bg-subtle)] group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                    <ChevronRight className="w-5 h-5" />
-                  </div>
-                </div>
-
-                <div className="space-y-4 mt-auto">
-                  <div className="flex items-start gap-4">
-                    <div className="p-2 bg-[var(--color-bg-subtle)] rounded-lg group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                      <MapPin className="w-4 h-4 shrink-0" />
-                    </div>
-                    <p className="text-sm text-[var(--color-text-body)] leading-relaxed">
-                      {court.courtAddress}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="p-2 bg-[var(--color-bg-subtle)] rounded-lg group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">
-                      <Phone className="w-4 h-4 shrink-0" />
-                    </div>
-                    <p className="text-sm font-bold text-[var(--color-text-primary)]">
-                      {court.clerkPhone}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <CountyList counties={washingtonCounties} />
         </div>
       </section>
 
       {/* ── MISSING COURTHOUSE ─────────────────────────────────────────── */}
-      <section className="section-default bg-white">
+      <section className="section-default bg-white py-10 border-b border-gray-100 last:border-0">
         <div className="container-reading">
-          <div className="card-standard border-dashed border-2 border-gray-200 !p-12 text-center shadow-none">
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[var(--color-text-primary)]">Missing a Courthouse?</h2>
-            <p className="text-[var(--color-text-secondary)] text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
-              If a local courthouse has moved or contact information has changed, please contact our editorial team so we can update our 2026 directory.
+          <div className="mt-12 text-center p-8 bg-gray-50 rounded-2xl">
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+              Data Error?
             </p>
-            <Link href="/contact" className="btn-primary-lg btn-primary !rounded-full">
-              Contact Support Team
-            </Link>
+            <h2 className="text-xl font-bold text-gray-900 mb-3">
+              Missing or Incorrect Court Info?
+            </h2>
+            <p className="text-gray-500 text-sm mb-6">
+              Help us keep our directory accurate. Send us the correct courthouse details and we&apos;ll update within 48 hours.
+            </p>
+            <a
+              href="mailto:support@wcssc.site?subject=Court Directory Correction"
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors duration-200"
+            >
+              Submit a Correction →
+            </a>
           </div>
         </div>
       </section>

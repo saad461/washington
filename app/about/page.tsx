@@ -3,8 +3,10 @@ import Link from 'next/link';
 import { ShieldCheck, ArrowLeft, Users, Database, Mail, Scale, Globe, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'About WCSSC | Washington Child Support Schedule Center',
-  description: 'Learn about WCSSC — our mission, data sources, team credentials, and commitment to providing accurate 2026 Washington State child support calculations.',
+  title: {
+    absolute: "About WCSSC — Washington Child Support Schedule Center | WCSSC"
+  },
+  description: "WCSSC is an independent educational platform providing free, accurate Washington State child support calculations based on the official 2026 RCW 26.19 economic tables.",
   alternates: { canonical: 'https://wcssc.site/about' },
 };
 
@@ -20,15 +22,24 @@ export default function AboutPage() {
         />
 
         <div className="container-reading relative z-10">
-          {/* Back Link */}
-          <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-8">
-            <ArrowLeft size={16} />
-            Back to Calculator
-          </Link>
+          {/* Breadcrumbs */}
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
+              <li>
+                <Link href="/" className="hover:text-blue-600 transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li className="text-gray-900 font-medium" aria-current="page">
+                About WCSSC
+              </li>
+            </ol>
+          </nav>
 
           <div className="flex flex-col gap-6">
-            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
-              E-E-A-T Transparency
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2" aria-hidden="true">
+              Who We Are
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
               About <span className="text-blue-600">WCSSC</span>
@@ -41,7 +52,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── MISSION ─────────────────────────────────────────────────────── */}
-      <section className="section-default bg-[var(--color-bg-subtle)]">
+      <section className="section-default bg-[var(--color-bg-subtle)] py-10 border-b border-gray-100">
         <div className="container-reading">
           <div className="card-standard">
             <div className="flex items-center gap-4 mb-6">
@@ -63,7 +74,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── DATA SOURCES ────────────────────────────────────────────────── */}
-      <section className="section-default bg-white">
+      <section className="section-default bg-white py-10 border-b border-gray-100">
         <div className="container-reading">
           <div className="flex items-center gap-4 mb-8">
             <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center">
@@ -96,7 +107,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── REVIEW PROCESS ──────────────────────────────────────────────── */}
-      <section className="section-default bg-[var(--color-bg-subtle)]">
+      <section className="section-default bg-[var(--color-bg-subtle)] py-10 border-b border-gray-100">
         <div className="container-reading">
           <div className="flex items-center gap-4 mb-8">
             <div className="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center">
@@ -108,17 +119,32 @@ export default function AboutPage() {
             <p className="text-lg leading-relaxed text-[var(--color-text-body)]">
               Our content undergoes a rigorous multi-step review process to ensure accuracy and compliance with Washington State law:
             </p>
-            <div className="grid grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
               {[
-                { step: "01", label: "Data Verification", desc: "Economic table values cross-checked against AOC publications for absolute accuracy." },
-                { step: "02", label: "Legal Review", desc: "Content reviewed for compliance with RCW 26.19 and current Washington case law." },
-                { step: "03", stepLabel: "Technical Audit", desc: "Calculation engine tested against thousands of edge cases and SSR thresholds." },
-              ].map((s) => (
-                <div key={s.step} className="flex gap-6 p-6 bg-white rounded-2xl border border-[var(--color-bg-border-soft)] shadow-sm">
-                  <div className="text-4xl font-black text-gray-100 select-none leading-none">{s.step}</div>
+                {
+                  title: "Data Verification",
+                  description: "Economic table values cross-checked against AOC publications for absolute accuracy."
+                },
+                {
+                  title: "Legal Review",
+                  description: "Content reviewed for compliance with RCW 26.19 and current Washington case law."
+                },
+                {
+                  title: "Technical Audit",
+                  description: "Calculation engine tested against thousands of edge cases and SSR thresholds."
+                }
+              ].map((step, index) => (
+                <div key={index} className="flex gap-4 p-5 rounded-xl bg-gray-50 border border-gray-100">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+                    {String(index + 1).padStart(2, '0')}
+                  </div>
                   <div>
-                    <p className="font-bold text-[var(--color-text-primary)] mb-1">{s.label || s.stepLabel}</p>
-                    <p className="text-[var(--color-text-secondary)] leading-relaxed">{s.desc}</p>
+                    <h3 className="font-bold text-gray-900 text-sm mb-1">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">
+                      {step.description}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -128,7 +154,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── COVERAGE ────────────────────────────────────────────────────── */}
-      <section className="section-default bg-white">
+      <section className="section-default bg-white py-10 border-b border-gray-100">
         <div className="container-reading">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
@@ -148,7 +174,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── DISCLAIMER ──────────────────────────────────────────────────── */}
-      <section className="section-default bg-[var(--color-bg-subtle)]">
+      <section className="section-default bg-[var(--color-bg-subtle)] py-10 border-b border-gray-100">
         <div className="container-reading">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-10 h-10 bg-amber-50 text-amber-600 rounded-lg flex items-center justify-center">
@@ -168,7 +194,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── CONTACT ─────────────────────────────────────────────────────── */}
-      <section className="section-default bg-white">
+      <section className="section-default bg-white py-10 border-b border-gray-100 last:border-0">
         <div className="container-reading">
           <div className="text-center space-y-4 mb-12">
             <div className="w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mx-auto shadow-lg shadow-indigo-200">
@@ -188,19 +214,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* ── FOOTER LINKS ────────────────────────────────────────────────── */}
-      <div className="py-12 border-t border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]">
-        <div className="container-reading text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6">Washington Child Support Schedule Center &copy; 2026</p>
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-medium text-gray-500">
-            <Link href="/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-blue-600 transition-colors">Terms of Service</Link>
-            <Link href="/disclaimer" className="hover:text-blue-600 transition-colors">Disclaimer</Link>
-            <Link href="/" className="hover:text-blue-600 transition-colors">Calculator</Link>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
