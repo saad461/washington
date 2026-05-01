@@ -127,6 +127,22 @@ const InputField = ({
   const isCurrency   = field.type === "currency";
   const isPercentage = field.type === "percentage";
   const isBoolean    = field.type === "boolean";
+  const [showTooltip, setShowTooltip] = useState(false);
+  const tooltipTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (tooltipTimeoutRef.current) clearTimeout(tooltipTimeoutRef.current);
+    };
+  }, []);
+
+  const triggerTooltip = () => {
+    if (tooltipTimeoutRef.current) clearTimeout(tooltipTimeoutRef.current);
+    setShowTooltip(true);
+    tooltipTimeoutRef.current = setTimeout(() => {
+      setShowTooltip(false);
+    }, 3000);
+  };
 
   const renderInput = (parent: "p1" | "p2") => {
     const val = values[parent];
@@ -136,6 +152,7 @@ const InputField = ({
         <button
           type="button"
           onClick={() => onChange(parent, !val)}
+          onFocus={triggerTooltip}
           className={`flex items-center justify-center w-full h-12 rounded-xl border-2 transition-all font-bold uppercase tracking-widest text-[12px] ${
             val
               ? "bg-[var(--color-brand-primary-light)] border-[var(--color-brand-primary)] text-[var(--color-brand-primary-hover)] shadow-[var(--shadow-card)]"
@@ -162,6 +179,7 @@ const InputField = ({
           type={field.type === "number" || isCurrency || isPercentage ? "number" : "text"}
           value={val as string}
           onChange={(e) => onChange(parent, e.target.value)}
+          onFocus={triggerTooltip}
           placeholder="0.00"
           className={`input-standard w-full font-medium ${isCurrency ? "pl-8" : ""} ${isPercentage ? "pr-8" : ""}`}
         />
@@ -184,12 +202,27 @@ const InputField = ({
           {field.label}
         </label>
         {field.description && (
-          <div className="group relative shrink-0">
-            <Info className="w-4 h-4 text-[var(--color-text-secondary)] cursor-help mt-1" />
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-64 p-4 bg-[var(--color-text-primary)] text-white text-[13px] leading-relaxed rounded-xl group-hover:block transition-opacity pointer-events-none z-50 shadow-[var(--shadow-card-hover)]">
-              {field.description}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 border-[8px] border-transparent border-t-[var(--color-text-primary)]" />
-            </div>
+          <div className="relative shrink-0">
+            <button
+              type="button"
+              onClick={triggerTooltip}
+              className="focus:outline-none"
+            >
+              <Info className="w-4 h-4 text-[var(--color-text-secondary)] cursor-help mt-1" />
+            </button>
+            <AnimatePresence>
+              {showTooltip && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 5, scale: 0.95 }}
+                  className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-64 p-4 bg-[var(--color-text-primary)] text-white text-[13px] leading-relaxed rounded-xl transition-opacity pointer-events-none z-50 shadow-[var(--shadow-card-hover)]"
+                >
+                  {field.description}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 border-[8px] border-transparent border-t-[var(--color-text-primary)]" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         )}
       </div>
