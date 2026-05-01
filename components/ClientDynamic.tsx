@@ -29,10 +29,6 @@ export const HomeCalculatorClient = dynamic(
  { ssr: false, loading: () => <div className="w-full max-w-lg h-96 animate-pulse bg-[var(--color-bg-muted)] rounded-xl" /> }
 );
 
-export const BlogGridClientClient = dynamic(
- () => import('@/components/BlogGridClient'),
- { ssr: false, loading: () => <div className="w-full h-16 animate-pulse bg-[var(--color-bg-muted)] rounded-xl" /> }
-);
 
 export const ComparisonToolClient = dynamic(
  () => import('@/components/ComparisonTool'),

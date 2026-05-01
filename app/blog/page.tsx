@@ -1,24 +1,40 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { TrendingUp, User, ArrowRight, Clock } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { blogs } from '@/data/blogs';
-import { BlogGridClientClient as BlogGridClient } from '@/components/ClientDynamic';
+import BlogGridClient from '@/components/BlogGridClient';
+import Badge from '@/components/ui/Badge';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'WA Child Support Resource Center | WCSSC Blog',
-  description: 'Expert legal guides, county-specific filing roadmaps, and 2026 Washington State Child Support Schedule updates. Stay informed with our legal team.',
+  title: {
+    absolute: "Washington Child Support Legal Guides & Resources 2026 | WCSSC"
+  },
+  description: "Expert guides on Washington State child support guidelines, 2026 law changes, county filing guides, and calculation walkthroughs from the WCSSC editorial team.",
   alternates: { canonical: 'https://wcssc.site/blog' },
 };
 
-export default function BlogListingPage() {
-  const featuredPost = blogs.find(p => p.featured) || blogs[0];
+export default async function BlogPage({
+  searchParams
+}: {
+  searchParams: Promise<{ category?: string }>
+}) {
+  const params = await searchParams;
+  const category = params?.category;
+
+  const articles = blogs;
+  const filteredArticles = category && category !== 'All'
+    ? articles.filter(a => a.category === category)
+    : articles;
+
+  const featured = articles.find(a => a.featured) || articles[0];
+  const gridArticles = filteredArticles.filter(a => a.slug !== featured?.slug);
 
   return (
     <main className="flex-1 bg-white relative overflow-hidden w-full">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white py-16 md:py-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
-        {/* Background Decoration */}
         <div
           aria-hidden="true"
           className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
@@ -40,58 +56,69 @@ export default function BlogListingPage() {
       </section>
 
       {/* ── FEATURED ARTICLE ────────────────────────────────────────────── */}
-      <section className="section-default bg-[var(--color-bg-subtle)] relative z-10">
-        <div className="container-wide">
-          {featuredPost && (
-            <div>
-              <Link
-                href={`/blog/${featuredPost.slug}`}
-                className="group card-standard !p-8 md:!p-12 block shadow-[var(--shadow-card-md)]"
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                  <div className="lg:col-span-8">
-                    <div className="flex flex-wrap items-center gap-4 mb-8">
-                      <span className="badge-category !bg-[var(--color-brand-primary)] !text-white !px-4 !py-1.5 !text-[12px] font-semibold !uppercase">
-                        Featured Article
-                      </span>
-                      <div className="badge-meta !px-4 !py-1.5">
-                        <Clock size={14} className="mr-2" />
-                        {featuredPost.readTime} Read
-                      </div>
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6 group-hover:text-[var(--color-brand-primary)] transition-colors leading-tight">
-                      {featuredPost.title}
-                    </h2>
-                    <p className="text-lg text-[var(--color-text-body)] mb-12 line-clamp-3 leading-relaxed">
-                      {featuredPost.excerpt}
-                    </p>
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-2xl bg-[var(--color-bg-subtle)] flex items-center justify-center border border-[var(--color-bg-border)] group-hover:bg-[var(--color-brand-primary-light)] transition-colors">
-                        <User size={20} className="text-[var(--color-text-secondary)] group-hover:text-[var(--color-brand-primary)]" />
-                      </div>
-                      <div>
-                        <p className="font-bold text-[var(--color-text-primary)] leading-none mb-2">{featuredPost.author}</p>
-                        <p className="text-[12px] font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider">Editorial & Legal Audit</p>
-                      </div>
-                    </div>
+      {!category && featured && (
+        <section className="section-default bg-[var(--color-bg-subtle)] relative z-10">
+          <div className="container-wide">
+            <Link
+              href={`/blog/${featured.slug}`}
+              className="group card-standard !p-0 block shadow-[var(--shadow-card-md)] overflow-hidden"
+            >
+              <div className="flex flex-col">
+                {featured.image?.url ? (
+                  <div className="relative w-full h-48 md:h-64 bg-gray-100">
+                    <Image
+                      src={featured.image.url}
+                      alt={featured.image.alt || featured.title}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                  </div>
+                ) : (
+                  <div className="w-full h-48 md:h-64 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
+                    <span className="text-blue-300 text-sm font-medium">WCSSC Legal Guide</span>
+                  </div>
+                )}
+
+                <div className="p-8 md:p-12">
+                  <div className="flex flex-wrap items-center gap-4 mb-8">
+                    <Badge text="Featured" variant="featured" />
+                    <Badge text={featured.category} variant="category" />
+                    <Badge text={`${featured.readTime} read`} variant="readtime" />
                   </div>
 
-                  <div className="hidden lg:flex lg:col-span-4 justify-end">
-                    <div className="p-16 bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-3xl group-hover:bg-[var(--color-brand-primary-light)] transition-all duration-500">
-                      <TrendingUp className="w-24 h-24 text-[var(--color-bg-border)] group-hover:text-[var(--color-brand-primary-mid)] group-hover:scale-110 transition-all" />
+                  <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6 group-hover:text-[var(--color-brand-primary)] transition-colors leading-tight">
+                    {featured.title}
+                  </h2>
+                  <p className="text-lg text-[var(--color-text-body)] mb-12 line-clamp-3 leading-relaxed">
+                    {featured.excerpt}
+                  </p>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-[var(--color-bg-subtle)] flex items-center justify-center border border-[var(--color-bg-border)] group-hover:bg-blue-50 transition-colors">
+                      <div className="w-6 h-6 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
+                        W
+                      </div>
+                    </div>
+                    <div>
+                      <p className="font-bold text-[var(--color-text-primary)] leading-none mb-2">{featured.author}</p>
+                      <p className="text-[12px] font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider">Editorial & Legal Audit</p>
                     </div>
                   </div>
                 </div>
-              </Link>
-            </div>
-          )}
-        </div>
-      </section>
+              </div>
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* ── BLOG GRID ─────────────────────────────────────────────────── */}
       <section className="section-default bg-white relative z-10">
         <div className="container-wide">
-          <BlogGridClient initialBlogs={blogs} />
+          <BlogGridClient
+            articles={gridArticles}
+            initialCategory={category || 'All'}
+          />
         </div>
       </section>
 
