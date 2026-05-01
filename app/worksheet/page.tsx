@@ -1,8 +1,42 @@
 import { Metadata } from "next";
 import WorksheetWizard from "@/components/WorksheetWizard";
 import CalculatorSchema from "@/components/CalculatorSchema";
+import FAQAccordion from "@/components/FAQAccordion";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft, ChevronRight, FileText } from "lucide-react";
+
+const worksheetFAQs = [
+  {
+    question: "What is the Washington State child support worksheet?",
+    answer:
+      "The Washington State child support worksheet is an official 8-part form required by RCW 26.19 that calculates the presumptive monthly child support obligation for both parents based on their combined net income, number of children, and additional expenses such as healthcare and daycare.",
+  },
+  {
+    question: "Do I need to complete a worksheet for child support in Washington?",
+    answer:
+      "Yes. Washington courts require a completed child support worksheet for all child support orders, modifications, and reviews. The worksheet must follow the 2026 AOC format to be accepted by any Washington State court.",
+  },
+  {
+    question: "How do I fill out Part 1 (Income) of the Washington child support worksheet?",
+    answer:
+      "Part 1 requires each parent's monthly net income — meaning gross wages minus mandatory deductions including federal and state income taxes, FICA, mandatory union dues, and required retirement contributions. Do not enter gross income. Our wizard auto-calculates the mandatory deductions based on your inputs.",
+  },
+  {
+    question: "Can I use this worksheet for a child support modification in Washington?",
+    answer:
+      "Yes. The same 8-part worksheet is used for new child support orders, modifications, and annual reviews. A substantial change in either parent's income of 15% or more typically qualifies for modification under Washington law.",
+  },
+  {
+    question: "Is this worksheet accepted by Washington courts?",
+    answer:
+      "This wizard produces calculations based on the official 2026 Washington State Child Support Schedule (RCW 26.19). The output figures match the AOC mandatory forms. However all calculations are estimates — final orders are determined by a Washington State court.",
+  },
+  {
+    question: "How is the worksheet different from the quick calculator?",
+    answer:
+      "The quick calculator gives an instant estimate based on combined income and number of children only. The full 8-part worksheet accounts for healthcare costs, daycare, educational expenses, parenting time credits, and existing child support obligations — producing a complete court-ready figure.",
+  },
+];
 
 export const metadata: Metadata = {
   title: {
@@ -198,6 +232,15 @@ export default function WorksheetPage() {
             Schedule. All calculations are estimates only. Final orders are determined by a Washington State court.
           </p>
         </div>
+      </section>
+
+      {/* ── FAQ SECTION ────────────────────────────────────────────────── */}
+      <section className="max-w-4xl mx-auto px-4 py-16 border-t border-gray-100">
+        <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">Worksheet Questions</p>
+        <h2 className="text-2xl font-bold text-gray-900 mb-8">
+          Frequently Asked Questions About the Washington Child Support Worksheet
+        </h2>
+        <FAQAccordion items={worksheetFAQs} />
       </section>
     </div>
   );
