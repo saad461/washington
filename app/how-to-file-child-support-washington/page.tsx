@@ -23,7 +23,7 @@ export default function HowToFileGuide() {
   };
 
   return (
-    <main className="flex-1 bg-white">
+    <div className="flex-1 bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
@@ -185,6 +185,6 @@ export default function HowToFileGuide() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

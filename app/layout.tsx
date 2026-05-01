@@ -78,6 +78,17 @@ export default function RootLayout({
  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
  </head>
  <body className="min-h-full flex flex-col bg-page">
+ <a
+  href="#main-content"
+  className="sr-only focus:not-sr-only
+  focus:fixed focus:top-4 focus:left-4
+  focus:z-[100] focus:bg-blue-600
+  focus:text-white focus:px-4 focus:py-2
+  focus:rounded-lg focus:font-semibold
+  focus:text-sm"
+ >
+  Skip to main content
+ </a>
 
  {/* Google AdSense — Publisher ID: ca-pub-9902783604679065 */}
  <Script
@@ -110,7 +121,7 @@ export default function RootLayout({
  `}
  </Script>
  <Navbar />
- <main className="flex-1 flex flex-col">
+ <main id="main-content" className="flex-1 flex flex-col">
  <Suspense fallback={<div className="min-h-screen bg-section-alt" />}>
  {children}
  </Suspense>

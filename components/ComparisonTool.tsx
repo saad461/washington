@@ -47,18 +47,18 @@ export default function ComparisonTool() {
   const curFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
   return (
-    <main className="container-wide section-default relative z-10">
-      <header className="max-w-3xl mx-auto text-center mb-16 md:mb-24">
-        <div className="inline-flex p-4 bg-[var(--color-brand-primary-light)] text-[var(--color-brand-primary)] rounded-2xl mb-8 shadow-[var(--shadow-card)]">
-          <ArrowRight className="w-8 h-8 rotate-45" />
-        </div>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-8 leading-tight text-[var(--color-text-primary)]">
-          2024 vs 2026 Guideline Comparison
-        </h1>
-        <p className="text-xl text-[var(--color-text-secondary)] leading-relaxed">
-          See exactly how Washington State&apos;s new 2026 economic tables (HB 1014 impacts) change your presumptive child support obligation compared to the old rules.
+    <div className="py-0">
+      <div className="mb-12">
+        <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+          See Your Impact
         </p>
-      </header>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          How Did Your Obligation Change?
+        </h2>
+        <p className="text-gray-500 mb-8">
+          Enter your combined net income to see the estimated difference between your 2024 and 2026 child support obligation.
+        </p>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
         <div className="lg:col-span-5">
@@ -179,6 +179,6 @@ export default function ComparisonTool() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

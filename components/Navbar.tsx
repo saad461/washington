@@ -33,15 +33,23 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { href: "/",                  label: "Estimator"    },
-    { href: "/worksheet",         label: "Full Wizard"  },
-    { href: "/washington-courts", label: "Courts"       },
-    { href: "/glossary",          label: "Glossary"     },
-    { href: "/compare-2024-2026", label: "2024 vs 2026" },
+    { href: "/",                  label: "Calculator"          },
+    { href: "/worksheet",         label: "Full Wizard"         },
+    { href: "/washington-courts", label: "Courts"              },
+    { href: "/glossary",          label: "Glossary"            },
+    { href: "/compare-2024-2026", label: "What Changed in 2026" },
   ];
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname === href;
+  };
+
+  const showPrint =
+    pathname === "/" ||
+    pathname === "/worksheet" ||
+    pathname.includes("-income-") ||
+    pathname.includes("-county-income-");
 
   // Single source of truth for nav height — used for both the header
   // and the drawer top offset so they never mismatch.
@@ -53,7 +61,7 @@ export default function Navbar() {
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-300 no-print ${navH} ${
           scrolled || mobileOpen
-            ? "bg-white/95 backdrop-blur-xl shadow-[var(--shadow-card)] border-b border-[var(--color-bg-border-soft)]"
+            ? "bg-white/95 backdrop-blur-xl shadow-[var(--shadow-card)] border-b border-gray-100"
             : "bg-transparent"
         }`}
       >
@@ -70,7 +78,7 @@ export default function Navbar() {
             </div>
             <div className="flex flex-col leading-none font-heading">
               <span className="text-lg sm:text-xl font-bold text-[var(--color-text-primary)] tracking-tight">WCSSC</span>
-              <span className="text-[12px] font-semibold text-[var(--color-text-secondary)] uppercase font-bold text-[var(--color-brand-primary)] tracking-widest mt-0.5">
+              <span className="text-[12px] font-semibold uppercase tracking-widest text-blue-600 mt-0.5">
                 Washington State
               </span>
             </div>
@@ -82,30 +90,29 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative px-3 py-2 text-sm font-semibold rounded-lg transition-all duration-200 ${
+                  className={`relative px-3 py-2 text-sm transition-all duration-200 ${
                   isActive(link.href)
-                    ? "text-[var(--color-brand-primary)] bg-indigo-50"
-                    : "text-[var(--color-text-body)] hover:text-[var(--color-brand-primary)] hover:bg-[var(--color-bg-subtle)]"
+                    ? "text-blue-600 font-semibold border-b-2 border-blue-600 pb-0.5"
+                    : "text-gray-600 font-medium hover:text-blue-600 transition-colors"
                 }`}
               >
                 {link.label}
-                {isActive(link.href) && (
-                  <span className="absolute bottom-0.5 left-3 right-3 h-0.5 bg-indigo-600 rounded-full" />
-                )}
               </Link>
             ))}
           </nav>
 
           {/* ── Actions ── */}
           <div className="flex items-center gap-4 sm:gap-3 shrink-0">
-            <button
-              onClick={handlePrint}
-              aria-label="Print this page"
-              className="hidden sm:flex items-center gap-2 px-4 h-10 rounded-xl text-sm font-semibold text-[var(--color-text-body)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-text-primary)] transition-all border border-[var(--color-bg-border)]"
-            >
-              <Printer size={15} />
-              <span className="hidden md:inline">Print</span>
-            </button>
+            {showPrint && (
+              <button
+                onClick={handlePrint}
+                aria-label="Print this page"
+                className="hidden sm:flex items-center gap-2 px-4 h-10 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:text-blue-600 transition-all border border-gray-200"
+              >
+                <Printer size={15} />
+                <span className="hidden md:inline">Print</span>
+              </button>
+            )}
 
           <Link href="/worksheet" className="hidden sm:flex btn-primary !h-9 !px-4 !text-[13px] !rounded-lg !font-semibold">
               <span className="hidden md:inline">Launch</span> Wizard
@@ -163,13 +170,9 @@ export default function Navbar() {
             {/* CTAs */}
             <div className="px-4 pt-4 pb-2 flex flex-col gap-3">
               <Link href="/worksheet" onClick={() => setMobileOpen(false)} className="btn-primary w-full">
-                Launch Calculator Wizard
+                Launch Wizard
                 <ChevronRight className="w-5 h-5" />
               </Link>
-              <button onClick={() => { handlePrint(); setMobileOpen(false); }} className="btn-secondary w-full">
-                <Printer size={16} />
-                Print This Page
-              </button>
             </div>
 
             {/* Legal links */}

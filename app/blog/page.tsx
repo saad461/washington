@@ -32,7 +32,7 @@ export default async function BlogPage({
   const gridArticles = filteredArticles.filter(a => a.slug !== featured?.slug);
 
   return (
-    <main className="flex-1 bg-white relative overflow-hidden w-full">
+    <div className="flex-1 bg-white relative overflow-hidden w-full">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white py-16 md:py-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div
@@ -140,6 +140,6 @@ export default async function BlogPage({
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

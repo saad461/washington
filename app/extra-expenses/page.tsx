@@ -25,7 +25,7 @@ export default function ExtraExpensesCalculator() {
   const perFormatter = new Intl.NumberFormat('en-US', { style: 'percent', minimumFractionDigits: 1 });
 
   return (
-    <main className="flex-1 bg-white relative overflow-hidden">
+    <div className="flex-1 bg-white relative overflow-hidden">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white py-16 md:py-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div
@@ -144,6 +144,6 @@ export default function ExtraExpensesCalculator() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

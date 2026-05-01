@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function WorksheetPage() {
   return (
-    <main className="flex-1 w-full bg-white">
+    <div className="flex-1 w-full bg-white">
       <CalculatorSchema url="https://wcssc.site/worksheet" />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
@@ -109,6 +109,6 @@ export default function WorksheetPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

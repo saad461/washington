@@ -106,7 +106,7 @@ export default async function CountyCourtPage({ params }: Props) {
   ];
 
   return (
-    <main className="flex-1 bg-white">
+    <div className="flex-1 bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": [{ "@type": "GovernmentOffice", name: county.court, address: { "@type": "PostalAddress", streetAddress: county.courtAddress, addressRegion: "WA", addressCountry: "US" }, telephone: county.clerkPhone, url: county.website }] }) }} />
       <CalculatorSchema county={county.name} url={`https://wcssc.site/washington-courts/${county.slug}`} />
 
@@ -197,7 +197,8 @@ export default async function CountyCourtPage({ params }: Props) {
 
               {/* D. FAQs */}
               <section>
-                <h2 className="text-2xl md:text-3xl font-bold mb-12 text-[var(--color-text-primary)]">Frequently Asked Questions</h2>
+                <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">Common Parent Questions</p>
+                <h2 className="text-2xl md:text-3xl font-bold mb-12 text-[var(--color-text-primary)]">Frequently Asked Questions About Washington Child Support</h2>
                 <FAQAccordion items={faqs.map(f => ({ question: f.q, answer: f.a }))} />
               </section>
             </div>
@@ -281,6 +282,6 @@ export default async function CountyCourtPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

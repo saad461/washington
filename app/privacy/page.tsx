@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
  return (
-  <main className="flex-1 bg-white">
+  <div className="flex-1 bg-white">
     {/* ── MINI HERO ────────────────────────────────────────────────────── */}
     <section className="bg-white py-16 md:py-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
       <div
@@ -59,6 +59,6 @@ export default function PrivacyPage() {
         </div>
       </div>
     </div>
-  </main>
+  </div>
  );
 }

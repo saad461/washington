@@ -362,7 +362,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
   };
 
   return (
-    <main className="flex-1 bg-white relative w-full">
+    <div className="flex-1 bg-white relative w-full">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <CalculatorSchema income={income} childCount={children} county={countyName} url={`https://wcssc.site/${slug}`} resultAmount={supportNum !== null ? supportNum : undefined} />
 
@@ -421,7 +421,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                     <div className="p-3 bg-white rounded-xl border border-gray-100 shadow-sm">
                       <Landmark className="w-8 h-8 text-blue-600" />
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Key Calculation Figures</h2>
+                    <h2 id="key-figures" className="scroll-mt-24 text-2xl md:text-3xl font-bold text-gray-900">Key Calculation Figures</h2>
                   </div>
                 </div>
                 <div className="table-container shadow-xl bg-white overflow-x-auto">
@@ -467,7 +467,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
                     Step by Step
                   </p>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-8">Breakdown of the {formattedIncome} Calculation</h2>
+                  <h2 id="breakdown" className="scroll-mt-24 text-3xl font-bold text-gray-900 mb-8">Breakdown of the {formattedIncome} Calculation</h2>
                 </div>
                 <p className="text-lg leading-relaxed">{calculation}</p>
 
@@ -478,7 +478,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
                     Low-Income Protection
                   </p>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-8">The SSR and Low-Income Safeguards</h2>
+                  <h2 id="ssr-info" className="scroll-mt-24 text-3xl font-bold text-gray-900 mb-8">The SSR and Low-Income Safeguards</h2>
                 </div>
                 <p className="text-lg leading-relaxed">{ssr}</p>
 
@@ -500,7 +500,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
                     Summary
                   </p>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-8">Calculation Summary & Requirements</h2>
+                  <h2 id="summary" className="scroll-mt-24 text-3xl font-bold text-gray-900 mb-8">Calculation Summary & Requirements</h2>
                 </div>
                 <p className="text-lg leading-relaxed">{conclusion}</p>
 
@@ -536,9 +536,12 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
               </div>
 
               <section className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
-                <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
-                  Common Parent Questions
-                </p>
+                <div className="flex flex-col mb-8">
+                  <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+                    Common Parent Questions
+                  </p>
+                  <h2 className="text-3xl font-bold text-gray-900">Frequently Asked Questions About Washington Child Support</h2>
+                </div>
                 <FAQAccordion items={dynamicFAQs.map((f) => ({ question: f.q, answer: f.a }))} />
               </section>
             </div>
@@ -654,6 +657,6 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
