@@ -199,7 +199,7 @@ export default async function CountyCourtPage({ params }: Props) {
               <section>
                 <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">Common Parent Questions</p>
                 <h2 className="text-2xl md:text-3xl font-bold mb-12 text-[var(--color-text-primary)]">Frequently Asked Questions About Washington Child Support</h2>
-                <FAQAccordion items={faqs.map(f => ({ question: f.q, answer: f.a }))} />
+                <FAQAccordion faqs={faqs.map(f => ({ question: f.q, answer: f.a }))} />
               </section>
             </div>
 

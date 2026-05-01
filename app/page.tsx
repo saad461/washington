@@ -472,7 +472,7 @@ export default function Home() {
               <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Common Parent Questions</p>
               <h2>Frequently Asked Questions About Washington Child Support</h2>
             </div>
-            <FAQAccordion items={homeFaqs} />
+            <FAQAccordion faqs={homeFaqs} />
           </div>
         </div>
       </section>

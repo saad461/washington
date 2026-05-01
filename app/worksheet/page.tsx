@@ -73,6 +73,67 @@ export default function WorksheetPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Complete the Washington State Child Support Worksheet 2026",
+            "description": "Complete the official 8-part Washington State child support worksheet using the 2026 RCW 26.19 economic tables",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Part 1: Income",
+                "text": "Enter gross monthly wages, business income, maintenance received, and imputed income for both parents",
+              },
+              {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Part 2: Basic Child Support Obligation",
+                "text": "Calculate the basic support obligation from the 2026 Washington State economic table",
+              },
+              {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Part 3: Healthcare, Daycare and Education",
+                "text": "Enter monthly healthcare premiums, work-related daycare costs, and approved educational expenses",
+              },
+              {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Part 4: Gross Child Support Obligation",
+                "text": "Calculate total gross support obligation combining basic support and additional expenses",
+              },
+              {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Part 5: Child Support Credits",
+                "text": "Apply credits for health insurance, daycare paid directly, and other qualifying payments",
+              },
+              {
+                "@type": "HowToStep",
+                "position": 6,
+                "name": "Part 6: Standard Calculation and Presumptive Amount",
+                "text": "Determine the final presumptive monthly transfer payment between parents",
+              },
+              {
+                "@type": "HowToStep",
+                "position": 7,
+                "name": "Part 7: Additional Informational Factors",
+                "text": "Document relevant additional factors including existing support obligations and other children",
+              },
+              {
+                "@type": "HowToStep",
+                "position": 8,
+                "name": "Part 8: Additional Factors for Court",
+                "text": "Include any deviation factors, special circumstances, or requests for judicial deviation from the presumptive amount",
+              },
+            ],
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             itemListElement: [
               {
@@ -295,7 +356,7 @@ export default function WorksheetPage() {
         <h2 className="text-2xl font-bold text-gray-900 mb-8">
           Frequently Asked Questions About the Washington Child Support Worksheet
         </h2>
-        <FAQAccordion items={worksheetFAQs} />
+        <FAQAccordion faqs={worksheetFAQs} />
       </section>
     </div>
   );
