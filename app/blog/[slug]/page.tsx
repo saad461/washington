@@ -18,6 +18,7 @@ import FAQAccordion from '@/components/FAQAccordion';
 import AdContainer from '@/components/AdContainer';
 import BlogCTA from '@/components/BlogCTA';
 import { cleanEmDashContent } from '@/lib/textOptimizer';
+import BlogCard from '@/components/BlogCard';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -80,6 +81,18 @@ export default async function BlogPostPage({ params }: Props) {
 
   const cleanedContent = cleanEmDashContent(post.content);
   const { headings, updatedHtml } = parseTOC(cleanedContent);
+
+  // Related Articles Logic
+  const allOtherArticles = blogs.filter(b => b.slug !== slug);
+  const sameCategory = allOtherArticles.filter(b => b.category === post.category);
+  const others = allOtherArticles.filter(b => b.category !== post.category);
+
+  const relatedArticles = [...sameCategory, ...others].slice(0, 3);
+
+  // Prev/Next Navigation
+  const currentIndex = blogs.findIndex(b => b.slug === slug);
+  const prevArticle = currentIndex > 0 ? blogs[currentIndex - 1] : null;
+  const nextArticle = currentIndex < blogs.length - 1 ? blogs[currentIndex + 1] : null;
 
   return (
     <main className="flex-1 bg-white relative overflow-hidden">
@@ -167,6 +180,20 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           <AdContainer slot="mid" wordCount={updatedHtml.split(' ').length} />
+
+          {/* Related Articles Section */}
+          <section aria-label="Related articles" className="my-12 pt-8 border-t border-gray-100">
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+              Keep Reading
+            </p>
+            <h2 className="text-xl font-bold text-gray-900 mb-6">Related Washington Child Support Guides</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {relatedArticles.map(article => (
+                <BlogCard key={article.slug} post={article} compact />
+              ))}
+            </div>
+          </section>
         </div>
       </section>
 
@@ -174,10 +201,6 @@ export default async function BlogPostPage({ params }: Props) {
       {post.faqs && post.faqs.length > 0 && (
         <section className="section-default bg-[var(--color-bg-subtle)] border-y border-gray-100">
           <div className="container-reading">
-            <h2 className="text-3xl font-bold mb-12 flex items-center gap-4 text-gray-900">
-              <HelpCircle className="w-8 h-8 text-blue-600" />
-              Common Questions
-            </h2>
             <FAQAccordion items={post.faqs.map(f => ({ question: f.question, answer: f.answer }))} />
           </div>
         </section>
@@ -195,9 +218,6 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           <div className="mt-16 p-10 bg-[var(--color-bg-subtle)] border border-gray-200 rounded-3xl">
-            <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-6 flex items-center gap-2">
-              <Scale className="w-5 h-5" /> E-E-A-T Disclosure
-            </p>
             <p className="text-sm text-gray-600 leading-relaxed mb-8">
               All WCSSC insights are reviewed for compliance with <strong className="text-gray-900">RCW 26.19.065</strong> and official Washington State guidelines. Our team cross-references all data with official AOC publications.
             </p>
@@ -210,6 +230,30 @@ export default async function BlogPostPage({ params }: Props) {
               </Link>
             </div>
           </div>
+
+          {/* Article Navigation */}
+          <nav aria-label="Article navigation" className="flex justify-between items-center pt-8 mt-8 border-t border-gray-100">
+            <div>
+              {prevArticle && (
+                <Link href={`/blog/${prevArticle.slug}`} className="group flex flex-col">
+                  <span className="text-xs text-gray-400 mb-1">← Previous</span>
+                  <span className="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
+                    {prevArticle.title}
+                  </span>
+                </Link>
+              )}
+            </div>
+            <div className="text-right">
+              {nextArticle && (
+                <Link href={`/blog/${nextArticle.slug}`} className="group flex flex-col items-end">
+                  <span className="text-xs text-gray-400 mb-1">Next →</span>
+                  <span className="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">
+                    {nextArticle.title}
+                  </span>
+                </Link>
+              )}
+            </div>
+          </nav>
         </div>
       </section>
     </main>
