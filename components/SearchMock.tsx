@@ -5,7 +5,7 @@ import { Search, MapPin, ChevronRight, Calculator } from 'lucide-react';
 import { washingtonCounties } from '@/data/washingtonCounties';
 import Link from 'next/link';
 
-const SearchMock = ({ isSidebar = false }: { isSidebar?: boolean }) => {
+const SearchMock = ({ isSidebar = false, isNavbar = false }: { isSidebar?: boolean; isNavbar?: boolean }) => {
  const [query, setQuery] = useState('');
 
  const filtered = washingtonCounties.filter(c =>
@@ -14,17 +14,17 @@ const SearchMock = ({ isSidebar = false }: { isSidebar?: boolean }) => {
  ).slice(0, 5);
 
  return (
- <div className={`w-full ${isSidebar ? '' : 'max-w-xl mx-auto'} no-print`}>
+ <div className={`w-full ${isSidebar ? '' : isNavbar ? '' : 'max-w-xl mx-auto'} no-print`}>
  <div className="relative group">
- <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
- <Search className="h-5 w-5 group-focus-within: transition-colors" />
+ <div className={`absolute inset-y-0 ${isNavbar ? 'left-4' : 'left-6'} flex items-center pointer-events-none`}>
+ <Search className={`${isNavbar ? 'h-4 w-4' : 'h-5 w-5'} group-focus-within: transition-colors`} />
  </div>
  <input
  type="text"
  value={query}
  onChange={(e) => setQuery(e.target.value)}
- placeholder="Search your WA county..."
- className={`w-full ${isSidebar ? 'py-4 min-h-[48px] px-14 text-sm' : 'py-6 px-16 text-lg'} bg-white border-2 border-[var(--color-bg-border-soft)] rounded-xl shadow-[var(--shadow-card)] shadow-indigo-900/5 focus:border-indigo-600 focus:ring-0 transition-all outline-none font-medium placeholder:`}
+ placeholder="Search WA county..."
+ className={`w-full ${isNavbar ? 'py-2 h-10 px-10 text-sm' : isSidebar ? 'py-4 min-h-[48px] px-14 text-sm' : 'py-6 px-16 text-lg'} bg-white border-2 border-[var(--color-bg-border-soft)] rounded-xl shadow-[var(--shadow-card)] shadow-indigo-900/5 focus:border-indigo-600 focus:ring-0 transition-all outline-none font-medium`}
  />
  </div>
 
