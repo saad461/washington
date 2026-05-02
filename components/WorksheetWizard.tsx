@@ -793,7 +793,7 @@ export default function WorksheetWizard() {
                 <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6 px-4">
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-[var(--color-success)] rounded-full animate-pulse" />
-                    <span className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest">AOC-Certified Worksheet v2026.01</span>
+                    <span className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest">AOC-Compliant Worksheet v2026.01</span>
                   </div>
                   <div className="flex gap-8">
                     <Link href="/privacy" className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest hover:text-[var(--color-brand-primary)] transition-colors">
