@@ -156,7 +156,7 @@ export default function Footer() {
           <div className="shrink-0">
             <span className="flex items-center gap-2 text-[12px] font-bold font-bold uppercase tracking-[0.15em] text-[#F9FAFB] bg-white/5 px-4 py-2 rounded-full border border-white/10 whitespace-nowrap">
               <span className="w-1.5 h-1.5 bg-[var(--color-success)] rounded-full shrink-0" />
-              RCW 26.19 Certified
+              RCW 26.19 Compliant
             </span>
           </div>
         </div>
