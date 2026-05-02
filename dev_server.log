@@ -1,60 +1,9 @@
-
-> wcssc@0.1.0 dev
-> next dev --turbopack
-
 ▲ Next.js 16.2.3 (Turbopack)
 - Local:         http://localhost:3000
 - Network:       http://192.168.0.2:3000
-✓ Ready in 582ms
-Attention: Next.js now collects completely anonymous telemetry regarding usage.
-This information is used to shape Next.js' roadmap and prioritize features.
-You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
-https://nextjs.org/telemetry
+✓ Ready in 876ms
 
-
-○ Compiling /[slug] ...
- GET /king-county-income-5000-2-children 200 in 12.1s (next.js: 8.9s, application-code: 3.2s)
-[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:221:302)
-[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
-    at gp (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:183:145)
-    at qr (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:219:444)
-    at sr (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:220:183)
-    at Dr (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:232:194)
-    at tr (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:229:200)
-    at g.client (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:221:47)
-    at Wj.g (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:79:555)
-    at dk (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:80:706)
-    at or (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:221:35)
-    at nr (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:218:132)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:243:61)
-    at Wj.g (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:79:555)
-    at dk (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:80:706)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:241:458)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:243:120)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:245:4)
- GET /king-county-income-5000-2-children 200 in 312ms (next.js: 52ms, application-code: 260ms)
-[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:221:302)
-[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
-    at gp (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:183:145)
-    at qr (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:219:444)
-    at sr (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:220:183)
-    at Dr (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:232:194)
-    at tr (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:229:200)
-    at g.client (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:221:47)
-    at Wj.g (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:79:555)
-    at dk (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:80:706)
-    at or (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:221:35)
-    at nr (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:218:132)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:243:61)
-    at Wj.g (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:79:555)
-    at dk (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:80:706)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:241:458)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:243:120)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:245:4)
-✓ Compiled in 318ms
-✓ Compiled in 297ms
-✓ Compiled in 68ms
- GET /king-county-income-5000-2-children 200 in 1860ms (next.js: 128ms, application-code: 1732ms)
+ GET /worksheet 200 in 1576ms (next.js: 508ms, application-code: 1068ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -74,7 +23,28 @@ https://nextjs.org/telemetry
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /how-to-file-child-support-washington 200 in 1835ms (next.js: 1501ms, application-code: 335ms)
+ HEAD /worksheet 200 in 175ms (next.js: 5ms, application-code: 170ms)
+ GET / 200 in 1135ms (next.js: 40ms, application-code: 1096ms)
+[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:290:320)
+[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
+    at xq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:244:145)
+    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:465)
+    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:289:93)
+    at Ss (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:289:213)
+    at ct (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:301:282)
+    at Ts (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:298:208)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:290:51)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:140:674)
+    at fl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:141:1134)
+    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:290:33)
+    at Ns (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:140)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:312:188)
+    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:140:674)
+    at fl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:141:1134)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:857)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:312:247)
+    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:313:4)
+ GET / 200 in 302ms (next.js: 5ms, application-code: 298ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -94,7 +64,7 @@ https://nextjs.org/telemetry
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /extra-expenses 200 in 2.5s (next.js: 2.3s, application-code: 233ms)
+ GET /worksheet 200 in 411ms (next.js: 7ms, application-code: 405ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
@@ -114,47 +84,7 @@ https://nextjs.org/telemetry
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
     at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /editorial-methodology 200 in 1105ms (next.js: 897ms, application-code: 207ms)
-[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
-[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
-    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
-    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
-    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
-    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
-    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
-    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
-    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
-    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
-    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
-    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
-    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
-    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET / 200 in 2.8s (next.js: 1345ms, application-code: 1427ms)
-[browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
-[browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
-    at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)
-    at Os (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:286:465)
-    at c (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:93)
-    at Qs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:287:213)
-    at at (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:299:282)
-    at Rs (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:296:208)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:51)
-    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
-    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
-    at Ms (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:33)
-    at Ls (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:285:140)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:188)
-    at r.na (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:138:674)
-    at dl (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:139:1134)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:308:857)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:310:247)
-    at <unknown> (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:311:4)
- GET /king-county-income-5000-2-children 200 in 281ms (next.js: 46ms, application-code: 235ms)
+ GET /worksheet 200 in 179ms (next.js: 4ms, application-code: 175ms)
 [browser] AdSense head tag doesn't support data-nscript attribute. (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:288:320)
 [browser] Uncaught TagError: adsbygoogle.push() error: Only one 'enable_page_level_ads' allowed per page.
     at vq (https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065:242:145)

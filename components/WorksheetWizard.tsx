@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronRight, ChevronLeft, CheckCircle2, Circle,
-  Calculator, Info, ArrowRight, LayoutDashboard,
+  Calculator, Info, ArrowRight, LayoutDashboard, Printer,
 } from "lucide-react";
 import worksheetSchema from "@/data/wa_csw_2026_schema.json";
 import { calculateChildSupport } from "@/utils/calculatorEngine";
@@ -480,7 +480,7 @@ export default function WorksheetWizard() {
         </p>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex flex-col sm:flex-row justify-center gap-4 no-print">
         <button
           id="pdf-download-btn"
           onClick={handleDownloadPDF}
@@ -488,6 +488,13 @@ export default function WorksheetWizard() {
         >
           <CheckCircle2 className="w-5 h-5 mr-2" />
           Download Official PDF
+        </button>
+        <button
+          onClick={() => window.print()}
+          className="btn-secondary-lg !rounded-full !px-10 h-[52px]"
+        >
+          <Printer className="w-5 h-5 mr-2" />
+          Print Entire Worksheet
         </button>
       </div>
     </motion.div>
@@ -497,6 +504,86 @@ export default function WorksheetWizard() {
   /* ── MAIN RENDER ─────────────────────────────────────────────────── */
   return (
     <div id="wizard" className="scroll-mt-24 min-h-screen bg-white flex flex-col lg:flex-row selection:bg-[var(--color-brand-primary-light)] selection:text-[var(--color-brand-primary-hover)]">
+
+      {/* ── PRINT-ONLY ALL STEPS ────────────────────────────────────────── */}
+      <div className="hidden print:block w-full p-8 bg-white">
+        <div className="max-w-4xl mx-auto space-y-10">
+          <div className="border-b-4 border-indigo-600 pb-6 mb-8 flex justify-between items-end">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Official Child Support Worksheet</h1>
+              <p className="text-indigo-600 font-semibold text-lg">Washington State Guidelines (2026)</p>
+            </div>
+            <div className="text-right">
+              <p className="text-sm text-gray-500 font-medium">Date: {new Date().toLocaleDateString()}</p>
+            </div>
+          </div>
+
+          {/* Results Summary in Print */}
+          <section className="bg-indigo-50 p-6 rounded-2xl border border-indigo-100 mb-10">
+            <h2 className="text-xl font-bold text-indigo-900 mb-4">Calculation Results Summary</h2>
+            <div className="grid grid-cols-2 gap-8">
+              <div className="space-y-2">
+                <p className="text-sm text-indigo-700 font-bold uppercase tracking-wider">Total Combined Net</p>
+                <p className="text-2xl font-bold text-gray-900">{curFormatter.format(calculation.combinedIncome)}</p>
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm text-indigo-700 font-bold uppercase tracking-wider">Presumptive Transfer (17)</p>
+                <div className="flex justify-between">
+                  <span className="text-gray-700">P1: <span className="font-bold">{curFormatter.format(derivedData["17"]?.p1 || 0)}</span></span>
+                  <span className="text-gray-700">P2: <span className="font-bold">{curFormatter.format(derivedData["17"]?.p2 || 0)}</span></span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* All Input Data */}
+          {Object.entries(worksheetSchema).map(([partName, fields]) => (
+            <section key={partName} className="break-inside-avoid">
+              <h3 className="text-lg font-bold bg-gray-100 p-3 rounded-lg mb-4 border-l-4 border-indigo-600">{partName}</h3>
+              <div className="grid grid-cols-1 gap-4">
+                {fields.map((field: WorksheetField) => {
+                  const isCalculated = ["1g","2j","3","4","5_per_child","6","18","19"].includes(field.id);
+                  const values = isCalculated
+                    ? { p1: derivedData[field.id]?.p1 ?? 0, p2: derivedData[field.id]?.p2 ?? 0 }
+                    : (formData[field.id] || { p1: "", p2: "" });
+
+                  if (!isCalculated && !values.p1 && !values.p2 && field.type !== 'boolean') return null;
+
+                  return (
+                    <div key={field.id} className="flex justify-between items-center py-2 border-b border-gray-100">
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-bold bg-gray-200 px-1.5 py-0.5 rounded text-gray-600">{field.id}</span>
+                        <span className="text-sm text-gray-700 font-medium">{field.label}</span>
+                      </div>
+                      <div className="flex gap-8 min-w-[200px] justify-end">
+                        <div className="text-right">
+                          <span className="text-[10px] text-gray-400 block uppercase">P1</span>
+                          <span className="text-sm font-bold">
+                            {field.type === 'boolean' ? (values.p1 ? 'Yes' : 'No') : field.type === 'currency' ? curFormatter.format(Number(values.p1)) : values.p1}
+                          </span>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-[10px] text-gray-400 block uppercase">P2</span>
+                          <span className="text-sm font-bold">
+                            {field.type === 'boolean' ? (values.p2 ? 'Yes' : 'No') : field.type === 'currency' ? curFormatter.format(Number(values.p2)) : values.p2}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
+
+          <div className="pt-10 mt-10 border-t border-gray-200">
+            <p className="text-xs text-gray-500 italic text-center leading-relaxed">
+              Disclaimer: This is an automated estimate generated by WCSSC Pro based on RCW 26.19 guidelines.
+              Actual court orders may vary. This worksheet summary is for informational and preparational purposes.
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* ── Desktop Sidebar ────────────────────────────────────────── */}
       {!showSummary && (
@@ -570,7 +657,7 @@ export default function WorksheetWizard() {
       )}
 
       {/* ── Main Content ───────────────────────────────────────────── */}
-      <main className="flex-1 flex flex-col min-w-0 w-full">
+      <main className="flex-1 flex flex-col min-w-0 w-full no-print">
 
         {!showSummary && (
           <MobileStepNav
@@ -725,7 +812,7 @@ export default function WorksheetWizard() {
 
       {!showSummary && (
         <div
-          className="lg:hidden fixed bottom-0 left-0 right-0 px-6 pt-4 bg-white/95 backdrop-blur-2xl border-t border-[var(--color-bg-border)] z-50 flex items-center justify-between shadow-[0_-8px_30px_rgba(0,0,0,0.08)]"
+          className="lg:hidden no-print fixed bottom-0 left-0 right-0 px-6 pt-4 bg-white/95 backdrop-blur-2xl border-t border-[var(--color-bg-border)] z-50 flex items-center justify-between shadow-[0_-8px_30px_rgba(0,0,0,0.08)]"
           style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
         >
           <div className={`transition-opacity duration-300 ${!hasIncomeInput ? "opacity-70" : "opacity-100"}`}>
