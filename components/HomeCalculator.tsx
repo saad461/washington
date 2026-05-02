@@ -284,13 +284,24 @@ export default function HomeCalculator() {
                 <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-2xl sm:rounded-3xl p-8 text-center relative overflow-hidden shadow-[var(--shadow-card)]">
                   <div className="absolute top-0 right-0 w-56 h-56 bg-blue-100/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
                   <div className="relative z-10">
+
+                    {/* ── CHANGE 1: Primary display — Total Basic Obligation ── */}
                     <p className="text-[12px] font-bold text-gray-600 uppercase tracking-[0.15em] mb-4">
-                      Estimated Monthly Transfer
+                      Total Basic Obligation
                     </p>
 
-                    <div className="text-5xl sm:text-6xl font-bold text-gray-900 mb-8 tracking-tight tabular-nums">
-                      <AnimatedNumber value={result.finalSupport} />
+                    <div className="text-5xl sm:text-6xl font-bold text-gray-900 mb-2 tracking-tight tabular-nums">
+                      <AnimatedNumber value={result.totalObligation} />
                     </div>
+
+                    {/* ── CHANGE 2: Secondary display — Transfer payment ── */}
+                    <p className="text-sm text-gray-500 mb-6">
+                      {payingParent === "P1" ? "Parent 1" : "Parent 2"} transfer payment:{" "}
+                      <span className="font-bold text-gray-700">
+                        <AnimatedNumber value={result.finalSupport} />
+                      </span>
+                      /mo
+                    </p>
 
                     {/* Status badges */}
                     {(result.ssrApplied || result.isLowIncome || result.is45PercentCapped || result.parentingDeviationApplied) && (
@@ -442,10 +453,11 @@ export default function HomeCalculator() {
                         </div>
                       )}
 
+                      {/* ── CHANGE 3: Bottom total — show totalObligation ── */}
                       <div className="pt-4 border-t border-[var(--color-bg-border-soft)] flex justify-between items-center">
-                        <span className="font-bold text-[var(--color-text-primary)]">Presumptive Total</span>
+                        <span className="font-bold text-[var(--color-text-primary)]">Total Obligation</span>
                         <span className="text-2xl font-bold text-[var(--color-brand-primary)] tabular-nums">
-                          <AnimatedNumber value={result.finalSupport} />
+                          <AnimatedNumber value={result.totalObligation} />
                         </span>
                       </div>
                     </div>
@@ -473,9 +485,10 @@ export default function HomeCalculator() {
           >
             <div className="max-w-md mx-auto flex items-center justify-between gap-4">
               <div className="min-w-0">
-                <span className="text-[12px] font-semibold text-[var(--color-text-secondary)] font-bold text-[var(--color-text-secondary)] uppercase tracking-wider block mb-0.5">Estimated Support</span>
+                {/* ── CHANGE 4: Mobile bar — show totalObligation ── */}
+                <span className="text-[12px] font-semibold text-[var(--color-text-secondary)] font-bold text-[var(--color-text-secondary)] uppercase tracking-wider block mb-0.5">Total Obligation</span>
                 <span className="text-2xl font-bold text-[var(--color-text-primary)] tabular-nums">
-                  <AnimatedNumber value={result.finalSupport} />
+                  <AnimatedNumber value={result.totalObligation} />
                 </span>
               </div>
               <button
@@ -566,9 +579,14 @@ export default function HomeCalculator() {
                   </div>
                 )}
 
+                {/* ── CHANGE 5: Print — show totalObligation ── */}
                 <div className="flex justify-between items-center pt-6 border-t-2 border-gray-300 mt-4">
-                  <span className="text-2xl font-bold text-gray-900">Estimated Monthly Transfer</span>
-                  <span className="text-3xl font-bold text-indigo-600">{curFormatter.format(result.finalSupport)}</span>
+                  <span className="text-2xl font-bold text-gray-900">Total Basic Obligation</span>
+                  <span className="text-3xl font-bold text-indigo-600">{curFormatter.format(result.totalObligation)}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-base text-gray-600">{payingParent === "P1" ? "Parent 1" : "Parent 2"} Transfer Payment</span>
+                  <span className="text-xl font-bold text-gray-700">{curFormatter.format(result.finalSupport)}</span>
                 </div>
               </div>
             </div>
