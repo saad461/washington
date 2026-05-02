@@ -218,7 +218,7 @@
       "id": "11b",
       "label": "Education Expenses",
       "type": "currency",
-      "description": "Tuition or other monthly educational costs."
+      "description": "Tuition or other monthly educational costs. (Note: Post-secondary support is not included in the standard calculation)."
     },
     {
       "id": "11c",

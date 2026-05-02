@@ -273,6 +273,7 @@ export default function WorksheetWizard() {
     "2j":      { p1: calculation.deductionsP1,  p2: calculation.deductionsP2  },
     "3":       { p1: calculation.netP1,         p2: calculation.netP2         },
     "4":       { p1: calculation.combinedIncome,p2: calculation.combinedIncome },
+    "5_per_child": { p1: calculation.baseSupport / calculation.children, p2: calculation.baseSupport / calculation.children },
     "6":       { p1: calculation.shareP1,       p2: calculation.shareP2       },
     "7":       { p1: calculation.obligationP1,  p2: calculation.obligationP2  },
     "8_reason":{ p1: 0, p2: 0, reason: calculation.adjustmentReason } as never,
@@ -280,6 +281,8 @@ export default function WorksheetWizard() {
     "14":      { p1: 0, p2: 0 },
     "16d":     { p1: 0, p2: 0 },
     "17":      { p1: calculation.obligationP1,  p2: calculation.obligationP2  },
+    "18":      { p1: calculation.netP1 * 0.45,  p2: calculation.netP2 * 0.45  },
+    "19":      { p1: calculation.obligationP1 * 0.25, p2: calculation.obligationP2 * 0.25 },
   }), [calculation]);
 
   if (!currentFields || !Array.isArray(currentFields)) {
@@ -301,7 +304,7 @@ export default function WorksheetWizard() {
   }
 
   const handleInputChange = (fieldId: string, parent: "p1" | "p2", value: FieldValue) => {
-    const calculatedIds = ["1g","2j","3","4","5","6","7","9","10c","10d","11e","12","13","14","15","16d","17"];
+    const calculatedIds = ["1g","2j","3","4","5","5_per_child","6","7","9","10c","10d","11e","12","13","14","15","16d","17","18","19"];
     if (calculatedIds.includes(fieldId)) return;
     setFormData((prev) => ({
       ...prev,
@@ -433,6 +436,8 @@ export default function WorksheetWizard() {
               { label: "Extra Expenses (14)",        id: "14"       },
               { label: "Total Credits (16d)",        id: "16d"      },
               { label: "Presumptive Transfer (17)",  id: "17", highlight: true, bold: true },
+              { label: "45% of Net Income Limit (18)", id: "18"     },
+              { label: "25% of Basic Support (19)",  id: "19"       },
             ].map((row) => (
               <tr
                 key={row.id}
@@ -617,7 +622,7 @@ export default function WorksheetWizard() {
                         )}
 
                         {currentFields.map((field: WorksheetField) => {
-                          const isCalculated = ["1g","2j","3","4","6"].includes(field.id);
+                          const isCalculated = ["1g","2j","3","4","5_per_child","6","18","19"].includes(field.id);
                           const values = isCalculated
                             ? { p1: derivedData[field.id]?.p1 ?? 0, p2: derivedData[field.id]?.p2 ?? 0 }
                             : (formData[field.id] || { p1: "", p2: "" });
@@ -626,11 +631,39 @@ export default function WorksheetWizard() {
                               key={field.id}
                               className={isCalculated ? "pointer-events-none select-none bg-[var(--color-bg-subtle)] p-6 rounded-2xl border border-[var(--color-bg-border)]" : ""}
                             >
-                              <InputField
-                                field={field}
-                                values={values as ParentValue}
-                                onChange={(parent, val) => handleInputChange(field.id, parent, val)}
-                              />
+                            <>
+                              {field.id === "5_children" ? (
+                                <div className="mb-8">
+                                  <div className="flex items-start gap-3 mb-4">
+                                    <span className="badge-meta !text-[12px] font-bold !py-1 !px-2 shrink-0 mt-0.5">5_children</span>
+                                    <label className="text-[15px] font-bold text-[var(--color-text-primary)] leading-snug">Number of children</label>
+                                  </div>
+                                  <div className="max-w-xs mx-auto">
+                                    <input
+                                      type="number"
+                                      value={values.p1 as string}
+                                      onChange={(e) => {
+                                        handleInputChange("5_children", "p1", e.target.value);
+                                        handleInputChange("5_children", "p2", e.target.value);
+                                      }}
+                                      className="input-standard w-full text-center font-bold text-lg"
+                                      placeholder="1"
+                                    />
+                                  </div>
+                                </div>
+                              ) : (
+                                <InputField
+                                  field={field}
+                                  values={values as ParentValue}
+                                  onChange={(parent, val) => handleInputChange(field.id, parent, val)}
+                                />
+                              )}
+                              {field.id === "8_reserve" && (
+                                <p className="text-[11px] font-bold text-[var(--color-text-secondary)] italic mt-2 ml-10">
+                                  * Adjusted annually by the state to reflect updated federal poverty guidelines.
+                                </p>
+                              )}
+                            </>
                               {isCalculated && (
                                 <div className="flex items-center gap-2 text-[12px] font-bold text-[var(--color-brand-primary)] uppercase tracking-widest mt-6 bg-white w-fit px-3 py-1 rounded-full border border-[var(--color-brand-primary-mid)]">
                                   <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}>

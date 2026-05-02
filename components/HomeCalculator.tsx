@@ -10,6 +10,12 @@ import { calculateChildSupport } from "@/utils/calculatorEngine";
 import ParentingTimeSelector from "@/components/calculator/ParentingTimeSelector";
 import { motion, useSpring, useTransform, AnimatePresence } from "framer-motion";
 
+const curFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
+
 /* ─── Animated currency number ─── */
 function AnimatedNumber({ value }: { value: number }) {
   const spring  = useSpring(value, { mass: 0.8, stiffness: 75, damping: 15 });
@@ -305,6 +311,36 @@ export default function HomeCalculator() {
                     </Link>
                   </div>
                 </div>
+
+                {/* Above Table Maximum Notice */}
+                {result.isAboveMaximum && (
+                  <div className="callout-amber">
+                    <div className="flex items-start gap-3">
+                      <AlertCircle size={18} className="shrink-0 text-[var(--color-warning)] mt-0.5" />
+                      <div>
+                        <p className="text-sm font-bold text-[var(--color-highlight)] mb-1">Income Exceeds Table Maximum</p>
+                        <p className="text-xs text-[var(--color-highlight)] leading-relaxed">
+                          Combined income exceeds $50,000/mo. The presumptive amount is shown, but the court may order a higher amount based on the family&apos;s standard of living.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* SSR Protection Explanation */}
+                {result.ssrApplied && (
+                  <div className="callout-amber">
+                    <div className="flex items-start gap-3">
+                      <Shield size={18} className="shrink-0 text-[var(--color-warning)] mt-0.5" />
+                      <div>
+                        <p className="text-sm font-bold text-[var(--color-highlight)] mb-1">Self-Support Reserve (SSR) Protection</p>
+                        <p className="text-xs text-[var(--color-highlight)] leading-relaxed">
+                          Payer net income ({curFormatter.format(payingParent === "P1" ? result.netP1 : result.netP2)}) is close to or below the $2,394 SSR. The obligation has been limited to ensure the payer can maintain a basic standard of living.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Breakdown card */}
                 <div className="card-standard space-y-6 shadow-[var(--shadow-card-md)]">
