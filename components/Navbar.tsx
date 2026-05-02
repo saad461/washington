@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Calculator, ChevronRight, Printer, Menu, X } from "lucide-react";
+import { Calculator, ChevronRight, Menu, X } from "lucide-react";
+import SearchMock from "./SearchMock";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -45,12 +46,6 @@ export default function Navbar() {
     return pathname === href;
   };
 
-  const showPrint =
-    pathname === "/" ||
-    pathname === "/worksheet" ||
-    pathname.includes("-income-") ||
-    pathname.includes("-county-income-");
-
   // Single source of truth for nav height — used for both the header
   // and the drawer top offset so they never mismatch.
   const navH      = scrolled ? "h-16" : "h-16 lg:h-20";
@@ -68,21 +63,27 @@ export default function Navbar() {
         <div className="container-wide px-6 h-full flex items-center justify-between">
 
           {/* ── Logo ── */}
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 group shrink-0 transition-transform active:scale-95"
-            aria-label="WCSSC — Home"
-          >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 bg-indigo-600 rounded-xl shadow-[var(--shadow-card-md)] shadow-indigo-200/60 flex items-center justify-center group-hover:bg-indigo-700 transition-colors shrink-0">
-              <Calculator className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+          <div className="flex items-center gap-8 flex-1">
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 group shrink-0 transition-transform active:scale-95"
+              aria-label="WCSSC — Home"
+            >
+              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-indigo-600 rounded-xl shadow-[var(--shadow-card-md)] shadow-indigo-200/60 flex items-center justify-center group-hover:bg-indigo-700 transition-colors shrink-0">
+                <Calculator className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              </div>
+              <div className="flex flex-col leading-none font-heading">
+                <span className="text-lg sm:text-xl font-bold text-[var(--color-text-primary)] tracking-tight">WCSSC</span>
+                <span className="text-[12px] font-semibold uppercase tracking-widest text-blue-600 mt-0.5">
+                  Washington State
+                </span>
+              </div>
+            </Link>
+
+            <div className="hidden lg:block w-full max-w-sm">
+              <SearchMock isNavbar={true} />
             </div>
-            <div className="flex flex-col leading-none font-heading">
-              <span className="text-lg sm:text-xl font-bold text-[var(--color-text-primary)] tracking-tight">WCSSC</span>
-              <span className="text-[12px] font-semibold uppercase tracking-widest text-blue-600 mt-0.5">
-                Washington State
-              </span>
-            </div>
-          </Link>
+          </div>
 
           {/* ── Desktop Nav ── */}
           <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
@@ -103,17 +104,6 @@ export default function Navbar() {
 
           {/* ── Actions ── */}
           <div className="flex items-center gap-4 sm:gap-3 shrink-0">
-            {showPrint && (
-              <button
-                onClick={handlePrint}
-                aria-label="Print this page"
-                className="hidden sm:flex items-center gap-2 px-4 h-10 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:text-blue-600 transition-all border border-gray-200"
-              >
-                <Printer size={15} />
-                <span className="hidden md:inline">Print</span>
-              </button>
-            )}
-
             {pathname === "/worksheet" ? (
               <a
                 href="#wizard"
@@ -160,6 +150,10 @@ export default function Navbar() {
             className={`lg:hidden fixed inset-x-0 bottom-0 bg-white/95 backdrop-blur-2xl z-40 overflow-y-auto
               flex flex-col border-t border-[var(--color-bg-border-soft)] animate-in fade-in slide-in-from-top-2 duration-300 ${drawerTop}`}
           >
+            <div className="px-4 pt-4 pb-2">
+               <SearchMock isNavbar={true} />
+            </div>
+
             {/* Links */}
             <div className="flex flex-col px-4 pt-4 pb-2 gap-1">
               {navLinks.map((link) => (
