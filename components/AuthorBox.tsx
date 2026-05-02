@@ -4,8 +4,8 @@ import { ShieldCheck as Shield, Mail as MailIcon, CheckCircle2 as Check } from '
 const AuthorBox = () => {
   return (
     <section className="w-full max-w-3xl mx-auto py-4 border-t border-[var(--color-bg-border)] no-print">
-      <div className="card-standard !p-8 md:!p-12 group overflow-hidden shadow-[var(--shadow-card-md)]">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-brand-primary-light)] rounded-full blur-3xl -translate-y-32 translate-x-32" />
+      <div className="card-standard !p-8 md:!p-12 group overflow-hidden shadow-[var(--shadow-card-md)] relative">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-brand-primary-light)] rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none" />
 
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8 relative z-10">
           <div className="relative shrink-0">

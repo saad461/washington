@@ -119,7 +119,7 @@ export default function ComparisonTool() {
             </div>
 
             <div className="card-highlighted !bg-[var(--color-brand-primary)] !border-none !p-8 md:!px-6 md:!py-8 shadow-[var(--shadow-card-hover)] flex flex-col justify-center min-h-[160px] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-16 translate-x-16" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-16 translate-x-16 pointer-events-none" />
               <p className="text-[12px] font-bold text-white/70 uppercase tracking-widest mb-6">New 2026 Presumptive</p>
               <p className="text-4xl font-bold text-white mb-2">
                 {actual2026 !== null ? curFormatter.format(actual2026) : 'Court Discretion'}

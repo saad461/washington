@@ -131,7 +131,7 @@ export default function HowToFileGuide() {
               </p>
             </div>
             <div className="bg-gray-900 !p-10 rounded-3xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-32 translate-x-32" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none" />
               <div className="flex items-center gap-4 text-white relative z-10">
                 <div className="p-3 bg-white/10 rounded-2xl border border-white/10">
                   <Building2 className="w-8 h-8 text-blue-400" />

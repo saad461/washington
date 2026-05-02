@@ -108,7 +108,7 @@ export default function ExtraExpensesCalculator() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   className="bg-blue-600 rounded-3xl !p-8 md:!p-10 shadow-xl relative overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32" />
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none" />
                   <span className="text-[12px] font-bold text-white/80 uppercase tracking-widest block mb-8">Proportional Split Results</span>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
