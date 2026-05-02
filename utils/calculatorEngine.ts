@@ -90,13 +90,8 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   } else if (lookup.status === "manual_determination") {
     baseTableSupport = MIN_SUPPORT_PER_CHILD * children;
     adjustmentReason = "Low income minimum: $50/child/month (RCW 26.19.065(2)(a))";
-    if (payingParent === "P1") {
-      obligationP1 = baseTableSupport;
-      obligationP2 = 0;
-    } else {
-      obligationP1 = 0;
-      obligationP2 = baseTableSupport;
-    }
+    obligationP1 = baseTableSupport * shareP1;
+    obligationP2 = baseTableSupport * shareP2;
 
   } else if (lookup.status === "above_maximum") {
     baseTableSupport = lookup.tableMaxTotal;
@@ -119,11 +114,24 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
 
     // Other children adjustment (RCW 26.19.075(1)(e))
     if (otherChildren > 0) {
-      const reductionRate = Math.min(otherChildren * 0.025, 0.125);
+      const SSR = SELF_SUPPORT_RESERVE;
+
+      // Line 8c for each parent: netIncome - SSR, minimum $50/child
+      const line8cP1 = Math.max(MIN_SUPPORT_PER_CHILD * children, netP1 - SSR);
+      const line8cP2 = Math.max(MIN_SUPPORT_PER_CHILD * children, netP2 - SSR);
+
+      // Line 8d: divide by total children, multiply by children in this case
+      const totalChildrenP1 = children + otherChildren;
+      const totalChildrenP2 = children + otherChildren;
+      const line8dP1 = (line8cP1 / totalChildrenP1) * children;
+      const line8dP2 = (line8cP2 / totalChildrenP2) * children;
+
+      // Only apply if 8d is less than line 7 (current obligation)
       const prevP1 = obligationP1;
       const prevP2 = obligationP2;
-      obligationP1 *= (1 - reductionRate);
-      obligationP2 *= (1 - reductionRate);
+      if (line8dP1 < obligationP1) obligationP1 = Math.max(line8dP1, MIN_SUPPORT_PER_CHILD * children);
+      if (line8dP2 < obligationP2) obligationP2 = Math.max(line8dP2, MIN_SUPPORT_PER_CHILD * children);
+
       otherChildrenAdjustment = payingParent === "P1"
         ? obligationP1 - prevP1
         : obligationP2 - prevP2;
@@ -211,10 +219,6 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
 
   // ── FINAL TRANSFER PAYMENT ────────────────────────────────────────────────
   let finalObligation = payingParent === "P1" ? obligationP1 : obligationP2;
-
-  if (combinedIncome > 0) {
-    finalObligation = Math.min(finalObligation, combinedIncome * 0.6);
-  }
 
   return {
     // Income
