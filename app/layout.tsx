@@ -121,7 +121,7 @@ export default function RootLayout({
  `}
  </Script>
  <Navbar />
- <main id="main-content" className="flex-1 flex flex-col">
+ <main id="main-content" className="flex-1 flex flex-col overflow-x-hidden">
  <Suspense fallback={<div className="min-h-screen bg-section-alt" />}>
  {children}
  </Suspense>

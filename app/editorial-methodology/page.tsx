@@ -104,7 +104,7 @@ export default function EditorialMethodology() {
       <section className="section-default bg-[var(--color-bg-subtle)]">
         <div className="container-reading">
           <div className="card-standard bg-blue-600 !p-12 text-center shadow-xl relative overflow-hidden">
-             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32" />
+             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none" />
              <h2 className="text-2xl md:text-3xl text-white font-bold mb-8">Independent Verification</h2>
              <p className="text-blue-50 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
               Every calculation is cross-referenced against the Washington State Department of Social and Health Services (DSHS) tools and official manual worksheets to ensure parity.
