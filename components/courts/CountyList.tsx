@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Search, MapPin } from 'lucide-react';
+import Link from 'next/link';
+import { Search, MapPin, ChevronRight } from 'lucide-react';
 import { WashingtonCounty } from '@/data/washingtonCounties';
 
 interface CountyListProps {
@@ -52,19 +53,30 @@ export default function CountyList({ counties }: CountyListProps) {
                   aria-hidden="true"
                 />
                 <h2 className="font-bold text-gray-900 text-base">
-                  {county.name} County
+                  <Link href={`/washington-courts/${county.slug}`} className="hover:text-blue-600 transition-colors">
+                    {county.name}
+                  </Link>
                 </h2>
               </div>
               <p className="text-sm text-gray-500 mb-1">{county.courtAddress}</p>
               <p className="text-sm text-gray-500 mb-4">{county.clerkPhone}</p>
-              <a
-                href={county.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 font-medium"
-              >
-                Court website →
-              </a>
+
+              <div className="flex flex-col gap-2">
+                <Link
+                  href={`/washington-courts/${county.slug}`}
+                  className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 font-bold"
+                >
+                  View Guide & Calculator <ChevronRight size={14} />
+                </Link>
+                <a
+                  href={county.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-700 font-medium"
+                >
+                  Court website →
+                </a>
+              </div>
             </article>
           ))}
         </div>
