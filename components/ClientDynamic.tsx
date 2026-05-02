@@ -4,11 +4,6 @@ import dynamic from 'next/dynamic';
 
 // These components use browser APIs (useEffect, useState, useContext).
 // They must be dynamically imported with ssr:false inside a Client Component boundary.
-export const PrintButtonClient = dynamic(
- () => import('@/components/PrintButton'),
- { ssr: false, loading: () => <div className="w-full h-12" /> }
-);
-
 export const AdContainerClient = dynamic(
  () => import('@/components/AdContainer'),
  { ssr: false, loading: () => <div className="w-full h-16" /> }
