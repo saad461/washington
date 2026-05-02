@@ -3,11 +3,14 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Calculator, ChevronRight, Printer, Menu, X } from "lucide-react";
+import { Calculator, ChevronRight, Menu, X, Search, MapPin } from "lucide-react";
+import { washingtonCounties } from '@/data/washingtonCounties';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled]     = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [query, setQuery]           = useState("");
   const pathname = usePathname();
 
   useEffect(() => {
@@ -20,6 +23,8 @@ export default function Navbar() {
   useEffect(() => {
     /* eslint-disable-next-line react-hooks/set-state-in-effect */
     setMobileOpen(false);
+    setSearchOpen(false);
+    setQuery("");
   }, [pathname]);
 
   // Lock body scroll when drawer is open
@@ -27,10 +32,6 @@ export default function Navbar() {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
-
-  const handlePrint = () => {
-    if (typeof window !== "undefined") window.print();
-  };
 
   const navLinks = [
     { href: "/",                  label: "Calculator"          },
@@ -45,16 +46,15 @@ export default function Navbar() {
     return pathname === href;
   };
 
-  const showPrint =
-    pathname === "/" ||
-    pathname === "/worksheet" ||
-    pathname.includes("-income-") ||
-    pathname.includes("-county-income-");
-
   // Single source of truth for nav height — used for both the header
   // and the drawer top offset so they never mismatch.
   const navH      = scrolled ? "h-16" : "h-16 lg:h-20";
   const drawerTop = scrolled ? "top-16" : "top-16";
+
+  const filteredCounties = washingtonCounties.filter(c =>
+    c.name.toLowerCase().includes(query.toLowerCase()) ||
+    c.seat.toLowerCase().includes(query.toLowerCase())
+  ).slice(0, 5);
 
   return (
     <>
@@ -103,16 +103,48 @@ export default function Navbar() {
 
           {/* ── Actions ── */}
           <div className="flex items-center gap-4 sm:gap-3 shrink-0">
-            {showPrint && (
-              <button
-                onClick={handlePrint}
-                aria-label="Print this page"
-                className="hidden sm:flex items-center gap-2 px-4 h-10 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:text-blue-600 transition-all border border-gray-200"
-              >
-                <Printer size={15} />
-                <span className="hidden md:inline">Print</span>
-              </button>
-            )}
+            <div className="hidden lg:relative lg:flex lg:items-center">
+               <div className={`flex items-center bg-gray-50 border border-gray-200 rounded-xl px-3 transition-all duration-300 ${searchOpen || query ? 'w-64 border-blue-400 ring-2 ring-blue-100' : 'w-40'}`}>
+                 <Search className={`w-4 h-4 ${searchOpen || query ? 'text-blue-600' : 'text-gray-400'}`} />
+                 <input
+                   type="text"
+                   value={query}
+                   onFocus={() => setSearchOpen(true)}
+                   onBlur={() => setTimeout(() => setSearchOpen(false), 200)}
+                   onChange={(e) => setQuery(e.target.value)}
+                   placeholder="Search counties..."
+                   className="bg-transparent border-none focus:ring-0 text-sm w-full py-2 px-2 placeholder:text-gray-400 text-gray-700"
+                 />
+               </div>
+
+               {searchOpen && query.length > 0 && (
+                 <div className="absolute top-full right-0 mt-2 w-72 bg-white border border-gray-100 rounded-xl shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-1">
+                   {filteredCounties.length > 0 ? (
+                     <div className="p-2">
+                       {filteredCounties.map((county) => (
+                         <Link
+                           key={county.slug}
+                           href={`/${county.slug}-income-5000-2-children`}
+                           className="flex items-center gap-3 p-3 hover:bg-blue-50 rounded-lg transition-colors group"
+                         >
+                           <div className="p-1.5 bg-gray-100 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                             <MapPin size={14} />
+                           </div>
+                           <div className="flex flex-col">
+                             <span className="text-sm font-bold text-gray-900">{county.name}</span>
+                             <span className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">{county.seat}, WA</span>
+                           </div>
+                         </Link>
+                       ))}
+                     </div>
+                   ) : (
+                     <div className="p-6 text-center">
+                       <p className="text-sm text-gray-500">No matching counties</p>
+                     </div>
+                   )}
+                 </div>
+               )}
+            </div>
 
             {pathname === "/worksheet" ? (
               <a
@@ -160,6 +192,52 @@ export default function Navbar() {
             className={`lg:hidden fixed inset-x-0 bottom-0 bg-white/95 backdrop-blur-2xl z-40 overflow-y-auto
               flex flex-col border-t border-[var(--color-bg-border-soft)] animate-in fade-in slide-in-from-top-2 duration-300 ${drawerTop}`}
           >
+            {/* Mobile Search */}
+            <div className="px-4 pt-6 pb-2">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                  <Search className="h-4 w-4 text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Find your county..."
+                  className="w-full bg-gray-50 border border-gray-100 rounded-xl py-4 pl-12 pr-4 text-base focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition-all outline-none"
+                />
+              </div>
+
+              {query.length > 0 && (
+                <div className="mt-2 bg-white border border-gray-100 rounded-xl shadow-lg overflow-hidden">
+                  {filteredCounties.length > 0 ? (
+                    <div className="divide-y divide-gray-50">
+                      {filteredCounties.map((county) => (
+                        <Link
+                          key={county.slug}
+                          href={`/${county.slug}-income-5000-2-children`}
+                          onClick={() => setMobileOpen(false)}
+                          className="flex items-center gap-4 p-4 hover:bg-blue-50 active:bg-blue-100 transition-colors"
+                        >
+                          <div className="p-2 bg-gray-100 rounded-lg">
+                            <MapPin size={16} className="text-gray-500" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-base font-bold text-gray-900">{county.name}</span>
+                            <span className="text-[12px] text-gray-500 font-medium uppercase tracking-widest">{county.seat}, WA</span>
+                          </div>
+                          <ChevronRight size={16} className="ml-auto text-gray-300" />
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="p-8 text-center">
+                      <p className="text-sm text-gray-500">No results found</p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
             {/* Links */}
             <div className="flex flex-col px-4 pt-4 pb-2 gap-1">
               {navLinks.map((link) => (

@@ -10,7 +10,6 @@ import {
   AdContainerClient as AdContainer,
   AuthoritySidebarClient as AuthoritySidebar,
   AuthorBoxClient as AuthorBox,
-  PrintButtonClient as PrintButton,
 } from "@/components/ClientDynamic";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import CalculatorSchema from "@/components/CalculatorSchema";
@@ -584,9 +583,6 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                 <ErrorBoundary>
                   <AuthorBox />
                 </ErrorBoundary>
-              </div>
-              <div className="not-print">
-                 <PrintButton />
               </div>
             </aside>
           </div>
