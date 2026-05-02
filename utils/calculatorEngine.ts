@@ -194,6 +194,8 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   const originalObligationP2 = obligationP2;
   obligationP1 = applySSRCap(obligationP1, netP1);
   obligationP2 = applySSRCap(obligationP2, netP2);
+  const ssrAdjustmentP1 = obligationP1 - originalObligationP1;
+  const ssrAdjustmentP2 = obligationP2 - originalObligationP2;
 
   const ssrApplied =
     (payingParent === "P1" && obligationP1 < originalObligationP1) ||
@@ -208,6 +210,8 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   const pre45P2 = obligationP2;
   if (netP1 > 0) obligationP1 = Math.min(obligationP1, netP1 * 0.45);
   if (netP2 > 0) obligationP2 = Math.min(obligationP2, netP2 * 0.45);
+  const cap45AdjustmentP1 = obligationP1 - pre45P1;
+  const cap45AdjustmentP2 = obligationP2 - pre45P2;
 
   const is45PercentCapped =
     (payingParent === "P1" && obligationP1 < pre45P1) ||
@@ -242,6 +246,8 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
         : baseTableSupport * shareP2,
       parentingAdjustment,
       otherChildrenAdjustment,
+      ssrAdjustment: payingParent === "P1" ? ssrAdjustmentP1 : ssrAdjustmentP2,
+      cap45Adjustment: payingParent === "P1" ? cap45AdjustmentP1 : cap45AdjustmentP2,
       extraCosts: extraCostsAdjustment,
     },
 

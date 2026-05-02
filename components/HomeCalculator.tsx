@@ -389,6 +389,15 @@ export default function HomeCalculator() {
                         </span>
                       </div>
 
+                      {result.breakdown.otherChildrenAdjustment < 0 && (
+                        <div className="flex justify-between items-start text-[var(--color-highlight)]">
+                          <span className="text-sm font-medium">Other Children Adjustment</span>
+                          <span className="font-bold tabular-nums shrink-0">
+                            <AnimatedNumber value={result.breakdown.otherChildrenAdjustment} />
+                          </span>
+                        </div>
+                      )}
+
                       {result.parentingDeviationApplied && result.breakdown.parentingAdjustment < 0 && (
                         <div className="flex justify-between items-start text-[var(--color-highlight)]">
                           <div className="flex flex-col pr-2">
@@ -399,6 +408,43 @@ export default function HomeCalculator() {
                           </div>
                           <span className="font-bold tabular-nums shrink-0">
                             <AnimatedNumber value={result.breakdown.parentingAdjustment} />
+                          </span>
+                        </div>
+                      )}
+
+                      {result.breakdown.extraCosts > 0 && (
+                        <div className="flex justify-between items-start text-blue-600">
+                          <span className="text-sm font-medium">Healthcare & Daycare Share</span>
+                          <span className="font-bold tabular-nums shrink-0">
+                            <AnimatedNumber value={result.breakdown.extraCosts} />
+                          </span>
+                        </div>
+                      )}
+
+                      {result.ssrApplied && result.breakdown.ssrAdjustment < 0 && (
+                        <div className="flex justify-between items-start text-[var(--color-warning)]">
+                          <div className="flex flex-col pr-2">
+                            <span className="text-sm font-medium">SSR Protection Applied</span>
+                            <span className="text-[12px] font-semibold text-[var(--color-text-secondary)] mt-0.5">
+                              RCW 26.19.065(2)(b)
+                            </span>
+                          </div>
+                          <span className="font-bold tabular-nums shrink-0">
+                            <AnimatedNumber value={result.breakdown.ssrAdjustment} />
+                          </span>
+                        </div>
+                      )}
+
+                      {result.is45PercentCapped && result.breakdown.cap45Adjustment < 0 && (
+                        <div className="flex justify-between items-start text-[var(--color-warning)]">
+                          <div className="flex flex-col pr-2">
+                            <span className="text-sm font-medium">45% Net Income Cap</span>
+                            <span className="text-[12px] font-semibold text-[var(--color-text-secondary)] mt-0.5">
+                              RCW 26.19.065(1)
+                            </span>
+                          </div>
+                          <span className="font-bold tabular-nums shrink-0">
+                            <AnimatedNumber value={result.breakdown.cap45Adjustment} />
                           </span>
                         </div>
                       )}
