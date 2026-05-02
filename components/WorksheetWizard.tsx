@@ -496,7 +496,7 @@ export default function WorksheetWizard() {
                   </>
                 )}
               </tr>
-            ))}
+            ); })}
           </tbody>
         </table>
       </div>
