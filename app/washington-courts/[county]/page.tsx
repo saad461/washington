@@ -137,7 +137,7 @@ export default async function CountyCourtPage({ params }: Props) {
               Official 2026 estimates for {county.name} residents. Based on the Washington Income Shares Model with updated SSR of <strong className="text-gray-900 font-bold">approximately $2,394</strong>.
             </p>
             <div className="flex flex-wrap gap-3">
-              {["SSR: ~$2,394", "2026 Guidelines", "RCW 26.19 Certified"].map(tag => (
+              {["SSR: ~$2,394", "2026 Guidelines", "RCW 26.19 Compliant"].map(tag => (
                 <span key={tag} className="badge-meta !px-4 !py-1.5 !rounded-lg !text-[11px] !font-bold !uppercase tracking-wider">{tag}</span>
               ))}
             </div>
@@ -149,7 +149,7 @@ export default async function CountyCourtPage({ params }: Props) {
       <section className="section-default bg-[var(--color-bg-subtle)] border-b border-[var(--color-bg-border)]">
         <div className="container-wide">
           <div className="text-center mb-12">
-            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Washington State Certified Engine</p>
+            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Washington State Compliant Engine</p>
             <h2 className="text-3xl font-bold mb-4">Calculate {county.name} Support</h2>
             <p className="text-[var(--color-text-secondary)] text-lg">Enter both parents&apos; net incomes below to get your 2026 estimate.</p>
           </div>
