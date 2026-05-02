@@ -9,7 +9,38 @@ interface ParentValues {
   p2?: string | number | boolean;
 }
 
-export function calculateChildSupport(formData: Record<string, ParentValues>) {
+export interface ChildSupportResult {
+  grossP1: number;
+  grossP2: number;
+  deductionsP1: number;
+  deductionsP2: number;
+  netP1: number;
+  netP2: number;
+  combinedIncome: number;
+  shareP1: number;
+  shareP2: number;
+  baseSupport: number;
+  finalSupport: number;
+  adjustmentReason: string;
+  obligationP1: number;
+  obligationP2: number;
+  children: number;
+  breakdown: {
+    baseSupport: number;
+    parentingAdjustment: number;
+    otherChildrenAdjustment: number;
+    extraCosts: number;
+    ssrAdjustment: number;
+    cap45Adjustment: number;
+  };
+  ssrApplied: boolean;
+  is45PercentCapped: boolean;
+  isLowIncome: boolean;
+  isAboveMaximum: boolean;
+  parentingDeviationApplied: boolean;
+}
+
+export function calculateChildSupport(formData: Record<string, ParentValues>): ChildSupportResult {
 
   function sum(fields: (ParentValues | undefined)[], parentKey: 'p1' | 'p2') {
     return fields.reduce((acc, field) => {
@@ -195,6 +226,9 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   obligationP1 = applySSRCap(obligationP1, netP1);
   obligationP2 = applySSRCap(obligationP2, netP2);
 
+  const postSSRP1 = obligationP1;
+  const postSSRP2 = obligationP2;
+
   const ssrApplied =
     (payingParent === "P1" && obligationP1 < originalObligationP1) ||
     (payingParent === "P2" && obligationP2 < originalObligationP2);
@@ -204,14 +238,12 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
   }
 
   // ── 45% NET INCOME CAP (RCW 26.19.065(1)) ────────────────────────────────
-  const pre45P1 = obligationP1;
-  const pre45P2 = obligationP2;
   if (netP1 > 0) obligationP1 = Math.min(obligationP1, netP1 * 0.45);
   if (netP2 > 0) obligationP2 = Math.min(obligationP2, netP2 * 0.45);
 
   const is45PercentCapped =
-    (payingParent === "P1" && obligationP1 < pre45P1) ||
-    (payingParent === "P2" && obligationP2 < pre45P2);
+    (payingParent === "P1" && obligationP1 < postSSRP1) ||
+    (payingParent === "P2" && obligationP2 < postSSRP2);
 
   // ── FLOOR: MINIMUM $50/CHILD ──────────────────────────────────────────────
   obligationP1 = Math.max(0, obligationP1);
@@ -243,6 +275,8 @@ export function calculateChildSupport(formData: Record<string, ParentValues>) {
       parentingAdjustment,
       otherChildrenAdjustment,
       extraCosts: extraCostsAdjustment,
+      ssrAdjustment: payingParent === "P1" ? postSSRP1 - originalObligationP1 : postSSRP2 - originalObligationP2,
+      cap45Adjustment: payingParent === "P1" ? obligationP1 - postSSRP1 : obligationP2 - postSSRP2,
     },
 
     // Status flags

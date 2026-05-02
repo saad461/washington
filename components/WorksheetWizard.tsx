@@ -268,7 +268,9 @@ export default function WorksheetWizard() {
     "parentingTime": { p1: parentingTime, p2: parentingTime },
   }), [formData, useParentingDeviation, parentingTime]);
 
-  const derivedData: Record<string, { p1: number; p2: number }> = React.useMemo(() => ({
+  const payingParent = String(formData["payingParent"]?.p1 || "P1");
+
+  const derivedData: Record<string, { p1: number; p2: number; reason?: string }> = React.useMemo(() => ({
     "1g":      { p1: calculation.grossP1,       p2: calculation.grossP2       },
     "2j":      { p1: calculation.deductionsP1,  p2: calculation.deductionsP2  },
     "3":       { p1: calculation.netP1,         p2: calculation.netP2         },
@@ -276,14 +278,22 @@ export default function WorksheetWizard() {
     "5_per_child": { p1: calculation.baseSupport / calculation.children, p2: calculation.baseSupport / calculation.children },
     "6":       { p1: calculation.shareP1,       p2: calculation.shareP2       },
     "7":       { p1: calculation.obligationP1,  p2: calculation.obligationP2  },
-    "8_reason":{ p1: 0, p2: 0, reason: calculation.adjustmentReason } as never,
+    "8_reason":{ p1: 0, p2: 0, reason: calculation.adjustmentReason },
     "9":       { p1: calculation.obligationP1,  p2: calculation.obligationP2  },
     "14":      { p1: 0, p2: 0 },
     "16d":     { p1: 0, p2: 0 },
     "17":      { p1: calculation.obligationP1,  p2: calculation.obligationP2  },
     "18":      { p1: calculation.netP1 * 0.45,  p2: calculation.netP2 * 0.45  },
     "19":      { p1: calculation.obligationP1 * 0.25, p2: calculation.obligationP2 * 0.25 },
-  }), [calculation]);
+    "ssr_adj": {
+      p1: payingParent === "P1" ? calculation.breakdown.ssrAdjustment : 0,
+      p2: payingParent === "P2" ? calculation.breakdown.ssrAdjustment : 0
+    },
+    "cap_adj": {
+      p1: payingParent === "P1" ? calculation.breakdown.cap45Adjustment : 0,
+      p2: payingParent === "P2" ? calculation.breakdown.cap45Adjustment : 0
+    },
+  }), [calculation, payingParent]);
 
   if (!currentFields || !Array.isArray(currentFields)) {
     return (
@@ -432,13 +442,21 @@ export default function WorksheetWizard() {
               { label: "Proportional Share (6)",     id: "6",  type: "per"     },
               { label: "Basic Support (Table)",      id: "base", value: calculation.baseSupport },
               { label: "Adjustment Reason",          id: "8_reason", isReason: true },
+              { label: "SSR Protection (RCW 26.19.065(2)(b))", id: "ssr_adj", showIfNegative: true },
+              { label: "45% Net Income Cap (RCW 26.19.065(1))", id: "cap_adj", showIfNegative: true },
               { label: "Final Basic Support (9)",    id: "9",  highlight: true },
               { label: "Extra Expenses (14)",        id: "14"       },
               { label: "Total Credits (16d)",        id: "16d"      },
               { label: "Presumptive Transfer (17)",  id: "17", highlight: true, bold: true },
               { label: "45% of Net Income Limit (18)", id: "18"     },
               { label: "25% of Basic Support (19)",  id: "19"       },
-            ].map((row) => (
+            ].map((row) => {
+              if (row.showIfNegative) {
+                const val1 = (derivedData[row.id] as any)?.p1 || 0;
+                const val2 = (derivedData[row.id] as any)?.p2 || 0;
+                if (val1 >= 0 && val2 >= 0) return null;
+              }
+              return (
               <tr
                 key={row.id}
                 className={`${row.highlight ? "bg-[var(--color-brand-primary-light)]" : ""} hover:bg-[var(--color-bg-subtle)] transition-colors`}
@@ -448,8 +466,17 @@ export default function WorksheetWizard() {
                 </td>
                 {row.isReason ? (
                   <td colSpan={2} className="table-body-cell text-[12px] font-bold text-[var(--color-text-secondary)] uppercase italic">
-                    {(derivedData[row.id] as unknown as { reason?: string })?.reason}
+                    {derivedData[row.id]?.reason}
                   </td>
+                ) : row.showIfNegative ? (
+                  <>
+                    <td className="table-body-cell tabular-nums font-bold text-amber-600">
+                      {curFormatter.format(derivedData[row.id]?.p1 || 0)}
+                    </td>
+                    <td className="table-body-cell tabular-nums font-bold text-amber-600">
+                      {curFormatter.format(derivedData[row.id]?.p2 || 0)}
+                    </td>
+                  </>
                 ) : row.value !== undefined ? (
                   <td colSpan={2} className={`table-body-cell tabular-nums ${row.bold ? "text-xl font-bold text-[var(--color-text-primary)]" : "font-bold"}`}>
                     {curFormatter.format(row.value)}

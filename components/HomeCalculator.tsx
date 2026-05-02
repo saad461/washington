@@ -338,13 +338,15 @@ export default function HomeCalculator() {
 
                 {/* SSR Protection Explanation */}
                 {result.ssrApplied && (
-                  <div className="callout-amber">
-                    <div className="flex items-start gap-3">
-                      <Shield size={18} className="shrink-0 text-[var(--color-warning)] mt-0.5" />
+                  <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 shadow-sm">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center shrink-0 border border-amber-200">
+                        <Shield size={20} className="text-amber-700" />
+                      </div>
                       <div>
-                        <p className="text-sm font-bold text-[var(--color-highlight)] mb-1">Self-Support Reserve (SSR) Protection</p>
-                        <p className="text-xs text-[var(--color-highlight)] leading-relaxed">
-                          Payer net income ({curFormatter.format(payingParent === "P1" ? result.netP1 : result.netP2)}) is close to or below the $2,394 SSR. The obligation has been limited to ensure the payer can maintain a basic standard of living.
+                        <p className="text-base font-bold text-amber-900 mb-1">SSR Protection Active</p>
+                        <p className="text-sm text-amber-800 leading-relaxed">
+                          Payer net income ({curFormatter.format(payingParent === "P1" ? result.netP1 : result.netP2)}) is protected by the $2,394 Self-Support Reserve. The obligation has been reduced to ensure basic needs can be met (RCW 26.19.065).
                         </p>
                       </div>
                     </div>
@@ -408,6 +410,34 @@ export default function HomeCalculator() {
                           </div>
                           <span className="font-bold tabular-nums shrink-0">
                             <AnimatedNumber value={result.breakdown.parentingAdjustment} />
+                          </span>
+                        </div>
+                      )}
+
+                      {result.ssrApplied && result.breakdown.ssrAdjustment < 0 && (
+                        <div className="flex justify-between items-start text-amber-600">
+                          <div className="flex flex-col pr-2">
+                            <span className="text-sm font-medium">SSR Protection Applied</span>
+                            <span className="text-[12px] font-semibold opacity-80 mt-0.5">
+                              RCW 26.19.065(2)(b)
+                            </span>
+                          </div>
+                          <span className="font-bold tabular-nums shrink-0">
+                            <AnimatedNumber value={result.breakdown.ssrAdjustment} />
+                          </span>
+                        </div>
+                      )}
+
+                      {result.is45PercentCapped && result.breakdown.cap45Adjustment < 0 && (
+                        <div className="flex justify-between items-start text-amber-600">
+                          <div className="flex flex-col pr-2">
+                            <span className="text-sm font-medium">45% Net Income Cap</span>
+                            <span className="text-[12px] font-semibold opacity-80 mt-0.5">
+                              RCW 26.19.065(1)
+                            </span>
+                          </div>
+                          <span className="font-bold tabular-nums shrink-0">
+                            <AnimatedNumber value={result.breakdown.cap45Adjustment} />
                           </span>
                         </div>
                       )}
