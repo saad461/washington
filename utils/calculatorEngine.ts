@@ -20,6 +20,7 @@ export interface ChildSupportResult {
   shareP1: number;
   shareP2: number;
   baseSupport: number;
+  totalObligation: number;
   finalSupport: number;
   adjustmentReason: string;
   obligationP1: number;
@@ -262,6 +263,7 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
 
     // Support
     baseSupport: baseTableSupport,
+    totalObligation: Math.round(baseTableSupport),
     finalSupport: Math.round(finalObligation),
     adjustmentReason,
     obligationP1, obligationP2,
