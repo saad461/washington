@@ -43,7 +43,7 @@ export default function ParentingTimeSelector({
           )}
           <div className="min-w-0">
             <p className="text-sm font-bold text-[var(--color-text-primary)] leading-snug">
-              Apply Parenting Time Credit
+              I share custody (optional parenting credit)
               <span className="ml-2 badge-warning">Estimated</span>
             </p>
             <p className="text-[12px] font-semibold text-[var(--color-text-secondary)] mt-0.5">
