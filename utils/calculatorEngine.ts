@@ -22,6 +22,7 @@ export interface ChildSupportResult {
   baseSupport: number;
   totalObligation: number;
   finalSupport: number;
+  roundedCombinedIncome: number;
   adjustmentReason: string;
   obligationP1: number;
   obligationP2: number;
@@ -213,19 +214,20 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
     }
   }
 
-  // ── SSR PROTECTION (RCW 26.19.065(2)(b)) ─────────────────────────────────
-  const applySSRCap = (obligation: number, netIncome: number) => {
-    const maxAffordable = netIncome - SELF_SUPPORT_RESERVE;
-    if (maxAffordable <= 0) {
-      return Math.min(MIN_SUPPORT_PER_CHILD * children, obligation);
-    }
-    return Math.min(obligation, maxAffordable);
-  };
-
+  // ── SSR PROTECTION & FLOOR ───────────────────────────────────────────────
   const originalObligationP1 = obligationP1;
   const originalObligationP2 = obligationP2;
-  obligationP1 = applySSRCap(obligationP1, netP1);
-  obligationP2 = applySSRCap(obligationP2, netP2);
+
+  const applySSR = (obligation: number, netIncome: number) => {
+    const minFloor = MIN_SUPPORT_PER_CHILD * children;
+    if (netIncome - obligation < SELF_SUPPORT_RESERVE) {
+      return Math.max(netIncome - SELF_SUPPORT_RESERVE, minFloor);
+    }
+    return Math.max(obligation, minFloor);
+  };
+
+  obligationP1 = applySSR(obligationP1, netP1);
+  obligationP2 = applySSR(obligationP2, netP2);
 
   const postSSRP1 = obligationP1;
   const postSSRP2 = obligationP2;
@@ -239,16 +241,21 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
   }
 
   // ── 45% NET INCOME CAP (RCW 26.19.065(1)) ────────────────────────────────
-  if (netP1 > 0) obligationP1 = Math.min(obligationP1, netP1 * 0.45);
-  if (netP2 > 0) obligationP2 = Math.min(obligationP2, netP2 * 0.45);
+  const apply45Cap = (obligation: number, netIncome: number) => {
+    const minFloor = MIN_SUPPORT_PER_CHILD * children;
+    const cap45 = netIncome * 0.45;
+    if (obligation > cap45) {
+      return Math.max(cap45, minFloor);
+    }
+    return obligation;
+  };
+
+  obligationP1 = apply45Cap(obligationP1, netP1);
+  obligationP2 = apply45Cap(obligationP2, netP2);
 
   const is45PercentCapped =
     (payingParent === "P1" && obligationP1 < postSSRP1) ||
     (payingParent === "P2" && obligationP2 < postSSRP2);
-
-  // ── FLOOR: MINIMUM $50/CHILD ──────────────────────────────────────────────
-  obligationP1 = Math.max(0, obligationP1);
-  obligationP2 = Math.max(0, obligationP2);
 
   // ── FINAL TRANSFER PAYMENT ────────────────────────────────────────────────
   let finalObligation = payingParent === "P1" ? obligationP1 : obligationP2;
@@ -263,8 +270,9 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
 
     // Support
     baseSupport: baseTableSupport,
-    totalObligation: Math.round(baseTableSupport),
-    finalSupport: Math.round(finalObligation),
+    totalObligation: baseTableSupport,
+    finalSupport: finalObligation,
+    roundedCombinedIncome: lookup.status === "calculated" ? lookup.roundedIncome : combinedIncome,
     adjustmentReason,
     obligationP1, obligationP2,
     children,
