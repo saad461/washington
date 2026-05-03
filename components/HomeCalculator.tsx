@@ -9,6 +9,7 @@ import {
 import { calculateChildSupport } from "@/utils/calculatorEngine";
 import ParentingTimeSelector from "@/components/calculator/ParentingTimeSelector";
 import { motion, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import HeroCard from "@/components/hero/HeroCard";
 
 const curFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -43,7 +44,12 @@ function sanitizeIncome(raw: string): string {
   return raw;
 }
 
-export default function HomeCalculator() {
+interface HomeCalculatorProps {
+  selectedCounty?: string;
+  setSelectedCounty?: (county: string) => void;
+}
+
+export default function HomeCalculator({ selectedCounty = "", setSelectedCounty }: HomeCalculatorProps) {
   const [parent1Income,          setParent1Income]          = useState("");
   const [parent2Income,          setParent2Income]          = useState("");
   const [childrenCount,          setChildrenCount]          = useState(1);
@@ -53,6 +59,7 @@ export default function HomeCalculator() {
   const [useParentingDeviation,  setUseParentingDeviation]  = useState(false);
   const [error,  setError]  = useState("");
   const [result, setResult] = useState<ReturnType<typeof calculateChildSupport> | null>(null);
+  const [showIncomeHint, setShowIncomeHint] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const handleCalculate = useCallback(() => {
@@ -107,6 +114,24 @@ export default function HomeCalculator() {
 
             <div className="flex flex-col gap-8">
 
+              {/* County Dropdown */}
+              <div className="flex flex-col">
+                <label htmlFor="county-select" className="input-label">Your county (optional)</label>
+                <select
+                  id="county-select"
+                  value={selectedCounty}
+                  onChange={(e) => setSelectedCounty?.(e.target.value)}
+                  className="input-standard appearance-none"
+                  style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23374151' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 16px center', backgroundSize: '16px' }}
+                >
+                  <option value="">Select a county...</option>
+                  <option value="king-county">King County</option>
+                  <option value="pierce-county">Pierce County</option>
+                  <option value="snohomish-county">Snohomish County</option>
+                  <option value="spokane-county">Spokane County</option>
+                </select>
+              </div>
+
               {/* Income cycle + children count */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
                 <div className="flex flex-col">
@@ -152,6 +177,8 @@ export default function HomeCalculator() {
                 </div>
               </div>
 
+              <p className="text-sm font-medium text-blue-600 -mb-6">Start with your monthly take-home pay after taxes</p>
+
               {/* Parent income inputs */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 bg-[var(--color-bg-subtle)] rounded-xl border border-[var(--color-bg-border)]">
                 <div className="flex flex-col">
@@ -168,12 +195,12 @@ export default function HomeCalculator() {
                       onBlur={(e) => {
                         if (e.target.value === "" || isNaN(parseFloat(e.target.value))) setParent1Income("");
                       }}
-                      placeholder="0"
+                      placeholder="e.g. 5,000"
                       min="0"
                       step="1"
                       inputMode="decimal"
                       autoComplete="off"
-                      className="input-standard pl-8 w-full"
+                      className="input-standard pl-8 w-full shadow-sm"
                     />
                   </div>
                   <p className="input-helper">After taxes &amp; mandatory deductions</p>
@@ -193,35 +220,51 @@ export default function HomeCalculator() {
                       onBlur={(e) => {
                         if (e.target.value === "" || isNaN(parseFloat(e.target.value))) setParent2Income("");
                       }}
-                      placeholder="0"
+                      placeholder="e.g. 5,000"
                       min="0"
                       step="1"
                       inputMode="decimal"
                       autoComplete="off"
-                      className="input-standard pl-8 w-full"
+                      className="input-standard pl-8 w-full shadow-sm"
                     />
                   </div>
                   <p className="input-helper">After taxes &amp; mandatory deductions</p>
                 </div>
               </div>
 
-              {/* Net income hint */}
-              <div className="callout-blue">
-                <div className="flex items-start gap-4">
-                  <Info size={16} className="text-[var(--color-brand-primary)] shrink-0 mt-0.5" />
-                  <p className="text-[var(--color-info)] text-sm leading-relaxed">
-                    <strong className="font-semibold">Court standard:</strong> Enter each parent&apos;s monthly net income — gross wages minus mandatory deductions (taxes, FICA, required union dues, mandatory retirement). Do not enter gross income.
-                  </p>
-                </div>
+              {/* Net income hint (collapsible) */}
+              <div>
+                <button
+                  id="net-income-hint-trigger"
+                  type="button"
+                  onClick={() => setShowIncomeHint(!showIncomeHint)}
+                  className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 transition-colors"
+                >
+                  What counts as net income? <Info size={14} />
+                </button>
+                <AnimatePresence>
+                  {showIncomeHint && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mt-3 p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm text-blue-800 leading-relaxed">
+                        <strong className="font-bold">Court standard:</strong> Enter each parent&apos;s monthly net income — gross wages minus mandatory deductions (taxes, FICA, required union dues, mandatory retirement). Do not enter gross income.
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
 
               <div className="space-y-8">
 
                 {/* Payer toggle */}
                 <div className="flex flex-col">
-                  <span className="input-label mb-0">Designated Payer</span>
-                  <p className="text-sm text-gray-500 mb-4">Which parent will make monthly payments to the other?</p>
-                  <div className="grid grid-cols-2 gap-4">
+                  <span id="payer-label" className="input-label mb-0">Who pays support?</span>
+                  <p className="text-sm text-gray-500 mb-4">Usually the parent with less custody time</p>
+                  <div className="grid grid-cols-2 gap-4" role="group" aria-labelledby="payer-label">
                     <button type="button" onClick={() => setPayingParent("P1")} className={toggleBtn(payingParent === "P1")}>
                       {payingParent === "P1" && <CheckCircle size={15} className="shrink-0 text-white" />}
                       Parent 1
@@ -260,17 +303,20 @@ export default function HomeCalculator() {
             {!result ? (
               <motion.div
                 key="empty"
-                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }}
-                className="bg-white border-dashed border-2 border-gray-300 rounded-[var(--radius-card)] flex flex-col items-center justify-center py-16 text-center gap-4 h-full"
+                initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.98 }}
+                className="h-full flex flex-col"
               >
-                <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center text-[var(--color-text-secondary)] shadow-[var(--shadow-card)]">
-                  <Calculator size={28} />
-                </div>
-                <div>
-                  <p className="font-semibold text-[var(--color-text-secondary)]">Ready to calculate</p>
-                  <p className="text-sm text-[var(--color-text-secondary)] mt-1 max-w-[220px] mx-auto">
-                    Enter income details to see your estimated support obligation.
-                  </p>
+                <div className="bg-white border border-gray-200 rounded-xl p-6 flex-1 shadow-sm">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                      <Calculator size={18} />
+                    </div>
+                    <span className="font-bold text-gray-900">Live Calculation Example</span>
+                  </div>
+                  <HeroCard />
+                  <div className="mt-8 text-center">
+                    <p className="text-sm font-semibold text-gray-500">Enter income to update this result</p>
+                  </div>
                 </div>
               </motion.div>
             ) : (
@@ -287,7 +333,9 @@ export default function HomeCalculator() {
 
                     {/* ── CHANGE 1: Primary display — Total Basic Obligation ── */}
                     <p className="text-[12px] font-bold text-gray-600 uppercase tracking-[0.15em] mb-4">
-                      Total Basic Obligation
+                      {selectedCounty
+                        ? `${selectedCounty.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')} Standard`
+                        : "Total Basic Obligation"}
                     </p>
 
                     <div className="text-5xl sm:text-6xl font-bold text-gray-900 mb-2 tracking-tight tabular-nums">

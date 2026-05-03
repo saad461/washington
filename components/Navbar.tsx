@@ -35,10 +35,10 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/",                  label: "Calculator"          },
-    { href: "/worksheet",         label: "Full Wizard"         },
+    { href: "/worksheet",         label: "Worksheet Wizard"    },
     { href: "/washington-courts", label: "Courts"              },
     { href: "/glossary",          label: "Glossary"            },
-    { href: "/compare-2024-2026", label: "What Changed in 2026" },
+    { href: "/compare-2024-2026", label: "2026 Updates"        },
   ];
 
   const isActive = (href: string) => {
@@ -137,80 +137,91 @@ export default function Navbar() {
           FIX: backdrop moved outside header to avoid stacking context issues.
           FIX: glassmorphism overlay style with semi-transparent background.
       ──────────────────────────────────────────────────────────────────── */}
-      {mobileOpen && (
-        <div className="no-print">
-          <div
-            className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-[2px] z-40"
-            onClick={() => setMobileOpen(false)}
-            aria-hidden="true"
-          />
+      <div className="no-print">
+        {/* Backdrop Overlay */}
+        <div
+          className={`lg:hidden fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40 transition-opacity duration-300 ${
+            mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
+        />
 
-          <nav
-            aria-label="Mobile navigation"
-            className={`lg:hidden fixed inset-x-0 bottom-0 bg-white/95 backdrop-blur-2xl z-40 overflow-y-auto
-              flex flex-col border-t border-[var(--color-bg-border-soft)] animate-in fade-in slide-in-from-top-2 duration-300 ${drawerTop}`}
-          >
-            <div className="px-4 pt-4 pb-2">
-               <SearchMock isNavbar={true} />
+        {/* Right-side Drawer */}
+        <nav
+          aria-label="Mobile navigation"
+          className={`lg:hidden fixed top-0 right-0 bottom-0 w-[80%] max-w-[320px] bg-white z-50 shadow-2xl transition-transform duration-250 ease-in-out flex flex-col ${
+            mobileOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          {/* Drawer Header */}
+          <div className="flex items-center justify-between px-6 h-16 border-b border-gray-100">
+            <span className="font-bold text-gray-900">Menu</span>
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="p-2 -mr-2 text-gray-500 hover:text-gray-700"
+              aria-label="Close menu"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          </div>
+
+          <div className="flex-1 overflow-y-auto py-4">
+            <div className="px-6 mb-4">
+              <SearchMock isNavbar={true} />
             </div>
 
-            {/* Links */}
-            <div className="flex flex-col px-4 pt-4 pb-2 gap-1">
-              {navLinks.map((link) => (
+            {/* Links ordered as requested */}
+            <div className="flex flex-col">
+              {[
+                navLinks.find(l => l.href === "/"),
+                navLinks.find(l => l.href === "/worksheet"),
+                navLinks.find(l => l.href === "/washington-courts"),
+                navLinks.find(l => l.href === "/glossary"),
+                navLinks.find(l => l.href === "/compare-2024-2026"),
+              ].map((link) => link && (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`flex items-center justify-between px-4 py-4 rounded-xl text-base font-semibold transition-all ${
+                  className={`flex items-center justify-between px-6 py-4 text-base font-semibold transition-colors ${
                     isActive(link.href)
-                      ? "bg-indigo-50 text-indigo-700"
-                      : "text-[var(--color-text-primary)] hover:bg-[var(--color-bg-subtle)] hover:text-indigo-700"
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-900 hover:bg-gray-50"
                   }`}
                 >
                   {link.label}
-                  <ChevronRight size={16} className={isActive(link.href) ? "text-[var(--color-brand-primary-hover)]" : "text-[var(--color-text-secondary)]"} />
+                  <ChevronRight size={16} className={isActive(link.href) ? "text-blue-600" : "text-gray-400"} />
                 </Link>
               ))}
             </div>
 
-            {/* CTAs */}
-            <div className="px-4 pt-4 pb-2 flex flex-col gap-3">
-              {pathname === "/worksheet" ? (
-                <a
-                  href="#wizard"
-                  onClick={() => setMobileOpen(false)}
-                  className="bg-blue-600 text-white px-4 py-3 rounded-xl font-semibold text-center transition-colors"
-                >
-                  Back to Top ↑
-                </a>
-              ) : (
-                <Link href="/worksheet" onClick={() => setMobileOpen(false)} className="btn-primary w-full">
-                  Launch Wizard
-                  <ChevronRight className="w-5 h-5" />
-                </Link>
-              )}
-            </div>
+            <div className="mx-6 my-4 border-t border-gray-100" />
 
-            {/* Legal links */}
-            <div className="mt-auto px-4 py-5 border-t border-[var(--color-bg-border-soft)] flex justify-center gap-8">
-              {[
-                { href: "/terms",      label: "Terms"   },
-                { href: "/disclaimer", label: "Legal"   },
-                { href: "/privacy",    label: "Privacy" },
-              ].map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-xs font-medium text-[var(--color-text-secondary)] font-bold text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] uppercase tracking-widest transition-colors"
-                >
-                  {l.label}
-                </Link>
-              ))}
+            <div className="px-6">
+              <Link
+                href="/worksheet"
+                onClick={() => setMobileOpen(false)}
+                className="btn-primary w-full justify-center"
+              >
+                Launch Wizard
+                <ChevronRight className="w-5 h-5" />
+              </Link>
             </div>
-          </nav>
-        </div>
-      )}
+          </div>
+
+          {/* Legal link at the very bottom */}
+          <div className="p-6 border-t border-gray-100 mt-auto">
+            <Link
+              href="/disclaimer"
+              onClick={() => setMobileOpen(false)}
+              className="text-[10px] font-bold text-gray-400 uppercase tracking-widest hover:text-gray-600 transition-colors block text-center"
+            >
+              Legal Disclaimer
+            </Link>
+          </div>
+        </nav>
+      </div>
     </>
   );
 }
