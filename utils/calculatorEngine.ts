@@ -1,4 +1,4 @@
-import { getExactSupport } from '../data/washingtonTable2026';
+import { getExactSupport } from '../data/washingtonTable2026.ts';
 
 // LEGAL CONSTANTS — RCW 26.19.065
 const MIN_SUPPORT_PER_CHILD = 50;
@@ -31,7 +31,8 @@ export interface ChildSupportResult {
     baseSupport: number;
     parentingAdjustment: number;
     otherChildrenAdjustment: number;
-    extraCosts: number;
+    healthInsurance: number;
+    daycare: number;
     ssrAdjustment: number;
     cap45Adjustment: number;
   };
@@ -61,19 +62,6 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
   const daycare         = parseFloat(String(formData["daycare"]?.p1 || 0)) || 0;
   const children        = Math.max(1, Math.min(5, parseInt(String(formData["5_children"]?.p1 || 1), 10) || 1));
 
-  /**
-   * PARENTING DEVIATION TOGGLE
-   * ─────────────────────────────────────────────────────────────────────────
-   * When false (default): parentingTime is ignored entirely. The result is
-   * the pure table-based presumptive obligation — fully court-defensible.
-   *
-   * When true: an estimated deviation credit is calculated per
-   * RCW 26.19.075(1)(d). IMPORTANT — this is an APPROXIMATION.
-   * Washington courts apply parenting time deviation case-by-case with no
-   * fixed statutory formula. The estimate uses a proportional scale above
-   * the 25% overnight baseline, capped at 50% reduction at 100% parenting.
-   * Label this clearly in any UI that exposes it.
-   */
   const useParentingDeviation = formData["useParentingDeviation"]?.p1 === true;
 
   // ── STEP 1 & 2: GROSS INCOME & DEDUCTIONS ────────────────────────────────
@@ -92,7 +80,6 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
   let deductionsP1 = sum(deductionFields, "p1");
   let deductionsP2 = sum(deductionFields, "p2");
 
-  // Convert yearly → monthly
   if (incomeType === "yearly") {
     grossP1 /= 12; grossP2 /= 12;
     deductionsP1 /= 12; deductionsP2 /= 12;
@@ -138,28 +125,52 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
     adjustmentReason = lookup.status === "error" ? lookup.message : "Calculation error";
   }
 
+  // Capture pre-adjustment obligations for breakdown
+  const presumptiveP1 = obligationP1;
+  const presumptiveP2 = obligationP2;
+
+  // ── SSR PROTECTION (RCW 26.19.065(2)(b)) ─────────────────────────
+  // SSR must be applied BEFORE deviations like parenting time
+  const applySSR = (obligation: number, netIncome: number) => {
+    const minFloor = MIN_SUPPORT_PER_CHILD * children;
+    if (netIncome - obligation < SELF_SUPPORT_RESERVE) {
+      return Math.max(netIncome - SELF_SUPPORT_RESERVE, minFloor);
+    }
+    return obligation;
+  };
+
+  const preSSRP1 = obligationP1;
+  const preSSRP2 = obligationP2;
+
+  obligationP1 = applySSR(obligationP1, netP1);
+  obligationP2 = applySSR(obligationP2, netP2);
+
+  const postSSRP1 = obligationP1;
+  const postSSRP2 = obligationP2;
+
+  const ssrApplied =
+    (payingParent === "P1" && obligationP1 < preSSRP1) ||
+    (payingParent === "P2" && obligationP2 < preSSRP2);
+
   // ── ADJUSTMENTS ───────────────────────────────────────────────────────────
   let parentingAdjustment = 0;
   let otherChildrenAdjustment = 0;
-  let extraCostsAdjustment = 0;
+  let healthcareAdjustment = 0;
+  let daycareAdjustment = 0;
 
+  // Only apply deviations and other adjustments if income is above low-income threshold
   if (combinedIncome >= 2200) {
 
     // Other children adjustment (RCW 26.19.075(1)(e))
     if (otherChildren > 0) {
       const SSR = SELF_SUPPORT_RESERVE;
-
-      // Line 8c for each parent: netIncome - SSR, minimum $50/child
       const line8cP1 = Math.max(MIN_SUPPORT_PER_CHILD * children, netP1 - SSR);
       const line8cP2 = Math.max(MIN_SUPPORT_PER_CHILD * children, netP2 - SSR);
 
-      // Line 8d: divide by total children, multiply by children in this case
-      const totalChildrenP1 = children + otherChildren;
-      const totalChildrenP2 = children + otherChildren;
-      const line8dP1 = (line8cP1 / totalChildrenP1) * children;
-      const line8dP2 = (line8cP2 / totalChildrenP2) * children;
+      const totalChildren = children + otherChildren;
+      const line8dP1 = (line8cP1 / totalChildren) * children;
+      const line8dP2 = (line8cP2 / totalChildren) * children;
 
-      // Only apply if 8d is less than line 7 (current obligation)
       const prevP1 = obligationP1;
       const prevP2 = obligationP2;
       if (line8dP1 < obligationP1) obligationP1 = Math.max(line8dP1, MIN_SUPPORT_PER_CHILD * children);
@@ -170,10 +181,7 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
         : obligationP2 - prevP2;
     }
 
-    // ── PARENTING TIME DEVIATION (OPTIONAL / ESTIMATED) ───────────────────
-    // Gated behind useParentingDeviation toggle — OFF by default.
-    // When OFF: parentingTime has zero effect on the result.
-    // When ON:  estimated deviation per RCW 26.19.075(1)(d) — Tier-based logic.
+    // Parenting time deviation
     if (useParentingDeviation) {
       let reductionRate = 0;
       let tierLabel = "";
@@ -189,56 +197,36 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
         tierLabel = "Significant Residential Time — RCW 26.19.075(1)(d)";
       }
 
-      let parentingAdjustmentAmount = 0;
       if (reductionRate > 0) {
+        const adjustment = (payingParent === "P1" ? obligationP1 : obligationP2) * reductionRate;
         if (payingParent === "P1") {
-          parentingAdjustmentAmount = obligationP1 * reductionRate;
-          obligationP1 -= parentingAdjustmentAmount;
+          obligationP1 -= adjustment;
         } else {
-          parentingAdjustmentAmount = obligationP2 * reductionRate;
-          obligationP2 -= parentingAdjustmentAmount;
+          obligationP2 -= adjustment;
         }
+        parentingAdjustment = -adjustment;
         adjustmentReason = tierLabel;
       }
-      parentingAdjustment = -parentingAdjustmentAmount;
     }
 
-    // Healthcare & daycare — proportional share (RCW 26.19.080(2)(3))
-    const totalExtra = healthInsurance + daycare;
-    if (totalExtra > 0) {
-      const extraP1 = totalExtra * shareP1;
-      const extraP2 = totalExtra * shareP2;
-      obligationP1 += extraP1;
-      obligationP2 += extraP2;
-      extraCostsAdjustment = payingParent === "P1" ? extraP1 : extraP2;
+    // Healthcare & daycare
+    const totalHealth = healthInsurance;
+    const totalDaycare = daycare;
+
+    if (totalHealth > 0) {
+      const share = payingParent === "P1" ? totalHealth * shareP1 : totalHealth * shareP2;
+      if (payingParent === "P1") obligationP1 += share; else obligationP2 += share;
+      healthcareAdjustment = share;
+    }
+    if (totalDaycare > 0) {
+      const share = payingParent === "P1" ? totalDaycare * shareP1 : totalDaycare * shareP2;
+      if (payingParent === "P1") obligationP1 += share; else obligationP2 += share;
+      daycareAdjustment = share;
     }
   }
 
-  // ── SSR PROTECTION & FLOOR ───────────────────────────────────────────────
-  const originalObligationP1 = obligationP1;
-  const originalObligationP2 = obligationP2;
-
-  const applySSR = (obligation: number, netIncome: number) => {
-    const minFloor = MIN_SUPPORT_PER_CHILD * children;
-    if (netIncome - obligation < SELF_SUPPORT_RESERVE) {
-      return Math.max(netIncome - SELF_SUPPORT_RESERVE, minFloor);
-    }
-    return Math.max(obligation, minFloor);
-  };
-
-  obligationP1 = applySSR(obligationP1, netP1);
-  obligationP2 = applySSR(obligationP2, netP2);
-
-  const postSSRP1 = obligationP1;
-  const postSSRP2 = obligationP2;
-
-  const ssrApplied =
-    (payingParent === "P1" && obligationP1 < originalObligationP1) ||
-    (payingParent === "P2" && obligationP2 < originalObligationP2);
-
-  if (ssrApplied) {
-    adjustmentReason = "Self-support reserve protection applied (RCW 26.19.065(2)(b))";
-  }
+  const postDevP1 = obligationP1;
+  const postDevP2 = obligationP2;
 
   // ── 45% NET INCOME CAP (RCW 26.19.065(1)) ────────────────────────────────
   const apply45Cap = (obligation: number, netIncome: number) => {
@@ -254,21 +242,17 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
   obligationP2 = apply45Cap(obligationP2, netP2);
 
   const is45PercentCapped =
-    (payingParent === "P1" && obligationP1 < postSSRP1) ||
-    (payingParent === "P2" && obligationP2 < postSSRP2);
+    (payingParent === "P1" && obligationP1 < postDevP1) ||
+    (payingParent === "P2" && obligationP2 < postDevP2);
 
-  // ── FINAL TRANSFER PAYMENT ────────────────────────────────────────────────
-  let finalObligation = payingParent === "P1" ? obligationP1 : obligationP2;
+  const finalObligation = payingParent === "P1" ? obligationP1 : obligationP2;
 
   return {
-    // Income
     grossP1, grossP2,
     deductionsP1, deductionsP2,
     netP1, netP2,
     combinedIncome,
     shareP1, shareP2,
-
-    // Support
     baseSupport: baseTableSupport,
     totalObligation: baseTableSupport,
     finalSupport: finalObligation,
@@ -276,20 +260,15 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
     adjustmentReason,
     obligationP1, obligationP2,
     children,
-
-    // Breakdown for UI
     breakdown: {
-      baseSupport: payingParent === "P1"
-        ? baseTableSupport * shareP1
-        : baseTableSupport * shareP2,
+      baseSupport: payingParent === "P1" ? presumptiveP1 : presumptiveP2,
       parentingAdjustment,
       otherChildrenAdjustment,
-      extraCosts: extraCostsAdjustment,
-      ssrAdjustment: payingParent === "P1" ? postSSRP1 - originalObligationP1 : postSSRP2 - originalObligationP2,
-      cap45Adjustment: payingParent === "P1" ? obligationP1 - postSSRP1 : obligationP2 - postSSRP2,
+      healthInsurance: healthcareAdjustment,
+      daycare: daycareAdjustment,
+      ssrAdjustment: payingParent === "P1" ? postSSRP1 - preSSRP1 : postSSRP2 - preSSRP2,
+      cap45Adjustment: payingParent === "P1" ? obligationP1 - postDevP1 : obligationP2 - postDevP2,
     },
-
-    // Status flags
     ssrApplied,
     is45PercentCapped,
     isLowIncome: combinedIncome < 2200,

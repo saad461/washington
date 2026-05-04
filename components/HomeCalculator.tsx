@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import {
   Scale, Shield, Calculator,
-  ChevronRight, CheckCircle, AlertCircle, Info, ArrowRight, Printer,
+  ChevronRight, ChevronDown, CheckCircle, AlertCircle, Info, ArrowRight, Printer,
 } from "lucide-react";
 import { calculateChildSupport } from "@/utils/calculatorEngine";
 import ParentingTimeSelector from "@/components/calculator/ParentingTimeSelector";
@@ -27,57 +27,6 @@ function AnimatedNumber({ value }: { value: number }) {
   );
   useEffect(() => { spring.set(value); }, [value, spring]);
   return <motion.span>{display}</motion.span>;
-}
-
-/* ─── Calculation Explanation (Collapsible) ─── */
-function CalculationExplanation() {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-5 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
-      >
-        <span className="text-sm font-bold text-gray-700 flex items-center gap-2">
-          How was this calculated? <Info size={14} className="text-blue-500" />
-        </span>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <ChevronRight size={18} className="text-gray-400" />
-        </motion.div>
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden"
-          >
-            <div className="px-5 pb-5 pt-1 text-xs text-gray-600 leading-relaxed space-y-3">
-              <p>
-                Washington uses the <strong>Income Shares Model</strong>. Both parents&apos;
-                net incomes are combined and looked up in the 2026
-                Economic Table to find the basic support obligation.
-                Each parent pays their proportional share based on
-                their percentage of combined income.
-              </p>
-              <p>
-                The <strong>Self-Support Reserve (SSR)</strong> of $2,394/mo ensures
-                the paying parent retains enough income for basic needs.
-              </p>
-              <p>
-                This estimate does not include healthcare, childcare,
-                or extraordinary expenses which may be added by the court.
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
 }
 
 /* ─── Shared toggle button styles ─── */
@@ -111,6 +60,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
   const [error,  setError]  = useState("");
   const [result, setResult] = useState<ReturnType<typeof calculateChildSupport> | null>(null);
   const [showIncomeHint, setShowIncomeHint] = useState(false);
+  const [showExplanation, setShowExplanation] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const handleCalculate = useCallback(() => {
@@ -377,177 +327,208 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                 transition={{ type: "spring", stiffness: 200, damping: 22 }}
                 className="space-y-4 sm:space-y-5"
               >
-                {/* Result hero - Professional Legal Aesthetic */}
-                <div className="bg-[#EFF6FF] border border-[#BFDBFE] rounded-2xl sm:rounded-3xl p-8 text-center relative overflow-hidden shadow-[var(--shadow-card)]">
-                  <div className="absolute top-0 right-0 w-56 h-56 bg-blue-100/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                  <div className="relative z-10">
-
-                    <p className="text-[12px] font-bold text-gray-600 uppercase tracking-[0.15em] mb-4">
-                      Monthly Transfer Payment
-                    </p>
-
-                    <div className="text-5xl sm:text-6xl font-bold text-blue-600 mb-2 tracking-tight tabular-nums">
-                      <AnimatedNumber value={result.finalSupport} />
-                    </div>
-
-                    <p className="text-sm text-gray-500 mb-6">
-                      Estimated payment from <strong>{payingParent === "P1" ? "Parent 1" : "Parent 2"}</strong>
-                    </p>
-
-                    {/* Status badges */}
-                    {(result.ssrApplied || result.isLowIncome || result.is45PercentCapped || result.parentingDeviationApplied) && (
-                      <div className="flex flex-wrap justify-center gap-2 mb-8">
-                        {result.ssrApplied              && <span className="badge-warning">SSR Protection</span>}
-                        {result.isLowIncome             && <span className="badge-success">Low Income Min.</span>}
-                        {result.is45PercentCapped       && <span className="badge-warning">45% Cap</span>}
-                        {result.parentingDeviationApplied && <span className="badge-category">Est. Deviation</span>}
-                      </div>
-                    )}
-
-                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                      <Link
-                        href="/worksheet"
-                        className="btn-primary-lg w-full sm:w-auto shadow-[var(--shadow-card-md)]"
-                      >
-                        Get Official PDF
-                        <ArrowRight size={18} />
-                      </Link>
-                      <button
-                        onClick={() => window.print()}
-                        className="btn-secondary-lg w-full sm:w-auto shadow-[var(--shadow-card-md)]"
-                      >
-                        <Printer size={18} />
-                        Print Results
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Above Table Maximum Notice */}
-                {result.isAboveMaximum && (
-                  <div className="callout-amber">
-                    <div className="flex items-start gap-3">
-                      <AlertCircle size={18} className="shrink-0 text-[var(--color-warning)] mt-0.5" />
-                      <div>
-                        <p className="text-sm font-bold text-[var(--color-highlight)] mb-1">Income Exceeds Table Maximum</p>
-                        <p className="text-xs text-[var(--color-highlight)] leading-relaxed">
-                          Combined income exceeds $50,000/mo. The presumptive amount is shown, but the court may order a higher amount based on the family&apos;s standard of living.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
                 {/* SSR Protection Info Banner */}
                 {result.ssrApplied && (
-                  <div className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-5 shadow-sm">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center shrink-0 border border-amber-200">
-                        <Shield size={20} className="text-amber-700" />
-                      </div>
-                      <div>
-                        <p className="text-base font-bold text-amber-900 mb-1">SSR Protection Applied (RCW 26.19.065)</p>
-                        <p className="text-sm text-amber-800 leading-relaxed">
-                          Payer net income ({curFormatter.format(payingParent === "P1" ? result.netP1 : result.netP2)}) is protected by the $2,394 Self-Support Reserve. Obligation reduced to protect basic needs.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
+                    className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3 shadow-sm"
+                  >
+                    <Shield size={18} className="text-amber-600 shrink-0 mt-0.5" />
+                    <p className="text-sm text-amber-800 leading-snug">
+                      Payer net income ({curFormatter.format(payingParent === "P1" ? result.netP1 : result.netP2)}) is protected by the $2,394 Self-Support Reserve (RCW 26.19.065). Obligation reduced to protect basic needs.
+                    </p>
+                  </motion.div>
                 )}
 
-                {/* Breakdown card */}
-                <div className="card-standard space-y-6 shadow-[var(--shadow-card-md)] !p-0 overflow-hidden">
-                  <div className="p-6 space-y-6">
-                    {/* INCOME BREAKDOWN */}
-                    <div>
-                      <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">Income Breakdown</h4>
-                      <div className="space-y-3">
-                        <div className="flex justify-between items-center text-sm">
-                          <span className="text-gray-600">P1 Monthly Net Income</span>
-                          <span className="font-bold text-gray-900"><AnimatedNumber value={result.netP1} /></span>
-                        </div>
-                        <div className="flex justify-between items-center text-sm">
-                          <span className="text-gray-600">P2 Monthly Net Income</span>
-                          <span className="font-bold text-gray-900"><AnimatedNumber value={result.netP2} /></span>
-                        </div>
-                        <div className="flex justify-between items-center text-sm pt-2 border-t border-gray-100">
-                          <span className="font-bold text-gray-900">Combined Monthly Net Income</span>
-                          <span className="font-bold text-gray-900"><AnimatedNumber value={result.combinedIncome} /></span>
-                        </div>
+                {/* Main Results Card */}
+                <div className="card-standard !p-0 overflow-hidden shadow-[var(--shadow-card-md)] border-gray-200">
 
-                        <div className="pt-4">
-                          <div className="flex justify-between mb-2">
-                            <span className="text-[11px] font-bold text-blue-600 uppercase">P1 Share: {Math.round(result.shareP1 * 100)}%</span>
-                            <span className="text-[11px] font-bold text-purple-600 uppercase">P2 Share: {Math.round(result.shareP2 * 100)}%</span>
-                          </div>
-                          <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden flex">
-                            <motion.div initial={{ width: 0 }} animate={{ width: `${result.shareP1 * 100}%` }} className="h-full bg-blue-600" />
-                            <motion.div initial={{ width: 0 }} animate={{ width: `${result.shareP2 * 100}%` }} className="h-full bg-purple-600" />
-                          </div>
-                        </div>
+                  {/* INCOME BREAKDOWN SECTION */}
+                  <div className="p-6 sm:p-8 space-y-6">
+                    <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                      <Scale size={14} /> Income Breakdown
+                    </h4>
+
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">P1 Monthly Net Income</span>
+                        <span className="font-bold text-gray-900 tabular-nums">
+                          <AnimatedNumber value={result.netP1} />
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-600">P2 Monthly Net Income</span>
+                        <span className="font-bold text-gray-900 tabular-nums">
+                          <AnimatedNumber value={result.netP2} />
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center pt-2 border-t border-gray-100">
+                        <span className="text-sm font-bold text-gray-900">Combined Monthly Net Income</span>
+                        <span className="font-bold text-gray-900 tabular-nums">
+                          <AnimatedNumber value={result.combinedIncome} />
+                        </span>
                       </div>
                     </div>
 
-                    {/* SUPPORT CALCULATION */}
-                    <div className="pt-6 border-t border-gray-100">
-                      <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">Support Calculation</h4>
-                      <div className="space-y-4">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <p className="text-sm font-bold text-gray-900">Basic Support Obligation</p>
-                            <p className="text-[11px] text-gray-500">2026 schedule · combined {curFormatter.format(result.roundedCombinedIncome)} · {childrenCount} {childrenCount === 1 ? 'child' : 'children'}</p>
-                          </div>
-                          <span className="font-bold text-gray-900"><AnimatedNumber value={result.totalObligation} /></span>
-                        </div>
-                        <div className="flex justify-between items-center text-sm">
-                          <span className="text-gray-600">{payingParent === "P1" ? "P1" : "P2"} Proportional Share ({Math.round((payingParent === "P1" ? result.shareP1 : result.shareP2) * 100)}%)</span>
-                          <span className="font-bold text-gray-900"><AnimatedNumber value={result.breakdown.baseSupport} /></span>
-                        </div>
+                    <div className="pt-2">
+                      <div className="flex justify-between mb-2">
+                        <span className="text-[12px] font-bold text-blue-600 uppercase">P1 Share: {Math.round(result.shareP1 * 100)}%</span>
+                        <span className="text-[12px] font-bold text-purple-600 uppercase">P2 Share: {Math.round(result.shareP2 * 100)}%</span>
+                      </div>
+                      <div className="h-2.5 w-full bg-gray-100 rounded-full overflow-hidden flex">
+                        <motion.div initial={{ width: 0 }} animate={{ width: `${result.shareP1 * 100}%` }} className="h-full bg-blue-600" />
+                        <motion.div initial={{ width: 0 }} animate={{ width: `${result.shareP2 * 100}%` }} className="h-full bg-purple-600" />
                       </div>
                     </div>
-
-                    {/* ADJUSTMENTS */}
-                    {(result.ssrApplied || result.parentingDeviationApplied || result.breakdown.extraCosts !== 0) && (
-                      <div className="pt-6 border-t border-gray-100">
-                        <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">Adjustments</h4>
-                        <div className="space-y-3">
-                          {result.ssrApplied && result.breakdown.ssrAdjustment !== 0 && (
-                            <div className="flex justify-between items-center text-sm text-amber-700">
-                              <span>SSR Protection Applied (RCW 26.19.065)</span>
-                              <span className="font-bold"><AnimatedNumber value={result.breakdown.ssrAdjustment} /></span>
-                            </div>
-                          )}
-                          {result.parentingDeviationApplied && result.breakdown.parentingAdjustment !== 0 && (
-                            <div className="flex justify-between items-center text-sm text-blue-700">
-                              <span>Parenting Time Credit</span>
-                              <span className="font-bold"><AnimatedNumber value={result.breakdown.parentingAdjustment} /></span>
-                            </div>
-                          )}
-                          {result.breakdown.extraCosts !== 0 && (
-                            <div className="flex justify-between items-center text-sm text-gray-700">
-                              <span>Healthcare/Childcare Adjustment</span>
-                              <span className="font-bold">+{curFormatter.format(result.breakdown.extraCosts)}</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )}
                   </div>
 
-                  {/* TOTAL OBLIGATION FOOTER */}
-                  <div className="bg-gray-50 p-6 flex justify-between items-center border-t border-gray-100">
-                    <span className="font-bold text-gray-900 uppercase tracking-wider text-xs">Total Monthly Obligation</span>
-                    <span className="text-3xl font-bold text-blue-600 tabular-nums">
-                      <AnimatedNumber value={result.finalSupport} />
-                    </span>
+                  {/* SUPPORT CALCULATION SECTION */}
+                  <div className="p-6 sm:p-8 bg-gray-50/50 border-y border-gray-100 space-y-6">
+                    <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                      <Calculator size={14} /> Support Calculation
+                    </h4>
+
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-start">
+                        <div className="flex flex-col">
+                          <span className="text-sm font-bold text-gray-900">Basic Support Obligation</span>
+                          <span className="text-[12px] text-gray-500">
+                            2026 schedule · combined {curFormatter.format(result.roundedCombinedIncome)} · {result.children} {result.children === 1 ? 'child' : 'children'}
+                          </span>
+                        </div>
+                        <span className="font-bold text-gray-900 tabular-nums">
+                          <AnimatedNumber value={result.baseSupport} />
+                        </span>
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-gray-700">
+                          {payingParent === "P1" ? "P1" : "P2"} Proportional Share ({Math.round((payingParent === "P1" ? result.shareP1 : result.shareP2) * 100)}%)
+                        </span>
+                        <span className="font-bold text-gray-900 tabular-nums">
+                          <AnimatedNumber value={result.breakdown.baseSupport} />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* ADJUSTMENTS SECTION (Conditional) */}
+                  {(Math.abs(result.breakdown.ssrAdjustment) > 0 ||
+                    Math.abs(result.breakdown.parentingAdjustment) > 0 ||
+                    Math.abs(result.breakdown.otherChildrenAdjustment) > 0 ||
+                    result.breakdown.healthInsurance > 0 ||
+                    result.breakdown.daycare > 0) && (
+                    <div className="p-6 sm:p-8 space-y-5">
+                      <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Adjustments</h4>
+                      <div className="space-y-3">
+                        {Math.abs(result.breakdown.ssrAdjustment) > 0 && (
+                          <div className="flex justify-between items-center text-amber-700">
+                            <span className="text-sm">SSR Protection Applied (RCW 26.19.065)</span>
+                            <span className="font-bold tabular-nums">
+                              -<AnimatedNumber value={Math.abs(result.breakdown.ssrAdjustment)} />
+                            </span>
+                          </div>
+                        )}
+                        {Math.abs(result.breakdown.otherChildrenAdjustment) > 0 && (
+                          <div className="flex justify-between items-center text-gray-700">
+                            <span className="text-sm">Other Children Adjustment</span>
+                            <span className="font-bold tabular-nums">
+                              {result.breakdown.otherChildrenAdjustment < 0 ? '-' : '+'}
+                              <AnimatedNumber value={Math.abs(result.breakdown.otherChildrenAdjustment)} />
+                            </span>
+                          </div>
+                        )}
+                        {Math.abs(result.breakdown.parentingAdjustment) > 0 && (
+                          <div className="flex justify-between items-center text-blue-700">
+                            <span className="text-sm">Parenting Time Credit</span>
+                            <span className="font-bold tabular-nums">
+                              -<AnimatedNumber value={Math.abs(result.breakdown.parentingAdjustment)} />
+                            </span>
+                          </div>
+                        )}
+                        {result.breakdown.healthInsurance > 0 && (
+                          <div className="flex justify-between items-center text-green-700">
+                            <span className="text-sm">Health Insurance Adjustment</span>
+                            <span className="font-bold tabular-nums">
+                              +<AnimatedNumber value={result.breakdown.healthInsurance} />
+                            </span>
+                          </div>
+                        )}
+                        {result.breakdown.daycare > 0 && (
+                          <div className="flex justify-between items-center text-green-700">
+                            <span className="text-sm">Childcare Adjustment</span>
+                            <span className="font-bold tabular-nums">
+                              +<AnimatedNumber value={result.breakdown.daycare} />
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* FINAL TOTAL SECTION */}
+                  <div className="p-6 sm:p-8 bg-blue-50/30 border-t border-blue-100">
+                    <div className="flex justify-between items-center">
+                      <span className="text-base font-bold text-gray-900">Monthly Transfer Payment</span>
+                      <div className="text-right">
+                        <div className="text-4xl sm:text-5xl font-extrabold text-blue-600 tracking-tight tabular-nums">
+                          <AnimatedNumber value={result.finalSupport} />
+                        </div>
+                        <p className="text-[10px] font-bold text-blue-400 uppercase tracking-wider mt-1">RCW 26.19 Compliant</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* CALCULATION EXPLANATION (Collapsible) */}
-                <CalculationExplanation />
+                {/* Explanatory Tooltip Section */}
+                <div className="mt-2">
+                  <button
+                    onClick={() => setShowExplanation(!showExplanation)}
+                    className="flex items-center gap-2 text-[13px] font-bold text-gray-500 hover:text-blue-600 transition-colors py-2 px-1"
+                  >
+                    How was this calculated? <Info size={15} className="text-blue-400" />
+                    <motion.div animate={{ rotate: showExplanation ? 180 : 0 }}>
+                      <ChevronDown size={15} />
+                    </motion.div>
+                  </button>
+                  <AnimatePresence>
+                    {showExplanation && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="mt-2 p-5 bg-white border border-gray-200 rounded-2xl text-sm text-gray-600 leading-relaxed shadow-sm space-y-4">
+                          <p>
+                            Washington uses the <strong>Income Shares Model</strong>. Both parents&apos; net incomes are combined and looked up in the 2026 Economic Table to find the basic support obligation. Each parent pays their proportional share based on their percentage of combined income.
+                          </p>
+                          <p>
+                            The <strong>Self-Support Reserve (SSR)</strong> of $2,394/mo ensures the paying parent retains enough income for basic needs.
+                          </p>
+                          <p className="text-xs italic text-gray-400">
+                            This estimate does not include healthcare, childcare, or extraordinary expenses which may be added by the court.
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
 
-                <p className="text-[12px] font-semibold text-[var(--color-text-secondary)] text-[var(--color-text-secondary)] text-center leading-relaxed px-4">
-                  Estimate only. Does not constitute legal advice. Actual court orders may differ based on deviations, extraordinary expenses, and judicial findings.
+                {/* Action Buttons Below Card */}
+                <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                  <Link href="/worksheet" className="btn-primary-lg flex-1 shadow-sm">
+                    Launch Full Wizard
+                    <ArrowRight size={18} />
+                  </Link>
+                  <button onClick={() => window.print()} className="btn-secondary-lg px-6">
+                    <Printer size={18} />
+                    Print
+                  </button>
+                </div>
+
+                <p className="text-[11px] font-medium text-gray-400 text-center leading-relaxed px-4 pt-4">
+                  Estimate only. Official calculations require a full Washington State Child Support Worksheet.
                 </p>
               </motion.div>
             )}
@@ -563,20 +544,20 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
           <motion.div
             initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100 }}
             transition={{ type: "spring", stiffness: 260, damping: 28 }}
-            className="lg:hidden fixed bottom-0 left-0 right-0 z-[70] px-4 pt-3 pb-6 bg-white/95 backdrop-blur-lg border-t border-[var(--color-bg-border)] shadow-[var(--shadow-card-hover)]"
+            className="lg:hidden fixed bottom-0 left-0 right-0 z-[70] px-5 pt-4 pb-8 bg-white/95 backdrop-blur-lg border-t border-gray-200 shadow-[0_-8px_30px_rgb(0,0,0,0.08)]"
           >
-            <div className="max-w-md mx-auto flex items-center justify-between gap-4">
+            <div className="max-w-md mx-auto flex items-center justify-between gap-6">
               <div className="min-w-0">
-                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider block mb-0.5">Monthly Transfer Payment</span>
-                <span className="text-2xl font-bold text-blue-600 tabular-nums">
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">Monthly Transfer Payment</span>
+                <div className="text-3xl font-extrabold text-blue-600 tabular-nums">
                   <AnimatedNumber value={result.finalSupport} />
-                </span>
+                </div>
               </div>
               <button
                 onClick={() => resultsRef.current?.scrollIntoView({ behavior: "smooth" })}
-                className="btn-primary shadow-lg shadow-blue-200"
+                className="btn-primary !px-5 whitespace-nowrap"
               >
-                View Breakdown ↑
+                View Full Breakdown ↑
               </button>
             </div>
           </motion.div>
@@ -660,13 +641,14 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                   </div>
                 )}
 
+                {/* ── CHANGE 5: Print — show totalObligation ── */}
                 <div className="flex justify-between items-center pt-6 border-t-2 border-gray-300 mt-4">
-                  <span className="text-2xl font-bold text-gray-900">Monthly Transfer Payment</span>
-                  <span className="text-3xl font-bold text-indigo-600">{curFormatter.format(result.finalSupport)}</span>
+                  <span className="text-2xl font-bold text-gray-900">Total Basic Obligation</span>
+                  <span className="text-3xl font-bold text-indigo-600">{curFormatter.format(result.totalObligation)}</span>
                 </div>
-                <div className="flex justify-between items-center text-sm text-gray-500">
-                  <span>Total Basic Obligation</span>
-                  <span>{curFormatter.format(result.totalObligation)}</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-base text-gray-600">{payingParent === "P1" ? "Parent 1" : "Parent 2"} Transfer Payment</span>
+                  <span className="text-xl font-bold text-gray-700">{curFormatter.format(result.finalSupport)}</span>
                 </div>
               </div>
             </div>
