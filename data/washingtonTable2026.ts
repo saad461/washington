@@ -3,10 +3,10 @@
  * Source: WSCSS Economic Table, Chapter 26.19 RCW, Effective January 1, 2026
  *
  * IMPORTANT LEGAL NOTE:
- * Table values are PER-CHILD monthly basic support obligations.
- * Total case obligation = perChild × numberOfChildren.
+ * Table values are TOTAL monthly basic support obligations for the entire family.
+ * Do NOT multiply by the number of children.
  *
- * Example: Income $8,500, 2 children → $994 per child → $1,988 total.
+ * Example: Income $5,000, 2 children → $723 total.
  *
  * FIXES vs prior version:
  * - Complete $100 increments from $2,200–$50,000 (781 rows)
@@ -19,13 +19,13 @@ export type ChildCount = 1 | 2 | 3 | 4 | 5;
 
 export type SupportTableEntry = {
   income: number;
-  perChild: Record<ChildCount, number>;
+  familyTotal: Record<ChildCount, number>;
 };
 
 export type WashingtonSupportTable2026 = SupportTableEntry[];
 
 // Raw table: [combinedMonthlyNetIncome, 1child, 2children, 3children, 4children, 5children]
-// All values are PER-CHILD monthly basic support obligation.
+// All values are TOTAL monthly basic support obligation for the family.
 const RAW_TABLE: [number, number, number, number, number, number][] = [
   [2200,477,367,298,250,220],[2300,499,384,311,261,230],[2400,521,400,325,272,239],
   [2500,543,417,338,283,249],[2600,565,433,351,294,259],[2700,587,450,365,305,269],
@@ -197,7 +197,7 @@ const RAW_TABLE: [number, number, number, number, number, number][] = [
 export const washingtonSupportTable2026: WashingtonSupportTable2026 = RAW_TABLE.map(
   ([income, c1, c2, c3, c4, c5]) => ({
     income,
-    perChild: { 1: c1, 2: c2, 3: c3, 4: c4, 5: c5 },
+    familyTotal: { 1: c1, 2: c2, 3: c3, 4: c4, 5: c5 },
   })
 );
 
@@ -205,7 +205,7 @@ export const washingtonSupportTable2026: WashingtonSupportTable2026 = RAW_TABLE.
 export const washingtonTable2026: Record<number, Record<number, number>> = Object.fromEntries(
   washingtonSupportTable2026.map(e => [
     e.income,
-    Object.fromEntries(Object.entries(e.perChild).map(([k, v]) => [Number(k), v])),
+    Object.fromEntries(Object.entries(e.familyTotal).map(([k, v]) => [Number(k), v])),
   ])
 );
 
@@ -252,7 +252,7 @@ export type SupportCalculationResult =
       roundedIncome: number;
       bracketUsed: number;
       childrenUsed: ChildCount;
-      perChild: number;
+      familyTotal: number;
       totalSupport: number;
       source: "WASHINGTON_TABLE_2026";
       debug?: Record<string, unknown>;
@@ -263,7 +263,6 @@ export type SupportCalculationResult =
       children: number;
       reason: string;
       /** Table maximum values — court may exceed with written findings of fact */
-      tableMaxPerChild: number;
       tableMaxTotal: number;
     }
   | {
@@ -326,14 +325,13 @@ export function getExactSupport(
   if (income > 50000) {
     const childrenUsed = Math.max(1, Math.min(Math.round(children), 5)) as ChildCount;
     const maxRow = washingtonTable2026[50000];
-    const maxPerChild = maxRow?.[childrenUsed] ?? 0;
+    const maxTotal = maxRow?.[childrenUsed] ?? 0;
     return {
       status: "above_maximum",
       income,
       children: childrenUsed,
       reason: "Combined income exceeds $50,000 table maximum. Court may exceed presumptive maximum with written findings of fact. (RCW 26.19.065(3))",
-      tableMaxPerChild: maxPerChild,
-      tableMaxTotal: maxPerChild * childrenUsed,
+      tableMaxTotal: maxTotal,
     };
   }
 
@@ -354,19 +352,19 @@ export function getExactSupport(
     return { status: "error", message: `Internal data error: bracket ${bracketUsed} not found`, debug: debugInfo };
   }
 
-  const perChild = row[childrenUsed];
-  if (perChild === undefined || isNaN(perChild)) {
+  const familyTotal = row[childrenUsed];
+  if (familyTotal === undefined || isNaN(familyTotal)) {
     return { status: "error", message: "Internal data error: invalid support value", debug: debugInfo };
   }
 
-  // 7. Total = per-child × number of children
-  const totalSupport = perChild * childrenUsed;
+  // 7. Total Basic Obligation (covers all children per 2026 table)
+  const totalSupport = familyTotal;
 
   if (debug && debugInfo) {
     debugInfo.roundedIncome = roundedIncome;
     debugInfo.bracketUsed = bracketUsed;
     debugInfo.childrenUsed = childrenUsed;
-    debugInfo.perChild = perChild;
+    debugInfo.familyTotal = familyTotal;
     debugInfo.totalSupport = totalSupport;
   }
 
@@ -376,7 +374,7 @@ export function getExactSupport(
     roundedIncome,
     bracketUsed,
     childrenUsed,
-    perChild,
+    familyTotal,
     totalSupport,
     source: "WASHINGTON_TABLE_2026",
     debug: debugInfo,
@@ -393,9 +391,9 @@ export function getSupport(income: number, children: number): number | null {
 }
 
 /**
- * Returns per-child amount only, or null.
+ * Returns family total support amount.
  */
-export function getPerChildSupport(income: number, children: number): number | null {
+export function getFamilyTotalSupport(income: number, children: number): number | null {
   const result = getExactSupport(income, children);
-  return result.status === "calculated" ? result.perChild : null;
+  return result.status === "calculated" ? result.familyTotal : null;
 }
