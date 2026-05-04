@@ -3,10 +3,10 @@
  * Source: WSCSS Economic Table, Chapter 26.19 RCW, Effective January 1, 2026
  *
  * IMPORTANT LEGAL NOTE:
- * Table values are TOTAL monthly basic support obligations for the entire family.
- * Do NOT multiply by the number of children.
+ * Table values are per-child amounts.
+ * Multiply the table value by the number of children to find the total basic obligation.
  *
- * Example: Income $5,000, 2 children → $723 total.
+ * Example: Income $5,000, 2 children → $723 × 2 = $1,446 total.
  *
  * FIXES vs prior version:
  * - Complete $100 increments from $2,200–$50,000 (781 rows)
@@ -357,7 +357,7 @@ export function getExactSupport(
     return { status: "error", message: "Internal data error: invalid support value", debug: debugInfo };
   }
 
-  // 7. Total Basic Obligation (covers all children per 2026 table)
+  // 7. Support value per child from table
   const totalSupport = familyTotal;
 
   if (debug && debugInfo) {

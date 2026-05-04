@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import {
   Scale, Shield, Calculator,
-  ChevronRight, ChevronDown, CheckCircle, AlertCircle, Info, ArrowRight, Printer,
+  ChevronDown, CheckCircle, AlertCircle, Info, ArrowRight, Printer,
 } from "lucide-react";
 import { calculateChildSupport } from "@/utils/calculatorEngine";
 import ParentingTimeSelector from "@/components/calculator/ParentingTimeSelector";

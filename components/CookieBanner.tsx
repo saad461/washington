@@ -51,9 +51,9 @@ export default function CookieBanner() {
     <div
       role="dialog"
       aria-label="Cookie consent"
-      className="fixed bottom-0 left-0 right-0 z-[100] no-print animate-in fade-in slide-in-from-bottom-8 duration-500"
+      className="fixed bottom-8 left-8 right-8 md:left-auto md:max-w-sm z-[100] no-print animate-in fade-in slide-in-from-bottom-8 duration-500"
     >
-      <div className="bg-[#111827] text-white p-8 shadow-[0_-4px_20px_rgba(0,0,0,0.2)] ring-1 ring-white/10 backdrop-blur-2xl">
+      <div className="bg-[#111827] text-white rounded-[2rem] p-8 shadow-[var(--shadow-card-hover)] ring-1 ring-white/10 backdrop-blur-2xl">
         <div className="flex items-start gap-4 mb-8">
           <div className="p-2.5 bg-indigo-500/20 rounded-2xl flex-shrink-0">
             <Shield className="w-6 h-6 text-[var(--color-brand-primary-hover)]" />

@@ -7,52 +7,34 @@ import { ArrowRight, ArrowLeft, ChevronRight, FileText } from "lucide-react";
 
 const worksheetFAQs = [
   {
-    question: "What if I don't know my exact tax deductions?",
-    answer: "Use your most recent pay stub for FICA and withholding amounts. For annual taxes, divide last year's tax return total by 12.",
+    question: "What is the Washington State child support worksheet?",
+    answer:
+      "The Washington State child support worksheet is an official 8-part form required by RCW 26.19 that calculates the presumptive monthly child support obligation for both parents based on their combined net income, number of children, and additional expenses such as healthcare and daycare.",
   },
   {
-    question: "What is imputed income and do I need it?",
-    answer: "Only fill in imputed income if a parent is voluntarily unemployed or working below their earning capacity. Leave blank if both parents are employed.",
+    question: "Do I need to complete a worksheet for child support in Washington?",
+    answer:
+      "Yes. Washington courts require a completed child support worksheet for all child support orders, modifications, and reviews. The worksheet must follow the 2026 AOC format to be accepted by any Washington State court.",
   },
   {
-    question: "Do I need to complete all 8 parts?",
-    answer: "Parts 1-6 are required for every worksheet. Parts 7-8 are informational and for court consideration — complete them if you have relevant circumstances to document.",
+    question: "How do I fill out Part 1 (Income) of the Washington child support worksheet?",
+    answer:
+      "Part 1 requires each parent's monthly net income — meaning gross wages minus mandatory deductions including federal and state income taxes, FICA, mandatory union dues, and required retirement contributions. Do not enter gross income. Our wizard auto-calculates the mandatory deductions based on your inputs.",
   },
   {
-    question: "Can I save and come back later?",
-    answer: "Yes — your progress is automatically saved in your browser. Return to this page on the same device to continue where you left off.",
+    question: "Can I use this worksheet for a child support modification in Washington?",
+    answer:
+      "Yes. The same 8-part worksheet is used for new child support orders, modifications, and annual reviews. A substantial change in either parent's income of 15% or more typically qualifies for modification under Washington law.",
   },
   {
-    question: "What is the difference between the worksheet and the quick calculator?",
-    answer: "The quick calculator gives an instant estimate using income and children only. The full worksheet includes healthcare, daycare, education expenses, credits, and all 8 required AOC parts for court submission.",
+    question: "Is this worksheet accepted by Washington courts?",
+    answer:
+      "This wizard produces calculations based on the official 2026 Washington State Child Support Schedule (RCW 26.19). The output figures match the AOC mandatory forms. However all calculations are estimates — final orders are determined by a Washington State court.",
   },
   {
-    question: "Will this worksheet be accepted by Washington courts?",
-    answer: "This wizard follows the official 2026 AOC format (RCW 26.19). The figures match the mandatory WSCSS forms. All results are estimates — final orders are determined by a Washington State court.",
-  },
-  {
-    question: "What is the Self-Support Reserve?",
-    answer: "The SSR ($2,394/mo in 2026) ensures the paying parent keeps enough income for basic needs. If paying the full obligation would leave the payer below $2,394, the obligation is automatically reduced. Minimum is still $50 per child.",
-  },
-  {
-    question: "Can I use this for a child support modification?",
-    answer: "Yes. The same 8-part worksheet is used for new orders, modifications, and annual reviews. A 15% or more change in either parent's income typically qualifies for modification under Washington law.",
-  },
-  {
-    question: "What is the Washington State Child Support Worksheet?",
-    answer: "The WSCSS worksheet is an 8-part mandatory form required by RCW 26.19 for all child support proceedings in Washington State. Courts use it to calculate the presumptive monthly transfer payment based on both parents combined net income, number of children, and additional expenses.",
-  },
-  {
-    question: "Who Needs to Complete This Worksheet?",
-    answer: "Both parents must complete the worksheet for new child support orders, modifications, annual reviews, temporary support orders, and administrative hearings through DSHS.",
-  },
-  {
-    question: "What Income Do I Use?",
-    answer: "Washington uses net monthly income — not gross. Net income is gross wages minus mandatory deductions including federal and state income taxes, FICA, mandatory union dues, and required pension contributions.",
-  },
-  {
-    question: "How Does Washington Calculate Child Support in 2026?",
-    answer: "Washington uses the Income Shares Model. Both parents net incomes are combined and used to look up the basic support obligation in the 2026 Economic Table. Each parent pays their proportional share based on their percentage of combined income.",
+    question: "How is the worksheet different from the quick calculator?",
+    answer:
+      "The quick calculator gives an instant estimate based on combined income and number of children only. The full 8-part worksheet accounts for healthcare costs, daycare, educational expenses, parenting time credits, and existing child support obligations — producing a complete court-ready figure.",
   },
 ];
 
@@ -213,48 +195,40 @@ export default function WorksheetPage() {
       {/* WorksheetWizard is the main content */}
       <WorksheetWizard />
 
-      {/* ── AFTER COMPLETION SECTION ───────────────────────────────────── */}
+      {/* ── EXAMPLE SECTION ──────────────────────────────────────────────── */}
       <section className="section-default border-t border-[var(--color-bg-border)] bg-[var(--color-bg-subtle)]">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
 
             <header className="mb-12 text-center">
               <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">
-                Next Steps
+                Real Calculation Example
               </p>
-              <h2 className="mt-2">What Happens After You Complete This Worksheet?</h2>
+              <h2 className="mt-2">Real Calculation Example: $5,000 Income, 2 Children in King County</h2>
             </header>
 
             <div className="card-standard !p-8 md:!p-10 mb-12 shadow-[var(--shadow-card-md)]">
-              <div className="space-y-6">
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  Once you complete all 8 parts, your worksheet produces the presumptive transfer payment amount required by Washington courts. Here is what to do next:
-                </p>
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-1 font-bold text-sm">1</div>
-                    <p className="text-gray-700">Download your completed worksheet as a PDF</p>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-1 font-bold text-sm">2</div>
-                    <p className="text-gray-700">File it with your county superior court</p>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-1 font-bold text-sm">3</div>
-                    <p className="text-gray-700">Attach it to your parenting plan or child support order</p>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-1 font-bold text-sm">4</div>
-                    <p className="text-gray-700">Both parents sign under penalty of perjury</p>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 mt-1 font-bold text-sm">5</div>
-                    <p className="text-gray-700">The judge or reviewing officer approves the final order</p>
-                  </li>
-                </ul>
-                <div className="pt-6 border-t border-gray-100 mt-6">
-                  <p className="text-sm text-gray-500 italic">
-                    Washington courts require this worksheet for all new child support orders, modifications, and annual reviews under RCW 26.19.
+              <div className="space-y-10">
+                <div>
+                  <p className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest mb-3">Input Data</p>
+                  <p className="text-base text-[var(--color-text-body)]">
+                    Combined Net Income: <strong className="text-[var(--color-text-primary)] font-bold">$5,000</strong> &nbsp;•&nbsp; Children: <strong className="text-[var(--color-text-primary)] font-bold">2</strong> &nbsp;•&nbsp; County: <strong className="text-[var(--color-text-primary)] font-bold">King</strong>
+                  </p>
+                </div>
+
+                <div className="pt-10 border-t border-[var(--color-bg-border-soft)]">
+                  <p className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest mb-4">Calculated Estimate</p>
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-[44px] font-bold text-[var(--color-text-primary)] leading-none">$1,446</span>
+                    <span className="text-lg font-medium text-[var(--color-text-secondary)]">/ month</span>
+                  </div>
+                  <p className="text-sm font-medium text-[var(--color-text-secondary)] mt-4">Presumptive Basic Support Obligation</p>
+                </div>
+
+                <div className="pt-10 border-t border-[var(--color-bg-border-soft)]">
+                  <p className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest mb-3">Logic Applied</p>
+                  <p className="text-[var(--color-text-body)] leading-relaxed text-lg">
+                    In King County, courts use the standard Washington State economic table. For a combined net income of $5,000 with 2 children, the base presumptive support is $1,446. This amount is split proportionally between parents based on their respective incomes.
                   </p>
                 </div>
               </div>

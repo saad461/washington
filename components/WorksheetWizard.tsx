@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronRight, ChevronLeft, CheckCircle2, Circle,
-  Calculator, Info, ArrowRight, LayoutDashboard, Printer, FileText,
+  Calculator, Info, ArrowRight, LayoutDashboard, Printer,
 } from "lucide-react";
 import worksheetSchema from "@/data/wa_csw_2026_schema.json";
 import { calculateChildSupport } from "@/utils/calculatorEngine";
@@ -40,7 +40,8 @@ const ProgressBar = ({ currentStep }: { currentStep: number }) => {
   const progress = ((currentStep + 1) / totalSteps) * 100;
   return (
     <div className="w-full mb-8">
-      <div className="flex justify-end items-center mb-3">
+      <div className="flex justify-between items-center mb-3">
+        <span className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-wider">Step {currentStep + 1} of {totalSteps}</span>
         <span className="text-[12px] font-bold text-[var(--color-brand-primary)] uppercase tracking-wider">{Math.round(progress)}% Complete</span>
       </div>
       <div className="h-1.5 w-full bg-[var(--color-bg-muted)] rounded-full overflow-hidden">
@@ -57,96 +58,58 @@ const ProgressBar = ({ currentStep }: { currentStep: number }) => {
 
 
 /* ─────────────────────────────────────────────
-   MOBILE STEP NAV & BOTTOM SHEET
+   MOBILE STEP PILLS
 ───────────────────────────────────────────── */
 const MobileStepNav = ({
   currentStep, onStepClick,
 }: {
   currentStep: number; onStepClick: (idx: number) => void;
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const totalSteps = PARTS.length;
-  const progress = ((currentStep + 1) / totalSteps) * 100;
-  const currentPartLabel = PARTS[currentStep].split(":")[1]?.trim() || PARTS[currentStep];
+  const scrollRef  = useRef<HTMLDivElement>(null);
+  const mountedRef = useRef(false);
+
+  useEffect(() => {
+    if (!mountedRef.current) { mountedRef.current = true; return; }
+    if (!scrollRef.current) return;
+    const active = scrollRef.current.querySelector('[data-active="true"]') as HTMLElement;
+    if (active) active.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  }, [currentStep]);
 
   return (
-    <>
-      <div className="lg:hidden no-print w-full bg-white border-b border-gray-200 sticky top-20 z-30 p-4">
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex flex-col">
-            <span className="text-[12px] font-bold text-gray-500 uppercase tracking-widest">Part {currentStep + 1} of {totalSteps} · {currentPartLabel}</span>
-          </div>
-          <button
-            onClick={() => setIsOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-[12px] font-bold text-gray-700 uppercase tracking-widest"
-          >
-            [≡ Parts]
-          </button>
-        </div>
-        <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-blue-600 transition-all duration-500 ease-out"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-        <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-2">{Math.round(progress)}% complete</p>
-      </div>
-
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/40 z-[60] lg:hidden"
-            />
-            <motion.div
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl z-[70] p-6 lg:hidden max-h-[60%] overflow-y-auto"
+    <div className="lg:hidden no-print w-full bg-white border-b border-[var(--color-bg-border)] shadow-[var(--shadow-card)] sticky top-20 z-30">
+      <div
+        ref={scrollRef}
+        className="flex gap-2 overflow-x-auto px-4 py-3 scrollbar-none"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        {PARTS.map((part, idx) => {
+          const isActive = idx === currentStep;
+          const isDone   = idx < currentStep;
+          const label    = part.split(":")[1]?.trim() || part;
+          return (
+            <button
+              key={idx}
+              data-active={isActive ? "true" : "false"}
+              onClick={() => onStepClick(idx)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full whitespace-nowrap transition-all shrink-0 border text-[12px] font-bold uppercase tracking-wider ${
+                isActive
+                  ? "bg-[var(--color-brand-primary)] text-white border-[var(--color-brand-primary)] shadow-[var(--shadow-card-md)] shadow-[var(--color-brand-primary)]/20"
+                  : isDone
+                  ? "bg-[var(--color-success-bg)] text-[var(--color-success)] border-[var(--color-bg-border)]"
+                  : "bg-white border-[var(--color-bg-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-brand-primary)]"
+              }`}
             >
-              <div className="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-6" />
-              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-6 text-center">SELECT A PART</p>
-              <div className="space-y-2">
-                {PARTS.map((part, idx) => {
-                  const isCompleted = idx < currentStep;
-                  const isCurrent = idx === currentStep;
-                  const isFuture = idx > currentStep;
-                  const label = part.split(":")[1]?.trim() || part;
-                  return (
-                    <button
-                      key={idx}
-                      disabled={isFuture}
-                      onClick={() => {
-                        onStepClick(idx);
-                        setIsOpen(false);
-                      }}
-                      className={`w-full flex items-center justify-between p-4 rounded-xl border transition-all ${
-                        isCurrent
-                          ? "bg-blue-50 border-blue-200 text-blue-700"
-                          : isFuture
-                          ? "bg-gray-50 border-gray-100 text-gray-300 opacity-50"
-                          : "bg-white border-gray-100 text-gray-600"
-                      }`}
-                    >
-                      <div className="flex items-center gap-3 font-bold text-sm">
-                        <span>{isCompleted ? "✅" : idx + 1}</span>
-                        <span>{label}</span>
-                      </div>
-                      {isCurrent && <ChevronRight className="w-4 h-4" />}
-                    </button>
-                  );
-                })}
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </>
+              <span className={`flex items-center justify-center w-4 h-4 rounded-full text-[12px] font-bold ${
+                isActive ? "bg-white/20" : isDone ? "bg-[var(--color-success)] text-white" : "bg-[var(--color-bg-muted)] text-[var(--color-text-secondary)]"
+              }`}>
+                {isDone ? "✓" : idx + 1}
+              </span>
+              <span className="max-w-[80px] truncate">{label}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 };
 
@@ -155,42 +118,30 @@ const MobileStepNav = ({
    INPUT FIELD
 ───────────────────────────────────────────── */
 const InputField = ({
-  field, values, onChange, activeTooltip, setActiveTooltip,
+  field, values, onChange,
 }: {
   field: WorksheetField;
   values: ParentValue;
   onChange: (parent: "p1" | "p2", val: FieldValue) => void;
-  activeTooltip: string | null;
-  setActiveTooltip: (id: string | null) => void;
 }) => {
   const isCurrency   = field.type === "currency";
   const isPercentage = field.type === "percentage";
   const isBoolean    = field.type === "boolean";
-  const isCalculated = ["1g","2j","3","4","5_per_child","6","7","9","14","15","16d","17","18","19"].includes(field.id);
-  const showTooltip = activeTooltip === field.id;
+  const [showTooltip, setShowTooltip] = useState(false);
+  const tooltipTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const tooltipTexts: Record<string, string> = {
-    "1a": "Your regular monthly pay before taxes. Include salary, hourly wages, commissions, and bonuses.",
-    "1b": "Monthly income from bank accounts, stocks, or investments.",
-    "1c": "Monthly profit from self-employment, rental property, or business ownership after expenses.",
-    "1d": "Monthly alimony or spousal support you currently receive from a court order.",
-    "1e": "Any other regular monthly income not listed above such as pension, workers comp, or unemployment.",
-    "1f": "Income the court assigns if a parent is voluntarily unemployed or underemployed. Leave blank if both parents are employed.",
-    "2a": "Your actual monthly federal and state income tax owed — not the amount withheld from your paycheck. Use last year's tax return divided by 12.",
-    "2b": "Social Security (6.2%) and Medicare (1.45%) deducted from your pay. Self-employed: use 15.3% of net self-employment income.",
-    "2c": "Required Washington State deductions including paid family and medical leave and long-term care premiums.",
-    "2d": "Workers compensation premiums deducted from your pay by your employer.",
-    "2e": "Required monthly union fees or professional licensing dues. Voluntary dues do not count.",
-    "2f": "Required retirement contributions you must pay. Voluntary 401k contributions go in line 2g.",
-    "2g": "Optional retirement savings up to $416/month ($5,000/year) may be deducted. Must show a consistent pattern of contributions.",
-    "2h": "Monthly alimony or spousal support you pay under a current court order.",
-    "2i": "If self-employed, your regular monthly business costs. Court requires justification if disputed."
-  };
+  useEffect(() => {
+    return () => {
+      if (tooltipTimeoutRef.current) clearTimeout(tooltipTimeoutRef.current);
+    };
+  }, []);
 
-  const tooltipContent = tooltipTexts[field.id] || field.description;
-
-  const toggleTooltip = () => {
-    setActiveTooltip(showTooltip ? null : field.id);
+  const triggerTooltip = () => {
+    if (tooltipTimeoutRef.current) clearTimeout(tooltipTimeoutRef.current);
+    setShowTooltip(true);
+    tooltipTimeoutRef.current = setTimeout(() => {
+      setShowTooltip(false);
+    }, 3000);
   };
 
   const renderInput = (parent: "p1" | "p2") => {
@@ -228,15 +179,10 @@ const InputField = ({
           type={field.type === "number" || isCurrency || isPercentage ? "number" : "text"}
           value={val as string}
           onChange={(e) => onChange(parent, e.target.value)}
+          onFocus={triggerTooltip}
           placeholder="0.00"
-          className={`input-standard w-full font-medium ${isCurrency ? "pl-8" : ""} ${isPercentage ? "pr-8" : ""} ${isCalculated ? "bg-[#f3f4f6] border-[#e5e7eb] cursor-not-allowed text-[#374151]" : ""}`}
-          readOnly={isCalculated}
+          className={`input-standard w-full font-medium ${isCurrency ? "pl-8" : ""} ${isPercentage ? "pr-8" : ""}`}
         />
-        {isCalculated && (
-          <div className="absolute right-10 top-1/2 -translate-y-1/2">
-            <span className="text-gray-400">🔒</span>
-          </div>
-        )}
         {isPercentage && (
           <span className="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-[var(--color-text-secondary)] group-focus-within:text-[var(--color-brand-primary)] pointer-events-none select-none">
             %
@@ -247,7 +193,7 @@ const InputField = ({
   };
 
   return (
-    <div className="mb-6 last:mb-0 animate-in fade-in slide-in-from-bottom-2 duration-500">
+    <div className="mb-8 last:mb-0 animate-in fade-in slide-in-from-bottom-2 duration-500">
       <div className="flex items-start gap-3 mb-4">
         <span className="badge-meta !text-[12px] font-bold !font-bold !py-1 !px-2 shrink-0 mt-0.5">
           {field.id}
@@ -255,33 +201,31 @@ const InputField = ({
         <label className="text-[15px] font-bold text-[var(--color-text-primary)] leading-snug">
           {field.label}
         </label>
-        {tooltipContent && (
+        {field.description && (
           <div className="relative shrink-0">
             <button
               type="button"
-              onClick={toggleTooltip}
+              onClick={triggerTooltip}
               className="focus:outline-none"
             >
               <Info className="w-4 h-4 text-[var(--color-text-secondary)] cursor-help mt-1" />
             </button>
+            <AnimatePresence>
+              {showTooltip && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 5, scale: 0.95 }}
+                  className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-64 p-4 bg-[var(--color-text-primary)] text-white text-[13px] leading-relaxed rounded-xl transition-opacity pointer-events-none z-50 shadow-[var(--shadow-card-hover)]"
+                >
+                  {field.description}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 border-[8px] border-transparent border-t-[var(--color-text-primary)]" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         )}
       </div>
-
-      <AnimatePresence>
-        {showTooltip && tooltipContent && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden mb-4"
-          >
-            <div className="p-4 bg-blue-50 border border-blue-100 rounded-xl text-sm text-blue-800 leading-relaxed">
-              {tooltipContent}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
@@ -304,7 +248,6 @@ const InputField = ({
 export default function WorksheetWizard() {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData,    setFormData]    = useState<FormData>({});
-  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
 
   const hasIncomeInput = React.useMemo(() => {
     const incomeFields = ["1a", "1b", "1c", "1d", "1e", "1f"];
@@ -316,8 +259,6 @@ export default function WorksheetWizard() {
   const [useParentingDeviation, setUseParentingDeviation] = useState(false);
   const [parentingTime, setParentingTime] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
-  const [county, setCounty] = useState("");
-  const [caseNumber, setCaseNumber] = useState("");
 
   const currentPartKey = PARTS[currentStep];
   const currentFields  = (worksheetSchema as Record<string, WorksheetField[]>)[currentPartKey];
@@ -328,17 +269,6 @@ export default function WorksheetWizard() {
   }), [formData, useParentingDeviation, parentingTime]);
 
   const payingParent = String(formData["payingParent"]?.p1 || "P1");
-
-  const partDescriptions: Record<string, string> = {
-    "Part 1: Income": "Enter gross monthly income for both parents. Deductions are calculated next.",
-    "Part 2: Basic Child Support Obligation": "Review your basic child support obligation from the 2026 economic table.",
-    "Part 3: Healthcare, Daycare & Education": "Add monthly healthcare premiums, daycare, and education costs for the children.",
-    "Part 4: Gross Child Support Obligation": "Your gross obligation combines basic support with healthcare and daycare expenses.",
-    "Part 5: Child Support Credits": "Apply credits for expenses paid directly to providers outside the transfer.",
-    "Part 6: Standard Calculation & Presumptive Amount": "Review the final presumptive transfer payment amount for each parent.",
-    "Part 7: Additional Informational Factors": "Document the 45% income limit and 25% basic support reference values.",
-    "Part 8: Additional Factors for Court": "Add any additional factors for court consideration or deviation requests."
-  };
 
   const derivedData: Record<string, { p1: number; p2: number; reason?: string }> = React.useMemo(() => ({
     "1g":      { p1: calculation.grossP1,       p2: calculation.grossP2       },
@@ -416,11 +346,10 @@ export default function WorksheetWizard() {
     const jsPDF = (await import("jspdf")).default;
     const html2canvas = (await import("html2canvas")).default;
 
-    const actionRow = document.getElementById("summary-action-row");
-    if (actionRow) actionRow.style.display = "none";
-    const editBtn = document.getElementById("pdf-edit-btn");
-    if (editBtn) editBtn.style.display = "none";
-
+    const printBtn = document.getElementById("pdf-download-btn");
+    const editBtn  = document.getElementById("pdf-edit-btn");
+    if (printBtn) printBtn.style.display = "none";
+    if (editBtn)  editBtn.style.display  = "none";
     try {
       const canvas  = await html2canvas(element, { scale: 2, useCORS: true });
       const imgData = canvas.toDataURL("image/png");
@@ -432,155 +361,176 @@ export default function WorksheetWizard() {
       console.error("PDF generation failed", err);
       alert("Could not generate PDF. Try printing the page directly.");
     } finally {
-      if (actionRow) actionRow.style.display = "flex";
-      if (editBtn) editBtn.style.display = "flex";
+      if (printBtn) printBtn.style.display = "flex";
+      if (editBtn)  editBtn.style.display  = "flex";
     }
-  };
-
-  const handleCopyToClipboard = () => {
-    const text = `Washington Child Support Worksheet
-Date: ${new Date().toLocaleDateString()} | County: ${county || "Not specified"}
-─────────────────────────────
-Combined Net Income: ${curFormatter.format(calculation.combinedIncome)}
-P1 Share: ${perFormatter.format(calculation.shareP1)} | P2 Share: ${perFormatter.format(calculation.shareP2)}
-Basic Obligation: ${curFormatter.format(calculation.baseSupport)}
-P1 Transfer Payment: ${curFormatter.format(derivedData["17"]?.p1 || 0)}
-P2 Transfer Payment: ${curFormatter.format(derivedData["17"]?.p2 || 0)}
-─────────────────────────────
-Generated by wscss.site
-Estimate only — not legal advice`;
-
-    navigator.clipboard.writeText(text).then(() => {
-      alert("Summary copied to clipboard!");
-    });
   };
 
 
   /* ── SUMMARY VIEW ────────────────────────────────────────────────── */
-  const renderSummaryContent = () => {
-    const today = new Date().toLocaleDateString();
-
-    const summaryRows = [
-      { section: "INCOME", rows: [
-        { label: "Combined Monthly Net Income (Line 4)", id: "4", value: calculation.combinedIncome }
-      ]},
-      { section: "BASIC SUPPORT", rows: [
-        { label: "Basic Support Per Child (Line 5)", id: "5_per_child" },
-        { label: "Total Basic Obligation (Line 5)", id: "base", value: calculation.baseSupport },
-        { label: "P1 Proportional Share (Line 6)", id: "6", type: "per" },
-        { label: "P2 Proportional Share (Line 6)", id: "6", type: "per", parent: "p2" }
-      ]},
-      { section: "AFTER LIMITATIONS (Line 9)", rows: [
-        { label: "P1 Basic Obligation", id: "9" },
-        { label: "P2 Basic Obligation", id: "9", parent: "p2" }
-      ]},
-      { section: "ADDITIONAL EXPENSES (Line 13)", rows: [
-        { label: "Healthcare + Daycare Total", id: "13", value: (formData["10d"]?.p1 as number || 0) + (formData["12"]?.p1 as number || 0) }
-      ]},
-      { section: "GROSS OBLIGATION (Line 15)", rows: [
-        { label: "P1 Gross Obligation", id: "15", value: derivedData["9"]?.p1 + (calculation.breakdown.extraCosts || 0) },
-        { label: "P2 Gross Obligation", id: "15", value: derivedData["9"]?.p2 + (payingParent === "P2" ? calculation.breakdown.extraCosts : 0) }
-      ]},
-      { section: "CREDITS (Line 16d)", rows: [
-        { label: "P1 Credits", id: "16d", value: formData["16d"]?.p1 as number || 0 },
-        { label: "P2 Credits", id: "16d", value: formData["16d"]?.p2 as number || 0 }
-      ]},
-      { section: "PRESUMPTIVE TRANSFER (Line 17)", rows: [
-        { label: "P1 Transfer Payment", id: "17", isTransfer: true },
-        { label: "P2 Transfer Payment", id: "17", parent: "p2", isTransfer: true }
-      ]},
-      { section: "INFORMATIONAL", rows: [
-        { label: "45% Net Income Limit (Line 18)", id: "18" },
-        { label: "25% Basic Support (Line 19)", id: "19" }
-      ]}
-    ];
-
-    return (
-      <motion.div
-        id="pdf-summary-content"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-8 pb-16 bg-white p-4 sm:p-10 rounded-2xl"
-      >
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 border-b border-gray-200 pb-8">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2 uppercase tracking-tight">WORKSHEET SUMMARY — 2026 AOC FORMAT</h1>
-            <div className="flex items-center gap-4 text-sm font-bold text-gray-500 uppercase tracking-widest">
-              <span>Date: {today}</span>
-              <span className="w-1.5 h-1.5 bg-gray-300 rounded-full" />
-              <span>RCW 26.19 Compliant</span>
-            </div>
-            {county && (
-              <p className="text-sm font-bold text-blue-600 uppercase tracking-widest mt-2">{county} County {caseNumber && `· Case: ${caseNumber}`}</p>
-            )}
+  const renderSummaryContent = () => (
+    <motion.div
+      id="pdf-summary-content"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-12 pb-16 bg-white p-4 sm:p-10 rounded-2xl"
+    >
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 border-b border-[var(--color-bg-border-soft)] pb-8">
+        <div>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-2">
+            <h1 className="text-3xl font-bold text-[var(--color-text-primary)]">Worksheet Summary</h1>
+            <span className="badge-category !bg-[var(--color-brand-primary)] !text-white sm:ml-2">2026 OFFICIAL</span>
           </div>
-          <button
-            id="pdf-edit-btn"
-            onClick={resetWizard}
-            className="btn-secondary !rounded-full !px-6"
-          >
-            <Calculator className="w-4 h-4 mr-2" />
-            Edit Data
-          </button>
+          <p className="text-lg text-[var(--color-text-secondary)]">
+            Official results based on the 2026 Washington State Child Support Schedule.
+          </p>
+          <div className="flex items-center gap-2 mt-4 text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest">
+            <span>Date of Calculation: {new Date().toLocaleDateString()}</span>
+            <span className="mx-2">•</span>
+            <span>Ref: RCW 26.19 Compliance</span>
+          </div>
         </div>
+        <button
+          id="pdf-edit-btn"
+          onClick={resetWizard}
+          className="btn-secondary !rounded-full !px-6"
+        >
+          <Calculator className="w-4 h-4 mr-2" />
+          Edit Data
+        </button>
+      </div>
 
-        <div className="space-y-10">
-          {summaryRows.map((section) => (
-            <div key={section.section} className="space-y-4">
-              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">{section.section}</p>
-              <div className="space-y-3">
-                {section.rows.map((row, idx) => {
-                  const val = row.value !== undefined ? row.value : (row.parent === "p2" ? derivedData[row.id]?.p2 : derivedData[row.id]?.p1);
-                  const displayVal = hasIncomeInput ? (row.type === "per" ? perFormatter.format(val || 0) : curFormatter.format(val || 0)) : "—";
-
-                  return (
-                    <div key={idx} className="flex justify-between items-center">
-                      <span className={`text-sm ${row.isTransfer ? "font-bold text-gray-900" : "text-gray-600"}`}>{row.label}:</span>
-                      <span className={`tabular-nums ${row.isTransfer ? "text-2xl font-bold text-blue-600" : "font-bold text-gray-900"}`}>
-                        {displayVal}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="card-highlighted !bg-[var(--color-text-primary)] !border-none !p-8 shadow-[var(--shadow-card-hover)] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-[40px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+          <div className="relative z-10">
+            <span className="text-[12px] font-bold text-white/60 uppercase tracking-widest block mb-4">Total Combined Net</span>
+            <p className="text-3xl font-bold text-white tabular-nums">
+              {curFormatter.format(calculation.combinedIncome)}
+            </p>
+          </div>
         </div>
-
-        <div className="callout-gray !p-8 !bg-gray-50 !border-gray-100">
-          <p className="text-xs text-gray-400 leading-relaxed text-center max-w-3xl mx-auto italic">
-            This worksheet produces estimates based on the 2026 Washington State Child Support Schedule. All calculations are estimates only. Final orders are determined by a Washington State court.
+        <div className="card-standard !p-8 shadow-[var(--shadow-card)]">
+          <span className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest block mb-4">Parent 1 Transfer</span>
+          <p className="text-3xl font-bold text-[var(--color-text-primary)] tabular-nums">
+            {curFormatter.format(derivedData["17"]?.p1 || 0)}
           </p>
         </div>
-
-        <div id="summary-action-row" className="flex flex-col sm:flex-row justify-center gap-4 no-print pt-6">
-          <button
-            onClick={handleDownloadPDF}
-            className="btn-primary !h-14 !px-10 !rounded-xl !bg-blue-600 !text-white !font-bold !text-lg"
-          >
-            Download Official PDF
-          </button>
-          <button
-            onClick={() => window.print()}
-            className="btn-secondary !h-14 !px-10 !rounded-xl !border-gray-200 !text-gray-700 !font-bold"
-          >
-            Print Entire Worksheet
-          </button>
-          <button
-            onClick={handleCopyToClipboard}
-            className="text-sm font-bold text-gray-400 hover:text-blue-600 transition-colors"
-          >
-            Copy Summary to Clipboard
-          </button>
+        <div className="card-standard !p-8 shadow-[var(--shadow-card)]">
+          <span className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest block mb-4">Parent 2 Transfer</span>
+          <p className="text-3xl font-bold text-[var(--color-text-primary)] tabular-nums">
+            {curFormatter.format(derivedData["17"]?.p2 || 0)}
+          </p>
         </div>
-      </motion.div>
-    );
-  };
+      </div>
+
+      <div className="table-container shadow-[var(--shadow-card)]">
+        <table className="w-full text-left border-collapse min-w-[300px]">
+          <caption className="sr-only">Official Worksheet Data Breakdown</caption>
+          <thead>
+            <tr>
+              <th className="table-header-cell">Part / Field</th>
+              <th className="table-header-cell">P1</th>
+              <th className="table-header-cell">P2</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-[var(--color-bg-border-soft)]">
+            {[
+              { label: "Total Gross Income (1g)",   id: "1g"       },
+              { label: "Total Deductions (2j)",      id: "2j"       },
+              { label: "Monthly Net Income (3)",     id: "3",  highlight: true },
+              { label: "Proportional Share (6)",     id: "6",  type: "per"     },
+              { label: "Basic Support (Table)",      id: "base", value: calculation.baseSupport },
+              { label: "Adjustment Reason",          id: "8_reason", isReason: true },
+              { label: "SSR Protection (RCW 26.19.065(2)(b))", id: "ssr_adj", showIfNegative: true },
+              { label: "45% Net Income Cap (RCW 26.19.065(1))", id: "cap_adj", showIfNegative: true },
+              { label: "Final Basic Support (9)",    id: "9",  highlight: true },
+              { label: "Extra Expenses (14)",        id: "14"       },
+              { label: "Total Credits (16d)",        id: "16d"      },
+              { label: "Presumptive Transfer (17)",  id: "17", highlight: true, bold: true },
+              { label: "45% of Net Income Limit (18)", id: "18"     },
+              { label: "25% of Basic Support (19)",  id: "19"       },
+            ].map((row) => {
+              if (row.showIfNegative) {
+                const val1 = (derivedData[row.id] as any)?.p1 || 0;
+                const val2 = (derivedData[row.id] as any)?.p2 || 0;
+                if (val1 >= 0 && val2 >= 0) return null;
+              }
+              return (
+              <tr
+                key={row.id}
+                className={`${row.highlight ? "bg-[var(--color-brand-primary-light)]" : ""} hover:bg-[var(--color-bg-subtle)] transition-colors`}
+              >
+                <td className={`table-body-cell ${row.bold ? "font-bold text-[var(--color-text-primary)]" : "font-medium text-[var(--color-text-secondary)]"}`}>
+                  {row.label}
+                </td>
+                {row.isReason ? (
+                  <td colSpan={2} className="table-body-cell text-[12px] font-bold text-[var(--color-text-secondary)] uppercase italic">
+                    {derivedData[row.id]?.reason}
+                  </td>
+                ) : row.showIfNegative ? (
+                  <>
+                    <td className="table-body-cell tabular-nums font-bold text-amber-600">
+                      {curFormatter.format(derivedData[row.id]?.p1 || 0)}
+                    </td>
+                    <td className="table-body-cell tabular-nums font-bold text-amber-600">
+                      {curFormatter.format(derivedData[row.id]?.p2 || 0)}
+                    </td>
+                  </>
+                ) : row.value !== undefined ? (
+                  <td colSpan={2} className={`table-body-cell tabular-nums ${row.bold ? "text-xl font-bold text-[var(--color-text-primary)]" : "font-bold"}`}>
+                    {curFormatter.format(row.value)}
+                  </td>
+                ) : (
+                  <>
+                    <td className={`table-body-cell tabular-nums ${row.bold ? "text-xl font-bold text-[var(--color-brand-primary)]" : "font-bold text-[var(--color-text-primary)]"}`}>
+                      {row.type === "per"
+                        ? perFormatter.format(derivedData[row.id]?.p1 || 0)
+                        : curFormatter.format(derivedData[row.id]?.p1 || 0)}
+                    </td>
+                    <td className={`table-body-cell tabular-nums ${row.bold ? "text-xl font-bold text-[var(--color-brand-primary)]" : "font-bold text-[var(--color-text-primary)]"}`}>
+                      {row.type === "per"
+                        ? perFormatter.format(derivedData[row.id]?.p2 || 0)
+                        : curFormatter.format(derivedData[row.id]?.p2 || 0)}
+                    </td>
+                  </>
+                )}
+              </tr>
+            ); })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="callout-gray !p-8">
+        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed text-center max-w-3xl mx-auto italic">
+          Disclaimer: This is an estimate based on the 2026 Washington State Child Support Schedule. Actual support amounts may vary based on judicial deviations, custody arrangements, and localized court rules. This document is for informational use only and does not constitute a court order.
+        </p>
+      </div>
+
+      <div className="flex flex-col sm:flex-row justify-center gap-4 no-print">
+        <button
+          id="pdf-download-btn"
+          onClick={handleDownloadPDF}
+          className="btn-primary-lg btn-primary !rounded-full !px-10"
+        >
+          <CheckCircle2 className="w-5 h-5 mr-2" />
+          Download Official PDF
+        </button>
+        <button
+          onClick={() => window.print()}
+          className="btn-secondary-lg !rounded-full !px-10 h-[52px]"
+        >
+          <Printer className="w-5 h-5 mr-2" />
+          Print Entire Worksheet
+        </button>
+      </div>
+    </motion.div>
+  );
 
 
   /* ── MAIN RENDER ─────────────────────────────────────────────────── */
   return (
-    <div id="wizard" className="scroll-mt-24 min-h-screen bg-white flex flex-col lg:flex-row selection:bg-[var(--color-brand-primary-light)] selection:text-[var(--color-brand-primary-hover)] items-start">
+    <div id="wizard" className="scroll-mt-24 min-h-screen bg-white flex flex-col lg:flex-row selection:bg-[var(--color-brand-primary-light)] selection:text-[var(--color-brand-primary-hover)]">
 
       {/* ── PRINT-ONLY ALL STEPS ────────────────────────────────────────── */}
       <div className="hidden print:block w-full p-8 bg-white">
@@ -664,9 +614,9 @@ Estimate only — not legal advice`;
 
       {/* ── Desktop Sidebar ────────────────────────────────────────── */}
       {!showSummary && (
-        <aside className="no-print hidden lg:flex w-80 shrink-0 flex-col border-r border-[#e5e7eb] bg-white sticky top-0 h-screen overflow-y-auto pr-6">
-          <div className="flex flex-col h-full p-6 space-y-10">
-            <div className="flex items-center gap-4">
+        <aside className="no-print hidden lg:flex w-80 shrink-0 flex-col border-r border-[var(--color-bg-border)] bg-white sticky top-0 h-screen overflow-y-auto">
+          <div className="flex flex-col h-full p-6">
+            <div className="mb-10 flex items-center gap-4">
               <div className="p-2.5 bg-[var(--color-text-primary)] rounded-xl shadow-[var(--shadow-card-md)] shrink-0">
                 <Calculator className="w-6 h-6 text-[var(--color-brand-primary-light)]" />
               </div>
@@ -678,151 +628,63 @@ Estimate only — not legal advice`;
               </div>
             </div>
 
-            {/* Section 1 — Parts Navigation */}
-            <div>
-              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">PARTS</p>
-              <nav className="space-y-1" aria-label="Worksheet steps">
-                {PARTS.map((part, idx) => {
-                  const isCompleted = idx < currentStep;
-                  const isCurrent = idx === currentStep;
-                  const isFuture = idx > currentStep;
-                  const label = part.split(":")[1]?.trim() || part;
+            <nav className="flex-1 space-y-1 overflow-y-auto" aria-label="Worksheet steps">
+              {PARTS.map((part, idx) => (
+                <button
+                  key={part}
+                  onClick={() => goToStep(idx)}
+                  className={`w-full group flex items-start gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-sm font-semibold text-left ${
+                    currentStep === idx
+                      ? "bg-[var(--color-bg-subtle)] text-[var(--color-text-primary)]"
+                      : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-text-primary)]"
+                  }`}
+                >
+                  <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-[12px] font-bold border-2 transition-colors shrink-0 mt-0.5 ${
+                    currentStep === idx
+                      ? "bg-[var(--color-brand-primary)] border-[var(--color-brand-primary)] text-white shadow-[var(--shadow-card-md)] shadow-[var(--color-brand-primary)]/20"
+                      : idx < currentStep
+                      ? "bg-[var(--color-success-bg)] border-[var(--color-bg-border)] text-[var(--color-success)]"
+                      : "bg-white border-[var(--color-bg-border)] text-[var(--color-text-secondary)] group-hover:border-[var(--color-brand-primary)]"
+                  }`}>
+                    {idx < currentStep ? "✓" : idx + 1}
+                  </span>
+                  <span className="whitespace-normal leading-snug">{part}</span>
+                </button>
+              ))}
+            </nav>
 
-                  return (
-                    <button
-                      key={part}
-                      onClick={() => !isFuture && goToStep(idx)}
-                      disabled={isFuture}
-                      className={`w-full group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200 text-[13px] font-semibold text-left ${
-                        isCurrent
-                          ? "bg-blue-50 text-blue-700"
-                          : isFuture
-                          ? "text-gray-300 cursor-not-allowed"
-                          : "text-gray-500 hover:bg-gray-50"
-                      }`}
-                    >
-                      <span className="shrink-0">
-                        {isCompleted ? "✅" : isCurrent ? `${idx + 1} ·` : `${idx + 1} ·`}
-                      </span>
-                      <span className="truncate">{label}</span>
-                    </button>
-                  );
-                })}
-              </nav>
-            </div>
-
-            {/* Section 2 — Live Estimate Card */}
-            <div>
-              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">LIVE ESTIMATE</p>
-              <div className="p-5 rounded-2xl bg-gray-50 border border-gray-100">
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center text-[13px]">
-                    <span className="text-gray-500">Combined Income</span>
-                    <span className="font-bold text-gray-900">{hasIncomeInput ? curFormatter.format(calculation.combinedIncome) : "$0"}</span>
+            <motion.div
+              className={`mt-10 p-6 rounded-2xl relative overflow-hidden shadow-[var(--shadow-card-hover)] transition-all duration-300 ${
+                hasIncomeInput ? "bg-gradient-to-br from-indigo-600 to-purple-800" : "bg-purple-600/70"
+              }`}
+              layout
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-1.5 bg-white/10 rounded-lg shrink-0">
+                    <LayoutDashboard className="w-4 h-4 text-indigo-100" />
                   </div>
-                  <div className="flex justify-between items-center text-[13px]">
-                    <span className="text-gray-500">P1 Share</span>
-                    <span className="font-bold text-gray-900">{hasIncomeInput ? perFormatter.format(calculation.shareP1) : "—"}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-[13px]">
-                    <span className="text-gray-500">P2 Share</span>
-                    <span className="font-bold text-gray-900">{hasIncomeInput ? perFormatter.format(calculation.shareP2) : "—"}</span>
-                  </div>
-                  <hr className="border-gray-200" />
-                  <div className="flex justify-between items-baseline">
-                    <span className="text-[13px] font-bold text-gray-900">Est. Transfer</span>
-                    <span className="text-xl font-bold text-blue-600">
-                      {hasIncomeInput ? curFormatter.format(calculation.finalSupport) : "—"}
-                    </span>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-[10px] text-gray-400">Estimate only</p>
-                    {!hasIncomeInput && (
-                      <p className="text-[10px] text-gray-400 italic">Updates as you type</p>
-                    )}
-                    {hasIncomeInput && !formData["2a"]?.p1 && !formData["2a"]?.p2 && (
-                       <p className="text-[10px] text-gray-400 italic">Deductions not yet entered</p>
-                    )}
-                  </div>
+                  <span className={`text-[12px] font-bold text-white/70 uppercase tracking-widest ${!hasIncomeInput && "opacity-75"}`}>
+                    {hasIncomeInput ? "Est. Base Support" : "Base Support"}
+                  </span>
                 </div>
-              </div>
-            </div>
-
-            {/* Section 3 — Current Step Context */}
-            <div>
-              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">YOU ARE HERE</p>
-              <div className="space-y-3">
-                <p className="text-sm font-bold text-gray-900">{currentPartKey}</p>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  {partDescriptions[currentPartKey]}
+                <p className="text-3xl font-bold text-white tabular-nums">
+                  {hasIncomeInput ? curFormatter.format(calculation.baseSupport) : "—"}
                 </p>
+                {!hasIncomeInput && (
+                  <p className="text-[12px] font-bold text-white/60 uppercase tracking-widest mt-2">
+                    Enter income above
+                  </p>
+                )}
               </div>
-            </div>
-
-            {/* Section 4 — 2026 Key Values Reference */}
-            <div>
-              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">2026 KEY VALUES</p>
-              <div className="p-5 rounded-2xl bg-blue-50 border border-blue-100 space-y-4">
-                <div>
-                  <p className="text-[11px] font-bold text-blue-600 uppercase mb-1">Self-Support Reserve</p>
-                  <p className="text-lg font-bold text-gray-900">$2,394/mo</p>
-                  <p className="text-[10px] text-blue-500">RCW 26.19.065(2)(b)</p>
-                </div>
-                <div>
-                  <p className="text-[11px] font-bold text-blue-600 uppercase mb-1">Minimum Support</p>
-                  <p className="text-sm font-bold text-gray-900">$50 per child/month</p>
-                </div>
-                <div>
-                  <p className="text-[11px] font-bold text-blue-600 uppercase mb-1">Economic Table Max</p>
-                  <p className="text-sm font-bold text-gray-900">$50,000 combined net</p>
-                </div>
-                <div>
-                  <p className="text-[11px] font-bold text-blue-600 uppercase mb-1">SSR Update Date</p>
-                  <p className="text-sm font-bold text-gray-900">January 1, 2026</p>
-                </div>
-              </div>
-            </div>
-
-             {/* Section 5 — Progress Checklist */}
-             <div>
-              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">YOUR PROGRESS</p>
-              <div className="space-y-2">
-                {PARTS.map((part, idx) => {
-                   const isCompleted = idx < currentStep;
-                   const label = part.split(":")[1]?.trim() || part;
-                   return (
-                     <div key={idx} className="flex items-center gap-2 text-[12px]">
-                        <span>{isCompleted ? "✅" : "⬜"}</span>
-                        <span className={isCompleted ? "text-gray-500" : "text-gray-400"}>{part.split(":")[0]} · {label}</span>
-                     </div>
-                   )
-                })}
-                <hr className="border-gray-100 my-4" />
-                <p className="text-[12px] font-bold text-gray-900">{currentStep} of 8 parts complete</p>
-              </div>
-            </div>
-
-            {/* Section 6 — Need Help */}
-            <div className="pt-10 mt-auto">
-              <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-4">NEED HELP?</p>
-              <div className="space-y-3">
-                <a href="https://www.courts.wa.gov/forms/?fa=forms.contribute&formID=16" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-blue-600 hover:underline">
-                  <FileText className="w-4 h-4" /> 📄 AOC Instructions
-                </a>
-                <a href="https://www.courts.wa.gov/forms/documents/WSCSS_Schedule_2026_01.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-blue-600 hover:underline">
-                  <LayoutDashboard className="w-4 h-4" /> 📊 2026 Schedule PDF
-                </a>
-                <Link href="/editorial-methodology" className="flex items-center gap-2 text-sm text-blue-600 hover:underline">
-                  <Info className="w-4 h-4" /> 📖 Our Methodology
-                </Link>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </aside>
       )}
 
       {/* ── Main Content ───────────────────────────────────────────── */}
-      <main className="flex-1 flex flex-col min-w-0 w-full no-print pl-6">
+      <main className="flex-1 flex flex-col min-w-0 w-full no-print">
 
         {!showSummary && (
           <MobileStepNav
@@ -831,26 +693,24 @@ Estimate only — not legal advice`;
           />
         )}
 
-        <div className="flex-1 w-full bg-white">
-          <div className="container-wide py-12 lg:py-0">
+        <div className="flex-1 w-full bg-[var(--color-bg-subtle)]">
+          <div className="container-wide py-12 lg:py-20">
 
             {showSummary ? renderSummaryContent() : (
-              <div className="max-w-3xl mx-auto mt-0">
+              <div className="max-w-3xl mx-auto">
                 <ProgressBar currentStep={currentStep} />
 
-                <div className="card-standard !p-8 md:!p-8 shadow-[var(--shadow-card-md)] relative overflow-hidden mt-0">
+                <div className="card-standard !p-8 md:!p-16 shadow-[var(--shadow-card-md)] relative overflow-hidden">
                    <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-brand-primary-light)]/40 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
                   <div className="mb-12 md:mb-16 text-center md:text-left relative z-10">
-                    <div className="flex items-center gap-3 mb-6">
-                      <span className="inline-block px-4 py-1.5 bg-blue-600 text-white text-[12px] font-bold uppercase tracking-widest rounded-lg">
-                        Step {currentStep + 1} OF {PARTS.length}
-                      </span>
-                      <span className="text-[12px] font-bold text-blue-600 uppercase tracking-widest">Follows Official AOC Format · RCW 26.19 Compliant</span>
-                    </div>
+                    <span className="inline-block px-4 py-1.5 bg-white border border-[var(--color-bg-border)] text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest rounded-full mb-6">
+                      Step {currentStep + 1} OF {PARTS.length}
+                    </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-text-primary)] mb-6">{currentPartKey}</h2>
                     <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-2xl">
-                      {partDescriptions[currentPartKey]}
+                      Fill in the mandatory fields below. Your live support estimate updates
+                      automatically as you input income and deduction details.
                     </p>
                   </div>
 
@@ -864,54 +724,7 @@ Estimate only — not legal advice`;
                       className="relative z-10"
                     >
                       <div className="space-y-10">
-                        {currentStep === 0 && (
-                          <div className="mb-10 pb-10 border-b border-gray-200">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                              <div className="col-span-full mb-2">
-                                <p className="text-sm font-bold text-gray-900 tracking-widest uppercase">CASE INFORMATION</p>
-                                <p className="text-xs text-gray-500 mt-1">These fields identify your case for court filing. They do not affect any calculations.</p>
-                              </div>
-                              <div className="space-y-2">
-                                <label htmlFor="county-select" className="text-[15px] font-bold text-gray-900">County</label>
-                                <select
-                                  id="county-select"
-                                  value={county}
-                                  onChange={(e) => setCounty(e.target.value)}
-                                  className="input-standard w-full"
-                                >
-                                  <option value="">Select County</option>
-                                  {[
-                                    "Adams", "Asotin", "Benton", "Chelan", "Clallam", "Clark", "Columbia", "Cowlitz", "Douglas", "Ferry",
-                                    "Franklin", "Garfield", "Grant", "Grays Harbor", "Island", "Jefferson", "King", "Kitsap", "Kittitas", "Klickitat",
-                                    "Lewis", "Lincoln", "Mason", "Okanogan", "Pacific", "Pend Oreille", "Pierce", "San Juan", "Skagit", "Skamania",
-                                    "Snohomish", "Spokane", "Stevens", "Thurston", "Wahkiakum", "Walla Walla", "Whatcom", "Whitman", "Yakima"
-                                  ].map(c => (
-                                    <option key={c} value={c}>{c} County</option>
-                                  ))}
-                                </select>
-                              </div>
-                              <div className="space-y-2">
-                                <label htmlFor="case-number" className="text-[15px] font-bold text-gray-900">Case Number (optional)</label>
-                                <input
-                                  id="case-number"
-                                  type="text"
-                                  value={caseNumber}
-                                  onChange={(e) => setCaseNumber(e.target.value)}
-                                  placeholder="e.g. 24-2-12345-6"
-                                  className="input-standard w-full"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        )}
-
-                        {currentStep === 0 && (
-                          <div className="mb-6">
-                            <p className="text-sm font-bold text-gray-900 tracking-widest uppercase">PART 1: INCOME</p>
-                          </div>
-                        )}
-
-                        {currentPartKey === "Part 2: Basic Child Support Obligation" && (
+                        {currentPartKey === "Part II: Basic Child Support Obligation" && (
                           <div className="mb-10 pb-10 border-b border-[var(--color-bg-border-soft)]">
                             <ParentingTimeSelector
                               useParentingDeviation={useParentingDeviation}
@@ -922,24 +735,16 @@ Estimate only — not legal advice`;
                           </div>
                         )}
 
-                        {currentFields.map((field: WorksheetField, idx: number) => {
+                        {currentFields.map((field: WorksheetField) => {
                           const isCalculated = ["1g","2j","3","4","5_per_child","6","18","19"].includes(field.id);
                           const values = isCalculated
                             ? { p1: derivedData[field.id]?.p1 ?? 0, p2: derivedData[field.id]?.p2 ?? 0 }
                             : (formData[field.id] || { p1: "", p2: "" });
-
-                          const showDeductionsDivider = field.id === "2a";
-
                           return (
                             <div
                               key={field.id}
-                              className={`${isCalculated ? "pointer-events-none select-none bg-[var(--color-bg-subtle)] p-6 rounded-2xl border border-[var(--color-bg-border)] mb-4" : "mb-6"}`}
+                              className={isCalculated ? "pointer-events-none select-none bg-[var(--color-bg-subtle)] p-6 rounded-2xl border border-[var(--color-bg-border)]" : ""}
                             >
-                            {showDeductionsDivider && (
-                              <div className="col-span-full border-t border-gray-200 pt-8 pb-4 mb-8 -mx-8 px-8 bg-gray-50/50">
-                                <p className="text-sm font-bold text-gray-900 tracking-widest uppercase">MONTHLY DEDUCTIONS FROM GROSS INCOME</p>
-                              </div>
-                            )}
                             <>
                               {field.id === "5_children" ? (
                                 <div className="mb-8">
@@ -965,8 +770,6 @@ Estimate only — not legal advice`;
                                   field={field}
                                   values={values as ParentValue}
                                   onChange={(parent, val) => handleInputChange(field.id, parent, val)}
-                                  activeTooltip={activeTooltip}
-                                  setActiveTooltip={setActiveTooltip}
                                 />
                               )}
                               {field.id === "8_reserve" && (
@@ -980,7 +783,7 @@ Estimate only — not legal advice`;
                                   <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: "linear" }}>
                                     <Calculator className="w-3 h-3" />
                                   </motion.div>
-                                  Calculated automatically
+                                  Auto-Calculating…
                                 </div>
                               )}
                             </div>
@@ -990,7 +793,7 @@ Estimate only — not legal advice`;
                     </motion.div>
                   </AnimatePresence>
 
-                  <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-[var(--color-bg-border-soft)] relative z-10">
+                  <div className="mt-16 md:mt-24 flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-[var(--color-bg-border-soft)] relative z-10">
                     <button
                       onClick={prevStep}
                       disabled={currentStep === 0}
@@ -1017,7 +820,7 @@ Estimate only — not legal advice`;
                 <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6 px-4">
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 bg-[var(--color-success)] rounded-full animate-pulse" />
-                      <span className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest">Follows Official AOC Format · RCW 26.19 Compliant</span>
+                    <span className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest">AOC-Certified Worksheet v2026.01</span>
                   </div>
                   <div className="flex gap-8">
                     <Link href="/privacy" className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest hover:text-[var(--color-brand-primary)] transition-colors">
@@ -1036,25 +839,22 @@ Estimate only — not legal advice`;
 
       {!showSummary && (
         <div
-          className="lg:hidden no-print fixed bottom-0 left-0 right-0 px-6 h-16 bg-white border-t border-gray-200 z-50 flex items-center justify-between shadow-[0_-4px_20px_rgba(0,0,0,0.05)]"
-          style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+          className="lg:hidden no-print fixed bottom-0 left-0 right-0 px-6 pt-4 bg-white/95 backdrop-blur-2xl border-t border-[var(--color-bg-border)] z-50 flex items-center justify-between shadow-[0_-8px_30px_rgba(0,0,0,0.08)]"
+          style={{ paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))" }}
         >
-          <div className="flex items-center gap-2">
-            <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">Est. Transfer</span>
-              <div className="flex items-center gap-1.5">
-                <span className="text-lg font-bold text-gray-900 tabular-nums">
-                  {hasIncomeInput ? curFormatter.format(calculation.finalSupport) : "—"}
-                </span>
-                {calculation.ssrApplied && <div className="w-2 h-2 bg-amber-400 rounded-full" title="SSR Applied" />}
-              </div>
-            </div>
+          <div className={`transition-opacity duration-300 ${!hasIncomeInput ? "opacity-70" : "opacity-100"}`}>
+            <p className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-widest mb-1">
+              {hasIncomeInput ? "Est. Support" : "Enter income"}
+            </p>
+            <p className="text-2xl font-bold text-[var(--color-text-primary)] tabular-nums">
+              {hasIncomeInput ? curFormatter.format(calculation.baseSupport) : "—"}
+            </p>
           </div>
           <button
             onClick={nextStep}
-            className="btn-primary !rounded-full !px-8 h-11 text-sm font-bold shadow-lg shadow-blue-600/20"
+            className="btn-primary !rounded-full !px-8 h-12 shadow-[var(--shadow-card-md)] shadow-[var(--color-brand-primary)]/20"
           >
-            {currentStep === PARTS.length - 1 ? "Get Summary" : "Continue →"}
+            {currentStep === PARTS.length - 1 ? "Get Summary" : "Next Step"}
           </button>
         </div>
       )}
