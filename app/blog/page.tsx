@@ -34,13 +34,13 @@ export default async function BlogPage({
   return (
     <div className="flex-1 bg-white relative overflow-hidden w-full">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 md:py-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+      <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div
           aria-hidden="true"
           className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
         />
 
-        <div className="container-wide relative z-10">
+        <div className="container-wide relative z-10 text-left">
           <div className="max-w-3xl">
             <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-4">
               Resource Center

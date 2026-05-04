@@ -367,7 +367,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
       <CalculatorSchema income={income} childCount={children} county={countyName} url={`https://wcssc.site/${slug}`} resultAmount={supportNum !== null ? supportNum : undefined} />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
-      <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+      <section className="bg-white pt-8 pb-12 lg:pt-12 lg:pb-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div
           aria-hidden="true"
           className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
@@ -376,7 +376,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
         <div className="container-wide relative z-10">
           <Breadcrumbs county={county} income={income} />
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 text-left">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
               {formattedIncome} Support in <span className="text-blue-600">{locationName}</span>
             </h1>

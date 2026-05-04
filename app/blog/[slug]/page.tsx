@@ -97,13 +97,13 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div className="flex-1 bg-white relative overflow-hidden">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
-      <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+      <section className="bg-white pt-8 pb-12 lg:pt-12 lg:pb-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div
           aria-hidden="true"
           className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
         />
 
-        <div className="container-reading relative z-10">
+        <div className="container-reading relative z-10 text-left">
           <nav className="mb-8">
             <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors">
               <ArrowLeft size={16} />

@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ChevronRight, CheckCircle, Calculator, Scale, Shield, MapPin, Calendar } from "lucide-react";
 import HomeCalculator from "@/components/HomeCalculator";
-import HeroCard from "@/components/hero/HeroCard";
 import FAQAccordion from "@/components/FAQAccordion";
 import { getSupport } from "@/data/washingtonTable2026";
 
@@ -40,7 +39,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section
         aria-label="Washington Child Support Calculator Hero"
-        className="bg-white pt-20 pb-0 lg:pt-28 lg:pb-0 relative overflow-hidden"
+        className="bg-white pt-8 pb-0 lg:pt-12 lg:pb-0 relative overflow-hidden"
       >
         {/* Background Decoration */}
         <div
@@ -49,10 +48,10 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-16">
 
-            {/* Left Column */}
-            <div className="flex-1 text-center lg:text-left">
+            {/* Hero Content */}
+            <div className="flex-1 text-left">
               <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-3">
                 Free · No Sign-up · 2026 Guidelines
               </p>
@@ -61,12 +60,12 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                 Washington Child Support Calculator <span className="text-blue-600">2026</span>
               </h1>
 
-              <p className="text-lg text-gray-500 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+              <p className="text-lg text-gray-500 leading-relaxed mb-8 max-w-2xl">
                 Calculate your exact monthly obligation using the official 2026 RCW 26.19 economic tables.
                 Trusted by Washington parents and family law attorneys across all 39 counties.
               </p>
 
-              <div className="flex flex-col items-center lg:items-start gap-4 mb-8">
+              <div className="flex flex-col items-start gap-4 mb-8">
                 <Link
                   href="/#calculator"
                   className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-10 py-5 rounded-2xl text-lg transition-all duration-200 shadow-lg hover:shadow-blue-200 active:scale-[0.98] w-full sm:w-auto text-center"
@@ -81,7 +80,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                 </Link>
               </div>
 
-              <ul role="list" className="flex flex-wrap gap-x-6 gap-y-2 justify-center lg:justify-start">
+              <ul role="list" className="flex flex-wrap gap-x-6 gap-y-2 justify-start">
                 {[
                   "No sign-up required",
                   "Instant results",
@@ -93,11 +92,6 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Right Column */}
-            <div className="flex-shrink-0 w-full lg:w-96 hidden md:block">
-              <HeroCard />
             </div>
           </div>
         </div>

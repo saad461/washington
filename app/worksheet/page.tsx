@@ -170,20 +170,20 @@ export default function WorksheetPage() {
       />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
-      <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+      <section className="bg-white pt-8 pb-12 lg:pt-12 lg:pb-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div
           aria-hidden="true"
           className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
         />
 
-        <div className="container-wide relative z-10">
+        <div className="container-wide relative z-10 text-left">
           <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-6">
             <ArrowLeft size={16} />
             Back to Calculator
           </Link>
 
           <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
+            <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap justify-start">
               <li>
                 <a href="/" className="hover:text-blue-600">
                   Home
