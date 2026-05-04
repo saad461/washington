@@ -22,13 +22,20 @@ export default function ComparisonTool() {
 
   if (parsedIncome >= 0 && parsedIncome <= 2200) {
     if (actual2026 !== null) {
-      actual2024 = Math.round(actual2026 * 0.95); // -5% modifier for low income (old SSR)
+      // 2024 values were generally ~4.2% lower, and the SSR threshold was lower ($2,258 vs $2,394)
+      actual2024 = Math.round((actual2026 / 1.042) * 0.98);
     }
   } else if (parsedIncome >= 2201 && parsedIncome <= 12000) {
-    actual2024 = actual2026; // Exactly the same
+    // Standard table tiers increased by ~4.2% in 2026
+    if (actual2026 !== null) {
+      actual2024 = Math.round(actual2026 / 1.042);
+    }
   } else if (parsedIncome > 12000) {
-    const res2024 = getExactSupport(12000, children);
-    actual2024 = res2024.status === "calculated" ? res2024.totalSupport : null; // Frozen at 12000 cap for 2024
+    // 2024 table capped at $12,000. We take the 2024 value for the $12,000 bracket.
+    const res12k = getExactSupport(12000, children);
+    if (res12k.status === "calculated") {
+      actual2024 = Math.round(res12k.totalSupport / 1.042);
+    }
   }
 
   const difference = (actual2026 || 0) - (actual2024 || 0);
@@ -104,6 +111,44 @@ export default function ComparisonTool() {
 
             <div className={`p-6 rounded-xl border text-center font-bold tracking-widest uppercase text-[12px] ${statusColor}`}>
               {statusText}
+            </div>
+          </div>
+
+          {/* ── SEO CONTENT: DESKTOP ONLY ────────────────────────────────── */}
+          <div className="hidden lg:block mt-12 space-y-10">
+            <div className="p-1 border-l-2 border-blue-600 pl-6">
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">2026 Guideline Overview</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                The 2026 Washington Child Support update represents a major shift in how obligations are calculated, particularly for high-income households. By expanding the economic table from a $12,000 cap to a $50,000 cap, the legislature has reduced judicial uncertainty and created a more predictable framework for families across the state.
+              </p>
+            </div>
+
+            <div className="p-1 border-l-2 border-gray-200 pl-6">
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">The 180% SSR Benchmark</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                A key pillar of the new rules is the adjustment of the Self-Support Reserve (SSR). Now indexed to 180% of the federal poverty level, the approximately $2,394 reserve protects the payer's ability to maintain a basic standard of living. This change often results in lower presumptive payments for those near the Washington minimum wage threshold.
+              </p>
+            </div>
+
+            <div className="p-1 border-l-2 border-gray-200 pl-6">
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">Economic Table Expansion</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                Historically, Washington's economic table ended at $12,000 combined monthly net income, leaving higher incomes to judicial "extrapolation." The 2026 update provides presumptive figures up to $50,000, ensuring that high-earning households have a clear, data-driven starting point for support discussions.
+              </p>
+            </div>
+
+            <div className="p-1 border-l-2 border-gray-200 pl-6">
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">Modernized Deductions</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                The 2026 calculations now formally account for mandatory state insurance premiums, including WA Cares and PFML. By allowing these as specific deductions from gross income, the New 2026 Presumptive amount more accurately reflects a parent's true "disposable" income before the table is applied.
+              </p>
+            </div>
+
+            <div className="p-1 border-l-2 border-gray-200 pl-6">
+              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">Modification Eligibility</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                Under RCW 26.09.170, a change in the statutory economic tables can be a basis for modifying an existing child support order. If your current order was calculated using the legacy 2024 tables, the 2026 update may represent a "substantial change in circumstances" allowing for a legal adjustment of your monthly transfer payment.
+              </p>
             </div>
           </div>
         </div>
