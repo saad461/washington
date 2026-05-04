@@ -33,6 +33,7 @@ export interface ChildSupportResult {
     otherChildrenAdjustment: number;
     healthInsurance: number;
     daycare: number;
+    extraCosts: number;
     ssrAdjustment: number;
     cap45Adjustment: number;
   };
@@ -160,6 +161,7 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
   let otherChildrenAdjustment = 0;
   let healthcareAdjustment = 0;
   let daycareAdjustment = 0;
+  let extraCostsAdjustment = 0;
 
   // Only apply deviations and other adjustments if income is above low-income threshold
   if (combinedIncome >= 2200) {
@@ -211,37 +213,6 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
         adjustmentReason = tierLabel;
       }
     }
-
-
-    // Healthcare & daycare
-    const totalHealth = healthInsurance;
-    const totalDaycare = daycare;
-
-    if (totalHealth > 0) {
-      const share = payingParent === "P1" ? totalHealth * shareP1 : totalHealth * shareP2;
-      if (payingParent === "P1") obligationP1 += share; else obligationP2 += share;
-      healthcareAdjustment = share;
-    }
-    if (totalDaycare > 0) {
-      const share = payingParent === "P1" ? totalDaycare * shareP1 : totalDaycare * shareP2;
-      if (payingParent === "P1") obligationP1 += share; else obligationP2 += share;
-      daycareAdjustment = share;
-
-  }
-
-  // ── SSR PROTECTION & FLOOR ───────────────────────────────────────────────
-  const originalObligationP1 = obligationP1;
-  const originalObligationP2 = obligationP2;
-
-  const applySSR = (obligation: number, netIncome: number) => {
-    const minFloor = MIN_SUPPORT_PER_CHILD * children;
-    if (netIncome - obligation < SELF_SUPPORT_RESERVE) {
-      const reduced = netIncome - SELF_SUPPORT_RESERVE;
-      if (reduced < obligation) {
-        return Math.max(reduced, minFloor);
-      }
- 
-    }
   }
 
   const postDevP1 = obligationP1;
@@ -249,17 +220,17 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
 
   // ── HEALTHCARE & DAYCARE (LINE 14) ──────────────────────────────────────
   // Applied AFTER SSR reduction per request
-  const totalExtra = healthInsurance + daycare;
-  let extraP1 = 0;
-  let extraP2 = 0;
-  if (totalExtra > 0) {
-    extraP1 = totalExtra * shareP1;
-    extraP2 = totalExtra * shareP2;
-    obligationP1 += extraP1;
-    obligationP2 += extraP2;
-    extraCostsAdjustment = payingParent === "P1" ? extraP1 : extraP2;
+  if (healthInsurance > 0) {
+    const share = payingParent === "P1" ? healthInsurance * shareP1 : healthInsurance * shareP2;
+    if (payingParent === "P1") obligationP1 += share; else obligationP2 += share;
+    healthcareAdjustment = share;
   }
- 
+  if (daycare > 0) {
+    const share = payingParent === "P1" ? daycare * shareP1 : daycare * shareP2;
+    if (payingParent === "P1") obligationP1 += share; else obligationP2 += share;
+    daycareAdjustment = share;
+  }
+  extraCostsAdjustment = healthcareAdjustment + daycareAdjustment;
 
   // ── 45% NET INCOME CAP (RCW 26.19.065(1)) ────────────────────────────────
   const apply45Cap = (obligation: number, netIncome: number) => {
@@ -278,10 +249,6 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
   obligationP2 = apply45Cap(obligationP2, netP2);
 
   const is45PercentCapped =
- 
-    (payingParent === "P1" && obligationP1 < postDevP1) ||
-    (payingParent === "P2" && obligationP2 < postDevP2);
-
     (payingParent === "P1" && obligationP1 < preCapP1) ||
     (payingParent === "P2" && obligationP2 < preCapP2);
 
@@ -311,16 +278,11 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
       baseSupport: payingParent === "P1" ? presumptiveP1 : presumptiveP2,
       parentingAdjustment,
       otherChildrenAdjustment,
-
       healthInsurance: healthcareAdjustment,
       daycare: daycareAdjustment,
-      ssrAdjustment: payingParent === "P1" ? postSSRP1 - preSSRP1 : postSSRP2 - preSSRP2,
-      cap45Adjustment: payingParent === "P1" ? obligationP1 - postDevP1 : obligationP2 - postDevP2,
-
       extraCosts: extraCostsAdjustment,
-      ssrAdjustment: payingParent === "P1" ? postSSRP1 - originalObligationP1 : postSSRP2 - originalObligationP2,
+      ssrAdjustment: payingParent === "P1" ? postSSRP1 - preSSRP1 : postSSRP2 - preSSRP2,
       cap45Adjustment: payingParent === "P1" ? obligationP1 - preCapP1 : obligationP2 - preCapP2,
- 
     },
     ssrApplied,
     is45PercentCapped,
