@@ -12,15 +12,15 @@ export default function TermsPage() {
   return (
     <div className="flex-1 bg-white">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 md:py-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+      <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div
           aria-hidden="true"
           className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
         />
 
-        <div className="container-reading relative z-10">
+        <div className="container-reading relative z-10 text-left">
           <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap">
+            <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap justify-start">
               <li>
                 <Link href="/" className="hover:text-blue-600 transition-colors">
                   Home

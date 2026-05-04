@@ -14,14 +14,14 @@ export default function ContactPage() {
   return (
     <div className="flex-1 bg-white">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
-      <section className="bg-white py-16 md:py-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+      <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         {/* Background Decoration */}
         <div
           aria-hidden="true"
           className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
         />
 
-        <div className="container-wide relative z-10">
+        <div className="container-wide relative z-10 text-left">
           {/* Back Link */}
           <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors mb-8">
             <ArrowLeft size={16} />
