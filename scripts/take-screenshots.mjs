@@ -63,7 +63,19 @@ async function takeScreenshots() {
       viewport: { width: 1440, height: 900 },
       url: '/worksheet',
       populated: 'summary',
-    }
+    },
+    {
+      name: 'courts-desktop',
+      viewport: { width: 1440, height: 900 },
+      url: '/washington-courts',
+      populated: false,
+    },
+    {
+      name: 'county-king-desktop',
+      viewport: { width: 1440, height: 900 },
+      url: '/washington-courts/king-county',
+      populated: false,
+    },
   ];
 
   for (const scenario of scenarios) {
