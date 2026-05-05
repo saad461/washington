@@ -248,10 +248,10 @@ export default async function GlossaryTermPage({ params }: Props) {
                </p>
 
                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-                 <Link href="/" className="btn btn-primary bg-white text-blue-600 hover:bg-blue-50 w-full sm:w-auto !rounded-full !px-10 !py-4 font-bold text-lg shadow-lg">
+                 <Link href="/" className="btn btn-primary !bg-white !text-blue-600 hover:!bg-blue-50 w-full sm:w-auto !rounded-full !px-10 !py-4 font-bold text-lg shadow-lg">
                    Start Free Estimate →
                  </Link>
-                 <Link href="/worksheet" className="btn btn-secondary border-2 border-white/30 text-white hover:bg-white/10 w-full sm:w-auto !rounded-full !px-10 !py-4 font-bold text-lg">
+                 <Link href="/worksheet" className="btn btn-secondary !bg-transparent !border-2 !border-white/30 !text-white hover:!bg-white/10 w-full sm:w-auto !rounded-full !px-10 !py-4 font-bold text-lg">
                    Use Full Worksheet →
                  </Link>
                </div>
