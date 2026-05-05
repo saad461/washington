@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { glossaryTerms } from '@/data/glossary';
-import { BookA, ChevronRight, Calculator, ArrowLeft, Scale } from 'lucide-react';
+import { ChevronRight, Calculator, ArrowLeft, Scale, BookOpen, Calculator as CalcIcon, HelpCircle, Link as LinkIcon, FileText } from 'lucide-react';
+import FAQAccordion from '@/components/FAQAccordion';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -58,71 +59,149 @@ export default async function GlossaryTermPage({ params }: Props) {
           </Link>
 
           <header className="flex flex-col gap-6">
-            <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600">
-              Legal Definition
-            </p>
+            <div>
+              <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-100 uppercase tracking-wider">
+                {termData.category}
+              </span>
+            </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight">
               {termData.h1Title}
             </h1>
+            <p className="text-xl text-gray-600 leading-relaxed max-w-3xl">
+              {termData.definition}
+            </p>
           </header>
         </div>
       </section>
 
-      {/* ── DEFINITION & EXAMPLE ───────────────────────────────────────── */}
-      <section className="section-default bg-[var(--color-bg-subtle)]">
-        <div className="container-reading">
-          <article className="card-standard !p-8 md:!p-12 shadow-xl border-none">
-            <div className="space-y-12">
-              <section>
-                <p className="text-xs font-bold text-gray-400 mb-6 uppercase tracking-widest">Formal Definition</p>
-                <p className="text-2xl md:text-4xl text-gray-900 font-bold leading-tight border-l-4 border-blue-600 pl-8 py-2">
-                  {termData.definition}
-                </p>
-              </section>
+      {/* ── CONTENT BODY ───────────────────────────────────────────────── */}
+      <section className="py-16 bg-white">
+        <div className="container-reading space-y-20">
 
-              <section className="bg-blue-50/50 rounded-3xl p-8 md:p-10 border border-blue-100">
-                <div className="flex items-center gap-3 mb-6">
-                  <Scale className="w-5 h-5 text-blue-600" />
-                  <h4 className="text-xl font-bold text-gray-900 uppercase tracking-tight">Real-World Application</h4>
-                </div>
-                <p className="text-lg text-gray-700 leading-relaxed italic">
-                  &ldquo;{termData.example}&rdquo;
-                </p>
-              </section>
+          {/* Legal Definition */}
+          <section>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-blue-50 rounded-lg">
+                <Scale className="w-5 h-5 text-blue-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900">Legal Definition Under Washington Law</h2>
             </div>
-          </article>
-        </div>
-      </section>
+            <div className="prose prose-blue max-w-none">
+              <p className="text-lg text-gray-700 leading-relaxed border-l-4 border-blue-600 pl-6 py-1 italic bg-blue-50/30 rounded-r-lg">
+                {termData.legalDefinition}
+              </p>
+            </div>
+          </section>
 
-      {/* ── RELATED RESOURCES ──────────────────────────────────────────── */}
-      <section className="section-default bg-white">
-        <div className="container-reading">
-          <h3 className="text-xs font-bold text-gray-400 mb-10 uppercase tracking-widest text-center">Related Tools & Resources</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {termData.relatedLinks.map((link, idx) => (
-              <Link
-                key={idx}
-                href={link.href}
-                className="flex items-center justify-between p-8 bg-[var(--color-bg-subtle)] hover:bg-white hover:border-blue-300 hover:shadow-lg text-gray-900 rounded-3xl transition-all group border border-gray-100"
-              >
-                <span className="flex items-center gap-4 font-bold text-lg">
-                  <Calculator className="w-6 h-6 text-blue-600" />
-                  {link.label}
-                </span>
-                <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-blue-600 transition-colors" />
-              </Link>
-            ))}
-          </div>
+          {/* How it Works */}
+          <section>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-blue-50 rounded-lg">
+                <BookOpen className="w-5 h-5 text-blue-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900">How {termData.name} Works in Practice</h2>
+            </div>
+            <div className="space-y-6">
+              {termData.howItWorks.map((para, i) => (
+                <p key={i} className="text-lg text-gray-700 leading-relaxed">
+                  {para}
+                </p>
+              ))}
+            </div>
+          </section>
 
-          <div className="mt-24 card-standard border-dashed border-2 border-gray-200 !p-12 text-center shadow-none bg-[var(--color-bg-subtle)]">
-            <h2 className="text-2xl font-bold mb-6 text-gray-900">Need a full calculation?</h2>
-            <p className="text-lg text-gray-500 mb-8 max-w-lg mx-auto leading-relaxed">
-              Use our 2026 Washington State estimator to see how these legal terms impact your support amount.
+          {/* Real-World Example */}
+          <section className="bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-100 shadow-sm">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-2 bg-blue-600 rounded-lg">
+                <CalcIcon className="w-5 h-5 text-white" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900">Real-World Example</h2>
+            </div>
+            <div className="bg-white rounded-2xl p-6 md:p-8 font-mono text-sm md:text-base text-gray-800 border border-gray-200 whitespace-pre-wrap leading-relaxed shadow-inner">
+              {termData.fullExample}
+            </div>
+          </section>
+
+          {/* How it Affects Amount */}
+          <section>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-blue-50 rounded-lg">
+                <FileText className="w-5 h-5 text-blue-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900">How {termData.name} Affects Your Child Support Amount</h2>
+            </div>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              {termData.howItAffects}
             </p>
-            <Link href="/" className="btn-primary-lg btn-primary !rounded-full">
-              Start Free Estimate
-            </Link>
+          </section>
+
+          {/* FAQs */}
+          <section>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-2 bg-blue-50 rounded-lg">
+                <HelpCircle className="w-5 h-5 text-blue-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
+            </div>
+            <FAQAccordion faqs={termData.faqs} defaultOpenCount={1} />
+          </section>
+
+          {/* Related Terms */}
+          <section>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-2 bg-blue-50 rounded-lg">
+                <LinkIcon className="w-5 h-5 text-blue-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900">Related Terms</h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {termData.relatedTerms.map((link, idx) => (
+                <Link
+                  key={idx}
+                  href={link.href}
+                  className="flex items-center justify-between p-5 bg-white border border-gray-200 hover:border-blue-300 hover:shadow-md rounded-xl transition-all group"
+                >
+                  <span className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    {link.label}
+                  </span>
+                  <ChevronRight className="w-4 h-4 text-gray-300 group-hover:text-blue-600 transition-colors" />
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* CTA Section */}
+          <div className="pt-10 border-t border-gray-100">
+            <div className="bg-blue-600 rounded-[2.5rem] p-8 md:p-16 text-center text-white relative overflow-hidden shadow-2xl">
+               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+               <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-900/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+
+               <h2 className="text-3xl md:text-4xl font-bold mb-6 relative z-10">Need a full calculation?</h2>
+               <p className="text-lg text-blue-100 mb-10 max-w-2xl mx-auto leading-relaxed relative z-10">
+                 Use our 2026 Washington State estimator to see how these legal terms impact your support amount. All calculators are RCW 26.19 compliant.
+               </p>
+
+               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
+                 <Link href="/" className="btn-primary bg-white text-blue-600 hover:bg-blue-50 w-full sm:w-auto !rounded-full !px-10 !py-4 font-bold text-lg shadow-lg">
+                   Start Free Estimate →
+                 </Link>
+                 <Link href="/worksheet" className="btn-secondary border-2 border-white/30 text-white hover:bg-white/10 w-full sm:w-auto !rounded-full !px-10 !py-4 font-bold text-lg">
+                   Use Full Worksheet →
+                 </Link>
+               </div>
+            </div>
           </div>
+
+          {/* RCW Reference Footer */}
+          <footer className="pt-8 text-center border-t border-gray-100">
+            <p className="text-sm text-gray-400 font-medium tracking-wide uppercase">
+              Statutory Source: <span className="text-gray-600">{termData.rcw}</span>
+            </p>
+            <p className="mt-8 text-xs text-gray-400 max-w-2xl mx-auto leading-relaxed italic">
+              Disclaimer: This information is for educational purposes only and does not constitute legal advice. Child support laws are complex; always consult with a qualified family law attorney or the Washington Division of Child Support (DCS) for your specific case.
+            </p>
+          </footer>
         </div>
       </section>
     </div>
