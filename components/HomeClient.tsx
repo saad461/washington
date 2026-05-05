@@ -51,7 +51,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
             {/* Hero Content */}
-            <div className="flex-1 text-left">
+            <div className="flex-1 text-center lg:text-left flex flex-col items-center lg:items-start">
               <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-3">
                 Free · No Sign-up · 2026 Guidelines
               </p>
@@ -65,7 +65,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                 Trusted by Washington parents and family law attorneys across all 39 counties.
               </p>
 
-              <div className="flex flex-col items-start gap-4 mb-8">
+              <div className="flex flex-col items-center lg:items-start gap-4 mb-8 w-full sm:w-auto">
                 <Link
                   href="/#calculator"
                   className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-10 py-5 rounded-2xl text-lg transition-all duration-200 shadow-lg hover:shadow-blue-200 active:scale-[0.98] w-full sm:w-auto text-center"
@@ -80,7 +80,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                 </Link>
               </div>
 
-              <ul role="list" className="flex flex-wrap gap-x-6 gap-y-2 justify-start">
+              <ul role="list" className="flex flex-wrap gap-x-6 gap-y-2 justify-center lg:justify-start">
                 {[
                   "No sign-up required",
                   "Instant results",
