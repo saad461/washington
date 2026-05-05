@@ -5,7 +5,7 @@ import { Scale, CheckCircle2, ShieldCheck, ArrowLeft, ChevronRight } from "lucid
 import CalculatorSchema from "@/components/CalculatorSchema";
 
 export const metadata: Metadata = {
-  title: "Editorial Methodology — WCSSC",
+  title: "Editorial Methodology — WSCSS",
   description: "Learn about the independent editorial methodology behind the Washington Child Support Calculator.",
   alternates: { canonical: 'https://wscss.site/editorial-methodology' },
 };
@@ -36,7 +36,7 @@ export default function EditorialMethodology() {
               Our Editorial <span className="text-blue-600">Methodology</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              At WCSSC, accuracy in child support estimation is our primary mission. Our calculator is engineered to mirror the official Washington State Child Support Schedule (WSCSS).
+              At WSCSS, accuracy in child support estimation is our primary mission. Our calculator is engineered to mirror the official Washington State Child Support Schedule (WSCSS).
             </p>
           </div>
         </div>
@@ -53,7 +53,7 @@ export default function EditorialMethodology() {
           </div>
           <div className="prose prose-gray prose-lg max-w-none text-[var(--color-text-body)]">
             <p>
-              All calculations performed by WCSSC are based on <strong className="text-[var(--color-text-primary)]">Chapter 26.19</strong> of the Revised Code of Washington (RCW). We specifically integrate the following standards into our algorithmic logic:
+              All calculations performed by WSCSS are based on <strong className="text-[var(--color-text-primary)]">Chapter 26.19</strong> of the Revised Code of Washington (RCW). We specifically integrate the following standards into our algorithmic logic:
             </p>
             <ul className="space-y-4 mt-8 list-none pl-0">
               {[

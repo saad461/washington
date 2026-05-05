@@ -31,11 +31,11 @@ Call log:
   - banner [ref=e3]:
     - generic [ref=e4]:
       - generic [ref=e5]:
-        - link "WCSSC — Home" [ref=e6] [cursor=pointer]:
+        - link "WSCSS — Home" [ref=e6] [cursor=pointer]:
           - /url: /
           - img [ref=e8]
           - generic [ref=e10]:
-            - generic [ref=e11]: WCSSC
+            - generic [ref=e11]: WSCSS
             - generic [ref=e12]: Washington State
         - generic [ref=e15]:
           - generic:
@@ -209,8 +209,8 @@ Call log:
       - generic [ref=e190]:
         - generic [ref=e191]:
           - paragraph [ref=e192]: RCW 26.19 Compliant
-          - heading "Why Washington Families and Attorneys Trust WCSSC" [level=2] [ref=e193]
-          - paragraph [ref=e194]: Unlike generic calculators, WCSSC is engineered to the exact 2026 Washington statutory logic.
+          - heading "Why Washington Families and Attorneys Trust WSCSS" [level=2] [ref=e193]
+          - paragraph [ref=e194]: Unlike generic calculators, WSCSS is engineered to the exact 2026 Washington statutory logic.
         - generic [ref=e195]:
           - generic [ref=e196]:
             - generic [ref=e197]:
@@ -227,9 +227,9 @@ Call log:
               - generic [ref=e216]: Live updates as you adjust inputs
           - table [ref=e218]:
             - rowgroup [ref=e219]:
-              - row "Engine Logic WCSSC Other Calculators" [ref=e220]:
+              - row "Engine Logic WSCSS Other Calculators" [ref=e220]:
                 - columnheader "Engine Logic" [ref=e221]
-                - columnheader "WCSSC" [ref=e222]
+                - columnheader "WSCSS" [ref=e222]
                 - columnheader "Other Calculators" [ref=e223]
             - rowgroup [ref=e224]:
               - row "2026 SSR Protection ✓ ✗" [ref=e225]:
@@ -530,10 +530,10 @@ Call log:
     - generic [ref=e577]:
       - generic [ref=e578]:
         - generic [ref=e579]:
-          - link "WCSSC" [ref=e580] [cursor=pointer]:
+          - link "WSCSS" [ref=e580] [cursor=pointer]:
             - /url: /
             - img [ref=e582]
-            - generic [ref=e584]: WCSSC
+            - generic [ref=e584]: WSCSS
           - paragraph [ref=e585]: Precision child support calculations for Washington State families. Official AOC-aligned data source.
           - link "Email support" [ref=e586] [cursor=pointer]:
             - /url: mailto:support@wscss.site
@@ -573,7 +573,7 @@ Call log:
               - link "Legal Guides & Blog" [ref=e615] [cursor=pointer]:
                 - /url: /blog
             - listitem [ref=e616]:
-              - link "About WCSSC" [ref=e617] [cursor=pointer]:
+              - link "About WSCSS" [ref=e617] [cursor=pointer]:
                 - /url: /about
         - generic [ref=e618]:
           - heading "Legal" [level=4] [ref=e619]
@@ -600,8 +600,8 @@ Call log:
                 - text: Legal Disclaimer
       - generic [ref=e643]:
         - generic [ref=e644]:
-          - paragraph [ref=e645]: © 2026 Washington Child Support Schedule Center
-          - paragraph [ref=e646]: WCSSC is not a law firm and does not provide legal advice. We are an independent resource for 2026 WA State Child Support guidelines. All calculations are estimates only.
+          - paragraph [ref=e645]: © 2026 Washington State Child Support Schedule
+          - paragraph [ref=e646]: WSCSS is not a law firm and does not provide legal advice. We are an independent resource for 2026 WA State Child Support guidelines. All calculations are estimates only.
         - generic [ref=e648]: RCW 26.19 Compliant
   - generic [ref=e654] [cursor=pointer]:
     - button "Open Next.js Dev Tools" [ref=e655]:

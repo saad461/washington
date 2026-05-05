@@ -18,7 +18,7 @@ const AdSensePrivacy = () => {
  <h2 className="font-semibold ">Information We Collect</h2>
  </div>
  <p className="mb-6">
- When you use the Washington Child Support Schedule Center (WCSSC), we may collect the following types of information:
+ When you use the Washington State Child Support Schedule (WSCSS), we may collect the following types of information:
  </p>
  <ul className="list-disc pl-6 space-y-3 mb-6">
  <li><strong>Usage Data:</strong> Pages visited, time spent on pages, links clicked, and referral sources. This data is collected via Google Analytics and AdSense tracking.</li>
@@ -122,7 +122,7 @@ const AdSensePrivacy = () => {
 
  <div className="p-6 bg-amber-50 border border-amber-200 rounded-xl">
  <p className="text-sm font-medium text-amber-900">
- <strong>&quot;Do Not Sell My Personal Information&quot;:</strong> WCSSC does not sell your personal information to third parties. Google AdSense may use cookies for personalized advertising; you can opt out via{' '}
+ <strong>&quot;Do Not Sell My Personal Information&quot;:</strong> WSCSS does not sell your personal information to third parties. Google AdSense may use cookies for personalized advertising; you can opt out via{' '}
  <Link href="https://www.google.com/settings/ads" className=" underline">Google Ads Settings</Link> or{' '}
  <Link href="https://optout.aboutads.info" className=" underline">DAA opt-out</Link>.
  </p>
@@ -150,7 +150,7 @@ const AdSensePrivacy = () => {
  For any privacy-related questions, data access requests, or to exercise your rights under GDPR/CCPA, please contact us at:
  </p>
  <div className="p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]">
- <p className="font-medium ">Washington Child Support Schedule Center (WCSSC)</p>
+ <p className="font-medium ">Washington State Child Support Schedule (WSCSS)</p>
  <p className=" font-medium">Email: <a href="mailto:support@wscss.site" className="underline">support@wscss.site</a></p>
  <p className="text-sm mt-2">We aim to respond to all privacy requests within 30 days.</p>
  </div>

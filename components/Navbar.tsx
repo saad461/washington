@@ -67,13 +67,13 @@ export default function Navbar() {
             <Link
               href="/"
               className="flex items-center gap-2.5 group shrink-0 transition-transform active:scale-95"
-              aria-label="WCSSC — Home"
+              aria-label="WSCSS — Home"
             >
               <div className="w-9 h-9 sm:w-10 sm:h-10 bg-indigo-600 rounded-xl shadow-[var(--shadow-card-md)] shadow-indigo-200/60 flex items-center justify-center group-hover:bg-indigo-700 transition-colors shrink-0">
                 <Calculator className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
               <div className="flex flex-col leading-none font-heading">
-                <span className="text-lg sm:text-xl font-bold text-[var(--color-text-primary)] tracking-tight">WCSSC</span>
+                <span className="text-lg sm:text-xl font-bold text-[var(--color-text-primary)] tracking-tight">WSCSS</span>
                 <span className="text-[12px] font-semibold uppercase tracking-widest text-blue-600 mt-0.5">
                   Washington State
                 </span>

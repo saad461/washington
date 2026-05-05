@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { ArrowLeft, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
- title: 'Privacy Policy | Washington Child Support Schedule Center',
- description: 'Privacy Policy and AdSense disclosure for WCSSC. We prioritize the security of your legal calculation data.',
+ title: 'Privacy Policy | Washington State Child Support Schedule',
+ description: 'Privacy Policy and AdSense disclosure for WSCSS. We prioritize the security of your legal calculation data.',
  alternates: { canonical: 'https://wscss.site/privacy' },
 };
 
@@ -43,7 +43,7 @@ export default function PrivacyPage() {
             Privacy <span className="text-blue-600">Policy</span>
           </h1>
           <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-            At WCSSC, your privacy is our priority. Our 2026 calculator is designed to process data locally in your browser, ensuring no sensitive financial information is stored on our servers.
+            At WSCSS, your privacy is our priority. Our 2026 calculator is designed to process data locally in your browser, ensuring no sensitive financial information is stored on our servers.
           </p>
         </div>
       </div>

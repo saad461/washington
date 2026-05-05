@@ -5,7 +5,7 @@ import FAQSchema from "@/components/seo/FAQSchema";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Washington Child Support Calculator 2026 — Free Instant Estimate | WCSSC"
+    absolute: "Washington Child Support Calculator 2026 — Free Instant Estimate | WSCSS"
   },
   description: "Calculate Washington child support in seconds using the official 2026 RCW 26.19 economic tables. Free, private, and updated for EHB 1014 — covers all 39 counties.",
   alternates: { canonical: "https://wscss.site/" },
@@ -34,7 +34,7 @@ export default function Home() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "WCSSC — Washington Child Support Schedule Center",
+    name: "WSCSS — Washington State Child Support Schedule",
     url: "https://wscss.site",
     description: "Washington's most accurate 2026 child support calculator.",
   };

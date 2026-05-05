@@ -32,25 +32,25 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
  metadataBase: new URL('https://wscss.site'),
  title: {
- default: "WCSSC — Washington Child Support Calculator 2026",
- template: "%s | WCSSC"
+ default: "WSCSS — Washington Child Support Calculator 2026",
+ template: "%s | WSCSS"
  },
  description: "Washington's most accurate 2026 child support calculator. Instantly estimate monthly obligations for all 39 counties using the official AOC economic table. Free, fast, court-compliant.",
  keywords: ["Washington child support calculator", "WA child support 2026", "child support estimator", "Washington state family law", "AOC child support schedule"],
- authors: [{ name: "WCSSC Editorial & Legal Team", url: "https://wscss.site/about" }],
- creator: "WCSSC Editorial & Legal Team",
+ authors: [{ name: "WSCSS Editorial & Legal Team", url: "https://wscss.site/about" }],
+ creator: "WSCSS Editorial & Legal Team",
  openGraph: {
  type: "website",
- siteName: "WCSSC — Washington Child Support Schedule Center",
- title: "Washington Child Support Calculator 2026 | WCSSC",
+ siteName: "WSCSS — Washington State Child Support Schedule",
+ title: "Washington Child Support Calculator 2026 | WSCSS",
  description: "Calculate your 2026 Washington State child support obligation instantly. Official AOC economic table. All 39 counties covered.",
- images: [{ url: '/wcssc-og.webp', width: 1200, height: 630, alt: 'WCSSC Washington Child Support Calculator 2026' }],
+ images: [{ url: '/wscss-og.webp', width: 1200, height: 630, alt: 'WSCSS Washington Child Support Calculator 2026' }],
  },
  twitter: {
  card: 'summary_large_image',
- title: 'Washington Child Support Calculator 2026 | WCSSC',
+ title: 'Washington Child Support Calculator 2026 | WSCSS',
  description: 'Calculate your 2026 Washington State child support obligation instantly. Official AOC economic table. All 39 counties covered.',
- images: ['/wcssc-og.webp'],
+ images: ['/wscss-og.webp'],
  },
  robots: {
  index: true,

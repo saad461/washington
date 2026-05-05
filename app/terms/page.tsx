@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { FileText, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | WCSSC — Washington Child Support Schedule Center',
-  description: 'Terms of Service for using the WCSSC child support calculator and educational resources. Read before using our 2026 Washington State calculation tools.',
+  title: 'Terms of Service | WSCSS — Washington State Child Support Schedule',
+  description: 'Terms of Service for using the WSCSS child support calculator and educational resources. Read before using our 2026 Washington State calculation tools.',
   alternates: { canonical: 'https://wscss.site/terms' },
 };
 
@@ -41,7 +41,7 @@ export default function TermsPage() {
               Terms of <span className="text-blue-600">Service</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              By accessing or using WCSSC, you agree to be bound by the following Terms of Service. These terms govern your use of our 2026 Washington child support tools.
+              By accessing or using WSCSS, you agree to be bound by the following Terms of Service. These terms govern your use of our 2026 Washington child support tools.
             </p>
           </div>
         </div>
@@ -64,11 +64,11 @@ export default function TermsPage() {
         },
         {
           title: "2. Description of Service",
-          body: "WCSSC provides an online educational calculator to estimate Washington State child support obligations based on the 2026 official schedule. Our service is provided 'as-is' for informational purposes only."
+          body: "WSCSS provides an online educational calculator to estimate Washington State child support obligations based on the 2026 official schedule. Our service is provided 'as-is' for informational purposes only."
         },
         {
           title: "3. Permitted Use",
-          body: "You may use WCSSC's tools for personal, non-commercial, educational purposes only. You agree not to reproduce or redistribute our content without permission or attempt to interfere with the website's technical systems."
+          body: "You may use WSCSS's tools for personal, non-commercial, educational purposes only. You agree not to reproduce or redistribute our content without permission or attempt to interfere with the website's technical systems."
         },
         {
           title: "4. Accuracy Disclaimer",
@@ -76,15 +76,15 @@ export default function TermsPage() {
         },
         {
           title: "5. Intellectual Property",
-          body: "All content, design, code, and data on this website are the intellectual property of WCSSC unless otherwise noted. The underlying Washington State child support tables are public domain government data."
+          body: "All content, design, code, and data on this website are the intellectual property of WSCSS unless otherwise noted. The underlying Washington State child support tables are public domain government data."
         },
         {
           title: "6. Third-Party Advertising",
-          body: "WCSSC displays advertisements provided by Google AdSense. These ads are governed by Google's own terms of service and privacy policies. WCSSC does not control the content of these advertisements."
+          body: "WSCSS displays advertisements provided by Google AdSense. These ads are governed by Google's own terms of service and privacy policies. WSCSS does not control the content of these advertisements."
         },
         {
           title: "7. Limitation of Liability",
-          body: "To the fullest extent permitted by law, WCSSC and its operators are not liable for any direct, indirect, incidental, or consequential damages arising from your use of this service."
+          body: "To the fullest extent permitted by law, WSCSS and its operators are not liable for any direct, indirect, incidental, or consequential damages arising from your use of this service."
         },
         {
           title: "8. Changes to Terms",

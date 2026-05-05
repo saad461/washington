@@ -674,7 +674,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
 
             <div className="mt-20 pt-8 border-t border-gray-200 text-center">
               <p className="text-[10px] text-gray-400 uppercase tracking-widest">
-                Generated via WCSSC Calculator — Washington Child Support Software
+                Generated via WSCSS Calculator — Washington Child Support Software
               </p>
             </div>
           </div>

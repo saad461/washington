@@ -9,9 +9,9 @@ import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Washington Child Support Legal Guides & Resources 2026 | WCSSC"
+    absolute: "Washington Child Support Legal Guides & Resources 2026 | WSCSS"
   },
-  description: "Expert guides on Washington State child support guidelines, 2026 law changes, county filing guides, and calculation walkthroughs from the WCSSC editorial team.",
+  description: "Expert guides on Washington State child support guidelines, 2026 law changes, county filing guides, and calculation walkthroughs from the WSCSS editorial team.",
   alternates: { canonical: 'https://wscss.site/blog' },
 };
 
@@ -49,7 +49,7 @@ export default async function BlogPage({
               Expert Insights for <span className="text-blue-600">Washington Parents</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              Deep-dives into Washington&apos;s 2026 Child Support tables, courthouse-specific filing guides, and legal analysis from the WCSSC team.
+              Deep-dives into Washington&apos;s 2026 Child Support tables, courthouse-specific filing guides, and legal analysis from the WSCSS team.
             </p>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default async function BlogPage({
                   </div>
                 ) : (
                   <div className="w-full h-48 md:h-64 bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
-                    <span className="text-blue-300 text-sm font-medium">WCSSC Legal Guide</span>
+                    <span className="text-blue-300 text-sm font-medium">WSCSS Legal Guide</span>
                   </div>
                 )}
 

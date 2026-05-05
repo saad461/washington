@@ -232,8 +232,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: `https://wscss.site/${slug}`,
-      siteName: "WCSSC",
-      images: [{ url: "/wcssc-og.jpg", width: 1200, height: 630 }],
+      siteName: "WSCSS",
+      images: [{ url: "/wscss-og.jpg", width: 1200, height: 630 }],
       locale: "en_US",
       type: "website",
     },
@@ -344,7 +344,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
     "@graph": [
       {
         "@type": "FinancialService",
-        name: "Washington Child Support Schedule Center",
+        name: "Washington State Child Support Schedule",
         url: "https://wscss.site",
         description: `Free 2026 Washington State child support calculator. ${formattedIncome} income, ${children} children.`,
         areaServed: { "@type": "State", name: "Washington" },

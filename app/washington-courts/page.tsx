@@ -7,14 +7,14 @@ import FAQAccordion from '@/components/FAQAccordion';
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Washington State Court Directory — All 39 Counties | Child Support Filing 2026 | WCSSC"
+    absolute: "Washington State Court Directory — All 39 Counties | Child Support Filing 2026 | WSCSS"
   },
  
   description: "Find courthouse addresses, phone numbers, and filing information for all 39 Washington State counties. Updated 2026 court directory for child support filings.",
   alternates: { canonical: 'https://wscss.site/washington-courts' },
 
   description: "Find courthouse addresses, phone numbers, and filing links for all 39 Washington State counties. Updated for 2026 child support filings under RCW 26.19.",
-  alternates: { canonical: 'https://wcssc.site/washington-courts' },
+  alternates: { canonical: 'https://wscss.site/washington-courts' },
  
 };
 

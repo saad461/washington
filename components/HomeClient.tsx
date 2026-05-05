@@ -154,13 +154,13 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
         <div className="container-wide">
           <div className="max-w-4xl mx-auto space-y-24">
 
-            {/* Why Washington Families and Attorneys Trust WCSSC */}
+            {/* Why Washington Families and Attorneys Trust WSCSS */}
             <div>
               <div className="text-center mb-12 space-y-4">
                 <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">RCW 26.19 Compliant</p>
-                <h2>Why Washington Families and Attorneys Trust WCSSC</h2>
+                <h2>Why Washington Families and Attorneys Trust WSCSS</h2>
                 <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-                  Unlike generic calculators, WCSSC is engineered to the exact 2026 Washington statutory logic.
+                  Unlike generic calculators, WSCSS is engineered to the exact 2026 Washington statutory logic.
                 </p>
               </div>
 
@@ -184,7 +184,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                     <thead>
                       <tr>
                         <th className="table-header-cell">Engine Logic</th>
-                        <th className="table-header-cell text-center">WCSSC</th>
+                        <th className="table-header-cell text-center">WSCSS</th>
                         <th className="table-header-cell text-center">Other Calculators</th>
                       </tr>
                     </thead>

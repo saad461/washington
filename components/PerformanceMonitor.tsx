@@ -15,7 +15,7 @@ export default function PerformanceMonitor() {
  const handleTTI = () => {
  const now = performance.now();
  console.log(
- `%c[WCSSC Performance] TTI Approx: ${now.toFixed(0)}ms`,
+ `%c[WSCSS Performance] TTI Approx: ${now.toFixed(0)}ms`,
  "color: #4F46E5; font-weight: bold;"
  );
  };

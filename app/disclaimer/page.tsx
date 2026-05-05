@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { Scale, ShieldCheck, ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Legal Disclaimer | WCSSC — Washington Child Support Schedule Center',
-  description: 'Important legal disclaimer for WCSSC. Our calculator provides estimates based on 2026 Washington State guidelines and is not a substitute for legal advice.',
+  title: 'Legal Disclaimer | WSCSS — Washington State Child Support Schedule',
+  description: 'Important legal disclaimer for WSCSS. Our calculator provides estimates based on 2026 Washington State guidelines and is not a substitute for legal advice.',
   alternates: { canonical: 'https://wscss.site/disclaimer' },
 };
 
@@ -41,7 +41,7 @@ export default function DisclaimerPage() {
               Legal <span className="text-blue-600">Disclaimer</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed">
-              WCSSC provides estimates based on 2026 Washington State guidelines. This is an educational resource and is not a substitute for legal advice.
+              WSCSS provides estimates based on 2026 Washington State guidelines. This is an educational resource and is not a substitute for legal advice.
             </p>
           </div>
         </div>
@@ -53,9 +53,9 @@ export default function DisclaimerPage() {
           <div className="p-6 md:p-10 bg-amber-50 border border-amber-200 rounded-2xl flex flex-col sm:flex-row items-start gap-4 md:gap-6 shadow-sm">
             <ShieldCheck className="w-10 h-10 text-amber-600 flex-shrink-0 mt-1" />
             <div>
-              <h2 className="text-2xl font-bold text-amber-900 mb-3">WCSSC Is Not a Law Firm</h2>
+              <h2 className="text-2xl font-bold text-amber-900 mb-3">WSCSS Is Not a Law Firm</h2>
               <p className="text-amber-800 leading-relaxed text-lg">
-                The Washington Child Support Schedule Center (WCSSC) is an independent educational resource. We are NOT a law firm, attorney, legal aid organization, or government agency. Nothing on this website constitutes legal advice.
+                The Washington State Child Support Schedule (WSCSS) is an independent educational resource. We are NOT a law firm, attorney, legal aid organization, or government agency. Nothing on this website constitutes legal advice.
               </p>
             </div>
           </div>
@@ -72,15 +72,15 @@ export default function DisclaimerPage() {
       {[
         {
           title: "1. Educational Purpose Only",
-          body: "All calculations, estimates, and information provided by WCSSC are for educational and informational purposes only. Our calculator uses the 2026 Washington State Child Support Schedule as published by the Washington State Administrative Office of the Courts (AOC). Results are estimates and may differ from actual court-ordered support amounts."
+          body: "All calculations, estimates, and information provided by WSCSS are for educational and informational purposes only. Our calculator uses the 2026 Washington State Child Support Schedule as published by the Washington State Administrative Office of the Courts (AOC). Results are estimates and may differ from actual court-ordered support amounts."
         },
         {
           title: "2. No Attorney-Client Relationship",
-          body: "Using this website or its tools does not create an attorney-client relationship between you and WCSSC, its operators, or any associated parties. For legal advice specific to your situation, you should consult with a licensed family law attorney in Washington State."
+          body: "Using this website or its tools does not create an attorney-client relationship between you and WSCSS, its operators, or any associated parties. For legal advice specific to your situation, you should consult with a licensed family law attorney in Washington State."
         },
         {
           title: "3. Accuracy of Information",
-          body: "While we make every effort to keep our data accurate and current with the latest 2026 WA State Guidelines, WCSSC makes no guarantees regarding the accuracy, completeness, or timeliness of any calculation or legal information provided on this site."
+          body: "While we make every effort to keep our data accurate and current with the latest 2026 WA State Guidelines, WSCSS makes no guarantees regarding the accuracy, completeness, or timeliness of any calculation or legal information provided on this site."
         },
         {
           title: "4. Court Discretion",
@@ -92,7 +92,7 @@ export default function DisclaimerPage() {
         },
         {
           title: "6. Limitation of Liability",
-          body: "WCSSC, its operators, employees, and contributors shall not be liable for any damages arising from the use or reliance on information provided on this website. This includes direct, indirect, incidental, and consequential damages."
+          body: "WSCSS, its operators, employees, and contributors shall not be liable for any damages arising from the use or reliance on information provided on this website. This includes direct, indirect, incidental, and consequential damages."
         }
       ].map((section, i, arr) => (
         <section key={i} className={`section-default ${i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-bg-subtle)]'} py-10 border-b border-gray-100 ${i === arr.length - 1 ? 'last:border-0' : ''}`}>

@@ -23,13 +23,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: termData.ogTitle,
       description: termData.ogDescription,
-      images: [{ url: 'https://wscss.site/wcssc-og.webp' }]
+      images: [{ url: 'https://wscss.site/wscss-og.webp' }]
     },
     twitter: {
       card: 'summary_large_image',
       title: termData.ogTitle,
       description: termData.ogDescription,
-      images: ['https://wscss.site/wcssc-og.webp']
+      images: ['https://wscss.site/wscss-og.webp']
     },
     alternates: { canonical: `https://wscss.site/glossary/${termData.slug}` }
   };
