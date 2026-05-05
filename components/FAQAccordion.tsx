@@ -11,20 +11,25 @@ export type FAQItem = {
 interface FAQProps {
  faqs: FAQItem[];
  defaultOpenCount?: number;
+ singleOpen?: boolean;
 }
 
-export default function FAQAccordion({ faqs, defaultOpenCount = 2 }: FAQProps) {
+export default function FAQAccordion({ faqs, defaultOpenCount = 2, singleOpen = false }: FAQProps) {
  // Initialize state based on the defaultOpenCount (normally the first 2 items)
  const [openIndexes, setOpenIndexes] = useState<number[]>(
  faqs.slice(0, defaultOpenCount).map((_, i) => i)
  );
 
  const toggleAccordion = (index: number) => {
- setOpenIndexes((prev) =>
- prev.includes(index)
- ? prev.filter((i) => i !== index)
- : [...prev, index]
- );
+ setOpenIndexes((prev) => {
+   if (prev.includes(index)) {
+     return prev.filter((i) => i !== index);
+   }
+   if (singleOpen) {
+     return [index];
+   }
+   return [...prev, index];
+ });
  };
 
  // Generate JSON-LD Schema
@@ -80,7 +85,7 @@ export default function FAQAccordion({ faqs, defaultOpenCount = 2 }: FAQProps) {
  id={controlId}
  role="region"
  aria-labelledby={buttonId}
- className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr]0' : 'grid-rows-[0fr] opacity-0'}`}
+ className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100 mt-2' : 'grid-rows-[0fr] opacity-0'}`}
  >
  <div className="overflow-hidden">
  <div className="faq-answer">
