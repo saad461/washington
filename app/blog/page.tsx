@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     absolute: "Washington Child Support Legal Guides & Resources 2026 | WCSSC"
   },
   description: "Expert guides on Washington State child support guidelines, 2026 law changes, county filing guides, and calculation walkthroughs from the WCSSC editorial team.",
-  alternates: { canonical: 'https://wcssc.site/blog' },
+  alternates: { canonical: 'https://wscss.site/blog' },
 };
 
 export default async function BlogPage({

@@ -30,7 +30,7 @@ const AuthorBox = () => {
                 <div className="w-8 h-8 rounded-lg bg-[var(--color-bg-subtle)] flex items-center justify-center border border-[var(--color-bg-border)] shadow-[var(--shadow-card)]">
                   <MailIcon size={14} className="text-[var(--color-brand-primary)]" />
                 </div>
-                <span className="text-[12px] font-bold text-[var(--color-text-primary)] uppercase tracking-wider">support@wcssc.site</span>
+                <span className="text-[12px] font-bold text-[var(--color-text-primary)] uppercase tracking-wider">support@wscss.site</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-[var(--color-bg-subtle)] flex items-center justify-center border border-[var(--color-bg-border)] shadow-[var(--shadow-card)]">

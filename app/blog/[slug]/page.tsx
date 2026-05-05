@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.metaTitle,
     description: post.metaDescription,
-    alternates: { canonical: `https://wcssc.site/blog/${slug}` },
+    alternates: { canonical: `https://wscss.site/blog/${slug}` },
     openGraph: {
       title: post.metaTitle,
       description: post.metaDescription,
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: post.createdAt,
       modifiedTime: post.updatedAt,
       authors: [post.author],
-      url: `https://wcssc.site/blog/${slug}`,
+      url: `https://wscss.site/blog/${slug}`,
       images: [{ url: post.image?.url || '/wcssc-og.jpg', width: 1200, height: 630 }],
     },
   };

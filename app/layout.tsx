@@ -30,14 +30,14 @@ const geistMono = Geist_Mono({
 
 
 export const metadata: Metadata = {
- metadataBase: new URL('https://wcssc.site'),
+ metadataBase: new URL('https://wscss.site'),
  title: {
  default: "WCSSC — Washington Child Support Calculator 2026",
  template: "%s | WCSSC"
  },
  description: "Washington's most accurate 2026 child support calculator. Instantly estimate monthly obligations for all 39 counties using the official AOC economic table. Free, fast, court-compliant.",
  keywords: ["Washington child support calculator", "WA child support 2026", "child support estimator", "Washington state family law", "AOC child support schedule"],
- authors: [{ name: "WCSSC Editorial & Legal Team", url: "https://wcssc.site/about" }],
+ authors: [{ name: "WCSSC Editorial & Legal Team", url: "https://wscss.site/about" }],
  creator: "WCSSC Editorial & Legal Team",
  openGraph: {
  type: "website",

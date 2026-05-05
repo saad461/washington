@@ -3,7 +3,7 @@ import { washingtonCounties } from '@/data/washingtonCounties';
 import { blogs } from '@/data/blogs';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://wcssc.site';
+  const baseUrl = 'https://wscss.site';
 
   const lastModified = new Date();
 

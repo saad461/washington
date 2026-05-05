@@ -23,15 +23,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: termData.ogTitle,
       description: termData.ogDescription,
-      images: [{ url: 'https://wcssc.site/wcssc-og.webp' }]
+      images: [{ url: 'https://wscss.site/wcssc-og.webp' }]
     },
     twitter: {
       card: 'summary_large_image',
       title: termData.ogTitle,
       description: termData.ogDescription,
-      images: ['https://wcssc.site/wcssc-og.webp']
+      images: ['https://wscss.site/wcssc-og.webp']
     },
-    alternates: { canonical: `https://wcssc.site/glossary/${termData.slug}` }
+    alternates: { canonical: `https://wscss.site/glossary/${termData.slug}` }
   };
 }
 
@@ -43,8 +43,68 @@ export default async function GlossaryTermPage({ params }: Props) {
     notFound();
   }
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://wscss.site"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Glossary",
+        "item": "https://wscss.site/glossary"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": termData.name,
+        "item": `https://wscss.site/glossary/${termData.slug}`
+      }
+    ]
+  };
+
+  const definedTermSchema = {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "@id": `https://wscss.site/glossary/${termData.slug}#term`,
+    "name": termData.name,
+    "description": termData.definition,
+    "inDefinedTermSet": "https://wscss.site/glossary"
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": termData.faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <div className="flex-1 bg-white pb-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div
@@ -67,6 +127,11 @@ export default async function GlossaryTermPage({ params }: Props) {
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight">
               {termData.h1Title}
             </h1>
+            <div className="flex items-center gap-2 text-sm text-gray-500 font-medium">
+              <span>Last updated: January 2026</span>
+              <span className="w-1 h-1 rounded-full bg-gray-300" />
+              <span>RCW 26.19 Compliant</span>
+            </div>
             <p className="text-xl text-gray-600 leading-relaxed max-w-3xl">
               {termData.definition}
             </p>

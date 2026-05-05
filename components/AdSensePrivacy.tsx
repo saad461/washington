@@ -151,7 +151,7 @@ const AdSensePrivacy = () => {
  </p>
  <div className="p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]">
  <p className="font-medium ">Washington Child Support Schedule Center (WCSSC)</p>
- <p className=" font-medium">Email: <a href="mailto:support@wcssc.site" className="underline">support@wcssc.site</a></p>
+ <p className=" font-medium">Email: <a href="mailto:support@wscss.site" className="underline">support@wscss.site</a></p>
  <p className="text-sm mt-2">We aim to respond to all privacy requests within 30 days.</p>
  </div>
  </section>

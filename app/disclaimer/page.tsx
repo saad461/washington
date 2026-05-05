@@ -5,7 +5,7 @@ import { Scale, ShieldCheck, ArrowLeft } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Legal Disclaimer | WCSSC — Washington Child Support Schedule Center',
   description: 'Important legal disclaimer for WCSSC. Our calculator provides estimates based on 2026 Washington State guidelines and is not a substitute for legal advice.',
-  alternates: { canonical: 'https://wcssc.site/disclaimer' },
+  alternates: { canonical: 'https://wscss.site/disclaimer' },
 };
 
 export default function DisclaimerPage() {

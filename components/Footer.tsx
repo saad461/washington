@@ -20,14 +20,14 @@ export default function Footer() {
               Precision child support calculations for Washington State families. Official AOC-aligned data source.
             </p>
             <a
-              href="mailto:support@wcssc.site"
+              href="mailto:support@wscss.site"
               className="inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors group"
               aria-label="Email support"
             >
               <span className="w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center group-hover:bg-[var(--color-brand-primary)] transition-colors shrink-0">
                 <Mail size={16} className="text-gray-300 group-hover:text-white" />
               </span>
-              <span className="hidden sm:inline">support@wcssc.site</span>
+              <span className="hidden sm:inline">support@wscss.site</span>
             </a>
           </div>
 

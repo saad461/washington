@@ -5,7 +5,7 @@ import { FileText, ArrowLeft, CheckCircle2 } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Terms of Service | WCSSC — Washington Child Support Schedule Center',
   description: 'Terms of Service for using the WCSSC child support calculator and educational resources. Read before using our 2026 Washington State calculation tools.',
-  alternates: { canonical: 'https://wcssc.site/terms' },
+  alternates: { canonical: 'https://wscss.site/terms' },
 };
 
 export default function TermsPage() {
@@ -96,7 +96,7 @@ export default function TermsPage() {
         },
         {
           title: "10. Contact",
-          body: "If you have questions about these Terms, please contact us at: support@wcssc.site."
+          body: "If you have questions about these Terms, please contact us at: support@wscss.site."
         }
       ].map((section, i, arr) => (
         <section key={i} className={`section-default ${i % 2 === 0 ? 'bg-white' : 'bg-[var(--color-bg-subtle)]'} py-10 border-b border-gray-100 ${i === arr.length - 1 ? 'last:border-0' : ''}`}>

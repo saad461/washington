@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     absolute: "Washington State Court Directory — All 39 Counties | WCSSC"
   },
   description: "Find courthouse addresses, phone numbers, and filing information for all 39 Washington State counties. Updated 2026 court directory for child support filings.",
-  alternates: { canonical: 'https://wcssc.site/washington-courts' },
+  alternates: { canonical: 'https://wscss.site/washington-courts' },
 };
 
 export default function CourtsIndex() {
@@ -45,7 +45,7 @@ export default function CourtsIndex() {
               Washington State Court Directory
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              Find courthouse addresses, phone numbers, and filing links for every Washington State county — updated for 2026 child support filings.
+              Find courthouse addresses, phone numbers, and filing links for every Washington State county — updated for 2026 child support filings. Need help with legal terminology? Visit our <Link href="/glossary" className="text-blue-600 hover:underline">Washington Child Support Glossary</Link>.
             </p>
           </div>
         </div>
@@ -72,7 +72,7 @@ export default function CourtsIndex() {
               Help us keep our directory accurate. Send us the correct courthouse details and we&apos;ll update within 48 hours.
             </p>
             <a
-              href="mailto:support@wcssc.site?subject=Court Directory Correction"
+              href="mailto:support@wscss.site?subject=Court Directory Correction"
               className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors duration-200"
             >
               Submit a Correction →
