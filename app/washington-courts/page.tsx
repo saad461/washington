@@ -246,7 +246,7 @@ export default function CourtsIndex() {
             </p>
             <a
               href="mailto:support@wscss.site?subject=Court Directory Correction"
-              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors duration-200"
+              className="btn btn-primary"
             >
               Submit a Correction →
             </a>

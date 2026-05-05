@@ -110,7 +110,7 @@ export default function CompareToolPage() {
             Ready to Calculate Your 2026 Obligation?
           </h2>
           <div className="flex gap-4 justify-center">
-            <a href="/" className="bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors">
+            <a href="/" className="btn btn-primary">
               Use the Calculator
             </a>
             <a href="/worksheet" className="border border-gray-200 text-gray-700 px-6 py-3 rounded-xl font-semibold hover:border-blue-300 transition-colors">

@@ -5,6 +5,7 @@
    DESIGN TOKENS — TAILWIND V4
 ───────────────────────────────────────────────*/
 @theme {
+  --color-primary-content: #FFFFFF;
   /* Backgrounds */
   --color-bg-page: #FFFFFF;
   --color-bg-subtle: #F9FAFB;
@@ -273,6 +274,14 @@
   }
 
   /* ══ BUTTONS (2B) ═════════════════════════════ */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 cursor-pointer transition-all duration-150 select-none;
+  }
+
+  .prose .btn {
+    @apply no-underline !text-primary-content;
+  }
+
   .btn-primary {
     height: 44px;
     padding: 0 24px;

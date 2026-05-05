@@ -217,7 +217,7 @@ export default function ComparisonTool() {
             </div>
 
             <div className="mt-12 pt-12 border-t border-[var(--color-bg-border-soft)]">
-              <Link href="/worksheet" className="btn-primary-lg btn-primary w-full sm:w-auto">
+              <Link href="/worksheet" className="btn btn-primary btn-primary-lg w-full sm:w-auto">
                 Use Full 2026 Worksheet Pro <ChevronRight size={18} />
               </Link>
             </div>

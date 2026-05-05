@@ -517,11 +517,11 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
 
                 {/* Action Buttons Below Card */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                  <Link href="/worksheet" className="btn-primary-lg flex-1 shadow-sm">
+                  <Link href="/worksheet" className="btn btn-primary btn-primary-lg flex-1 shadow-sm">
                     Launch Full Wizard
                     <ArrowRight size={18} />
                   </Link>
-                  <button onClick={() => window.print()} className="btn-secondary-lg px-6">
+                  <button onClick={() => window.print()} className="btn btn-secondary btn-secondary-lg px-6">
                     <Printer size={18} />
                     Print
                   </button>
@@ -555,7 +555,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
               </div>
               <button
                 onClick={() => resultsRef.current?.scrollIntoView({ behavior: "smooth" })}
-                className="btn-primary !px-5 whitespace-nowrap"
+                className="btn btn-primary !px-5 whitespace-nowrap"
               >
                 View Full Breakdown ↑
               </button>
