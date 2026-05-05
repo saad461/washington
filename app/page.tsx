@@ -8,14 +8,14 @@ export const metadata: Metadata = {
     absolute: "Washington Child Support Calculator 2026 — Free Instant Estimate | WCSSC"
   },
   description: "Calculate Washington child support in seconds using the official 2026 RCW 26.19 economic tables. Free, private, and updated for EHB 1014 — covers all 39 counties.",
-  alternates: { canonical: "https://wcssc.site/" },
+  alternates: { canonical: "https://wscss.site/" },
 };
 
 export default function Home() {
   const homeFaqs = [
     {
       question: "What is the minimum child support in Washington state?",
-      answer: "The statutory minimum child support in Washington is $50 per child per month. Judges may deviate below this amount in extraordinary circumstances only, to ensure the paying parent's self-support reserve is protected.",
+      answer: "The statutory minimum child support in Washington is $50 per child per month. Judges may deviate below this amount in extraordinary circumstances only, to ensure the paying parent's <a href='/glossary/self-support-reserve' class='text-blue-600 hover:underline'>self-support reserve</a> is protected.",
     },
     {
       question: "How is Washington child support calculated in 2026?",
@@ -23,7 +23,7 @@ export default function Home() {
     },
     {
       question: "What is the Self-Support Reserve (SSR) for 2026?",
-      answer: "The 2026 Self-Support Reserve (SSR) is approximately $2,394 per month. This low-income protection ensures that a paying parent is not left with less than approximately $2,394 to live on after making a basic child support payment.",
+      answer: "The 2026 Self-Support Reserve (SSR) is approximately $2,394 per month. This low-income protection ensures that a paying parent is not left with less than approximately $2,394 to live on after making a basic child support payment. Learn more in our <a href='/glossary/self-support-reserve' class='text-blue-600 hover:underline'>glossary</a>.",
     },
     {
       question: "Does child support cover extraordinary expenses like daycare?",
@@ -35,7 +35,7 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "WCSSC — Washington Child Support Schedule Center",
-    url: "https://wcssc.site",
+    url: "https://wscss.site",
     description: "Washington's most accurate 2026 child support calculator.",
   };
 
@@ -45,7 +45,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <CalculatorSchema url="https://wcssc.site" />
+      <CalculatorSchema url="https://wscss.site" />
       <FAQSchema faqs={homeFaqs} />
       <HomeClient homeFaqs={homeFaqs} />
     </>

@@ -32,7 +32,7 @@ const worksheetFAQs = [
   },
   {
     question: "What is the Self-Support Reserve?",
-    answer: "The SSR ($2,394/mo in 2026) ensures the paying parent keeps enough income for basic needs. If paying the full obligation would leave the payer below $2,394, the obligation is automatically reduced. Minimum is still $50 per child.",
+    answer: "The SSR ($2,394/mo in 2026) ensures the paying parent keeps enough income for basic needs. If paying the full obligation would leave the payer below $2,394, the obligation is automatically reduced. Minimum is still $50 per child. Detailed definition available in our <a href='/glossary/self-support-reserve' class='text-blue-600 hover:underline'>glossary</a>.",
   },
   {
     question: "Can I use this for a child support modification?",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     title: "Washington Child Support Worksheet 2026 | WCSSC",
     description:
       "Complete the official 8-part AOC child support worksheet online — free, instant, 2026 compliant.",
-    url: "https://wcssc.site/worksheet",
+    url: "https://wscss.site/worksheet",
     type: "website",
     siteName: "WCSSC",
   },
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
 export default function WorksheetPage() {
   return (
     <div className="flex-1 w-full bg-white">
-      <CalculatorSchema url="https://wcssc.site/worksheet" />
+      <CalculatorSchema url="https://wscss.site/worksheet" />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -156,13 +156,13 @@ export default function WorksheetPage() {
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://wcssc.site",
+                item: "https://wscss.site",
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: "Child Support Worksheet",
-                item: "https://wcssc.site/worksheet",
+                item: "https://wscss.site/worksheet",
               },
             ],
           }),

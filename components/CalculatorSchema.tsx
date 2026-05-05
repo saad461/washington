@@ -15,7 +15,7 @@ export default function CalculatorSchema({
  county = "King County",
  resultAmount = 1000,
  year = 2026,
- url = "https://wcssc.site/worksheet",
+ url = "https://wscss.site/worksheet",
 }: CalculatorSchemaProps) {
  const schema = {
  "@context": "https://schema.org",

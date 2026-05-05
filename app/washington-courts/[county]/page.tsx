@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `Child Support in ${county.name} Washington 2026 | Court Guide & Calculator`,
     description: `Free 2026 child support calculator for ${county.name}, WA. Official SSR (approximately $2,394), income shares model, local ${county.court} filing info, clerk phone & step-by-step guide.`,
     alternates: {
-      canonical: `https://wcssc.site/washington-courts/${county.slug}`,
+      canonical: `https://wscss.site/washington-courts/${county.slug}`,
     },
   };
 }
@@ -108,7 +108,7 @@ export default async function CountyCourtPage({ params }: Props) {
   return (
     <div className="flex-1 bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": [{ "@type": "GovernmentOffice", name: county.court, address: { "@type": "PostalAddress", streetAddress: county.courtAddress, addressRegion: "WA", addressCountry: "US" }, telephone: county.clerkPhone, url: county.website }] }) }} />
-      <CalculatorSchema county={county.name} url={`https://wcssc.site/washington-courts/${county.slug}`} />
+      <CalculatorSchema county={county.name} url={`https://wscss.site/washington-courts/${county.slug}`} />
 
       {/* 1. MINI HERO */}
       <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">

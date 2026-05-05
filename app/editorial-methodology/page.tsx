@@ -7,13 +7,13 @@ import CalculatorSchema from "@/components/CalculatorSchema";
 export const metadata: Metadata = {
   title: "Editorial Methodology — WCSSC",
   description: "Learn about the independent editorial methodology behind the Washington Child Support Calculator.",
-  alternates: { canonical: 'https://wcssc.site/editorial-methodology' },
+  alternates: { canonical: 'https://wscss.site/editorial-methodology' },
 };
 
 export default function EditorialMethodology() {
   return (
     <div className="flex-1 bg-white">
-      <CalculatorSchema url="https://wcssc.site/editorial-methodology" />
+      <CalculatorSchema url="https://wscss.site/editorial-methodology" />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">

@@ -12,15 +12,15 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Washington Child Support Glossary 2026 — 20 Key Legal Terms | WCSSC",
     description: "Plain-language definitions of 20 Washington State child support terms including SSR, imputed income, deviation, and transfer payment. Updated for 2026 RCW 26.19 guidelines.",
-    images: [{ url: 'https://wcssc.site/wcssc-og.webp' }]
+    images: [{ url: 'https://wscss.site/wcssc-og.webp' }]
   },
   twitter: {
     card: 'summary_large_image',
     title: "Washington Child Support Glossary 2026 — 20 Key Legal Terms | WCSSC",
     description: "Plain-language definitions of 20 Washington State child support terms. Updated for 2026 RCW 26.19 guidelines.",
-    images: ['https://wcssc.site/wcssc-og.webp']
+    images: ['https://wscss.site/wcssc-og.webp']
   },
-  alternates: { canonical: 'https://wcssc.site/glossary' },
+  alternates: { canonical: 'https://wscss.site/glossary' },
 };
 
 const definedTermSetSchema = {
@@ -28,13 +28,13 @@ const definedTermSetSchema = {
   "@type": "DefinedTermSet",
   "name": "Washington Child Support Glossary 2026",
   "description": "Plain-language definitions of Washington State child support legal terms under RCW 26.19. Updated for the 2026 economic table effective January 1 2026.",
-  "url": "https://wcssc.site/glossary",
-  "inDefinedTermSet": "https://wcssc.site/glossary",
+  "url": "https://wscss.site/glossary",
+  "inDefinedTermSet": "https://wscss.site/glossary",
   "hasDefinedTerm": glossaryTerms.map(term => ({
     "@type": "DefinedTerm",
     "name": term.name,
     "description": term.definition,
-    "url": `https://wcssc.site/glossary/${term.slug}`
+    "url": `https://wscss.site/glossary/${term.slug}`
   }))
 };
 

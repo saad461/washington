@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         '/tmp/'
       ],
     },
-    sitemap: 'https://wcssc.site/sitemap.xml',
+    sitemap: 'https://wscss.site/sitemap.xml',
   };
 }

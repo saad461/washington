@@ -227,11 +227,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     robots,
-    alternates: { canonical: `https://wcssc.site/${slug}` },
+    alternates: { canonical: `https://wscss.site/${slug}` },
     openGraph: {
       title,
       description,
-      url: `https://wcssc.site/${slug}`,
+      url: `https://wscss.site/${slug}`,
       siteName: "WCSSC",
       images: [{ url: "/wcssc-og.jpg", width: 1200, height: 630 }],
       locale: "en_US",
@@ -345,7 +345,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
       {
         "@type": "FinancialService",
         name: "Washington Child Support Schedule Center",
-        url: "https://wcssc.site",
+        url: "https://wscss.site",
         description: `Free 2026 Washington State child support calculator. ${formattedIncome} income, ${children} children.`,
         areaServed: { "@type": "State", name: "Washington" },
         priceRange: "Free",
@@ -353,8 +353,8 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: "https://wcssc.site" },
-          ...(county ? [{ "@type": "ListItem", position: 2, name: county.name, item: `https://wcssc.site/${county.slug}-income-5000-${children}-children` }] : []),
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://wscss.site" },
+          ...(county ? [{ "@type": "ListItem", position: 2, name: county.name, item: `https://wscss.site/${county.slug}-income-5000-${children}-children` }] : []),
           { "@type": "ListItem", position: county ? 3 : 2, name: `${formattedIncome} Calculation` },
         ],
       },
@@ -364,7 +364,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
   return (
     <div className="flex-1 bg-white relative w-full overflow-x-hidden">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <CalculatorSchema income={income} childCount={children} county={countyName} url={`https://wcssc.site/${slug}`} resultAmount={supportNum !== null ? supportNum : undefined} />
+      <CalculatorSchema income={income} childCount={children} county={countyName} url={`https://wscss.site/${slug}`} resultAmount={supportNum !== null ? supportNum : undefined} />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white pt-8 pb-12 lg:pt-12 lg:pb-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">

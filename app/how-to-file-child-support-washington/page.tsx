@@ -5,7 +5,7 @@ import { FileText, CheckCircle2, AlertTriangle, Building2, ChevronRight, ArrowRi
 export const metadata: Metadata = {
   title: 'How to File Child Support in Washington State (2026 Guide)',
   description: 'A step-by-step 2026 guide on how to file for child support in Washington. Includes required court forms, serving the other parent, and filing procedures.',
-  alternates: { canonical: 'https://wcssc.site/how-to-file-child-support-washington' },
+  alternates: { canonical: 'https://wscss.site/how-to-file-child-support-washington' },
 };
 
 export default function HowToFileGuide() {

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     absolute: "About WCSSC — Washington Child Support Schedule Center | WCSSC"
   },
   description: "WCSSC is an independent educational platform providing free, accurate Washington State child support calculations based on the official 2026 RCW 26.19 economic tables.",
-  alternates: { canonical: 'https://wcssc.site/about' },
+  alternates: { canonical: 'https://wscss.site/about' },
 };
 
 export default function AboutPage() {
@@ -208,8 +208,8 @@ export default function AboutPage() {
 
           <div className="max-w-md mx-auto p-8 bg-[var(--color-bg-subtle)] rounded-3xl border border-[var(--color-bg-border)] text-center">
             <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">General Inquiries</p>
-            <a href="mailto:support@wcssc.site" className="text-2xl font-bold text-blue-600 hover:underline break-all">
-              support@wcssc.site
+            <a href="mailto:support@wscss.site" className="text-2xl font-bold text-blue-600 hover:underline break-all">
+              support@wscss.site
             </a>
           </div>
         </div>

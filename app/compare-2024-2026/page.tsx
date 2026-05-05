@@ -8,7 +8,7 @@ import { ArrowLeft } from 'lucide-react';
 export const metadata: Metadata = {
   title: '2024 vs 2026 Child Support Comparison | WCSSC',
   description: 'Compare Washington State child support guidelines for 2024 and 2026. See how the new SSR (approximately $2,394) and expanded economic tables impact your payments.',
-  alternates: { canonical: 'https://wcssc.site/compare-2024-2026' },
+  alternates: { canonical: 'https://wscss.site/compare-2024-2026' },
 };
 
 const COMPARISON_FACTORS = [
@@ -22,7 +22,7 @@ const COMPARISON_FACTORS = [
 export default function CompareToolPage() {
   return (
     <div className="flex-1 bg-white relative w-full overflow-hidden min-h-screen">
-      <CalculatorSchema year={2026} url="https://wcssc.site/compare-2024-2026" />
+      <CalculatorSchema year={2026} url="https://wscss.site/compare-2024-2026" />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">

@@ -536,9 +536,9 @@ Call log:
             - generic [ref=e584]: WCSSC
           - paragraph [ref=e585]: Precision child support calculations for Washington State families. Official AOC-aligned data source.
           - link "Email support" [ref=e586] [cursor=pointer]:
-            - /url: mailto:support@wcssc.site
+            - /url: mailto:support@wscss.site
             - img [ref=e588]
-            - generic [ref=e591]: support@wcssc.site
+            - generic [ref=e591]: support@wscss.site
         - generic [ref=e592]:
           - heading "Calculators" [level=4] [ref=e593]
           - list [ref=e594]:

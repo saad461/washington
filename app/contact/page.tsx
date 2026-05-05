@@ -7,7 +7,7 @@ import ContactForm from '@/components/ContactForm';
 export const metadata: Metadata = {
   title: 'Contact Us | Washington Child Support Schedule Center',
   description: 'Get in touch with the WCSSC editorial and support team. We value your feedback on our Washington child support tools.',
-  alternates: { canonical: 'https://wcssc.site/contact' },
+  alternates: { canonical: 'https://wscss.site/contact' },
 };
 
 export default function ContactPage() {
@@ -63,7 +63,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-1">Email Support</p>
-                    <p className="font-bold text-[var(--color-text-primary)] break-all">support@wcssc.site</p>
+                    <p className="font-bold text-[var(--color-text-primary)] break-all">support@wscss.site</p>
                   </div>
                 </div>
 
@@ -73,7 +73,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-1">Editorial Team</p>
-                    <p className="font-bold text-[var(--color-text-primary)] break-all">editor@wcssc.site</p>
+                    <p className="font-bold text-[var(--color-text-primary)] break-all">editor@wscss.site</p>
                   </div>
                 </div>
               </div>
