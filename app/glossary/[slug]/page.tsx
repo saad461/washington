@@ -15,8 +15,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!termData) return {};
 
   return {
-    title: `What is ${termData.term} in WA? | Child Support Glossary`,
-    description: `Clear, legal definition and practical examples of ${termData.term} under 2026 Washington State Child Support guidelines.`,
+    title: {
+      absolute: termData.metaTitle
+    },
+    description: termData.metaDescription,
+    openGraph: {
+      title: termData.ogTitle,
+      description: termData.ogDescription,
+      images: [{ url: 'https://wcssc.site/wcssc-og.webp' }]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: termData.ogTitle,
+      description: termData.ogDescription,
+      images: ['https://wcssc.site/wcssc-og.webp']
+    },
     alternates: { canonical: `https://wcssc.site/glossary/${termData.slug}` }
   };
 }
@@ -30,7 +43,7 @@ export default async function GlossaryTermPage({ params }: Props) {
   }
 
   return (
-    <div className="flex-1 bg-white">
+    <div className="flex-1 bg-white pb-32">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white py-12 md:py-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div
@@ -49,7 +62,7 @@ export default async function GlossaryTermPage({ params }: Props) {
               Legal Definition
             </p>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight">
-              {termData.term}
+              {termData.h1Title}
             </h1>
           </header>
         </div>

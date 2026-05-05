@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function GlossaryIndex() {
   return (
-    <div className="flex-1 bg-white relative w-full overflow-hidden">
+    <div className="flex-1 bg-white relative w-full overflow-hidden pb-32">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div

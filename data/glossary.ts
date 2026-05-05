@@ -6,6 +6,11 @@ export interface GlossaryTerm {
   example: string;
   linkLabel: string;
   relatedLinks: { label: string; href: string }[];
+  metaTitle: string;
+  metaDescription: string;
+  h1Title: string;
+  ogTitle: string;
+  ogDescription: string;
 }
 
 export const glossaryTerms: GlossaryTerm[] = [
@@ -18,8 +23,13 @@ export const glossaryTerms: GlossaryTerm[] = [
     linkLabel: "Read SSR Guide",
     relatedLinks: [
       { label: "Check your SSR Eligibility", href: "/worksheet" },
-      { label: "King County Support Filing", href: "/washington-courts/king-county" }
-    ]
+      { label: "Washington Court Directory", href: "/washington-courts" }
+    ],
+    metaTitle: "What is the Self-Support Reserve (SSR) in WA? | Child Support Glossary | WCSSC",
+    metaDescription: "The Self-Support Reserve (SSR) in Washington is $2,394/mo in 2026. Learn how it protects paying parents and affects your child support obligation under RCW 26.19.065.",
+    h1Title: "What is the Self-Support Reserve (SSR) in Washington Child Support?",
+    ogTitle: "What is the Self-Support Reserve (SSR) in WA? | WCSSC",
+    ogDescription: "The Self-Support Reserve (SSR) in Washington is $2,394/mo in 2026. Learn how it protects paying parents and affects your child support obligation under RCW 26.19.065."
   },
   {
     name: "Deviation",
@@ -30,7 +40,12 @@ export const glossaryTerms: GlossaryTerm[] = [
     linkLabel: "Read Deviation Guide",
     relatedLinks: [
       { label: "Calculate Base Obligation to Find Deviation Value", href: "/worksheet" }
-    ]
+    ],
+    metaTitle: "What is a Child Support Deviation in WA? | Child Support Glossary | WCSSC",
+    metaDescription: "A deviation is a court-approved adjustment to Washington's standard child support amount. Learn when courts grant deviations and how to request one under RCW 26.19.075.",
+    h1Title: "What is a Child Support Deviation in Washington State?",
+    ogTitle: "What is a Child Support Deviation in WA? | WCSSC",
+    ogDescription: "A deviation is a court-approved adjustment to Washington's standard child support amount. Learn when courts grant deviations and how to request one under RCW 26.19.075."
   },
   {
     name: "Imputed Income",
@@ -41,7 +56,12 @@ export const glossaryTerms: GlossaryTerm[] = [
     linkLabel: "Read Imputed Income Guide",
     relatedLinks: [
       { label: "Calculate Impact of Increased Income", href: "/worksheet" }
-    ]
+    ],
+    metaTitle: "What is Imputed Income in WA Child Support? | Child Support Glossary | WCSSC",
+    metaDescription: "Imputed income is assigned by a court when a parent is voluntarily unemployed or underemployed. Learn how Washington courts calculate imputed income under RCW 26.19.071.",
+    h1Title: "What is Imputed Income in Washington Child Support?",
+    ogTitle: "What is Imputed Income in WA Child Support? | WCSSC",
+    ogDescription: "Imputed income is assigned by a court when a parent is voluntarily unemployed or underemployed. Learn how Washington courts calculate imputed income under RCW 26.19.071."
   },
   {
     name: "Transfer Payment",
@@ -52,7 +72,12 @@ export const glossaryTerms: GlossaryTerm[] = [
     linkLabel: "Read Transfer Payment Guide",
     relatedLinks: [
       { label: "Estimate Your Transfer Payment", href: "/worksheet" }
-    ]
+    ],
+    metaTitle: "What is a Child Support Transfer Payment in WA? | Child Support Glossary | WCSSC",
+    metaDescription: "The transfer payment is the final monthly amount one parent pays the other for child support in Washington. Learn how it is calculated under RCW 26.19.",
+    h1Title: "What is a Child Support Transfer Payment in Washington State?",
+    ogTitle: "What is a Child Support Transfer Payment in WA? | WCSSC",
+    ogDescription: "The transfer payment is the final monthly amount one parent pays the other for child support in Washington. Learn how it is calculated under RCW 26.19."
   },
   {
     name: "Combined Net Income",
@@ -63,7 +88,12 @@ export const glossaryTerms: GlossaryTerm[] = [
     linkLabel: "Read Net Income Guide",
     relatedLinks: [
       { label: "View Support Estimates for $8,000 Income", href: "/income-8000-2-children" }
-    ]
+    ],
+    metaTitle: "What is Combined Net Income in WA Child Support? | Child Support Glossary | WCSSC",
+    metaDescription: "Combined net income is both parents monthly income after mandatory deductions. It determines your position on Washington's 2026 economic table under RCW 26.19.071.",
+    h1Title: "What is Combined Net Income in Washington Child Support?",
+    ogTitle: "What is Combined Net Income in WA Child Support? | WCSSC",
+    ogDescription: "Combined net income is both parents monthly income after mandatory deductions. It determines your position on Washington's 2026 economic table under RCW 26.19.071."
   },
   {
     name: "Extraordinary Expenses",
@@ -74,6 +104,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     linkLabel: "Read Extraordinary Expenses Guide",
     relatedLinks: [
       { label: "Calculate Proportional Expense Splits", href: "/extra-expenses" }
-    ]
+    ],
+    metaTitle: "What are Extraordinary Expenses in WA Child Support? | Child Support Glossary | WCSSC",
+    metaDescription: "Extraordinary expenses are costs not covered by basic child support in Washington including healthcare and daycare. Learn how they are split proportionally under RCW 26.19.080.",
+    h1Title: "What are Extraordinary Expenses in Washington Child Support?",
+    ogTitle: "What are Extraordinary Expenses in WA Child Support? | WCSSC",
+    ogDescription: "Extraordinary expenses are costs not covered by basic child support in Washington including healthcare and daycare. Learn how they are split proportionally under RCW 26.19.080."
   }
 ];
