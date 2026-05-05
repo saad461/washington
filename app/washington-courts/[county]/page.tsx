@@ -274,7 +274,7 @@ export default async function CountyCourtPage({ params }: Props) {
                       Legal Disclaimer
                     </p>
                     <p className="text-sm text-[var(--color-text-body)] leading-relaxed">
-                      Information for <strong>{county.name}</strong> is for educational use. The 2026 SSR is approximately $2,394. WCSSC is not a law firm and does not provide legal representation. Consult a family law attorney for advice specific to your case.
+                      Information for <strong>{county.name}</strong> is for educational use. The 2026 SSR is approximately $2,394. WSCSS is not a law firm and does not provide legal representation. Consult a family law attorney for advice specific to your case.
                     </p>
                   </div>
                 </div>

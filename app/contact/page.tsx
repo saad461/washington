@@ -5,8 +5,8 @@ import { Mail, MessageCircle, ArrowLeft, Shield } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Washington Child Support Schedule Center',
-  description: 'Get in touch with the WCSSC editorial and support team. We value your feedback on our Washington child support tools.',
+  title: 'Contact Us | Washington State Child Support Schedule',
+  description: 'Get in touch with the WSCSS editorial and support team. We value your feedback on our Washington child support tools.',
   alternates: { canonical: 'https://wscss.site/contact' },
 };
 
@@ -33,7 +33,7 @@ export default function ContactPage() {
               Support & Feedback
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              Contact <span className="text-blue-600">WCSSC</span>
+              Contact <span className="text-blue-600">WSCSS</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
               Whether you found a bug in our 2026 calculator, have a suggestion for our legal glossary, or need to report an error, our editorial team is ready to listen.
@@ -105,7 +105,7 @@ export default function ContactPage() {
             </div>
             <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4">Important Legal Notice</p>
             <p className="text-[var(--color-text-secondary)] leading-relaxed text-lg">
-              WCSSC is an educational tool and does not provide legal representation. If you are in immediate need of legal assistance, please contact the <Link href="/washington-courts" className="text-blue-600 font-medium hover:underline">Washington State Courts</Link> directly or seek a licensed attorney.
+              WSCSS is an educational tool and does not provide legal representation. If you are in immediate need of legal assistance, please contact the <Link href="/washington-courts" className="text-blue-600 font-medium hover:underline">Washington State Courts</Link> directly or seek a licensed attorney.
             </p>
           </div>
         </div>

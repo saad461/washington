@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       modifiedTime: post.updatedAt,
       authors: [post.author],
       url: `https://wscss.site/blog/${slug}`,
-      images: [{ url: post.image?.url || '/wcssc-og.jpg', width: 1200, height: 630 }],
+      images: [{ url: post.image?.url || '/wscss-og.jpg', width: 1200, height: 630 }],
     },
   };
 }
@@ -223,7 +223,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           <div className="mt-16 p-10 bg-[var(--color-bg-subtle)] border border-gray-200 rounded-3xl">
             <p className="text-sm text-gray-600 leading-relaxed mb-8">
-              All WCSSC insights are reviewed for compliance with <strong className="text-gray-900">RCW 26.19.065</strong> and official Washington State guidelines. Our team cross-references all data with official AOC publications.
+              All WSCSS insights are reviewed for compliance with <strong className="text-gray-900">RCW 26.19.065</strong> and official Washington State guidelines. Our team cross-references all data with official AOC publications.
             </p>
             <div className="flex flex-wrap gap-8">
               <Link href="/editorial-methodology" className="text-blue-600 font-bold hover:underline flex items-center gap-2">

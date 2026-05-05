@@ -14,7 +14,7 @@ export default function Footer() {
               <div className="w-10 h-10 bg-[var(--color-brand-primary)] rounded-xl shadow-lg shadow-[var(--color-brand-primary)]/20 flex items-center justify-center group-hover:bg-[var(--color-brand-primary-hover)] transition-colors shrink-0">
                 <Calculator className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-white font-heading">WCSSC</span>
+              <span className="text-xl font-bold tracking-tight text-white font-heading">WSCSS</span>
             </Link>
             <p className="text-sm sm:text-base leading-relaxed mb-6 text-gray-300 max-w-xs">
               Precision child support calculations for Washington State families. Official AOC-aligned data source.
@@ -103,7 +103,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/about" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
-                  About WCSSC
+                  About WSCSS
                 </Link>
               </li>
             </ul>
@@ -146,10 +146,10 @@ export default function Footer() {
         <div className="pt-8 border-t border-gray-700 flex flex-col sm:flex-row justify-between items-center gap-6">
           <div className="text-center sm:text-left max-w-xl">
             <p className="text-[13px] font-semibold text-gray-400 mb-2">
-              &copy; 2026 Washington Child Support Schedule Center
+              &copy; 2026 Washington State Child Support Schedule
             </p>
             <p className="text-[13px] text-gray-400 leading-relaxed">
-              WCSSC is not a law firm and does not provide legal advice. We are an independent resource for 2026 WA State Child Support guidelines. All calculations are estimates only.
+              WSCSS is not a law firm and does not provide legal advice. We are an independent resource for 2026 WA State Child Support guidelines. All calculations are estimates only.
             </p>
           </div>
 

@@ -58,7 +58,7 @@ const worksheetFAQs = [
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Washington Child Support Worksheet 2026 — Free Online Generator | WCSSC",
+    absolute: "Washington Child Support Worksheet 2026 — Free Online Generator | WSCSS",
   },
   description:
     "Complete the official 8-part Washington State child support worksheet online. Auto-calculates all figures using 2026 RCW 26.19 economic tables. Free for all 39 Washington counties. No sign-up needed.",
@@ -71,12 +71,12 @@ export const metadata: Metadata = {
     "child support worksheet Washington State online",
   ],
   openGraph: {
-    title: "Washington Child Support Worksheet 2026 | WCSSC",
+    title: "Washington Child Support Worksheet 2026 | WSCSS",
     description:
       "Complete the official 8-part AOC child support worksheet online — free, instant, 2026 compliant.",
     url: "https://wscss.site/worksheet",
     type: "website",
-    siteName: "WCSSC",
+    siteName: "WSCSS",
   },
 };
 

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: '2024 vs 2026 Child Support Comparison | WCSSC',
+  title: '2024 vs 2026 Child Support Comparison | WSCSS',
   description: 'Compare Washington State child support guidelines for 2024 and 2026. See how the new SSR (approximately $2,394) and expanded economic tables impact your payments.',
   alternates: { canonical: 'https://wscss.site/compare-2024-2026' },
 };

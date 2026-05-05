@@ -177,7 +177,7 @@ export default function HowToFileGuide() {
           <div className="card-standard border-dashed border-2 border-gray-200 !p-12 shadow-none">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Need legal help?</h2>
             <p className="text-lg text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-              While WCSSC provides estimates, complex cases often require a professional. We recommend consulting a licensed Washington State family law attorney.
+              While WSCSS provides estimates, complex cases often require a professional. We recommend consulting a licensed Washington State family law attorney.
             </p>
             <Link href="/contact" className="btn-primary-lg btn-secondary !rounded-full">
               Contact Editorial Team

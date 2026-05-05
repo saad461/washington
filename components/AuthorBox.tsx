@@ -19,7 +19,7 @@ const AuthorBox = () => {
 
           <div className="flex-1 text-center md:text-left">
             <span className="eyebrow mb-2">Academic & Legal Entity</span>
-            <h3 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6 tracking-tight">WCSSC Editorial & Legal Team</h3>
+            <h3 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6 tracking-tight">WSCSS Editorial & Legal Team</h3>
 
             <p className="text-[var(--color-text-body)] text-sm md:text-base leading-relaxed mb-8 max-w-2xl">
               Our calculations and guides are rigorously audited by family law advocates and technical developers to ensure compliance with <strong className="text-[var(--color-text-primary)]">RCW 26.19</strong> and the latest 2026 economic table updates. We maintain a strict editorial protocol based on official AOC mandatory forms and WAC guidelines.
@@ -45,7 +45,7 @@ const AuthorBox = () => {
 
       <div className="mt-4 text-center px-6">
         <p className="text-[12px] font-medium text-[var(--color-text-secondary)] uppercase tracking-widest leading-loose">
-          Transparency Disclosure: WCSSC is an independent resource center. We are not a government agency or a law firm. Our calculations are provided for educational and estimation purposes based on the latest 2026 guidelines.
+          Transparency Disclosure: WSCSS is an independent resource center. We are not a government agency or a law firm. Our calculations are provided for educational and estimation purposes based on the latest 2026 guidelines.
         </p>
       </div>
     </section>

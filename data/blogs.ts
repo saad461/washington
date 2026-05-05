@@ -27,7 +27,7 @@ export const blogs: BlogPost[] = [
     excerpt: "Everything you need to know about Washington's 2026 child support schedule, including exactly what changed, how the economic tables work, and what you can expect in court.",
     metaTitle: "2026 WA Child Support Guidelines | The Complete Parent Handbook",
     metaDescription: "Master the 2026 Washington Child Support Schedule. Expert breakdown of the updated economic tables, SSR thresholds (approximately $2,394), shared custody rules, and extraordinary expenses.",
-    author: "WCSSC Editorial Team",
+    author: "WSCSS Editorial Team",
     createdAt: "2026-01-05",
     updatedAt: "2026-04-09",
     featured: true,
@@ -130,7 +130,7 @@ export const blogs: BlogPost[] = [
 
       <p class="mb-4">Check your specific county's calculation profile: <a href="/king-county-income-5000-2-children">King County</a> | <a href="/pierce-county-income-5000-2-children">Pierce County</a> | <a href="/snohomish-county-income-5000-2-children">Snohomish County</a></p>
 
-       <h2 class="mt-12 mb-6">Related Articles From WCSSC</h2>
+       <h2 class="mt-12 mb-6">Related Articles From WSCSS</h2>
        <ul class="list-disc pl-6 space-y-6 mb-8">
         <li><a href="/blog/child-support-calculation-washington-2026">Full Calculation Walkthrough: Step-by-Step for 2026</a></li>
         <li><a href="/blog/washington-ssr-self-support-reserve-explained">Understanding the approximately $2,394 Self-Support Reserve</a></li>
@@ -172,7 +172,7 @@ export const blogs: BlogPost[] = [
     excerpt: "A practical, step-by-step guide to filing a child support petition in King County, including which courthouse handles your case, the forms you need, and what actually happens at your first hearing.",
     metaTitle: "Filing Child Support in King County | Step-by-Step 2026 Roadmap",
     metaDescription: "Step-by-step guide to filing for child support in King County, WA. Covers Seattle vs. Kent courthouse routing, required forms, e-filing, and what to expect at your first hearing.",
-    author: "WCSSC Editorial Team",
+    author: "WSCSS Editorial Team",
     createdAt: "2026-02-12",
     updatedAt: "2026-04-09",
     featured: false,
@@ -288,7 +288,7 @@ export const blogs: BlogPost[] = [
     excerpt: "A plain-English deep dive into the 2026 Self-Support Reserve, what it is, how the math actually works at different income levels, and what happens when your support obligation hits the floor.",
     metaTitle: "WA Self-Support Reserve (SSR) Explained | 2026 Guide",
     metaDescription: "What is the WA Child Support SSR? Plain-English guide to how the approximately $2,394 monthly floor protects low-income parents, with real math examples at different income levels.",
-    author: "WCSSC Editorial Team",
+    author: "WSCSS Editorial Team",
     createdAt: "2026-03-20",
     updatedAt: "2026-04-09",
     featured: false,
@@ -387,7 +387,7 @@ export const blogs: BlogPost[] = [
     excerpt: "A complete, step-by-step walkthrough of exactly how Washington State calculates child support in 2026, with a worked example using real numbers from start to finish.",
     metaTitle: "2026 Washington Child Support Calculation | Step-by-Step Guide",
     metaDescription: "Learn exactly how child support is calculated in Washington State in 2026. Includes a complete worked example: gross income, deductions, proportional shares, and extraordinary expenses.",
-    author: "WCSSC Editorial Team",
+    author: "WSCSS Editorial Team",
     createdAt: "2026-04-08",
     updatedAt: "2026-04-09",
     featured: false,
@@ -530,7 +530,7 @@ export const blogs: BlogPost[] = [
     excerpt: "If your income is low or you've lost your job, here's what Washington law actually requires, including the $50 minimum, the SSR protection, imputed income risks, and how to get a legitimate reduction.",
     metaTitle: "Minimum Child Support in WA | Low-Income Parent Guide 2026",
     metaDescription: "Struggling to afford child support in Washington State? Learn how minimum orders work, the approximately $2,394 SSR limit, imputed income rules, and the right way to petition for a reduction.",
-    author: "WCSSC Editorial Team",
+    author: "WSCSS Editorial Team",
     createdAt: "2026-04-09",
     updatedAt: "2026-04-09",
     featured: false,
@@ -640,7 +640,7 @@ export const blogs: BlogPost[] = [
     excerpt: "King County has specific local family law rules that supplement state law, and ignoring them can derail your case. Here's what you need to know about LFLR 10, financial declarations, and high-income Seattle cases.",
     metaTitle: "King County Child Support Rules | 2026 Local Guidelines Explained",
     metaDescription: "Navigating family law in Seattle or Kent? Learn the King County child support local rules, LFLR 10 requirements, financial declarations, and how high-income cases differ in 2026.",
-    author: "WCSSC Editorial Team",
+    author: "WSCSS Editorial Team",
     createdAt: "2026-04-09",
     updatedAt: "2026-04-09",
     featured: false,
@@ -749,11 +749,11 @@ export const blogs: BlogPost[] = [
     excerpt: "Missing child support payments in Washington triggers a cascade of serious enforcement actions, from wage garnishment on day one to passport denial, license suspension, and contempt of court. Here's what happens and what you can do.",
     metaTitle: "Unpaid Child Support in WA | 2026 Penalties & Enforcement Guide",
     metaDescription: "What happens if child support is not paid in Washington State? Learn about wage garnishment, 12% interest on arrears, license suspension, passport denial, and how to get back on track.",
-    author: "WCSSC Editorial Team",
+    author: "WSCSS Editorial Team",
     createdAt: "2026-04-09",
     updatedAt: "2026-04-09",
     featured: false,
-    image: { url: "/wcssc-og.webp", alt: "Consequences of Unpaid Child Support in Washington State", width: 1200, height: 630 },
+    image: { url: "/wscss-og.webp", alt: "Consequences of Unpaid Child Support in Washington State", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
 <strong>Key Takeaways (2026)</strong>
@@ -865,11 +865,11 @@ export const blogs: BlogPost[] = [
     excerpt: "What actually happens when a Washington judge or commissioner decides your child support order, from the mandatory worksheet process to how income is verified and what deviation standards really look like.",
     metaTitle: "How Courts Decide Child Support in Washington | A 2026 Legal Guide",
     metaDescription: "Curious how courts decide child support in Washington State? Learn how commissioners use the Income Shares Model, verify income, handle extraordinary expenses, and decide when to deviate from the guidelines.",
-    author: "WCSSC Editorial Team",
+    author: "WSCSS Editorial Team",
     createdAt: "2026-04-09",
     updatedAt: "2026-04-09",
     featured: false,
-    image: { url: "/wcssc-og.webp", alt: "How Washington State Courts Decide Child Support Orders", width: 1200, height: 630 },
+    image: { url: "/wscss-og.webp", alt: "How Washington State Courts Decide Child Support Orders", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
 <strong>Key Takeaways (2026)</strong>

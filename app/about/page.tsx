@@ -4,9 +4,9 @@ import { ShieldCheck, ArrowLeft, Users, Database, Mail, Scale, Globe, CheckCircl
 
 export const metadata: Metadata = {
   title: {
-    absolute: "About WCSSC — Washington Child Support Schedule Center | WCSSC"
+    absolute: "About WSCSS — Washington State Child Support Schedule | WSCSS"
   },
-  description: "WCSSC is an independent educational platform providing free, accurate Washington State child support calculations based on the official 2026 RCW 26.19 economic tables.",
+  description: "WSCSS is an independent educational platform providing free, accurate Washington State child support calculations based on the official 2026 RCW 26.19 economic tables.",
   alternates: { canonical: 'https://wscss.site/about' },
 };
 
@@ -32,7 +32,7 @@ export default function AboutPage() {
               </li>
               <li aria-hidden="true">/</li>
               <li className="text-gray-900 font-medium" aria-current="page">
-                About WCSSC
+                About WSCSS
               </li>
             </ol>
           </nav>
@@ -42,10 +42,10 @@ export default function AboutPage() {
               Who We Are
             </p>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-              About <span className="text-blue-600">WCSSC</span>
+              About <span className="text-blue-600">WSCSS</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              The Washington Child Support Schedule Center (WCSSC) is an independent educational platform dedicated to helping Washington State families understand and estimate child support obligations under the 2026 guidelines.
+              The Washington State Child Support Schedule (WSCSS) is an independent educational platform dedicated to helping Washington State families understand and estimate child support obligations under the 2026 guidelines.
             </p>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default function AboutPage() {
             </div>
             <div className="space-y-4">
               <p className="text-[var(--color-text-body)] leading-relaxed text-lg">
-                Navigating child support calculations can be overwhelming. WCSSC was built to demystify the process by providing a free, accurate, and easy-to-use calculator based on the official 2026 Washington State Child Support Economic Table.
+                Navigating child support calculations can be overwhelming. WSCSS was built to demystify the process by providing a free, accurate, and easy-to-use calculator based on the official 2026 Washington State Child Support Economic Table.
               </p>
               <p className="text-[var(--color-text-body)] leading-relaxed">
                 We believe every parent deserves access to transparent, understandable financial guidance — without requiring expensive legal consultations for basic estimates.
@@ -164,7 +164,7 @@ export default function AboutPage() {
           </div>
           <div className="card-standard border-blue-100 bg-blue-50/30">
             <p className="leading-relaxed text-lg text-[var(--color-text-body)]">
-              WCSSC provides detailed child support calculations for all <strong>39 Washington counties</strong>, including localized courthouse information, filing guidance, and county-specific insights.
+              WSCSS provides detailed child support calculations for all <strong>39 Washington counties</strong>, including localized courthouse information, filing guidance, and county-specific insights.
             </p>
             <p className="mt-4 leading-relaxed text-[var(--color-text-secondary)]">
               From King County to Garfield County, our platform covers the full spectrum of Washington State jurisdictions with over 7,800 unique calculation pages.
@@ -184,7 +184,7 @@ export default function AboutPage() {
           </div>
           <div className="p-8 bg-white border border-amber-200 rounded-2xl shadow-sm">
             <p className="leading-relaxed text-[var(--color-text-body)]">
-              WCSSC is <strong>not a law firm</strong> and does not provide legal advice. Our calculations are estimates for educational purposes only.
+              WSCSS is <strong>not a law firm</strong> and does not provide legal advice. Our calculations are estimates for educational purposes only.
             </p>
             <p className="mt-4 leading-relaxed text-[var(--color-text-secondary)]">
               Actual court-ordered child support may differ based on healthcare costs, childcare expenses, custody arrangements, deviation petitions, and judicial discretion. We strongly recommend consulting a licensed Washington State family law attorney for specific legal guidance.

@@ -15,7 +15,7 @@ export default function CookieBanner() {
 
   useEffect(() => {
     try {
-      const consent = localStorage.getItem('wcssc-cookie-consent');
+      const consent = localStorage.getItem('wscss-cookie-consent');
       if (!consent) {
         const timer = setTimeout(() => setShow(true), 2000);
         return () => clearTimeout(timer);
@@ -27,14 +27,14 @@ export default function CookieBanner() {
 
   const handleAccept = () => {
     try {
-      localStorage.setItem('wcssc-cookie-consent', 'accepted');
+      localStorage.setItem('wscss-cookie-consent', 'accepted');
     } catch { /* noop */ }
     setShow(false);
   };
 
   const handleDecline = () => {
     try {
-      localStorage.setItem('wcssc-cookie-consent', 'declined');
+      localStorage.setItem('wscss-cookie-consent', 'declined');
       if (typeof window !== 'undefined' && window.gtag) {
         window.gtag('consent', 'update', {
           'analytics_storage': 'denied',
