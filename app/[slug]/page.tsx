@@ -529,7 +529,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <p className="mb-10 text-lg text-blue-50 max-w-lg mx-auto leading-relaxed relative z-10">
                     Get a full breakdown using our Washington Child Support Worksheet Wizard. Calculate precise income splits and extraordinary expenses.
                   </p>
-                  <Link href="/worksheet" className="btn-primary-lg !bg-white !text-blue-600 hover:!bg-blue-50 !rounded-full relative z-10">
+                  <Link href="/worksheet" className="btn-primary btn-primary-lg !bg-white !text-blue-600 hover:!bg-blue-50 !rounded-full relative z-10">
                     Launch Complete Wizard <ArrowRight className="w-5 h-5" />
                   </Link>
                 </div>

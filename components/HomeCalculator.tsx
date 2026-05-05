@@ -517,11 +517,11 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
 
                 {/* Action Buttons Below Card */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                  <Link href="/worksheet" className="btn-primary-lg flex-1 shadow-sm">
+                  <Link href="/worksheet" className="btn-primary btn-primary-lg flex-1 shadow-sm">
                     Launch Full Wizard
                     <ArrowRight size={18} />
                   </Link>
-                  <button onClick={() => window.print()} className="btn-secondary-lg px-6">
+                  <button onClick={() => window.print()} className="btn-secondary btn-secondary-lg px-6">
                     <Printer size={18} />
                     Print
                   </button>

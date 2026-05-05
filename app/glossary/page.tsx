@@ -218,11 +218,11 @@ export default function GlossaryIndex() {
               Now that you understand the key terms use our free 2026 Washington child support calculator or complete the full 8-part official worksheet.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/" className="btn-primary-lg btn-primary !rounded-full w-full sm:w-auto">
+              <Link href="/" className="btn-primary btn-primary-lg !rounded-full w-full sm:w-auto">
                 <Calculator className="w-5 h-5 mr-2" />
                 Start Free Calculator →
               </Link>
-              <Link href="/worksheet" className="btn-secondary !rounded-full w-full sm:w-auto !border-2">
+              <Link href="/worksheet" className="btn-secondary btn-secondary-lg !rounded-full w-full sm:w-auto !border-2">
                 <FileText className="w-5 h-5 mr-2" />
                 Launch Full Worksheet →
               </Link>
