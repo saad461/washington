@@ -138,7 +138,7 @@ export default function ExtraExpensesCalculator() {
             <p className="text-lg text-gray-500 mb-10 max-w-lg mx-auto leading-relaxed">
               This tool only calculates the add-on expenses. To calculate the mandatory base support and print your official forms, use the full worksheet.
             </p>
-            <Link href="/worksheet" className="btn-primary-lg btn-primary !rounded-full">
+            <Link href="/worksheet" className="btn btn-primary btn-primary-lg !rounded-full">
               Open Full Calculator <ArrowRight size={18} className="ml-2" />
             </Link>
           </div>

@@ -229,10 +229,10 @@ export default async function CountyCourtPage({ params }: Props) {
                 <div className="my-12 h-px bg-white/10" />
 
                 <div className="space-y-4">
-                  <a href={county.website} target="_blank" rel="noopener noreferrer" className="btn-secondary w-full !bg-white/10 !border-white/20 !text-white hover:!bg-white/20">
+                  <a href={county.website} target="_blank" rel="noopener noreferrer" className="btn btn-secondary w-full !bg-white/10 !border-white/20 !text-white hover:!bg-white/20">
                     Court Website <ExternalLink className="w-4 h-4" />
                   </a>
-                  <a href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} target="_blank" rel="noopener noreferrer" className="btn-primary w-full shadow-lg shadow-blue-500/20">
+                  <a href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full shadow-lg shadow-blue-500/20">
                     Get Directions <MapPin className="w-4 h-4" />
                   </a>
                 </div>

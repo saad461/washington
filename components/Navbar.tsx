@@ -107,14 +107,14 @@ export default function Navbar() {
             {pathname === "/worksheet" ? (
               <a
                 href="#wizard"
-                className="hidden sm:flex bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold text-[13px] hover:bg-blue-700 transition-colors items-center gap-1"
+                className="hidden sm:flex btn btn-primary !h-9 !px-4 !text-[13px] !rounded-lg !font-semibold items-center gap-1"
               >
                 Back to Top ↑
               </a>
             ) : (
               <Link
                 href="/worksheet"
-                className="hidden sm:flex btn-primary !h-9 !px-4 !text-[13px] !rounded-lg !font-semibold"
+                className="hidden sm:flex btn btn-primary !h-9 !px-4 !text-[13px] !rounded-lg !font-semibold"
               >
                 <span className="hidden md:inline">Launch</span> Wizard
                 <ChevronRight className="w-4 h-4" />
@@ -123,7 +123,7 @@ export default function Navbar() {
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden btn-icon"
+              className="lg:hidden btn btn-icon"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
             >
@@ -202,7 +202,7 @@ export default function Navbar() {
               <Link
                 href="/worksheet"
                 onClick={() => setMobileOpen(false)}
-                className="btn-primary w-full justify-center"
+                className="btn btn-primary w-full justify-center"
               >
                 Launch Wizard
                 <ChevronRight className="w-5 h-5" />

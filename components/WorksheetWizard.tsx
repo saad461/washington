@@ -374,7 +374,7 @@ export default function WorksheetWizard() {
           <p className="text-[var(--color-text-secondary)] mb-8">The requested worksheet step could not be loaded.</p>
           <button
             onClick={() => setCurrentStep(0)}
-            className="btn-primary w-full"
+            className="btn btn-primary w-full"
           >
             Back to Start
           </button>
@@ -517,7 +517,7 @@ Estimate only — not legal advice`;
           <button
             id="pdf-edit-btn"
             onClick={resetWizard}
-            className="btn-secondary !rounded-full !px-6"
+            className="btn btn-secondary !rounded-full !px-6"
           >
             <Calculator className="w-4 h-4 mr-2" />
             Edit Data
@@ -556,13 +556,13 @@ Estimate only — not legal advice`;
         <div id="summary-action-row" className="flex flex-col sm:flex-row justify-center gap-4 no-print pt-6">
           <button
             onClick={handleDownloadPDF}
-            className="btn-primary !h-14 !px-10 !rounded-xl !bg-blue-600 !text-white !font-bold !text-lg"
+            className="btn btn-primary !h-14 !px-10 !rounded-xl !font-bold !text-lg"
           >
             Download Official PDF
           </button>
           <button
             onClick={() => window.print()}
-            className="btn-secondary !h-14 !px-10 !rounded-xl !border-gray-200 !text-gray-700 !font-bold"
+            className="btn btn-secondary !h-14 !px-10 !rounded-xl !font-bold"
           >
             Print Entire Worksheet
           </button>
@@ -994,7 +994,7 @@ Estimate only — not legal advice`;
                     <button
                       onClick={prevStep}
                       disabled={currentStep === 0}
-                      className={`btn-secondary !rounded-full !px-8 h-14 ${
+                      className={`btn btn-secondary !rounded-full !px-8 h-14 ${
                         currentStep === 0
                           ? "pointer-events-none"
                           : "hover:shadow-[var(--shadow-card-md)] active:scale-[0.98]"
@@ -1006,7 +1006,7 @@ Estimate only — not legal advice`;
 
                     <button
                       onClick={nextStep}
-                      className="btn-primary !rounded-full !px-10 h-14 shadow-[var(--shadow-card-hover)] shadow-[var(--color-brand-primary)]/20"
+                      className="btn btn-primary !rounded-full !px-10 h-14 shadow-[var(--shadow-card-hover)] shadow-[var(--color-brand-primary)]/20"
                     >
                       {currentStep === PARTS.length - 1 ? "Generate Summary" : "Save & Continue"}
                       <ChevronRight className="w-5 h-5 ml-2" />
@@ -1052,7 +1052,7 @@ Estimate only — not legal advice`;
           </div>
           <button
             onClick={nextStep}
-            className="btn-primary !rounded-full !px-8 h-11 text-sm font-bold shadow-lg shadow-blue-600/20"
+            className="btn btn-primary !rounded-full !px-8 h-11 text-sm font-bold shadow-lg shadow-blue-600/20"
           >
             {currentStep === PARTS.length - 1 ? "Get Summary" : "Continue →"}
           </button>

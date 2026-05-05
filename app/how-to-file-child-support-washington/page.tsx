@@ -71,7 +71,7 @@ export default function HowToFileGuide() {
                 <h4 className="text-xl font-bold text-gray-900 mb-2">Generate Your Free Worksheet</h4>
                 <p className="text-gray-500">Includes the mandatory 2026 economic table updates.</p>
               </div>
-              <Link href="/worksheet" className="btn-primary-lg btn-primary w-full md:w-fit !rounded-full">
+              <Link href="/worksheet" className="btn btn-primary btn-primary-lg w-full md:w-fit !rounded-full">
                 Start Calculator <ArrowRight size={18} />
               </Link>
             </div>
@@ -141,7 +141,7 @@ export default function HowToFileGuide() {
                   <p className="text-white/60 text-sm font-medium uppercase tracking-widest">Addresses for all 39 counties.</p>
                 </div>
               </div>
-              <Link href="/washington-courts" className="btn-primary !bg-white !text-gray-900 hover:!bg-gray-100 !rounded-full relative z-10">
+              <Link href="/washington-courts" className="btn btn-primary !bg-white !text-gray-900 hover:!bg-gray-100 !rounded-full relative z-10">
                 View Directory <ChevronRight size={18} />
               </Link>
             </div>
@@ -179,7 +179,7 @@ export default function HowToFileGuide() {
             <p className="text-lg text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed">
               While WSCSS provides estimates, complex cases often require a professional. We recommend consulting a licensed Washington State family law attorney.
             </p>
-            <Link href="/contact" className="btn-primary-lg btn-secondary !rounded-full">
+            <Link href="/contact" className="btn btn-secondary btn-primary-lg !rounded-full">
               Contact Editorial Team
             </Link>
           </div>

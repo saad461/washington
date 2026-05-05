@@ -64,13 +64,13 @@ export default function CountyList({ counties }: CountyListProps) {
                   href={county.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-blue-600 bg-transparent border border-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
+                  className="btn btn-secondary !h-auto !py-2 text-sm"
                 >
                   Court website →
                 </a>
                 <Link
                   href={`/washington-courts/${county.slug}`}
-                  className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg hover:bg-blue-700 transition-colors"
+                  className="btn btn-primary !h-auto !py-2 text-sm"
                 >
                   Child Support Guide →
                 </Link>

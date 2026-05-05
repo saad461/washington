@@ -44,7 +44,7 @@ export default function ContactForm() {
         </div>
         <button
           type="submit"
-          className="btn-primary !h-14 !px-10 !rounded-xl w-full md:w-auto shadow-lg"
+          className="btn btn-primary !h-14 !px-10 !rounded-xl w-full md:w-auto shadow-lg"
         >
           Send Message <Send size={18} />
         </button>

@@ -82,7 +82,7 @@ const LocalInsight: React.FC<LocalInsightProps> = ({ county }) => {
  href={`https://www.google.com/search?q=${encodeURIComponent(county.court + ' ' + county.name + ' Washington')}`}
  target="_blank"
  rel="noopener noreferrer"
- className="btn-primary w-full md:w-fit px-8 h-14 flex items-center justify-center gap-3 shadow-[var(--shadow-card-md)]"
+ className="btn btn-primary w-full md:w-fit px-8 h-14 flex items-center justify-center gap-3 shadow-[var(--shadow-card-md)]"
  >
  <span>Visit Official Court Portal</span>
  <ExternalLink className="w-4 h-4" />

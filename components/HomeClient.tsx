@@ -68,7 +68,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
               <div className="flex flex-col items-start gap-4 mb-8">
                 <Link
                   href="/#calculator"
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-10 py-5 rounded-2xl text-lg transition-all duration-200 shadow-lg hover:shadow-blue-200 active:scale-[0.98] w-full sm:w-auto text-center"
+                  className="btn btn-primary btn-primary-lg w-full sm:w-auto"
                 >
                   Start Free Calculation →
                 </Link>
@@ -323,7 +323,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
             </p>
 
             <div className="mt-12 flex justify-center">
-              <Link href="/worksheet" className="btn-primary-lg btn-primary !rounded-full">
+              <Link href="/worksheet" className="btn btn-primary btn-primary-lg !rounded-full">
                 Calculate Exact Support
                 <ChevronRight className="w-5 h-5" />
               </Link>
@@ -555,7 +555,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
             </div>
             <Link
               href="/blog"
-              className="btn-tertiary-ghost"
+              className="btn btn-tertiary-ghost"
             >
               View all articles <ChevronRight size={16} />
             </Link>

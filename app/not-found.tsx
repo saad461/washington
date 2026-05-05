@@ -19,7 +19,7 @@ export default function NotFound() {
         <div className="grid gap-4">
           <Link
             href="/"
-            className="btn-primary w-full h-14 flex items-center justify-center gap-3 !rounded-full"
+            className="btn btn-primary w-full h-14 flex items-center justify-center gap-3 !rounded-full"
           >
             <ArrowLeft className="w-5 h-5" />
             Back to Calculator
@@ -27,7 +27,7 @@ export default function NotFound() {
 
           <Link
             href="/worksheet"
-            className="btn-secondary w-full h-14 flex items-center justify-center gap-3 !rounded-full"
+            className="btn btn-secondary w-full h-14 flex items-center justify-center gap-3 !rounded-full"
           >
             <Search className="w-5 h-5 text-blue-600" />
             Worksheet Pro Wizard
@@ -35,7 +35,7 @@ export default function NotFound() {
 
           <Link
             href="/blog"
-            className="btn-ghost w-full h-14 flex items-center justify-center gap-3 font-bold !rounded-full"
+            className="btn btn-ghost w-full h-14 flex items-center justify-center gap-3 font-bold !rounded-full"
           >
             Read Legal Guides <ChevronRight className="w-5 h-5" />
           </Link>
