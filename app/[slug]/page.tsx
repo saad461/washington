@@ -15,6 +15,7 @@ import {
 import ErrorBoundary from "@/components/ErrorBoundary";
 import CalculatorSchema from "@/components/CalculatorSchema";
 import FAQAccordion from "@/components/FAQAccordion";
+import { getBreadcrumbSchema } from "@/utils/jsonld";
 import { contentVariants } from "@/lib/contentVariants";
 import { getVariantIndices, formatVariant } from "@/lib/getVariant";
 
@@ -353,7 +354,6 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
 
   return (
     <div className="flex-1 bg-white relative w-full overflow-x-hidden">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <CalculatorSchema income={income} childCount={children} county={countyName} url={`https://wscss.site/${slug}`} resultAmount={supportNum !== null ? supportNum : undefined} />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
@@ -669,6 +669,17 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBreadcrumbSchema([
+          { name: "Home", url: "https://wscss.site" },
+          { name: "Washington", url: "https://wscss.site/washington-courts" },
+          ...(county ? [{ name: county.name, url: `https://wscss.site/washington-courts/${county.slug}` }] : []),
+          { name: `${formattedIncome} Calculation`, url: `https://wscss.site/${slug}` }
+        ])) }}
+      />
     </div>
   );
 }
