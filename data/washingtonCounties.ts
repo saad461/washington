@@ -3,6 +3,8 @@ export interface FaqItem {
   answer: string;
 }
 
+export const LAST_REVIEWED_DATE = "April 2026";
+
 export interface WashingtonCounty {
   slug: string;
   name: string;

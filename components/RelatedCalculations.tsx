@@ -14,7 +14,7 @@ const POPULOUS_COUNTIES = [
   { name: "Spokane County", slug: "spokane-county" },
 ];
 
-const RelatedCalculations: React.FC<RelatedCalculationsProps> = ({ countySlug, countyName }) => {
+const RelatedCalculations: React.FC<RelatedCalculationsProps> = ({ countySlug }) => {
   const nearbyIncomeTiers = [3000, 4000, 5000, 7500];
 
   // Get comparison counties, excluding the current one

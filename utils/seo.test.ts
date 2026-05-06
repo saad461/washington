@@ -14,6 +14,8 @@ const mockCounty: WashingtonCounty = {
   website: "https://kingcounty.gov",
   courthouseUrl: "https://kingcounty.gov",
   localTip: "Tip here",
+  localNote: "Note",
+  faqs: [],
 };
 
 const mockPierceCounty: WashingtonCounty = {
@@ -29,6 +31,8 @@ const mockPierceCounty: WashingtonCounty = {
   website: "https://www.piercecountywa.gov",
   courthouseUrl: "https://www.piercecountywa.gov",
   localTip: "Local tip",
+  localNote: "Note",
+  faqs: [],
 };
 
 describe("SEO Utility", () => {
@@ -36,7 +40,9 @@ describe("SEO Utility", () => {
     const meta = getCountyPageMeta({ county: mockCounty });
     expect(meta.openGraph?.title).toBe("King County Child Support 2026 | Calculator, Court Info & Filing Guide");
     expect(meta.openGraph?.description).not.toContain("All 39 counties");
-    expect(meta.openGraph?.images?.[0]?.url).toBe("https://wscss.site/wscss-og.webp");
+    const images = meta.openGraph?.images;
+    const imageUrl = Array.isArray(images) ? (images[0] as any).url : (images as any)?.url;
+    expect(imageUrl).toBe("https://wscss.site/wscss-og.webp");
   });
 
   it("generates correct meta for Pierce County income page, $5,000, 2 children", () => {
@@ -74,7 +80,8 @@ describe("SEO Utility", () => {
       amount: 843,
       slug: "king-county-income-4000-1-child",
     });
-    const imageUrl = meta.openGraph?.images?.[0]?.url;
+    const images = meta.openGraph?.images;
+    const imageUrl = Array.isArray(images) ? (images[0] as any).url : (images as any)?.url;
     expect(imageUrl).toMatch(/\.webp$/);
     expect(imageUrl).not.toMatch(/\.jpg$/);
   });

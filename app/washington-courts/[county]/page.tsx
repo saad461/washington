@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   washingtonCounties,
   WashingtonCounty,
+  LAST_REVIEWED_DATE,
 } from "@/data/washingtonCounties";
 import { getCountyPageMeta } from "@/utils/seo";
 import {
@@ -29,7 +30,6 @@ import FAQAccordion from "@/components/FAQAccordion";
 import { cleanEmDashContent } from "@/lib/textOptimizer";
 import RelatedCalculations from "@/components/RelatedCalculations";
 import {
-  getFaqPageSchema,
   getWebPageSchema,
   getBreadcrumbSchema,
   getCourthouseSchema
@@ -127,7 +127,7 @@ export default async function CountyCourtPage({ params }: Props) {
           <nav className="breadcrumbs-container mb-8">
             <Link href="/" className="breadcrumb-link">Home</Link>
             <span className="breadcrumb-separator">/</span>
-            <Link href="/washington-courts" className="breadcrumb-link">Courts</Link>
+            <Link href="/washington-courts" className="breadcrumb-link">Washington</Link>
             <span className="breadcrumb-separator">/</span>
             <span className="breadcrumb-current">{county.name}</span>
           </nav>
@@ -142,10 +142,13 @@ export default async function CountyCourtPage({ params }: Props) {
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
               Official 2026 estimates for {county.name} residents. Based on the Washington Income Shares Model with updated SSR of <strong className="text-gray-900 font-bold">approximately $2,394</strong>.
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 items-center">
               {["SSR: ~$2,394", "2026 Guidelines", "RCW 26.19 Compliant"].map(tag => (
                 <span key={tag} className="badge-meta !px-4 !py-1.5 !rounded-lg !text-[11px] !font-bold !uppercase tracking-wider">{tag}</span>
               ))}
+              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider ml-2">
+                Last Reviewed: {LAST_REVIEWED_DATE}
+              </span>
             </div>
           </div>
         </div>
@@ -277,7 +280,7 @@ export default async function CountyCourtPage({ params }: Props) {
                   <BookOpen className="w-4 h-4" /> Resources
                 </p>
                 <nav className="divide-y divide-[var(--color-bg-border-soft)]">
-                  {[{ href: "/worksheet", label: "2026 Worksheet Wizard" }, { href: "/how-to-file-child-support-washington", label: "Filing Guide" }, { href: "/washington-courts", label: "All WA Courthouses" }].map(link => (
+                  {[{ href: "/worksheet", label: `Calculate ${county.name} Support` }, { href: "/how-to-file-child-support-washington", label: "Filing Guide" }, { href: "/washington-courts", label: "All WA Courthouses" }].map(link => (
                     <Link key={link.href} href={link.href} className="flex items-center justify-between group py-5 hover:text-blue-600 transition-colors">
                       <span className="font-semibold text-[var(--color-text-body)] group-hover:text-blue-600 transition-colors">{link.label}</span>
                       <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-all" />

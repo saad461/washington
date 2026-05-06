@@ -24,15 +24,6 @@ type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = true;
 export const revalidate = 2592000; // 30 days ISR cache
 
-function getABVariant(slug: string): "A" | "B" {
-  let hash = 0;
-  for (let i = 0; i < slug.length; i++) {
-    hash = (hash << 5) - hash + slug.charCodeAt(i);
-    hash |= 0;
-  }
-  return Math.abs(hash) % 2 === 0 ? "A" : "B";
-}
-
 function parseSlug(slug: string) {
   const countyMatch = slug.match(
     /^(.+)-income-(\d+)-(\d+)-(?:child|children)$/,
@@ -330,28 +321,6 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
     { label: `Washington State Courts Directory`, href: "/washington-courts" },
   ];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "FinancialService",
-        name: "Washington State Child Support Schedule",
-        url: "https://wscss.site",
-        description: `Free 2026 Washington State child support calculator. ${formattedIncome} income, ${children} children.`,
-        areaServed: { "@type": "State", name: "Washington" },
-        priceRange: "Free",
-      },
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: "https://wscss.site" },
-          ...(county ? [{ "@type": "ListItem", position: 2, name: county.name, item: `https://wscss.site/${county.slug}-income-5000-${children}-children` }] : []),
-          { "@type": "ListItem", position: county ? 3 : 2, name: `${formattedIncome} Calculation` },
-        ],
-      },
-    ],
-  };
-
   return (
     <div className="flex-1 bg-white relative w-full overflow-x-hidden">
       <CalculatorSchema income={income} childCount={children} county={countyName} url={`https://wscss.site/${slug}`} resultAmount={supportNum !== null ? supportNum : undefined} />
@@ -377,6 +346,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                 <span className="text-6xl md:text-8xl font-bold tracking-tight text-gray-900">{formattedSupport}</span>
                 <span className="text-xl font-bold text-gray-400">/ mo</span>
               </div>
+              <p className="text-[12px] font-bold text-gray-400 uppercase tracking-widest mt-2">{timestamp}</p>
             </div>
 
             <div className="flex gap-12 pt-8 border-t border-gray-100">
@@ -505,8 +475,6 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                     </p>
                   </div>
                 </div>
-
-                <p className="text-[12px] font-bold text-gray-400 uppercase tracking-widest mt-12">{timestamp}</p>
               </article>
 
               <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
@@ -520,7 +488,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                     Get a full breakdown using our Washington Child Support Worksheet Wizard. Calculate precise income splits and extraordinary expenses.
                   </p>
                   <Link href="/worksheet" className="btn btn-primary btn-primary-lg !bg-white !text-blue-600 hover:!bg-blue-50 relative z-10">
-                    Launch Complete Wizard <ArrowRight className="w-5 h-5" />
+                    Adjust for {countyName} — Try Different Income <ArrowRight className="w-5 h-5" />
                   </Link>
                 </div>
               </div>

@@ -8,10 +8,7 @@ import {
   MapPin,
   Phone,
   Clock,
-  Globe,
-  Calculator,
-  Info,
-  Scale
+  Globe
 } from 'lucide-react';
 import { WashingtonCounty } from '@/data/washingtonCounties';
 import SearchMock from './SearchMock';
@@ -38,7 +35,6 @@ interface CountySidebarProps {
 
 const CountySidebar: React.FC<CountySidebarProps> = ({
   countyName,
-  countySlug,
   courthouseName,
   courthouseAddress,
   courthousePhone,
@@ -88,15 +84,16 @@ const CountySidebar: React.FC<CountySidebarProps> = ({
         <h3 className="eyebrow !mb-8">Official Authorities</h3>
         <div className="space-y-3">
           {[
-            { label: "WA DSHS Support Center", url: "https://www.dshs.wa.gov/esa/division-child-support", icon: Globe },
-            { label: "State Court Forms", url: "https://www.courts.wa.gov/forms/", icon: FileText },
-            { label: "Legal WA Resource Portal", url: "https://www.washingtonlawhelp.org/", icon: HelpCircle }
+            { label: "WA DSHS Support Center", url: "https://www.dshs.wa.gov/esa/division-child-support", icon: Globe, aria: "WA DSHS Support Center — opens in new tab" },
+            { label: "State Court Forms", url: "https://www.courts.wa.gov/forms/", icon: FileText, aria: "Washington State Court Forms — opens in new tab" },
+            { label: "Legal WA Resource Portal", url: "https://www.washingtonlawhelp.org/", icon: HelpCircle, aria: "Washington Law Help — opens in new tab" }
           ].map((link, i) => (
             <a
               key={i}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={link.aria}
               className="group flex items-center justify-between py-4 border-b border-[var(--color-bg-border-soft)] hover:border-[var(--color-brand-primary)] transition-all"
             >
               <div className="flex items-center gap-3">
@@ -131,9 +128,15 @@ const CountySidebar: React.FC<CountySidebarProps> = ({
 
           <div>
             <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Clerk Phone</p>
-            <a href={`tel:${courthousePhone.replace(/[^\d]/g, '')}`} className="text-sm font-bold text-[var(--color-brand-primary)] hover:underline flex items-center gap-2">
+            <a href={`tel:${courthousePhone.replace(/[^\d]/g, '')}`} className="text-sm font-bold text-[var(--color-brand-primary)] hover:underline flex items-center gap-2 mb-2">
               <Phone size={14} /> {courthousePhone}
             </a>
+            <div className="flex items-start gap-2 mt-2">
+              <Clock size={12} className="text-gray-400 shrink-0 mt-0.5" />
+              <p className="text-[10px] font-medium text-gray-500 leading-relaxed uppercase">
+                Call ahead to verify current clerk hours before visiting.
+              </p>
+            </div>
           </div>
 
           <div className="pt-4 border-t border-[var(--color-bg-border-soft)]">
@@ -144,11 +147,23 @@ const CountySidebar: React.FC<CountySidebarProps> = ({
 
         <div className="space-y-3 pt-4">
           {courthouseUrl && (
-            <a href={courthouseUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary w-full text-xs">
+            <a
+              href={courthouseUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary w-full text-xs"
+              aria-label={`${courthouseName} website — opens in new tab`}
+            >
               Court Website <ExternalLink size={14} />
             </a>
           )}
-          <a href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full text-xs shadow-lg shadow-blue-500/20">
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary w-full text-xs shadow-lg shadow-blue-500/20"
+            aria-label={`Get directions to ${courthouseName} — opens in new tab`}
+          >
             Get Directions <MapPin size={14} />
           </a>
         </div>
