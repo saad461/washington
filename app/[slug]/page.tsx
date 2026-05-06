@@ -9,8 +9,7 @@ import Link from "next/link";
 import { ArrowRight, Calculator, Info, Landmark, Scale, ChevronRight, MapPin } from "lucide-react";
 import {
   AdContainerClient as AdContainer,
-  AuthoritySidebarClient as AuthoritySidebar,
-  AuthorBoxClient as AuthorBox,
+  CountySidebarClient as CountySidebar,
   PrintButtonClient as PrintButton,
 } from "@/components/ClientDynamic";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -538,15 +537,26 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
             </div>
 
             <aside className="lg:col-span-4 space-y-4">
-              <div className="hidden lg:block space-y-4">
-                <ErrorBoundary fallback={<div className="p-6 bg-gray-50 border border-gray-200 rounded-2xl text-sm text-gray-500">Legal resources temporarily unavailable</div>}>
-                  <AuthoritySidebar county={county} />
-                </ErrorBoundary>
-                <ErrorBoundary fallback={<div className="p-6 bg-gray-50 border border-gray-200 rounded-2xl text-sm text-gray-500">Editorial info unavailable</div>}>
-                  <AuthorBox />
+              <div className="hidden lg:block">
+                <ErrorBoundary fallback={<div className="p-6 bg-gray-50 border border-gray-200 rounded-2xl text-sm text-gray-500">Sidebar temporarily unavailable</div>}>
+                  <CountySidebar
+                    countyName={countyName}
+                    countySlug={county?.slug || "washington"}
+                    courthouseName={county?.court || "Washington Superior Court"}
+                    courthouseAddress={county?.courtAddress || "Official AOC Guidelines"}
+                    courthousePhone={county?.clerkPhone || "(360) 753-3365"}
+                    courthousePrimarySeat={county?.seat || "Olympia"}
+                    filingFee={county?.filingFeeMax || 314}
+                    filingFeeIsRange={county?.filingFeeIsRange}
+                    courthouseUrl={county?.courthouseUrl}
+                    presumptiveAmount={supportNum || 0}
+                    combinedIncome={income}
+                    numberOfChildren={children}
+                    lastUpdated={county?.lastUpdated || "April 9, 2026"}
+                  />
                 </ErrorBoundary>
               </div>
-              <div className="lg:hidden space-y-4">
+              <div className="lg:hidden">
                 <details className="bg-white border border-gray-200 rounded-2xl shadow-sm group overflow-hidden">
                   <summary className="flex items-center justify-between px-6 h-14 cursor-pointer select-none list-none font-bold text-gray-900">
                     <span className="flex items-center gap-2">
@@ -568,13 +578,24 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   </summary>
                   <div className="px-6 pb-6 pt-2">
                     <ErrorBoundary>
-                      <AuthoritySidebar county={county} />
+                      <CountySidebar
+                        countyName={countyName}
+                        countySlug={county?.slug || "washington"}
+                        courthouseName={county?.court || "Washington Superior Court"}
+                        courthouseAddress={county?.courtAddress || "Official AOC Guidelines"}
+                        courthousePhone={county?.clerkPhone || "(360) 753-3365"}
+                        courthousePrimarySeat={county?.seat || "Olympia"}
+                        filingFee={county?.filingFeeMax || 314}
+                        filingFeeIsRange={county?.filingFeeIsRange}
+                        courthouseUrl={county?.courthouseUrl}
+                        presumptiveAmount={supportNum || 0}
+                        combinedIncome={income}
+                        numberOfChildren={children}
+                        lastUpdated={county?.lastUpdated || "April 9, 2026"}
+                      />
                     </ErrorBoundary>
                   </div>
                 </details>
-                <ErrorBoundary>
-                  <AuthorBox />
-                </ErrorBoundary>
               </div>
               <div className="not-print">
                  <PrintButton />

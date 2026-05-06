@@ -19,6 +19,11 @@ export const AuthoritySidebarClient = dynamic(
  { ssr: true, loading: () => <div className="w-full h-48 animate-pulse bg-[var(--color-bg-muted)] rounded-xl" /> }
 );
 
+export const CountySidebarClient = dynamic(
+  () => import('@/components/CountySidebar'),
+  { ssr: true, loading: () => <div className="w-full h-96 animate-pulse bg-[var(--color-bg-muted)] rounded-xl" /> }
+);
+
 export const AuthorBoxClient = dynamic(
  () => import('@/components/AuthorBox'),
  { ssr: true, loading: () => <div className="w-full h-32 animate-pulse bg-[var(--color-bg-muted)] rounded-xl" /> }
