@@ -27,6 +27,13 @@ import CalculatorSchema from "@/components/CalculatorSchema";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import FAQAccordion from "@/components/FAQAccordion";
 import { cleanEmDashContent } from "@/lib/textOptimizer";
+import RelatedCalculations from "@/components/RelatedCalculations";
+import {
+  getFaqPageSchema,
+  getWebPageSchema,
+  getBreadcrumbSchema,
+  getCourthouseSchema
+} from "@/utils/jsonld";
 
 type Props = { params: Promise<{ county: string }> };
 
@@ -104,18 +111,9 @@ export default async function CountyCourtPage({ params }: Props) {
   if (!county) notFound();
 
   const content = generateCountyContent(county);
-  const mapQuery = encodeURIComponent(county.courtAddress);
-
-  const faqs = [
-    { q: `Does living in ${county.name} affect my child support amount?`, a: `No. Child support is governed by uniform Washington State law (RCW 26.19). The presumptive amount in ${county.name} uses the exact same 2026 economic table as every other county.` },
-    { q: "What is the minimum child support in Washington State?", a: `The presumptive minimum is $50 per child per month. In 2026, judges in ${county.name} may deviate below this only in extraordinary circumstances.` },
-    { q: `Where do I file paperwork in ${county.name}?`, a: `You file with the Clerk of the ${county.court}, located at ${county.courtAddress}. The standard filing fee is ${county.filingFee}.` },
-    { q: `What is the Self-Support Reserve (SSR) in 2026?`, a: `In 2026, the SSR is approximately $2,394 per month. A ${county.name} court cannot issue a child support order that leaves the paying parent with less than this amount.` },
-  ];
 
   return (
     <div className="flex-1 bg-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": [{ "@type": "GovernmentOffice", name: county.court, address: { "@type": "PostalAddress", streetAddress: county.courtAddress, addressRegion: "WA", addressCountry: "US" }, telephone: county.clerkPhone, url: county.website }] }) }} />
       <CalculatorSchema county={county.name} url={`https://wscss.site/washington-courts/${county.slug}`} />
 
       {/* 1. MINI HERO */}
@@ -200,14 +198,14 @@ export default async function CountyCourtPage({ params }: Props) {
                   <Lightbulb className="w-8 h-8 text-amber-600" />
                   <span className="text-[12px] font-bold text-amber-900 uppercase tracking-widest">Local Filing Insight</span>
                 </div>
-                <p className="text-amber-900 text-lg font-medium leading-relaxed italic">&ldquo;{content.localTip}&rdquo;</p>
+                <p className="text-amber-900 text-lg font-medium leading-relaxed italic">&ldquo;{county.localNote}&rdquo;</p>
               </section>
 
               {/* D. FAQs */}
               <section>
                 <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">Common Parent Questions</p>
                 <h2 className="text-2xl md:text-3xl font-bold mb-12 text-[var(--color-text-primary)]">Frequently Asked Questions About Washington Child Support</h2>
-                <FAQAccordion faqs={faqs.map(f => ({ question: f.q, answer: f.a }))} />
+                <FAQAccordion faqs={county.faqs.map(f => ({ question: f.question, answer: f.answer }))} />
               </section>
             </div>
 
@@ -292,7 +290,10 @@ export default async function CountyCourtPage({ params }: Props) {
         </div>
       </section>
 
-      {/* 5. FOOTER DISCLAIMER */}
+      {/* 5. RELATED CALCULATIONS */}
+      <RelatedCalculations countySlug={county.slug} countyName={county.name} />
+
+      {/* 6. FOOTER DISCLAIMER */}
       <section className="bg-[var(--color-bg-subtle)] border-t border-[var(--color-bg-border)] section-default">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
@@ -312,6 +313,35 @@ export default async function CountyCourtPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getWebPageSchema({
+          name: `Child Support in ${county.name}, WA – 2026 Guide & Calculator`,
+          description: `Free 2026 child support calculator for ${county.name}, WA. Courthouse address, filing fee (${county.filingFee}), Self-Support Reserve ($2,394), and step-by-step filing guide. RCW 26.19 compliant.`,
+          url: `https://wscss.site/washington-courts/${county.slug}`,
+          dateModified: "2026-04-09"
+        })) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getBreadcrumbSchema([
+          { name: "Home", url: "https://wscss.site" },
+          { name: "Washington Courts", url: "https://wscss.site/washington-courts" },
+          { name: county.name, url: `https://wscss.site/washington-courts/${county.slug}` }
+        ])) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getCourthouseSchema({
+          countyName: county.name,
+          courthouseName: county.court,
+          courthouseAddress: county.courtAddress,
+          courthousePhone: county.clerkPhone,
+          courthouseUrl: county.courthouseUrl
+        })) }}
+      />
     </div>
   );
 }
