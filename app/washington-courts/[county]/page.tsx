@@ -6,7 +6,10 @@ import {
   WashingtonCounty,
 } from "@/data/washingtonCounties";
 import { getCountyPageMeta } from "@/utils/seo";
-import { HomeCalculatorClient as HomeCalculator } from "@/components/ClientDynamic";
+import {
+  HomeCalculatorClient as HomeCalculator,
+  CountySidebarClient as CountySidebar
+} from "@/components/ClientDynamic";
 import {
   Building2,
   ChevronRight,
@@ -18,8 +21,10 @@ import {
   Clock,
   BookOpen,
   ArrowLeft,
+  Scale
 } from "lucide-react";
 import CalculatorSchema from "@/components/CalculatorSchema";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import FAQAccordion from "@/components/FAQAccordion";
 import { cleanEmDashContent } from "@/lib/textOptimizer";
 
@@ -208,45 +213,67 @@ export default async function CountyCourtPage({ params }: Props) {
 
             {/* 4. SIDEBAR */}
             <aside className="lg:col-span-5 space-y-8">
-              <div className="bg-gray-900 text-white p-8 md:p-12 rounded-[var(--radius-card)] shadow-xl relative overflow-hidden lg:sticky lg:top-24">
-                <Building2 className="w-12 h-12 text-blue-400 mb-12" />
-                <h3 className="text-2xl font-bold mb-12 text-white">{county.court}</h3>
-
-                <div className="space-y-10">
-                  <div className="stat-block">
-                    <div className="flex items-center gap-2 mb-2">
-                      <MapPin className="w-4 h-4 text-white/50" />
-                      <span className="text-[12px] font-bold text-white/60 uppercase tracking-widest">Address</span>
-                    </div>
-                    <p className="text-[15px] font-medium leading-relaxed text-white">{county.courtAddress}</p>
+              <div className="hidden lg:block">
+                <ErrorBoundary fallback={<div className="p-6 bg-gray-50 border border-gray-200 rounded-2xl text-sm text-gray-500">Sidebar temporarily unavailable</div>}>
+                  <CountySidebar
+                    countyName={county.name}
+                    countySlug={county.slug}
+                    courthouseName={county.court}
+                    courthouseAddress={county.courtAddress}
+                    courthousePhone={county.clerkPhone}
+                    courthousePrimarySeat={county.seat}
+                    filingFee={county.filingFeeMax}
+                    filingFeeIsRange={county.filingFeeIsRange}
+                    courthouseUrl={county.courthouseUrl}
+                  />
+                </ErrorBoundary>
+              </div>
+              <div className="lg:hidden">
+                <details className="bg-white border border-gray-200 rounded-2xl shadow-sm group overflow-hidden">
+                  <summary className="flex items-center justify-between px-6 h-14 cursor-pointer select-none list-none font-bold text-gray-900">
+                    <span className="flex items-center gap-2">
+                      <Scale size={18} className="text-blue-600" /> Resources & Legal Sources
+                    </span>
+                    <svg
+                      className="w-5 h-5 transition-transform duration-300 group-open:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M19 9l-7 7-7-7"
+                      ></path>
+                    </svg>
+                  </summary>
+                  <div className="px-6 pb-6 pt-2">
+                    <ErrorBoundary>
+                      <CountySidebar
+                        countyName={county.name}
+                        countySlug={county.slug}
+                        courthouseName={county.court}
+                        courthouseAddress={county.courtAddress}
+                        courthousePhone={county.clerkPhone}
+                        courthousePrimarySeat={county.seat}
+                        filingFee={county.filingFeeMax}
+                        filingFeeIsRange={county.filingFeeIsRange}
+                        courthouseUrl={county.courthouseUrl}
+                      />
+                    </ErrorBoundary>
                   </div>
-                  <div className="stat-block">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Phone className="w-4 h-4 text-white/50" />
-                      <span className="text-[12px] font-bold text-white/60 uppercase tracking-widest">Clerk Phone</span>
-                    </div>
-                    <p className="text-lg font-bold text-white">{county.clerkPhone}</p>
-                  </div>
-                </div>
-
-                <div className="my-12 h-px bg-white/10" />
-
-                <div className="space-y-4">
-                  <a href={county.website} target="_blank" rel="noopener noreferrer" className="btn btn-secondary w-full !bg-white/10 !border-white/20 !text-white hover:!bg-white/20">
-                    Court Website <ExternalLink className="w-4 h-4" />
-                  </a>
-                  <a href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full shadow-lg shadow-blue-500/20">
-                    Get Directions <MapPin className="w-4 h-4" />
-                  </a>
-                </div>
-
-                <div className="mt-12 p-6 bg-white/5 rounded-xl border border-white/10 flex gap-4">
-                  <Clock className="w-5 h-5 text-white/40 shrink-0" />
-                  <p className="text-[12px] font-bold text-white/60 leading-relaxed uppercase">Call ahead to verify current clerk hours before visiting {county.seat}.</p>
-                </div>
+                </details>
               </div>
 
-              {/* Related Links */}
+              {/* Related Links - Keep as they were unique to this page or move inside sidebar?
+                  Prompt says: "The main content area of county pages must be completely untouched in terms of content and structure."
+                  It also says "replace the existing aside section on county pages with the new CountySidebar component" in my question response.
+                  I'll keep them here for now or move them if they fit.
+                  Actually, Section 3 of CountySidebar has official authorities.
+                  The original county page had a 'Related Links' card.
+                  I'll keep the related links below the new sidebar for parity with original structure if it doesn't conflict.
+              */}
               <div className="card-standard">
                 <p aria-hidden="true" className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-8 flex items-center gap-2">
                   <BookOpen className="w-4 h-4" /> Resources
