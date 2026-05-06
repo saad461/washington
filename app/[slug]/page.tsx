@@ -3,6 +3,7 @@ import {
   washingtonCounties,
   WashingtonCounty,
 } from "@/data/washingtonCounties";
+import { getIncomePageMeta } from "@/utils/seo";
 import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Calculator, Info, Landmark, Scale, ChevronRight, MapPin } from "lucide-react";
@@ -208,35 +209,25 @@ function generateDynamicFAQs(
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { county, income } = parseSlug(slug);
-  const variant = getABVariant(slug);
-  const locationText = county ? `in ${county.name}` : "in Washington";
-  const formattedAmt = formatter.format(income);
+  const { county, income, children } = parseSlug(slug);
 
-  const title =
-    variant === "A"
-      ? `${formattedAmt} Income Child Support ${locationText} (2026 Calculator)`
-      : `How Much is Child Support for ${formattedAmt} Income ${locationText}? (2026 Estimate)`;
+  const supportResult = getExactSupport(income, children);
+  const amount = supportResult.status === "calculated" ? supportResult.totalSupport : 0;
 
-  const description = `Calculate child support in ${county?.name || "Washington"}. Includes 2026 SSR rules (approximately $2,394 limit), Courthouse location, and low-income protections.`;
+  const seoMeta = getIncomePageMeta({
+    county,
+    income,
+    children,
+    amount,
+    slug,
+  });
 
   const isRoundIncome = income % 1000 === 0;
   const robots = isRoundIncome ? "index, follow" : "noindex, follow";
 
   return {
-    title,
-    description,
+    ...seoMeta,
     robots,
-    alternates: { canonical: `https://wscss.site/${slug}` },
-    openGraph: {
-      title,
-      description,
-      url: `https://wscss.site/${slug}`,
-      siteName: "WSCSS",
-      images: [{ url: "/wscss-og.jpg", width: 1200, height: 630 }],
-      locale: "en_US",
-      type: "website",
-    },
   };
 }
 
