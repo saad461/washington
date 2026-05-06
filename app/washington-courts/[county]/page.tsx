@@ -5,6 +5,7 @@ import {
   washingtonCounties,
   WashingtonCounty,
 } from "@/data/washingtonCounties";
+import { getCountyPageMeta } from "@/utils/seo";
 import { HomeCalculatorClient as HomeCalculator } from "@/components/ClientDynamic";
 import {
   Building2,
@@ -32,9 +33,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const county = washingtonCounties.find((c) => c.slug === slug);
   if (!county) return {};
 
+  const baseMeta = getCountyPageMeta({ county });
+
   return {
+    ...baseMeta,
     title: `Child Support in ${county.name} Washington 2026 | Court Guide & Calculator`,
-    description: `Free 2026 child support calculator for ${county.name}, WA. Official SSR (approximately $2,394), income shares model, local ${county.court} filing info, clerk phone & step-by-step guide.`,
     alternates: {
       canonical: `https://wscss.site/washington-courts/${county.slug}`,
     },

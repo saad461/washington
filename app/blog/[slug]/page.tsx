@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       modifiedTime: post.updatedAt,
       authors: [post.author],
       url: `https://wscss.site/blog/${slug}`,
-      images: [{ url: post.image?.url || '/wscss-og.jpg', width: 1200, height: 630 }],
+      images: [{ url: post.image?.url || '/wscss-og.webp', width: 1200, height: 630 }],
     },
   };
 }
