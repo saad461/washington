@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "cross-env NEXT_TURBOPACK=0 next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "jest"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
@@ -21,14 +22,18 @@
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
     "sharp": "^0.34.5",
     "tailwindcss": "^4",
+    "ts-jest": "^29.4.9",
     "ts-node": "^10.9.2",
     "typescript": "^5"
   }
