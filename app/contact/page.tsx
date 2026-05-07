@@ -8,6 +8,20 @@ export const metadata: Metadata = {
   title: 'Contact Us | Washington State Child Support Schedule',
   description: 'Get in touch with the WSCSS editorial and support team. We value your feedback on our Washington child support tools.',
   alternates: { canonical: 'https://wscss.site/contact' },
+  openGraph: {
+    title: "Contact Us | Washington State Child Support Schedule",
+    description: "Get in touch with the WSCSS editorial and support team. We value your feedback on our Washington child support tools.",
+    url: "https://wscss.site/contact",
+    siteName: "WSCSS",
+    images: [{ url: '/wscss-og.webp', width: 1200, height: 630, alt: 'Contact WSCSS' }],
+    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Contact Us | Washington State Child Support Schedule",
+    description: "Get in touch with the WSCSS editorial and support team.",
+    images: ['/wscss-og.webp'],
+  },
 };
 
 export default function ContactPage() {

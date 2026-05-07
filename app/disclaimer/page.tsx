@@ -6,6 +6,20 @@ export const metadata: Metadata = {
   title: 'Legal Disclaimer | WSCSS — Washington State Child Support Schedule',
   description: 'Important legal disclaimer for WSCSS. Our calculator provides estimates based on 2026 Washington State guidelines and is not a substitute for legal advice.',
   alternates: { canonical: 'https://wscss.site/disclaimer' },
+  openGraph: {
+    title: "Legal Disclaimer | WSCSS — Washington State Child Support Schedule",
+    description: "Important legal disclaimer for WSCSS. Our calculator provides estimates based on 2026 Washington State guidelines.",
+    url: "https://wscss.site/disclaimer",
+    siteName: "WSCSS",
+    images: [{ url: '/wscss-og.webp', width: 1200, height: 630, alt: 'Legal Disclaimer' }],
+    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Legal Disclaimer | WSCSS — Washington State Child Support Schedule",
+    description: "Important legal disclaimer for WSCSS.",
+    images: ['/wscss-og.webp'],
+  },
 };
 
 export default function DisclaimerPage() {

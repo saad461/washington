@@ -13,6 +13,20 @@ export const metadata: Metadata = {
   },
   description: "Expert guides on Washington State child support guidelines, 2026 law changes, county filing guides, and calculation walkthroughs from the WSCSS editorial team.",
   alternates: { canonical: 'https://wscss.site/blog' },
+  openGraph: {
+    title: { absolute: "Washington Child Support Legal Guides & Resources 2026 | WSCSS" },
+    description: "Expert guides on Washington State child support guidelines, 2026 law changes, and calculation walkthroughs.",
+    url: "https://wscss.site/blog",
+    siteName: "WSCSS",
+    images: [{ url: '/wscss-og.webp', width: 1200, height: 630, alt: 'WSCSS Blog' }],
+    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Washington Child Support Legal Guides & Resources 2026 | WSCSS",
+    description: "Expert guides on Washington State child support guidelines, 2026 law changes, and calculation walkthroughs.",
+    images: ['/wscss-og.webp'],
+  },
 };
 
 export default async function BlogPage({

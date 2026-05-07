@@ -7,10 +7,10 @@ import GlossaryClient from '@/components/glossary/GlossaryClient';
 import FAQAccordion from '@/components/FAQAccordion';
 
 export const metadata: Metadata = {
-  title: "Washington Child Support Glossary 2026 — 20 Key Legal Terms Explained | WSCSS",
+  title: { absolute: "Washington Child Support Glossary 2026 — 20 Key Legal Terms Explained | WSCSS" },
   description: "Plain-language definitions of 20 Washington State child support terms including SSR, imputed income, deviation, transfer payment, and economic table. Updated for 2026 RCW 26.19.",
   openGraph: {
-    title: "Washington Child Support Glossary 2026 — 20 Key Legal Terms | WSCSS",
+    title: { absolute: "Washington Child Support Glossary 2026 — 20 Key Legal Terms | WSCSS" },
     description: "Plain-language definitions of 20 Washington State child support terms including SSR, imputed income, deviation, and transfer payment. Updated for 2026 RCW 26.19 guidelines.",
     images: [{ url: 'https://wscss.site/wscss-og.webp' }]
   },

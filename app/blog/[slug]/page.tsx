@@ -50,6 +50,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://wscss.site/blog/${slug}`,
       images: [{ url: post.image?.url || '/wscss-og.webp', width: 1200, height: 630 }],
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.metaTitle,
+      description: post.metaDescription,
+      images: [post.image?.url || '/wscss-og.webp'],
+    },
   };
 }
 

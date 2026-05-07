@@ -8,6 +8,20 @@ export const metadata: Metadata = {
   },
   description: "WSCSS is an independent educational platform providing free, accurate Washington State child support calculations based on the official 2026 RCW 26.19 economic tables.",
   alternates: { canonical: 'https://wscss.site/about' },
+  openGraph: {
+    title: "About WSCSS — Washington State Child Support Schedule | WSCSS",
+    description: "Independent educational platform providing free, accurate Washington State child support calculations based on the official 2026 RCW 26.19 economic tables.",
+    url: "https://wscss.site/about",
+    siteName: "WSCSS",
+    images: [{ url: '/wscss-og.webp', width: 1200, height: 630, alt: 'About WSCSS' }],
+    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "About WSCSS — Washington State Child Support Schedule | WSCSS",
+    description: "Independent educational platform providing free, accurate Washington State child support calculations based on the official 2026 RCW 26.19 economic tables.",
+    images: ['/wscss-og.webp'],
+  },
 };
 
 export default function AboutPage() {
