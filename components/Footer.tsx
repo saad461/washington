@@ -48,22 +48,22 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/king-county-income-5000-2-children" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
+                <Link href="/washington-courts/king-county" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
                   King County Guide
                 </Link>
               </li>
               <li>
-                <Link href="/pierce-county-income-5000-2-children" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
+                <Link href="/washington-courts/pierce-county" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
                   Pierce County Guide
                 </Link>
               </li>
               <li>
-                <Link href="/snohomish-county-income-5000-2-children" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
+                <Link href="/washington-courts/snohomish-county" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
                   Snohomish County Guide
                 </Link>
               </li>
               <li>
-                <Link href="/spokane-county-income-5000-2-children" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
+                <Link href="/washington-courts/spokane-county" className="hover:text-white transition-colors hover:underline inline-block py-0.5">
                   Spokane County Guide
                 </Link>
               </li>
