@@ -149,7 +149,7 @@ function generateDynamicContent(
   if (children >= 3) {
     familyBlock = `
  <div class="p-8 bg-blue-600 rounded-3xl my-12 shadow-xl relative overflow-hidden">
- <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none"></div>
+ <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none no-print"></div>
  <h4 class="text-white flex items-center gap-3 mt-0 font-bold text-2xl relative z-10">Large Family Analysis</h4>
  <p class="leading-relaxed text-blue-50 text-lg mt-4 relative z-10">Raising ${childrenText} involves 'economies of scale'. The multiplier applied to the base income accounts for shared household costs. While the total of ${formattedSupport} is higher than for one child, the per-child cost is lower, reflecting common shared resources.</p>
  </div>`;
@@ -482,7 +482,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
 
                 <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0 no-print">
                   <div className="bg-blue-600 p-8 md:p-12 text-center shadow-2xl rounded-3xl relative overflow-hidden border border-blue-100">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none no-print" />
                     <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-100 mb-2 relative z-10">
                       Full Worksheet Tool
                     </p>
