@@ -9,6 +9,20 @@ export const metadata: Metadata = {
   },
   description: "Calculate Washington child support in seconds using the official 2026 RCW 26.19 economic tables. Free, private, and updated for EHB 1014 — covers all 39 counties.",
   alternates: { canonical: "https://wscss.site/" },
+  openGraph: {
+    title: "Washington Child Support Calculator 2026 — Free Instant Estimate | WSCSS",
+    description: "Calculate Washington child support in seconds using the official 2026 RCW 26.19 economic tables. Free, private, and updated for EHB 1014.",
+    url: "https://wscss.site/",
+    siteName: "WSCSS",
+    images: [{ url: '/wscss-og.webp', width: 1200, height: 630, alt: 'Washington Child Support Calculator 2026' }],
+    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Washington Child Support Calculator 2026 — Free Instant Estimate | WSCSS",
+    description: "Calculate Washington child support in seconds using the official 2026 RCW 26.19 economic tables. Free, private, and updated for EHB 1014.",
+    images: ['/wscss-og.webp'],
+  },
 };
 
 export default function Home() {

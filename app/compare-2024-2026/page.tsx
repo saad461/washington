@@ -9,6 +9,20 @@ export const metadata: Metadata = {
   title: '2024 vs 2026 Child Support Comparison | WSCSS',
   description: 'Compare Washington State child support guidelines for 2024 and 2026. See how the new SSR (approximately $2,394) and expanded economic tables impact your payments.',
   alternates: { canonical: 'https://wscss.site/compare-2024-2026' },
+  openGraph: {
+    title: "2024 vs 2026 Child Support Comparison | WSCSS",
+    description: "Compare Washington child support guidelines. See how the new SSR and expanded 2026 tables affect your payments.",
+    url: "https://wscss.site/compare-2024-2026",
+    siteName: "WSCSS",
+    images: [{ url: '/wscss-og.webp', width: 1200, height: 630, alt: '2024 vs 2026 Comparison' }],
+    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "2024 vs 2026 Child Support Comparison | WSCSS",
+    description: "Compare Washington child support guidelines. See how the new SSR and expanded 2026 tables affect your payments.",
+    images: ['/wscss-og.webp'],
+  },
 };
 
 const COMPARISON_FACTORS = [

@@ -11,6 +11,20 @@ export const metadata: Metadata = {
   },
   description: "Find courthouse addresses, phone numbers, and filing information for all 39 Washington State counties. Updated 2026 court directory for child support filings.",
   alternates: { canonical: 'https://wscss.site/washington-courts' },
+  openGraph: {
+    title: "Washington State Court Directory — All 39 Counties | WSCSS",
+    description: "Courthouse addresses, phone numbers, and filing information for all 39 Washington State counties. Updated for 2026.",
+    url: "https://wscss.site/washington-courts",
+    siteName: "WSCSS",
+    images: [{ url: '/wscss-og.webp', width: 1200, height: 630, alt: 'Washington Courts Directory' }],
+    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Washington State Court Directory — All 39 Counties | WSCSS",
+    description: "Courthouse addresses and filing information for all 39 Washington State counties.",
+    images: ['/wscss-og.webp'],
+  },
 };
 
 export default function CourtsIndex() {

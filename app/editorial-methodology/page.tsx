@@ -8,6 +8,20 @@ export const metadata: Metadata = {
   title: "Editorial Methodology — WSCSS",
   description: "Learn about the independent editorial methodology behind the Washington Child Support Calculator.",
   alternates: { canonical: 'https://wscss.site/editorial-methodology' },
+  openGraph: {
+    title: "Editorial Methodology — WSCSS",
+    description: "Learn about the independent editorial methodology behind the Washington Child Support Calculator.",
+    url: "https://wscss.site/editorial-methodology",
+    siteName: "WSCSS",
+    images: [{ url: '/wscss-og.webp', width: 1200, height: 630, alt: 'Editorial Methodology' }],
+    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Editorial Methodology — WSCSS",
+    description: "Learn about the independent editorial methodology behind the Washington Child Support Calculator.",
+    images: ['/wscss-og.webp'],
+  },
 };
 
 export default function EditorialMethodology() {

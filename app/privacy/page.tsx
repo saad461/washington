@@ -8,6 +8,20 @@ export const metadata: Metadata = {
  title: 'Privacy Policy | Washington State Child Support Schedule',
  description: 'Privacy Policy and AdSense disclosure for WSCSS. We prioritize the security of your legal calculation data.',
  alternates: { canonical: 'https://wscss.site/privacy' },
+  openGraph: {
+    title: "Privacy Policy | Washington State Child Support Schedule",
+    description: "Learn how WSCSS protects your privacy. We do not store your financial data.",
+    url: "https://wscss.site/privacy",
+    siteName: "WSCSS",
+    images: [{ url: '/wscss-og.webp', width: 1200, height: 630, alt: 'Privacy Policy' }],
+    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Privacy Policy | Washington State Child Support Schedule",
+    description: "Learn how WSCSS protects your privacy.",
+    images: ['/wscss-og.webp'],
+  },
 };
 
 export default function PrivacyPage() {

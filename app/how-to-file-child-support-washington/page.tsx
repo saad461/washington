@@ -6,6 +6,20 @@ export const metadata: Metadata = {
   title: 'How to File Child Support in Washington State (2026 Guide)',
   description: 'A step-by-step 2026 guide on how to file for child support in Washington. Includes required court forms, serving the other parent, and filing procedures.',
   alternates: { canonical: 'https://wscss.site/how-to-file-child-support-washington' },
+  openGraph: {
+    title: "How to File Child Support in Washington State (2026 Guide)",
+    description: "Step-by-step 2026 guide on how to file for child support in Washington. Forms, serving, and filing procedures.",
+    url: "https://wscss.site/how-to-file-child-support-washington",
+    siteName: "WSCSS",
+    images: [{ url: '/wscss-og.webp', width: 1200, height: 630, alt: 'How to File Guide' }],
+    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "How to File Child Support in Washington State (2026 Guide)",
+    description: "Step-by-step 2026 guide on how to file for child support in Washington.",
+    images: ['/wscss-og.webp'],
+  },
 };
 
 export default function HowToFileGuide() {
