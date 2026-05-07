@@ -167,6 +167,27 @@
       display: block !important;
     }
   }
+
+  /* Custom PDF Capture Mode */
+  .pdf-capture-mode .no-print {
+    display: none !important;
+  }
+
+  .pdf-capture-mode .container-wide {
+    max-width: 1000px !important; /* Fixed width for consistent PDF rendering */
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+
+  .pdf-capture-mode section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+
+  /* Ensure the main column takes full width when sidebar is hidden */
+  .pdf-capture-mode .lg\:col-span-8 {
+    grid-column: span 12 / span 12 !important;
+  }
 }
 
 /* ─────────────────────────────────────────────

@@ -325,54 +325,57 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
     <div className="flex-1 bg-white relative w-full overflow-x-hidden">
       <CalculatorSchema income={income} childCount={children} county={countyName} url={`https://wscss.site/${slug}`} resultAmount={supportNum !== null ? supportNum : undefined} />
 
-      {/* ── MINI HERO ────────────────────────────────────────────────────── */}
-      <section className="bg-white pt-8 pb-12 lg:pt-12 lg:pb-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
-        <div
-          aria-hidden="true"
-          className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
-        />
+      <div id="pdf-content">
+        {/* ── MINI HERO ────────────────────────────────────────────────────── */}
+        <section className="bg-white pt-8 pb-12 lg:pt-12 lg:pb-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+          <div
+            aria-hidden="true"
+            className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block no-print"
+          />
 
-        <div className="container-wide relative z-10">
-          <Breadcrumbs county={county} income={income} />
-
-          <div className="flex flex-col gap-8 text-left">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
-              {formattedIncome} Support in <span className="text-blue-600">{locationName}</span>
-            </h1>
-
-            <div className="flex flex-col gap-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">2026 Presumptive Payment</span>
-              <div className="flex items-baseline gap-4">
-                <span className="text-6xl md:text-8xl font-bold tracking-tight text-gray-900">{formattedSupport}</span>
-                <span className="text-xl font-bold text-gray-400">/ mo</span>
-              </div>
-              <p className="text-[12px] font-bold text-gray-400 uppercase tracking-widest mt-2">{timestamp}</p>
+          <div className="container-wide relative z-10">
+            <div className="no-print">
+              <Breadcrumbs county={county} income={income} />
             </div>
 
-            <div className="flex gap-12 pt-8 border-t border-gray-100">
-              <div className="flex flex-col gap-1">
-                <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">Net Income</span>
-                <span className="text-2xl font-bold text-gray-900">{formattedIncome}</span>
+            <div className="flex flex-col gap-8 text-left">
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900 leading-tight">
+                {formattedIncome} Support in <span className="text-blue-600">{locationName}</span>
+              </h1>
+
+              <div className="flex flex-col gap-2">
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-600">2026 Presumptive Payment</span>
+                <div className="flex items-baseline gap-4">
+                  <span className="text-6xl md:text-8xl font-bold tracking-tight text-gray-900">{formattedSupport}</span>
+                  <span className="text-xl font-bold text-gray-400">/ mo</span>
+                </div>
+                <p className="text-[12px] font-bold text-gray-400 uppercase tracking-widest mt-2">{timestamp}</p>
               </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">Children</span>
-                <span className="text-2xl font-bold text-gray-900">{children}</span>
+
+              <div className="flex gap-12 pt-8 border-t border-gray-100">
+                <div className="flex flex-col gap-1">
+                  <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">Net Income</span>
+                  <span className="text-2xl font-bold text-gray-900">{formattedIncome}</span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">Children</span>
+                  <span className="text-2xl font-bold text-gray-900">{children}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── CONTENT SECTION ─────────────────────────────────────────────── */}
-      <section className="section-default bg-[var(--color-bg-subtle)]">
-        <div className="container-wide">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            <div className="lg:col-span-8">
-              <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
-                <AdContainer slot="top" wordCount={wordCount} />
-              </div>
+        {/* ── CONTENT SECTION ─────────────────────────────────────────────── */}
+        <section className="section-default bg-[var(--color-bg-subtle)]">
+          <div className="container-wide">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+              <div className="lg:col-span-8">
+                <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0 no-print">
+                  <AdContainer slot="top" wordCount={wordCount} />
+                </div>
 
-              <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
+                <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
                 <div className="flex flex-col mb-8">
                   <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
                     2026 Data · {countyName}
@@ -419,7 +422,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                 </div>
                 <p className="text-lg leading-relaxed">{intro}</p>
 
-                <div className="my-16 not-prose">
+                <div className="my-16 not-prose no-print">
                   <AdContainer slot="mid" wordCount={wordCount} />
                 </div>
 
@@ -477,104 +480,105 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                 </div>
               </article>
 
-              <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
-                <div className="bg-blue-600 p-8 md:p-12 text-center shadow-2xl rounded-3xl relative overflow-hidden border border-blue-100">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none" />
-                  <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-100 mb-2 relative z-10">
-                    Full Worksheet Tool
-                  </p>
-                  <h3 className="text-3xl text-white mb-6 font-bold relative z-10">Advanced Estimator Wizard</h3>
-                  <p className="mb-10 text-lg text-blue-50 max-w-lg mx-auto leading-relaxed relative z-10">
-                    Get a full breakdown using our Washington Child Support Worksheet Wizard. Calculate precise income splits and extraordinary expenses.
-                  </p>
-                  <Link href="/worksheet" className="btn btn-primary btn-primary-lg !bg-white !text-blue-600 hover:!bg-blue-50 relative z-10">
-                    Adjust for {countyName} — Try Different Income <ArrowRight className="w-5 h-5" />
-                  </Link>
-                </div>
-              </div>
-
-              <section className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
-                <div className="flex flex-col mb-8">
-                  <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
-                    Common Parent Questions
-                  </p>
-                  <h2 className="text-3xl font-bold text-gray-900">Frequently Asked Questions About Washington Child Support</h2>
-                </div>
-                <FAQAccordion faqs={dynamicFAQs.map((f) => ({ question: f.q, answer: f.a }))} />
-              </section>
-            </div>
-
-            <aside className="lg:col-span-4 space-y-4">
-              <div className="hidden lg:block">
-                <ErrorBoundary fallback={<div className="p-6 bg-gray-50 border border-gray-200 rounded-2xl text-sm text-gray-500">Sidebar temporarily unavailable</div>}>
-                  <CountySidebar
-                    countyName={countyName}
-                    countySlug={county?.slug || "washington"}
-                    courthouseName={county?.court || "Washington Superior Court"}
-                    courthouseAddress={county?.courtAddress || "Official AOC Guidelines"}
-                    courthousePhone={county?.clerkPhone || "(360) 753-3365"}
-                    courthousePrimarySeat={county?.seat || "Olympia"}
-                    filingFee={county?.filingFeeMax || 314}
-                    filingFeeIsRange={county?.filingFeeIsRange}
-                    courthouseUrl={county?.courthouseUrl}
-                    presumptiveAmount={supportNum || 0}
-                    combinedIncome={income}
-                    numberOfChildren={children}
-                    lastUpdated={county?.lastUpdated || "April 9, 2026"}
-                  />
-                </ErrorBoundary>
-              </div>
-              <div className="lg:hidden">
-                <details className="bg-white border border-gray-200 rounded-2xl shadow-sm group overflow-hidden">
-                  <summary className="flex items-center justify-between px-6 h-14 cursor-pointer select-none list-none font-bold text-gray-900">
-                    <span className="flex items-center gap-2">
-                      <Scale size={18} className="text-blue-600" /> Resources & Legal Sources
-                    </span>
-                    <svg
-                      className="w-5 h-5 transition-transform duration-300 group-open:rotate-180"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M19 9l-7 7-7-7"
-                      ></path>
-                    </svg>
-                  </summary>
-                  <div className="px-6 pb-6 pt-2">
-                    <ErrorBoundary>
-                      <CountySidebar
-                        countyName={countyName}
-                        countySlug={county?.slug || "washington"}
-                        courthouseName={county?.court || "Washington Superior Court"}
-                        courthouseAddress={county?.courtAddress || "Official AOC Guidelines"}
-                        courthousePhone={county?.clerkPhone || "(360) 753-3365"}
-                        courthousePrimarySeat={county?.seat || "Olympia"}
-                        filingFee={county?.filingFeeMax || 314}
-                        filingFeeIsRange={county?.filingFeeIsRange}
-                        courthouseUrl={county?.courthouseUrl}
-                        presumptiveAmount={supportNum || 0}
-                        combinedIncome={income}
-                        numberOfChildren={children}
-                        lastUpdated={county?.lastUpdated || "April 9, 2026"}
-                      />
-                    </ErrorBoundary>
+                <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0 no-print">
+                  <div className="bg-blue-600 p-8 md:p-12 text-center shadow-2xl rounded-3xl relative overflow-hidden border border-blue-100">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none" />
+                    <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-100 mb-2 relative z-10">
+                      Full Worksheet Tool
+                    </p>
+                    <h3 className="text-3xl text-white mb-6 font-bold relative z-10">Advanced Estimator Wizard</h3>
+                    <p className="mb-10 text-lg text-blue-50 max-w-lg mx-auto leading-relaxed relative z-10">
+                      Get a full breakdown using our Washington Child Support Worksheet Wizard. Calculate precise income splits and extraordinary expenses.
+                    </p>
+                    <Link href="/worksheet" className="btn btn-primary btn-primary-lg !bg-white !text-blue-600 hover:!bg-blue-50 relative z-10">
+                      Adjust for {countyName} — Try Different Income <ArrowRight className="w-5 h-5" />
+                    </Link>
                   </div>
-                </details>
+                </div>
+
+                <section className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0 no-print">
+                  <div className="flex flex-col mb-8">
+                    <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
+                      Common Parent Questions
+                    </p>
+                    <h2 className="text-3xl font-bold text-gray-900">Frequently Asked Questions About Washington Child Support</h2>
+                  </div>
+                  <FAQAccordion faqs={dynamicFAQs.map((f) => ({ question: f.q, answer: f.a }))} />
+                </section>
               </div>
-              <div className="not-print">
-                 <PrintButton />
-              </div>
-            </aside>
+
+              <aside className="lg:col-span-4 space-y-4 no-print">
+                <div className="hidden lg:block">
+                  <ErrorBoundary fallback={<div className="p-6 bg-gray-50 border border-gray-200 rounded-2xl text-sm text-gray-500">Sidebar temporarily unavailable</div>}>
+                    <CountySidebar
+                      countyName={countyName}
+                      countySlug={county?.slug || "washington"}
+                      courthouseName={county?.court || "Washington Superior Court"}
+                      courthouseAddress={county?.courtAddress || "Official AOC Guidelines"}
+                      courthousePhone={county?.clerkPhone || "(360) 753-3365"}
+                      courthousePrimarySeat={county?.seat || "Olympia"}
+                      filingFee={county?.filingFeeMax || 314}
+                      filingFeeIsRange={county?.filingFeeIsRange}
+                      courthouseUrl={county?.courthouseUrl}
+                      presumptiveAmount={supportNum || 0}
+                      combinedIncome={income}
+                      numberOfChildren={children}
+                      lastUpdated={county?.lastUpdated || "April 9, 2026"}
+                    />
+                  </ErrorBoundary>
+                </div>
+                <div className="lg:hidden">
+                  <details className="bg-white border border-gray-200 rounded-2xl shadow-sm group overflow-hidden">
+                    <summary className="flex items-center justify-between px-6 h-14 cursor-pointer select-none list-none font-bold text-gray-900">
+                      <span className="flex items-center gap-2">
+                        <Scale size={18} className="text-blue-600" /> Resources & Legal Sources
+                      </span>
+                      <svg
+                        className="w-5 h-5 transition-transform duration-300 group-open:rotate-180"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
+                    </summary>
+                    <div className="px-6 pb-6 pt-2">
+                      <ErrorBoundary>
+                        <CountySidebar
+                          countyName={countyName}
+                          countySlug={county?.slug || "washington"}
+                          courthouseName={county?.court || "Washington Superior Court"}
+                          courthouseAddress={county?.courtAddress || "Official AOC Guidelines"}
+                          courthousePhone={county?.clerkPhone || "(360) 753-3365"}
+                          courthousePrimarySeat={county?.seat || "Olympia"}
+                          filingFee={county?.filingFeeMax || 314}
+                          filingFeeIsRange={county?.filingFeeIsRange}
+                          courthouseUrl={county?.courthouseUrl}
+                          presumptiveAmount={supportNum || 0}
+                          combinedIncome={income}
+                          numberOfChildren={children}
+                          lastUpdated={county?.lastUpdated || "April 9, 2026"}
+                        />
+                      </ErrorBoundary>
+                    </div>
+                  </details>
+                </div>
+                <div>
+                   <PrintButton countySlug={county?.slug || "washington"} income={income} children={children} />
+                </div>
+              </aside>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* ── RELATED SECTION ─────────────────────────────────────────────── */}
-      <section className="section-default bg-white border-t border-gray-100">
+      <section className="section-default bg-white border-t border-gray-100 no-print">
         <div className="container-wide">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
             {internalLinks.map((link, idx) => (
