@@ -22,6 +22,14 @@ export const metadata: Metadata = {
     description: "WSCSS privacy policy. No personal calculation data stored or sold.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true,
+    },
+  },
 };
 
 export default function PrivacyPage() {

@@ -1,19 +1,37 @@
 import { MetadataRoute } from 'next';
 import { washingtonCounties } from '@/data/washingtonCounties';
 import { blogs } from '@/data/blogs';
+import { glossaryTerms } from '@/data/glossary';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://wscss.site';
+  const lastModified = new Date('2026-04-09');
 
-  const lastModified = new Date();
-
-  // Base priority routes (homepage + all static pages)
+  // Base routes with specific priorities and frequencies
   const sitemapUrls: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/`,
       lastModified,
       changeFrequency: 'weekly',
-      priority: 1,
+      priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/worksheet`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/extra-expenses`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/glossary`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/blog`,
@@ -22,86 +40,77 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/worksheet`,
+      url: `${baseUrl}/washington-courts`,
       lastModified,
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/about`,
       lastModified,
       changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/privacy`,
+      url: `${baseUrl}/how-to-file-child-support-washington`,
       lastModified,
-      changeFrequency: 'yearly',
-      priority: 0.3,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/terms`,
+      url: `${baseUrl}/compare-2024-2026`,
       lastModified,
-      changeFrequency: 'yearly',
-      priority: 0.3,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: `${baseUrl}/editorial-methodology`,
       lastModified,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/disclaimer`,
-      lastModified,
-      changeFrequency: 'yearly',
-      priority: 0.3,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
   ];
 
-  // Add Blog Posts — use real post dates for accurate lastmod
-  blogs.forEach((post) => {
+  // County income pages (all 4 specified)
+  const targetCounties = ['king-county', 'pierce-county', 'snohomish-county', 'spokane-county'];
+  targetCounties.forEach((slug) => {
     sitemapUrls.push({
-      url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: new Date(post.updatedAt || post.createdAt),
+      url: `${baseUrl}/${slug}-income-5000-2-children`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    });
+  });
+
+  // All 39 county subpages
+  washingtonCounties.forEach((county) => {
+    sitemapUrls.push({
+      url: `${baseUrl}/washington-courts/${county.slug}`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    });
+  });
+
+  // All 20 glossary term pages
+  glossaryTerms.forEach((term) => {
+    sitemapUrls.push({
+      url: `${baseUrl}/glossary/${term.slug}`,
+      lastModified,
       changeFrequency: 'monthly',
       priority: 0.7,
     });
   });
 
-  // RESTRICT SITEMAP FOR NEW DOMAIN: 
-  // Submitting 8,000 URLs to a brand new domain triggers Google Sandbox filters.
-  // Phase 1 (Launch): Submit only priority county pages (4 common income tiers, 2 children counts).
-  const priorityIncomes = [3000, 5000, 7000, 10000];
-  const priorityChildren = [1, 2];
-
-  // Generate Priority County Pages (39 * 4 * 2 = 312 high-intent URLs)
-  for (const county of washingtonCounties) {
-    for (const income of priorityIncomes) {
-      for (const children of priorityChildren) {
-        const slug = `${county.slug}-income-${income}-${children}-${children === 1 ? 'child' : 'children'}`;
-        sitemapUrls.push({
-          url: `${baseUrl}/${slug}`,
-          lastModified,
-          changeFrequency: 'monthly',
-          priority: 0.65,
-        });
-      }
-    }
-  }
-
-  // Generic pages for baseline indexing
-  for (const income of priorityIncomes) {
-    for (const children of priorityChildren) {
-      const slug = `income-${income}-${children}-${children === 1 ? 'child' : 'children'}`;
-      sitemapUrls.push({
-        url: `${baseUrl}/${slug}`,
-        lastModified,
-        changeFrequency: 'monthly',
-        priority: 0.5,
-      });
-    }
-  }
+  // All blog posts
+  blogs.forEach((post) => {
+    sitemapUrls.push({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    });
+  });
 
   return sitemapUrls;
 }
