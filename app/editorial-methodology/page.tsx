@@ -25,8 +25,49 @@ export const metadata: Metadata = {
 };
 
 export default function EditorialMethodology() {
+  const aboutPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "WSCSS Editorial Methodology",
+    "url": "https://wscss.site/editorial-methodology",
+    "description": "How WSCSS calculates Washington child support using RCW 26.19 and the official 2026 AOC economic table. Verified against official DSHS tools.",
+    "author": {
+      "@type": "Organization",
+      "name": "WSCSS Editorial & Legal Team",
+      "url": "https://wscss.site"
+    },
+    "dateModified": "2026-01-01"
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://wscss.site/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Editorial Methodology",
+        "item": "https://wscss.site/editorial-methodology"
+      }
+    ]
+  };
+
   return (
     <div className="flex-1 bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <CalculatorSchema url="https://wscss.site/editorial-methodology" />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
