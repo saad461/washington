@@ -7,7 +7,7 @@ const AuthorBox = () => {
       <div className="card-standard !p-8 md:!p-12 group overflow-hidden shadow-[var(--shadow-card-md)] relative">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--color-brand-primary-light)] rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none" />
 
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 relative z-10">
+        <div className="flex flex-col items-center gap-8 relative z-10">
           <div className="relative shrink-0">
             <div className="w-24 h-24 bg-[var(--color-text-primary)] rounded-3xl flex items-center justify-center shadow-[var(--shadow-card-hover)] group-hover:rotate-3 transition-transform duration-300">
               <Shield className="w-12 h-12 text-[var(--color-brand-primary-mid)]" />
@@ -17,15 +17,15 @@ const AuthorBox = () => {
             </div>
           </div>
 
-          <div className="flex-1 text-center md:text-left">
+          <div className="flex-1 text-center">
             <span className="eyebrow mb-2">Academic & Legal Entity</span>
             <h3 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6 tracking-tight">WSCSS Editorial & Legal Team</h3>
 
-            <p className="text-[var(--color-text-body)] text-sm md:text-base leading-relaxed mb-8 max-w-2xl">
+            <p className="text-[var(--color-text-body)] text-sm md:text-base leading-relaxed mb-8 max-w-2xl mx-auto">
               Our calculations and guides are rigorously audited by family law advocates and technical developers to ensure compliance with <strong className="text-[var(--color-text-primary)]">RCW 26.19</strong> and the latest 2026 economic table updates. We maintain a strict editorial protocol based on official AOC mandatory forms and WAC guidelines.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-6">
+            <div className="flex flex-wrap items-center justify-center gap-6">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-[var(--color-bg-subtle)] flex items-center justify-center border border-[var(--color-bg-border)] shadow-[var(--shadow-card)]">
                   <MailIcon size={14} className="text-[var(--color-brand-primary)]" />
