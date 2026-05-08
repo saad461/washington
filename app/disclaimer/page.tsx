@@ -3,9 +3,23 @@ import Link from 'next/link';
 import { Scale, ShieldCheck, ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Legal Disclaimer | WSCSS — Washington State Child Support Schedule',
-  description: 'Important legal disclaimer for WSCSS. Our calculator provides estimates based on 2026 Washington State guidelines and is not a substitute for legal advice.',
+  title: { absolute: "Legal Disclaimer | WSCSS Child Support Calculator" },
+  description: "WSCSS legal disclaimer. All child support calculations are estimates only. Not a law firm. Not legal advice. Consult a licensed attorney.",
   alternates: { canonical: 'https://wscss.site/disclaimer' },
+  openGraph: {
+    title: "Legal Disclaimer | WSCSS",
+    description: "WSCSS legal disclaimer. All calculations are estimates only. Not a law firm. Not legal advice.",
+    url: "https://wscss.site/disclaimer",
+    type: "website",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Legal Disclaimer | WSCSS",
+    description: "WSCSS legal disclaimer. All calculations are estimates only. Not legal advice.",
+    images: ["https://wscss.site/wscss-og.webp"],
+  },
 };
 
 export default function DisclaimerPage() {

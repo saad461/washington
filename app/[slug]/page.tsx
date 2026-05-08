@@ -292,7 +292,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
     formattedSupport,
   );
 
-  const totalText = `${intro} ${calculation} ${ssr} ${conclusion} ${incomeBlock} ${familyBlock}`;
+  const totalText = `${intro} ${calculation} ${ssr} ${conclusion} ${incomeBlock} ${familyBlock}`.replace(/&amp;/g, '&');
   const wordCount = totalText.split(/\s+/).filter((word) => word.length > 0).length;
 
   if (!county && process.env.NODE_ENV === 'development') {

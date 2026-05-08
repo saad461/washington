@@ -5,9 +5,23 @@ import { Scale, CheckCircle2, ShieldCheck, ArrowLeft, ChevronRight } from "lucid
 import CalculatorSchema from "@/components/CalculatorSchema";
 
 export const metadata: Metadata = {
-  title: "Editorial Methodology — WSCSS",
-  description: "Learn about the independent editorial methodology behind the Washington Child Support Calculator.",
+  title: { absolute: "Editorial Methodology | WSCSS Child Support" },
+  description: "Learn how WSCSS calculates Washington child support. Based on RCW 26.19, the 2026 AOC economic table, and verified against official DSHS tools.",
   alternates: { canonical: 'https://wscss.site/editorial-methodology' },
+  openGraph: {
+    title: "Editorial Methodology | WSCSS Child Support",
+    description: "How WSCSS calculates Washington child support using RCW 26.19 and the 2026 AOC economic table. Verified against official DSHS tools.",
+    url: "https://wscss.site/editorial-methodology",
+    type: "article",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Editorial Methodology | WSCSS",
+    description: "How WSCSS calculates Washington child support using RCW 26.19 and the 2026 AOC economic table.",
+    images: ["https://wscss.site/wscss-og.webp"],
+  },
 };
 
 export default function EditorialMethodology() {

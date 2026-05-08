@@ -204,7 +204,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                       className="input-standard pl-8 w-full shadow-sm"
                     />
                   </div>
-                  <p className="input-helper">After taxes &amp; mandatory deductions</p>
+                  <p className="input-helper">After taxes & mandatory deductions</p>
                 </div>
 
                 <div className="flex flex-col">
@@ -229,7 +229,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                       className="input-standard pl-8 w-full shadow-sm"
                     />
                   </div>
-                  <p className="input-helper">After taxes &amp; mandatory deductions</p>
+                  <p className="input-helper">After taxes & mandatory deductions</p>
                 </div>
               </div>
 

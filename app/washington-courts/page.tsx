@@ -6,11 +6,23 @@ import CountyList from '@/components/courts/CountyList';
 import FAQAccordion from '@/components/FAQAccordion';
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "Washington State Court Directory — All 39 Counties | Child Support Filing 2026 | WSCSS"
-  },
-  description: "Find courthouse addresses, phone numbers, and filing information for all 39 Washington State counties. Updated 2026 court directory for child support filings.",
+  title: { absolute: "WA Court Directory 2026 | All 39 Counties | WSCSS" },
+  description: "Courthouse addresses, phone numbers, and filing links for all 39 Washington counties. Updated for 2026 child support filings under RCW 26.19.",
   alternates: { canonical: 'https://wscss.site/washington-courts' },
+  openGraph: {
+    title: "WA Court Directory 2026 | All 39 Counties | WSCSS",
+    description: "Courthouse addresses, phone numbers, and filing links for all 39 Washington counties. Updated for 2026 child support filings under RCW 26.19.",
+    url: "https://wscss.site/washington-courts",
+    type: "website",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WA Court Directory 2026 | All 39 Counties | WSCSS",
+    description: "Courthouse addresses and filing links for all 39 Washington counties. Updated for 2026 child support filings.",
+    images: ["https://wscss.site/wscss-og.webp"],
+  },
 };
 
 export default function CourtsIndex() {

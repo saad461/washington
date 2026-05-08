@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     ...baseMeta,
-    title: `Child Support in ${county.name} Washington 2026 | Court Guide & Calculator`,
+    title: { absolute: `${county.name} Child Support Guide 2026 | Court Info | WSCSS` },
     alternates: {
       canonical: `https://wscss.site/washington-courts/${county.slug}`,
     },

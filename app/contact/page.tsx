@@ -5,9 +5,23 @@ import { Mail, MessageCircle, ArrowLeft, Shield } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact Us | Washington State Child Support Schedule',
-  description: 'Get in touch with the WSCSS editorial and support team. We value your feedback on our Washington child support tools.',
+  title: { absolute: "Contact WSCSS | WA Child Support Center" },
+  description: "Contact the WSCSS editorial and support team. Report calculator bugs, suggest improvements, or ask questions about Washington child support guidelines.",
   alternates: { canonical: 'https://wscss.site/contact' },
+  openGraph: {
+    title: "Contact WSCSS | WA Child Support Center",
+    description: "Contact the WSCSS team. Report calculator bugs, suggest improvements, or ask questions about Washington child support.",
+    url: "https://wscss.site/contact",
+    type: "website",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact WSCSS | WA Child Support Center",
+    description: "Contact the WSCSS team for calculator feedback and Washington child support questions.",
+    images: ["https://wscss.site/wscss-og.webp"],
+  },
 };
 
 export default function ContactPage() {

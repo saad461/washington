@@ -25,8 +25,8 @@ export const blogs: BlogPost[] = [
     category: "Legal Guide",
     readTime: "14 min",
     excerpt: "Everything you need to know about Washington's 2026 child support schedule, including exactly what changed, how the economic tables work, and what you can expect in court.",
-    metaTitle: "2026 WA Child Support Guidelines | The Complete Parent Handbook",
-    metaDescription: "Master the 2026 Washington Child Support Schedule. Expert breakdown of the updated economic tables, SSR thresholds (approximately $2,394), shared custody rules, and extraordinary expenses.",
+    metaTitle: "WA Child Support Guidelines 2026 - Handbook | WSCSS",
+    metaDescription: "Everything you need to know about Washington's 2026 child support schedule including what changed, how the economic tables work, and what to expect in court.",
     author: "WSCSS Editorial Team",
     createdAt: "2026-01-05",
     updatedAt: "2026-04-09",
@@ -70,76 +70,72 @@ export const blogs: BlogPost[] = [
 
       <p class="mb-4">Want to check your own numbers? Use our <a href="/">Washington child support calculator</a> to run the estimate instantly, or the <a href="/worksheet">Professional Worksheet Wizard</a> for the full 8-part breakdown.</p>
 
-       <h2 class="mt-12 mb-6">Step-by-Step: How "Monthly Net Income" Is Calculated</h2>
-      <p class="mb-4">Before you can use the table at all, you need to figure out each parent's monthly net income, and that's not as simple as looking at your take-home pay. Washington defines net income in a specific way under <strong>RCW 26.19.071</strong>.</p>
+       <h2 class="mt-12 mb-6">1. Seattle or Kent? Which Courthouse Handles Your Case</h2>
+      <p class="mb-4">King County's Superior Court operates across two main locations, and routing is determined by <strong>where the responding parent lives</strong> (typically the non-custodial parent), not where you live.</p>
 
-      <p class="mb-4">You start with gross income, everything that counts, including wages, salaries, overtime (averaged historically, not just one big month), bonuses, commissions, self-employment income, rental income, Social Security benefits, unemployment, and even some worker's compensation payments.</p>
-
-      <p class="mb-4">From gross income, you subtract only specific, legally-allowed deductions:</p>
        <ul class="list-disc pl-6 space-y-6 mb-8">
-        <li>Federal and state income taxes (based on the actual tax filing status)</li>
-        <li>FICA (Social Security and Medicare contributions)</li>
-        <li>Mandatory pension contributions required as a condition of employment</li>
-        <li>Union dues</li>
-        <li>State industrial insurance (L&amp;I)</li>
-        <li>Health insurance premiums paid for the children</li>
-        <li>Voluntary retirement contributions are <em>not</em> deductible</li>
-        <li>Credit card debt, car payments, and personal loans are <em>not</em> deductible</li>
+        <li><strong>King County Courthouse, Seattle:</strong> 516 Third Avenue, Seattle, WA 98104. This handles cases in north and central King County, including Seattle, Bellevue, Kirkland, Redmond, Mercer Island, and Renton.</li>
+        <li><strong>Maleng Regional Justice Center, Kent:</strong> 401 Fourth Avenue North, Kent, WA 98032. This handles south King County: Auburn, Federal Way, Kent, Enumclaw, Black Diamond, and similar areas.</li>
       </ul>
 
-      <p class="mb-4">This distinction trips people up constantly. Just because you have a large car payment or credit card balance doesn't mean the court reduces your support obligation. Only the specific deductions listed in RCW 26.19 count.</p>
+      <p class="mb-4">If you're unsure which venue applies to your case, call the King County Superior Court Clerk at (206) 477-0400 or check the <a href="https://kingcounty.gov/courts/superior-court.aspx" target="_blank" rel="nofollow">King County Superior Court website</a>. Getting this wrong means your case gets transferred, which adds weeks to your timeline.</p>
 
-       <h2 class="mt-12 mb-6">The Self-Support Reserve: Your Floor, Not Your Ceiling</h2>
-      <p class="mb-4">One of the most important protections in Washington child support law is the Self-Support Reserve, currently set at <strong>approximately $2,394 per month in 2026</strong>. The legislature's reasoning is straightforward: you can't help your children if you've been driven into poverty yourself.</p>
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Financial Data Table</caption><thead><tr class='bg-[var(--color-warning-bg)] border-y border-[var(--color-warning-border)]'><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>King County Court</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Location</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Handles</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm '>Seattle Courthouse</td><td class='py-3 px-4 text-sm font-medium '>516 Third Ave</td><td class='py-3 px-4 text-sm font-medium '>North/Central King County</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm '>Maleng Regional Justice Center</td><td class='py-3 px-4 text-sm font-medium '>401 Fourth Ave N, Kent</td><td class='py-3 px-4 text-sm font-medium '>South King County</td></tr></tbody></table></div> <h2 class="mt-12 mb-6">2. The Forms You'll Need</h2>
+      <p class="mb-4">Washington uses a standardized set of family law forms called the <strong>FL All Family series</strong>, most of which are free to download from the Washington Courts website. For a standard child support petition, you'll typically need:</p>
 
-      <p class="mb-4">Here's how it works: before finalizing any support order, the court performs an SSR check. If the calculated support amount would leave the paying parent with less than approximately $2,394 after making the payment, the court <em>must</em> reduce the obligation, often all the way down to the statutory minimum of <strong>$50 per child per month</strong>.</p>
-
-      <p class="mb-4">For example, imagine a parent who nets $1,900 per month. The standard table might generate a support obligation of $550. But $1,900 minus $550 leaves only $1,350, which is below the approximately $2,394 SSR. In this case, the court would need to reduce the payment, likely to $50 per child. If there are two children, that's $100/month rather than $550.</p>
-
-      <p class="mb-4">Read our full deep-dive on this topic: <a href="/blog/washington-ssr-self-support-reserve-explained">Understanding the approximately $2,394 Self-Support Reserve in 2026</a>.</p>
-
-       <h2 class="mt-12 mb-6">What the Basic Support Amount Does, and Doesn't, Cover</h2>
-      <p class="mb-4">Here's something a lot of parents don't realize until they're already in court: the basic transfer payment shown on the economic table only covers <strong>food, ordinary clothing, and shelter</strong>. That's it.</p>
-
-      <p class="mb-4">Everything else, what the law calls "extraordinary expenses", is calculated separately and paid on top of the base amount, split proportionally between both parents. These include:</p>
        <ul class="list-disc pl-6 space-y-6 mb-8">
-        <li><strong>Work-related childcare</strong>, daycare, after-school programs, and summer camps that allow a parent to work. In Seattle, this alone can easily run $2,000–$2,500/month.</li>
-        <li><strong>Health insurance premiums</strong>, the actual cost of covering the children on either parent's medical plan</li>
-        <li><strong>Uninsured medical, dental, and vision expenses</strong>, copays, prescriptions, orthodontics</li>
-        <li><strong>Long-distance transportation costs</strong>, if one parent moves, the travel costs for visitation are split</li>
-        <li><strong>Educational expenses</strong>, private school tuition or special education costs, if ordered</li>
+        <li><strong>FL All Family 130</strong>, Petition for Child Support (the main filing document)</li>
+        <li><strong>FL All Family 131</strong>, Child Support Order (what the court signs)</li>
+        <li><strong>FL All Family 132</strong>, Child Support Worksheets (the income calculations, our <a href="/worksheet">Worksheet Wizard</a> generates this automatically)</li>
+        <li><strong>FL All Family 101</strong>, Summons (notifies the other parent)</li>
+        <li><strong>King County Case Assignment Designation</strong>, a local form that routes your case to Seattle or Kent (find it on the King County court website)</li>
       </ul>
 
-      <p class="mb-4">If daycare runs $1,800/month and Parent A is responsible for 60% of extraordinary expenses, they pay an additional $1,080 on top of their base transfer payment. That can significantly change the total picture. Use our <a href="/worksheet">Worksheet Wizard</a> to calculate both base and extraordinary expense totals at once.</p>
+      <p class="mb-4">If you're modifying an existing order rather than creating a new one, you'll use FL All Family 422 (Petition to Modify Child Support) and updated Worksheets. Make sure you're using the 2026 versions, forms are updated periodically and using an outdated version can cause your filing to be rejected.</p>
 
-       <h2 class="mt-12 mb-6">Judicial Deviations: When the Table Isn't the Final Answer</h2>
-      <p class="mb-4">The economic table gives the <em>presumptive</em> amount, the starting point. But Washington judges and commissioners have the authority to deviate from that amount when there's good cause. Deviations can go up or down.</p>
+       <h2 class="mt-12 mb-6">3. Calculating and Filing Your Support Worksheets</h2>
+      <p class="mb-4">The most common reason filings get sent back or delayed is incomplete or incorrect support worksheets. King County commissioners see hundreds of these and have little patience for math errors or missing income documentation.</p>
 
-      <p class="mb-4">The most common reasons courts grant a downward deviation:</p>
+      <p class="mb-4">Before you file, gather: your last two months of pay stubs, your most recent federal tax return (both forms W-2 and 1040), documentation of any self-employment income, proof of health insurance costs for the children, and any childcare invoices. The other parent's income information will eventually need to be exchanged through discovery if they don't voluntarily disclose it.</p>
+
+      <p class="mb-4">Use our <a href="/worksheet">Professional Worksheet Wizard</a> to generate properly formatted support worksheets that match what King County courts expect. Print the output, sign it, and attach it to your petition.</p>
+
+       <h2 class="mt-12 mb-6">4. Filing at the Clerk's Office (or E-Filing)</h2>
+      <p class="mb-4">King County strongly encourages e-filing through the Washington Courts TurboCourt system. You can file 24 hours a day from home, pay filing fees by credit card, and get a confirmation immediately. The standard filing fee for a new family law case is approximately <strong>$314</strong>, though this may be waived if you qualify for an In Forma Pauperis (IFP) fee waiver based on low income.</p>
+
+      <p class="mb-4">If you're filing in person, document windows at the Seattle courthouse are open Monday–Friday from 8:30 AM to 4:30 PM. Arrive early, the clerk's office can get backed up, and if you arrive after 4:00 PM they may not process same-day.</p>
+
+       <h2 class="mt-12 mb-6">5. Serving the Other Parent</h2>
+      <p class="mb-4">After you file, you must legally notify ("serve") the other parent. In King County, the most common methods are:</p>
        <ul class="list-disc pl-6 space-y-6 mb-8">
-        <li><strong>Substantially equal residential time</strong>, if the child spends close to 50% of nights with each parent, there's less need for a large transfer payment because both parents are absorbing direct costs</li>
-        <li><strong>Obligor has other biological children</strong> who are also receiving court-ordered support</li>
-        <li><strong>Non-recurring income</strong>, a large bonus or inheritance that inflated income in one year</li>
-        <li><strong>Child receiving Social Security benefits</strong> based on a parent's disability account</li>
+        <li><strong>King County Sheriff's process service</strong>, ~$85 fee; reliable and creates an official record</li>
+        <li><strong>Certified adult (not a party to the case) personal service</strong>, a friend, relative, or private process server physically hands the documents to the other parent</li>
+        <li><strong>Certified mail</strong>, the other parent must sign the return receipt personally</li>
+      </ul>
+      <p class="mb-4">You'll receive a "Return of Service" form to file with the court proving the other parent was served. Without this, your case cannot move forward.</p>
+
+       <h2 class="mt-12 mb-6">6. The Role of the Prosecuting Attorney's Office</h2>
+      <p class="mb-4">If you currently receive TANF (public assistance) or Medicaid, the <strong>King County Prosecuting Attorney's Family Support Division</strong> will often open a child support case on your behalf automatically, working in coordination with <a href="https://www.dshs.wa.gov/esa/division-child-support" target="_blank" rel="nofollow">DSHS</a>. This service is free, though the state retains any support collected to offset public assistance costs.</p>
+
+      <p class="mb-4">If you don't receive public assistance but want agency help, DSHS's Division of Child Support (DCS) can also open a case, though they prioritize public-assistance cases and response times vary.</p>
+
+       <h2 class="mt-12 mb-6">7. What Happens at Your First Court Date</h2>
+      <p class="mb-4">For uncontested cases, where both parents agree on the support amount, you may be able to present a stipulated order and get it signed without a contested hearing. Commissioners approve these quickly if the worksheets are complete and the math checks out.</p>
+
+      <p class="mb-4">For contested cases, your first court date is typically a scheduling conference or an Order to Show Cause hearing. The commissioner will set deadlines for financial disclosure, issue temporary orders (which take effect immediately), and schedule a follow-up hearing if needed. <strong>Temporary orders are critical</strong>, they're the support amount that applies from the day they're issued until the final order, so getting them calculated correctly matters immediately.</p>
+
+       <h2 class="mt-12 mb-6">8. Modifying an Existing King County Order</h2>
+      <p class="mb-4">If you have an older support order and your income has changed by more than 10%, or two full years have passed, you can petition for a modification. The process is similar to the original filing but uses the FL 422 family of forms. If your combined income is now around <a href="/king-county-income-7000-2-children">$7,000/month</a>, run a new estimate first so you know whether a modification is worth pursuing.</p>
+
+       <h2 class="mt-12 mb-6">Related Reading</h2>
+       <ul class="list-disc pl-6 space-y-6 mb-8">
+        <li><a href="/blog/king-county-child-support-rules">King County Child Support Local Rules: The LFLR 10 Deep Dive</a></li>
+        <li><a href="/blog/washington-child-support-guidelines-2026">2026 WA State Guidelines: Complete Handbook</a></li>
+        <li><a href="/blog/child-support-calculation-washington-2026">WA Child Support Calculation: Step-by-Step Guide</a></li>
       </ul>
 
-      <p class="mb-4">Upward deviations are less common but happen when the child has special medical needs, unusual educational expenses, or when the custodial parent can document that the baseline amount genuinely doesn't cover actual costs given the family's previous standard of living.</p>
-
-       <h2 class="mt-12 mb-6">A Note on County-Level Differences</h2>
-      <p class="mb-4">The economic tables are statewide, the math is the same whether you're in King County or Garfield County. But the <em>procedure</em> for filing and enforcing that order varies significantly by county. King County has strict local rules (LFLR 10) requiring detailed financial declarations. Rural counties may have informal commissioner hearings that move much faster.</p>
-
-      <p class="mb-4">Check your specific county's calculation profile: <a href="/king-county-income-5000-2-children">King County</a> | <a href="/pierce-county-income-5000-2-children">Pierce County</a> | <a href="/snohomish-county-income-5000-2-children">Snohomish County</a></p>
-
-       <h2 class="mt-12 mb-6">Related Articles From WSCSS</h2>
-       <ul class="list-disc pl-6 space-y-6 mb-8">
-        <li><a href="/blog/child-support-calculation-washington-2026">Full Calculation Walkthrough: Step-by-Step for 2026</a></li>
-        <li><a href="/blog/washington-ssr-self-support-reserve-explained">Understanding the approximately $2,394 Self-Support Reserve</a></li>
-        <li><a href="/blog/how-courts-decide-child-support-washington">How Washington Courts Decide Your Final Order</a></li>
-      </ul>
-
-       <h2 class="mt-12 mb-6">The Bottom Line</h2>
-      <p class="mb-4">Navigating Washington's child support system is genuinely complicated, there are layers of calculations, exceptions, and local rules that can catch you off guard. But understanding the core framework (Income Shares Model, SSR protection, 45% cap, extraordinary expenses) gives you a real foundation before you walk into any courthouse or attorney's office.</p>
-      <p class="mb-4">Use our <a href="/">free calculator</a> to get a baseline estimate before your case starts, and consider downloading a copy of your estimated worksheet to bring to mediation. Being prepared with real numbers on your side is one of the most valuable things you can do.</p>
+       <h2 class="mt-12 mb-6">Wrapping Up</h2>
+      <p class="mb-4">Filing for child support in King County takes preparation, correct paperwork, and a clear understanding of which building your case belongs in. The process isn't fast, but going in with complete, accurate worksheets and the right forms significantly reduces delays. Take 10 minutes with our <a href="/">calculator</a> now, that one step costs nothing, but it might save you from the most common mistakes families make in King County court.</p>
     <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/king-county-income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
     faqs: [
       {
@@ -170,8 +166,8 @@ export const blogs: BlogPost[] = [
     category: "County Guide",
     readTime: "11 min",
     excerpt: "A practical, step-by-step guide to filing a child support petition in King County, including which courthouse handles your case, the forms you need, and what actually happens at your first hearing.",
-    metaTitle: "Filing Child Support in King County | Step-by-Step 2026 Roadmap",
-    metaDescription: "Step-by-step guide to filing for child support in King County, WA. Covers Seattle vs. Kent courthouse routing, required forms, e-filing, and what to expect at your first hearing.",
+    metaTitle: "Filing Child Support in King County 2026 | WSCSS",
+    metaDescription: "Step-by-step guide to filing a child support petition in King County including which courthouse handles your case and what happens at your first hearing.",
     author: "WSCSS Editorial Team",
     createdAt: "2026-02-12",
     updatedAt: "2026-04-09",
@@ -286,8 +282,8 @@ export const blogs: BlogPost[] = [
     category: "Calculation Guide",
     readTime: "10 min",
     excerpt: "A plain-English deep dive into the 2026 Self-Support Reserve, what it is, how the math actually works at different income levels, and what happens when your support obligation hits the floor.",
-    metaTitle: "WA Self-Support Reserve (SSR) Explained | 2026 Guide",
-    metaDescription: "What is the WA Child Support SSR? Plain-English guide to how the approximately $2,394 monthly floor protects low-income parents, with real math examples at different income levels.",
+    metaTitle: "WA Self-Support Reserve $2,394 2026 | WSCSS",
+    metaDescription: "The SSR in Washington is $2,394/month in 2026. Learn how it protects paying parents under RCW 26.19.065.",
     author: "WSCSS Editorial Team",
     createdAt: "2026-03-20",
     updatedAt: "2026-04-09",
@@ -359,7 +355,7 @@ export const blogs: BlogPost[] = [
 
        <h2 class="mt-12 mb-6">The Bottom Line</h2>
       <p class="mb-4">The Self-Support Reserve exists because the legislature recognized that destroying a parent's ability to survive doesn't serve anyone, not the children, not the courts, and not society. If your income puts you near that approximately $2,394 line, know your rights, document your income carefully, and ask the court to apply the SSR explicitly. It's not a loophole, it's the law.</p>
-    <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/king-county-income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
+    <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
     faqs: [
       {
         question: "Is the SSR calculated on gross or net income?",
@@ -385,8 +381,8 @@ export const blogs: BlogPost[] = [
     category: "Calculation Guide",
     readTime: "13 min",
     excerpt: "A complete, step-by-step walkthrough of exactly how Washington State calculates child support in 2026, with a worked example using real numbers from start to finish.",
-    metaTitle: "2026 Washington Child Support Calculation | Step-by-Step Guide",
-    metaDescription: "Learn exactly how child support is calculated in Washington State in 2026. Includes a complete worked example: gross income, deductions, proportional shares, and extraordinary expenses.",
+    metaTitle: "WA Child Support Calculation Guide 2026 | WSCSS",
+    metaDescription: "Complete step-by-step walkthrough of exactly how Washington calculates child support in 2026 with a worked example using real numbers.",
     author: "WSCSS Editorial Team",
     createdAt: "2026-04-08",
     updatedAt: "2026-04-09",
@@ -405,7 +401,7 @@ export const blogs: BlogPost[] = [
       </div>
       <p class="text-sm italic  mb-6">Disclaimer: This guide explains Washington State's 2026 child support calculation methodology for educational purposes. It is not legal advice.</p>
 
-      <p class="mb-4">Ask most people how child support is calculated and you'll get a shrug or a vague answer about "following a formula." The truth is, there's a very specific, legally-mandated process that Washington courts follow, and once you understand it, a lot of the confusion and anxiety around child support goes away.</p>
+      <p class="mb-4">Ask most people how child support is calculated and you'll get a shrug or a vage answer about "following a formula." The truth is, there's a very specific, legally-mandated process that Washington courts follow, and once you understand it, a lot of the confusion and anxiety around child support goes away.</p>
 
       <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Financial Data Table</caption><thead><tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'><th class='py-3 px-4 text-sm font-medium '>Calculation Metric</th><th class='py-3 px-4 text-sm font-medium '>2026 Value</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm '>Self Support Reserve</td><td class='py-3 px-4 text-sm font-medium '>approximately $2,394</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm '>Economic Table Limit</td><td class='py-3 px-4 text-sm font-medium '>$50,000</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm '>Minimum Support</td><td class='py-3 px-4 text-sm font-medium '>$50 per child</td></tr></tbody></table></div><p class="mb-4">This guide walks through the entire calculation from beginning to end, with a real worked example so you can follow along with your own numbers. By the end, you'll understand exactly where every dollar of a support order comes from, and what you can and can't change about it.</p>
 
@@ -439,7 +435,7 @@ export const blogs: BlogPost[] = [
         <li>Medicare surcharge if applicable</li>
         <li>Mandatory pension or retirement contributions <em>required by the employer</em> as a condition of employment (not voluntary 401k contributions)</li>
         <li>Union dues actually paid</li>
-        <li>State industrial insurance (L&amp;I) premiums</li>
+        <li>State industrial insurance (L&I) premiums</li>
         <li>Health and dental insurance premiums paid for the <em>children</em></li>
         <li>Actual payments on court-ordered child support or maintenance for <em>other</em> children</li>
       </ul>
@@ -502,7 +498,7 @@ export const blogs: BlogPost[] = [
 
        <h2 class="mt-12 mb-6">Conclusion</h2>
       <p class="mb-4">The calculation process is actually quite logical once you see it laid out step by step. Knowing the math before you go to court is one of the most practical advantages you can have, it tells you exactly what to fight for and what to accept. Run your specific numbers through our <a href="/">quick calculator</a> now, then use the <a href="/worksheet">Professional Wizard</a> to generate the complete worksheet.</p>
-    <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/king-county-income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
+    <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
     faqs: [
       {
         question: "Can I stop paying child support if my ex won't let me see my children?",
@@ -528,8 +524,8 @@ export const blogs: BlogPost[] = [
     category: "Policy Update",
     readTime: "11 min",
     excerpt: "If your income is low or you've lost your job, here's what Washington law actually requires, including the $50 minimum, the SSR protection, imputed income risks, and how to get a legitimate reduction.",
-    metaTitle: "Minimum Child Support in WA | Low-Income Parent Guide 2026",
-    metaDescription: "Struggling to afford child support in Washington State? Learn how minimum orders work, the approximately $2,394 SSR limit, imputed income rules, and the right way to petition for a reduction.",
+    metaTitle: "Minimum Child Support WA Low Income 2026 | WSCSS",
+    metaDescription: "If your income is low or you lost your job, here is what Washington law requires including the $50 minimum, SSR protection, and imputed income risks.",
     author: "WSCSS Editorial Team",
     createdAt: "2026-04-09",
     updatedAt: "2026-04-09",
@@ -550,7 +546,7 @@ export const blogs: BlogPost[] = [
 
       <p class="mb-4">Getting a child support order when you're already struggling financially is one of the most stressful legal experiences in Washington. If you're working minimum wage, dealing with job loss, or facing a sudden income drop, understanding how Washington's minimum support rules actually work, and what you can do, is critical.</p>
 
-      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Financial Data Table</caption><thead><tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'><th class='py-3 px-4 text-sm font-medium '>Key Metric</th><th class='py-3 px-4 text-sm font-medium '>2026 Standard</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm '>Self Support Reserve</td><td class='py-3 px-4 text-sm font-medium '>approximately $2,394</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm '>Economic Table Limit</td><td class='py-3 px-4 text-sm font-medium '>$50,000</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm '>Minimum Support</td><td class='py-3 px-4 text-sm font-medium '>$50 per child</td></tr></tbody></table></div><p class="mb-4">The good news: Washington law has built-in protections for genuinely low-income parents. The hard news: the courts take a very dim view of parents who try to game the system by artificially reducing their income. Let's talk through both realities.</p>
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Financial Data Table</caption><thead><tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'><th class='py-3 px-4 text-sm font-medium '>Key Metric</th><th class='py-3 px-4 text-sm font-medium '>2026 Standard</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm '>Self Support Reserve</td><td class='py-3 px-4 text-sm font-medium '>approximately $2,394</td></tr><tr class='border-b border(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm '>Economic Table Limit</td><td class='py-3 px-4 text-sm font-medium '>$50,000</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm '>Minimum Support</td><td class='py-3 px-4 text-sm font-medium '>$50 per child</td></tr></tbody></table></div><p class="mb-4">The good news: Washington law has built-in protections for genuinely low-income parents. The hard news: the courts take a very dim view of parents who try to game the system by artificially reducing their income. Let's talk through both realities.</p>
 
        <h2 class="mt-12 mb-6">1. The Absolute Minimum: $50 Per Child Per Month</h2>
       <p class="mb-4">Washington law establishes a <strong>presumptive minimum of $50 per child per month</strong> under RCW 26.19.065. This is the floor beneath which no court-ordered support obligation can go in normal circumstances. For one child, that's $50/month. For three children, that's $150/month. It's not optional, and it's extremely rare for a court to waive it entirely.</p>
@@ -612,7 +608,7 @@ export const blogs: BlogPost[] = [
 
        <h2 class="mt-12 mb-6">Final Thoughts</h2>
       <p class="mb-4">Washington has built meaningful protections for parents who genuinely can't afford full support obligations. The SSR exists for a real reason. But those protections only work if you show up, document your income accurately, and formally ask the court to apply them. Silence and avoidance are the most expensive choices a low-income parent in this situation can make.</p>
-    <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/king-county-income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
+    <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
     faqs: [
       {
         question: "Can I go to jail if I genuinely can't afford child support?",
@@ -638,8 +634,8 @@ export const blogs: BlogPost[] = [
     category: "County Guide",
     readTime: "11 min",
     excerpt: "King County has specific local family law rules that supplement state law, and ignoring them can derail your case. Here's what you need to know about LFLR 10, financial declarations, and high-income Seattle cases.",
-    metaTitle: "King County Child Support Rules | 2026 Local Guidelines Explained",
-    metaDescription: "Navigating family law in Seattle or Kent? Learn the King County child support local rules, LFLR 10 requirements, financial declarations, and how high-income cases differ in 2026.",
+    metaTitle: "King County Child Support Rules 2026 | WSCSS",
+    metaDescription: "King County has specific local family law rules that supplement state law. What you need to know about LFLR 10, financial declarations, and high-income cases.",
     author: "WSCSS Editorial Team",
     createdAt: "2026-04-09",
     updatedAt: "2026-04-09",
@@ -710,7 +706,7 @@ export const blogs: BlogPost[] = [
        <h2 class="mt-12 mb-6">5. Commissioners vs. Judges in King County Family Court</h2>
       <p class="mb-4">Most initial hearings, temporary orders, and uncontested support orders in King County are handled by <strong>Court Commissioners</strong>, judicial officers with full authority to enter binding orders. A Superior Court judge reviews commissioner decisions only if a party files a Motion for Revision within 10 days.</p>
 
-      <p class="mb-4">Commissioners run fast, efficient hearings. They expect you to show up with complete documentation, know your numbers, and be ready to state your position concisely. Showing up with incomplete financial declarations, vague income estimates, or an inability to explain your child support worksheet will result in an unfavorable temporary order that can be very difficult to undo.</p>
+      <p class="mb-4">Commissioners run fast, efficient hearings. They expect you to show up with complete documentation, know your numbers, and be ready to state your position concisely. Showing up with incomplete financial declarations, vage income estimates, or an inability to explain your child support worksheet will result in an unfavorable temporary order that can be very difficult to undo.</p>
 
        <h2 class="mt-12 mb-6">Related Articles</h2>
        <ul class="list-disc pl-6 space-y-6 mb-8">
@@ -721,7 +717,7 @@ export const blogs: BlogPost[] = [
 
        <h2 class="mt-12 mb-6">Conclusion</h2>
       <p class="mb-4">King County doesn't cut corners on financial disclosure, and neither should you. The most common outcome for parents who walk in underprepared is a temporary order that's either too high or too low, and those temporary orders can take months to correct. Get your documentation together, run your numbers through the <a href="/worksheet">Worksheet Wizard</a>, and show up knowing exactly what you owe and why.</p>
-    <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/king-county-income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
+    <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
     faqs: [
       {
         question: "Can I request a deviation in King County because the cost of living in Seattle is so high?",
@@ -747,8 +743,8 @@ export const blogs: BlogPost[] = [
     category: "Legal Guide",
     readTime: "12 min",
     excerpt: "Missing child support payments in Washington triggers a cascade of serious enforcement actions, from wage garnishment on day one to passport denial, license suspension, and contempt of court. Here's what happens and what you can do.",
-    metaTitle: "Unpaid Child Support in WA | 2026 Penalties & Enforcement Guide",
-    metaDescription: "What happens if child support is not paid in Washington State? Learn about wage garnishment, 12% interest on arrears, license suspension, passport denial, and how to get back on track.",
+    metaTitle: "Child Support Not Paid in Washington? | WSCSS",
+    metaDescription: "Missing child support in Washington triggers wage garnishment, license suspension, passport denial, and contempt of court. Here is what happens and what to do.",
     author: "WSCSS Editorial Team",
     createdAt: "2026-04-09",
     updatedAt: "2026-04-09",
@@ -828,7 +824,7 @@ export const blogs: BlogPost[] = [
 
       <p class="mb-4">You can also contact DCS directly to set up a payment plan on existing arrears. DCS would rather receive something consistently each month than go through the expense of license suspension and court proceedings.</p>
 
-       <h2 class="mt-12 mb-6">Related Articles</h2>
+       <h2 class="mt-12 mb-6">Related Reading</h2>
        <ul class="list-disc pl-6 space-y-6 mb-8">
         <li><a href="/blog/minimum-child-support-washington-low-income">Minimum Support for Low-Income Parents: Your Options</a></li>
         <li><a href="/blog/washington-ssr-self-support-reserve-explained">The SSR: Protection for Genuinely Low-Income Obligors</a></li>
@@ -837,7 +833,7 @@ export const blogs: BlogPost[] = [
 
        <h2 class="mt-12 mb-6">Final Thoughts</h2>
       <p class="mb-4">Washington's child support enforcement system is designed to make avoidance expensive and difficult. The 12% interest rate and no statute of limitations mean unpaid support just keeps growing. The most expensive thing you can do is nothing. Run your current numbers through our <a href="/">calculator</a>, determine whether you're overpaying or underpaying, and if there's a problem, file a modification today, not next month.</p>
-    <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/king-county-income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
+    <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
     faqs: [
       {
         question: "Does unpaid child support in Washington affect my credit score?",
@@ -863,8 +859,8 @@ export const blogs: BlogPost[] = [
     category: "Legal Guide",
     readTime: "12 min",
     excerpt: "What actually happens when a Washington judge or commissioner decides your child support order, from the mandatory worksheet process to how income is verified and what deviation standards really look like.",
-    metaTitle: "How Courts Decide Child Support in Washington | A 2026 Legal Guide",
-    metaDescription: "Curious how courts decide child support in Washington State? Learn how commissioners use the Income Shares Model, verify income, handle extraordinary expenses, and decide when to deviate from the guidelines.",
+    metaTitle: "How Courts Decide Child Support in WA 2026 | WSCSS",
+    metaDescription: "What actually happens when a Washington judge decides your child support order including how income is verified and what deviation standards look like.",
     author: "WSCSS Editorial Team",
     createdAt: "2026-04-09",
     updatedAt: "2026-04-09",
@@ -938,13 +934,6 @@ export const blogs: BlogPost[] = [
         <li>Specific extracurricular activities, rarely included unless they were part of the child's prior lifestyle and the family can clearly afford them</li>
       </ul>
 
-       <h3 class="mt-8 mb-4">Generally Excluded:</h3>
-       <ul class="list-disc pl-6 space-y-6 mb-8">
-        <li>Regular clothing, toys, school supplies (covered by the base amount)</li>
-        <li>Entertainment, vacations, or recreational costs</li>
-        <li>Standard extracurricular activities like recreational soccer or music lessons (unless both parents agree)</li>
-      </ul>
-
        <h2 class="mt-12 mb-6">5. When Do Courts Grant Deviations?</h2>
       <p class="mb-4">A deviation means the court orders a different amount than what the worksheets produce. They're not common, but they happen when there's documented justification. Under <strong>RCW 26.19.075</strong>, courts can deviate based on:</p>
        <ul class="list-disc pl-6 space-y-6 mb-8">
@@ -975,16 +964,16 @@ export const blogs: BlogPost[] = [
     <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Obligations</h3><ul class="space-y-2"><li><a href="/worksheet" class=" hover:underline">Calculate your exact support using the Professional Worksheet</a></li><li><!-- TODO: restore when /income-5000-2-children page is created --><a href="/king-county-income-5000-2-children" class=" hover:underline">See real example for $5,000 income and 2 children</a></li><li><a href="/king-county-income-6000-1-child" class=" hover:underline">View King County example for $6,000 income</a></li><li><a href="/pierce-county-income-4000-2-children" class=" hover:underline">See Pierce County example at $4,000 income</a></li></ul></div><p class="text-sm  mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class=" hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class=" hover:underline">Washington Courts</a> homepage.</p><div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">  <div>    <p class="font-semibold text-gray-900 text-base mb-1">      Calculate Your Exact Child Support    </p>    <p class="text-sm text-gray-500">      Free · 2026 RCW 26.19 Guidelines · All 39 Washington Counties    </p>  </div>  <a href="/worksheet"    class="btn btn-primary whitespace-nowrap">    Start Calculation →  </a></div>`,
     faqs: [
       {
-        question: "Can a judge just ignore the child support worksheets and order whatever seems fair?",
-        answer: "No. RCW 26.19.020 legally requires courts to use the economic table and complete the standard worksheets for every case. A judge can deviate from the calculated amount, but only with specific written findings documenting the reason. 'Seems fair' without statutory justification is grounds for appeal."
+        question: "Can I stop paying child support if my ex won't let me see my children?",
+        answer: "No. Under Washington law, child support and residential time (visitation) are completely separate legal issues. Withholding support because of denied visitation puts you at risk of contempt of court, wage garnishment, and license suspension. The correct remedy for denied visitation is a motion to enforce your parenting plan, not stopping payments."
       },
       {
-        question: "Does my new spouse's income affect what the court orders?",
-        answer: "Generally no. A new spouse's income is not included in either parent's gross income calculation under Washington's Income Shares Model. However, if you've voluntarily reduced your own work hours or income because your new partner is supporting your household expenses, the court may impute income reflecting what you could earn, treating the reduced income as voluntary underemployment."
+        question: "When does child support end in Washington State?",
+        answer: "Generally, child support ends when the child turns 18 OR graduates high school, whichever is later, but no later than age 19. Support can continue beyond that if the child has a disability requiring ongoing support, but that requires a separate court order."
       },
       {
-        question: "Can both parents agree to zero child support in Washington?",
-        answer: "Courts are very resistant to approving zero-dollar support orders. Even in 50/50 residential arrangements, commissioners typically require some transfer payment or at minimum a specific extraordinary expense allocation. A judge may approve $0 if income levels are genuinely identical, extraordinary expenses are perfectly balanced, and both parents formally waive support with full understanding, but it requires a specific court finding and is unusual."
+        question: "Does my new partner's income affect my child support?",
+        answer: "Generally no. Washington does not include a new spouse's or domestic partner's income in the core calculation. However, if you've dramatically reduced your own work hours because your new partner is supporting your household, the court may impute income to you at the level you would otherwise earn."
       }
     ]
   }

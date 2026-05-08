@@ -3,11 +3,23 @@ import Link from 'next/link';
 import { ShieldCheck, ArrowLeft, Users, Database, Mail, Scale, Globe, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "About WSCSS — Washington State Child Support Schedule | WSCSS"
-  },
-  description: "WSCSS is an independent educational platform providing free, accurate Washington State child support calculations based on the official 2026 RCW 26.19 economic tables.",
+  title: { absolute: "About WSCSS | WA Child Support Schedule Center" },
+  description: "WSCSS is an independent educational platform providing free, accurate Washington child support calculations based on the official 2026 RCW 26.19 economic tables.",
   alternates: { canonical: 'https://wscss.site/about' },
+  openGraph: {
+    title: "About WSCSS | WA Child Support Schedule Center",
+    description: "WSCSS provides free, accurate Washington child support calculations based on the official 2026 RCW 26.19 economic tables.",
+    url: "https://wscss.site/about",
+    type: "website",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About WSCSS | WA Child Support Schedule Center",
+    description: "WSCSS provides free, accurate Washington child support calculations based on the official 2026 RCW 26.19 economic tables.",
+    images: ["https://wscss.site/wscss-og.webp"],
+  },
 };
 
 export default function AboutPage() {

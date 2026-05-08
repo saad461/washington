@@ -5,9 +5,23 @@ import Link from 'next/link';
 import { ArrowLeft, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
- title: 'Privacy Policy | Washington State Child Support Schedule',
- description: 'Privacy Policy and AdSense disclosure for WSCSS. We prioritize the security of your legal calculation data.',
- alternates: { canonical: 'https://wscss.site/privacy' },
+  title: { absolute: "Privacy Policy | WSCSS Child Support Calculator" },
+  description: "WSCSS privacy policy. We do not store personal calculation data. Analytics only. No data is ever sold or shared with third parties.",
+  alternates: { canonical: 'https://wscss.site/privacy' },
+  openGraph: {
+    title: "Privacy Policy | WSCSS",
+    description: "WSCSS privacy policy. No personal calculation data stored. Analytics only. No data sold or shared.",
+    url: "https://wscss.site/privacy",
+    type: "website",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | WSCSS",
+    description: "WSCSS privacy policy. No personal calculation data stored or sold.",
+    images: ["https://wscss.site/wscss-og.webp"],
+  },
 };
 
 export default function PrivacyPage() {

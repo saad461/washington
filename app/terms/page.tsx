@@ -3,9 +3,23 @@ import Link from 'next/link';
 import { FileText, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service | WSCSS — Washington State Child Support Schedule',
-  description: 'Terms of Service for using the WSCSS child support calculator and educational resources. Read before using our 2026 Washington State calculation tools.',
+  title: { absolute: "Terms of Service | WSCSS Child Support Calculator" },
+  description: "Terms of service for WSCSS Washington child support calculator. Educational use only. All calculations are estimates and do not constitute legal advice.",
   alternates: { canonical: 'https://wscss.site/terms' },
+  openGraph: {
+    title: "Terms of Service | WSCSS",
+    description: "WSCSS terms of service. Educational use only. Calculations are estimates and not legal advice.",
+    url: "https://wscss.site/terms",
+    type: "website",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms of Service | WSCSS",
+    description: "WSCSS terms of service. Educational use only. Not legal advice.",
+    images: ["https://wscss.site/wscss-og.webp"],
+  },
 };
 
 export default function TermsPage() {

@@ -8,11 +8,23 @@ import Badge from '@/components/ui/Badge';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "Washington Child Support Legal Guides & Resources 2026 | WSCSS"
-  },
-  description: "Expert guides on Washington State child support guidelines, 2026 law changes, county filing guides, and calculation walkthroughs from the WSCSS editorial team.",
+  title: { absolute: "WA Child Support Legal Guides 2026 | WSCSS" },
+  description: "Expert guides on Washington child support guidelines, 2026 law changes, county filing guides, and calculation walkthroughs from the WSCSS editorial team.",
   alternates: { canonical: 'https://wscss.site/blog' },
+  openGraph: {
+    title: "WA Child Support Legal Guides 2026 | WSCSS",
+    description: "Expert guides on 2026 Washington child support law changes, county filing guides, and calculation walkthroughs from the WSCSS editorial team.",
+    url: "https://wscss.site/blog",
+    type: "website",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WA Child Support Legal Guides 2026 | WSCSS",
+    description: "Expert guides on 2026 Washington child support law, county filing, and calculation walkthroughs.",
+    images: ["https://wscss.site/wscss-og.webp"],
+  },
 };
 
 export default async function BlogPage({

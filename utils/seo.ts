@@ -26,16 +26,19 @@ interface CountyMetaProps {
  * Generates SEO metadata for County-specific court pages.
  */
 export function getCountyPageMeta({ county }: CountyMetaProps): Metadata {
-  const filingFee = county.filingFee.includes("$") ? county.filingFee.replace("$", "") : county.filingFee;
   const ssr = "2,394";
 
+  const title = { absolute: `${county.name} Child Support Guide 2026 | Court Info | WSCSS` };
+  const description = `Calculate 2026 child support in ${county.name}, WA. Courthouse address, filing fee, SSR rules ($${ssr}), and filing guides under RCW 26.19.`.slice(0, 160);
+
   return {
-    // Note: <title> tag is kept as-is in the page component to avoid regression
+    title,
+    description,
     openGraph: {
-      title: `${county.name} Child Support 2026 | Calculator, Court Info & Filing Guide`,
-      description: `Calculate your 2026 child support obligation in ${county.name}, Washington. Get courthouse contacts, local filing tips, SSR protection rules, and instant estimates.`,
+      title: title.absolute.slice(0, 60),
+      description: `Calculate 2026 child support in ${county.name}, WA. Courthouse address, filing fee, and SSR rules ($${ssr}).`.slice(0, 160),
       url: `https://wscss.site/washington-courts/${county.slug}`,
-      siteName: "WSCSS",
+      siteName: "WSCSS — Washington State Child Support Schedule",
       images: [
         {
           url: "https://wscss.site/wscss-og.webp",
@@ -49,11 +52,10 @@ export function getCountyPageMeta({ county }: CountyMetaProps): Metadata {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${county.name} Child Support Calculator 2026 | WSCSS`,
-      description: `Instant 2026 child support estimates for ${county.name}, WA. Official AOC economic table, local court info, and RCW 26.19 guidelines.`,
+      title: title.absolute.slice(0, 60),
+      description: `Instant 2026 child support estimates for ${county.name}, WA. Official AOC economic table and RCW 26.19 guidelines.`.slice(0, 160),
       images: ["https://wscss.site/wscss-og.webp"],
     },
-    description: `Free 2026 child support calculator for ${county.name}, WA. Courthouse address, filing fee ($${filingFee}), Self-Support Reserve ($${ssr}), and step-by-step filing guide. RCW 26.19 compliant.`,
   };
 }
 
@@ -80,20 +82,20 @@ export function getIncomePageMeta({
   const formattedAmount = formatNumber(Math.round(amount));
   const childrenLabel = getChildrenLabel(children);
 
-  const title = `Child Support $${formattedIncome} – ${countyName}, WA (${childrenLabel}) | 2026 | WSCSS`;
-  const description = `2026 child support for $${formattedIncome}/mo combined income and ${childrenLabel} in ${countyName}, WA. Presumptive amount: $${formattedAmount}/mo. Includes SSR protection, income split, and court filing info.`;
+  const titleText = `Child Support $${formattedIncome} – ${countyName}, WA (${childrenLabel}) | 2026 | WSCSS`;
+  const descriptionText = `2026 child support for $${formattedIncome}/mo income and ${childrenLabel} in ${countyName}, WA. Presumptive: $${formattedAmount}/mo. Includes SSR and RCW 26.19 rules.`;
 
   return {
-    title,
-    description,
+    title: { absolute: titleText.slice(0, 60) },
+    description: descriptionText.slice(0, 160),
     alternates: {
       canonical: `https://wscss.site/${slug}`,
     },
     openGraph: {
-      title: `$${formattedIncome} Income Child Support in ${countyName} – ${childrenLabel} | 2026`,
-      description: `Your 2026 child support in ${countyName} is ~$${formattedAmount}/mo for $${formattedIncome} combined net income and ${childrenLabel}. Includes SSR rules and courthouse details.`,
+      title: `$${formattedIncome} Child Support in ${countyName} – ${childrenLabel} | 2026`.slice(0, 60),
+      description: `2026 child support in ${countyName} is ~$${formattedAmount}/mo for $${formattedIncome} combined net income and ${childrenLabel}. Includes SSR and court info.`.slice(0, 160),
       url: `https://wscss.site/${slug}`,
-      siteName: "WSCSS",
+      siteName: "WSCSS — Washington State Child Support Schedule",
       images: [
         {
           url: "https://wscss.site/wscss-og.webp",
@@ -103,12 +105,12 @@ export function getIncomePageMeta({
         },
       ],
       locale: "en_US",
-      type: "website",
+      type: "article",
     },
     twitter: {
       card: "summary_large_image",
-      title: `${countyName} Child Support $${formattedIncome} / ${childrenLabel} | 2026 WSCSS`,
-      description: `Presumptive 2026 child support for $${formattedIncome} income and ${childrenLabel} in ${countyName}, WA: ~$${formattedAmount}/mo. Based on official AOC economic table.`,
+      title: `${countyName} Support $${formattedIncome} | ${childrenLabel} | 2026`.slice(0, 60),
+      description: `2026 child support for $${formattedIncome} income and ${childrenLabel} in ${countyName}, WA: ~$${formattedAmount}/mo. Based on AOC economic table.`.slice(0, 160),
       images: ["https://wscss.site/wscss-og.webp"],
     },
   };
