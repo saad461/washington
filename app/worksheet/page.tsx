@@ -57,11 +57,8 @@ const worksheetFAQs = [
 ];
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "Washington Child Support Worksheet 2026 — Free Online Generator | WSCSS",
-  },
-  description:
-    "Complete the official 8-part Washington State child support worksheet online. Auto-calculates all figures using 2026 RCW 26.19 economic tables. Free for all 39 Washington counties. No sign-up needed.",
+  title: { absolute: "WA Child Support Worksheet 2026 | AOC Form | WSCSS" },
+  description: "Complete the official 8-part AOC child support worksheet online. Auto-calculates all figures using the 2026 RCW 26.19 economic tables. Free for all 39 counties.",
   keywords: [
     "Washington child support worksheet",
     "Washington child support worksheet 2026",
@@ -71,12 +68,18 @@ export const metadata: Metadata = {
     "child support worksheet Washington State online",
   ],
   openGraph: {
-    title: "Washington Child Support Worksheet 2026 | WSCSS",
-    description:
-      "Complete the official 8-part AOC child support worksheet online — free, instant, 2026 compliant.",
+    title: "WA Child Support Worksheet 2026 | AOC Form | WSCSS",
+    description: "Complete the official 8-part AOC child support worksheet online. Auto-calculates figures using the 2026 RCW 26.19 tables. Free for all 39 counties.",
     url: "https://wscss.site/worksheet",
     type: "website",
-    siteName: "WSCSS",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WA Child Support Worksheet 2026 | WSCSS",
+    description: "Complete the official 8-part AOC child support worksheet online. Auto-calculates all figures. Free for all 39 WA counties.",
+    images: ["https://wscss.site/wscss-og.webp"],
   },
 };
 

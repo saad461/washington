@@ -3,9 +3,23 @@ import Link from 'next/link';
 import { FileText, CheckCircle2, AlertTriangle, Building2, ChevronRight, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'How to File Child Support in Washington State (2026 Guide)',
-  description: 'A step-by-step 2026 guide on how to file for child support in Washington. Includes required court forms, serving the other parent, and filing procedures.',
+  title: { absolute: "How to File Child Support in Washington 2026 | WSCSS" },
+  description: "Step-by-step 2026 guide to filing child support in Washington. Required court forms, serving the other parent, and county filing procedures under RCW 26.19.",
   alternates: { canonical: 'https://wscss.site/how-to-file-child-support-washington' },
+  openGraph: {
+    title: "How to File Child Support in Washington 2026 | WSCSS",
+    description: "Step-by-step 2026 guide to filing child support in Washington. Required forms, serving procedures, and county filing info under RCW 26.19.",
+    url: "https://wscss.site/how-to-file-child-support-washington",
+    type: "article",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "How to File Child Support in Washington 2026 | WSCSS",
+    description: "Step-by-step guide to filing child support in Washington 2026. Required forms and county filing procedures.",
+    images: ["https://wscss.site/wscss-og.webp"],
+  },
 };
 
 export default function HowToFileGuide() {

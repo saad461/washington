@@ -4,11 +4,23 @@ import CalculatorSchema from "@/components/CalculatorSchema";
 import FAQSchema from "@/components/seo/FAQSchema";
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "Washington Child Support Calculator 2026 — Free Instant Estimate | WSCSS"
-  },
-  description: "Calculate Washington child support in seconds using the official 2026 RCW 26.19 economic tables. Free, private, and updated for EHB 1014 — covers all 39 counties.",
+  title: { absolute: "WA Child Support Calculator 2026 | Free | WSCSS" },
+  description: "Calculate your 2026 Washington child support instantly using the official AOC economic table. Free for all 39 counties. Trusted by parents and attorneys.",
   alternates: { canonical: "https://wscss.site/" },
+  openGraph: {
+    title: "WA Child Support Calculator 2026 | Free | WSCSS",
+    description: "Calculate your 2026 Washington child support instantly using the official AOC economic table. Free for all 39 counties.",
+    url: "https://wscss.site/",
+    type: "website",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WA Child Support Calculator 2026 | WSCSS",
+    description: "Free instant child support estimate for Washington 2026. Official AOC economic table. All 39 counties covered.",
+    images: ["https://wscss.site/wscss-og.webp"],
+  },
 };
 
 export default function Home() {

@@ -7,20 +7,23 @@ import GlossaryClient from '@/components/glossary/GlossaryClient';
 import FAQAccordion from '@/components/FAQAccordion';
 
 export const metadata: Metadata = {
-  title: "Washington Child Support Glossary 2026 — 20 Key Legal Terms Explained | WSCSS",
-  description: "Plain-language definitions of 20 Washington State child support terms including SSR, imputed income, deviation, transfer payment, and economic table. Updated for 2026 RCW 26.19.",
+  title: { absolute: "WA Child Support Glossary 2026 | 20 Terms | WSCSS" },
+  description: "Plain-language definitions of 20 Washington child support terms including SSR, imputed income, deviation, transfer payment, and economic table. Updated 2026.",
+  alternates: { canonical: 'https://wscss.site/glossary' },
   openGraph: {
-    title: "Washington Child Support Glossary 2026 — 20 Key Legal Terms | WSCSS",
-    description: "Plain-language definitions of 20 Washington State child support terms including SSR, imputed income, deviation, and transfer payment. Updated for 2026 RCW 26.19 guidelines.",
-    images: [{ url: 'https://wscss.site/wscss-og.webp' }]
+    title: "WA Child Support Glossary 2026 | 20 Terms | WSCSS",
+    description: "Plain-language definitions of 20 Washington child support terms including SSR, imputed income, deviation, and transfer payment. Updated 2026 RCW 26.19.",
+    url: "https://wscss.site/glossary",
+    type: "website",
+    siteName: "WSCSS — Washington State Child Support Schedule",
+    images: [{ url: 'https://wscss.site/wscss-og.webp', width: 1200, height: 630 }]
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Washington Child Support Glossary 2026 — 20 Key Legal Terms | WSCSS",
-    description: "Plain-language definitions of 20 Washington State child support terms. Updated for 2026 RCW 26.19 guidelines.",
+    title: "WA Child Support Glossary 2026 | 20 Terms | WSCSS",
+    description: "Plain-language definitions of 20 Washington child support legal terms. Updated for 2026 RCW 26.19 guidelines.",
     images: ['https://wscss.site/wscss-og.webp']
   },
-  alternates: { canonical: 'https://wscss.site/glossary' },
 };
 
 const definedTermSetSchema = {

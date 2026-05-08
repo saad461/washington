@@ -16,20 +16,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!termData) return {};
 
   return {
-    title: {
-      absolute: termData.metaTitle
-    },
-    description: termData.metaDescription,
+    title: { absolute: termData.metaTitle.slice(0, 60) },
+    description: termData.metaDescription.slice(0, 160),
     openGraph: {
-      title: termData.ogTitle,
-      description: termData.ogDescription,
-      images: [{ url: 'https://wscss.site/wscss-og.webp' }]
+      title: termData.ogTitle.slice(0, 60),
+      description: termData.ogDescription.slice(0, 160),
+      url: `https://wscss.site/glossary/${termData.slug}`,
+      type: "article",
+      siteName: "WSCSS — Washington State Child Support Schedule",
+      images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }]
     },
     twitter: {
-      card: 'summary_large_image',
-      title: termData.ogTitle,
-      description: termData.ogDescription,
-      images: ['https://wscss.site/wscss-og.webp']
+      card: "summary_large_image",
+      title: termData.ogTitle.slice(0, 60),
+      description: termData.ogDescription.slice(0, 160),
+      images: ["https://wscss.site/wscss-og.webp"]
     },
     alternates: { canonical: `https://wscss.site/glossary/${termData.slug}` }
   };

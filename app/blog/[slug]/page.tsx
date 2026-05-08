@@ -32,23 +32,30 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = blogs.find(p => p.slug === slug);
+  const post = blogs.find((p) => p.slug === slug);
 
   if (!post) return {};
 
   return {
-    title: post.metaTitle,
-    description: post.metaDescription,
+    title: { absolute: post.metaTitle.slice(0, 60) },
+    description: post.metaDescription.slice(0, 160),
     alternates: { canonical: `https://wscss.site/blog/${slug}` },
     openGraph: {
-      title: post.metaTitle,
-      description: post.metaDescription,
-      type: 'article',
+      title: post.metaTitle.slice(0, 60),
+      description: post.metaDescription.slice(0, 160),
+      type: "article",
       publishedTime: post.createdAt,
       modifiedTime: post.updatedAt,
       authors: [post.author],
       url: `https://wscss.site/blog/${slug}`,
-      images: [{ url: post.image?.url || '/wscss-og.webp', width: 1200, height: 630 }],
+      siteName: "WSCSS — Washington State Child Support Schedule",
+      images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.metaTitle.slice(0, 60),
+      description: post.metaDescription.slice(0, 160),
+      images: ["https://wscss.site/wscss-og.webp"],
     },
   };
 }

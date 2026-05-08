@@ -38,7 +38,7 @@ const mockPierceCounty: WashingtonCounty = {
 describe("SEO Utility", () => {
   it("generates correct meta for King County page", () => {
     const meta = getCountyPageMeta({ county: mockCounty });
-    expect(meta.openGraph?.title).toBe("King County Child Support 2026 | Calculator, Court Info & Filing Guide");
+    expect(meta.openGraph?.title).toBe("King County Child Support Guide 2026 | Court Info | WSCSS");
     expect(meta.openGraph?.description).not.toContain("All 39 counties");
     const images = meta.openGraph?.images;
     const imageUrl = Array.isArray(images) ? (images[0] as any).url : (images as any)?.url;
@@ -67,7 +67,7 @@ describe("SEO Utility", () => {
       amount: 652,
       slug: "king-county-income-3000-1-child",
     });
-    const title = meta.title as string;
+    const title = (meta.title as any).absolute as string;
     expect(title).toContain("1 Child");
     expect(title).not.toContain("1 Children");
   });

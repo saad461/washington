@@ -7,7 +7,7 @@ const AdSensePrivacy = () => {
  <div className="w-full font-sans leading-relaxed">
  <div className="text-center mb-12 md:mb-16">
  <ShieldCheck className="w-16 h-16 mx-auto mb-6" />
- <h1 className="font-bold tracking-tight mb-4 text-3xl md:text-4xl">Privacy Policy &amp; Ad Disclosure</h1>
+ <h1 className="font-bold tracking-tight mb-4 text-3xl md:text-4xl">Privacy Policy & Ad Disclosure</h1>
  <p className=" font-medium italic">Last Updated: April 9, 2026</p>
  </div>
 
@@ -64,7 +64,7 @@ const AdSensePrivacy = () => {
  <section className="mb-12">
  <div className="flex items-center gap-3 mb-6">
  <Eye className="w-6 h-6 text-[var(--color-brand-primary)]" />
- <h2 className="font-semibold ">Data Sharing &amp; Cookies</h2>
+ <h2 className="font-semibold ">Data Sharing & Cookies</h2>
  </div>
  <p className="mb-6 font-medium label-metadata ">Mandatory Third-Party Disclosure:</p>
  <ul className="list-disc pl-6 space-y-2 mb-6">
