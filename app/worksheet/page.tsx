@@ -59,6 +59,7 @@ const worksheetFAQs = [
 export const metadata: Metadata = {
   title: { absolute: "WA Child Support Worksheet 2026 | AOC Form | WSCSS" },
   description: "Complete the official 8-part AOC child support worksheet online. Auto-calculates all figures using the 2026 RCW 26.19 economic tables. Free for all 39 counties.",
+  alternates: { canonical: 'https://wscss.site/worksheet' },
   keywords: [
     "Washington child support worksheet",
     "Washington child support worksheet 2026",

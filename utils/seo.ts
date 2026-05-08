@@ -28,7 +28,7 @@ interface CountyMetaProps {
 export function getCountyPageMeta({ county }: CountyMetaProps): Metadata {
   const ssr = "2,394";
 
-  const title = { absolute: `${county.name} Child Support Guide 2026 | Court Info | WSCSS` };
+  const title = { absolute: `${county.name} Child Support 2026 | WSCSS` };
   const description = `Calculate 2026 child support in ${county.name}, WA. Courthouse address, filing fee, SSR rules ($${ssr}), and filing guides under RCW 26.19.`.slice(0, 160);
 
   return {
