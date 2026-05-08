@@ -34,8 +34,71 @@ const COMPARISON_FACTORS = [
 ];
 
 export default function CompareToolPage() {
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "2024 vs 2026 Washington State Child Support Schedule Comparison",
+    "description": "Detailed comparison of key changes between the 2024 and 2026 Washington State Child Support Schedule including SSR increase, economic table expansion, and PFML deductions",
+    "url": "https://wscss.site/compare-2024-2026",
+    "datePublished": "2026-01-01",
+    "dateModified": "2026-04-09",
+    "author": {
+      "@type": "Organization",
+      "name": "WSCSS Editorial & Legal Team",
+      "url": "https://wscss.site"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "WSCSS — Washington State Child Support Schedule",
+      "url": "https://wscss.site",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://wscss.site/wscss-og.webp",
+        "width": 1200,
+        "height": 630
+      }
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://wscss.site/wscss-og.webp",
+      "width": 1200,
+      "height": 630
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://wscss.site/compare-2024-2026"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://wscss.site/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "2024 vs 2026 Child Support Schedule Comparison",
+        "item": "https://wscss.site/compare-2024-2026"
+      }
+    ]
+  };
+
   return (
     <div className="flex-1 bg-white relative w-full overflow-hidden min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <CalculatorSchema year={2026} url="https://wscss.site/compare-2024-2026" />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}

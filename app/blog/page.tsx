@@ -43,8 +43,41 @@ export default async function BlogPage({
   const featured = articles.find(a => a.featured) || articles[0];
   const gridArticles = filteredArticles.filter(a => a.slug !== featured?.slug);
 
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Washington Child Support Legal Guides & Resources",
+    "url": "https://wscss.site/blog",
+    "description": "Expert guides on Washington State child support guidelines, 2026 law changes, county filing guides, and calculation walkthroughs",
+    "publisher": {
+      "@type": "Organization",
+      "name": "WSCSS — Washington State Child Support Schedule",
+      "url": "https://wscss.site",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://wscss.site/wscss-og.webp",
+        "width": 1200,
+        "height": 630
+      }
+    },
+    "blogPost": blogs.map(post => ({
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "url": `https://wscss.site/blog/${post.slug}`,
+      "datePublished": post.createdAt,
+      "author": {
+        "@type": "Organization",
+        "name": "WSCSS Editorial & Legal Team"
+      }
+    }))
+  };
+
   return (
     <div className="flex-1 bg-white relative overflow-hidden w-full">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div

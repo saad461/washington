@@ -101,8 +101,79 @@ export default async function BlogPostPage({ params }: Props) {
   const prevArticle = currentIndex > 0 ? blogs[currentIndex - 1] : null;
   const nextArticle = currentIndex < blogs.length - 1 ? blogs[currentIndex + 1] : null;
 
+  const blogPostingSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.metaDescription,
+    "url": `https://wscss.site/blog/${slug}`,
+    "datePublished": post.createdAt,
+    "dateModified": post.updatedAt || post.createdAt,
+    "author": {
+      "@type": "Organization",
+      "name": "WSCSS Editorial & Legal Team",
+      "url": "https://wscss.site"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "WSCSS — Washington State Child Support Schedule",
+      "url": "https://wscss.site",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://wscss.site/wscss-og.webp",
+        "width": 1200,
+        "height": 630
+      }
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://wscss.site/wscss-og.webp",
+      "width": 1200,
+      "height": 630
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://wscss.site/blog/${slug}`
+    },
+    "keywords": post.category + ", Washington child support, RCW 26.19",
+    "articleSection": post.category
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://wscss.site/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Legal Guides & Blog",
+        "item": "https://wscss.site/blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": post.title,
+        "item": `https://wscss.site/blog/${slug}`
+      }
+    ]
+  };
+
   return (
     <div className="flex-1 bg-white relative overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white pt-8 pb-12 lg:pt-12 lg:pb-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div

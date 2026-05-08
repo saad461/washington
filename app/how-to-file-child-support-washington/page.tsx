@@ -23,22 +23,86 @@ export const metadata: Metadata = {
 };
 
 export default function HowToFileGuide() {
-  const jsonLd = {
+  const howToSchema = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": "How to File for Child Support in Washington State",
-    "description": "Step-by-step instructions on filing family court forms for child support establishment or modification in WA.",
+    "name": "How to File Child Support in Washington State 2026",
+    "description": "Step-by-step guide to filing a child support petition in Washington State under RCW 26.19",
+    "totalTime": "P30D",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "USD",
+      "value": "314"
+    },
     "step": [
-      { "@type": "HowToStep", "name": "Calculate Your Estimates", "text": "Complete the Washington Child Support Worksheet to determine the presumptive support amount." },
-      { "@type": "HowToStep", "name": "Complete Required Forms", "text": "Fill out FL All Family 130 and FL All Family 131." },
-      { "@type": "HowToStep", "name": "File with the Court Clerk", "text": "Submit the paperwork to your local County Superior Court Clerk and pay the filing fee." },
-      { "@type": "HowToStep", "name": "Serve the Other Parent", "text": "Ensure the other parent is legally served with the filed documents." }
+      {
+        "@type": "HowToStep",
+        "position": "1",
+        "name": "Calculate Your Presumptive Amount",
+        "text": "Use the free WSCSS calculator to determine your presumptive 2026 child support amount based on both parents net monthly incomes and number of children."
+      },
+      {
+        "@type": "HowToStep",
+        "position": "2",
+        "name": "Complete Mandatory Court Forms",
+        "text": "Complete FL All Family 130 Child Support Worksheet and FL All Family 131 Financial Declaration. Attach two years of tax returns and current pay stubs as sealed exhibits."
+      },
+      {
+        "@type": "HowToStep",
+        "position": "3",
+        "name": "File with the County Clerk",
+        "text": "File your completed forms at the Superior Court Clerk office in the county where the child resides. Standard filing fee is $314."
+      },
+      {
+        "@type": "HowToStep",
+        "position": "4",
+        "name": "Serve the Other Parent",
+        "text": "Have a neutral third party over age 18 serve all filed documents on the other parent. File the Proof of Service with the clerk."
+      },
+      {
+        "@type": "HowToStep",
+        "position": "5",
+        "name": "Attend Your Hearing",
+        "text": "Attend your scheduled hearing with three copies of all filed documents. Both parents may present evidence to the judge or commissioner."
+      },
+      {
+        "@type": "HowToStep",
+        "position": "6",
+        "name": "Receive Your Court Order",
+        "text": "The court enters a written child support order stating the standard calculation and actual amount ordered under RCW 26.19.035."
+      },
+      {
+        "@type": "HowToStep",
+        "position": "7",
+        "name": "Set Up Your Payment",
+        "text": "Set up payment through the Washington State Support Registry. Contact the Division of Child Support at 1-800-442-5437 or dshs.wa.gov/dcs."
+      }
+    ]
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://wscss.site/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "How to File Child Support in Washington State",
+        "item": "https://wscss.site/how-to-file-child-support-washington"
+      }
     ]
   };
 
   return (
     <div className="flex-1 bg-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">

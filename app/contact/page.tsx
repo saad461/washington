@@ -25,8 +25,32 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact WSCSS",
+    "url": "https://wscss.site/contact",
+    "description": "Contact the WSCSS editorial and support team for calculator feedback, bug reports, and Washington child support questions",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "WSCSS — Washington State Child Support Schedule",
+      "url": "https://wscss.site",
+      "email": "support@wscss.site",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "support@wscss.site",
+        "availableLanguage": "English"
+      }
+    }
+  };
+
   return (
     <div className="flex-1 bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         {/* Background Decoration */}

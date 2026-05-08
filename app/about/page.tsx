@@ -23,8 +23,66 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const aboutPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About WSCSS — Washington State Child Support Schedule Center",
+    "url": "https://wscss.site/about",
+    "description": "WSCSS is an independent educational platform providing free accurate Washington State child support calculations based on the official 2026 RCW 26.19 economic tables",
+    "author": {
+      "@type": "Organization",
+      "name": "WSCSS Editorial & Legal Team",
+      "url": "https://wscss.site",
+      "email": "support@wscss.site"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "WSCSS — Washington State Child Support Schedule",
+      "url": "https://wscss.site",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://wscss.site/wscss-og.webp"
+      }
+    }
+  };
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "WSCSS — Washington State Child Support Schedule",
+    "alternateName": "WSCSS",
+    "url": "https://wscss.site",
+    "logo": "https://wscss.site/wscss-og.webp",
+    "email": "support@wscss.site",
+    "description": "Independent educational platform providing free accurate Washington State child support calculations based on official 2026 RCW 26.19 economic tables",
+    "foundingDate": "2026",
+    "areaServed": {
+      "@type": "State",
+      "name": "Washington",
+      "containedInPlace": {
+        "@type": "Country",
+        "name": "United States"
+      }
+    },
+    "knowsAbout": [
+      "Washington State Child Support",
+      "RCW 26.19",
+      "Child Support Calculator",
+      "Washington Child Support Schedule",
+      "AOC Economic Table 2026"
+    ]
+  };
+
   return (
     <div className="flex-1 bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div

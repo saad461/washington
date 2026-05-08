@@ -43,19 +43,69 @@ export default function Home() {
     },
   ];
 
-  const jsonLd = {
+  const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "WSCSS — Washington State Child Support Schedule",
-    url: "https://wscss.site",
-    description: "Washington's most accurate 2026 child support calculator.",
+    "name": "WSCSS — Washington State Child Support Schedule",
+    "url": "https://wscss.site",
+    "description": "Free Washington State child support calculator using the official 2026 AOC economic table. All 39 counties covered.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://wscss.site/washington-courts?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "WSCSS — Washington State Child Support Schedule",
+      "url": "https://wscss.site",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://wscss.site/wscss-og.webp",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  };
+
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Washington Child Support Calculator 2026",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web Browser",
+    "url": "https://wscss.site",
+    "description": "Free Washington State child support calculator using the official 2026 AOC economic table under RCW 26.19",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "2026 Washington State economic table",
+      "All 39 Washington counties",
+      "SSR protection calculation",
+      "Healthcare and daycare expense sharing",
+      "Official AOC worksheet generator"
+    ],
+    "provider": {
+      "@type": "Organization",
+      "name": "WSCSS — Washington State Child Support Schedule",
+      "url": "https://wscss.site"
+    }
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
       <CalculatorSchema url="https://wscss.site" />
       <FAQSchema faqs={homeFaqs} />
