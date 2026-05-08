@@ -45,11 +45,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const county = washingtonCounties.find((c) => c.slug === slug);
   if (!county) return {};
 
-  const baseMeta = getCountyPageMeta({ county });
-
   return {
-    ...baseMeta,
-    title: { absolute: `${county.name} Child Support Guide 2026 | Court Info | WSCSS` },
+    ...getCountyPageMeta({ county }),
     alternates: {
       canonical: `https://wscss.site/washington-courts/${county.slug}`,
     },

@@ -23,8 +23,25 @@ export const metadata: Metadata = {
 };
 
 export default function TermsPage() {
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Terms of Service | WSCSS",
+    "url": "https://wscss.site/terms",
+    "description": "WSCSS terms of service. Educational use only. All calculations are estimates and not legal advice.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "WSCSS — Washington State Child Support Schedule",
+      "url": "https://wscss.site",
+    },
+  };
+
   return (
     <div className="flex-1 bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }}
+      />
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
         <div

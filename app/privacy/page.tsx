@@ -25,8 +25,25 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
- return (
-  <div className="flex-1 bg-white">
+  const webpageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Privacy Policy | WSCSS",
+    "url": "https://wscss.site/privacy",
+    "description": "WSCSS privacy policy. No personal calculation data stored. Analytics only. No data sold.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "WSCSS — Washington State Child Support Schedule",
+      "url": "https://wscss.site",
+    },
+  };
+
+  return (
+    <div className="flex-1 bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webpageSchema) }}
+      />
     {/* ── MINI HERO ────────────────────────────────────────────────────── */}
     <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
       <div
