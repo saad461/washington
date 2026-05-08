@@ -20,6 +20,14 @@ export const metadata: Metadata = {
     description: "WSCSS terms of service. Educational use only. Not legal advice.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true,
+    },
+  },
 };
 
 export default function TermsPage() {

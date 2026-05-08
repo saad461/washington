@@ -22,6 +22,14 @@ export const metadata: Metadata = {
     description: "Contact the WSCSS team for calculator feedback and Washington child support questions.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true,
+    },
+  },
 };
 
 export default function ContactPage() {
