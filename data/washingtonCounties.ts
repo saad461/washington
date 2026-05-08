@@ -39,7 +39,7 @@ function generateDefaultFaqs(countyName: string, courtName: string, courtAddress
     },
     {
       question: `What is the Self-Support Reserve (SSR) in 2026?`,
-      answer: `In 2026, the SSR is approximately $2,394 per month. A ${countyName} court cannot issue a child support order that leaves the paying parent with less than this amount.`
+      answer: `In 2026, the SSR is $2,394 per month. A ${countyName} court cannot issue a child support order that leaves the paying parent with less than this amount.`
     },
   ];
 }

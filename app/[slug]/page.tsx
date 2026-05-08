@@ -113,10 +113,10 @@ function generateDynamicContent(
     incomeBlock = `
  <div class="p-8 bg-blue-50 border border-blue-100 rounded-3xl my-12 shadow-sm">
  <h3 class="flex items-center gap-3 mt-0 font-bold text-2xl text-blue-600">Low-Income Protective Measures</h3>
- <p class="leading-relaxed text-lg text-gray-700 mt-4">For families with a combined monthly income of <strong>${formattedIncome}</strong>, Washington's 2026 guidelines trigger automatic poverty protections. At this level, the standard ${formattedSupport} obligation is often reduced to the statutory minimum of $50 per child.</p>
+ <p class="leading-relaxed text-lg text-gray-700 mt-4">For families with a combined monthly income of <strong>${formattedIncome}</strong>, Washington's 2026 guidelines trigger automatic poverty protections. At this level, the standard ${formattedSupport} obligation is often reduced to the statutory minimum of $50 per child per month.</p>
  <ul class="mt-8 space-y-4 text-gray-600">
  <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-600"></span><strong>SSR Protection:</strong> Approximately $2,394 reserve is strictly applied.</li>
- <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-600"></span><strong>Statutory Minimum:</strong> Usually $50/month per child.</li>
+ <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-600"></span><strong>Statutory Minimum:</strong> Usually $50 per child per month.</li>
  <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-600"></span><strong>Deviation Probability:</strong> High at the ${formattedIncome} tier.</li>
  </ul>
  </div>`;
@@ -185,11 +185,11 @@ function generateDynamicFAQs(
     },
     {
       q: `What if my ${formattedIncome} income changes significantly?`,
-      a: `Child support orders in Washington can be modified if there is a 'substantial change in circumstances,' typically defined as a 10% or greater shift in net income. If your income changes, you should file a petition for modification in the ${countyName} court system.`,
+      a: `Child support orders in Washington can be modified if there is a 'substantial change in circumstances,' typically defined as a 15% or more change in net income under RCW 26.09.170. If your income changes, you should file a petition for modification in the ${countyName} court system.`,
     },
     {
       q: `How does the 2026 SSR affect my $${income.toLocaleString()} child support order?`,
-      a: `The 2026 Self-Support Reserve (SSR) is approximately $2,394. If the parent paying support would be left with less than this amount in monthly net income, the court must consider a downward deviation.`,
+      a: `The 2026 Self-Support Reserve (SSR) is $2,394. If the parent paying support would be left with less than this amount in monthly net income, the court must consider a downward deviation.`,
     },
     {
       q: `Does the ${formattedSupport} include health insurance for ${childrenText}?`,
@@ -310,7 +310,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
     { label: "Combined Monthly Net Income", value: formattedIncome, icon: <Calculator className="w-4 h-4" /> },
     { label: "Number of Children", value: children.toString(), icon: <Info className="w-4 h-4" /> },
     { label: "Presumptive Basic Support", value: formattedSupport, icon: <Landmark className="w-4 h-4" /> },
-    { label: "Self-Support Reserve (2026)", value: "approximately $2,394", icon: <Scale className="w-4 h-4" />, isSSR: true },
+    { label: "Self-Support Reserve (2026)", value: "$2,394", icon: <Scale className="w-4 h-4" />, isSSR: true },
     { label: "Jurisdiction", value: locationName, icon: <Landmark className="w-4 h-4" /> },
   ];
 

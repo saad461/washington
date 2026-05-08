@@ -120,7 +120,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
           {/* Desktop view: Single row with dividers */}
           <div className="hidden md:flex items-center bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] px-7 py-5 divide-x divide-[var(--color-bg-border)]">
             {[
-              { label: "2026 SSR",     value: "~$2,394 / mo"    },
+              { label: "2026 SSR",     value: "$2,394 / mo"    },
               { label: "Min Support",  value: "$50 / child"      },
               { label: "Table Limit",  value: "$50,000"          },
               { label: "Covers All 39 WA Counties", value: "Washington State" },
@@ -135,7 +135,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
           {/* Mobile/Tablet view: 2x2 Grid */}
           <div className="grid md:hidden grid-cols-2 gap-4">
             {[
-              { label: "2026 SSR",     value: "~$2,394 / mo"    },
+              { label: "2026 SSR",     value: "$2,394 / mo"    },
               { label: "Min Support",  value: "$50 / child"      },
               { label: "Table Limit",  value: "$50,000"          },
               { label: "Covers All 39 WA Counties", value: "Washington State" },
@@ -431,7 +431,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                   <p className="text-lg leading-relaxed text-[var(--color-text-body)]">
                     Washington&apos;s primary low-income protection is the{" "}
                     <strong className="text-[var(--color-text-primary)] font-bold">SSR</strong>, set at{" "}
-                    <strong className="text-[var(--color-text-primary)] font-bold">approximately $2,394 per month for 2026</strong>.
+                    <strong className="text-[var(--color-text-primary)] font-bold">$2,394 per month for 2026</strong>.
                     If a payment would leave the payer with less than this, the
                     court may deviate the payment downward.
                   </p>

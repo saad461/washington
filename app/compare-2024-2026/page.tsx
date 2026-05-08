@@ -26,9 +26,9 @@ export const metadata: Metadata = {
 };
 
 const COMPARISON_FACTORS = [
-  { factor: "Self-Support Reserve", v2024: "~$2,258/mo", v2026: "~$2,394/mo", changed: true },
+  { factor: "Self-Support Reserve", v2024: "$2,258/mo", v2026: "$2,394/mo", changed: true },
   { factor: "Economic Table Limit", v2024: "$12,000", v2026: "$50,000", changed: true },
-  { factor: "Minimum Support", v2024: "$50/child", v2026: "$50/child", changed: false },
+  { factor: "Minimum Support", v2024: "$50 per child per month", v2026: "$50 per child per month", changed: false },
   { factor: "Income Cap", v2024: "45%", v2026: "45%", changed: false },
   { factor: "PFML Deductions", v2024: "Not included", v2026: "Included", changed: true },
 ];
@@ -59,7 +59,7 @@ export default function CompareToolPage() {
               2024 vs <span className="text-blue-600">2026 Guidelines</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              Compare Washington State child support guidelines. See how the new SSR (approximately $2,394) and expanded 2026 economic tables impact your monthly estimates.
+              Compare Washington State child support guidelines. See how the new SSR ($2,394) and expanded 2026 economic tables impact your monthly estimates.
             </p>
           </div>
         </div>
@@ -117,7 +117,44 @@ export default function CompareToolPage() {
         </div>
       </section>
 
-      {/* ── SECTION 3: CTA ──────────────────────────────────────────────── */}
+      {/* ── SECTION 3: Detailed Analysis ────────────────────────────────── */}
+      <section className="py-16 bg-white border-t border-gray-100">
+        <div className="container-reading">
+          <div className="prose prose-gray prose-lg max-w-none">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">What the 2026 Changes Mean for Washington Parents</h2>
+            <p className="mb-12">
+              The most significant change in the 2026 Washington State Child Support Schedule is the dramatic expansion of the economic table from a maximum combined income of $12,000 to $50,000 per month. Under the 2024 schedule parents earning above $12,000 combined had no clear table guidance and courts used judicial discretion. The 2026 table gives clear presumptive amounts for every $100 increment all the way to $50,000 combined net income — eliminating ambiguity for higher-earning families and giving attorneys a definitive starting point.
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Self-Support Reserve Increase</h3>
+            <p className="mb-12">
+              The Self-Support Reserve increased from $2,258 per month in 2024 to $2,394 per month in 2026 — an increase of $136 per month. This means paying parents at lower income levels are protected from a slightly higher floor. If your income situation triggers SSR protection your obligation may be slightly lower in 2026 than it was under the 2024 schedule. The SSR is recalculated annually based on 180% of the federal poverty guideline for a one-person family under RCW 26.19.065(2)(b).
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">PFML Deductions Now Formally Included</h3>
+            <p className="mb-12">
+              The 2026 schedule formally includes Washington State Paid Family and Medical Leave (PFML) premiums as a mandatory deduction from gross income when calculating net monthly income. This was not explicitly included in the 2024 schedule. Depending on your PFML premium amount this may slightly reduce your net income and therefore your child support obligation. PFML is entered on Line 2c of the official WSCSS worksheet alongside the long-term services and supports trust program premium.
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Minimum Support Unchanged</h3>
+            <p className="mb-12">
+              The $50 per child per month support obligation remains unchanged from 2024 to 2026. Washington courts cannot order less than this amount except in extraordinary circumstances with specific written court findings under RCW 26.19.065(2)(a). The minimum applies even when the SSR check would otherwise reduce the obligation below $50 per child per month.
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">When Does the 2026 Schedule Apply?</h3>
+            <p className="mb-12">
+              The 2026 schedule applies to all new child support orders entered on or after January 1 2026. Existing orders entered under the 2024 schedule remain in effect until a court approves a modification. A substantial change in circumstances — typically a 15% or more change in either parent&apos;s net income under RCW 26.09.170 — is required to petition for modification to the 2026 schedule values. Courts will not automatically update your order — you must file a modification petition.
+            </p>
+
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">How to Use This Comparison</h3>
+            <p className="mb-8">
+              The table above shows the key differences between the 2024 and 2026 schedules. To find your specific child support amount under the 2026 schedule use the free WSCSS calculator or complete the official 8-part AOC worksheet. Both tools use the full 2026 economic table covering combined incomes from $2,200 to $50,000 per month.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 4: CTA ──────────────────────────────────────────────── */}
       <section className="py-12 text-center bg-white border-t border-gray-100">
         <div className="container-wide">
           <h2 className="text-xl font-bold text-gray-900 mb-4">

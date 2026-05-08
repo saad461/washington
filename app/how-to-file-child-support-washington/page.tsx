@@ -107,9 +107,9 @@ export default function HowToFileGuide() {
               </p>
               <ul className="list-none space-y-6 pl-0 not-prose mt-8">
                 {[
-                  { title: "FL All Family 130", desc: "Child Support Worksheet." },
-                  { title: "FL All Family 131", desc: "Financial Declaration. You must swear under penalty of perjury regarding your income, expenses, and debts." },
-                  { title: "Sealed Financial Documents", desc: "You must attach at least two years of full tax returns and your last six months of pay stubs." }
+                  { title: "FL All Family 130 — Child Support Worksheet", desc: "The official form used to calculate monthly support obligations." },
+                  { title: "FL All Family 131 — Financial Declaration", desc: "A mandatory disclosure where you swear under penalty of perjury regarding your income, expenses, and debts." },
+                  { title: "Sealed Financial Documents — You must attach your two most recent tax returns and current pay stubs as sealed exhibits.", desc: "Failure to provide these can lead a judge to impute your income at an unfavorably high rate." }
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-4 p-5 bg-[var(--color-bg-subtle)] border border-gray-200 rounded-xl">
                     <CheckCircle2 className="w-6 h-6 text-green-600 shrink-0 mt-0.5" />
@@ -180,6 +180,57 @@ export default function HowToFileGuide() {
                   <strong className="text-blue-600">Important:</strong> You cannot serve the papers yourself. They must be served by a neutral third party over the age of 18, or formally via certified mail if allowed by the court.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── STEP 5 ──────────────────────────────────────────────────────── */}
+      <section className="section-default bg-[var(--color-bg-subtle)]">
+        <div className="container-reading">
+          <div className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card-md)]">
+            <div className="flex items-center gap-6 mb-8">
+              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-600 text-white font-bold text-xl shrink-0 shadow-lg shadow-blue-200">5</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Attend Your Hearing</h2>
+            </div>
+            <div className="prose prose-gray prose-lg max-w-none text-gray-600">
+              <p className="text-lg leading-relaxed">
+                Review your county court calendar for your scheduled hearing date. Bring three copies of everything you filed — your completed WSCSS worksheet, Financial Declaration (FL All Family 131), and your Proof of Service. Both parents may attend and present evidence. The judge or court commissioner will review your worksheet, verify the income figures, and may ask questions about extraordinary expenses or deviation requests. If both parents agree on the amount the hearing is typically brief. If there is a dispute the commissioner may schedule a longer evidentiary hearing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── STEP 6 ──────────────────────────────────────────────────────── */}
+      <section className="section-default bg-white">
+        <div className="container-reading">
+          <div className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card-md)]">
+            <div className="flex items-center gap-6 mb-8">
+              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-600 text-white font-bold text-xl shrink-0 shadow-lg shadow-blue-200">6</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Receive Your Court Order</h2>
+            </div>
+            <div className="prose prose-gray prose-lg max-w-none text-gray-600">
+              <p className="text-lg leading-relaxed">
+                After the hearing the court enters a written child support order. The order must state both the standard calculation amount and the actual amount ordered under RCW 26.19.035(4). If the ordered amount differs from the standard calculation the order must include written findings of fact explaining the deviation. Both parents receive a signed copy. The order is filed with the court clerk and becomes legally enforceable immediately upon entry. Keep your copy in a safe place — you will need it to set up payments and for any future modification proceedings.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── STEP 7 ──────────────────────────────────────────────────────── */}
+      <section className="section-default bg-[var(--color-bg-subtle)]">
+        <div className="container-reading">
+          <div className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card-md)]">
+            <div className="flex items-center gap-6 mb-8">
+              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-blue-600 text-white font-bold text-xl shrink-0 shadow-lg shadow-blue-200">7</div>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Set Up Your Payment</h2>
+            </div>
+            <div className="prose prose-gray prose-lg max-w-none text-gray-600">
+              <p className="text-lg leading-relaxed">
+                Washington child support payments are processed through the Washington State Support Registry (WSSR) in most cases. Wage withholding is the standard method — the paying parent&apos;s employer receives an income withholding order and deducts the payment directly from each paycheck. To set up your payment account contact the Division of Child Support (DCS) at 1-800-442-5437 or visit <a href="https://www.dshs.wa.gov/esa/division-child-support" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">dshs.wa.gov/dcs</a>. If the court orders direct payment between parents rather than through WSSR keep records of every payment made including dates, amounts, and confirmation numbers.
+              </p>
             </div>
           </div>
         </div>

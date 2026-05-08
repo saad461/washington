@@ -32,11 +32,11 @@ const worksheetFAQs = [
   },
   {
     question: "What is the Self-Support Reserve?",
-    answer: "The SSR ($2,394/mo in 2026) ensures the paying parent keeps enough income for basic needs. If paying the full obligation would leave the payer below $2,394, the obligation is automatically reduced. Minimum is still $50 per child. Detailed definition available in our <a href='/glossary/self-support-reserve' class='text-blue-600 hover:underline'>glossary</a>.",
+    answer: "The SSR ($2,394/mo in 2026) ensures the paying parent keeps enough income for basic needs. If paying the full obligation would leave the payer below $2,394, the obligation is automatically reduced. Minimum is still $50 per child per month. Detailed definition available in our <a href='/glossary/self-support-reserve' class='text-blue-600 hover:underline'>glossary</a>.",
   },
   {
     question: "Can I use this for a child support modification?",
-    answer: "Yes. The same 8-part worksheet is used for new orders, modifications, and annual reviews. A 15% or more change in either parent's income typically qualifies for modification under Washington law.",
+    answer: "Yes. The same 8-part worksheet is used for new orders, modifications, and annual reviews. A 15% or more change in either parent's net income under RCW 26.09.170 typically qualifies for modification under Washington law.",
   },
   {
     question: "What is the Washington State Child Support Worksheet?",

@@ -770,7 +770,7 @@ Estimate only — not legal advice`;
                 </div>
                 <div>
                   <p className="text-[11px] font-bold text-blue-600 uppercase mb-1">Minimum Support</p>
-                  <p className="text-sm font-bold text-gray-900">$50 per child/month</p>
+                  <p className="text-sm font-bold text-gray-900">$50 per child per month/month</p>
                 </div>
                 <div>
                   <p className="text-[11px] font-bold text-blue-600 uppercase mb-1">Economic Table Max</p>
