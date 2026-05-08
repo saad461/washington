@@ -156,13 +156,13 @@
       "id": "8a",
       "label": "Presumptive Minimum ($2,200 Combined)",
       "type": "currency",
-      "description": "Presumptive $50 per child if combined net income is less than $2,200."
+      "description": "Presumptive $50 per child per month if combined net income is less than $2,200."
     },
     {
       "id": "8b",
       "label": "Self-Support Reserve Limit (Individual)",
       "type": "currency",
-      "description": "Presumptive $50 per child if parent's net income is less than self-support reserve."
+      "description": "Presumptive $50 per child per month if parent's net income is less than self-support reserve."
     },
     {
       "id": "8c",
@@ -296,7 +296,7 @@
       "id": "17",
       "label": "Standard Calculation",
       "type": "currency",
-      "description": "Gross obligation minus credits (Line 15 - 16d). Presumptive minimum $50/child applies."
+      "description": "Gross obligation minus credits (Line 15 - 16d). Presumptive minimum $50 per child per month applies."
     }
   ],
   "Part 7: Additional Informational Factors": [

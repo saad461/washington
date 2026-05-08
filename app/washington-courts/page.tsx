@@ -169,7 +169,7 @@ export default function CourtsIndex() {
                   Can I Modify Child Support in Washington?
                 </h3>
                 <p className="text-gray-600 text-lg leading-relaxed">
-                  Yes. Either parent can request a modification if there has been a substantial change in circumstances — typically defined as a 15% or more change in either parent&apos;s income, or a significant change in the child&apos;s needs or residential schedule. The same WSCSS worksheet is used for modifications as for initial orders.
+                  Yes. Either parent can request a modification if there has been a substantial change in circumstances — typically defined as a 15% or more change in net income under RCW 26.09.170 or more change in either parent&apos;s income, or a significant change in the child&apos;s needs or residential schedule. The same WSCSS worksheet is used for modifications as for initial orders.
                 </p>
               </div>
 

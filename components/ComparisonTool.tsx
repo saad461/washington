@@ -126,7 +126,7 @@ export default function ComparisonTool() {
             <div className="p-1 border-l-2 border-gray-200 pl-6">
               <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">The 180% SSR Benchmark</h3>
               <p className="text-sm text-gray-500 leading-relaxed">
-                A key pillar of the new rules is the adjustment of the Self-Support Reserve (SSR). Now indexed to 180% of the federal poverty level, the approximately $2,394 reserve protects the payer's ability to maintain a basic standard of living. This change often results in lower presumptive payments for those near the Washington minimum wage threshold.
+                A key pillar of the new rules is the adjustment of the Self-Support Reserve (SSR). Now indexed to 180% of the federal poverty level, the $2,394 reserve protects the payer's ability to maintain a basic standard of living. This change often results in lower presumptive payments for those near the Washington minimum wage threshold.
               </p>
             </div>
 
@@ -196,7 +196,7 @@ export default function ComparisonTool() {
                 <div>
                   <h4 className="text-lg font-bold text-[var(--color-text-primary)] mb-2">New 180% Self-Support Reserve (SSR)</h4>
                   <p className="text-[var(--color-text-body)] leading-relaxed">
-                    The 2026 changes index the SSR to 180% of the federal poverty level (approximately $2,394/month). This provides stronger poverty protections, lowering presumptive payments for low-income earners.
+                    The 2026 changes index the SSR to 180% of the federal poverty level ($2,394/month). This provides stronger poverty protections, lowering presumptive payments for low-income earners.
                   </p>
                 </div>
               </div>

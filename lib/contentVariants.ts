@@ -20,7 +20,7 @@ export const contentVariants: ContentVariation = {
     "As a Washington resident with {formattedIncome} in monthly net income, you are subject to the 2026 Child Support Schedule. This ensures support for {childrenText} is proportional to the total income earned by both parents."
   ],
   calculations: [
-    "The calculation for {formattedIncome} involves the Basic Support Obligation. Under the 2026 economic table, a household earning {formattedIncome} should spend approximately {formattedSupport} on {childrenText}, split proportionally between parents.",
+    "The calculation for {formattedIncome} involves the Basic Support Obligation. Under the 2026 economic table, a household earning {formattedIncome} should spend {formattedSupport} on {childrenText}, split proportionally between parents.",
     "Applying the Income Shares approach to a {formattedIncome} income, Washington assumes parents would dedicate {formattedSupport} of their combined resources to {childrenText}. This serves as the presumptive transfer payment.",
     "At the {formattedIncome} net income level, the 2026 tables specify a base obligation of {formattedSupport} for {childrenText}. This covers necessities like food and housing, while extraordinary expenses are added separately in {countyName}.",
     "The mathematical directive for parents earning {formattedIncome} is a {formattedSupport} basic support obligation for {childrenText}. This is derived from economic studies of household spending in Washington State.",
@@ -32,16 +32,16 @@ export const contentVariants: ContentVariation = {
     "With a combined {formattedIncome} per month, parents are expected to provide {formattedSupport} in basic support for {childrenText}. The 2026 rules split this obligation based on each parent's proportional share of the {formattedIncome}."
   ],
   ssrExplanations: [
-    "A vital component of the 2026 system is the Self-Support Reserve (SSR), set at approximately $2,394. If paying {formattedSupport} would leave the payor with less than approximately $2,394, the court may reduce the obligation for fairness.",
-    "The 2026 SSR of approximately $2,394 serves as a poverty floor in Washington. Even if the standard calculation for {formattedIncome} suggests a {formattedSupport} payment, the law protects parents from extreme financial hardship.",
-    "Washington law ensures every parent retains a minimum income to survive. The 2026 SSR is fixed at approximately $2,394. At the {formattedIncome} level, the court verifies that the payor still retains approximately $2,394 after the {formattedSupport} payment.",
-    "At the {formattedIncome} income level, SSR rules are critical. The approximately $2,394 threshold ensures that no parent is ordered to pay {formattedSupport} if it leaves them with less than the defined minimum for self-sustenance.",
-    "The approximately $2,394 SSR is a mandatory consideration. If the {formattedSupport} from your {formattedIncome} results in the payor having less than approximately $2,394, a Low-Income Deviation is typically applied in {countyName}.",
-    "In 2026, the SSR remains a vital safeguard. When the combined income is {formattedIncome}, the court ensures the {formattedSupport} payment doesn't violate the approximately $2,394 rule, protecting the payor's ability to live.",
-    "The Self-Support Reserve (SSR) is a legal shield. With the 2026 SSR at approximately $2,394, any support order based on {formattedIncome} is cross-referenced against this floor. If {formattedSupport} is too high, the court will adjust it.",
-    "The child support formula for {formattedIncome} includes the SSR protection. For 2026, this is approximately $2,394. It guarantees the parent paying {formattedSupport} isn't left with less than approximately $2,394 to cover their own basic rent and food.",
-    "Regardless of your share of the {formattedIncome}, the SSR of approximately $2,394 may apply if your net income is low. The court's priority is the child, but they must also ensure the payor can function within the {formattedSupport} limit.",
-    "The 2026 Washington schedule incorporates the approximately $2,394 SSR. For a {formattedIncome} income, the {formattedSupport} obligation is subject to a check to ensure the payor isn't reduced to a net income below the poverty threshold."
+    "A vital component of the 2026 system is the Self-Support Reserve (SSR), set at $2,394. If paying {formattedSupport} would leave the payor with less than $2,394, the court may reduce the obligation for fairness.",
+    "The 2026 SSR of $2,394 serves as a poverty floor in Washington. Even if the standard calculation for {formattedIncome} suggests a {formattedSupport} payment, the law protects parents from extreme financial hardship.",
+    "Washington law ensures every parent retains a minimum income to survive. The 2026 SSR is fixed at $2,394. At the {formattedIncome} level, the court verifies that the payor still retains $2,394 after the {formattedSupport} payment.",
+    "At the {formattedIncome} income level, SSR rules are critical. The $2,394 threshold ensures that no parent is ordered to pay {formattedSupport} if it leaves them with less than the defined minimum for self-sustenance.",
+    "The $2,394 SSR is a mandatory consideration. If the {formattedSupport} from your {formattedIncome} results in the payor having less than $2,394, a Low-Income Deviation is typically applied in {countyName}.",
+    "In 2026, the SSR remains a vital safeguard. When the combined income is {formattedIncome}, the court ensures the {formattedSupport} payment doesn't violate the $2,394 rule, protecting the payor's ability to live.",
+    "The Self-Support Reserve (SSR) is a legal shield. With the 2026 SSR at $2,394, any support order based on {formattedIncome} is cross-referenced against this floor. If {formattedSupport} is too high, the court will adjust it.",
+    "The child support formula for {formattedIncome} includes the SSR protection. For 2026, this is $2,394. It guarantees the parent paying {formattedSupport} isn't left with less than $2,394 to cover their own basic rent and food.",
+    "Regardless of your share of the {formattedIncome}, the SSR of $2,394 may apply if your net income is low. The court's priority is the child, but they must also ensure the payor can function within the {formattedSupport} limit.",
+    "The 2026 Washington schedule incorporates the $2,394 SSR. For a {formattedIncome} income, the {formattedSupport} obligation is subject to a check to ensure the payor isn't reduced to a net income below the poverty threshold."
   ],
   conclusions: [
     "Determining support for a {formattedIncome} income in Washington is a multi-step process. While the 2026 tables set a {formattedSupport} baseline for {childrenText}, the final order in {countyName} considers deviations and the SSR.",

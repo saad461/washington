@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ShieldCheck, ArrowLeft, Users, Database, Mail, Scale, Globe, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, ArrowLeft, Users, Database, Mail, Scale, Globe, CheckCircle2, Calculator, FileText, Building2 } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: { absolute: "About WSCSS | WA Child Support Schedule Center" },
@@ -27,14 +27,12 @@ export default function AboutPage() {
     <div className="flex-1 bg-white">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
       <section className="bg-white pt-8 pb-16 lg:pt-12 lg:pb-24 relative overflow-hidden border-b border-[var(--color-bg-border)]">
-        {/* Background Decoration */}
         <div
           aria-hidden="true"
           className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
         />
 
         <div className="container-reading relative z-10 text-left">
-          {/* Breadcrumbs */}
           <nav aria-label="Breadcrumb">
             <ol className="flex items-center gap-2 text-sm text-gray-500 mb-6 flex-wrap justify-start">
               <li>
@@ -85,141 +83,109 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── DATA SOURCES ────────────────────────────────────────────────── */}
+      {/* ── WHAT WE BUILD ──────────────────────────────────────────────── */}
       <section className="section-default bg-white py-10 border-b border-gray-100">
         <div className="container-reading">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-lg flex items-center justify-center">
-              <Database size={20} />
+          <h2 className="text-2xl font-bold mb-8 text-[var(--color-text-primary)]">What We Build</h2>
+          <p className="text-lg leading-relaxed text-[var(--color-text-body)] mb-10">
+            WSCSS provides three free tools for Washington State parents and attorneys:
+          </p>
+
+          <div className="grid gap-8">
+            <div className="flex gap-6 items-start">
+              <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                <Calculator size={24} />
+              </div>
+              <div>
+                <h3 className="font-bold text-gray-900 mb-2">The Child Support Calculator</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Uses the official 2026 economic table to produce an instant presumptive transfer payment estimate based on both parents net monthly incomes and number of children.
+                </p>
+              </div>
             </div>
-            <h2 className="text-2xl font-bold">Data Sources & Methodology</h2>
-          </div>
-          <div className="space-y-6">
-            <p className="text-lg leading-relaxed text-[var(--color-text-body)]">
-              Our calculations are powered by official Washington State legislative and judicial records:
-            </p>
-            <ul className="grid grid-cols-1 gap-4">
-              {[
-                { title: "2026 Washington State Economic Table", desc: "Published by the Administrative Office of the Courts (AOC), effective January 1, 2026." },
-                { title: "RCW 26.19", desc: "Washington's Revised Code governing child support obligations, including the Self-Support Reserve (SSR)." },
-                { title: "WAC 388-14A", desc: "Washington Administrative Code rules for child support implementation." },
-                { title: "County Court Data", desc: "Filing addresses and courthouse locations for all 39 Washington counties." },
-              ].map((item, i) => (
-                <li key={i} className="p-5 rounded-xl border border-[var(--color-bg-border)] bg-[var(--color-bg-subtle)] flex flex-col gap-1">
-                  <span className="font-bold text-[var(--color-text-primary)]">{item.title}</span>
-                  <span className="text-sm text-[var(--color-text-secondary)]">{item.desc}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="text-[var(--color-text-secondary)] italic text-sm">
-              All data is cross-referenced with official government publications and updated when legislative changes occur.
-            </p>
+
+            <div className="flex gap-6 items-start">
+              <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                <FileText size={24} />
+              </div>
+              <div>
+                <h3 className="font-bold text-gray-900 mb-2">The Worksheet Wizard</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Generates a complete 8-part AOC-compliant child support worksheet including healthcare, daycare, extraordinary expenses, and all limitation standards required for court submission.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-6 items-start">
+              <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                <Building2 size={24} />
+              </div>
+              <div>
+                <h3 className="font-bold text-gray-900 mb-2">The County Court Directory</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Lists courthouse addresses, phone numbers, clerk hours, and filing links for all 39 Washington counties updated for 2026 child support proceedings.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── REVIEW PROCESS ──────────────────────────────────────────────── */}
+      {/* ── OUR DATA SOURCES ────────────────────────────────────────────── */}
       <section className="section-default bg-[var(--color-bg-subtle)] py-10 border-b border-gray-100">
         <div className="container-reading">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center">
-              <ShieldCheck size={20} />
+          <h2 className="text-2xl font-bold mb-8 text-[var(--color-text-primary)]">Our Data Sources</h2>
+          <p className="text-lg leading-relaxed text-[var(--color-text-body)] mb-8">
+            All calculations on WSCSS are based exclusively on official Washington State sources:
+          </p>
+          <div className="space-y-4">
+            <div className="p-6 bg-white border border-[var(--color-bg-border)] rounded-2xl shadow-sm">
+              <p className="text-gray-700 leading-relaxed">
+                <strong className="text-gray-900">The 2026 Washington State Child Support Schedule (RCW Chapter 26.19)</strong> effective January 1 2026 published by the Administrative Office of the Courts.
+              </p>
             </div>
-            <h2 className="text-2xl font-bold">Editorial & Legal Review</h2>
-          </div>
-          <div className="space-y-8">
-            <p className="text-lg leading-relaxed text-[var(--color-text-body)]">
-              Our content undergoes a rigorous multi-step review process to ensure accuracy and compliance with Washington State law:
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-              {[
-                {
-                  title: "Data Verification",
-                  description: "Economic table values cross-checked against AOC publications for absolute accuracy."
-                },
-                {
-                  title: "Legal Review",
-                  description: "Content reviewed for compliance with RCW 26.19 and current Washington case law."
-                },
-                {
-                  title: "Technical Audit",
-                  description: "Calculation engine tested against thousands of edge cases and SSR thresholds."
-                }
-              ].map((step, index) => (
-                <div key={index} className="flex gap-4 p-5 rounded-xl bg-gray-50 border border-gray-100">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 text-sm mb-1">
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+            <div className="p-6 bg-white border border-[var(--color-bg-border)] rounded-2xl shadow-sm">
+              <p className="text-gray-700 leading-relaxed">
+                <strong className="text-gray-900">The 2026 WSCSS Economic Table</strong> covering combined monthly net incomes from $2,200 to $50,000 per month for families of 1 to 5 children.
+              </p>
+            </div>
+            <div className="p-6 bg-white border border-[var(--color-bg-border)] rounded-2xl shadow-sm">
+              <p className="text-gray-700 leading-relaxed">
+                <strong className="text-gray-900">The official AOC worksheet format</strong> (WSCSS-Worksheets Mandatory CSW/CSWP 01/2026) required for all Washington court filings.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── COVERAGE ────────────────────────────────────────────────────── */}
+      {/* ── WHAT WE ARE NOT ─────────────────────────────────────────────── */}
       <section className="section-default bg-white py-10 border-b border-gray-100">
         <div className="container-reading">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
-              <Globe size={20} />
-            </div>
-            <h2 className="text-2xl font-bold">Statewide Coverage</h2>
-          </div>
-          <div className="card-standard border-blue-100 bg-blue-50/30">
-            <p className="leading-relaxed text-lg text-[var(--color-text-body)]">
-              WSCSS provides detailed child support calculations for all <strong>39 Washington counties</strong>, including localized courthouse information, filing guidance, and county-specific insights.
+          <h2 className="text-2xl font-bold mb-6 text-[var(--color-text-primary)]">What We Are Not</h2>
+          <div className="p-8 bg-amber-50 border border-amber-200 rounded-2xl">
+            <p className="leading-relaxed text-amber-900 text-lg mb-4">
+              WSCSS is <strong>not a law firm</strong>. We do not provide legal advice.
             </p>
-            <p className="mt-4 leading-relaxed text-[var(--color-text-secondary)]">
-              From King County to Garfield County, our platform covers the full spectrum of Washington State jurisdictions with over 7,800 unique calculation pages.
+            <p className="leading-relaxed text-amber-800">
+              Our tools produce estimates based on the standard calculation — actual court orders may differ based on deviations, extraordinary expenses, and judicial findings. Always consult a licensed Washington State family law attorney for advice specific to your situation.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── DISCLAIMER ──────────────────────────────────────────────────── */}
-      <section className="section-default bg-[var(--color-bg-subtle)] py-10 border-b border-gray-100">
+      {/* ── CONTACT US ──────────────────────────────────────────────────── */}
+      <section className="section-default bg-[var(--color-bg-subtle)] py-10 border-b border-gray-100 last:border-0">
         <div className="container-reading">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-10 h-10 bg-amber-50 text-amber-600 rounded-lg flex items-center justify-center">
-              <CheckCircle2 size={20} />
-            </div>
-            <h2 className="text-2xl font-bold text-amber-900">Important Disclaimer</h2>
-          </div>
-          <div className="p-8 bg-white border border-amber-200 rounded-2xl shadow-sm">
-            <p className="leading-relaxed text-[var(--color-text-body)]">
-              WSCSS is <strong>not a law firm</strong> and does not provide legal advice. Our calculations are estimates for educational purposes only.
-            </p>
-            <p className="mt-4 leading-relaxed text-[var(--color-text-secondary)]">
-              Actual court-ordered child support may differ based on healthcare costs, childcare expenses, custody arrangements, deviation petitions, and judicial discretion. We strongly recommend consulting a licensed Washington State family law attorney for specific legal guidance.
-            </p>
-          </div>
-        </div>
-      </section>
+          <h2 className="text-2xl font-bold mb-6 text-[var(--color-text-primary)]">Contact Us</h2>
+          <p className="text-lg text-[var(--color-text-body)] mb-8 leading-relaxed">
+            For questions, corrections, or feedback contact the WSCSS editorial team at <a href="mailto:support@wscss.site" className="text-blue-600 font-bold hover:underline">support@wscss.site</a>. We typically respond within 2 business days. To report a calculation error please include your input values and the result you received.
+          </p>
 
-      {/* ── CONTACT ─────────────────────────────────────────────────────── */}
-      <section className="section-default bg-white py-10 border-b border-gray-100 last:border-0">
-        <div className="container-reading">
-          <div className="text-center space-y-4 mb-12">
-            <div className="w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mx-auto shadow-lg shadow-indigo-200">
+          <div className="max-w-md mx-auto p-8 bg-white rounded-3xl border border-[var(--color-bg-border)] text-center shadow-sm">
+            <div className="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-200">
               <Mail size={24} />
             </div>
-            <h2 className="text-3xl font-bold">Contact Us</h2>
-            <p className="text-lg text-[var(--color-text-secondary)] max-w-xl mx-auto">
-              Have questions, feedback, or data correction requests? We&apos;d love to hear from you.
-            </p>
-          </div>
-
-          <div className="max-w-md mx-auto p-8 bg-[var(--color-bg-subtle)] rounded-3xl border border-[var(--color-bg-border)] text-center">
-            <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">General Inquiries</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-2">Editorial Support</p>
             <a href="mailto:support@wscss.site" className="text-2xl font-bold text-blue-600 hover:underline break-all">
               support@wscss.site
             </a>

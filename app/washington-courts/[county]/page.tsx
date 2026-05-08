@@ -80,7 +80,7 @@ function generateCountyContent(county: WashingtonCounty) {
 
   const introduction = [
     `Understanding child support in ${county.name}, Washington requires navigating both uniform state law and specific local court procedures. ${contextPhrase}. Under Washington's Revised Code (RCW 26.19), child support obligations are calculated using an Income Shares Model — a methodology designed to ensure that children receive a level of financial support proportionate to what they would have enjoyed if their parents had remained together.`,
-    `In 2026, the Washington State Administrative Office of the Courts (AOC) updated the mandatory child support economic tables that all ${county.name} courts must use. These tables cap at a combined monthly net income of $50,000 and set a firm Self-Support Reserve (SSR) of approximately $2,394 per month — a critical poverty-protection threshold that prevents courts from issuing orders that would impoverish the paying parent.`,
+    `In 2026, the Washington State Administrative Office of the Courts (AOC) updated the mandatory child support economic tables that all ${county.name} courts must use. These tables cap at a combined monthly net income of $50,000 and set a firm Self-Support Reserve (SSR) of $2,394 per month — a critical poverty-protection threshold that prevents courts from issuing orders that would impoverish the paying parent.`,
   ];
 
   const howItWorks = [
@@ -140,10 +140,10 @@ export default async function CountyCourtPage({ params }: Props) {
               Child Support – <span className="text-blue-600">{county.name}</span>, WA
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              Official 2026 estimates for {county.name} residents. Based on the Washington Income Shares Model with updated SSR of <strong className="text-gray-900 font-bold">approximately $2,394</strong>.
+              Official 2026 estimates for {county.name} residents. Based on the Washington Income Shares Model with updated SSR of <strong className="text-gray-900 font-bold">$2,394</strong>.
             </p>
             <div className="flex flex-wrap gap-3 items-center">
-              {["SSR: ~$2,394", "2026 Guidelines", "RCW 26.19 Compliant"].map(tag => (
+              {["SSR: $2,394", "2026 Guidelines", "RCW 26.19 Compliant"].map(tag => (
                 <span key={tag} className="badge-meta !px-4 !py-1.5 !rounded-lg !text-[11px] !font-bold !uppercase tracking-wider">{tag}</span>
               ))}
               <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider ml-2">
@@ -308,7 +308,7 @@ export default async function CountyCourtPage({ params }: Props) {
                       Legal Disclaimer
                     </p>
                     <p className="text-sm text-[var(--color-text-body)] leading-relaxed">
-                      Information for <strong>{county.name}</strong> is for educational use. The 2026 SSR is approximately $2,394. WSCSS is not a law firm and does not provide legal representation. Consult a family law attorney for advice specific to your case.
+                      Information for <strong>{county.name}</strong> is for educational use. The 2026 SSR is $2,394. WSCSS is not a law firm and does not provide legal representation. Consult a family law attorney for advice specific to your case.
                     </p>
                   </div>
                 </div>

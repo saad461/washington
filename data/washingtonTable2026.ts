@@ -310,13 +310,13 @@ export function getExactSupport(
     return { status: "error", message: "Invalid input parameters", debug: debugInfo };
   }
 
-  // 2. Below-table threshold → manual determination (minimum $50/child/month)
+  // 2. Below-table threshold → manual determination (minimum $50 per child per month/month)
   if (income < 2200) {
     return {
       status: "manual_determination",
       income,
       children,
-      reason: "Combined income below $2,200 statutory threshold. Minimum support is $50/child/month unless court finds unjust. (RCW 26.19.065(2)(a))",
+      reason: "Combined income below $2,200 statutory threshold. Minimum support is $50 per child per month/month unless court finds unjust. (RCW 26.19.065(2)(a))",
       debug: debugInfo,
     };
   }

@@ -113,7 +113,7 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
 
   } else if (lookup.status === "manual_determination") {
     baseTableSupport = MIN_SUPPORT_PER_CHILD * children;
-    adjustmentReason = "Low income minimum: $50/child/month (RCW 26.19.065(2)(a))";
+    adjustmentReason = "Low income minimum: $50 per child per month/month (RCW 26.19.065(2)(a))";
     obligationP1 = baseTableSupport * shareP1;
     obligationP2 = baseTableSupport * shareP2;
 

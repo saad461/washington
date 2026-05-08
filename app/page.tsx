@@ -35,7 +35,7 @@ export default function Home() {
     },
     {
       question: "What is the Self-Support Reserve (SSR) for 2026?",
-      answer: "The 2026 Self-Support Reserve (SSR) is approximately $2,394 per month. This low-income protection ensures that a paying parent is not left with less than approximately $2,394 to live on after making a basic child support payment. Learn more in our <a href='/glossary/self-support-reserve' class='text-blue-600 hover:underline'>glossary</a>.",
+      answer: "The 2026 Self-Support Reserve (SSR) is $2,394 per month. This low-income protection ensures that a paying parent is not left with less than $2,394 to live on after making a basic child support payment. Learn more in our <a href='/glossary/self-support-reserve' class='text-blue-600 hover:underline'>glossary</a>.",
     },
     {
       question: "Does child support cover extraordinary expenses like daycare?",

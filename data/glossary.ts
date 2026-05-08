@@ -25,8 +25,8 @@ export const glossaryTerms: GlossaryTerm[] = [
     name: "Self-Support Reserve (SSR)",
     slug: "self-support-reserve",
     category: "Financial Protection",
-    definition: "The Self-Support Reserve (SSR) is a minimum income protection limit set by Washington State to ensure a paying parent is not left impoverished after paying child support. In 2026, the SSR is approximately $2,394 (180% of the federal poverty level).",
-    example: "If a non-custodial parent earns $2,000 net income and their calculated child support is $800, paying it would leave them with only $1,200 (below the approximately $2,394 SSR). In this case, the court will likely deviate the payment downward to preserve their basic living needs.",
+    definition: "The Self-Support Reserve (SSR) is a minimum income protection limit set by Washington State to ensure a paying parent is not left impoverished after paying child support. In 2026, the SSR is $2,394 (180% of the federal poverty level).",
+    example: "If a non-custodial parent earns $2,000 net income and their calculated child support is $800, paying it would leave them with only $1,200 (below the $2,394 SSR). In this case, the court will likely deviate the payment downward to preserve their basic living needs.",
     linkLabel: "Read SSR Guide",
     relatedLinks: [
       { label: "Check your SSR Eligibility", href: "/worksheet" },
@@ -164,7 +164,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     howItAffects: "The transfer payment is a legally enforceable court order. Non-payment triggers enforcement through Washington's Division of Child Support including wage garnishment, license suspension, tax refund interception, and contempt of court. Payments are typically processed through the Washington State Support Registry unless direct payment is ordered.",
     faqs: [
       { question: "Is the transfer payment the same as child support?", answer: "Yes. Transfer payment is the precise legal term used in RCW 26.19 for the monthly child support amount ordered by the court." },
-      { question: "Can the transfer payment be modified?", answer: "Yes. Either parent may petition for modification if there is a substantial change in circumstances — typically defined as a 15% or more change in either parent's income or a significant change in the child's needs." },
+      { question: "Can the transfer payment be modified?", answer: "Yes. Either parent may petition for modification if there is a substantial change in circumstances — typically defined as a 15% or more change in net income under RCW 26.09.170 or a significant change in the child's needs." },
       { question: "What happens if the transfer payment is not paid?", answer: "DSHS Division of Child Support enforces through wage garnishment, license suspension, bank levy, tax intercept, and contempt of court proceedings. Contact DCS at 1-800-442-5437." }
     ],
     relatedTerms: [
@@ -462,7 +462,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     faqs: [
       { question: "Is the standard calculation always the final transfer payment?", answer: "Not always. If the court approves a deviation the transfer payment will differ from the standard calculation. But the order must always state both amounts — the standard calculation and the actual ordered amount." },
       { question: "Can parents agree to an amount different from the standard calculation?", answer: "Only with court approval. An agreement alone without written findings from the court is not a valid deviation." },
-      { question: "How often is the standard calculation reviewed?", answer: "It can be reviewed any time either parent experiences a substantial change in circumstances of 15% or more income change." }
+      { question: "How often is the standard calculation reviewed?", answer: "It can be reviewed any time either parent experiences a substantial change in circumstances of 15% or more change in net income under RCW 26.09.170." }
     ],
     relatedTerms: [
       { label: "Transfer Payment", href: "/glossary/transfer-payment" },
@@ -677,7 +677,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     name: "Support Modification",
     slug: "support-modification",
     category: "Court Process",
-    definition: "A support modification is a court-approved change to an existing child support order. In Washington a modification requires showing a substantial change in circumstances — typically a 15% or more change in either parent's income or a significant change in the child's needs under RCW 26.09.170.",
+    definition: "A support modification is a court-approved change to an existing child support order. In Washington a modification requires showing a substantial change in circumstances — typically a 15% or more change in either parent's net income under RCW 26.09.170.",
     example: "If a parent receives a 30% salary increase, the other parent may petition to modify the support amount based on the new income level.",
     linkLabel: "Read Support Modification Guide →",
     relatedLinks: [],
@@ -685,7 +685,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     metaDescription: "Child support modification in Washington requires a substantial change - typically a 15% income change. Learn the full process under RCW 26.09.170.",
     h1Title: "What is Child Support Modification in Washington State?",
     ogTitle: "Child Support Modification in Washington | WSCSS",
-    ogDescription: "Washington child support modification requires a 15% or more income change. Learn the full process under RCW 26.09.170.",
+    ogDescription: "Washington child support modification requires a 15% or more change in net income under RCW 26.09.170. Learn the full process under RCW 26.09.170.",
     legalDefinition: "RCW 26.09.170 governs modification of child support orders in Washington. A substantial change in circumstances is required. Washington presumes a substantial change exists when the order would change by 15% or more based on current income.",
     howItWorks: [
       "Income changes: Either parent's income increases or decreases by 15% or more since the last order. A parent loses employment involuntarily. A parent receives a significant promotion or change in employment.",
