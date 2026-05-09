@@ -1,0 +1,23 @@
+{
+  "name": "WSCSS — Washington State Child Support Schedule",
+  "short_name": "WSCSS",
+  "description": "Free Washington State child support calculator using the official 2026 AOC economic table",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e3a5f",
+  "theme_color": "#6366f1",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
