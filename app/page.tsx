@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     description: "Free instant child support estimate for Washington 2026. Official AOC economic table. All 39 counties covered.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
+  verification: {
+    google: "vNFLdBGaMMeyqONiq_vu6gfivxqAX1AtZ4akoSCSQbY",
+  },
 };
 
 export default function Home() {
