@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = blogs.find((p) => p.slug === slug);
 
-  if (!post) return {};
+  if (!post) notFound();
 
   return {
     title: { absolute: post.metaTitle.slice(0, 60) },
