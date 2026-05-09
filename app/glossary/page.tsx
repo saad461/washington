@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Script from 'next/script';
 import { glossaryTerms } from '@/data/glossary';
-import { ArrowRight, ChevronRight, Calculator, FileText } from 'lucide-react';
+import { Calculator, FileText } from 'lucide-react';
 import GlossaryClient from '@/components/glossary/GlossaryClient';
 import FAQAccordion from '@/components/FAQAccordion';
 
