@@ -43,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/washington-courts`,
       lastModified,
       changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/about`,
