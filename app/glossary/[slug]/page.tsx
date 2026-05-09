@@ -78,19 +78,6 @@ export default async function GlossaryTermPage({ params }: Props) {
     "inDefinedTermSet": "https://wscss.site/glossary"
   };
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": termData.faqs.map(faq => ({
-      "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
-  };
-
   return (
     <div className="flex-1 bg-white pb-32">
       <script
@@ -100,10 +87,6 @@ export default async function GlossaryTermPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
