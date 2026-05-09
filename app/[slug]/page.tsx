@@ -12,6 +12,7 @@ import {
   CountySidebarClient as CountySidebar,
   PrintButtonClient as PrintButton,
 } from "@/components/ClientDynamic";
+import PrintReport from "@/components/calculator/PrintReport";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import CalculatorSchema from "@/components/CalculatorSchema";
 import FAQAccordion from "@/components/FAQAccordion";
@@ -325,12 +326,12 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
     <div className="flex-1 bg-white relative w-full overflow-x-hidden">
       <CalculatorSchema income={income} childCount={children} county={countyName} url={`https://wscss.site/${slug}`} resultAmount={supportNum !== null ? supportNum : undefined} />
 
-      <div id="pdf-content">
+      <div>
         {/* ── MINI HERO ────────────────────────────────────────────────────── */}
-        <section className="bg-white pt-8 pb-12 lg:pt-12 lg:pb-16 relative overflow-hidden border-b border-[var(--color-bg-border)]">
+        <section className="bg-white pt-8 pb-12 lg:pt-12 lg:pb-16 relative overflow-hidden border-b border-[var(--color-bg-border)] no-print">
           <div
             aria-hidden="true"
-            className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block no-print"
+            className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-bl from-blue-50 to-transparent pointer-events-none hidden lg:block"
           />
 
           <div className="container-wide relative z-10">
@@ -367,7 +368,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
         </section>
 
         {/* ── CONTENT SECTION ─────────────────────────────────────────────── */}
-        <section className="section-default bg-[var(--color-bg-subtle)]">
+        <section className="section-default bg-[var(--color-bg-subtle)] no-print">
           <div className="container-wide">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
               <div className="lg:col-span-8">
@@ -576,6 +577,32 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
           </div>
         </section>
       </div>
+
+      {/* ── PRINT-ONLY BREAKDOWN ────────────────────────────────────────── */}
+      <PrintReport
+        caseContext={[
+          { label: "Combined Monthly Net Income:", value: formattedIncome },
+          { label: "Number of Children:", value: children },
+          { label: "Location:", value: locationName },
+        ]}
+        calculationBase={[
+          { label: "Presumptive Support:", value: formattedSupport },
+          { label: "Schedule Bracket:", value: income > 50000 ? "Above Max" : "Standard 2026" },
+          { label: "Self-Support Reserve (2026):", value: "$2,394" },
+        ]}
+        analysisTitle="Estimate Analysis"
+        analysisItems={[
+          { label: "Presumptive Basic Support Obligation", value: formattedSupport },
+          {
+            label: "Basis of Estimate",
+            value: "",
+            isBold: true,
+            description: `Based on the combined monthly net income of ${formattedIncome}, the 2026 Washington State economic schedule identifies a presumptive base support amount of ${formattedSupport} per month for ${children} ${children === 1 ? 'child' : 'children'}.`
+          },
+        ]}
+        assumptions="This calculation is based on the official 2026 Washington State Child Support Schedule (RCW 26.19). It assumes all income entered is net monthly income (gross wages minus taxes and mandatory deductions)."
+        disclaimerText="This document provides an estimate only and does not constitute legal advice or a binding court order. Actual support obligations are determined by a judge based on the full Child Support Worksheet, which may include healthcare costs, daycare expenses, other children, and specific judicial findings."
+      />
 
       {/* ── RELATED SECTION ─────────────────────────────────────────────── */}
       <section className="section-default bg-white border-t border-gray-100 no-print">

@@ -155,6 +155,7 @@
     body {
       background: white !important;
       color: black !important;
+      overflow: visible !important;
     }
     header, footer, nav {
       display: none !important;
@@ -162,9 +163,15 @@
     main {
       padding: 0 !important;
       margin: 0 !important;
+      overflow: visible !important;
+      display: block !important;
     }
     .print-only {
       display: block !important;
+    }
+    /* Hide scrollbars in print */
+    ::-webkit-scrollbar {
+      display: none;
     }
   }
 

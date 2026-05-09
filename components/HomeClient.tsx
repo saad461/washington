@@ -39,7 +39,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section
         aria-label="Washington Child Support Calculator Hero"
-        className="bg-white pt-8 pb-0 lg:pt-12 lg:pb-0 relative overflow-hidden"
+        className="bg-white pt-8 pb-0 lg:pt-12 lg:pb-0 relative overflow-hidden no-print"
       >
         {/* Background Decoration */}
         <div
@@ -101,7 +101,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       <section className="py-0 w-full bg-white">
         <div className="container-wide">
           <div className="flex flex-col">
-            <h2 className="text-center mt-[32px] mb-[16px] scroll-mt-24" id="calculator-heading">
+            <h2 className="text-center mt-[32px] mb-[16px] scroll-mt-24 no-print" id="calculator-heading">
               Calculate Your Child Support Obligation Instantly
             </h2>
             <div id="calculator" className="scroll-mt-24 mb-[32px]">
@@ -115,7 +115,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       </section>
 
       {/* ── STAT BAR ────────────────────────────────────────────────────── */}
-      <section className="py-[32px] bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative">
+      <section className="py-[32px] bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative no-print">
         <div className="container-wide">
           {/* Desktop view: Single row with dividers */}
           <div className="hidden md:flex items-center bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] px-7 py-5 divide-x divide-[var(--color-bg-border)]">
@@ -150,7 +150,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       </section>
 
       {/* ── TRUST & FEATURES ────────────────────────────────────────────── */}
-      <section className="py-[40px] md:py-[64px] w-full bg-white relative">
+      <section className="py-[40px] md:py-[64px] w-full bg-white relative no-print">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto space-y-24">
 
@@ -259,7 +259,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       </section>
 
       {/* ── BENCHMARK TABLE ──────────────────────────────────────────────── */}
-      <section className="py-[40px] md:py-[64px] w-full relative bg-[var(--color-bg-subtle)]" id="benchmark-table">
+      <section className="py-[40px] md:py-[64px] w-full relative bg-[var(--color-bg-subtle)] no-print" id="benchmark-table">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
@@ -333,7 +333,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       </section>
 
       {/* ── CASE STUDY ───────────────────────────────────────────────────── */}
-      <section className="py-[40px] md:py-[64px] w-full bg-white relative">
+      <section className="py-[40px] md:py-[64px] w-full bg-white relative no-print">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
@@ -386,7 +386,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       </section>
 
       {/* ── EDUCATIONAL CONTENT ──────────────────────────────────────────── */}
-      <section className="py-[40px] md:py-[64px] w-full relative bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)]">
+      <section className="py-[40px] md:py-[64px] w-full relative bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] no-print">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
@@ -452,7 +452,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-      <section className="py-[40px] md:py-[64px] w-full bg-white relative">
+      <section className="py-[40px] md:py-[64px] w-full bg-white relative no-print">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12 md:mb-16 space-y-4">
@@ -465,7 +465,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       </section>
 
       {/* ── COUNTY QUICKLINKS ────────────────────────────────────────────── */}
-      <section className="py-[40px] md:py-[64px] w-full relative bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)]">
+      <section className="py-[40px] md:py-[64px] w-full relative bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] no-print">
         <div className="container-wide">
           <div className="text-center mb-12 md:mb-16">
             <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2 mx-auto">Major Washington Counties</p>
@@ -543,7 +543,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       </section>
 
       {/* ── BLOG QUICKLINKS ──────────────────────────────────────────────── */}
-      <section className="py-[40px] md:py-[64px] w-full bg-white relative">
+      <section className="py-[40px] md:py-[64px] w-full bg-white relative no-print">
         <div className="container-wide">
           <div className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12 md:mb-16">
             <div>

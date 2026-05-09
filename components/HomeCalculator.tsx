@@ -10,6 +10,7 @@ import { calculateChildSupport } from "@/utils/calculatorEngine";
 import ParentingTimeSelector from "@/components/calculator/ParentingTimeSelector";
 import { motion, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import HeroCard from "@/components/hero/HeroCard";
+import PrintReport from "@/components/calculator/PrintReport";
 
 const curFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -97,7 +98,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
     <div className="w-full">
 
       {/* ══ CALCULATOR GRID ══════════════════════════════════════════════ */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mb-8 md:mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mb-8 md:mb-12 no-print">
 
         {/* ── LEFT: Input panel ──────────────────────────────────────── */}
         <div className="lg:col-span-7">
@@ -566,119 +567,41 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
 
       {/* ── PRINT-ONLY BREAKDOWN ────────────────────────────────────────── */}
       {result && (
-        <div className="hidden print:block fixed inset-0 bg-white z-[1000] p-10 overflow-y-auto">
-          <div className="max-w-4xl mx-auto">
-            <div className="border-b-2 border-indigo-600 pb-6 mb-8 flex justify-between items-end">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">Child Support Estimate</h1>
-                <p className="text-indigo-600 font-semibold">Washington State (2026 Guidelines)</p>
-              </div>
-              <div className="text-right">
-                <p className="text-sm text-gray-500 font-medium">Date: {new Date().toLocaleDateString()}</p>
-                <p className="text-sm text-gray-500 font-medium">Ref: RCW 26.19 Compliance</p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-12 mb-10">
-              <div className="space-y-4">
-                <h2 className="text-lg font-bold border-b pb-2">Parental Income</h2>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Parent 1 Net Income:</span>
-                  <span className="font-bold">{curFormatter.format(result.netP1)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Parent 2 Net Income:</span>
-                  <span className="font-bold">{curFormatter.format(result.netP2)}</span>
-                </div>
-                <div className="flex justify-between border-t pt-2 mt-2">
-                  <span className="font-bold">Combined Family Income:</span>
-                  <span className="font-bold">{curFormatter.format(result.combinedIncome)}</span>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h2 className="text-lg font-bold border-b pb-2">Case Details</h2>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Number of Children:</span>
-                  <span className="font-bold">{childrenCount}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Proportional Share:</span>
-                  <span className="font-bold">P1: {Math.round(result.shareP1 * 100)}% | P2: {Math.round(result.shareP2 * 100)}%</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Designated Payer:</span>
-                  <span className="font-bold">{payingParent === "P1" ? "Parent 1" : "Parent 2"}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 p-8 rounded-2xl border border-gray-200 mb-10">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Calculation Breakdown</h2>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center text-lg">
-                  <span className="text-gray-700">Base Support (Payer Share)</span>
-                  <span className="font-bold text-gray-900">{curFormatter.format(result.breakdown.baseSupport)}</span>
-                </div>
-
-                {result.parentingDeviationApplied && result.breakdown.parentingAdjustment < 0 && (
-                  <div className="flex justify-between items-start pt-2 border-t border-gray-200">
-                    <div>
-                      <p className="font-semibold text-gray-900">Parenting Time Credit</p>
-                      <p className="text-sm text-gray-500">{result.adjustmentReason}</p>
-                    </div>
-                    <span className="font-bold text-indigo-600">{curFormatter.format(result.breakdown.parentingAdjustment)}</span>
-                  </div>
-                )}
-
-                {result.ssrApplied && (
-                   <div className="flex justify-between items-start pt-2 border-t border-gray-200">
-                    <div>
-                      <p className="font-semibold text-gray-900">SSR Protection Applied</p>
-                      <p className="text-sm text-gray-500">Payer income is protected by Self-Support Reserve guidelines.</p>
-                    </div>
-                    <span className="font-bold text-amber-600">Limit Applied</span>
-                  </div>
-                )}
-
-                {/* ── CHANGE 5: Print — show totalObligation ── */}
-                <div className="flex justify-between items-center pt-6 border-t-2 border-gray-300 mt-4">
-                  <span className="text-2xl font-bold text-gray-900">Total Basic Obligation</span>
-                  <span className="text-3xl font-bold text-indigo-600">{curFormatter.format(result.totalObligation)}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-base text-gray-600">{payingParent === "P1" ? "Parent 1" : "Parent 2"} Transfer Payment</span>
-                  <span className="text-xl font-bold text-gray-700">{curFormatter.format(result.finalSupport)}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-bold text-gray-900 mb-2">Legal Context & Assumptions</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  This calculation is based on the official 2026 Washington State Child Support Schedule (RCW 26.19).
-                  It assumes all income entered is <strong>net monthly income</strong> (gross minus taxes and mandatory deductions).
-                </p>
-              </div>
-
-              <div className="bg-amber-50 p-6 rounded-xl border border-amber-100">
-                <p className="text-sm text-amber-800 font-semibold mb-2">Disclaimer: Official Estimate Only</p>
-                <p className="text-xs text-amber-700 leading-relaxed">
-                  This document provides an estimate only and does not constitute legal advice or a binding court order.
-                  Actual support obligations are determined by a judge based on the full Child Support Worksheet,
-                  which may include healthcare costs, daycare expenses, other children, and specific judicial findings.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-20 pt-8 border-t border-gray-200 text-center">
-              <p className="text-[10px] text-gray-400 uppercase tracking-widest">
-                Generated via WSCSS Calculator — Washington Child Support Software
-              </p>
-            </div>
-          </div>
-        </div>
+        <PrintReport
+          caseContext={[
+            { label: "Parent 1 Net Income:", value: curFormatter.format(result.netP1) },
+            { label: "Parent 2 Net Income:", value: curFormatter.format(result.netP2) },
+            { label: "Combined Family Income:", value: curFormatter.format(result.combinedIncome) },
+          ]}
+          calculationBase={[
+            { label: "Number of Children:", value: childrenCount },
+            { label: "Proportional Share:", value: `P1: ${Math.round(result.shareP1 * 100)}% | P2: ${Math.round(result.shareP2 * 100)}%` },
+            { label: "Designated Payer:", value: payingParent === "P1" ? "Parent 1" : "Parent 2" },
+          ]}
+          analysisItems={[
+            { label: "Base Support (Payer Share)", value: curFormatter.format(result.breakdown.baseSupport) },
+            ...(result.parentingDeviationApplied && result.breakdown.parentingAdjustment < 0 ? [{
+              label: "Parenting Time Credit",
+              value: curFormatter.format(result.breakdown.parentingAdjustment),
+              isBold: true,
+              isIndigo: true,
+              description: result.adjustmentReason
+            }] : []),
+            ...(result.ssrApplied ? [{
+              label: "SSR Protection Applied",
+              value: "Limit Applied",
+              isBold: true,
+              isAmber: true,
+              description: "Payer income is protected by Self-Support Reserve guidelines."
+            }] : []),
+          ]}
+          totalLabel="Total Basic Obligation"
+          totalValue={curFormatter.format(result.totalObligation)}
+          secondaryTotalLabel={`${payingParent === "P1" ? "Parent 1" : "Parent 2"} Transfer Payment`}
+          secondaryTotalValue={curFormatter.format(result.finalSupport)}
+          assumptions="This calculation is based on the official 2026 Washington State Child Support Schedule (RCW 26.19). It assumes all income entered is net monthly income (gross minus taxes and mandatory deductions)."
+          disclaimerText="This document provides an estimate only and does not constitute legal advice or a binding court order. Actual support obligations are determined by a judge based on the full Child Support Worksheet, which may include healthcare costs, daycare expenses, other children, and specific judicial findings."
+        />
       )}
     </div>
   );
