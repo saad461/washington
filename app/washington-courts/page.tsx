@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://wscss.site/washington-courts",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
-    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630, alt: "Washington State Court Directory 2026 — All 39 Counties Child Support Filing | WSCSS" }],
   },
   twitter: {
     card: "summary_large_image",
