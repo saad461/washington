@@ -5,7 +5,7 @@ import { glossaryTerms } from '@/data/glossary';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://wscss.site';
-  const lastModified = new Date('2026-04-09');
+  const lastModified = '2026-04-09';
 
   // Base routes with specific priorities and frequencies
   const sitemapUrls: MetadataRoute.Sitemap = [
@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified,
+      lastModified: '2026-05-07',
       changeFrequency: 'weekly',
       priority: 0.8,
     },
@@ -106,7 +106,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   blogs.forEach((post) => {
     sitemapUrls.push({
       url: `${baseUrl}/blog/${post.slug}`,
-      lastModified,
+      lastModified: post.createdAt,
       changeFrequency: 'monthly',
       priority: 0.7,
     });

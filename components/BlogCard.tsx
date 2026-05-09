@@ -46,7 +46,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, compact = false }) => {
 
       <div className={`${compact ? 'pt-4' : 'pt-6'} border-t border-[var(--color-bg-border-soft)] flex items-center justify-between mt-auto`}>
         <div className="flex items-center gap-2 text-[var(--color-text-secondary)] font-medium text-[12px] font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider">
-          {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+          {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
         </div>
         <div className="cta-link text-xs font-bold text-blue-600 flex items-center gap-1">
           Read <ArrowRight size={14} />

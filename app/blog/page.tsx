@@ -65,6 +65,7 @@ export default async function BlogPage({
       "headline": post.title,
       "url": `https://wscss.site/blog/${post.slug}`,
       "datePublished": post.createdAt,
+      "dateModified": post.updatedAt || post.createdAt,
       "author": {
         "@type": "Organization",
         "name": "WSCSS Editorial & Legal Team"

@@ -568,21 +568,24 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                 href:  "/blog/washington-child-support-guidelines-2026",
                 cat:   "Legal",
                 img:   "/img/wa_guidelines_2026.png",
-                alt:   "Washington child support guidelines 2026 legal handbook"
+                alt:   "Washington child support guidelines 2026 legal handbook",
+                date:  "April 9, 2026"
               },
               {
                 label: "Self-Support Reserve (SSR) Explained",
                 href:  "/blog/washington-ssr-self-support-reserve-explained",
                 cat:   "Analysis",
                 img:   "/img/ssr_explained.png",
-                alt:   "Washington self-support reserve 2026 explanation"
+                alt:   "Washington self-support reserve 2026 explanation",
+                date:  "April 19, 2026"
               },
               {
                 label: "King County Child Support Rules",
                 href:  "/blog/king-county-child-support-rules",
                 cat:   "Local Rules",
                 img:   "/img/king_county_rules.png",
-                alt:   "King County child support rules and calculator guide"
+                alt:   "King County child support rules and calculator guide",
+                date:  "May 1, 2026"
               },
             ].map((p) => (
               <Link key={p.href} href={p.href} className="card-standard group flex flex-col !p-0 overflow-hidden">
@@ -599,7 +602,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                   <span className="badge-category w-fit">{p.cat}</span>
                   <span className="text-[11px] font-bold text-gray-400 flex items-center gap-1">
                     <Calendar size={12} />
-                    Updated: April 2026
+                    Updated: {p.date}
                   </span>
                 </div>
                 <div className="flex-1">

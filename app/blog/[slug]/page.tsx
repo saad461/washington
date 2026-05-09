@@ -195,7 +195,7 @@ export default async function BlogPostPage({ params }: Props) {
                 {post.category}
               </span>
               <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">
-                Updated {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                Updated {new Date(post.updatedAt || post.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               </span>
             </div>
 
