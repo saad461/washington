@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     url: "https://wscss.site/blog",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
-    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630, alt: "Washington Child Support Legal Guides & Resources 2026 | WSCSS" }],
   },
   twitter: {
     card: "summary_large_image",

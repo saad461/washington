@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     url: "https://wscss.site/worksheet",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
-    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
+    images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630, alt: "WSCSS Washington Child Support Worksheet 2026 — Official 8-Part AOC Form" }],
   },
   twitter: {
     card: "summary_large_image",

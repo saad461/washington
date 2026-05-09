@@ -81,7 +81,7 @@ export const metadata: Metadata = {
   siteName: "WSCSS — Washington State Child Support Schedule",
   title: "WA Child Support Calculator 2026 | Free | WSCSS",
   description: "Calculate your 2026 Washington child support instantly using the official AOC economic table. Free for all 39 counties.",
-  images: [{ url: 'https://wscss.site/wscss-og.webp', width: 1200, height: 630, alt: 'WSCSS Washington Child Support Calculator 2026' }],
+  images: [{ url: 'https://wscss.site/wscss-og.webp', width: 1200, height: 630, alt: 'WSCSS Washington State Child Support Calculator 2026 — Free Estimate for All 39 Counties' }],
  },
  twitter: {
   card: 'summary_large_image',

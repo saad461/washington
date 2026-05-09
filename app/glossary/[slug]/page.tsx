@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://wscss.site/glossary/${termData.slug}`,
       type: "article",
       siteName: "WSCSS — Washington State Child Support Schedule",
-      images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }]
+      images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630, alt: `${termData.name} — Washington Child Support Glossary 2026 | WSCSS` }]
     },
     twitter: {
       card: "summary_large_image",

@@ -38,11 +38,12 @@ const mockPierceCounty: WashingtonCounty = {
 describe("SEO Utility", () => {
   it("generates correct meta for King County page", () => {
     const meta = getCountyPageMeta({ county: mockCounty });
-    expect(meta.openGraph?.title).toBe("King County Child Support Guide 2026 | Court Info | WSCSS");
+    expect(meta.openGraph?.title).toBe("King County Child Support 2026 | WSCSS");
     expect(meta.openGraph?.description).not.toContain("All 39 counties");
     const images = meta.openGraph?.images;
-    const imageUrl = Array.isArray(images) ? (images[0] as any).url : (images as any)?.url;
-    expect(imageUrl).toBe("https://wscss.site/wscss-og.webp");
+    const image = Array.isArray(images) ? images[0] : images;
+    expect((image as any).url).toBe("https://wscss.site/wscss-og.webp");
+    expect((image as any).alt).toBe("King County Child Support Calculator & Court Guide 2026 | WSCSS");
   });
 
   it("generates correct meta for Pierce County income page, $5,000, 2 children", () => {
@@ -57,6 +58,9 @@ describe("SEO Utility", () => {
     expect(ogTitle).toContain("$5,000");
     expect(ogTitle).toContain("Pierce County");
     expect(ogTitle).toContain("2 Children");
+    const images = meta.openGraph?.images;
+    const image = Array.isArray(images) ? images[0] : images;
+    expect((image as any).alt).toBe("Child Support for $5,000 Income in Pierce County WA 2026 | WSCSS");
   });
 
   it("uses singular '1 Child' label for any income page with 1 child", () => {
