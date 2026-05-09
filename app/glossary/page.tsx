@@ -41,69 +41,6 @@ const definedTermSetSchema = {
   }))
 };
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Do all Washington counties use the same child support formula?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. All 39 Washington counties use the same Washington State Child Support Schedule under RCW 26.19 and the same 2026 economic table. Calculation rules do not vary by county. Only court filing procedures and fees differ between counties."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the difference between gross income and net income in Washington child support?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Gross income is all income before deductions. Net income is gross income after subtracting mandatory deductions including federal and state taxes, FICA, mandatory union dues, required pension contributions, and state insurance premiums. Washington's 2026 economic table uses net income not gross income."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the Self-Support Reserve and how much is it in 2026?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The Self-Support Reserve (SSR) is $2,394 per month in 2026. It ensures the paying parent retains enough income for basic living needs after making their child support payment. If paying the full obligation would leave the payer below $2,394 the obligation is automatically reduced. The minimum payment is still $50 per child per month."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How are healthcare and daycare costs handled in Washington child support?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Healthcare and daycare costs are not included in the basic child support obligation from the economic table. They are added separately and shared proportionally based on each parent's income share percentage. The parent who pays these costs directly receives a credit on Line 16 of the worksheet."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does it mean if my income is imputed by the court?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Imputed income means the court assigns you an estimated income based on your earning capacity rather than your actual earnings. This happens when the court finds you are voluntarily unemployed or working below your ability. The imputed amount is used in the child support calculation as if it were your actual income."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "When can child support be modified in Washington?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Child support can be modified any time there is a substantial change in circumstances. Washington presumes a substantial change exists when the order would change by 15% or more based on current income. File your modification petition promptly as the new order is typically effective from the filing date not the date income changed."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the 45% income cap in Washington child support?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The 45% cap limits total child support for all a parent's children to no more than 45% of their net income. It is not automatic — courts must consider whether to apply it based on the best interests of all children involved. Good cause such as substantial wealth or special needs can justify exceeding the cap under RCW 26.19.065."
-      }
-    }
-  ]
-};
-
 const glossaryFaqs = [
   {
     question: "Do all Washington counties use the same child support formula?",
@@ -135,7 +72,7 @@ const glossaryFaqs = [
   },
   {
     question: "What is the 45% income cap and does it apply to my case?",
-    answer: "The 45% cap limits total child support for all a parent's children to no more than 45% of their net income. It is not automatic — courts must consider whether to apply it based on the best interests of all children involved. Good cause such as substantial wealth or special needs can justify exceeding the cap."
+    answer: "The 45% cap limits total child support for all a parent's children to no more than 45% of their net income. It is not automatic — courts must consider whether to apply it based on the best interests of all children involved. Good cause such as substantial wealth or special needs can justify exceeding the cap under RCW 26.19.065."
   }
 ];
 
@@ -146,11 +83,6 @@ export default function GlossaryIndex() {
         id="glossary-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSetSchema) }}
-      />
-      <Script
-        id="glossary-faq-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}

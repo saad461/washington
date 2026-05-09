@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import HomeClient from "@/components/HomeClient";
 import CalculatorSchema from "@/components/CalculatorSchema";
-import FAQSchema from "@/components/seo/FAQSchema";
 
 export const metadata: Metadata = {
   title: { absolute: "WA Child Support Calculator 2026 | Free | WSCSS" },
@@ -111,7 +110,6 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
       <CalculatorSchema url="https://wscss.site" />
-      <FAQSchema faqs={homeFaqs} />
       <HomeClient homeFaqs={homeFaqs} />
     </>
   );
