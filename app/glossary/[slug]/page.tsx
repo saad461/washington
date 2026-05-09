@@ -13,7 +13,7 @@ export const revalidate = 2592000;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const termData = glossaryTerms.find(t => t.slug === resolvedParams.slug);
-  if (!termData) return {};
+  if (!termData) notFound();
 
   return {
     title: { absolute: termData.metaTitle.slice(0, 60) },

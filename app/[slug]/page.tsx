@@ -6,6 +6,7 @@ import {
 import { getIncomePageMeta } from "@/utils/seo";
 import { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ArrowRight, Calculator, Info, Landmark, Scale, ChevronRight, MapPin } from "lucide-react";
 import {
   AdContainerClient as AdContainer,
@@ -30,8 +31,8 @@ function parseSlug(slug: string) {
     /^(.+)-income-(\d+)-(\d+)-(?:child|children)$/,
   );
   if (countyMatch) {
-    const county =
-      washingtonCounties.find((c) => c.slug === countyMatch[1]) || null;
+    const county = washingtonCounties.find((c) => c.slug === countyMatch[1]);
+    if (!county) return null;
     return {
       county,
       income: parseInt(countyMatch[2], 10),
@@ -48,15 +49,15 @@ function parseSlug(slug: string) {
   }
   const legacyCountyMatch = slug.match(/^(.+)-income-(\d+)-(\d+)$/);
   if (legacyCountyMatch) {
-    const county =
-      washingtonCounties.find((c) => c.slug === legacyCountyMatch[1]) || null;
+    const county = washingtonCounties.find((c) => c.slug === legacyCountyMatch[1]);
+    if (!county) return null;
     return {
       county,
       income: parseInt(legacyCountyMatch[2], 10),
       children: parseInt(legacyCountyMatch[3], 10),
     };
   }
-  return { county: null, income: 5000, children: 1 };
+  return null;
 }
 
 const formatter = new Intl.NumberFormat("en-US", {
@@ -201,7 +202,10 @@ function generateDynamicFAQs(
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { county, income, children } = parseSlug(slug);
+  const parsed = parseSlug(slug);
+  if (!parsed) notFound();
+
+  const { county, income, children } = parsed;
 
   const supportResult = getExactSupport(income, children);
   const amount = supportResult.status === "calculated" ? supportResult.totalSupport : 0;
@@ -266,7 +270,10 @@ const Breadcrumbs = ({
 
 export default async function ProgrammaticSEOPage({ params }: Props) {
   const { slug } = await params;
-  const { county, income, children } = parseSlug(slug);
+  const parsed = parseSlug(slug);
+  if (!parsed) notFound();
+
+  const { county, income, children } = parsed;
   const result = getExactSupport(income, children);
   const supportNum = result.status === "calculated" ? result.totalSupport : null;
 

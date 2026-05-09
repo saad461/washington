@@ -43,7 +43,7 @@ export const revalidate = 2592000;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { county: slug } = await params;
   const county = washingtonCounties.find((c) => c.slug === slug);
-  if (!county) return {};
+  if (!county) notFound();
 
   return {
     ...getCountyPageMeta({ county }),
