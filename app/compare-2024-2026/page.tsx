@@ -78,7 +78,7 @@ export default function CompareToolPage() {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://wscss.site/"
+        "item": "https://wscss.site"
       },
       {
         "@type": "ListItem",

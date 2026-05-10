@@ -50,7 +50,7 @@ export default function ExtraExpensesPage() {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://wscss.site/",
+        "item": "https://wscss.site",
       },
       {
         "@type": "ListItem",

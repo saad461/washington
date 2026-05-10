@@ -5,11 +5,11 @@ import CalculatorSchema from "@/components/CalculatorSchema";
 export const metadata: Metadata = {
   title: { absolute: "WA Child Support Calculator 2026 | Free | WSCSS" },
   description: "Calculate your 2026 Washington child support instantly using the official AOC economic table. Free for all 39 counties. Trusted by parents and attorneys.",
-  alternates: { canonical: "https://wscss.site/" },
+  alternates: { canonical: "https://wscss.site" },
   openGraph: {
     title: "WA Child Support Calculator 2026 | Free | WSCSS",
     description: "Calculate your 2026 Washington child support instantly using the official AOC economic table. Free for all 39 counties.",
-    url: "https://wscss.site/",
+    url: "https://wscss.site",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
     images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630 }],
