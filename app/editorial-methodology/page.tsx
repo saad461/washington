@@ -47,7 +47,7 @@ export default function EditorialMethodology() {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://wscss.site/"
+        "item": "https://wscss.site"
       },
       {
         "@type": "ListItem",
