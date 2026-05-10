@@ -34,6 +34,9 @@ export function getCountyPageMeta({ county }: CountyMetaProps): Metadata {
   return {
     title,
     description,
+    alternates: {
+      canonical: `https://wscss.site/washington-courts/${county.slug}`,
+    },
     openGraph: {
       title: title.absolute.slice(0, 60),
       description: `Calculate 2026 child support in ${county.name}, WA. Courthouse address, filing fee, and SSR rules ($${ssr}).`.slice(0, 160),
