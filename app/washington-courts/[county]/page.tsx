@@ -45,12 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const county = washingtonCounties.find((c) => c.slug === slug);
   if (!county) notFound();
 
-  return {
-    ...getCountyPageMeta({ county }),
-    alternates: {
-      canonical: `https://wscss.site/washington-courts/${county.slug}`,
-    },
-  };
+  return getCountyPageMeta({ county });
 }
 
 function generateCountyContent(county: WashingtonCounty) {

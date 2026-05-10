@@ -224,6 +224,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     ...seoMeta,
     robots,
+    openGraph: {
+      ...seoMeta.openGraph,
+      url: `https://wscss.site/${slug}`,
+    },
   };
 }
 
