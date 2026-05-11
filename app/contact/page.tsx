@@ -23,10 +23,10 @@ export const metadata: Metadata = {
     images: ["https://wscss.site/wscss-og.webp"],
   },
   robots: {
-    index: true,
+    index: false,
     follow: true,
     googleBot: {
-      index: true,
+      index: false,
       follow: true,
     },
   },
