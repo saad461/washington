@@ -15,7 +15,6 @@ import { blogs, type BlogPost } from '@/data/blogs';
 import MobileTOC from '@/components/MobileTOC';
 import AuthorBox from '@/components/AuthorBox';
 import FAQAccordion from '@/components/FAQAccordion';
-import AdContainer from '@/components/AdContainer';
 import BlogCTA from '@/components/BlogCTA';
 import { cleanEmDashContent } from '@/lib/textOptimizer';
 import BlogCard from '@/components/BlogCard';
@@ -240,8 +239,6 @@ export default async function BlogPostPage({ params }: Props) {
             <MobileTOC headings={headings} />
           </div>
 
-          <AdContainer slot="top" wordCount={updatedHtml.split(' ').length} />
-
           <div className="prose prose-gray max-w-none mb-20 text-[17px] leading-[1.8] text-gray-700">
              <style dangerouslySetInnerHTML={{ __html: `
                .prose h2 { font-size: 28px; font-weight: 700; color: #111827; margin-top: 64px; margin-bottom: 24px; line-height: 1.25; }
@@ -256,8 +253,6 @@ export default async function BlogPostPage({ params }: Props) {
              `}} />
              <div dangerouslySetInnerHTML={{ __html: updatedHtml }} />
           </div>
-
-          <AdContainer slot="mid" wordCount={updatedHtml.split(' ').length} />
 
           {/* Related Articles Section */}
           <section aria-label="Related articles" className="my-12 pt-8 border-t border-gray-100">

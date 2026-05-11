@@ -109,10 +109,8 @@ export default function RootLayout({
  return (
  <html lang="en" className={`${inter.variable} ${poppins.variable} ${geistMono.variable} h-full antialiased`}>
  <head>
- {/* Performance: preconnect to ad & analytics origins for faster load */}
- <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+ {/* Performance: preconnect to analytics origins for faster load */}
  <link rel="preconnect" href="https://www.googletagmanager.com" />
- <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
  <meta name="msapplication-TileColor" content="#1e3a5f" />
  <meta name="msapplication-TileImage" content="/favicon-192x192.png" />
@@ -125,23 +123,6 @@ export default function RootLayout({
   Skip to main content
  </a>
 
- {/* Google AdSense — Publisher ID: ca-pub-9902783604679065 */}
- <Script
- async
- src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9902783604679065"
- crossOrigin="anonymous"
- strategy="afterInteractive"
- />
- {/* Google AdSense Anchor Ads (Auto-Ads) — Placeholder */}
- <Script id="adsense-anchor" strategy="afterInteractive">
- {`
- (adsbygoogle = window.adsbygoogle || []).push({
- google_ad_client: "ca-pub-9902783604679065",
- enable_page_level_ads: true,
- overlays: { bottom: true }
- });
- `}
- </Script>
  {/* Google Analytics (GA4) */}
  <Script
  src="https://www.googletagmanager.com/gtag/js?id=G-FV0272PCT1"

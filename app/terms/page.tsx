@@ -118,23 +118,19 @@ export default function TermsPage() {
           body: "All content, design, code, and data on this website are the intellectual property of WSCSS unless otherwise noted. The underlying Washington State child support tables are public domain government data."
         },
         {
-          title: "6. Third-Party Advertising",
-          body: "WSCSS displays advertisements provided by Google AdSense. These ads are governed by Google's own terms of service and privacy policies. WSCSS does not control the content of these advertisements."
-        },
-        {
-          title: "7. Limitation of Liability",
+          title: "6. Limitation of Liability",
           body: "To the fullest extent permitted by law, WSCSS and its operators are not liable for any direct, indirect, incidental, or consequential damages arising from your use of this service."
         },
         {
-          title: "8. Changes to Terms",
+          title: "7. Changes to Terms",
           body: "We reserve the right to update these Terms of Service at any time. Changes will be effective immediately upon posting. Continued use constitutes acceptance of the new terms."
         },
         {
-          title: "9. Governing Law",
+          title: "8. Governing Law",
           body: "These Terms are governed by the laws of the State of Washington, United States, without regard to its conflict of law provisions."
         },
         {
-          title: "10. Contact",
+          title: "9. Contact",
           body: "If you have questions about these Terms, please contact us at: support@wscss.site."
         }
       ].map((section, i, arr) => (
