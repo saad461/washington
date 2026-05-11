@@ -9,11 +9,6 @@ export const PrintButtonClient = dynamic(
  { ssr: false, loading: () => <div className="w-full h-12" /> }
 );
 
-export const AdContainerClient = dynamic(
- () => import('@/components/AdContainer'),
- { ssr: false, loading: () => <div className="w-full h-16" /> }
-);
-
 export const AuthoritySidebarClient = dynamic(
  () => import('@/components/AuthoritySidebar'),
  { ssr: true, loading: () => <div className="w-full h-48 animate-pulse bg-[var(--color-bg-muted)] rounded-xl" /> }

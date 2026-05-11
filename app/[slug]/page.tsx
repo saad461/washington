@@ -9,7 +9,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, Calculator, Info, Landmark, Scale, ChevronRight, MapPin } from "lucide-react";
 import {
-  AdContainerClient as AdContainer,
   CountySidebarClient as CountySidebar,
   PrintButtonClient as PrintButton,
 } from "@/components/ClientDynamic";
@@ -304,9 +303,6 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
     formattedSupport,
   );
 
-  const totalText = `${intro} ${calculation} ${ssr} ${conclusion} ${incomeBlock} ${familyBlock}`.replace(/&amp;/g, '&');
-  const wordCount = totalText.split(/\s+/).filter((word) => word.length > 0).length;
-
   if (!county && process.env.NODE_ENV === 'development') {
     console.warn('County name is null on calculation page — check slug data');
   }
@@ -383,10 +379,6 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
           <div className="container-wide">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
               <div className="lg:col-span-8">
-                <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0 no-print">
-                  <AdContainer slot="top" wordCount={wordCount} />
-                </div>
-
                 <div className="pb-10 mb-10 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0">
                 <div className="flex flex-col mb-8">
                   <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
@@ -433,10 +425,6 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <h2 className="text-3xl font-bold text-gray-900 mb-8">Washington Child Support Guidelines (2026 Updates)</h2>
                 </div>
                 <p className="text-lg leading-relaxed">{intro}</p>
-
-                <div className="my-16 not-prose no-print">
-                  <AdContainer slot="mid" wordCount={wordCount} />
-                </div>
 
                 <div className="flex flex-col not-prose">
                   <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">

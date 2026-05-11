@@ -1,5 +1,5 @@
 import React from 'react';
-import AdSensePrivacy from '@/components/AdSensePrivacy';
+import WebsitePrivacy from '@/components/WebsitePrivacy';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, Shield } from 'lucide-react';
@@ -96,11 +96,11 @@ export default function PrivacyPage() {
             About Your Calculator Data
           </p>
           <p className="text-sm text-blue-800">
-            Income figures and family details you enter into our calculator are never transmitted to our servers or stored anywhere. All calculations happen locally in your browser. This policy covers standard website analytics and advertising cookies only.
+            Income figures and family details you enter into our calculator are never transmitted to our servers or stored anywhere. All calculations happen locally in your browser. This policy covers standard website analytics and performance cookies only.
           </p>
         </div>
 
-        <AdSensePrivacy />
+        <WebsitePrivacy />
       </div>
     </section>
 
