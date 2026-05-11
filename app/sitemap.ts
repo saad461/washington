@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Base routes with specific priorities and frequencies
   const sitemapUrls: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}`,
+      url: `${baseUrl}/`,
       lastModified,
       changeFrequency: 'weekly',
       priority: 1.0,
@@ -68,12 +68,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: 'monthly',
       priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.6,
     },
   ];
 

@@ -39,6 +39,7 @@ export const metadata: Metadata = {
  keywords: ["Washington child support calculator", "WA child support 2026", "child support estimator", "Washington state family law", "AOC child support schedule"],
  authors: [{ name: "WSCSS Editorial & Legal Team", url: "https://wscss.site/about" }],
  creator: "WSCSS Editorial & Legal Team",
+ alternates: { canonical: "https://wscss.site/" },
  icons: {
   icon: [
    {
