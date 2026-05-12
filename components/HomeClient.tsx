@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight, CheckCircle, Calculator, Scale, Shield, MapPin, Calendar } from "lucide-react";
 import HomeCalculator from "@/components/HomeCalculator";
 import FAQAccordion from "@/components/FAQAccordion";
@@ -567,7 +568,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                 label: "2026 WA Guidelines: Complete Handbook",
                 href:  "/blog/washington-child-support-guidelines-2026",
                 cat:   "Legal",
-                img:   "/img/wa_guidelines_2026.png",
+                img:   "/img/wa_guidelines_2026.webp",
                 alt:   "Washington child support guidelines 2026 legal handbook",
                 date:  "April 9, 2026"
               },
@@ -575,7 +576,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                 label: "Self-Support Reserve (SSR) Explained",
                 href:  "/blog/washington-ssr-self-support-reserve-explained",
                 cat:   "Analysis",
-                img:   "/img/ssr_explained.png",
+                img:   "/img/ssr_explained.webp",
                 alt:   "Washington self-support reserve 2026 explanation",
                 date:  "April 19, 2026"
               },
@@ -583,17 +584,20 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                 label: "King County Child Support Rules",
                 href:  "/blog/king-county-child-support-rules",
                 cat:   "Local Rules",
-                img:   "/img/king_county_rules.png",
+                img:   "/img/king_county_rules.webp",
                 alt:   "King County child support rules and calculator guide",
                 date:  "May 1, 2026"
               },
             ].map((p) => (
               <Link key={p.href} href={p.href} className="card-standard group flex flex-col !p-0 overflow-hidden">
                 <div className="h-40 w-full bg-gray-100 flex items-center justify-center border-b border-gray-100 relative overflow-hidden">
-                  <img
+                  <Image
                     src={p.img}
                     alt={p.alt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    quality={80}
                   />
                   <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors" />
                 </div>

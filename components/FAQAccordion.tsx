@@ -88,9 +88,11 @@ export default function FAQAccordion({ faqs, defaultOpenCount = 2, singleOpen = 
  className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100 mt-2' : 'grid-rows-[0fr] opacity-0'}`}
  >
  <div className="overflow-hidden">
+ {isOpen && (
  <div className="faq-answer">
  <p>{item.answer}</p>
  </div>
+ )}
  </div>
  </div>
  </div>

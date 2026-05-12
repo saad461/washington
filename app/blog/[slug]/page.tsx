@@ -225,7 +225,15 @@ export default async function BlogPostPage({ params }: Props) {
 
             {post.image?.url && (
               <div className="relative w-full aspect-[16/9] md:aspect-[2/1] rounded-3xl overflow-hidden mt-12 shadow-xl border border-gray-100">
-                <Image src={post.image.url} alt={post.image.alt || post.title} fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 800px" />
+                <Image
+                  src={post.image.url}
+                  alt={post.image.alt || post.title}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  quality={80}
+                />
               </div>
             )}
           </header>

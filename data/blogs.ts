@@ -31,7 +31,7 @@ export const blogs: BlogPost[] = [
     createdAt: "2026-04-09",
     updatedAt: "2026-04-09",
     featured: true,
-    image: { url: "/img/wa_guidelines_2026.png", alt: "2026 Washington State Child Support Guidelines Handbook", width: 1200, height: 630 },
+    image: { url: "/img/wa_guidelines_2026.webp", alt: "2026 Washington State Child Support Guidelines Handbook", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
 <strong>Key Takeaways (2026)</strong>
@@ -172,7 +172,7 @@ export const blogs: BlogPost[] = [
     createdAt: "2026-04-28",
     updatedAt: "2026-04-28",
     featured: false,
-    image: { url: "/img/king_county_guide.png", alt: "Filing Child Support in King County Washington State", width: 1200, height: 630 },
+    image: { url: "/img/king_county_guide.webp", alt: "Filing Child Support in King County Washington State", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
 <strong>Key Takeaways (2026)</strong>
@@ -288,7 +288,7 @@ export const blogs: BlogPost[] = [
     createdAt: "2026-04-19",
     updatedAt: "2026-04-19",
     featured: false,
-    image: { url: "/img/ssr_explained.png", alt: "Washington State Self-Support Reserve SSR Explained 2026", width: 1200, height: 630 },
+    image: { url: "/img/ssr_explained.webp", alt: "Washington State Self-Support Reserve SSR Explained 2026", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
 <strong>Key Takeaways (2026)</strong>
@@ -387,7 +387,7 @@ export const blogs: BlogPost[] = [
     createdAt: "2026-04-14",
     updatedAt: "2026-04-14",
     featured: false,
-    image: { url: "/img/calculation_guide.png", alt: "Washington State Child Support Calculation Guide 2026", width: 1200, height: 630 },
+    image: { url: "/img/calculation_guide.webp", alt: "Washington State Child Support Calculation Guide 2026", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
 <strong>Key Takeaways (2026)</strong>
@@ -530,7 +530,7 @@ export const blogs: BlogPost[] = [
     createdAt: "2026-04-24",
     updatedAt: "2026-04-24",
     featured: false,
-    image: { url: "/img/low_income_guide.png", alt: "Minimum Child Support Low Income Washington State Guide", width: 1200, height: 630 },
+    image: { url: "/img/low_income_guide.webp", alt: "Minimum Child Support Low Income Washington State Guide", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
 <strong>Key Takeaways (2026)</strong>
@@ -640,7 +640,7 @@ export const blogs: BlogPost[] = [
     createdAt: "2026-05-01",
     updatedAt: "2026-05-01",
     featured: false,
-    image: { url: "/img/king_county_rules.png", alt: "King County Child Support Rules and Local Guidelines 2026", width: 1200, height: 630 },
+    image: { url: "/img/king_county_rules.webp", alt: "King County Child Support Rules and Local Guidelines 2026", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
 <strong>Key Takeaways (2026)</strong>

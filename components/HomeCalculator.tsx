@@ -247,6 +247,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                 <AnimatePresence>
                   {showIncomeHint && (
                     <motion.div
+                      key="income-hint"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
@@ -495,6 +496,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                   <AnimatePresence>
                     {showExplanation && (
                       <motion.div
+                        key="explanation"
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
