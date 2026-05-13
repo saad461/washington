@@ -13,6 +13,7 @@ export interface BlogPost {
   readTime: string;
   image: { url: string; alt: string; width: number; height: number; };
   faqs: { question: string; answer: string }[];
+  keywords?: string;
 }
 
 export const blogs: BlogPost[] = [
@@ -974,6 +975,190 @@ export const blogs: BlogPost[] = [
       {
         question: "Does my new partner's income affect my child support?",
         answer: "Generally no. Washington does not include a new spouse's or domestic partner's income in the core calculation. However, if you've dramatically reduced your own work hours because your new partner is supporting your household, the court may impute income to you at the level you would otherwise earn."
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // BLOG 9
+  // ─────────────────────────────────────────────────────────────────────────────
+  {
+    title: "How to Calculate Child Support in Washington State (2026 Guide)",
+    slug: "how-to-calculate-child-support-washington-state",
+    category: "Washington State Guide · 2026",
+    keywords: "child support calculator wa, washington state child support calculator, wa child support schedule, wscss",
+    readTime: "8 min",
+    excerpt: "Learn exactly how to calculate child support in Washington State using the official WSCSS formula. Includes income, custody, and worksheet examples for 2026.",
+    metaTitle: "How to Calculate Child Support in Washington State (2026 Guide)",
+    metaDescription: "Learn exactly how to calculate child support in Washington State using the official WSCSS formula. Includes income, custody, and worksheet examples for 2026.",
+    author: "WSCSS Editorial Team",
+    createdAt: "2026-05-13",
+    updatedAt: "2026-05-13",
+    featured: false,
+    image: { url: "/wscss-og.webp", alt: "How to Calculate Child Support in Washington State (2026 Guide)", width: 1200, height: 630 },
+    content: `
+      <div class="bg-[var(--color-bg-subtle)] p-6 rounded-2xl border border-[var(--color-bg-border-soft)] mb-8">
+        <p class="text-sm italic">This is for informational purposes only. Child support orders are set by a court. Always consult a family law attorney.</p>
+      </div>
+
+      <p class="mb-4">Child support in Washington uses the WSCSS (Washington State Child Support Schedule) formula under RCW 26.19. Both parents' net incomes are used. This guide explains the full process step by step.</p>
+
+      <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]">
+        <h2 class="text-lg font-bold mb-4">Table of Contents</h2>
+        <ul class="space-y-2">
+          <li><a href="#what-is-the-wa-child-support-schedule" class="text-blue-600 hover:underline">1. What Is the WA Child Support Schedule?</a></li>
+          <li><a href="#who-pays-child-support-in-washington" class="text-blue-600 hover:underline">2. Who Pays Child Support in Washington?</a></li>
+          <li><a href="#how-is-child-support-calculated" class="text-blue-600 hover:underline">3. How Is Child Support Calculated?</a></li>
+          <li><a href="#step-by-step-calculation" class="text-blue-600 hover:underline">4. Step-by-Step Calculation</a></li>
+          <li><a href="#sample-income-support-table-1-child" class="text-blue-600 hover:underline">5. Sample Income & Support Table</a></li>
+          <li><a href="#when-can-courts-deviate-from-the-formula" class="text-blue-600 hover:underline">6. When Can Courts Deviate from the Formula?</a></li>
+        </ul>
+      </div>
+
+      <h2 id="what-is-the-wa-child-support-schedule" class="mt-12 mb-6">What Is the WA Child Support Schedule?</h2>
+      <ul class="list-disc pl-6 space-y-2 mb-8">
+        <li>Established under RCW 26.19</li>
+        <li>Income shares model</li>
+        <li>Both parents' incomes factored in</li>
+        <li>Reflects what parents would spend if together</li>
+      </ul>
+
+      <h2 id="who-pays-child-support-in-washington" class="mt-12 mb-6">Who Pays Child Support in Washington?</h2>
+      <ul class="list-disc pl-6 space-y-2 mb-8">
+        <li>Non-residential parent typically pays</li>
+        <li>Even 50/50 custody may still require payment</li>
+        <li>Depends on income differences</li>
+      </ul>
+
+      <h2 id="how-is-child-support-calculated" class="mt-12 mb-6">How Is Child Support Calculated?</h2>
+      <div class="bg-[var(--color-bg-subtle)] p-6 rounded-xl border border-[var(--color-bg-border-soft)] font-mono text-sm mb-8 whitespace-pre-wrap">Combined Net Income = Parent 1 Net Income + Parent 2 Net Income
+Basic Support Obligation = From WSCSS Table (based on combined income + number of children)
+Each Parent's Share = (Their Net Income ÷ Combined Net Income) × BSO
+Transfer payment = Non-residential parent's share</div>
+
+      <h2 id="step-by-step-calculation" class="mt-12 mb-6">Step-by-Step Calculation</h2>
+
+      <h3 class="mt-8 mb-4">Step 1 — Calculate Each Parent's Gross Monthly Income</h3>
+      <p class="mb-4">Include wages, salaries, tips, bonuses, self-employment, rental income, Social Security. Exclude TANF and SSI.</p>
+
+      <h3 class="mt-8 mb-4">Step 2 — Determine Net Monthly Income</h3>
+      <p class="mb-4">Deduct: federal/state taxes, FICA, mandatory union dues, mandatory pension, court-ordered support for other children. Do NOT deduct voluntary expenses.</p>
+
+      <h3 class="mt-8 mb-4">Step 3 — Add Both Net Incomes Together</h3>
+      <p class="mb-4">This gives the Combined Monthly Net Income used in the WSCSS table.</p>
+
+      <h3 class="mt-8 mb-4">Step 4 — Look Up the Basic Support Obligation</h3>
+      <p class="mb-4">Find the income row and number-of-children column in the WSCSS table.</p>
+
+      <h3 class="mt-8 mb-4">Step 5 — Calculate Each Parent's Proportional Share</h3>
+      <p class="mb-4">Each parent's net ÷ combined net × BSO = their share. Non-residential parent's share = transfer payment.</p>
+
+      <h3 class="mt-8 mb-4">Step 6 — Add Additional Expenses</h3>
+      <p class="mb-4">Child care, health insurance premiums, and extraordinary medical expenses are split proportionally on top of the base amount.</p>
+
+      <h2 id="sample-income-support-table-1-child" class="mt-12 mb-6">Sample Income & Support Table (1 Child)</h2>
+      <div class='overflow-x-auto mb-4'>
+        <table class='w-full'>
+          <caption class='sr-only'>Sample Income & Support Table</caption>
+          <thead>
+            <tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'>
+              <th class='py-3 px-4 text-left text-sm font-medium'>Combined Net Monthly Income</th>
+              <th class='py-3 px-4 text-left text-sm font-medium'>BSO (1 Child)</th>
+              <th class='py-3 px-4 text-left text-sm font-medium'>BSO (2 Children)</th>
+              <th class='py-3 px-4 text-left text-sm font-medium'>BSO (3 Children)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class='border-b border-[var(--color-bg-border-soft)]'>
+              <td class='py-3 px-4 text-sm'>$1,000</td>
+              <td class='py-3 px-4 text-sm font-medium'>$252</td>
+              <td class='py-3 px-4 text-sm font-medium'>$349</td>
+              <td class='py-3 px-4 text-sm font-medium'>$396</td>
+            </tr>
+            <tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'>
+              <td class='py-3 px-4 text-sm'>$2,000</td>
+              <td class='py-3 px-4 text-sm font-medium'>$401</td>
+              <td class='py-3 px-4 text-sm font-medium'>$556</td>
+              <td class='py-3 px-4 text-sm font-medium'>$631</td>
+            </tr>
+            <tr class='border-b border-[var(--color-bg-border-soft)]'>
+              <td class='py-3 px-4 text-sm'>$3,000</td>
+              <td class='py-3 px-4 text-sm font-medium'>$515</td>
+              <td class='py-3 px-4 text-sm font-medium'>$713</td>
+              <td class='py-3 px-4 text-sm font-medium'>$809</td>
+            </tr>
+            <tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'>
+              <td class='py-3 px-4 text-sm'>$4,000</td>
+              <td class='py-3 px-4 text-sm font-medium'>$612</td>
+              <td class='py-3 px-4 text-sm font-medium'>$847</td>
+              <td class='py-3 px-4 text-sm font-medium'>$961</td>
+            </tr>
+            <tr class='border-b border-[var(--color-bg-border-soft)]'>
+              <td class='py-3 px-4 text-sm'>$5,000</td>
+              <td class='py-3 px-4 text-sm font-medium'>$697</td>
+              <td class='py-3 px-4 text-sm font-medium'>$966</td>
+              <td class='py-3 px-4 text-sm font-medium'>$1,096</td>
+            </tr>
+            <tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'>
+              <td class='py-3 px-4 text-sm'>$6,000</td>
+              <td class='py-3 px-4 text-sm font-medium'>$770</td>
+              <td class='py-3 px-4 text-sm font-medium'>$1,067</td>
+              <td class='py-3 px-4 text-sm font-medium'>$1,210</td>
+            </tr>
+            <tr class='border-b border-[var(--color-bg-border-soft)]'>
+              <td class='py-3 px-4 text-sm'>$7,000</td>
+              <td class='py-3 px-4 text-sm font-medium'>$844</td>
+              <td class='py-3 px-4 text-sm font-medium'>$1,169</td>
+              <td class='py-3 px-4 text-sm font-medium'>$1,326</td>
+            </tr>
+            <tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'>
+              <td class='py-3 px-4 text-sm'>$8,000</td>
+              <td class='py-3 px-4 text-sm font-medium'>$908</td>
+              <td class='py-3 px-4 text-sm font-medium'>$1,258</td>
+              <td class='py-3 px-4 text-sm font-medium'>$1,426</td>
+            </tr>
+            <tr class='border-b border-[var(--color-bg-border-soft)]'>
+              <td class='py-3 px-4 text-sm'>$10,000</td>
+              <td class='py-3 px-4 text-sm font-medium'>$1,013</td>
+              <td class='py-3 px-4 text-sm font-medium'>$1,404</td>
+              <td class='py-3 px-4 text-sm font-medium'>$1,591</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-sm italic mb-8">These are approximate figures. Use the official WSCSS table or our calculator for accurate numbers.</p>
+
+      <h2 id="when-can-courts-deviate-from-the-formula" class="mt-12 mb-6">When Can Courts Deviate from the Formula?</h2>
+      <p class="mb-4">Courts can deviate when standard amount would be unjust. Reasons include:</p>
+      <ul class="list-disc pl-6 space-y-2 mb-8">
+        <li>Significant residential time with non-custodial parent</li>
+        <li>Special needs of the child</li>
+        <li>Tax benefits received by a parent</li>
+        <li>Non-recurring income (bonuses, inheritances)</li>
+        <li>Income of a new spouse (considered but not directly counted)</li>
+      </ul>
+      <p class="mb-4">Any deviation must be written in the order with explanation.</p>
+    `,
+    faqs: [
+      {
+        question: "Does 50/50 custody eliminate child support in Washington?",
+        answer: "Not automatically. Even with equal residential time, if one parent earns significantly more, they may still owe support. The WSCSS formula accounts for shared custody, often reducing but not eliminating support."
+      },
+      {
+        question: "What income is used for self-employed parents?",
+        answer: "Gross income minus legitimate business expenses. Courts can impute income if a parent appears underemployed or hiding income."
+      },
+      {
+        question: "How long does child support last in Washington?",
+        answer: "Until the child turns 18 or graduates high school — whichever is later — but no later than age 19. Can continue longer for special needs."
+      },
+      {
+        question: "Can child support be modified?",
+        answer: "Yes, if there is a substantial change in circumstances — significant income change, custody change, or change in child's needs."
+      },
+      {
+        question: "What is the WSCSS worksheet?",
+        answer: "The official document showing courts how child support was calculated. Required to be filed with every child support order."
       }
     ]
   }
