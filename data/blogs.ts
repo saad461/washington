@@ -1001,7 +1001,7 @@ export const blogs: BlogPost[] = [
         <p class="text-sm italic">This is for informational purposes only. Child support orders are set by a court. Always consult a family law attorney.</p>
       </div>
 
-      <p class="mb-4">Child support in Washington uses the WSCSS (Washington State Child Support Schedule) formula under RCW 26.19. Both parents' net incomes are used. This guide explains the full process step by step.</p>
+      <p class="mb-4">Child support in Washington uses the <a href="/" class="hover:underline">WSCSS (Washington State Child Support Schedule)</a> formula under <a href="/glossary/standard-calculation" class="hover:underline">RCW 26.19</a>. Both parents' <a href="/glossary/net-monthly-income" class="hover:underline">net incomes</a> are used. This guide explains the full process step by step.</p>
 
       <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]">
         <h2 class="text-lg font-bold mb-4">Table of Contents</h2>
@@ -1038,22 +1038,22 @@ Transfer payment = Non-residential parent's share</div>
 
       <h2 id="step-by-step-calculation" class="mt-12 mb-6">Step-by-Step Calculation</h2>
 
-      <h3 class="mt-8 mb-4">Step 1 — Calculate Each Parent's Gross Monthly Income</h3>
+      <h3 class="mt-8 mb-4">Step 1 — Calculate Each Parent's <a href="/glossary/gross-monthly-income" class="hover:underline">Gross Monthly Income</a></h3>
       <p class="mb-4">Include wages, salaries, tips, bonuses, self-employment, rental income, Social Security. Exclude TANF and SSI.</p>
 
-      <h3 class="mt-8 mb-4">Step 2 — Determine Net Monthly Income</h3>
+      <h3 class="mt-8 mb-4">Step 2 — Determine <a href="/glossary/net-monthly-income" class="hover:underline">Net Monthly Income</a></h3>
       <p class="mb-4">Deduct: federal/state taxes, FICA, mandatory union dues, mandatory pension, court-ordered support for other children. Do NOT deduct voluntary expenses.</p>
 
       <h3 class="mt-8 mb-4">Step 3 — Add Both Net Incomes Together</h3>
-      <p class="mb-4">This gives the Combined Monthly Net Income used in the WSCSS table.</p>
+      <p class="mb-4">This gives the <a href="/glossary/combined-net-income" class="hover:underline">Combined Monthly Net Income</a> used in the <a href="/glossary/economic-table" class="hover:underline">WSCSS table</a>.</p>
 
-      <h3 class="mt-8 mb-4">Step 4 — Look Up the Basic Support Obligation</h3>
-      <p class="mb-4">Find the income row and number-of-children column in the WSCSS table.</p>
+      <h3 class="mt-8 mb-4">Step 4 — Look Up the <a href="/glossary/basic-child-support-obligation" class="hover:underline">Basic Support Obligation</a></h3>
+      <p class="mb-4">Find the income row and number-of-children column in the <a href="/glossary/economic-table" class="hover:underline">WSCSS table</a>.</p>
 
-      <h3 class="mt-8 mb-4">Step 5 — Calculate Each Parent's Proportional Share</h3>
-      <p class="mb-4">Each parent's net ÷ combined net × BSO = their share. Non-residential parent's share = transfer payment.</p>
+      <h3 class="mt-8 mb-4">Step 5 — Calculate Each Parent's <a href="/glossary/proportional-share" class="hover:underline">Proportional Share</a></h3>
+      <p class="mb-4">Each parent's net ÷ combined net × BSO = their share. Non-residential parent's share = <a href="/glossary/transfer-payment" class="hover:underline">transfer payment</a>.</p>
 
-      <h3 class="mt-8 mb-4">Step 6 — Add Additional Expenses</h3>
+      <h3 class="mt-8 mb-4">Step 6 — Add <a href="/glossary/extraordinary-expenses" class="hover:underline">Additional Expenses</a></h3>
       <p class="mb-4">Child care, health insurance premiums, and extraordinary medical expenses are split proportionally on top of the base amount.</p>
 
       <h2 id="sample-income-support-table-1-child" class="mt-12 mb-6">Sample Income & Support Table (1 Child)</h2>
@@ -1128,10 +1128,10 @@ Transfer payment = Non-residential parent's share</div>
       </div>
       <p class="text-sm italic mb-8">These are approximate figures. Use the official WSCSS table or our calculator for accurate numbers.</p>
 
-      <h2 id="when-can-courts-deviate-from-the-formula" class="mt-12 mb-6">When Can Courts Deviate from the Formula?</h2>
-      <p class="mb-4">Courts can deviate when standard amount would be unjust. Reasons include:</p>
+      <h2 id="when-can-courts-deviate-from-the-formula" class="mt-12 mb-6">When Can Courts <a href="/glossary/deviation" class="hover:underline">Deviate</a> from the Formula?</h2>
+      <p class="mb-4">Courts can <a href="/glossary/deviation" class="hover:underline">deviate</a> when standard amount would be unjust. Reasons include:</p>
       <ul class="list-disc pl-6 space-y-2 mb-8">
-        <li>Significant residential time with non-custodial parent</li>
+        <li>Significant <a href="/glossary/parenting-time-credit" class="hover:underline">residential time</a> with non-custodial parent</li>
         <li>Special needs of the child</li>
         <li>Tax benefits received by a parent</li>
         <li>Non-recurring income (bonuses, inheritances)</li>
@@ -1142,11 +1142,11 @@ Transfer payment = Non-residential parent's share</div>
     faqs: [
       {
         question: "Does 50/50 custody eliminate child support in Washington?",
-        answer: "Not automatically. Even with equal residential time, if one parent earns significantly more, they may still owe support. The WSCSS formula accounts for shared custody, often reducing but not eliminating support."
+        answer: "Not automatically. Even with equal <a href=\"/glossary/parenting-time-credit\" class=\"hover:underline\">residential time</a>, if one parent earns significantly more, they may still owe support. The WSCSS formula accounts for shared custody, often reducing but not eliminating support."
       },
       {
         question: "What income is used for self-employed parents?",
-        answer: "Gross income minus legitimate business expenses. Courts can impute income if a parent appears underemployed or hiding income."
+        answer: "Gross income minus legitimate business expenses. Courts can <a href=\"/glossary/imputed-income\" class=\"hover:underline\">impute income</a> if a parent appears underemployed or hiding income."
       },
       {
         question: "How long does child support last in Washington?",
@@ -1154,11 +1154,11 @@ Transfer payment = Non-residential parent's share</div>
       },
       {
         question: "Can child support be modified?",
-        answer: "Yes, if there is a substantial change in circumstances — significant income change, custody change, or change in child's needs."
+        answer: "Yes, if there is a substantial change in circumstances — significant income change, custody change, or change in child's needs. See our guide on <a href=\"/glossary/support-modification\" class=\"hover:underline\">support modification</a>."
       },
       {
         question: "What is the WSCSS worksheet?",
-        answer: "The official document showing courts how child support was calculated. Required to be filed with every child support order."
+        answer: "The <a href=\"/worksheet\" class=\"hover:underline\">official document</a> showing courts how child support was calculated. Required to be filed with every child support order."
       }
     ]
   }
