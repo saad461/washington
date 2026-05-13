@@ -134,7 +134,7 @@ export default async function BlogPostPage({ params }: Props) {
       "@type": "WebPage",
       "@id": `https://wscss.site/blog/${slug}`
     },
-    "keywords": post.category + ", Washington child support, RCW 26.19",
+    "keywords": post.keywords || (post.category + ", Washington child support, RCW 26.19"),
     "articleSection": post.category
   };
 
