@@ -112,6 +112,19 @@ export default function RootLayout({
  {/* Performance: preconnect to analytics origins for faster load */}
  <link rel="preconnect" href="https://www.googletagmanager.com" />
  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+ <link
+  rel="preload"
+  href="/_next/static/media/1bffadaabf893a1e-s.16ipb6fqu393i.woff2"
+  as="font"
+  type="font/woff2"
+  crossOrigin="anonymous"
+ />
+ <link
+  rel="preload"
+  as="image"
+  href="/wscss-og.webp"
+  type="image/webp"
+ />
  <meta name="msapplication-TileColor" content="#1e3a5f" />
  <meta name="msapplication-TileImage" content="/favicon-192x192.png" />
  </head>
@@ -126,9 +139,9 @@ export default function RootLayout({
  {/* Google Analytics (GA4) */}
  <Script
  src="https://www.googletagmanager.com/gtag/js?id=G-FV0272PCT1"
- strategy="afterInteractive"
+ strategy="lazyOnload"
  />
- <Script id="google-analytics" strategy="afterInteractive">
+ <Script id="google-analytics" strategy="lazyOnload">
  {`
  window.dataLayer = window.dataLayer || [];
  function gtag(){dataLayer.push(arguments);}
