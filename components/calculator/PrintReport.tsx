@@ -50,7 +50,7 @@ export default function PrintReport({
       <div className="max-w-4xl mx-auto">
         <div className="border-b-2 border-indigo-600 pb-6 mb-8 flex justify-between items-end">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">{title}</h1>
+            <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
             <p className="text-indigo-600 font-semibold">{subtitle}</p>
           </div>
           <div className="text-right">

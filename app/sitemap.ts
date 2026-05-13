@@ -71,14 +71,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // County income pages (all 4 specified)
+  // County income pages (Round income tiers for major counties)
   const targetCounties = ['king-county', 'pierce-county', 'snohomish-county', 'spokane-county'];
+  const roundIncomes = [3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000];
+
   targetCounties.forEach((slug) => {
-    sitemapUrls.push({
-      url: `${baseUrl}/${slug}-income-5000-2-children`,
-      lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.8,
+    roundIncomes.forEach((income) => {
+      sitemapUrls.push({
+        url: `${baseUrl}/${slug}-income-${income}-2-children`,
+        lastModified,
+        changeFrequency: 'monthly',
+        priority: 0.8,
+      });
     });
   });
 
