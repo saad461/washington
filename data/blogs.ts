@@ -749,7 +749,7 @@ export const blogs: BlogPost[] = [
     createdAt: "2026-05-07",
     updatedAt: "2026-05-07",
     featured: false,
-    image: { url: "/wscss-og.webp", alt: "Consequences of Unpaid Child Support in Washington State", width: 1200, height: 630 },
+    image: { url: "/wscss-og.webp", alt: "Illustration of legal consequences for unpaid child support in Washington State", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
 <strong>Key Takeaways (2026)</strong>
@@ -865,7 +865,7 @@ export const blogs: BlogPost[] = [
     createdAt: "2026-05-04",
     updatedAt: "2026-05-04",
     featured: false,
-    image: { url: "/wscss-og.webp", alt: "How Washington State Courts Decide Child Support Orders", width: 1200, height: 630 },
+    image: { url: "/wscss-og.webp", alt: "Conceptual image of a Washington State courtroom deciding a child support order", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
 <strong>Key Takeaways (2026)</strong>

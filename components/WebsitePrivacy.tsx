@@ -7,7 +7,7 @@ const WebsitePrivacy = () => {
  <div className="w-full font-sans leading-relaxed">
  <div className="text-center mb-12 md:mb-16">
  <ShieldCheck className="w-16 h-16 mx-auto mb-6" />
- <h1 className="font-bold tracking-tight mb-4 text-3xl md:text-4xl">Privacy Policy & Data Disclosure</h1>
+ <h2 className="font-bold tracking-tight mb-4 text-3xl md:text-4xl">Privacy Policy & Data Disclosure</h2>
  <p className=" font-medium italic">Last Updated: April 9, 2026</p>
  </div>
 

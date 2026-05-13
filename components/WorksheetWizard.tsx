@@ -504,7 +504,7 @@ Estimate only — not legal advice`;
       >
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 border-b border-gray-200 pb-8">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2 uppercase tracking-tight">WORKSHEET SUMMARY — 2026 AOC FORMAT</h1>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2 uppercase tracking-tight">WORKSHEET SUMMARY — 2026 AOC FORMAT</h2>
             <div className="flex items-center gap-4 text-sm font-bold text-gray-500 uppercase tracking-widest">
               <span>Date: {today}</span>
               <span className="w-1.5 h-1.5 bg-gray-300 rounded-full" />
@@ -587,7 +587,7 @@ Estimate only — not legal advice`;
         <div className="max-w-4xl mx-auto space-y-10">
           <div className="border-b-4 border-indigo-600 pb-6 mb-8 flex justify-between items-end">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Official Child Support Worksheet</h1>
+              <h2 className="text-3xl font-bold text-gray-900">Official Child Support Worksheet</h2>
               <p className="text-indigo-600 font-semibold text-lg">Washington State Guidelines (2026)</p>
             </div>
             <div className="text-right">

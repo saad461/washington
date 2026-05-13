@@ -57,8 +57,8 @@ const worksheetFAQs = [
 ];
 
 export const metadata: Metadata = {
-  title: { absolute: "WA Child Support Worksheet 2026 | AOC Form | WSCSS" },
-  description: "Complete the official 8-part AOC child support worksheet online. Auto-calculates all figures using the 2026 RCW 26.19 economic tables. Free for all 39 counties.",
+  title: { absolute: "Professional WA Child Support Estimator Washington 2026 | AOC" },
+  description: "Complete the official 8-part AOC worksheet with this Washington child support calculator. Free child support estimator WA using 2026 RCW 26.19 tables.",
   alternates: { canonical: 'https://wscss.site/worksheet' },
   keywords: [
     "Washington child support worksheet",
@@ -67,10 +67,12 @@ export const metadata: Metadata = {
     "RCW 26.19 worksheet",
     "AOC child support worksheet 2026",
     "child support worksheet Washington State online",
+    "child support calculator Washington",
+    "child support estimator WA"
   ],
   openGraph: {
-    title: "WA Child Support Worksheet 2026 | AOC Form | WSCSS",
-    description: "Complete the official 8-part AOC child support worksheet online. Auto-calculates figures using the 2026 RCW 26.19 tables. Free for all 39 counties.",
+    title: "Professional WA Child Support Estimator Washington 2026 | AOC",
+    description: "Complete the official 8-part AOC worksheet with this Washington child support calculator. Free child support estimator WA using 2026 RCW 26.19 tables.",
     url: "https://wscss.site/worksheet",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -88,6 +90,25 @@ export default function WorksheetPage() {
   return (
     <div className="flex-1 w-full bg-white">
       <CalculatorSchema url="https://wscss.site/worksheet" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": ["SoftwareApplication", "WebApplication"],
+            "name": "Washington Child Support Calculator 2026 — Official Worksheet",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Web Browser",
+            "url": "https://wscss.site/worksheet",
+            "description": "Complete the official 8-part Washington State child support worksheet using the 2026 RCW 26.19 economic tables",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          }),
+        }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -205,7 +226,7 @@ export default function WorksheetPage() {
               Free · Official AOC Format · 2026 Guidelines
             </p>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
-              Washington State <span className="text-blue-600">Child Support Worksheet 2026</span>
+              Washington State <span className="text-blue-600">Child Support Calculator 2026</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
               Complete the official 8-part AOC child support worksheet online. Auto-calculates all figures using the 2026 RCW 26.19 economic tables — free for all 39 Washington counties.
@@ -274,6 +295,22 @@ export default function WorksheetPage() {
               >
                 Read our Editorial Methodology <ChevronRight size={16} />
               </Link>
+            </div>
+
+            <div className="mt-8">
+               <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-4">
+                Helpful Guides
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Link href="/blog/washington-child-support-guidelines-2026" className="p-4 bg-white border border-gray-100 rounded-xl hover:border-blue-300 transition-all group">
+                  <h4 className="font-bold text-gray-900 group-hover:text-blue-600 mb-1">2026 Guidelines Handbook</h4>
+                  <p className="text-xs text-gray-500">Everything you need to know about the 2026 update.</p>
+                </Link>
+                <Link href="/blog/child-support-calculation-washington-2026" className="p-4 bg-white border border-gray-100 rounded-xl hover:border-blue-300 transition-all group">
+                  <h4 className="font-bold text-gray-900 group-hover:text-blue-600 mb-1">Step-by-Step Calculation Guide</h4>
+                  <p className="text-xs text-gray-500">How the math actually works in Washington.</p>
+                </Link>
+              </div>
             </div>
 
           </div>
