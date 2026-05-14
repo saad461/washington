@@ -255,52 +255,68 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                 </h3>
 
                 <div className="space-y-6">
-                  <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-500">Parent A Monthly Net (Est.)</span>
-                      <span className="font-bold text-gray-900">{curFormatter.format(result.netA)}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-500">Parent B Monthly Net (Est.)</span>
-                      <span className="font-bold text-gray-900">{curFormatter.format(result.netB)}</span>
-                    </div>
-                    <div className="pt-2 border-t border-gray-100 flex justify-between items-center">
-                      <span className="text-sm font-bold">Combined Net Income</span>
-                      <span className="font-bold text-blue-600">{curFormatter.format(result.combined)}</span>
-                    </div>
-                  </div>
-
-                  <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
-                    <div className="flex justify-between items-start">
-                      <div className="flex flex-col">
-                        <span className="text-sm font-bold text-gray-900">Basic Support Obligation</span>
-                        <span className="text-[12px] text-gray-500">2026 Economic Table</span>
+                  <div className="card-standard !p-0 overflow-hidden shadow-[var(--shadow-card-md)] border-gray-200">
+                    <div className="p-6 sm:p-8 space-y-4">
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-gray-500">Parent A Monthly Net (Est.)</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(result.netA)}</span>
                       </div>
-                      <span className="font-bold text-gray-900">{curFormatter.format(result.baseSupport)}</span>
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-gray-500">Parent B Monthly Net (Est.)</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(result.netB)}</span>
+                      </div>
+                      <div className="pt-2 border-t border-gray-100 flex justify-between items-center">
+                        <span className="text-sm font-bold">Combined Net Income</span>
+                        <span className="font-bold text-blue-600">{curFormatter.format(result.combined)}</span>
+                      </div>
+                    </div>
+
+                    <div className="p-6 sm:p-8 bg-gray-50/50 border-y border-gray-100 space-y-4">
+                      <div className="flex justify-between items-start">
+                        <div className="flex flex-col">
+                          <span className="text-sm font-bold text-gray-900">Basic Support Obligation</span>
+                          <span className="text-[12px] text-gray-500">2026 Economic Table</span>
+                        </div>
+                        <span className="font-bold text-gray-900">{curFormatter.format(result.baseSupport)}</span>
+                      </div>
+                    </div>
+
+                    <AnimatePresence>
+                      {result.creditApplies && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          className="p-6 sm:p-8 space-y-4"
+                        >
+                          <h4 className="text-[11px] font-bold text-blue-600 uppercase tracking-widest">Residential Credit (RCW 26.19.080)</h4>
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm pt-2 border-t border-gray-100">
+                              <span className="text-gray-700 font-medium">A Adjusted Obligation</span>
+                              <span className="font-bold text-gray-900">{curFormatter.format(result.adjustedA)}</span>
+                            </div>
+                            <div className="flex justify-between text-sm">
+                              <span className="text-gray-700 font-medium">B Adjusted Obligation</span>
+                              <span className="font-bold text-gray-900">{curFormatter.format(result.adjustedB)}</span>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <div className="p-6 sm:p-8 bg-blue-50/30 border-t border-blue-100">
+                      <div className="flex justify-between items-center">
+                        <span className="text-base font-bold text-gray-900">Monthly Transfer Payment</span>
+                        <div className="text-right">
+                          <div className="text-3xl sm:text-4xl font-extrabold text-blue-600 tracking-tight">
+                            {curFormatter.format(result.finalTransfer)}
+                          </div>
+                          <p className="text-[10px] font-bold text-blue-400 uppercase tracking-wider mt-1">
+                            {result.payer} pays {result.payer === "Parent A" ? "Parent B" : "Parent A"}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  <AnimatePresence>
-                    {result.creditApplies && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        className="bg-blue-50 p-6 rounded-xl border border-blue-100 space-y-4"
-                      >
-                        <h4 className="text-[11px] font-bold text-blue-600 uppercase tracking-widest">Residential Credit (RCW 26.19.080)</h4>
-                        <div className="space-y-2">
-                          <div className="flex justify-between text-sm pt-2 border-t border-blue-200/50">
-                            <span className="text-blue-700">A Adjusted Obligation</span>
-                            <span className="font-bold text-blue-900">{curFormatter.format(result.adjustedA)}</span>
-                          </div>
-                          <div className="flex justify-between text-sm">
-                            <span className="text-blue-700">B Adjusted Obligation</span>
-                            <span className="font-bold text-blue-900">{curFormatter.format(result.adjustedB)}</span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
 
                   {!result.creditApplies && (pADaysNum > 0 || pBDaysNum > 0) && (
                     <div className="bg-amber-50 p-4 rounded-xl border border-amber-100 flex gap-3">
@@ -310,16 +326,6 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                       </p>
                     </div>
                   )}
-
-                  <div className="p-6 bg-blue-600 rounded-xl shadow-lg text-white">
-                    <p className="text-[10px] font-bold uppercase tracking-widest mb-1 opacity-80">Monthly Transfer Payment</p>
-                    <div className="text-4xl font-extrabold mb-1">
-                      {curFormatter.format(result.finalTransfer)}
-                    </div>
-                    <p className="text-sm font-bold">
-                      {result.payer} pays {result.payer === "Parent A" ? "Parent B" : "Parent A"}
-                    </p>
-                  </div>
 
                   <div className="flex flex-col gap-3 pt-4 no-print">
                     <button onClick={() => window.print()} className="btn btn-secondary w-full">

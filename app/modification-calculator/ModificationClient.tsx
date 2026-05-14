@@ -260,54 +260,58 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                 </h3>
 
                 <div className="space-y-6">
-                  <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-500">Original Obligation (2026 Table)</span>
-                      <span className="font-bold text-gray-900">{curFormatter.format(result.originalObligation)}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-500">New Obligation (2026 Table)</span>
-                      <span className="font-bold text-gray-900">{curFormatter.format(result.newObligation)}</span>
-                    </div>
-                    <div className="pt-2 border-t border-gray-100 flex justify-between items-center">
-                      <span className="text-sm font-bold">Percentage Change</span>
-                      <span className={`font-bold ${result.threshold1Met ? "text-blue-600" : "text-gray-900"}`}>
-                        {result.percentChange > 0 ? "+" : ""}{perFormatter.format(result.percentChange)}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-4">
-                    <div className={`p-4 rounded-xl border flex items-center justify-between ${result.threshold1Met ? "bg-blue-50 border-blue-200" : "bg-gray-50 border-gray-100"}`}>
-                      <div className="flex items-center gap-3">
-                        <TrendingUp size={18} className={result.threshold1Met ? "text-blue-600" : "text-gray-400"} />
-                        <span className="text-sm font-bold">Threshold 1: 15% Change</span>
+                  <div className="card-standard !p-0 overflow-hidden shadow-[var(--shadow-card-md)] border-gray-200">
+                    <div className="p-6 sm:p-8 space-y-4">
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-gray-500">Original Obligation (2026 Table)</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(result.originalObligation)}</span>
                       </div>
-                      <span className={`text-xs font-bold uppercase tracking-widest ${result.threshold1Met ? "text-blue-600" : "text-gray-400"}`}>
-                        {result.threshold1Met ? "MET" : "NOT MET"}
-                      </span>
-                    </div>
-                    <div className={`p-4 rounded-xl border flex items-center justify-between ${result.threshold2Met ? "bg-blue-50 border-blue-200" : "bg-gray-50 border-gray-100"}`}>
-                      <div className="flex items-center gap-3">
-                        <Clock size={18} className={result.threshold2Met ? "text-blue-600" : "text-gray-400"} />
-                        <span className="text-sm font-bold">Threshold 2: 3 Years Passed</span>
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-gray-500">New Obligation (2026 Table)</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(result.newObligation)}</span>
                       </div>
-                      <span className={`text-xs font-bold uppercase tracking-widest ${result.threshold2Met ? "text-blue-600" : "text-gray-400"}`}>
-                        {result.threshold2Met ? "MET" : "NOT MET"}
-                      </span>
+                      <div className="pt-2 border-t border-gray-100 flex justify-between items-center">
+                        <span className="text-sm font-bold">Percentage Change</span>
+                        <span className={`font-bold ${result.threshold1Met ? "text-blue-600" : "text-gray-900"}`}>
+                          {result.percentChange > 0 ? "+" : ""}{perFormatter.format(result.percentChange)}
+                        </span>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className={`p-6 rounded-xl shadow-lg text-white ${result.modificationWarranted ? "bg-blue-600" : "bg-gray-600"}`}>
-                    <p className="text-[10px] font-bold uppercase tracking-widest mb-1 opacity-80">Final Verdict</p>
-                    <div className="text-2xl font-extrabold mb-1">
-                      {result.modificationWarranted ? "MODIFICATION LIKELY WARRANTED" : "MODIFICATION LIKELY NOT WARRANTED"}
+                    <div className="p-6 sm:p-8 bg-gray-50/50 border-t border-gray-100 space-y-4">
+                      <div className={`p-4 rounded-xl border flex items-center justify-between ${result.threshold1Met ? "bg-blue-50 border-blue-200" : "bg-white border-gray-200"}`}>
+                        <div className="flex items-center gap-3">
+                          <TrendingUp size={18} className={result.threshold1Met ? "text-blue-600" : "text-gray-400"} />
+                          <span className="text-sm font-bold">Threshold 1: 15% Change</span>
+                        </div>
+                        <span className={`text-xs font-bold uppercase tracking-widest ${result.threshold1Met ? "text-blue-600" : "text-gray-400"}`}>
+                          {result.threshold1Met ? "MET" : "NOT MET"}
+                        </span>
+                      </div>
+                      <div className={`p-4 rounded-xl border flex items-center justify-between ${result.threshold2Met ? "bg-blue-50 border-blue-200" : "bg-white border-gray-200"}`}>
+                        <div className="flex items-center gap-3">
+                          <Clock size={18} className={result.threshold2Met ? "text-blue-600" : "text-gray-400"} />
+                          <span className="text-sm font-bold">Threshold 2: 3 Years Passed</span>
+                        </div>
+                        <span className={`text-xs font-bold uppercase tracking-widest ${result.threshold2Met ? "text-blue-600" : "text-gray-400"}`}>
+                          {result.threshold2Met ? "MET" : "NOT MET"}
+                        </span>
+                      </div>
                     </div>
-                    <p className="text-sm opacity-90">
-                      {result.modificationWarranted
-                        ? "Your case meets at least one statutory threshold for modification."
-                        : "Your case does not appear to meet standard statutory thresholds."}
-                    </p>
+
+                    <div className={`p-6 sm:p-8 border-t ${result.modificationWarranted ? "bg-blue-50/30 border-blue-100" : "bg-gray-50/50 border-gray-100"}`}>
+                      <div className="flex justify-between items-center">
+                        <span className="text-base font-bold text-gray-900">Final Verdict</span>
+                        <div className="text-right">
+                          <div className={`text-xl sm:text-2xl font-extrabold tracking-tight ${result.modificationWarranted ? "text-blue-600" : "text-gray-600"}`}>
+                            {result.modificationWarranted ? "MODIFICATION WARRANTED" : "NOT WARRANTED"}
+                          </div>
+                          <p className={`text-[10px] font-bold uppercase tracking-wider mt-1 ${result.modificationWarranted ? "text-blue-400" : "text-gray-400"}`}>
+                            {result.modificationWarranted ? "Threshold Met" : "Thresholds Not Met"}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="flex flex-col gap-3 pt-4 no-print">
