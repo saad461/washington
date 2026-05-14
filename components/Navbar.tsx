@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Calculator, ChevronRight, Menu, X } from "lucide-react";
 import SearchMock from "./SearchMock";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -33,12 +34,21 @@ export default function Navbar() {
     if (typeof window !== "undefined") window.print();
   };
 
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
   const navLinks = [
-    { href: "/",                  label: "Calculator"          },
     { href: "/worksheet",         label: "Worksheet Wizard"    },
     { href: "/washington-courts", label: "Courts"              },
     { href: "/glossary",          label: "Glossary"            },
     { href: "/compare-2024-2026", label: "2026 Updates"        },
+  ];
+
+  const calculators = [
+    { href: "/", label: "Income Estimator" },
+    { href: "/joint-custody-calculator", label: "Joint Custody" },
+    { href: "/deviation-calculator", label: "Deviation Tool" },
+    { href: "/modification-calculator", label: "Modification Check" },
+    { href: "/extra-expenses", label: "Expense Splitter" },
   ];
 
   const isActive = (href: string) => {
@@ -87,6 +97,49 @@ export default function Navbar() {
 
           {/* ── Desktop Nav ── */}
           <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+            {/* Calculator Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setDropdownOpen(true)}
+              onMouseLeave={() => setDropdownOpen(false)}
+            >
+              <button
+                className={`relative px-3 py-2 text-sm transition-all duration-200 flex items-center gap-1 ${
+                  calculators.some(c => isActive(c.href))
+                    ? "text-blue-600 font-semibold"
+                    : "text-gray-600 font-medium hover:text-blue-600 transition-colors"
+                }`}
+              >
+                Calculators
+                <ChevronRight className={`w-3 h-3 transition-transform ${dropdownOpen ? "rotate-90" : ""}`} />
+              </button>
+
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute top-full left-0 w-56 bg-white border border-gray-100 shadow-xl rounded-xl py-2 overflow-hidden"
+                  >
+                    {calculators.map((calc) => (
+                      <Link
+                        key={calc.href}
+                        href={calc.href}
+                        className={`block px-4 py-2.5 text-sm transition-colors ${
+                          isActive(calc.href)
+                            ? "bg-blue-50 text-blue-600 font-bold"
+                            : "text-gray-600 hover:bg-gray-50 font-medium"
+                        }`}
+                      >
+                        {calc.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -173,8 +226,29 @@ export default function Navbar() {
 
             {/* Links ordered as requested */}
             <div className="flex flex-col">
+              {/* Calculators Mobile Group */}
+              <div className="px-6 py-2">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Calculators</p>
+                <div className="grid grid-cols-1 gap-1">
+                  {calculators.map((calc) => (
+                    <Link
+                      key={calc.href}
+                      href={calc.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`flex items-center justify-between py-3 text-sm font-semibold transition-colors ${
+                        isActive(calc.href) ? "text-blue-600" : "text-gray-700"
+                      }`}
+                    >
+                      {calc.label}
+                      <ChevronRight size={14} className={isActive(calc.href) ? "text-blue-600" : "text-gray-300"} />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="my-2 border-t border-gray-50" />
+
               {[
-                navLinks.find(l => l.href === "/"),
                 navLinks.find(l => l.href === "/worksheet"),
                 navLinks.find(l => l.href === "/washington-courts"),
                 navLinks.find(l => l.href === "/glossary"),
