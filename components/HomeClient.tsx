@@ -213,43 +213,56 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
               </div>
 
               {/* Feature cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="card-standard text-center flex flex-col items-center group">
-                  <div className="w-12 h-12 bg-[var(--color-brand-primary-light)] text-[var(--color-brand-primary)] rounded-[12px] flex items-center justify-center mb-0 shadow-[var(--shadow-card)] group-hover:bg-[var(--color-brand-primary)] group-hover:text-white transition-all">
+                  <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-blue-600 group-hover:text-white transition-all">
                     <Scale size={24} />
                   </div>
-                  <h3 className="text-[17px] font-semibold text-[var(--color-text-primary)] mt-4 mb-3">Legal Precision</h3>
-                  <p className="text-[15px] text-[var(--color-text-body)] leading-[1.65] mb-6">
-                    Mapped exactly to the 2026 Washington State Economic Tables and statutory updates.
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Joint Custody</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Calculate residential credits and schedule adjustments per RCW 26.19.080.
                   </p>
-                  <Link href="/editorial-methodology" className="cta-link mt-auto">
-                    View methodology <ChevronRight size={16} />
+                  <Link href="/joint-custody-calculator" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Open Tool <ChevronRight size={14} />
                   </Link>
                 </div>
 
                 <div className="card-standard text-center flex flex-col items-center group">
-                  <div className="w-12 h-12 bg-[var(--color-success-bg)] text-[var(--color-success)] rounded-[12px] flex items-center justify-center mb-0 shadow-[var(--shadow-card)] group-hover:bg-[var(--color-success)] group-hover:text-white transition-all">
+                  <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-all">
                     <Shield size={24} />
                   </div>
-                  <h3 className="text-[17px] font-semibold text-[var(--color-text-primary)] mt-4 mb-3">Privacy First</h3>
-                  <p className="text-[15px] text-[var(--color-text-body)] leading-[1.65] mb-6">
-                    No data is stored. All processing stays local in your browser session for 100% privacy.
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Deviation Tool</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Explore legal reasons for upward or downward support deviations.
                   </p>
-                  <Link href="/privacy" className="cta-link mt-auto">
-                    Learn more <ChevronRight size={16} />
+                  <Link href="/deviation-calculator" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Open Tool <ChevronRight size={14} />
                   </Link>
                 </div>
 
-                <div className="card-standard text-center flex flex-col items-center group sm:col-span-2 md:col-span-1">
-                  <div className="w-12 h-12 bg-[var(--color-warning-bg)] text-[var(--color-warning)] rounded-[12px] flex items-center justify-center mb-0 shadow-[var(--shadow-card)] group-hover:bg-[var(--color-warning)] group-hover:text-white transition-all">
+                <div className="card-standard text-center flex flex-col items-center group">
+                  <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-purple-600 group-hover:text-white transition-all">
+                    <Calendar size={24} />
+                  </div>
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Modification Check</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Check if your case meets 15% or 3-year thresholds for a legal review.
+                  </p>
+                  <Link href="/modification-calculator" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Open Tool <ChevronRight size={14} />
+                  </Link>
+                </div>
+
+                <div className="card-standard text-center flex flex-col items-center group">
+                  <div className="w-12 h-12 bg-green-100 text-green-600 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-green-600 group-hover:text-white transition-all">
                     <Calculator size={24} />
                   </div>
-                  <h3 className="text-[17px] font-semibold text-[var(--color-text-primary)] mt-4 mb-3">Worksheet Wizard</h3>
-                  <p className="text-[15px] text-[var(--color-text-body)] leading-[1.65] mb-6">
-                    Generate the mandatory 8-part official PDF worksheet using our advanced automated wizard.
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Worksheet Wizard</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Complete the official 8-part AOC worksheet for court filing.
                   </p>
-                  <Link href="/worksheet" className="cta-link mt-auto">
-                    Launch Wizard <ChevronRight size={16} />
+                  <Link href="/worksheet" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Launch Wizard <ChevronRight size={14} />
                   </Link>
                 </div>
               </div>
