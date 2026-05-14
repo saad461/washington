@@ -478,9 +478,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "A parenting time credit is a deviation that reduces child support when the paying parent has significant residential time with the child. Washington courts reference 25% of the basic obligation when calculating this credit under RCW 26.19.075.",
     example: "A paying parent with the child 35% of the time may receive a credit that reduces their monthly payment from $850 to $743.",
     linkLabel: "Read Parenting Time Credit Guide →",
-    relatedLinks: [
-      { label: "Calculate with parenting time credit →", href: "/joint-custody-calculator" }
-    ],
+    relatedLinks: [],
     metaTitle: "Parenting Time Credit in WA Child Support | WSCSS",
     metaDescription: "Parenting time credit reduces child support in Washington when the paying parent has significant residential time. Learn how courts calculate this deviation under RCW 26.19.075.",
     h1Title: "What is Parenting Time Credit in Washington Child Support?",
@@ -548,9 +546,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "The residential schedule defines when each parent has the child. It determines which parent is the primary residential parent for child support purposes and may be used to request a parenting time deviation under RCW 26.09.187.",
     example: "A schedule where the child spends 70% of the time with Parent A and 30% with Parent B establishes Parent A as the primary residential parent.",
     linkLabel: "Read Residential Schedule Guide →",
-    relatedLinks: [
-      { label: "Try Joint Custody Calculator →", href: "/joint-custody-calculator" }
-    ],
+    relatedLinks: [],
     metaTitle: "Residential Schedule in WA Child Support | WSCSS",
     metaDescription: "The residential schedule defines when each parent has the child in WA. It affects child support calculations and parenting time deviations under RCW 26.09.187.",
     h1Title: "What is a Residential Schedule in Washington Child Support?",
