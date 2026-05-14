@@ -63,6 +63,8 @@ export default async function BlogPage({
     "blogPost": blogs.map(post => ({
       "@type": "BlogPosting",
       "headline": post.title,
+      "name": post.metaTitle,
+      "description": post.metaDescription,
       "url": `https://wscss.site/blog/${post.slug}`,
       "datePublished": post.createdAt,
       "dateModified": post.updatedAt || post.createdAt,
