@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: { absolute: post.metaTitle.slice(0, 60) },
     description: post.metaDescription.slice(0, 160),
+    keywords: post.keywords || (post.category + ", Washington child support, RCW 26.19"),
     alternates: { canonical: `https://wscss.site/blog/${slug}` },
     openGraph: {
       title: post.metaTitle.slice(0, 60),
@@ -104,6 +105,7 @@ export default async function BlogPostPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": post.title,
+    "name": post.metaTitle,
     "description": post.metaDescription,
     "url": `https://wscss.site/blog/${slug}`,
     "datePublished": post.createdAt,
