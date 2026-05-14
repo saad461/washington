@@ -49,6 +49,7 @@ export default function Navbar() {
     { href: "/deviation-calculator", label: "Deviation Tool" },
     { href: "/modification-calculator", label: "Modification Check" },
     { href: "/extra-expenses", label: "Expense Splitter" },
+    { href: "/compare", label: "Compare Scenarios" },
   ];
 
   const isActive = (href: string) => {

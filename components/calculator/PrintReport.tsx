@@ -28,7 +28,7 @@ interface PrintReportProps {
 }
 
 export default function PrintReport({
-  title = "Child Support Estimate",
+  title = "WSCSS.site — Child Support Estimate",
   subtitle = "Washington State (2026 Guidelines)",
   date = new Date().toLocaleDateString(),
   refCode = "RCW 26.19 Compliance",

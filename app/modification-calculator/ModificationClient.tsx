@@ -9,6 +9,10 @@ import { calculateChildSupport } from "@/utils/calculatorEngine";
 import { motion, AnimatePresence } from "framer-motion";
 import PrintReport from "@/components/calculator/PrintReport";
 import FAQAccordion from "@/components/FAQAccordion";
+import IncomeHelper from "@/components/calculator/IncomeHelper";
+import AttorneyCTA from "@/components/calculator/AttorneyCTA";
+import CrossSuggestions from "@/components/calculator/CrossSuggestions";
+import HistoryPanel from "@/components/calculator/HistoryPanel";
 
 const curFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -41,9 +45,11 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
   const [currentP2Net, setCurrentP2Net] = useState("");
   const [childrenCount, setChildrenCount] = useState(1);
   const [reason, setReason] = useState("Income change");
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [isYearly, setIsYearly] = useState(false);
 
   const result = useMemo(() => {
-    // Calculate original obligation using 2026 schedule and original incomes (as per Answer 4)
+    // Calculate original obligation using 2026 schedule and original incomes
     const originalCalc = calculateChildSupport({
       "incomeType": { p1: "monthly" },
       "1a": { p1: parseFloat(originalP1Net) || 0, p2: parseFloat(originalP2Net) || 0 },
@@ -90,6 +96,8 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
     };
   }, [orderDate, originalP1Net, originalP2Net, currentP1Net, currentP2Net, childrenCount]);
 
+  const toggleValue = (val: number) => isYearly ? val * 12 : val;
+
   return (
     <div className="flex-1 w-full bg-white">
       {/* ── MINI HERO ────────────────────────────────────────────────────── */}
@@ -129,6 +137,9 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                 </div>
 
                 <div className="space-y-8">
+                  <IncomeHelper onUseAmount={(amt) => setCurrentP1Net(amt)} label="P1: Not sure of current monthly net income?" />
+                  <IncomeHelper onUseAmount={(amt) => setCurrentP2Net(amt)} label="P2: Not sure of current monthly net income?" />
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="order-date" className="input-label">Current Court Order Date</label>
@@ -260,15 +271,31 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                 </h3>
 
                 <div className="space-y-6">
+                  {/* Monthly / Yearly Toggle */}
+                  <div className="flex bg-white border border-gray-200 rounded-xl p-1 h-11 mb-2">
+                    <button
+                      onClick={() => setIsYearly(false)}
+                      className={`flex-1 flex items-center justify-center rounded-lg text-xs font-bold transition-all ${!isYearly ? "bg-blue-600 text-white shadow-sm" : "text-gray-500 hover:bg-gray-50"}`}
+                    >
+                      Monthly View
+                    </button>
+                    <button
+                      onClick={() => setIsYearly(true)}
+                      className={`flex-1 flex items-center justify-center rounded-lg text-xs font-bold transition-all ${isYearly ? "bg-blue-600 text-white shadow-sm" : "text-gray-500 hover:bg-gray-50"}`}
+                    >
+                      Yearly View
+                    </button>
+                  </div>
+
                   <div className="card-standard !p-0 overflow-hidden shadow-[var(--shadow-card-md)] border-gray-200">
                     <div className="p-6 sm:p-8 space-y-4">
                       <div className="flex justify-between items-center text-sm">
                         <span className="text-gray-500">Original Obligation (2026 Table)</span>
-                        <span className="font-bold text-gray-900">{curFormatter.format(result.originalObligation)}</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.originalObligation))}</span>
                       </div>
                       <div className="flex justify-between items-center text-sm">
                         <span className="text-gray-500">New Obligation (2026 Table)</span>
-                        <span className="font-bold text-gray-900">{curFormatter.format(result.newObligation)}</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.newObligation))}</span>
                       </div>
                       <div className="pt-2 border-t border-gray-100 flex justify-between items-center">
                         <span className="text-sm font-bold">Percentage Change</span>
@@ -314,14 +341,81 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                     </div>
                   </div>
 
+                  {/* Explanatory Section */}
+                  <div className="mt-2">
+                    <button
+                      onClick={() => setShowExplanation(!showExplanation)}
+                      className="flex items-center gap-2 text-[13px] font-bold text-gray-500 hover:text-blue-600 transition-colors py-2 px-1"
+                    >
+                      How was this calculated? {showExplanation ? "▲" : "▼"}
+                    </button>
+                    <AnimatePresence>
+                      {showExplanation && (
+                        <motion.div
+                          key="explanation"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="mt-2 p-6 bg-white border border-gray-200 rounded-2xl text-sm text-gray-600 leading-relaxed shadow-sm space-y-4">
+                            <div className="space-y-4">
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">6</div>
+                                <p>Original obligation under 2026 schedule: <strong>{curFormatter.format(result.originalObligation)}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">7</div>
+                                <p>New obligation under 2026 schedule: <strong>{curFormatter.format(result.newObligation)}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">8</div>
+                                <p>Difference: <strong>{curFormatter.format(result.dollarDiff)}</strong> ({perFormatter.format(result.percentChange)})</p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">9</div>
+                                <p>15% threshold: <strong>{result.threshold1Met ? "met" : "not met"}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">10</div>
+                                <p>3 year threshold: <strong>{result.threshold2Met ? "met" : "not met"}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">11</div>
+                                <p>Verdict: <strong>modification {result.modificationWarranted ? "warranted" : "not warranted"}</strong></p>
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  <HistoryPanel
+                    storageKey="wscss_history_modification"
+                    currentInputs={{ orderDate, currentAmount, originalP1Net, originalP2Net, currentP1Net, currentP2Net, childrenCount, reason }}
+                    currentResult={result.modificationWarranted ? 1 : 0}
+                    onReload={(inputs) => {
+                      setOrderDate(inputs.orderDate);
+                      setCurrentAmount(inputs.currentAmount);
+                      setOriginalP1Net(inputs.originalP1Net);
+                      setOriginalP2Net(inputs.originalP2Net);
+                      setCurrentP1Net(inputs.currentP1Net);
+                      setCurrentP2Net(inputs.currentP2Net);
+                      setChildrenCount(inputs.childrenCount);
+                      setReason(inputs.reason);
+                    }}
+                    formatResult={(val) => val === 1 ? "Warranted" : "Not Warranted"}
+                  />
+
                   <div className="flex flex-col gap-3 pt-4 no-print">
                     <button onClick={() => window.print()} className="btn btn-secondary w-full">
-                      <Printer size={18} /> Print Report
+                      <Printer size={18} /> Print Results
                     </button>
-                    <p className="text-[10px] text-gray-400 text-center leading-relaxed">
-                      Statutory thresholds are defined by RCW 26.09.170. Other factors may also apply.
-                    </p>
                   </div>
+
+                  <AttorneyCTA />
+                  <CrossSuggestions calculatorType="modification" />
                 </div>
               </div>
             </div>
@@ -330,7 +424,7 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
       </section>
 
       {/* DISCLAIMER SECTION */}
-      <section className="section-default border-t border-gray-100">
+      <section className="section-default border-t border-gray-100 no-print">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto space-y-16">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -401,7 +495,7 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
         secondaryTotalLabel="Reasoning"
         secondaryTotalValue={result.modificationWarranted ? "Threshold Met" : "Thresholds Not Met"}
         assumptions="Based on RCW 26.09.170 and 2026 economic tables."
-        disclaimerText="Estimate only. Final orders determined by court."
+        disclaimerText="This estimate is based on the 2026 Washington State Child Support Schedule. This is not a legal document. Consult a family law attorney for advice."
       />
     </div>
   );

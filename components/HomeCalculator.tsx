@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import Link from "next/link";
 import {
   Scale, Shield, Calculator,
@@ -11,6 +11,10 @@ import ParentingTimeSelector from "@/components/calculator/ParentingTimeSelector
 import { motion, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import HeroCard from "@/components/hero/HeroCard";
 import PrintReport from "@/components/calculator/PrintReport";
+import IncomeHelper from "@/components/calculator/IncomeHelper";
+import AttorneyCTA from "@/components/calculator/AttorneyCTA";
+import CrossSuggestions from "@/components/calculator/CrossSuggestions";
+import HistoryPanel from "@/components/calculator/HistoryPanel";
 
 const curFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -60,9 +64,13 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
   const [useParentingDeviation,  setUseParentingDeviation]  = useState(false);
   const [error,  setError]  = useState("");
   const [result, setResult] = useState<ReturnType<typeof calculateChildSupport> | null>(null);
-  const [showIncomeHint, setShowIncomeHint] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [isYearly, setIsYearly] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
+
+  // What-If Sliders State
+  const [whatIfP1, setWhatIfP1] = useState<number | null>(null);
+  const [whatIfP2, setWhatIfP2] = useState<number | null>(null);
 
   const handleCalculate = useCallback(() => {
     const p1 = parseFloat(parent1Income) || 0;
@@ -93,6 +101,34 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
     const t = setTimeout(handleCalculate, 400);
     return () => clearTimeout(t);
   }, [handleCalculate]);
+
+  // Sync what-if sliders with main inputs when result is first generated or inputs change
+  useEffect(() => {
+    if (result) {
+      if (whatIfP1 === null) setWhatIfP1(parseFloat(parent1Income) || 0);
+      if (whatIfP2 === null) setWhatIfP2(parseFloat(parent2Income) || 0);
+    } else {
+      setWhatIfP1(null);
+      setWhatIfP2(null);
+    }
+  }, [result, parent1Income, parent2Income]);
+
+  const whatIfResult = useMemo(() => {
+    if (whatIfP1 === null || whatIfP2 === null) return null;
+    return calculateChildSupport({
+      "1a":                   { p1: whatIfP1, p2: whatIfP2 },
+      "5_children":           { p1: childrenCount },
+      "incomeType":           { p1: incomeType },
+      "payingParent":         { p1: payingParent },
+      "parentingTime":        { p1: parentingTime },
+      "useParentingDeviation":{ p1: useParentingDeviation },
+      "otherChildren":        { p1: 0 },
+      "healthInsurance":      { p1: 0 },
+      "daycare":              { p1: 0 },
+    });
+  }, [whatIfP1, whatIfP2, childrenCount, incomeType, payingParent, parentingTime, useParentingDeviation]);
+
+  const toggleValue = (val: number) => isYearly ? val * 12 : val;
 
   return (
     <div className="w-full">
@@ -179,6 +215,9 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                 </div>
               </div>
 
+              <IncomeHelper onUseAmount={(amt) => setParent1Income(amt)} label="P1: Not sure of your monthly net income?" />
+              <IncomeHelper onUseAmount={(amt) => setParent2Income(amt)} label="P2: Not sure of your monthly net income?" />
+
               <p className="text-sm font-medium text-blue-600 -mb-6">Start with your monthly take-home pay after taxes</p>
 
               {/* Parent income inputs */}
@@ -232,33 +271,6 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                   </div>
                   <p className="input-helper">After taxes & mandatory deductions</p>
                 </div>
-              </div>
-
-              {/* Net income hint (collapsible) */}
-              <div>
-                <button
-                  id="net-income-hint-trigger"
-                  type="button"
-                  onClick={() => setShowIncomeHint(!showIncomeHint)}
-                  className="text-sm font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1.5 transition-colors"
-                >
-                  What counts as net income? <Info size={14} />
-                </button>
-                <AnimatePresence>
-                  {showIncomeHint && (
-                    <motion.div
-                      key="income-hint"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="mt-3 p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm text-blue-800 leading-relaxed">
-                        <strong className="font-bold">Court standard:</strong> Enter each parent&apos;s monthly net income — gross wages minus mandatory deductions (taxes, FICA, required union dues, mandatory retirement). Do not enter gross income.
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
 
               <div className="space-y-8">
@@ -329,6 +341,22 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                 transition={{ type: "spring", stiffness: 200, damping: 22 }}
                 className="space-y-4 sm:space-y-5"
               >
+                {/* Monthly / Yearly Toggle */}
+                <div className="flex bg-white border border-gray-200 rounded-xl p-1 h-11 mb-2">
+                  <button
+                    onClick={() => setIsYearly(false)}
+                    className={`flex-1 flex items-center justify-center rounded-lg text-xs font-bold transition-all ${!isYearly ? "bg-blue-600 text-white shadow-sm" : "text-gray-500 hover:bg-gray-50"}`}
+                  >
+                    Monthly View
+                  </button>
+                  <button
+                    onClick={() => setIsYearly(true)}
+                    className={`flex-1 flex items-center justify-center rounded-lg text-xs font-bold transition-all ${isYearly ? "bg-blue-600 text-white shadow-sm" : "text-gray-500 hover:bg-gray-50"}`}
+                  >
+                    Yearly View
+                  </button>
+                </div>
+
                 {/* SSR Protection Info Banner */}
                 {result.ssrApplied && (
                   <motion.div
@@ -353,21 +381,21 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
 
                     <div className="space-y-3">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-600">P1 Monthly Net Income</span>
+                        <span className="text-sm text-gray-600">P1 {isYearly ? 'Annual' : 'Monthly'} Net Income</span>
                         <span className="font-bold text-gray-900 tabular-nums">
-                          <AnimatedNumber value={result.netP1} />
+                          <AnimatedNumber value={toggleValue(result.netP1)} />
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-600">P2 Monthly Net Income</span>
+                        <span className="text-sm text-gray-600">P2 {isYearly ? 'Annual' : 'Monthly'} Net Income</span>
                         <span className="font-bold text-gray-900 tabular-nums">
-                          <AnimatedNumber value={result.netP2} />
+                          <AnimatedNumber value={toggleValue(result.netP2)} />
                         </span>
                       </div>
                       <div className="flex justify-between items-center pt-2 border-t border-gray-100">
-                        <span className="text-sm font-bold text-gray-900">Combined Monthly Net Income</span>
+                        <span className="text-sm font-bold text-gray-900">Combined {isYearly ? 'Annual' : 'Monthly'} Net Income</span>
                         <span className="font-bold text-gray-900 tabular-nums">
-                          <AnimatedNumber value={result.combinedIncome} />
+                          <AnimatedNumber value={toggleValue(result.combinedIncome)} />
                         </span>
                       </div>
                     </div>
@@ -393,13 +421,13 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                     <div className="space-y-4">
                       <div className="flex justify-between items-start">
                         <div className="flex flex-col">
-                          <span className="text-sm font-bold text-gray-900">Basic Support Obligation</span>
+                          <span className="text-sm font-bold text-gray-900">{isYearly ? 'Annual' : 'Basic'} Support Obligation</span>
                           <span className="text-[12px] text-gray-500">
                             2026 schedule · combined {curFormatter.format(result.roundedCombinedIncome)} · {result.children} {result.children === 1 ? 'child' : 'children'}
                           </span>
                         </div>
                         <span className="font-bold text-gray-900 tabular-nums">
-                          <AnimatedNumber value={result.baseSupport} />
+                          <AnimatedNumber value={toggleValue(result.baseSupport)} />
                         </span>
                       </div>
 
@@ -408,73 +436,19 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                           {payingParent === "P1" ? "P1" : "P2"} Proportional Share ({Math.round((payingParent === "P1" ? result.shareP1 : result.shareP2) * 100)}%)
                         </span>
                         <span className="font-bold text-gray-900 tabular-nums">
-                          <AnimatedNumber value={result.breakdown.baseSupport} />
+                          <AnimatedNumber value={toggleValue(result.breakdown.baseSupport)} />
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  {/* ADJUSTMENTS SECTION (Conditional) */}
-                  {(Math.abs(result.breakdown.ssrAdjustment) > 0 ||
-                    Math.abs(result.breakdown.parentingAdjustment) > 0 ||
-                    Math.abs(result.breakdown.otherChildrenAdjustment) > 0 ||
-                    result.breakdown.healthInsurance > 0 ||
-                    result.breakdown.daycare > 0) && (
-                    <div className="p-6 sm:p-8 space-y-5">
-                      <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Adjustments</h4>
-                      <div className="space-y-3">
-                        {Math.abs(result.breakdown.ssrAdjustment) > 0 && (
-                          <div className="flex justify-between items-center text-amber-700">
-                            <span className="text-sm">SSR Protection Applied (RCW 26.19.065)</span>
-                            <span className="font-bold tabular-nums">
-                              -<AnimatedNumber value={Math.abs(result.breakdown.ssrAdjustment)} />
-                            </span>
-                          </div>
-                        )}
-                        {Math.abs(result.breakdown.otherChildrenAdjustment) > 0 && (
-                          <div className="flex justify-between items-center text-gray-700">
-                            <span className="text-sm">Other Children Adjustment</span>
-                            <span className="font-bold tabular-nums">
-                              {result.breakdown.otherChildrenAdjustment < 0 ? '-' : '+'}
-                              <AnimatedNumber value={Math.abs(result.breakdown.otherChildrenAdjustment)} />
-                            </span>
-                          </div>
-                        )}
-                        {Math.abs(result.breakdown.parentingAdjustment) > 0 && (
-                          <div className="flex justify-between items-center text-blue-700">
-                            <span className="text-sm">Parenting Time Credit</span>
-                            <span className="font-bold tabular-nums">
-                              -<AnimatedNumber value={Math.abs(result.breakdown.parentingAdjustment)} />
-                            </span>
-                          </div>
-                        )}
-                        {result.breakdown.healthInsurance > 0 && (
-                          <div className="flex justify-between items-center text-green-700">
-                            <span className="text-sm">Health Insurance Adjustment</span>
-                            <span className="font-bold tabular-nums">
-                              +<AnimatedNumber value={result.breakdown.healthInsurance} />
-                            </span>
-                          </div>
-                        )}
-                        {result.breakdown.daycare > 0 && (
-                          <div className="flex justify-between items-center text-green-700">
-                            <span className="text-sm">Childcare Adjustment</span>
-                            <span className="font-bold tabular-nums">
-                              +<AnimatedNumber value={result.breakdown.daycare} />
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
                   {/* FINAL TOTAL SECTION */}
                   <div className="p-6 sm:p-8 bg-blue-50/30 border-t border-blue-100">
                     <div className="flex justify-between items-center">
-                      <span className="text-base font-bold text-gray-900">Monthly Transfer Payment</span>
+                      <span className="text-base font-bold text-gray-900">{isYearly ? 'Annual' : 'Monthly'} Transfer Payment</span>
                       <div className="text-right">
                         <div className="text-4xl sm:text-5xl font-extrabold text-blue-600 tracking-tight tabular-nums">
-                          <AnimatedNumber value={result.finalSupport} />
+                          <AnimatedNumber value={toggleValue(result.finalSupport)} />
                         </div>
                         <p className="text-[10px] font-bold text-blue-400 uppercase tracking-wider mt-1">RCW 26.19 Compliant</p>
                       </div>
@@ -482,16 +456,13 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                   </div>
                 </div>
 
-                {/* Explanatory Tooltip Section */}
+                {/* Explanatory Section */}
                 <div className="mt-2">
                   <button
                     onClick={() => setShowExplanation(!showExplanation)}
                     className="flex items-center gap-2 text-[13px] font-bold text-gray-500 hover:text-blue-600 transition-colors py-2 px-1"
                   >
-                    How was this calculated? <Info size={15} className="text-blue-400" />
-                    <motion.div animate={{ rotate: showExplanation ? 180 : 0 }}>
-                      <ChevronDown size={15} />
-                    </motion.div>
+                    How was this calculated? {showExplanation ? "▲" : "▼"}
                   </button>
                   <AnimatePresence>
                     {showExplanation && (
@@ -502,21 +473,102 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                         exit={{ height: 0, opacity: 0 }}
                         className="overflow-hidden"
                       >
-                        <div className="mt-2 p-5 bg-white border border-gray-200 rounded-2xl text-sm text-gray-600 leading-relaxed shadow-sm space-y-4">
-                          <p>
-                            Washington uses the <strong>Income Shares Model</strong>. Both parents&apos; net incomes are combined and looked up in the 2026 Economic Table to find the basic support obligation. Each parent pays their proportional share based on their percentage of combined income.
-                          </p>
-                          <p>
-                            The <strong>Self-Support Reserve (SSR)</strong> of $2,394/mo ensures the paying parent retains enough income for basic needs.
-                          </p>
-                          <p className="text-xs italic text-gray-400">
-                            This estimate does not include healthcare, childcare, or extraordinary expenses which may be added by the court.
-                          </p>
+                        <div className="mt-2 p-6 bg-white border border-gray-200 rounded-2xl text-sm text-gray-600 leading-relaxed shadow-sm space-y-4">
+                          <div className="space-y-4">
+                            <div className="flex gap-4">
+                              <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">1</div>
+                              <p>We took P1 income <strong>{curFormatter.format(result.netP1)}</strong> and P2 income <strong>{curFormatter.format(result.netP2)}</strong> to get combined income <strong>{curFormatter.format(result.combinedIncome)}</strong></p>
+                            </div>
+                            <div className="flex gap-4">
+                              <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">2</div>
+                              <p>We looked up combined income <strong>{curFormatter.format(result.roundedCombinedIncome)}</strong> with {result.children} {result.children === 1 ? 'child' : 'children'} in the 2026 Washington Schedule table — basic obligation: <strong>{curFormatter.format(result.baseSupport)}</strong></p>
+                            </div>
+                            <div className="flex gap-4">
+                              <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">3</div>
+                              <p>P1 income share = <strong>{Math.round(result.shareP1 * 100)}%</strong> | P2 income share = <strong>{Math.round(result.shareP2 * 100)}%</strong></p>
+                            </div>
+                            <div className="flex gap-4">
+                              <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">4</div>
+                              <p>P1 proportional share = <strong>{curFormatter.format(result.netP1 * result.baseSupport / (result.netP1 + result.netP2 || 1))}</strong> (approx based on shares)</p>
+                            </div>
+                            <div className="flex gap-4">
+                              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">5</div>
+                              <p>Monthly transfer payment = <strong>{curFormatter.format(result.finalSupport)}</strong> ({payingParent === "P1" ? "P1 pays P2" : "P2 pays P1"})</p>
+                            </div>
+                          </div>
                         </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
+
+                {/* What-If Sliders */}
+                {whatIfP1 !== null && whatIfP2 !== null && whatIfResult && (
+                  <div className="mt-8 p-6 bg-white border border-gray-200 rounded-2xl shadow-sm">
+                    <h4 className="text-lg font-bold text-gray-900 mb-2">Explore What If Scenarios</h4>
+                    <p className="text-xs text-gray-500 mb-6">Explore scenarios below — your original calculation above is not affected.</p>
+
+                    <div className="space-y-8">
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                          <label className="text-sm font-bold text-gray-700">P1 Monthly Net: {curFormatter.format(whatIfP1)}</label>
+                        </div>
+                        <input
+                          type="range"
+                          min="500"
+                          max="20000"
+                          step="100"
+                          value={whatIfP1}
+                          onChange={(e) => setWhatIfP1(Number(e.target.value))}
+                          className="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                        />
+                      </div>
+
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                          <label className="text-sm font-bold text-gray-700">P2 Monthly Net: {curFormatter.format(whatIfP2)}</label>
+                        </div>
+                        <input
+                          type="range"
+                          min="500"
+                          max="20000"
+                          step="100"
+                          value={whatIfP2}
+                          onChange={(e) => setWhatIfP2(Number(e.target.value))}
+                          className="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                        />
+                      </div>
+
+                      <div className="pt-6 border-t border-gray-100 grid grid-cols-3 gap-4">
+                        <div className="text-center">
+                          <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Combined</p>
+                          <p className="text-sm font-bold text-gray-900">{curFormatter.format(whatIfResult.combinedIncome)}</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Obligation</p>
+                          <p className="text-sm font-bold text-gray-900">{curFormatter.format(whatIfResult.baseSupport)}</p>
+                        </div>
+                        <div className="text-center">
+                          <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Transfer</p>
+                          <p className="text-sm font-bold text-blue-600">{curFormatter.format(whatIfResult.finalSupport)}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <HistoryPanel
+                  storageKey="wscss_history_basic"
+                  currentInputs={{ parent1Income, parent2Income, childrenCount, payingParent }}
+                  currentResult={result.finalSupport}
+                  onReload={(inputs) => {
+                    setParent1Income(inputs.parent1Income);
+                    setParent2Income(inputs.parent2Income);
+                    setChildrenCount(inputs.childrenCount);
+                    setPayingParent(inputs.payingParent);
+                  }}
+                  formatResult={(val) => curFormatter.format(val)}
+                />
 
                 {/* Action Buttons Below Card */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-4">
@@ -526,9 +578,12 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                   </Link>
                   <button onClick={() => window.print()} className="btn btn-secondary btn-secondary-lg px-6">
                     <Printer size={18} />
-                    Print
+                    Print Results
                   </button>
                 </div>
+
+                <AttorneyCTA />
+                <CrossSuggestions calculatorType="basic" />
 
                 <p className="text-[11px] font-medium text-gray-400 text-center leading-relaxed px-4 pt-4">
                   Estimate only. Official calculations require a full Washington State Child Support Worksheet.
@@ -551,9 +606,9 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
           >
             <div className="max-w-md mx-auto flex items-center justify-between gap-6">
               <div className="min-w-0">
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">Monthly Transfer Payment</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">{isYearly ? 'Annual' : 'Monthly'} Transfer Payment</span>
                 <div className="text-3xl font-extrabold text-blue-600 tabular-nums">
-                  <AnimatedNumber value={result.finalSupport} />
+                  <AnimatedNumber value={toggleValue(result.finalSupport)} />
                 </div>
               </div>
               <button
@@ -602,7 +657,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
           secondaryTotalLabel={`${payingParent === "P1" ? "Parent 1" : "Parent 2"} Transfer Payment`}
           secondaryTotalValue={curFormatter.format(result.finalSupport)}
           assumptions="This calculation is based on the official 2026 Washington State Child Support Schedule (RCW 26.19). It assumes all income entered is net monthly income (gross minus taxes and mandatory deductions)."
-          disclaimerText="This document provides an estimate only and does not constitute legal advice or a binding court order. Actual support obligations are determined by a judge based on the full Child Support Worksheet, which may include healthcare costs, daycare expenses, other children, and specific judicial findings."
+          disclaimerText="This estimate is based on the 2026 Washington State Child Support Schedule. This is not a legal document. Consult a family law attorney for advice."
         />
       )}
     </div>

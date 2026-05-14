@@ -1,228 +1,351 @@
 "use client";
 
-import React, { useState } from 'react';
-import { getExactSupport } from '@/data/washingtonTable2026';
-import { ArrowRight, Info, Calculator, CheckCircle2, ChevronRight } from 'lucide-react';
-import Link from 'next/link';
+import React, { useState, useMemo } from "react";
+import {
+  Calculator, Plus, Trash2, Printer,
+  ArrowLeft, Scale, Shield, AlertCircle, Info, ChevronRight, CheckCircle
+} from "lucide-react";
+import Link from "next/link";
+import { calculateChildSupport } from "@/utils/calculatorEngine";
+import { convertGrossToNet } from "@/utils/taxUtils";
+import { motion, AnimatePresence } from "framer-motion";
+import PrintReport from "@/components/calculator/PrintReport";
+
+const curFormatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
+
+interface Scenario {
+  id: string;
+  name: string;
+  p1Income: string;
+  p2Income: string;
+  children: number;
+  custodyType: "Standard" | "Joint Custody" | "With Deviation";
+  daysA?: number;
+  deviationAmount?: string;
+  deviationDirection?: "upward" | "downward";
+}
 
 export default function ComparisonTool() {
-  const [income, setIncome] = useState<string>('5000');
-  const [children, setChildren] = useState<number>(2);
+  const [scenarios, setScenarios] = useState<Scenario[]>([
+    { id: "1", name: "Scenario 1", p1Income: "", p2Income: "", children: 1, custodyType: "Standard" },
+    { id: "2", name: "Scenario 2", p1Income: "", p2Income: "", children: 1, custodyType: "Standard" },
+  ]);
 
-  const parsedIncome = parseFloat(income) || 0;
-
-  // Calculate 2026 Value
-  const res2026 = getExactSupport(parsedIncome, children);
-  const actual2026 = res2026.status === "calculated" ? res2026.totalSupport : null;
-
-  // Custom Logic for 2024 vs 2026 Comparison
-  let actual2024: number | null = null;
-  let statusText = '';
-  let statusColor = '';
-
-  if (parsedIncome >= 0 && parsedIncome <= 2200) {
-    if (actual2026 !== null) {
-      // 2024 values were generally ~4.2% lower, and the SSR threshold was lower ($2,258 vs $2,394)
-      actual2024 = Math.round((actual2026 / 1.042) * 0.98);
+  const addScenario = () => {
+    if (scenarios.length < 3) {
+      setScenarios([...scenarios, {
+        id: Date.now().toString(),
+        name: `Scenario ${scenarios.length + 1}`,
+        p1Income: "",
+        p2Income: "",
+        children: 1,
+        custodyType: "Standard"
+      }]);
     }
-  } else if (parsedIncome >= 2201 && parsedIncome <= 12000) {
-    // Standard table tiers increased by ~4.2% in 2026
-    if (actual2026 !== null) {
-      actual2024 = Math.round(actual2026 / 1.042);
+  };
+
+  const removeScenario = (id: string) => {
+    if (scenarios.length > 1) {
+      setScenarios(scenarios.filter(s => s.id !== id));
     }
-  } else if (parsedIncome > 12000) {
-    // 2024 table capped at $12,000. We take the 2024 value for the $12,000 bracket.
-    const res12k = getExactSupport(12000, children);
-    if (res12k.status === "calculated") {
-      actual2024 = Math.round(res12k.totalSupport / 1.042);
+  };
+
+  const updateScenario = (id: string, updates: Partial<Scenario>) => {
+    setScenarios(scenarios.map(s => s.id === id ? { ...s, ...updates } : s));
+  };
+
+  const results = useMemo(() => {
+    return scenarios.map(s => {
+      const p1Net = parseFloat(s.p1Income) || 0;
+      const p2Net = parseFloat(s.p2Income) || 0;
+
+      const calc = calculateChildSupport({
+        "incomeType": { p1: "monthly" },
+        "1a": { p1: p1Net, p2: p2Net },
+        "5_children": { p1: s.children },
+      });
+
+      let basicObligation = calc.baseSupport;
+      let transferPayment = calc.finalSupport;
+
+      if (s.custodyType === "Joint Custody" && s.daysA !== undefined) {
+        const daysB = 365 - s.daysA;
+        if (s.daysA >= 135 && daysB >= 135) {
+           const shareA = calc.shareP1;
+           const shareB = calc.shareP2;
+           const adjA = (basicObligation * shareA) * (daysB / 365);
+           const adjB = (basicObligation * shareB) * (s.daysA / 365);
+           transferPayment = Math.abs(adjA - adjB);
+        }
+      } else if (s.custodyType === "With Deviation" && s.deviationAmount) {
+        const devAmt = parseFloat(s.deviationAmount) || 0;
+        if (s.deviationDirection === "upward") {
+          transferPayment += devAmt;
+        } else {
+          transferPayment = Math.max(0, transferPayment - devAmt);
+        }
+      }
+
+      return {
+        id: s.id,
+        basicObligation,
+        transferPayment,
+        annualTotal: transferPayment * 12
+      };
+    });
+  }, [scenarios]);
+
+  const highlights = useMemo(() => {
+    if (scenarios.length < 2) return {};
+
+    let minVal = Infinity;
+    let maxVal = -Infinity;
+    let minIds: string[] = [];
+    let maxIds: string[] = [];
+
+    results.forEach(r => {
+      if (r.transferPayment < minVal) {
+        minVal = r.transferPayment;
+        minIds = [r.id];
+      } else if (r.transferPayment === minVal) {
+        minIds.push(r.id);
+      }
+
+      if (r.transferPayment > maxVal) {
+        maxVal = r.transferPayment;
+        maxIds = [r.id];
+      } else if (r.transferPayment === maxVal) {
+        maxIds.push(r.id);
+      }
+    });
+
+    const res: Record<string, "min" | "max" | null> = {};
+    if (minVal === maxVal) {
+      results.forEach(r => res[r.id] = "min");
+    } else {
+      minIds.forEach(id => res[id] = "min");
+      maxIds.forEach(id => res[id] = "max");
     }
-  }
-
-  const difference = (actual2026 || 0) - (actual2024 || 0);
-
-  if (difference > 0) {
-    statusText = `+$${difference.toLocaleString()} Increase in 2026`;
-    statusColor = 'bg-[var(--color-brand-primary-light)] text-[var(--color-brand-primary-hover)] border-[var(--color-brand-primary-mid)]';
-  } else if (difference < 0) {
-    statusText = `-$${Math.abs(difference).toLocaleString()} Decrease in 2026`;
-    statusColor = 'text-[var(--color-success)] bg-[var(--color-success-bg)] border-[var(--color-bg-border)]';
-  } else {
-    statusText = 'No Presumptive Change';
-    statusColor = 'bg-[var(--color-bg-subtle)] text-[var(--color-text-secondary)] border-[var(--color-bg-border)]';
-  }
-
-  const curFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    return res;
+  }, [results, scenarios]);
 
   return (
-    <div className="py-0">
-      <div className="mb-12">
-        <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
-          See Your Impact
-        </p>
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">
-          How Did Your Obligation Change?
-        </h2>
-        <p className="text-gray-500 mb-8">
-          Enter your combined net income to see the estimated difference between your 2024 and 2026 child support obligation.
-        </p>
+    <div className="w-full">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 no-print">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-900">Compare Calculation Scenarios</h2>
+          <p className="text-sm text-gray-500 mt-1">Run up to 3 different scenarios side-by-side to see how changes affect support.</p>
+        </div>
+        <div className="flex gap-3">
+          {scenarios.length < 3 && (
+            <button onClick={addScenario} className="btn btn-secondary flex items-center gap-2">
+              <Plus size={18} /> Add Scenario
+            </button>
+          )}
+          <button onClick={() => window.print()} className="btn btn-primary flex items-center gap-2">
+            <Printer size={18} /> Print Comparison
+          </button>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-        <div className="lg:col-span-5">
-          <div className="card-standard lg:sticky lg:top-24 shadow-[var(--shadow-card-md)]">
-            <h2 className="text-2xl font-bold mb-8 flex items-center gap-3 text-[var(--color-text-primary)]">
-              <Calculator className="w-6 h-6 text-[var(--color-brand-primary)]" />
-              Impact Calculator
-            </h2>
+      <div className="no-print overflow-x-auto pb-6 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <div className="flex gap-6 min-w-[840px] lg:min-w-0">
+          {scenarios.map((s, idx) => {
+            const res = results[idx];
+            const highlight = highlights[s.id];
 
-            <div className="space-y-8 mb-10">
-              <div>
-                <label className="block input-label mb-3">Combined Monthly Net Income</label>
-                <div className="relative group">
-                  <span className="absolute left-6 top-1/2 -translate-y-1/2 font-bold text-[var(--color-text-secondary)] group-focus-within:text-[var(--color-brand-primary)] transition-colors">$</span>
-                  <input
-                    type="number"
-                    value={income}
-                    onChange={(e) => setIncome(e.target.value)}
-                    className="input-standard !h-16 pl-12 pr-6 !text-2xl font-bold"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block input-label mb-3">Number of Children</label>
-                <div className="flex gap-2">
-                  {[1, 2, 3, 4, 5].map((num) => (
-                    <button
-                      key={num}
-                      onClick={() => setChildren(num)}
-                      className={`flex-1 h-11 rounded-xl text-sm font-bold border-2 transition-all ${
-                        children === num
-                          ? 'border-[var(--color-brand-primary)] bg-[var(--color-brand-primary)] text-white shadow-[var(--shadow-card-md)] shadow-[var(--color-brand-primary)]/20'
-                          : 'border-[var(--color-bg-border)] bg-white hover:border-[var(--color-brand-primary)] text-[var(--color-text-secondary)]'
-                      }`}
-                    >
-                      {num}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className={`p-6 rounded-xl border text-center font-bold tracking-widest uppercase text-[12px] ${statusColor}`}>
-              {statusText}
-            </div>
-          </div>
-
-          {/* ── SEO CONTENT: DESKTOP ONLY ────────────────────────────────── */}
-          <div className="hidden lg:block mt-12 space-y-10">
-            <div className="p-1 border-l-2 border-blue-600 pl-6">
-              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">2026 Guideline Overview</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                The 2026 Washington Child Support update represents a major shift in how obligations are calculated, particularly for high-income households. By expanding the economic table from a $12,000 cap to a $50,000 cap, the legislature has reduced judicial uncertainty and created a more predictable framework for families across the state.
-              </p>
-            </div>
-
-            <div className="p-1 border-l-2 border-gray-200 pl-6">
-              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">The 180% SSR Benchmark</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                A key pillar of the new rules is the adjustment of the Self-Support Reserve (SSR). Now indexed to 180% of the federal poverty level, the $2,394 reserve protects the payer's ability to maintain a basic standard of living. This change often results in lower presumptive payments for those near the Washington minimum wage threshold.
-              </p>
-            </div>
-
-            <div className="p-1 border-l-2 border-gray-200 pl-6">
-              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">Economic Table Expansion</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Historically, Washington's economic table ended at $12,000 combined monthly net income, leaving higher incomes to judicial "extrapolation." The 2026 update provides presumptive figures up to $50,000, ensuring that high-earning households have a clear, data-driven starting point for support discussions.
-              </p>
-            </div>
-
-            <div className="p-1 border-l-2 border-gray-200 pl-6">
-              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">Modernized Deductions</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                The 2026 calculations now formally account for mandatory state insurance premiums, including WA Cares and PFML. By allowing these as specific deductions from gross income, the New 2026 Presumptive amount more accurately reflects a parent's true "disposable" income before the table is applied.
-              </p>
-            </div>
-
-            <div className="p-1 border-l-2 border-gray-200 pl-6">
-              <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-2">Modification Eligibility</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Under RCW 26.09.170, a change in the statutory economic tables can be a basis for modifying an existing child support order. If your current order was calculated using the legacy 2024 tables, the 2026 update may represent a "substantial change in circumstances" allowing for a legal adjustment of your monthly transfer payment.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="lg:col-span-7 space-y-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-            <div className="bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-2xl p-8 md:px-6 md:py-8 shadow-[var(--shadow-card)] flex flex-col justify-center min-h-[160px]">
-              <p className="eyebrow !text-[var(--color-text-secondary)] mb-6">Old 2024 Presumptive</p>
-              <p className="text-4xl font-bold text-[var(--color-text-primary)] mb-2">
-                {actual2024 !== null ? curFormatter.format(actual2024) : 'Court Discretion'}
-              </p>
-              <p className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-wider">Legacy Estimate</p>
-            </div>
-
-            <div className="card-highlighted !bg-[var(--color-brand-primary)] !border-none !p-8 md:!px-6 md:!py-8 shadow-[var(--shadow-card-hover)] flex flex-col justify-center min-h-[160px] relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-y-16 translate-x-16 pointer-events-none" />
-              <p className="text-[12px] font-bold text-white/70 uppercase tracking-widest mb-6">New 2026 Presumptive</p>
-              <p className="text-4xl font-bold text-white mb-2">
-                {actual2026 !== null ? curFormatter.format(actual2026) : 'Court Discretion'}
-              </p>
-              <p className="text-[12px] font-bold text-white/70 uppercase tracking-wider">Official 2026 Tables</p>
-            </div>
-          </div>
-
-          <div className="card-standard !p-8 md:!p-12 shadow-[var(--shadow-card)]">
-            <h3 className="text-2xl font-bold mb-10 text-[var(--color-text-primary)]">Why did it change?</h3>
-
-            <div className="space-y-10">
-              <div className="flex gap-6">
-                <div className="w-12 h-12 rounded-xl bg-[var(--color-success-bg)] text-[var(--color-success)] flex items-center justify-center shrink-0 border border-[var(--color-bg-border)]">
-                  <CheckCircle2 size={24} />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold text-[var(--color-text-primary)] mb-2">Expanded Economic Tables (Up to $50,000)</h4>
-                  <p className="text-[var(--color-text-body)] leading-relaxed">
-                    In 2024, the official economic table explicitly capped at $12,000 combined monthly net income. In 2026, tables expand to $50,000, creating much higher presumptive base obligations for high-income earners.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-6">
-                <div className="w-12 h-12 rounded-xl bg-[var(--color-success-bg)] text-[var(--color-success)] flex items-center justify-center shrink-0 border border-[var(--color-bg-border)]">
-                  <CheckCircle2 size={24} />
-                </div>
-                <div>
-                  <h4 className="text-lg font-bold text-[var(--color-text-primary)] mb-2">New 180% Self-Support Reserve (SSR)</h4>
-                  <p className="text-[var(--color-text-body)] leading-relaxed">
-                    The 2026 changes index the SSR to 180% of the federal poverty level ($2,394/month). This provides stronger poverty protections, lowering presumptive payments for low-income earners.
-                  </p>
-                </div>
-              </div>
-
-              <div className="callout-blue">
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 rounded-xl bg-[var(--color-brand-primary)] text-white flex items-center justify-center shrink-0 shadow-[var(--shadow-card-md)] shadow-[var(--color-brand-primary)]/20">
-                    <Info size={24} />
+            return (
+              <div key={s.id} className="flex-1 min-w-[280px] space-y-6">
+                <div className="card-standard !p-6 border-2 transition-all">
+                  <div className="flex justify-between items-center mb-6">
+                    <input
+                      className="text-lg font-bold text-gray-900 bg-transparent border-b border-transparent hover:border-gray-200 focus:border-blue-500 focus:outline-none w-full mr-4"
+                      value={s.name}
+                      onChange={(e) => updateScenario(s.id, { name: e.target.value })}
+                    />
+                    {scenarios.length > 1 && (
+                      <button onClick={() => removeScenario(s.id)} className="text-gray-400 hover:text-red-500 transition-colors">
+                        <Trash2 size={18} />
+                      </button>
+                    )}
                   </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-[var(--color-text-primary)] mb-2">Mandatory Insurance Deductions</h4>
-                    <p className="text-[var(--color-info)] leading-relaxed">
-                      The 2026 rules allow for specific deductions like Mandatory State Insurance Premiums (e.g., WA Cares Fund), reducing net income calculation before the table is applied.
-                    </p>
+
+                  <div className="space-y-4">
+                    <div className="space-y-1.5">
+                      <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">P1 Monthly Net</label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+                        <input
+                          type="number"
+                          value={s.p1Income}
+                          onChange={(e) => updateScenario(s.id, { p1Income: e.target.value })}
+                          className="input-standard !h-10 pl-7 w-full shadow-sm"
+                          placeholder="0"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">P2 Monthly Net</label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+                        <input
+                          type="number"
+                          value={s.p2Income}
+                          onChange={(e) => updateScenario(s.id, { p2Income: e.target.value })}
+                          className="input-standard !h-10 pl-7 w-full shadow-sm"
+                          placeholder="0"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Children</label>
+                      <select
+                        value={s.children}
+                        onChange={(e) => updateScenario(s.id, { children: Number(e.target.value) })}
+                        className="input-standard !h-10 w-full shadow-sm"
+                      >
+                        {[1,2,3,4,5].map(n => <option key={n} value={n}>{n}</option>)}
+                      </select>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Custody Type</label>
+                      <select
+                        value={s.custodyType}
+                        onChange={(e) => updateScenario(s.id, { custodyType: e.target.value as any })}
+                        className="input-standard !h-10 w-full shadow-sm"
+                      >
+                        <option value="Standard">Standard</option>
+                        <option value="Joint Custody">Joint Custody</option>
+                        <option value="With Deviation">With Deviation</option>
+                      </select>
+                    </div>
+
+                    {s.custodyType === "Joint Custody" && (
+                      <div className="space-y-1.5 animate-in fade-in slide-in-from-top-1">
+                        <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Parent A Days</label>
+                        <input
+                          type="number"
+                          value={s.daysA ?? ""}
+                          onChange={(e) => updateScenario(s.id, { daysA: Number(e.target.value) })}
+                          className="input-standard !h-10 w-full shadow-sm"
+                          placeholder="182"
+                          max="365"
+                        />
+                      </div>
+                    )}
+
+                    {s.custodyType === "With Deviation" && (
+                      <div className="space-y-4 animate-in fade-in slide-in-from-top-1">
+                        <div className="space-y-1.5">
+                          <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Deviation Amount</label>
+                          <div className="relative">
+                            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+                            <input
+                              type="number"
+                              value={s.deviationAmount ?? ""}
+                              onChange={(e) => updateScenario(s.id, { deviationAmount: e.target.value })}
+                              className="input-standard !h-10 pl-7 w-full shadow-sm"
+                              placeholder="0"
+                            />
+                          </div>
+                        </div>
+                        <div className="flex bg-gray-100 p-1 rounded-lg gap-1">
+                          <button
+                            onClick={() => updateScenario(s.id, { deviationDirection: "upward" })}
+                            className={`flex-1 py-1 text-[10px] font-bold rounded-md transition-all ${s.deviationDirection !== "downward" ? "bg-white text-blue-600 shadow-sm" : "text-gray-500"}`}
+                          >
+                            UPWARD
+                          </button>
+                          <button
+                            onClick={() => updateScenario(s.id, { deviationDirection: "downward" })}
+                            className={`flex-1 py-1 text-[10px] font-bold rounded-md transition-all ${s.deviationDirection === "downward" ? "bg-white text-blue-600 shadow-sm" : "text-gray-500"}`}
+                          >
+                            DOWNWARD
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
-              </div>
-            </div>
 
-            <div className="mt-12 pt-12 border-t border-[var(--color-bg-border-soft)]">
-              <Link href="/worksheet" className="btn btn-primary btn-primary-lg w-full sm:w-auto">
-                Use Full 2026 Worksheet Pro <ChevronRight size={18} />
-              </Link>
-            </div>
-          </div>
+                <div className={`card-standard !p-0 overflow-hidden shadow-md border-2 transition-all ${
+                  highlight === "min" ? "border-green-500 ring-4 ring-green-500/10" :
+                  highlight === "max" ? "border-red-500 ring-4 ring-red-500/10" :
+                  "border-gray-200"
+                }`}>
+                  <div className="p-6 space-y-4">
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-gray-500">Basic Obligation</span>
+                      <span className="font-bold text-gray-900">{curFormatter.format(res.basicObligation)}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-gray-500">Annual Total</span>
+                      <span className="font-bold text-gray-900">{curFormatter.format(res.annualTotal)}</span>
+                    </div>
+                  </div>
+                  <div className={`p-6 border-t ${
+                    highlight === "min" ? "bg-green-50" :
+                    highlight === "max" ? "bg-red-50" :
+                    "bg-blue-50/30"
+                  }`}>
+                    <div className="text-center">
+                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Transfer Payment</p>
+                      <p className={`text-3xl font-extrabold ${
+                        highlight === "min" ? "text-green-600" :
+                        highlight === "max" ? "text-red-600" :
+                        "text-blue-600"
+                      }`}>
+                        {curFormatter.format(res.transferPayment)}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
+      </div>
+
+      <p className="no-print lg:hidden text-center text-xs font-bold text-gray-400 uppercase tracking-widest mt-2">
+        Scroll sideways to see all scenarios →
+      </p>
+
+      {/* PRINT LAYOUT */}
+      <div className="hidden print:block space-y-8">
+        {scenarios.map((s, idx) => (
+          <PrintReport
+            key={s.id}
+            title={`Scenario Comparison: ${s.name}`}
+            caseContext={[
+              { label: "P1 Monthly Net:", value: curFormatter.format(parseFloat(s.p1Income) || 0) },
+              { label: "P2 Monthly Net:", value: curFormatter.format(parseFloat(s.p2Income) || 0) },
+            ]}
+            calculationBase={[
+              { label: "Children:", value: s.children },
+              { label: "Custody Type:", value: s.custodyType },
+              ...(s.custodyType === "Joint Custody" ? [{ label: "Parent A Days:", value: s.daysA ?? 182 }] : []),
+              ...(s.custodyType === "With Deviation" ? [
+                { label: "Deviation Amount:", value: curFormatter.format(parseFloat(s.deviationAmount || "0")) },
+                { label: "Direction:", value: s.deviationDirection?.toUpperCase() || "UPWARD" }
+              ] : [])
+            ]}
+            analysisItems={[
+              { label: "Basic Obligation:", value: curFormatter.format(results[idx].basicObligation) },
+              { label: "Annual Total:", value: curFormatter.format(results[idx].annualTotal) },
+            ]}
+            totalLabel="Transfer Payment"
+            totalValue={curFormatter.format(results[idx].transferPayment)}
+            assumptions="Based on 2026 Washington State Child Support Schedule."
+            disclaimerText="This estimate is based on the 2026 Washington State Child Support Schedule. This is not a legal document. Consult a family law attorney for advice."
+          />
+        ))}
       </div>
     </div>
   );
