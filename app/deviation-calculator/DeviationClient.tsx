@@ -24,9 +24,9 @@ const perFormatter = new Intl.NumberFormat("en-US", {
 
 /* ─── Shared toggle button styles ─── */
 function toggleBtn(active: boolean) {
-  const base = "h-11 sm:h-12 px-4 rounded-xl border-2 font-bold transition-all flex items-center justify-center gap-2 text-sm select-none w-full";
+  const base = "h-11 sm:h-12 px-4 rounded-xl border-2 font-bold transition-all flex items-center justify-center gap-2 text-sm select-none w-full cursor-pointer";
   if (active) return `${base} bg-[var(--color-brand-primary)] border-[var(--color-brand-primary)] text-white shadow-[var(--shadow-card)]`;
-  return `${base} bg-white border-[var(--color-bg-border)] text-[var(--color-text-body)] hover:border-[var(--color-text-disabled)]`;
+  return `${base} bg-white border-[var(--color-bg-border)] text-[var(--color-text-body)] hover:border-[var(--color-text-placeholder)]`;
 }
 
 function sanitizeIncome(raw: string): string {
@@ -117,7 +117,7 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
           </Link>
 
           <div className="flex flex-col gap-4">
-            <p className="text-xs font-semibold uppercase tracking-widest text-blue-600">
+            <p className="eyebrow">
               RCW 26.19.075 · 2026 Guidelines
             </p>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
@@ -352,7 +352,7 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
 
             <div className="pt-12 border-t border-gray-100">
               <h2 className="text-2xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
-              <FAQAccordion items={faqs} />
+              <FAQAccordion faqs={faqs} />
             </div>
 
             <div className="p-8 bg-amber-50 border border-amber-100 rounded-2xl">

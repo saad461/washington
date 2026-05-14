@@ -101,7 +101,7 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
           </Link>
 
           <div className="flex flex-col gap-4">
-            <p className="text-xs font-semibold uppercase tracking-widest text-blue-600">
+            <p className="eyebrow">
               RCW 26.09.170 · 2026 Guidelines
             </p>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
@@ -358,7 +358,7 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
 
             <div className="pt-12 border-t border-gray-100">
               <h2 className="text-2xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
-              <FAQAccordion items={faqs} />
+              <FAQAccordion faqs={faqs} />
             </div>
 
             <div className="p-8 bg-amber-50 border border-amber-100 rounded-2xl">
