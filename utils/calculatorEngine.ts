@@ -107,7 +107,9 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
   const lookup = getExactSupport(combinedIncome, children);
 
   if (lookup.status === "calculated") {
-    baseTableSupport = lookup.totalSupport;
+    // 2026 Economic Table values are per-child amounts.
+    // Total obligation = per-child amount × number of children.
+    baseTableSupport = lookup.totalSupport * children;
     obligationP1 = baseTableSupport * shareP1;
     obligationP2 = baseTableSupport * shareP2;
 

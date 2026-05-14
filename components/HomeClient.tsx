@@ -228,15 +228,15 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                 </div>
 
                 <div className="card-standard text-center flex flex-col items-center group">
-                  <div className="w-12 h-12 bg-[var(--color-success-bg)] text-[var(--color-success)] rounded-[12px] flex items-center justify-center mb-0 shadow-[var(--shadow-card)] group-hover:bg-[var(--color-success)] group-hover:text-white transition-all">
-                    <Shield size={24} />
+                  <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-[12px] flex items-center justify-center mb-0 shadow-[var(--shadow-card)] group-hover:bg-purple-600 group-hover:text-white transition-all">
+                    <Calendar size={24} />
                   </div>
-                  <h3 className="text-[17px] font-semibold text-[var(--color-text-primary)] mt-4 mb-3">Privacy First</h3>
+                  <h3 className="text-[17px] font-semibold text-[var(--color-text-primary)] mt-4 mb-3">Joint Custody</h3>
                   <p className="text-[15px] text-[var(--color-text-body)] leading-[1.65] mb-6">
-                    No data is stored. All processing stays local in your browser session for 100% privacy.
+                    Calculate 50/50 and shared custody schedules with parenting time credit.
                   </p>
-                  <Link href="/privacy" className="cta-link mt-auto">
-                    Learn more <ChevronRight size={16} />
+                  <Link href="/joint-custody-calculator" className="cta-link mt-auto">
+                    Try Joint Custody →
                   </Link>
                 </div>
 
