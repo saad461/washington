@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Calculator, ChevronRight, ChevronDown, Menu, X } from "lucide-react";
+import { Calculator, ChevronRight, Menu, X } from "lucide-react";
 import SearchMock from "./SearchMock";
 
 export default function Navbar() {
@@ -35,7 +35,6 @@ export default function Navbar() {
 
   const navLinks = [
     { href: "/",                  label: "Calculator"          },
-    { href: "/joint-custody-calculator", label: "Joint Custody" },
     { href: "/worksheet",         label: "Worksheet Wizard"    },
     { href: "/washington-courts", label: "Courts"              },
     { href: "/glossary",          label: "Glossary"            },
@@ -88,30 +87,11 @@ export default function Navbar() {
 
           {/* ── Desktop Nav ── */}
           <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
-            {/* Main Calculator Dropdown */}
-            <div className="relative group px-3 py-2">
-              <button className={`flex items-center gap-1 text-sm font-medium transition-colors ${isActive("/") || isActive("/joint-custody-calculator") ? "text-blue-600" : "text-gray-600 hover:text-blue-600"}`}>
-                Calculator
-                <ChevronDown size={14} className="group-hover:rotate-180 transition-transform" />
-              </button>
-
-              <div className="absolute top-full left-0 mt-1 w-56 bg-white border border-gray-100 shadow-xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                <Link href="/" className="flex flex-col px-4 py-2 hover:bg-blue-50 transition-colors">
-                  <span className="text-sm font-bold text-gray-900">Standard Calculator</span>
-                  <span className="text-[10px] text-gray-400 uppercase tracking-wider">Default RCW 26.19</span>
-                </Link>
-                <Link href="/joint-custody-calculator" className="flex flex-col px-4 py-2 hover:bg-blue-50 transition-colors">
-                  <span className="text-sm font-bold text-gray-900">Joint Custody Calculator</span>
-                  <span className="text-[10px] text-gray-400 uppercase tracking-wider">50/50 & Shared Schedules</span>
-                </Link>
-              </div>
-            </div>
-
-            {navLinks.filter(l => l.href !== "/" && l.href !== "/joint-custody-calculator").map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative px-3 py-2 text-sm transition-all duration-200 ${
+                  className={`relative px-3 py-2 text-sm transition-all duration-200 ${
                   isActive(link.href)
                     ? "text-blue-600 font-semibold border-b-2 border-blue-600 pb-0.5"
                     : "text-gray-600 font-medium hover:text-blue-600 transition-colors"
@@ -195,7 +175,6 @@ export default function Navbar() {
             <div className="flex flex-col">
               {[
                 navLinks.find(l => l.href === "/"),
-                navLinks.find(l => l.href === "/joint-custody-calculator"),
                 navLinks.find(l => l.href === "/worksheet"),
                 navLinks.find(l => l.href === "/washington-courts"),
                 navLinks.find(l => l.href === "/glossary"),
