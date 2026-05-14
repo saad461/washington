@@ -266,47 +266,53 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                 </h3>
 
                 <div className="space-y-6">
-                  <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-4">
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-500">Standard 2026 Obligation</span>
-                      <span className="font-bold text-gray-900">{curFormatter.format(result.standardObligation)}</span>
-                    </div>
-                    {result.totalDeviation > 0 && (
+                  <div className="card-standard !p-0 overflow-hidden shadow-[var(--shadow-card-md)] border-gray-200">
+                    <div className="p-6 sm:p-8 space-y-4">
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-gray-500">Total Deviation ({deviationDirection})</span>
-                        <span className={`font-bold ${deviationDirection === "upward" ? "text-blue-600" : "text-amber-600"}`}>
-                          {deviationDirection === "upward" ? "+" : "-"}{curFormatter.format(result.totalDeviation)}
-                        </span>
+                        <span className="text-gray-500">Standard 2026 Obligation</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(result.standardObligation)}</span>
                       </div>
-                    )}
-                  </div>
-
-                  <div className="p-6 bg-blue-600 rounded-xl shadow-lg text-white">
-                    <p className="text-[10px] font-bold uppercase tracking-widest mb-1 opacity-80">Final Adjusted Support Amount</p>
-                    <div className="text-4xl font-extrabold mb-1">
-                      {curFormatter.format(result.adjustedObligation)}
+                      {result.totalDeviation > 0 && (
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="text-gray-500">Total Deviation ({deviationDirection})</span>
+                          <span className={`font-bold ${deviationDirection === "upward" ? "text-blue-600" : "text-amber-600"}`}>
+                            {deviationDirection === "upward" ? "+" : "-"}{curFormatter.format(result.totalDeviation)}
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <p className="text-sm font-bold">
-                      {result.percentDiff > 0 ? "+" : ""}{perFormatter.format(result.percentDiff)} from 2026 standard
-                    </p>
-                  </div>
 
-                  <AnimatePresence>
-                    {result.reasons.length > 0 && (
-                      <motion.div
-                        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                        className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-3"
-                      >
-                        <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Included Factors</h4>
-                        {result.reasons.map((r, i) => (
-                          <div key={i} className="flex justify-between text-[13px]">
-                            <span className="text-gray-600">{r.label}</span>
-                            <span className="font-bold text-gray-900">{curFormatter.format(r.amount)}</span>
+                    <AnimatePresence>
+                      {result.reasons.length > 0 && (
+                        <motion.div
+                          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                          className="p-6 sm:p-8 bg-gray-50/50 border-t border-gray-100 space-y-3"
+                        >
+                          <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Included Factors</h4>
+                          {result.reasons.map((r, i) => (
+                            <div key={i} className="flex justify-between text-[13px]">
+                              <span className="text-gray-600">{r.label}</span>
+                              <span className="font-bold text-gray-900">{curFormatter.format(r.amount)}</span>
+                            </div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <div className="p-6 sm:p-8 bg-blue-50/30 border-t border-blue-100">
+                      <div className="flex justify-between items-center">
+                        <span className="text-base font-bold text-gray-900">Adjusted Support Amount</span>
+                        <div className="text-right">
+                          <div className="text-3xl sm:text-4xl font-extrabold text-blue-600 tracking-tight">
+                            {curFormatter.format(result.adjustedObligation)}
                           </div>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                          <p className="text-[10px] font-bold text-blue-400 uppercase tracking-wider mt-1">
+                            {result.percentDiff > 0 ? "+" : ""}{perFormatter.format(result.percentDiff)} from 2026 standard
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
                   <div className="flex flex-col gap-3 pt-4 no-print">
                     <button onClick={() => window.print()} className="btn btn-secondary w-full">
