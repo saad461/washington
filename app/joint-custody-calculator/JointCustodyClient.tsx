@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import {
   Calculator, ArrowLeft, AlertCircle, Printer, Scale
@@ -10,6 +10,10 @@ import { convertGrossToNet } from "@/utils/taxUtils";
 import { motion, AnimatePresence } from "framer-motion";
 import PrintReport from "@/components/calculator/PrintReport";
 import FAQAccordion from "@/components/FAQAccordion";
+import IncomeHelper from "@/components/calculator/IncomeHelper";
+import AttorneyCTA from "@/components/calculator/AttorneyCTA";
+import CrossSuggestions from "@/components/calculator/CrossSuggestions";
+import HistoryPanel from "@/components/calculator/HistoryPanel";
 
 const curFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -43,20 +47,25 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
   const [parentBDays, setParentBDays] = useState("183");
   const [hasChildcare, setHasChildcare] = useState(false);
   const [monthlyChildcare, setMonthlyChildcare] = useState("");
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [isYearly, setIsYearly] = useState(false);
+
+  // What-If Sliders State
+  const [whatIfADays, setWhatIfADays] = useState<number | null>(null);
 
   const pADaysNum = parseInt(parentADays) || 0;
   const pBDaysNum = parseInt(parentBDays) || 0;
 
-  const result = useMemo(() => {
-    const pANet = convertGrossToNet(parseFloat(parentAAnnual) || 0);
-    const pBNet = convertGrossToNet(parseFloat(parentBAnnual) || 0);
-    const childcare = hasChildcare ? (parseFloat(monthlyChildcare) || 0) : 0;
+  const calculateResult = (pAAnn: string, pBAnn: string, childCount: number, pAD: number, pBD: number, hasCC: boolean, mCC: string) => {
+    const pANet = convertGrossToNet(parseFloat(pAAnn) || 0);
+    const pBNet = convertGrossToNet(parseFloat(pBAnn) || 0);
+    const childcare = hasCC ? (parseFloat(mCC) || 0) : 0;
 
     // Use existing calculator engine for base obligation using NET incomes
     const calc = calculateChildSupport({
       "incomeType": { p1: "monthly" },
       "1a": { p1: pANet, p2: pBNet },
-      "5_children": { p1: childrenCount },
+      "5_children": { p1: childCount },
     });
 
     const basicObligation = calc.baseSupport;
@@ -67,15 +76,15 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
     const parentBStandardObligation = basicObligation * shareB;
 
     // Residential credit applies if BOTH parents have 135+ days (per standard joint custody interpretation)
-    const creditApplies = pADaysNum >= 135 && pBDaysNum >= 135;
+    const creditApplies = pAD >= 135 && pBD >= 135;
 
     let adjustedA = parentAStandardObligation;
     let adjustedB = parentBStandardObligation;
 
     if (creditApplies) {
       // Offset method: share * (days with other parent / 365)
-      adjustedA = parentAStandardObligation * (pBDaysNum / 365);
-      adjustedB = parentBStandardObligation * (pADaysNum / 365);
+      adjustedA = parentAStandardObligation * (pBD / 365);
+      adjustedB = parentBStandardObligation * (pAD / 365);
     }
 
     const netSupport = adjustedA - adjustedB;
@@ -86,13 +95,9 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
     let finalTransfer = 0;
     let payer = "Parent A";
     if (netSupport > 0) {
-      // Parent A pays Parent B.
-      // We assume the recipient (B) pays for childcare, so A pays their share to B.
       finalTransfer = netSupport + shareChildcareA;
       payer = "Parent A";
     } else {
-      // Parent B pays Parent A.
-      // We assume the recipient (A) pays for childcare, so B pays their share to A.
       finalTransfer = Math.abs(netSupport) + shareChildcareB;
       payer = "Parent B";
     }
@@ -102,8 +107,8 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
       netB: pBNet,
       combined: calc.combinedIncome,
       baseSupport: basicObligation,
-      pADaysNum,
-      pBDaysNum,
+      pADaysNum: pAD,
+      pBDaysNum: pBD,
       creditApplies,
       parentAStandardObligation,
       parentBStandardObligation,
@@ -113,9 +118,28 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
       payer,
       childcare,
       shareChildcareA,
-      shareChildcareB
+      shareChildcareB,
+      shareA,
+      shareB
     };
-  }, [parentAAnnual, parentBAnnual, childrenCount, parentADays, parentBDays, hasChildcare, monthlyChildcare]);
+  };
+
+  const result = useMemo(() => calculateResult(parentAAnnual, parentBAnnual, childrenCount, pADaysNum, pBDaysNum, hasChildcare, monthlyChildcare),
+    [parentAAnnual, parentBAnnual, childrenCount, pADaysNum, pBDaysNum, hasChildcare, monthlyChildcare]);
+
+  const whatIfResult = useMemo(() => {
+    if (whatIfADays === null) return null;
+    return calculateResult(parentAAnnual, parentBAnnual, childrenCount, whatIfADays, 365 - whatIfADays, hasChildcare, monthlyChildcare);
+  }, [whatIfADays, parentAAnnual, parentBAnnual, childrenCount, hasChildcare, monthlyChildcare]);
+
+  // Sync what-if slider
+  useEffect(() => {
+    if (pADaysNum >= 0) {
+      if (whatIfADays === null) setWhatIfADays(pADaysNum);
+    }
+  }, [pADaysNum]);
+
+  const toggleValue = (val: number) => isYearly ? val * 12 : val;
 
   return (
     <div className="flex-1 w-full bg-white">
@@ -153,6 +177,9 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                 </div>
 
                 <div className="space-y-8">
+                  <IncomeHelper onUseAmount={(amt) => setParentAAnnual((parseFloat(amt) * 1.25 * 12).toString())} label="Parent A: Calculate annual gross from net monthly" />
+                  <IncomeHelper onUseAmount={(amt) => setParentBAnnual((parseFloat(amt) * 1.25 * 12).toString())} label="Parent B: Calculate annual gross from net monthly" />
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="parent-a-annual" className="input-label">Parent A Annual Gross</label>
@@ -255,29 +282,45 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                 </h3>
 
                 <div className="space-y-6">
+                  {/* Monthly / Yearly Toggle */}
+                  <div className="flex bg-white border border-gray-200 rounded-xl p-1 h-11 mb-2">
+                    <button
+                      onClick={() => setIsYearly(false)}
+                      className={`flex-1 flex items-center justify-center rounded-lg text-xs font-bold transition-all ${!isYearly ? "bg-blue-600 text-white shadow-sm" : "text-gray-500 hover:bg-gray-50"}`}
+                    >
+                      Monthly View
+                    </button>
+                    <button
+                      onClick={() => setIsYearly(true)}
+                      className={`flex-1 flex items-center justify-center rounded-lg text-xs font-bold transition-all ${isYearly ? "bg-blue-600 text-white shadow-sm" : "text-gray-500 hover:bg-gray-50"}`}
+                    >
+                      Yearly View
+                    </button>
+                  </div>
+
                   <div className="card-standard !p-0 overflow-hidden shadow-[var(--shadow-card-md)] border-gray-200">
                     <div className="p-6 sm:p-8 space-y-4">
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-gray-500">Parent A Monthly Net (Est.)</span>
-                        <span className="font-bold text-gray-900">{curFormatter.format(result.netA)}</span>
+                        <span className="text-gray-500">Parent A {isYearly ? 'Annual' : 'Monthly'} Net (Est.)</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.netA))}</span>
                       </div>
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-gray-500">Parent B Monthly Net (Est.)</span>
-                        <span className="font-bold text-gray-900">{curFormatter.format(result.netB)}</span>
+                        <span className="text-gray-500">Parent B {isYearly ? 'Annual' : 'Monthly'} Net (Est.)</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.netB))}</span>
                       </div>
                       <div className="pt-2 border-t border-gray-100 flex justify-between items-center">
                         <span className="text-sm font-bold">Combined Net Income</span>
-                        <span className="font-bold text-blue-600">{curFormatter.format(result.combined)}</span>
+                        <span className="font-bold text-blue-600">{curFormatter.format(toggleValue(result.combined))}</span>
                       </div>
                     </div>
 
                     <div className="p-6 sm:p-8 bg-gray-50/50 border-y border-gray-100 space-y-4">
                       <div className="flex justify-between items-start">
                         <div className="flex flex-col">
-                          <span className="text-sm font-bold text-gray-900">Basic Support Obligation</span>
+                          <span className="text-sm font-bold text-gray-900">{isYearly ? 'Annual' : 'Basic'} Support Obligation</span>
                           <span className="text-[12px] text-gray-500">2026 Economic Table</span>
                         </div>
-                        <span className="font-bold text-gray-900">{curFormatter.format(result.baseSupport)}</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.baseSupport))}</span>
                       </div>
                     </div>
 
@@ -292,11 +335,11 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                           <div className="space-y-2">
                             <div className="flex justify-between text-sm pt-2 border-t border-gray-100">
                               <span className="text-gray-700 font-medium">A Adjusted Obligation</span>
-                              <span className="font-bold text-gray-900">{curFormatter.format(result.adjustedA)}</span>
+                              <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.adjustedA))}</span>
                             </div>
                             <div className="flex justify-between text-sm">
                               <span className="text-gray-700 font-medium">B Adjusted Obligation</span>
-                              <span className="font-bold text-gray-900">{curFormatter.format(result.adjustedB)}</span>
+                              <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.adjustedB))}</span>
                             </div>
                           </div>
                         </motion.div>
@@ -305,10 +348,10 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
 
                     <div className="p-6 sm:p-8 bg-blue-50/30 border-t border-blue-100">
                       <div className="flex justify-between items-center">
-                        <span className="text-base font-bold text-gray-900">Monthly Transfer Payment</span>
+                        <span className="text-base font-bold text-gray-900">{isYearly ? 'Annual' : 'Monthly'} Transfer Payment</span>
                         <div className="text-right">
                           <div className="text-3xl sm:text-4xl font-extrabold text-blue-600 tracking-tight">
-                            {curFormatter.format(result.finalTransfer)}
+                            {curFormatter.format(toggleValue(result.finalTransfer))}
                           </div>
                           <p className="text-[10px] font-bold text-blue-400 uppercase tracking-wider mt-1">
                             {result.payer} pays {result.payer === "Parent A" ? "Parent B" : "Parent A"}
@@ -327,11 +370,134 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                     </div>
                   )}
 
+                  {/* Explanatory Section */}
+                  <div className="mt-2">
+                    <button
+                      onClick={() => setShowExplanation(!showExplanation)}
+                      className="flex items-center gap-2 text-[13px] font-bold text-gray-500 hover:text-blue-600 transition-colors py-2 px-1"
+                    >
+                      How was this calculated? {showExplanation ? "▲" : "▼"}
+                    </button>
+                    <AnimatePresence>
+                      {showExplanation && (
+                        <motion.div
+                          key="explanation"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="mt-2 p-6 bg-white border border-gray-200 rounded-2xl text-sm text-gray-600 leading-relaxed shadow-sm space-y-4">
+                            <div className="space-y-4">
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">1</div>
+                                <p>We took Parent A net income <strong>{curFormatter.format(result.netA)}</strong> and Parent B net income <strong>{curFormatter.format(result.netB)}</strong> to get combined income <strong>{curFormatter.format(result.combined)}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">2</div>
+                                <p>We looked up combined income with {childrenCount} children in the 2026 Washington Schedule table — basic obligation: <strong>{curFormatter.format(result.baseSupport)}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">3</div>
+                                <p>Parent A income share = <strong>{Math.round(result.shareA * 100)}%</strong> | Parent B income share = <strong>{Math.round(result.shareB * 100)}%</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">4</div>
+                                <p>Parent A proportional share = <strong>{curFormatter.format(result.parentAStandardObligation)}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">5</div>
+                                <p>Monthly transfer payment = <strong>{curFormatter.format(result.finalTransfer)}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">6</div>
+                                <p>Parent A has {result.pADaysNum} days and Parent B has {result.pBDaysNum} days ({result.creditApplies ? "Above" : "Below"} 135 day threshold)</p>
+                              </div>
+                              {result.creditApplies && (
+                                <>
+                                  <div className="flex gap-4">
+                                    <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">7</div>
+                                    <p>Residential credit calculated: Parent A gets reduction to <strong>{curFormatter.format(result.adjustedA)}</strong> and Parent B gets reduction to <strong>{curFormatter.format(result.adjustedB)}</strong></p>
+                                  </div>
+                                  <div className="flex gap-4">
+                                    <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">8</div>
+                                    <p>Adjusted transfer payment after credit: <strong>{curFormatter.format(result.finalTransfer)}</strong></p>
+                                  </div>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* What-If Sliders */}
+                  {whatIfADays !== null && whatIfResult && (
+                    <div className="mt-8 p-6 bg-white border border-gray-200 rounded-2xl shadow-sm">
+                      <h4 className="text-lg font-bold text-gray-900 mb-2">Explore What If Scenarios</h4>
+                      <p className="text-xs text-gray-500 mb-6">Explore scenarios below — your original calculation above is not affected.</p>
+
+                      <div className="space-y-8">
+                        <div className="space-y-4">
+                          <div className="flex justify-between items-center">
+                            <label className={`text-sm font-bold ${whatIfADays >= 135 ? "text-green-600" : "text-gray-700"}`}>Parent A Days: {whatIfADays}</label>
+                            <label className={`text-sm font-bold ${365 - whatIfADays >= 135 ? "text-green-600" : "text-gray-700"}`}>Parent B Days: {365 - whatIfADays}</label>
+                          </div>
+                          <input
+                            type="range"
+                            min="0"
+                            max="365"
+                            step="1"
+                            value={whatIfADays}
+                            onChange={(e) => setWhatIfADays(Number(e.target.value))}
+                            className="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                          />
+                          {whatIfADays >= 135 && 365 - whatIfADays >= 135 && (
+                            <p className="text-[10px] font-bold text-green-600 uppercase tracking-widest text-center">135 day threshold met ✓</p>
+                          )}
+                        </div>
+
+                        <div className="pt-6 border-t border-gray-100 grid grid-cols-2 gap-4">
+                          <div className="text-center">
+                            <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Residential Credit</p>
+                            <p className="text-sm font-bold text-gray-900">
+                              {whatIfResult.creditApplies ? curFormatter.format(whatIfResult.parentAStandardObligation - whatIfResult.adjustedA) : "$0"}
+                            </p>
+                          </div>
+                          <div className="text-center">
+                            <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Adjusted Transfer</p>
+                            <p className="text-sm font-bold text-blue-600">{curFormatter.format(whatIfResult.finalTransfer)}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  <HistoryPanel
+                    storageKey="wscss_history_joint"
+                    currentInputs={{ parentAAnnual, parentBAnnual, childrenCount, parentADays, parentBDays, hasChildcare, monthlyChildcare }}
+                    currentResult={result.finalTransfer}
+                    onReload={(inputs) => {
+                      setParentAAnnual(inputs.parentAAnnual);
+                      setParentBAnnual(inputs.parentBAnnual);
+                      setChildrenCount(inputs.childrenCount);
+                      setParentADays(inputs.parentADays);
+                      setParentBDays(inputs.parentBDays);
+                      setHasChildcare(inputs.hasChildcare);
+                      setMonthlyChildcare(inputs.monthlyChildcare);
+                    }}
+                    formatResult={(val) => curFormatter.format(val)}
+                  />
+
                   <div className="flex flex-col gap-3 pt-4 no-print">
                     <button onClick={() => window.print()} className="btn btn-secondary w-full">
-                      <Printer size={18} /> Print Report
+                      <Printer size={18} /> Print Results
                     </button>
                   </div>
+
+                  <AttorneyCTA />
+                  <CrossSuggestions calculatorType="joint" />
                 </div>
               </div>
             </div>
@@ -339,7 +505,7 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
         </div>
       </section>
 
-      <section className="section-default border-t border-gray-100">
+      <section className="section-default border-t border-gray-100 no-print">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto space-y-16">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -409,7 +575,7 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
         secondaryTotalLabel="Designated Payer"
         secondaryTotalValue={result.payer}
         assumptions="Based on RCW 26.19.080 and 2026 economic tables. Net income estimated using simplified 2026 conversion."
-        disclaimerText="Estimate only. Final orders determined by court."
+        disclaimerText="This estimate is based on the 2026 Washington State Child Support Schedule. This is not a legal document. Consult a family law attorney for advice."
       />
     </div>
   );

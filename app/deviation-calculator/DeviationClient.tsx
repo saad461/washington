@@ -10,6 +10,10 @@ import { convertGrossToNet } from "@/utils/taxUtils";
 import { motion, AnimatePresence } from "framer-motion";
 import PrintReport from "@/components/calculator/PrintReport";
 import FAQAccordion from "@/components/FAQAccordion";
+import IncomeHelper from "@/components/calculator/IncomeHelper";
+import AttorneyCTA from "@/components/calculator/AttorneyCTA";
+import CrossSuggestions from "@/components/calculator/CrossSuggestions";
+import HistoryPanel from "@/components/calculator/HistoryPanel";
 
 const curFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -56,6 +60,8 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
   const [selectedReasons, setSelectedReasons] = useState<string[]>([]);
   const [reasonAmounts, setReasonAmounts] = useState<Record<string, string>>({});
   const [deviationDirection, setDeviationDirection] = useState<"upward" | "downward">("upward");
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [isYearly, setIsYearly] = useState(false);
 
   const toggleReason = (id: string) => {
     setSelectedReasons(prev =>
@@ -103,9 +109,14 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
       reasons: selectedReasons.map(id => ({
         label: DEVIATION_REASONS.find(r => r.id === id)?.label || id,
         amount: parseFloat(reasonAmounts[id]) || 0
-      }))
+      })),
+      shareP1: calc.shareP1,
+      shareP2: calc.shareP2,
+      baseSupport: calc.baseSupport
     };
   }, [obligorAnnual, obligeeAnnual, childrenCount, selectedReasons, reasonAmounts, deviationDirection]);
+
+  const toggleValue = (val: number) => isYearly ? val * 12 : val;
 
   return (
     <div className="flex-1 w-full bg-white">
@@ -143,6 +154,9 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                 </div>
 
                 <div className="space-y-8">
+                  <IncomeHelper onUseAmount={(amt) => setObligorAnnual((parseFloat(amt) * 1.25 * 12).toString())} label="Obligor: Calculate annual gross from net monthly" />
+                  <IncomeHelper onUseAmount={(amt) => setObligeeAnnual((parseFloat(amt) * 1.25 * 12).toString())} label="Obligee: Calculate annual gross from net monthly" />
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="obligor-annual" className="input-label">Obligor Annual Gross</label>
@@ -266,17 +280,33 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                 </h3>
 
                 <div className="space-y-6">
+                  {/* Monthly / Yearly Toggle */}
+                  <div className="flex bg-white border border-gray-200 rounded-xl p-1 h-11 mb-2">
+                    <button
+                      onClick={() => setIsYearly(false)}
+                      className={`flex-1 flex items-center justify-center rounded-lg text-xs font-bold transition-all ${!isYearly ? "bg-blue-600 text-white shadow-sm" : "text-gray-500 hover:bg-gray-50"}`}
+                    >
+                      Monthly View
+                    </button>
+                    <button
+                      onClick={() => setIsYearly(true)}
+                      className={`flex-1 flex items-center justify-center rounded-lg text-xs font-bold transition-all ${isYearly ? "bg-blue-600 text-white shadow-sm" : "text-gray-500 hover:bg-gray-50"}`}
+                    >
+                      Yearly View
+                    </button>
+                  </div>
+
                   <div className="card-standard !p-0 overflow-hidden shadow-[var(--shadow-card-md)] border-gray-200">
                     <div className="p-6 sm:p-8 space-y-4">
                       <div className="flex justify-between items-center text-sm">
                         <span className="text-gray-500">Standard 2026 Obligation</span>
-                        <span className="font-bold text-gray-900">{curFormatter.format(result.standardObligation)}</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.standardObligation))}</span>
                       </div>
                       {result.totalDeviation > 0 && (
                         <div className="flex justify-between items-center text-sm">
                           <span className="text-gray-500">Total Deviation ({deviationDirection})</span>
                           <span className={`font-bold ${deviationDirection === "upward" ? "text-blue-600" : "text-amber-600"}`}>
-                            {deviationDirection === "upward" ? "+" : "-"}{curFormatter.format(result.totalDeviation)}
+                            {deviationDirection === "upward" ? "+" : "-"}{curFormatter.format(toggleValue(result.totalDeviation))}
                           </span>
                         </div>
                       )}
@@ -292,7 +322,7 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                           {result.reasons.map((r, i) => (
                             <div key={i} className="flex justify-between text-[13px]">
                               <span className="text-gray-600">{r.label}</span>
-                              <span className="font-bold text-gray-900">{curFormatter.format(r.amount)}</span>
+                              <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(r.amount))}</span>
                             </div>
                           ))}
                         </motion.div>
@@ -304,7 +334,7 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                         <span className="text-base font-bold text-gray-900">Adjusted Support Amount</span>
                         <div className="text-right">
                           <div className="text-3xl sm:text-4xl font-extrabold text-blue-600 tracking-tight">
-                            {curFormatter.format(result.adjustedObligation)}
+                            {curFormatter.format(toggleValue(result.adjustedObligation))}
                           </div>
                           <p className="text-[10px] font-bold text-blue-400 uppercase tracking-wider mt-1">
                             {result.percentDiff > 0 ? "+" : ""}{perFormatter.format(result.percentDiff)} from 2026 standard
@@ -314,11 +344,98 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                     </div>
                   </div>
 
+                  {/* Explanatory Section */}
+                  <div className="mt-2">
+                    <button
+                      onClick={() => setShowExplanation(!showExplanation)}
+                      className="flex items-center gap-2 text-[13px] font-bold text-gray-500 hover:text-blue-600 transition-colors py-2 px-1"
+                    >
+                      How was this calculated? {showExplanation ? "▲" : "▼"}
+                    </button>
+                    <AnimatePresence>
+                      {showExplanation && (
+                        <motion.div
+                          key="explanation"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="mt-2 p-6 bg-white border border-gray-200 rounded-2xl text-sm text-gray-600 leading-relaxed shadow-sm space-y-4">
+                            <div className="space-y-4">
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">1</div>
+                                <p>We took P1 income <strong>{curFormatter.format(result.netObligor)}</strong> and P2 income <strong>{curFormatter.format(result.netObligee)}</strong> to get combined income <strong>{curFormatter.format(result.combined)}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">2</div>
+                                <p>We looked up combined income with {childrenCount} children in the 2026 Washington Schedule table — basic obligation: <strong>{curFormatter.format(result.baseSupport)}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">3</div>
+                                <p>P1 income share = <strong>{Math.round(result.shareP1 * 100)}%</strong> | P2 income share = <strong>{Math.round(result.shareP2 * 100)}%</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">4</div>
+                                <p>P1 proportional share = <strong>{curFormatter.format(result.standardObligation)}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">5</div>
+                                <p>Monthly transfer payment = <strong>{curFormatter.format(result.standardObligation)}</strong> (P1 pays P2)</p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">6</div>
+                                <p>Standard obligation: <strong>{curFormatter.format(result.standardObligation)}</strong></p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">7</div>
+                                <div className="flex-1">
+                                  <p>Deviation reasons:</p>
+                                  <ul className="list-disc pl-5 mt-1 space-y-1">
+                                    {result.reasons.length > 0 ? result.reasons.map((r, i) => (
+                                      <li key={i}>{r.label}: {curFormatter.format(r.amount)}</li>
+                                    )) : <li>No reasons selected</li>}
+                                  </ul>
+                                </div>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">8</div>
+                                <p>Total deviation: <strong>{curFormatter.format(result.totalDeviation)}</strong> ({deviationDirection})</p>
+                              </div>
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">9</div>
+                                <p>Final adjusted amount: <strong>{curFormatter.format(result.adjustedObligation)}</strong></p>
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  <HistoryPanel
+                    storageKey="wscss_history_deviation"
+                    currentInputs={{ obligorAnnual, obligeeAnnual, childrenCount, selectedReasons, reasonAmounts, deviationDirection }}
+                    currentResult={result.adjustedObligation}
+                    onReload={(inputs) => {
+                      setObligorAnnual(inputs.obligorAnnual);
+                      setObligeeAnnual(inputs.obligeeAnnual);
+                      setChildrenCount(inputs.childrenCount);
+                      setSelectedReasons(inputs.selectedReasons);
+                      setReasonAmounts(inputs.reasonAmounts);
+                      setDeviationDirection(inputs.deviationDirection);
+                    }}
+                    formatResult={(val) => curFormatter.format(val)}
+                  />
+
                   <div className="flex flex-col gap-3 pt-4 no-print">
                     <button onClick={() => window.print()} className="btn btn-secondary w-full">
-                      <Printer size={18} /> Print Report
+                      <Printer size={18} /> Print Results
                     </button>
                   </div>
+
+                  <AttorneyCTA />
+                  <CrossSuggestions calculatorType="deviation" />
                 </div>
               </div>
             </div>
@@ -326,7 +443,7 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
         </div>
       </section>
 
-      <section className="section-default border-t border-gray-100">
+      <section className="section-default border-t border-gray-100 no-print">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto space-y-16">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -397,7 +514,7 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
         secondaryTotalLabel="Percentage Change"
         secondaryTotalValue={perFormatter.format(result.percentDiff)}
         assumptions="Based on RCW 26.19.075 and 2026 economic tables. Net income estimated using simplified 2026 conversion."
-        disclaimerText="Estimate only. Deviations require judicial approval."
+        disclaimerText="This estimate is based on the 2026 Washington State Child Support Schedule. This is not a legal document. Consult a family law attorney for advice."
       />
     </div>
   );
