@@ -1161,5 +1161,585 @@ Transfer payment = Non-residential parent's share</div>
         answer: "The <a href=\"/worksheet\" class=\"hover:underline\">official document</a> showing courts how child support was calculated. Required to be filed with every child support order."
       }
     ]
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // BLOG 10
+  // ─────────────────────────────────────────────────────────────────────────────
+  {
+    title: "Washington State Joint Custody Child Support Explained (2026)",
+    slug: "joint-custody-child-support-washington-2026",
+    category: "Calculation Guide",
+    keywords: "joint custody child support wa, washington child support calculator joint custody, washington state child support joint custody",
+    readTime: "10 min",
+    excerpt: "How does joint custody affect child support in Washington State? Learn how the residential credit works, who pays whom, and how to calculate your adjusted obligation using the 2026 WSCSS formula.",
+    metaTitle: "Joint Custody Child Support Washington State 2026 | WSCSS",
+    metaDescription: "How does joint custody affect child support in WA? Learn about residential credit, who pays whom, and how to calculate your 2026 adjusted obligation.",
+    author: "WSCSS Editorial Team",
+    createdAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    featured: false,
+    image: { url: "/wscss-og.webp", alt: "Joint Custody Child Support Washington State 2026", width: 1200, height: 630 },
+    content: `
+      <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
+        <strong>Key Takeaways (2026)</strong>
+        <ul class="space-y-2 text-indigo-800 list-disc ml-6 mt-2">
+          <li>Joint custody does <strong>not</strong> automatically eliminate child support in Washington</li>
+          <li>The residential credit under RCW 26.19.080 applies when a parent has <strong>135+ overnights per year</strong></li>
+          <li>Even in a true 50/50 split, the higher-earning parent typically still pays</li>
+          <li>The credit reduces but rarely eliminates the transfer payment entirely</li>
+          <li>Use our <a href="/joint-custody-calculator">Joint Custody Calculator</a> to get your 2026 adjusted estimate instantly</li>
+        </ul>
+      </div>
+      <p class="text-sm italic mb-6">Disclaimer: This guide explains Washington State's 2026 joint custody child support rules for educational purposes. It is not legal advice. Consult a licensed WA family law attorney for advice specific to your case.</p>
+
+      <p class="mb-4">One of the most common misconceptions in Washington family law is that 50/50 custody means zero child support. It doesn't. Washington State uses a residential credit formula under <strong>RCW 26.19.080</strong> that adjusts the standard support amount based on how many overnights each parent has, but the higher-earning parent almost always still owes something. Here's exactly how it works.</p>
+
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Joint Custody Key Figures</caption><thead><tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'><th class='py-3 px-4 text-sm font-medium'>Key Figure</th><th class='py-3 px-4 text-sm font-medium'>2026 Standard</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Residential Credit Threshold</td><td class='py-3 px-4 text-sm font-medium'>135 overnights per year</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-medium'>$2,394/month</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Minimum Support</td><td class='py-3 px-4 text-sm font-medium'>$50 per child per month</td></tr></tbody></table></div>
+
+      <h2 class="mt-12 mb-6">What Is the 135 Day Rule in Washington?</h2>
+      <p class="mb-4">Washington's residential credit only activates when a parent has the child for at least <strong>135 overnights per year</strong> — roughly 37% of the year. This threshold is the legal trigger for the RCW 26.19.080 adjustment. Below 135 days, the standard calculation applies with no credit. At or above 135 days, the offset method kicks in and reduces the transfer payment.</p>
+
+      <p class="mb-4">If both parents exceed 135 days — which happens in true shared parenting arrangements — both receive a proportional credit and the difference between those credits becomes the transfer payment. The parent with the higher income typically still makes a payment to the lower-earning parent, just a reduced one.</p>
+
+      <h2 class="mt-12 mb-6">How the Residential Credit Formula Works</h2>
+      <p class="mb-4">Washington uses what's called the <strong>offset method</strong> for joint custody calculations. Here's the process step by step:</p>
+      <ol class="list-decimal pl-6 space-y-4 mb-8">
+        <li>Calculate the basic support obligation from the 2026 WSCSS table using combined income and number of children</li>
+        <li>Determine each parent's proportional income share</li>
+        <li>Calculate each parent's theoretical obligation based on their income share</li>
+        <li>Multiply each parent's obligation by the percentage of time the child spends with the other parent</li>
+        <li>Subtract the smaller result from the larger — the difference is the transfer payment</li>
+      </ol>
+
+      <p class="mb-4">This math gets complex quickly, which is why we built the <a href="/joint-custody-calculator">Joint Custody Calculator</a> — enter both incomes and residential days and it handles the entire formula instantly.</p>
+
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Custody Days Impact</caption><thead><tr class='bg-[var(--color-warning-bg)] border-y border-[var(--color-warning-border)]'><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Parent B Days</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Residential Credit</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Effect on Transfer</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Under 135 days</td><td class='py-3 px-4 text-sm font-medium'>No credit</td><td class='py-3 px-4 text-sm font-medium'>Standard amount applies</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>135–182 days</td><td class='py-3 px-4 text-sm font-medium'>Partial credit</td><td class='py-3 px-4 text-sm font-medium'>Reduced transfer payment</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>183 days (50/50)</td><td class='py-3 px-4 text-sm font-medium'>Full offset credit</td><td class='py-3 px-4 text-sm font-medium'>Only income difference remains</td></tr></tbody></table></div>
+
+      <h2 class="mt-12 mb-6">A Worked Example: 50/50 Custody</h2>
+      <p class="mb-4">Parent A earns $6,000/month net. Parent B earns $3,000/month net. Combined income: $9,000. One child. 2026 WSCSS table shows basic obligation of approximately $950/month.</p>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li>Parent A's share (67%): $637/month</li>
+        <li>Parent B's share (33%): $313/month</li>
+        <li>Child spends 50% with each parent (183 days each)</li>
+        <li>Parent A's credit: $637 × 50% = $319</li>
+        <li>Parent B's credit: $313 × 50% = $157</li>
+        <li>Transfer payment: $319 − $157 = <strong>$162/month</strong> (Parent A pays Parent B)</li>
+      </ul>
+      <p class="mb-4">Without the residential credit, Parent A would owe $637/month. The 50/50 split reduces it to $162 — a significant difference, but not zero.</p>
+
+      <h2 class="mt-12 mb-6">Does 50/50 Custody Ever Result in Zero Child Support?</h2>
+      <p class="mb-4">Rarely, but it can happen when both parents earn nearly identical incomes. If Parent A nets $4,000 and Parent B nets $3,800 with a true 50/50 split, the offset credits nearly cancel each other out and the transfer payment may be under $30/month — effectively zero for practical purposes. Courts may still enter a nominal order to keep the structure in place.</p>
+
+      <h2 class="mt-12 mb-6">What About Childcare in Joint Custody Cases?</h2>
+      <p class="mb-4">Work-related childcare costs are added on top of the residential credit adjusted base amount and split proportionally regardless of custody arrangement. If daycare costs $1,500/month and Parent A has 67% of combined income, Parent A pays $1,005 of that regardless of how many nights the child spends with each parent. The custody adjustment only affects the base transfer payment, not extraordinary expenses.</p>
+
+      <h2 class="mt-12 mb-6">How to Request a Joint Custody Adjustment</h2>
+      <p class="mb-4">The residential credit is not applied automatically. You must present your residential schedule clearly in your parenting plan, document the number of overnights each parent has per year, and ensure the worksheets reflect the adjusted calculation. If your current order was based on a different custody arrangement and residential time has changed significantly, you may be eligible to petition for modification under RCW 26.09.170.</p>
+
+      <h2 class="mt-12 mb-6">Related Articles</h2>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><a href="/blog/how-to-calculate-child-support-washington-state">How to Calculate Child Support in Washington State (2026 Guide)</a></li>
+        <li><a href="/blog/child-support-calculation-washington-2026">WA Child Support Calculation: Full Step-by-Step Walkthrough</a></li>
+        <li><a href="/blog/washington-child-support-guidelines-2026">2026 WA State Guidelines: Complete Handbook</a></li>
+      </ul>
+
+      <h2 class="mt-12 mb-6">Bottom Line</h2>
+      <p class="mb-4">Joint custody reduces child support in Washington — it does not eliminate it unless both parents earn almost identical incomes. The 135 day threshold is the key trigger, and the offset method determines how much credit each parent receives. Use our <a href="/joint-custody-calculator">Joint Custody Calculator</a> to see exactly what the 2026 formula produces for your specific income and parenting schedule.</p>
+
+      <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Joint Custody Obligation</h3><ul class="space-y-2"><li><a href="/joint-custody-calculator" class="hover:underline">Use the Joint Custody Calculator — adjusted for residential days</a></li><li><a href="/" class="hover:underline">Run the standard child support estimate first</a></li><li><a href="/deviation-calculator" class="hover:underline">Add deviation factors to your result</a></li></ul></div>
+      <p class="text-sm mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class="hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class="hover:underline">Washington Courts</a> homepage.</p>
+      <div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4"><div><p class="font-semibold text-gray-900 text-base mb-1">Calculate Your Joint Custody Child Support</p><p class="text-sm text-gray-500">Free · 2026 RCW 26.19 Guidelines · Residential Credit Included</p></div><a href="/joint-custody-calculator" class="btn btn-primary whitespace-nowrap">Calculate Now →</a></div>
+    `,
+    faqs: [
+      {
+        question: "Does 50/50 custody eliminate child support in Washington State?",
+        answer: "Not automatically. Even with equal residential time, if one parent earns significantly more than the other, they will still owe a transfer payment. The residential credit under RCW 26.19.080 reduces the standard amount using an offset formula, but only eliminates support entirely when both parents earn nearly identical incomes."
+      },
+      {
+        question: "What is the 135 day rule in Washington child support?",
+        answer: "The 135 day rule means a parent must have the child for at least 135 overnights per year — roughly 37% of the year — to qualify for the residential credit adjustment under RCW 26.19.080. Below this threshold, the standard child support calculation applies with no reduction for parenting time."
+      },
+      {
+        question: "Which parent pays child support in a joint custody arrangement in Washington?",
+        answer: "The parent with the higher income typically pays child support to the lower-earning parent even in joint custody. The residential credit reduces the amount based on how many overnights each parent has, but the direction of payment — from higher earner to lower earner — generally stays the same."
+      },
+      {
+        question: "How do I request the residential credit adjustment in Washington?",
+        answer: "The residential credit is not applied automatically. You must document the residential schedule in your parenting plan, specify the number of overnights each parent has per year, and ensure your child support worksheets reflect the adjusted calculation using the RCW 26.19.080 offset formula. If residential time has changed significantly since your original order, you may petition for modification."
+      },
+      {
+        question: "Is this calculator accurate for 2026 Washington State joint custody cases?",
+        answer: "Our Joint Custody Calculator uses the 2026 Washington State Child Support Schedule and applies the RCW 26.19.080 residential credit formula. It provides a close estimate, but actual court-ordered amounts may vary based on childcare costs, health insurance, deviations, and other factors. Always consult a family law attorney for legal advice."
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // BLOG 11
+  // ─────────────────────────────────────────────────────────────────────────────
+  {
+    title: "WA Child Support Deviation: What Qualifies (2026 Guide)",
+    slug: "washington-child-support-deviation-2026",
+    category: "Legal Guide",
+    keywords: "child support deviation washington state, washington state child support deviation calculator, wa child support deviation",
+    readTime: "10 min",
+    excerpt: "A deviation adjusts your Washington child support above or below the standard 2026 schedule amount. Learn what qualifies, how courts decide, and how to formally request one under RCW 26.19.075.",
+    metaTitle: "WA Child Support Deviation 2026 — What Qualifies | WSCSS",
+    metaDescription: "What qualifies for a child support deviation in WA? Learn how courts decide and how to request an adjustment above or below the standard schedule amount.",
+    author: "WSCSS Editorial Team",
+    createdAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    featured: false,
+    image: { url: "/wscss-og.webp", alt: "Washington State Child Support Deviation 2026 Guide", width: 1200, height: 630 },
+    content: `
+      <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
+        <strong>Key Takeaways (2026)</strong>
+        <ul class="space-y-2 text-indigo-800 list-disc ml-6 mt-2">
+          <li>A deviation adjusts support <strong>above or below</strong> the standard 2026 WSCSS table amount</li>
+          <li>Governed by <strong>RCW 26.19.075</strong> — courts require documented good cause</li>
+          <li>Either parent can request a deviation independently</li>
+          <li>Courts must enter written findings explaining every deviation</li>
+          <li>Use our <a href="/deviation-calculator">Deviation Calculator</a> to estimate your adjusted amount instantly</li>
+        </ul>
+      </div>
+      <p class="text-sm italic mb-6">Disclaimer: This guide explains Washington State's 2026 deviation standards for educational purposes. It is not legal advice. Consult a licensed WA family law attorney for advice specific to your case.</p>
+
+      <p class="mb-4">Washington's child support formula is designed to produce a fair standard amount in most cases. But "most cases" doesn't mean all cases. When specific financial circumstances make the standard amount genuinely unjust, either parent can ask the court for a deviation — a formal adjustment up or down from the 2026 WSCSS table amount. Here's everything you need to know about how deviations work, what actually qualifies, and how courts decide.</p>
+
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Deviation Key Standards</caption><thead><tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'><th class='py-3 px-4 text-sm font-medium'>Standard</th><th class='py-3 px-4 text-sm font-medium'>2026 Rule</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Legal Authority</td><td class='py-3 px-4 text-sm font-medium'>RCW 26.19.075</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>Direction</td><td class='py-3 px-4 text-sm font-medium'>Upward or downward from standard</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Court Requirement</td><td class='py-3 px-4 text-sm font-medium'>Written findings of good cause required</td></tr></tbody></table></div>
+
+      <h2 class="mt-12 mb-6">What Is a Child Support Deviation in Washington State?</h2>
+      <p class="mb-4">A deviation is a court-approved adjustment that sets child support above or below what the standard WSCSS economic table would otherwise produce. It is not a loophole or a way to avoid paying support — it is a formal legal mechanism governed by RCW 26.19.075 that exists because the legislature recognized the standard formula cannot perfectly fit every family's circumstances.</p>
+
+      <p class="mb-4">Deviations require the requesting parent to show the court specific, documented reasons why applying the standard amount would be unjust or inappropriate. Vague arguments — "it seems high" or "I have other expenses" — are not sufficient. Courts want evidence.</p>
+
+      <h2 class="mt-12 mb-6">Reasons for an Upward Deviation</h2>
+      <p class="mb-4">An upward deviation increases support above the standard table amount. Courts grant these when a child has costs that the base formula does not account for. Common qualifying reasons include:</p>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><strong>Extraordinary medical expenses:</strong> Ongoing treatment costs, specialist visits, prescription medications, or therapy beyond what ordinary health insurance covers</li>
+        <li><strong>Educational expenses:</strong> Private school tuition, special education programs, or tutoring that was part of the child's established lifestyle during the marriage</li>
+        <li><strong>Long-distance transportation:</strong> Significant travel costs required by the parenting schedule that one parent bears disproportionately</li>
+        <li><strong>Child's special needs:</strong> Documented physical, developmental, or behavioral needs requiring additional expenditure</li>
+      </ul>
+
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Deviation Types</caption><thead><tr class='bg-[var(--color-warning-bg)] border-y border-[var(--color-warning-border)]'><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Deviation Type</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Common Qualifying Reasons</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Upward</td><td class='py-3 px-4 text-sm font-medium'>Medical, educational, special needs, long-distance transport</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>Downward</td><td class='py-3 px-4 text-sm font-medium'>Prior debt, other children, child's assets, non-recurring income</td></tr></tbody></table></div>
+
+      <h2 class="mt-12 mb-6">Reasons for a Downward Deviation</h2>
+      <p class="mb-4">A downward deviation reduces support below the standard table amount. Washington courts grant these less frequently than upward deviations, but they do happen when there is clear documented justification:</p>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><strong>Debt obligations prior to separation:</strong> Documented debt incurred for the benefit of both parents, not personal consumer debt, that one parent is now paying entirely</li>
+        <li><strong>Children from other relationships:</strong> Existing court-ordered support obligations for children from other relationships already reducing available income</li>
+        <li><strong>Significant assets of the child:</strong> Trust funds, inheritance, or investment income the child receives independently</li>
+        <li><strong>Non-recurring income:</strong> A one-time bonus or inheritance that inflated the income used in the calculation but will not repeat</li>
+        <li><strong>Substantially equal residential time:</strong> When both parents have the child for very close to 50% of the year and each absorbs significant direct costs</li>
+      </ul>
+
+      <h2 class="mt-12 mb-6">What Does Not Qualify as a Deviation Reason</h2>
+      <p class="mb-4">Washington courts hear deviation arguments regularly and are experienced at recognizing unsupported claims. These arguments typically fail:</p>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li>High cost of living generally — the economic table applies statewide</li>
+        <li>Voluntary debt like credit cards, car loans, or student loans incurred after separation</li>
+        <li>Personal living expenses the paying parent claims are excessive</li>
+        <li>Disagreement with how the other parent spends support money</li>
+        <li>New partner's income or expenses</li>
+      </ul>
+
+      <h2 class="mt-12 mb-6">How Courts Decide on Deviations</h2>
+      <p class="mb-4">A judge or commissioner does not automatically grant a deviation request. The burden is on the requesting parent to present credible, documented evidence. Courts consider the best interests of the child as the primary factor — a deviation that would significantly harm the child's financial support is almost never approved regardless of the parent's circumstances.</p>
+
+      <p class="mb-4">If the court grants a deviation, it <strong>must enter written findings</strong> in the order specifically explaining why the standard amount would be unjust and what facts support the deviation. This is a legal requirement under RCW 26.19.075 — boilerplate language is not sufficient.</p>
+
+      <h2 class="mt-12 mb-6">Do Both Parents Have to Agree to a Deviation?</h2>
+      <p class="mb-4">No. Either parent can request a deviation independently without the other parent's consent. However, the court must approve it regardless of whether both parents agree. If both parents agree on a deviation amount and submit a stipulated order, the court will typically approve it as long as the deviation is not contrary to the child's best interests and the written findings requirement is satisfied.</p>
+
+      <h2 class="mt-12 mb-6">How to Request a Deviation</h2>
+      <p class="mb-4">To formally request a deviation in Washington:</p>
+      <ol class="list-decimal pl-6 space-y-4 mb-8">
+        <li>Calculate the standard obligation first using your completed WSCSS worksheets</li>
+        <li>Identify which specific RCW 26.19.075 factor applies to your situation</li>
+        <li>Gather documentation proving that factor — receipts, invoices, court orders, medical records</li>
+        <li>State the requested deviation amount and direction clearly in your declaration</li>
+        <li>Explain in writing why the standard amount would be unjust given your documented circumstances</li>
+      </ol>
+      <p class="mb-4">Use our <a href="/deviation-calculator">Deviation Calculator</a> to see how qualifying factors adjust your standard 2026 obligation before you go to court.</p>
+
+      <h2 class="mt-12 mb-6">Related Articles</h2>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><a href="/blog/how-to-calculate-child-support-washington-state">How to Calculate Child Support in Washington State (2026 Guide)</a></li>
+        <li><a href="/blog/child-support-calculation-washington-2026">WA Child Support Calculation: Full Step-by-Step Walkthrough</a></li>
+        <li><a href="/blog/washington-child-support-guidelines-2026">2026 WA State Guidelines: Complete Handbook</a></li>
+      </ul>
+
+      <h2 class="mt-12 mb-6">Bottom Line</h2>
+      <p class="mb-4">A deviation is not a way to avoid child support — it is a formal legal mechanism for situations where the standard formula produces a genuinely unjust result. Courts take them seriously, require written findings, and expect real documentation. If you believe a deviation applies to your situation, start by calculating the standard amount with our <a href="/">calculator</a>, then use the <a href="/deviation-calculator">Deviation Calculator</a> to estimate your adjusted figure before speaking with an attorney.</p>
+
+      <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Deviation Adjustment</h3><ul class="space-y-2"><li><a href="/deviation-calculator" class="hover:underline">Use the Deviation Calculator — enter your deviation reasons and amounts</a></li><li><a href="/" class="hover:underline">Run the standard child support estimate first</a></li><li><a href="/modification-calculator" class="hover:underline">Check if your existing order should be modified</a></li></ul></div>
+      <p class="text-sm mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class="hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class="hover:underline">Washington Courts</a> homepage.</p>
+      <div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4"><div><p class="font-semibold text-gray-900 text-base mb-1">Calculate Your Deviation Adjusted Amount</p><p class="text-sm text-gray-500">Free · 2026 RCW 26.19 Guidelines · Upward and Downward Deviations</p></div><a href="/deviation-calculator" class="btn btn-primary whitespace-nowrap">Calculate Now →</a></div>
+    `,
+    faqs: [
+      {
+        question: "What is a child support deviation in Washington State?",
+        answer: "A child support deviation is a court-approved adjustment that sets support above or below the standard 2026 WSCSS schedule amount. It is governed by RCW 26.19.075 and requires the requesting parent to show documented good cause why the standard amount would be unjust. Courts must enter written findings explaining every deviation they grant."
+      },
+      {
+        question: "What qualifies for a downward deviation in Washington child support?",
+        answer: "Qualifying reasons for a downward deviation include documented debt obligations incurred for both parents before separation, existing court-ordered support for children from other relationships, significant independent assets or income of the child, non-recurring income that inflated the calculation, and substantially equal residential time where both parents bear significant direct costs."
+      },
+      {
+        question: "Can I get more child support than the standard amount in Washington?",
+        answer: "Yes. An upward deviation can be requested when a child has extraordinary medical expenses, significant educational costs such as private school or specialized programs, long-distance transportation costs required by the parenting schedule, or documented special needs requiring additional expenditure beyond what the base formula accounts for."
+      },
+      {
+        question: "Do both parents have to agree to a deviation in Washington?",
+        answer: "No. Either parent can request a deviation independently. The court must approve it regardless of whether both parents agree. If both parents submit a stipulated deviation order, the court will typically approve it as long as the written findings requirement is met and the deviation is not contrary to the child's best interests."
+      },
+      {
+        question: "How much can child support deviate from the standard in Washington?",
+        answer: "Washington law does not set a fixed cap on deviation amounts. The adjustment is based on documented costs and circumstances presented to the court. A judge has discretion to set any amount they find just and appropriate based on the evidence, as long as written findings are entered into the record explaining the deviation."
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // BLOG 12
+  // ─────────────────────────────────────────────────────────────────────────────
+  {
+    title: "How to Modify Child Support in Washington State (2026 Guide)",
+    slug: "how-to-modify-child-support-washington-2026",
+    category: "Legal Guide",
+    keywords: "child support modification washington, washington state child support modification, modify child support wa",
+    readTime: "11 min",
+    excerpt: "Your income changed, your custody arrangement shifted, or it has been years since your order was set. Here is exactly how to modify child support in Washington State in 2026, including the 15% rule, the 3 year rule, and the forms you need.",
+    metaTitle: "How to Modify Child Support in Washington State 2026 | WSCSS",
+    metaDescription: "Learn how to modify WA child support in 2026. Covers the 15% rule, 3 year rule under RCW 26.09.170, forms needed, and what to expect in court.",
+    author: "WSCSS Editorial Team",
+    createdAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    featured: false,
+    image: { url: "/wscss-og.webp", alt: "How to Modify Child Support in Washington State 2026", width: 1200, height: 630 },
+    content: `
+      <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
+        <strong>Key Takeaways (2026)</strong>
+        <ul class="space-y-2 text-indigo-800 list-disc ml-6 mt-2">
+          <li>Modification is allowed when the recalculated amount differs by <strong>15% or more</strong>, OR <strong>3 years have passed</strong> since the last order — only one threshold needs to be met</li>
+          <li>Governed by <strong>RCW 26.09.170</strong></li>
+          <li>Arrears cannot be modified retroactively — <strong>file immediately</strong> when your situation changes</li>
+          <li>Use the <a href="/modification-calculator">Modification Calculator</a> to check if your change meets the threshold before filing</li>
+          <li>Child support does not change automatically — you must file a petition</li>
+        </ul>
+      </div>
+      <p class="text-sm italic mb-6">Disclaimer: This guide explains Washington State's 2026 child support modification process for educational purposes. It is not legal advice. Consult a licensed WA family law attorney for advice specific to your case.</p>
+
+      <p class="mb-4">Life changes. Income goes up or down, custody arrangements shift, children grow older, and what made sense three years ago may no longer reflect reality. Washington State law allows either parent to request a modification to an existing child support order when specific legal thresholds are met — but the process requires filing a formal petition, and every day you delay costs you money that cannot be recovered. Here is exactly how it works in 2026.</p>
+
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Modification Key Standards</caption><thead><tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'><th class='py-3 px-4 text-sm font-medium'>Threshold</th><th class='py-3 px-4 text-sm font-medium'>2026 Standard</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Amount change threshold</td><td class='py-3 px-4 text-sm font-medium'>15% or more difference</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>Time threshold</td><td class='py-3 px-4 text-sm font-medium'>3 years since last order</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Legal authority</td><td class='py-3 px-4 text-sm font-medium'>RCW 26.09.170</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>Retroactive arrears forgiveness</td><td class='py-3 px-4 text-sm font-medium'>Not allowed — file immediately</td></tr></tbody></table></div>
+
+      <h2 class="mt-12 mb-6">The Two Pathways to Modification Under RCW 26.09.170</h2>
+      <p class="mb-4">Washington provides two independent grounds for requesting a child support modification. You only need to meet <strong>one</strong> of these two conditions — not both.</p>
+
+      <h3 class="mt-8 mb-4">Pathway 1 — The 15% Rule</h3>
+      <p class="mb-4">If recalculating child support using current incomes and the 2026 WSCSS table produces an amount that is 15% higher or lower than your current court order, you have grounds to petition for modification. The percentage change can go in either direction — a parent whose income dropped significantly can request a reduction, and a parent whose co-parent's income increased substantially can request an increase.</p>
+      <p class="mb-4">The 15% is calculated against the current order amount, not the original order. If your current order is $700/month, the new calculation needs to be above $805 or below $595 to meet the threshold.</p>
+
+      <h3 class="mt-8 mb-4">Pathway 2 — The 3 Year Rule</h3>
+      <p class="mb-4">If at least 3 years have passed since the child support order was entered or last modified, either parent can request a modification regardless of whether income has changed significantly. This is sometimes called a "periodic review" and exists to ensure support stays reasonably aligned with current circumstances over time. You do not need to show a specific dollar change — the passage of time alone is sufficient grounds under this pathway.</p>
+
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Modification Pathways</caption><thead><tr class='bg-[var(--color-warning-bg)] border-y border-[var(--color-warning-border)]'><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Pathway</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Requirement</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Evidence Needed</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>15% Rule</td><td class='py-3 px-4 text-sm font-medium'>Recalculated amount differs by 15%+</td><td class='py-3 px-4 text-sm font-medium'>Current income documentation</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>3 Year Rule</td><td class='py-3 px-4 text-sm font-medium'>3+ years since last order</td><td class='py-3 px-4 text-sm font-medium'>Date of original order</td></tr></tbody></table></div>
+
+      <h2 class="mt-12 mb-6">Other Grounds for Modification</h2>
+      <p class="mb-4">Beyond the two primary pathways, Washington courts also consider modification petitions when there has been a substantial change in circumstances including:</p>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><strong>Job loss or significant involuntary income reduction:</strong> Must be documented with termination letters, unemployment records, or medical documentation if disability related</li>
+        <li><strong>Custody arrangement change:</strong> A significant shift in where the child lives and with whom can change the entire calculation</li>
+        <li><strong>A child turning 18 or graduating:</strong> Support for that child ends and the remaining children's obligation must be recalculated</li>
+        <li><strong>New child in either household:</strong> An existing court-ordered support obligation for a new child can be a basis for downward modification</li>
+        <li><strong>Significant increase in either parent's income:</strong> A large raise or inheritance can justify an upward modification request</li>
+      </ul>
+
+      <h2 class="mt-12 mb-6">The Most Critical Rule — File Immediately</h2>
+      <p class="mb-4">This is the single most important thing to understand about modifications in Washington: <strong>arrears that accumulate before you file cannot be retroactively waived.</strong> If your income dropped three months ago and you have not yet filed, those three months of accrued payments are permanent debts that you owe regardless of what the new order says. They grow at Washington's 12% annual interest rate and have no statute of limitations.</p>
+      <p class="mb-4">The moment your situation changes in a way that would support a modification, file the petition. Do not wait to see if things improve. Do not assume the other parent will agree to an informal reduction. File the paperwork and let the legal process establish your new obligation from the earliest possible date.</p>
+
+      <h2 class="mt-12 mb-6">The Forms You Need</h2>
+      <p class="mb-4">Washington uses the FL All Family form series for modification petitions. The core forms are:</p>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><strong>FL All Family 422:</strong> Petition to Modify Child Support — the main filing document</li>
+        <li><strong>FL All Family 132:</strong> Updated Child Support Worksheets reflecting current incomes — our <a href="/modification-calculator">Modification Calculator</a> helps you prepare these numbers</li>
+        <li><strong>FL All Family 131:</strong> Proposed Child Support Order showing the new amount</li>
+        <li><strong>FL All Family 101:</strong> Summons to notify the other parent</li>
+        <li>Financial declaration with current income documentation — last 2 pay stubs, most recent tax return</li>
+      </ul>
+
+      <h2 class="mt-12 mb-6">What to Expect in the Modification Process</h2>
+      <p class="mb-4">For uncontested modifications where both parents agree on new income figures and the calculated amount, the process can resolve in 4–8 weeks. You submit the stipulated order and worksheets, the court reviews and signs it if the math is correct and the written record is complete.</p>
+      <p class="mb-4">For contested modifications where one parent disputes the income figures or disagrees with the proposed new amount, the process typically takes 3–6 months and requires a hearing. The court will review financial declarations from both parties, may request additional documentation, and will issue a ruling based on current incomes and the 2026 WSCSS table.</p>
+
+      <h2 class="mt-12 mb-6">How to Check if You Meet the Threshold Before Filing</h2>
+      <p class="mb-4">Before spending time on the paperwork, use our <a href="/modification-calculator">Modification Calculator</a> to run a quick check. Enter your current order amount, the original incomes when the order was set, your current incomes, and the date of the original order. The calculator will show you whether the 15% threshold is met, whether the 3 year threshold is met, and what the new calculated amount would be under the 2026 schedule.</p>
+
+      <h2 class="mt-12 mb-6">Related Articles</h2>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><a href="/blog/what-happens-if-child-support-is-not-paid-washington">What Happens If Child Support Is Not Paid in Washington State</a></li>
+        <li><a href="/blog/minimum-child-support-washington-low-income">Minimum Child Support for Low-Income Parents in Washington</a></li>
+        <li><a href="/blog/washington-child-support-guidelines-2026">2026 WA State Guidelines: Complete Handbook</a></li>
+      </ul>
+
+      <h2 class="mt-12 mb-6">Bottom Line</h2>
+      <p class="mb-4">Washington's modification process is designed to be accessible — either the 15% change threshold or the 3 year time threshold gives most parents a legitimate path to update an outdated order. The key is acting immediately when circumstances change. Use the <a href="/modification-calculator">Modification Calculator</a> to check your numbers, then file without delay.</p>
+
+      <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Check If Your Order Should Be Modified</h3><ul class="space-y-2"><li><a href="/modification-calculator" class="hover:underline">Use the Modification Calculator — compare old vs new income instantly</a></li><li><a href="/" class="hover:underline">Run a fresh standard estimate with current incomes</a></li><li><a href="/deviation-calculator" class="hover:underline">Check if deviation factors apply to your situation</a></li></ul></div>
+      <p class="text-sm mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class="hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class="hover:underline">Washington Courts</a> homepage.</p>
+      <div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4"><div><p class="font-semibold text-gray-900 text-base mb-1">Check If Your Order Qualifies for Modification</p><p class="text-sm text-gray-500">Free · 2026 RCW 26.09.170 · 15% Rule and 3 Year Rule</p></div><a href="/modification-calculator" class="btn btn-primary whitespace-nowrap">Check Now →</a></div>
+    `,
+    faqs: [
+      {
+        question: "When can I modify child support in Washington State?",
+        answer: "You can request a child support modification in Washington when either the recalculated amount under current incomes differs from your existing order by 15% or more, OR at least 3 years have passed since the order was entered or last modified. You only need to meet one of these two conditions under RCW 26.09.170."
+      },
+      {
+        question: "What is the 15% rule for child support modification in Washington?",
+        answer: "The 15% rule means that if recalculating child support using current incomes and the 2026 WSCSS schedule produces an amount that is 15% higher or lower than your existing court order, you have grounds to petition for modification regardless of how recently the order was set."
+      },
+      {
+        question: "Can I modify child support if I lost my job in Washington State?",
+        answer: "Yes. Job loss is a qualifying reason for modification in Washington State. If your income has dropped enough that the recalculated amount differs from your current order by 15% or more, you can petition for modification under RCW 26.09.170. File the petition immediately — arrears that accumulate before your filing date cannot be retroactively waived."
+      },
+      {
+        question: "Does child support automatically change when income changes in Washington?",
+        answer: "No. Child support does not change automatically in Washington State when income changes. You must file a formal modification petition with the court. Until a new order is entered, your existing order remains legally in effect and every unpaid dollar accrues at 12% annual interest."
+      },
+      {
+        question: "How long does a child support modification take in Washington?",
+        answer: "An uncontested modification where both parents agree typically resolves in 4 to 8 weeks. A contested modification requiring a hearing may take 3 to 6 months depending on court scheduling and the complexity of the income dispute. A temporary order can often be obtained at the first hearing, which reduces the obligation while the case proceeds."
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // BLOG 13
+  // ─────────────────────────────────────────────────────────────────────────────
+  {
+    title: "What Counts as Income for WA Child Support (2026 Guide)",
+    slug: "what-counts-as-income-child-support-washington-2026",
+    category: "Calculation Guide",
+    keywords: "wa child support income, washington state child support income definition, child support income washington",
+    readTime: "9 min",
+    excerpt: "Washington State defines income broadly for child support purposes. Learn exactly what counts, what does not, how self-employment income is treated, and what happens if a parent appears to be hiding income.",
+    metaTitle: "What Counts as Income for WA Child Support 2026 | WSCSS",
+    metaDescription: "WA defines income broadly for child support. Learn what counts, what doesn't, how self-employment works, and what courts do when income is hidden.",
+    author: "WSCSS Editorial Team",
+    createdAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    featured: false,
+    image: { url: "/wscss-og.webp", alt: "What Counts as Income for Child Support in Washington State 2026", width: 1200, height: 630 },
+    content: `
+      <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
+        <strong>Key Takeaways (2026)</strong>
+        <ul class="space-y-2 text-indigo-800 list-disc ml-6 mt-2">
+          <li>Washington uses <strong>gross monthly income</strong> as the starting point — defined broadly under RCW 26.19.071</li>
+          <li>Overtime, bonuses, and RSUs are all included and averaged over 12 months</li>
+          <li>Self-employment income = gross revenue minus legitimate business expenses only</li>
+          <li>New spouse's income is generally <strong>not</strong> included in the core calculation</li>
+          <li>Courts can impute income if a parent appears voluntarily underemployed</li>
+        </ul>
+      </div>
+      <p class="text-sm italic mb-6">Disclaimer: This guide explains Washington State's 2026 income definition for child support purposes. It is not legal advice. Consult a licensed WA family law attorney for advice specific to your case.</p>
+
+      <p class="mb-4">One of the most contested aspects of any child support case in Washington is what actually counts as income. The definition under <strong>RCW 26.19.071</strong> is deliberately broad — the legislature did not want parents to be able to structure their finances to avoid supporting their children. Understanding exactly what is included, what is excluded, and what the court does when it suspects income is being hidden is essential knowledge for any parent going through this process.</p>
+
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Income Definition Key Points</caption><thead><tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'><th class='py-3 px-4 text-sm font-medium'>Category</th><th class='py-3 px-4 text-sm font-medium'>Treatment</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Wages and salary</td><td class='py-3 px-4 text-sm font-medium'>Included — gross amount</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>Bonuses and overtime</td><td class='py-3 px-4 text-sm font-medium'>Included — averaged over 12 months</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>TANF and SSI</td><td class='py-3 px-4 text-sm font-medium'>Excluded</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>New spouse's income</td><td class='py-3 px-4 text-sm font-medium'>Generally excluded from core calculation</td></tr></tbody></table></div>
+
+      <h2 class="mt-12 mb-6">What Washington Includes in Gross Income</h2>
+      <p class="mb-4">Washington's definition of gross income for child support purposes is expansive. Under RCW 26.19.071, it includes virtually everything a parent receives:</p>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><strong>Wages, salaries, commissions, and tips</strong> — the full gross amount before any deductions</li>
+        <li><strong>Overtime pay</strong> — averaged over 12 months rather than based on a single high-earning period</li>
+        <li><strong>Annual bonuses</strong> — averaged monthly over the prior 12-month period regardless of whether they are recurring</li>
+        <li><strong>Self-employment income</strong> — gross revenue minus legitimate business expenses under the RCW 26.19 standard, not the IRS standard</li>
+        <li><strong>Rental income</strong> — net of maintenance and mortgage costs directly associated with the property</li>
+        <li><strong>Unemployment compensation</strong> — counts as gross income and can be garnished by DSHS</li>
+        <li><strong>Disability and workers' compensation benefits</strong></li>
+        <li><strong>Social Security benefits</strong> — including disability payments received on behalf of the children, which are credited against the support obligation</li>
+        <li><strong>Pension and retirement income</strong> — distributions received during the calculation period</li>
+        <li><strong>Trust fund distributions</strong> — amounts actually distributed, not just trust value</li>
+        <li><strong>Restricted Stock Units (RSUs)</strong> — counted as income in the year they vest, reported on W-2</li>
+        <li><strong>Investment income</strong> — dividends, interest, and capital gains reported on tax returns</li>
+      </ul>
+
+      <h2 class="mt-12 mb-6">What Washington Excludes from Gross Income</h2>
+      <p class="mb-4">The following are specifically excluded under RCW 26.19.071 and do not count toward gross income for child support purposes:</p>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><strong>Income of a new spouse or domestic partner</strong> — the other parent's new relationship does not affect your income calculation</li>
+        <li><strong>Public assistance benefits</strong> — TANF, food stamps, and similar means-tested programs</li>
+        <li><strong>Supplemental Security Income (SSI)</strong></li>
+        <li><strong>Child support received for children from other relationships</strong> — not counted as your income</li>
+      </ul>
+
+      <h2 class="mt-12 mb-6">How Self-Employment Income Works</h2>
+      <p class="mb-4">Self-employment income is the most frequently disputed category in Washington child support cases. Courts start with the business's gross revenue and then subtract what Washington considers legitimate business expenses — which is not the same as what the IRS allows on Schedule C.</p>
+      <p class="mb-4">Washington courts regularly add back deductions that reduce taxable income on paper but do not represent actual cash outflows, including:</p>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li>Depreciation on assets — not a real cash expense in the calculation period</li>
+        <li>Home office deductions — unless the space is used exclusively for business</li>
+        <li>Vehicle expenses that appear personal — meals, entertainment, personal travel</li>
+        <li>Excessive owner compensation structures used to minimize apparent income</li>
+      </ul>
+      <p class="mb-4">If you are self-employed and facing a child support case, expect your Schedule C to be scrutinized carefully. Commissioners in counties like King County see this regularly and are experienced at identifying inflated business expense deductions.</p>
+
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Self Employment Income Treatment</caption><thead><tr class='bg-[var(--color-warning-bg)] border-y border-[var(--color-warning-border)]'><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Business Deduction</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>WA Child Support Treatment</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Depreciation</td><td class='py-3 px-4 text-sm font-medium'>Often added back — no cash outflow</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>Legitimate operating costs</td><td class='py-3 px-4 text-sm font-medium'>Deductible if documented</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Personal expenses through business</td><td class='py-3 px-4 text-sm font-medium'>Added back as income</td></tr></tbody></table></div>
+
+      <h2 class="mt-12 mb-6">Imputed Income — When Courts Assign Income You Did Not Earn</h2>
+      <p class="mb-4">If the court finds that a parent is <strong>voluntarily underemployed</strong> — meaning they have chosen to work less than they are capable of — it can assign or "impute" income at the level the parent could reasonably earn. This is one of the most powerful tools courts have against parents who try to reduce their apparent income to lower their support obligation.</p>
+      <p class="mb-4">Courts consider factors including the parent's work history, education, professional licenses, and the local job market when determining what income to impute. At a minimum, courts typically impute income at Washington's current minimum wage for full-time work. If your documented history shows you were earning $5,000/month and you suddenly claim $800/month after a separation, expect significant scrutiny.</p>
+      <p class="mb-4">Legitimate reasons for reduced income — a documented medical condition, industry-wide layoffs, or an involuntary termination — are evaluated differently. The key is contemporaneous documentation proving the reduction was not voluntary.</p>
+
+      <h2 class="mt-12 mb-6">How Courts Verify Income in Disputed Cases</h2>
+      <p class="mb-4">When one parent disputes the other's income disclosure, courts have broad fact-finding authority. They can order production of bank statements, credit card records, business financials, brokerage accounts, real estate records, and any other financial documentation relevant to establishing actual income. Lifestyle evidence — vacations taken, vehicles driven, housing maintained — can also be introduced to challenge claimed income figures.</p>
+
+      <h2 class="mt-12 mb-6">Does My New Partner's Income Affect My Child Support?</h2>
+      <p class="mb-4">Generally no — a new spouse or domestic partner's income is not included in the core child support calculation in Washington State. However, if you have significantly reduced your own working hours because your new partner is supporting your household, the court may impute income to you at the level you would otherwise be earning. The indirect effect is real even if the direct inclusion is prohibited.</p>
+
+      <h2 class="mt-12 mb-6">Related Articles</h2>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><a href="/blog/child-support-calculation-washington-2026">WA Child Support Calculation: Full Step-by-Step Walkthrough</a></li>
+        <li><a href="/blog/washington-child-support-guidelines-2026">2026 WA State Guidelines: Complete Handbook</a></li>
+        <li><a href="/blog/how-courts-decide-child-support-washington">How Washington Courts Decide Your Support Order</a></li>
+      </ul>
+
+      <h2 class="mt-12 mb-6">Bottom Line</h2>
+      <p class="mb-4">Washington's income definition is deliberately broad and courts are experienced at identifying attempts to minimize apparent income. Accurate, complete disclosure is both legally required and practically the best strategy — undisclosed income discovered during a hearing damages credibility in ways that affect the entire proceeding. Enter your accurate income into our <a href="/">calculator</a> to get your 2026 estimate, then review the full calculation with the <a href="/worksheet">Professional Worksheet</a>.</p>
+
+      <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Using Your Actual Income</h3><ul class="space-y-2"><li><a href="/" class="hover:underline">Run your child support estimate with accurate net income</a></li><li><a href="/deviation-calculator" class="hover:underline">Check if deviation factors apply to your situation</a></li><li><a href="/modification-calculator" class="hover:underline">See if your current order should be modified</a></li></ul></div>
+      <p class="text-sm mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class="hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class="hover:underline">Washington Courts</a> homepage.</p>
+      <div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4"><div><p class="font-semibold text-gray-900 text-base mb-1">Calculate Your Child Support Using 2026 Income Rules</p><p class="text-sm text-gray-500">Free · RCW 26.19.071 Income Definition · All 39 Washington Counties</p></div><a href="/" class="btn btn-primary whitespace-nowrap">Start Calculation →</a></div>
+    `,
+    faqs: [
+      {
+        question: "What income is used to calculate child support in Washington State?",
+        answer: "Washington uses gross monthly income as defined under RCW 26.19.071, which includes wages, salary, overtime, bonuses, commissions, self-employment income, rental income, unemployment compensation, disability benefits, Social Security, pension distributions, RSUs, and investment income. The definition is deliberately broad to prevent parents from structuring their finances to reduce apparent income."
+      },
+      {
+        question: "Does my new spouse's income count toward child support in Washington?",
+        answer: "Generally no. A new spouse or domestic partner's income is not included in the core child support calculation in Washington State. However, if you have significantly reduced your own working hours because your new partner supports the household, the court may impute income to you at the level you would otherwise be earning."
+      },
+      {
+        question: "How is self-employment income calculated for child support in Washington?",
+        answer: "Self-employment income is calculated as gross business revenue minus legitimate business expenses under the RCW 26.19 standard, which is stricter than the IRS standard. Courts regularly add back deductions like depreciation, excessive vehicle expenses, and personal costs run through the business that do not represent actual cash outflows reducing the parent's available income."
+      },
+      {
+        question: "What is imputed income in Washington child support cases?",
+        answer: "Imputed income is income assigned by the court to a parent who appears to be voluntarily working less than they are capable of. Under RCW 26.19.071(6), if a court finds a parent is voluntarily underemployed, it assigns income at the level the parent could reasonably earn based on their work history, education, and the local job market — at minimum, Washington's current minimum wage for full-time work."
+      },
+      {
+        question: "Is unemployment compensation counted as income for child support in Washington?",
+        answer: "Yes. Unemployment compensation is defined as gross income under RCW 26.19.071 in Washington State. DSHS can request an income withholding order directly with the Employment Security Department, meaning unemployment benefits can be garnished to pay child support. Receiving unemployment does not pause or reduce your existing child support obligation — you must file a modification petition to change the order amount."
+      }
+    ]
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // BLOG 14
+  // ─────────────────────────────────────────────────────────────────────────────
+  {
+    title: "WA Child Support Schedule 2026: Reading the Economic Table",
+    slug: "washington-child-support-schedule-2026-economic-table",
+    category: "Calculation Guide",
+    keywords: "wa child support schedule, washington child support schedule, wscss economic table 2026, wa child support schedule 2026",
+    readTime: "9 min",
+    excerpt: "The 2026 Washington Child Support Schedule economic table is the foundation of every child support order in the state. Here is exactly how to read it, what the numbers mean, and how courts use it to calculate your obligation.",
+    metaTitle: "WA Child Support Schedule 2026: Economic Table | WSCSS",
+    metaDescription: "Learn to read the 2026 WA Child Support Schedule economic table. Understand what the numbers mean and how to find your basic support obligation.",
+    author: "WSCSS Editorial Team",
+    createdAt: "2026-05-15",
+    updatedAt: "2026-05-15",
+    featured: false,
+    image: { url: "/wscss-og.webp", alt: "Washington Child Support Schedule 2026 Economic Table Guide", width: 1200, height: 630 },
+    content: `
+      <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
+        <strong>Key Takeaways (2026)</strong>
+        <ul class="space-y-2 text-indigo-800 list-disc ml-6 mt-2">
+          <li>The 2026 economic table covers combined net income from <strong>$0 to $50,000 per month</strong></li>
+          <li>The table increased by approximately <strong>4.2%</strong> from the prior schedule</li>
+          <li>You look up the table using <strong>combined net income</strong> — not individual income</li>
+          <li>The table gives the <strong>Basic Support Obligation (BSO)</strong> — not the transfer payment</li>
+          <li>Use our <a href="/">calculator</a> to look up your table amount instantly without manual lookup</li>
+        </ul>
+      </div>
+      <p class="text-sm italic mb-6">Disclaimer: This guide explains the 2026 Washington Child Support Schedule for educational purposes. It is not legal advice. Consult a licensed WA family law attorney for advice specific to your case.</p>
+
+      <p class="mb-4">Every child support order in Washington State begins with the same document: the Washington State Child Support Schedule (WSCSS) economic table. It is a published table that shows how much Washington believes it costs to raise children at different combined income levels, and it is legally mandated as the starting point for every calculation under <strong>RCW 26.19</strong>. Understanding how to read it, and what it actually tells you, demystifies a large portion of the child support process.</p>
+
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>2026 Schedule Key Facts</caption><thead><tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'><th class='py-3 px-4 text-sm font-medium'>Key Fact</th><th class='py-3 px-4 text-sm font-medium'>2026 Standard</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Table coverage</td><td class='py-3 px-4 text-sm font-medium'>Combined net income $0 to $50,000/month</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>Table increase from prior year</td><td class='py-3 px-4 text-sm font-medium'>Approximately 4.2%</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-medium'>$2,394/month</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>Minimum support</td><td class='py-3 px-4 text-sm font-medium'>$50 per child per month</td></tr></tbody></table></div>
+
+      <h2 class="mt-12 mb-6">What Is the WSCSS Economic Table?</h2>
+      <p class="mb-4">The economic table is a grid. The rows represent combined monthly net income levels in $100 increments. The columns represent the number of children — 1, 2, 3, 4, 5, or 6 or more. Each cell in the table contains the <strong>Basic Support Obligation (BSO)</strong> — the total amount Washington estimates it costs to raise that number of children at that combined income level per month.</p>
+      <p class="mb-4">The table is based on economic research into what intact families actually spend on children at different income levels. The legislature updates it periodically — the 2026 table reflects cost-of-living changes and revised expenditure data, producing an increase of approximately 4.2% across most income brackets from the prior schedule.</p>
+
+      <h2 class="mt-12 mb-6">The Critical Distinction: BSO vs. Transfer Payment</h2>
+      <p class="mb-4">This is where many people get confused. The number in the economic table — the Basic Support Obligation — is <strong>not</strong> what either parent pays. It is the total combined obligation before it is split between the parents.</p>
+      <p class="mb-4">Each parent is responsible for their proportional share of the BSO based on their share of combined income. If Parent A earns 65% of combined income, Parent A is responsible for 65% of the BSO. The transfer payment — what actually changes hands — is the share owed by the parent with fewer residential days.</p>
+
+      <h2 class="mt-12 mb-6">How to Read the Table Step by Step</h2>
+      <ol class="list-decimal pl-6 space-y-4 mb-8">
+        <li><strong>Calculate both parents' monthly net income</strong> after all permitted deductions under RCW 26.19.071</li>
+        <li><strong>Add both net incomes together</strong> to get combined monthly net income</li>
+        <li><strong>Find the income row</strong> in the table that matches your combined income — round to the nearest $100 increment</li>
+        <li><strong>Find the column</strong> for your number of children</li>
+        <li><strong>The number in that cell is your BSO</strong> — the starting point for the calculation</li>
+        <li><strong>Calculate each parent's share</strong> by multiplying the BSO by each parent's income percentage</li>
+        <li><strong>Add extraordinary expenses</strong> — childcare, health insurance, uninsured medical — split proportionally on top</li>
+      </ol>
+
+      <h2 class="mt-12 mb-6">Sample Table Values — 2026 Schedule</h2>
+      <div class='overflow-x-auto mb-4'><table class='w-full'><caption class='sr-only'>2026 WSCSS Sample Values</caption><thead><tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'><th class='py-3 px-4 text-left text-sm font-medium'>Combined Net Monthly Income</th><th class='py-3 px-4 text-left text-sm font-medium'>1 Child</th><th class='py-3 px-4 text-left text-sm font-medium'>2 Children</th><th class='py-3 px-4 text-left text-sm font-medium'>3 Children</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>$3,000</td><td class='py-3 px-4 text-sm font-medium'>$515</td><td class='py-3 px-4 text-sm font-medium'>$713</td><td class='py-3 px-4 text-sm font-medium'>$809</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>$5,000</td><td class='py-3 px-4 text-sm font-medium'>$697</td><td class='py-3 px-4 text-sm font-medium'>$966</td><td class='py-3 px-4 text-sm font-medium'>$1,096</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>$5,500</td><td class='py-3 px-4 text-sm font-medium'>$733</td><td class='py-3 px-4 text-sm font-medium'>$768</td><td class='py-3 px-4 text-sm font-medium'>$1,149</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>$7,000</td><td class='py-3 px-4 text-sm font-medium'>$844</td><td class='py-3 px-4 text-sm font-medium'>$1,169</td><td class='py-3 px-4 text-sm font-medium'>$1,326</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>$10,000</td><td class='py-3 px-4 text-sm font-medium'>$1,013</td><td class='py-3 px-4 text-sm font-medium'>$1,404</td><td class='py-3 px-4 text-sm font-medium'>$1,591</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>$15,000</td><td class='py-3 px-4 text-sm font-medium'>$1,253</td><td class='py-3 px-4 text-sm font-medium'>$1,736</td><td class='py-3 px-4 text-sm font-medium'>$1,968</td></tr></tbody></table></div>
+      <p class="text-sm italic mb-8">These values are from the 2026 WSCSS schedule. Use our <a href="/">calculator</a> for your exact income amount — it handles interpolation between table rows automatically.</p>
+
+      <h2 class="mt-12 mb-6">What Happens Above $50,000 Combined Income?</h2>
+      <p class="mb-4">The 2026 economic table covers combined monthly net income up to $50,000. Above that threshold, the table ends and courts use judicial discretion — they apply the table's top-tier amount as a starting point and may add a percentage of income above the cap based on the child's actual needs, the family's established lifestyle, and the parents' specific financial circumstances. High-income cases above $50,000 combined typically involve attorney representation and more detailed litigation.</p>
+
+      <h2 class="mt-12 mb-6">What Changed from the Prior Schedule</h2>
+      <p class="mb-4">The 2026 table increased by approximately 4.2% across most combined income brackets compared to the prior schedule. This means if your order was set under an earlier schedule and your incomes have not changed, recalculating under the 2026 table will likely produce a higher BSO. If 3 years have passed since your order was set, you may have grounds to request modification using the updated 2026 table — use the <a href="/modification-calculator">Modification Calculator</a> to check your numbers.</p>
+
+      <h2 class="mt-12 mb-6">Why You Should Use a Calculator Rather Than the Raw Table</h2>
+      <p class="mb-4">The published table uses $100 income increments, but your actual combined income almost certainly falls between two rows. Courts interpolate between rows to find the precise BSO for your exact income — a calculation that is easy to get wrong manually. Our <a href="/">calculator</a> handles this interpolation automatically along with the proportional share split and extraordinary expense addition, giving you the complete picture in seconds rather than requiring manual table lookup and arithmetic.</p>
+
+      <h2 class="mt-12 mb-6">Related Articles</h2>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><a href="/blog/how-to-calculate-child-support-washington-state">How to Calculate Child Support in Washington State (2026 Guide)</a></li>
+        <li><a href="/blog/child-support-calculation-washington-2026">WA Child Support Calculation: Full Step-by-Step Walkthrough</a></li>
+        <li><a href="/blog/washington-child-support-guidelines-2026">2026 WA State Guidelines: Complete Handbook</a></li>
+      </ul>
+
+      <h2 class="mt-12 mb-6">Bottom Line</h2>
+      <p class="mb-4">The 2026 WSCSS economic table is the foundation of every Washington child support order, but it is the starting point — not the final number. The BSO from the table gets split by income share, then adjusted for extraordinary expenses, the Self-Support Reserve, and the 45% cap before producing the actual transfer payment. Use our <a href="/">calculator</a> to handle all of this automatically with your specific numbers.</p>
+
+      <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Look Up Your 2026 Table Amount Instantly</h3><ul class="space-y-2"><li><a href="/" class="hover:underline">Basic calculator — enter incomes and children, get your BSO immediately</a></li><li><a href="/joint-custody-calculator" class="hover:underline">Joint custody adjustment — applies residential credit to BSO</a></li><li><a href="/modification-calculator" class="hover:underline">Modification calculator — compare your current order to 2026 table amount</a></li></ul></div>
+      <p class="text-sm mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class="hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class="hover:underline">Washington Courts</a> homepage.</p>
+      <div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4"><div><p class="font-semibold text-gray-900 text-base mb-1">Calculate Using the 2026 Washington Schedule</p><p class="text-sm text-gray-500">Free · Official 2026 WSCSS Economic Table · All 39 Washington Counties</p></div><a href="/" class="btn btn-primary whitespace-nowrap">Start Calculation →</a></div>
+    `,
+    faqs: [
+      {
+        question: "What is the Washington State Child Support Schedule?",
+        answer: "The Washington State Child Support Schedule (WSCSS) is the legally mandated framework for calculating child support in Washington, established under RCW 26.19. Its core component is an economic table that shows the Basic Support Obligation — the estimated total cost of raising children — at different combined parental income levels. Every child support order in Washington must start with this table."
+      },
+      {
+        question: "How do I read the Washington child support economic table?",
+        answer: "Find the row matching your combined monthly net income (both parents' net incomes added together), then find the column for your number of children. The number in that cell is the Basic Support Obligation — the total combined cost estimate before it is split between parents by their proportional income shares. This is not what either parent pays directly."
+      },
+      {
+        question: "What is the difference between the BSO and the transfer payment?",
+        answer: "The Basic Support Obligation (BSO) from the economic table is the total combined amount both parents owe for the children's support. Each parent is responsible for their proportional share based on their share of combined income. The transfer payment is the amount the parent with fewer residential days actually pays to the other parent — typically their proportional share of the BSO plus extraordinary expenses."
+      },
+      {
+        question: "Did the Washington child support table change for 2026?",
+        answer: "Yes. The 2026 Washington State Child Support Schedule economic table increased by approximately 4.2% across most combined income brackets compared to the prior schedule. This reflects updated cost-of-living data and revised research on actual child-rearing expenditures. If your order was set before 2026 and three years have passed, the updated table may justify a modification petition."
+      },
+      {
+        question: "What happens when combined income exceeds $50,000 per month in Washington?",
+        answer: "The 2026 WSCSS economic table covers combined monthly net income up to $50,000. Above that level, the table ends and courts apply judicial discretion — using the top-tier table amount as a baseline and potentially adding a percentage of income above the threshold based on the child's actual needs and the family's established standard of living during the marriage."
+      }
+    ]
   }
 ];

@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: '2026-05-07',
+      lastModified: '2026-05-15',
       changeFrequency: 'weekly',
       priority: 0.8,
     },
@@ -66,6 +66,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/editorial-methodology`,
       lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    // New 2026 Blogs
+    {
+      url: `${baseUrl}/blog/joint-custody-child-support-washington-2026`,
+      lastModified: '2026-05-15',
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/washington-child-support-deviation-2026`,
+      lastModified: '2026-05-15',
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/how-to-modify-child-support-washington-2026`,
+      lastModified: '2026-05-15',
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/what-counts-as-income-child-support-washington-2026`,
+      lastModified: '2026-05-15',
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/blog/washington-child-support-schedule-2026-economic-table`,
+      lastModified: '2026-05-15',
       changeFrequency: 'monthly',
       priority: 0.7,
     },
@@ -102,8 +133,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // All blog posts
+  // All blog posts (excluding the new ones already added explicitly)
+  const explicitBlogSlugs = [
+    'joint-custody-child-support-washington-2026',
+    'washington-child-support-deviation-2026',
+    'how-to-modify-child-support-washington-2026',
+    'what-counts-as-income-child-support-washington-2026',
+    'washington-child-support-schedule-2026-economic-table'
+  ];
+
   blogs.forEach((post) => {
+    if (explicitBlogSlugs.includes(post.slug)) return;
     sitemapUrls.push({
       url: `${baseUrl}/blog/${post.slug}`,
       lastModified: post.createdAt,
