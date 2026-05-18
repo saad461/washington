@@ -1176,8 +1176,8 @@ Transfer payment = Non-residential parent's share</div>
     metaTitle: "Joint Custody Child Support Washington State 2026 | WSCSS",
     metaDescription: "How does joint custody affect child support in WA? Learn about residential credit, who pays whom, and how to calculate your 2026 adjusted obligation.",
     author: "WSCSS Editorial Team",
-    createdAt: "2026-05-15",
-    updatedAt: "2026-05-15",
+    createdAt: "2026-05-14",
+    updatedAt: "2026-05-14",
     featured: false,
     image: { url: "/wscss-og.webp", alt: "Joint Custody Child Support Washington State 2026", width: 1200, height: 630 },
     content: `
@@ -1415,8 +1415,8 @@ Transfer payment = Non-residential parent's share</div>
     metaTitle: "How to Modify Child Support in Washington State 2026 | WSCSS",
     metaDescription: "Learn how to modify WA child support in 2026. Covers the 15% rule, 3 year rule under RCW 26.09.170, forms needed, and what to expect in court.",
     author: "WSCSS Editorial Team",
-    createdAt: "2026-05-15",
-    updatedAt: "2026-05-15",
+    createdAt: "2026-05-16",
+    updatedAt: "2026-05-16",
     featured: false,
     image: { url: "/wscss-og.webp", alt: "How to Modify Child Support in Washington State 2026", width: 1200, height: 630 },
     content: `
@@ -1530,8 +1530,8 @@ Transfer payment = Non-residential parent's share</div>
     metaTitle: "What Counts as Income for WA Child Support 2026 | WSCSS",
     metaDescription: "WA defines income broadly for child support. Learn what counts, what doesn't, how self-employment works, and what courts do when income is hidden.",
     author: "WSCSS Editorial Team",
-    createdAt: "2026-05-15",
-    updatedAt: "2026-05-15",
+    createdAt: "2026-05-17",
+    updatedAt: "2026-05-17",
     featured: false,
     image: { url: "/wscss-og.webp", alt: "What Counts as Income for Child Support in Washington State 2026", width: 1200, height: 630 },
     content: `
@@ -1652,8 +1652,8 @@ Transfer payment = Non-residential parent's share</div>
     metaTitle: "WA Child Support Schedule 2026: Economic Table | WSCSS",
     metaDescription: "Learn to read the 2026 WA Child Support Schedule economic table. Understand what the numbers mean and how to find your basic support obligation.",
     author: "WSCSS Editorial Team",
-    createdAt: "2026-05-15",
-    updatedAt: "2026-05-15",
+    createdAt: "2026-05-18",
+    updatedAt: "2026-05-18",
     featured: false,
     image: { url: "/wscss-og.webp", alt: "Washington Child Support Schedule 2026 Economic Table Guide", width: 1200, height: 630 },
     content: `
