@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog`,
-      lastModified: '2026-05-15',
+      lastModified: '2026-05-18',
       changeFrequency: 'weekly',
       priority: 0.8,
     },
@@ -72,7 +72,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // New 2026 Blogs
     {
       url: `${baseUrl}/blog/joint-custody-child-support-washington-2026`,
-      lastModified: '2026-05-15',
+      lastModified: '2026-05-14',
       changeFrequency: 'monthly',
       priority: 0.7,
     },
@@ -84,19 +84,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/blog/how-to-modify-child-support-washington-2026`,
-      lastModified: '2026-05-15',
+      lastModified: '2026-05-16',
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/blog/what-counts-as-income-child-support-washington-2026`,
-      lastModified: '2026-05-15',
+      lastModified: '2026-05-17',
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${baseUrl}/blog/washington-child-support-schedule-2026-economic-table`,
-      lastModified: '2026-05-15',
+      lastModified: '2026-05-18',
       changeFrequency: 'monthly',
       priority: 0.7,
     },
