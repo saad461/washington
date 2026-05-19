@@ -1179,7 +1179,7 @@ Transfer payment = Non-residential parent's share</div>
     createdAt: "2026-05-14",
     updatedAt: "2026-05-14",
     featured: false,
-    image: { url: "/wscss-og.webp", alt: "Joint Custody Child Support Washington State 2026", width: 1200, height: 630 },
+    image: { url: "/img/joint_custody_guide.webp", alt: "Joint Custody Child Support Washington State 2026", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
         <strong>Key Takeaways (2026)</strong>
@@ -1291,7 +1291,7 @@ Transfer payment = Non-residential parent's share</div>
     createdAt: "2026-05-15",
     updatedAt: "2026-05-15",
     featured: false,
-    image: { url: "/wscss-og.webp", alt: "Washington State Child Support Deviation 2026 Guide", width: 1200, height: 630 },
+    image: { url: "/img/deviation_guide.webp", alt: "Washington State Child Support Deviation 2026 Guide", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
         <strong>Key Takeaways (2026)</strong>
@@ -1418,7 +1418,7 @@ Transfer payment = Non-residential parent's share</div>
     createdAt: "2026-05-16",
     updatedAt: "2026-05-16",
     featured: false,
-    image: { url: "/wscss-og.webp", alt: "How to Modify Child Support in Washington State 2026", width: 1200, height: 630 },
+    image: { url: "/img/modification_guide.webp", alt: "How to Modify Child Support in Washington State 2026", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
         <strong>Key Takeaways (2026)</strong>
@@ -1533,7 +1533,7 @@ Transfer payment = Non-residential parent's share</div>
     createdAt: "2026-05-17",
     updatedAt: "2026-05-17",
     featured: false,
-    image: { url: "/wscss-og.webp", alt: "What Counts as Income for Child Support in Washington State 2026", width: 1200, height: 630 },
+    image: { url: "/img/income_definition_guide.webp", alt: "What Counts as Income for Child Support in Washington State 2026", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
         <strong>Key Takeaways (2026)</strong>
@@ -1655,7 +1655,7 @@ Transfer payment = Non-residential parent's share</div>
     createdAt: "2026-05-18",
     updatedAt: "2026-05-18",
     featured: false,
-    image: { url: "/wscss-og.webp", alt: "Washington Child Support Schedule 2026 Economic Table Guide", width: 1200, height: 630 },
+    image: { url: "/img/economic_table_guide.webp", alt: "Washington Child Support Schedule 2026 Economic Table Guide", width: 1200, height: 630 },
     content: `
       <div class="bg-[var(--color-brand-primary-light)] p-4 rounded-xl mb-8">
         <strong>Key Takeaways (2026)</strong>
