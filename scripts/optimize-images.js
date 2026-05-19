@@ -34,6 +34,10 @@ async function optimizeImages() {
       const afterSizeKiB = (optimizedStats.size / 1024).toFixed(2);
 
       console.log(`Optimized ${file}: ${beforeSizeKiB} KiB -> ${afterSizeKiB} KiB`);
+
+      // Remove the original source file after successful optimization
+      fs.unlinkSync(inputPath);
+      console.log(`Removed original file: ${file}`);
     }
 
     console.log('Image optimization complete.');
