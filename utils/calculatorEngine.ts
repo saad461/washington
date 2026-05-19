@@ -143,16 +143,12 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
 
   // ── SSR PROTECTION (RCW 26.19.065(2)(b)) ─────────────────────────
   // SSR must be applied BEFORE deviations like parenting time
-  const applySSR = (obligation: number, netIncome: number) => {
+  const applySSR = (share: number, netIncome: number) => {
     const minFloor = MIN_SUPPORT_PER_CHILD * children;
-    // FIX 2: Stabilize SSR logic - check threshold directly
-    if (netIncome <= SELF_SUPPORT_RESERVE) {
-      return minFloor;
-    }
-    if (netIncome - obligation < SELF_SUPPORT_RESERVE) {
-      return Math.max(netIncome - SELF_SUPPORT_RESERVE, minFloor);
-    }
-    return obligation;
+    const available = netIncome - SELF_SUPPORT_RESERVE;
+    // The equation must compare the Proportional Share against Available Income After SSR
+    // and must not drop below the statutory floor.
+    return Math.max(minFloor, Math.min(share, available));
   };
 
   obligationP1 = applySSR(obligationP1, netP1);
@@ -303,12 +299,12 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
     obligationP1, obligationP2,
     children,
     breakdown: {
-      // FIX 5: breakdown.baseSupport = total base table support
-      baseSupport: baseTableSupport,
+      // breakdown.baseSupport = Payer's Proportional Share of Basic Obligation
+      baseSupport: payingParent === "P1" ? preSSRP1 : preSSRP2,
       payerNetIncome: payingParent === "P1" ? netP1 : netP2,
       payerSharePercentage: payingParent === "P1" ? shareP1 : shareP2,
-      // FIX 5: Clamp payerAvailableAfterSSR at zero
-      payerAvailableAfterSSR: Math.max(0, (payingParent === "P1" ? netP1 : netP2) - SELF_SUPPORT_RESERVE),
+      // Payer available income after SSR (can be negative)
+      payerAvailableAfterSSR: (payingParent === "P1" ? netP1 : netP2) - SELF_SUPPORT_RESERVE,
       parentingAdjustment,
       otherChildrenAdjustment,
       healthInsurance: healthcareAdjustment,

@@ -402,8 +402,8 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
 
                     <div className="pt-2">
                       <div className="flex justify-between mb-2">
-                        <span className="text-[12px] font-bold text-blue-600 uppercase">P1 Share: {Math.round(result.shareP1 * 100)}%</span>
-                        <span className="text-[12px] font-bold text-purple-600 uppercase">P2 Share: {Math.round(result.shareP2 * 100)}%</span>
+                        <span className="text-[12px] font-bold text-blue-600 uppercase">P1 Share: {(result.shareP1 * 100).toFixed(2)}%</span>
+                        <span className="text-[12px] font-bold text-purple-600 uppercase">P2 Share: {(result.shareP2 * 100).toFixed(2)}%</span>
                       </div>
                       <div className="h-2.5 w-full bg-gray-100 rounded-full overflow-hidden flex">
                         <motion.div initial={{ width: 0 }} animate={{ width: `${result.shareP1 * 100}%` }} className="h-full bg-blue-600" />
@@ -433,7 +433,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
 
                       <div className="flex justify-between items-center">
                         <span className="text-sm text-gray-700">
-                          {payingParent === "P1" ? "P1" : "P2"} Proportional Share ({Math.round((payingParent === "P1" ? result.shareP1 : result.shareP2) * 100)}%)
+                          {payingParent === "P1" ? "P1" : "P2"} Proportional Share ({((payingParent === "P1" ? result.shareP1 : result.shareP2) * 100).toFixed(2)}%)
                         </span>
                         <span className="font-bold text-gray-900 tabular-nums">
                           <AnimatedNumber value={toggleValue(result.breakdown.baseSupport)} />
@@ -475,7 +475,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                         <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">2</div>
                         <div className="flex flex-col gap-1">
                           <p className="font-bold text-gray-900">Step 2 — Income Share</p>
-                          <p>Paying Parent income <strong>{curFormatter.format(result.breakdown.payerNetIncome)}</strong> ÷ Combined <strong>{curFormatter.format(result.combinedIncome)}</strong> = <strong>{Math.round(result.breakdown.payerSharePercentage * 100)}%</strong></p>
+                          <p>Paying Parent income <strong>{curFormatter.format(result.breakdown.payerNetIncome)}</strong> ÷ Combined <strong>{curFormatter.format(result.combinedIncome)}</strong> = <strong>{(result.breakdown.payerSharePercentage * 100).toFixed(2)}%</strong></p>
                         </div>
                       </div>
 
@@ -484,7 +484,7 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                         <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">3</div>
                         <div className="flex flex-col gap-1">
                           <p className="font-bold text-gray-900">Step 3 — Proportional Share</p>
-                          <p><strong>{curFormatter.format(result.baseSupport)}</strong> × <strong>{Math.round(result.breakdown.payerSharePercentage * 100)}%</strong> = <strong>{curFormatter.format(result.breakdown.baseSupport)}</strong></p>
+                          <p><strong>{curFormatter.format(result.baseSupport)}</strong> × <strong>{(result.breakdown.payerSharePercentage * 100).toFixed(2)}%</strong> = <strong>{curFormatter.format(result.breakdown.baseSupport)}</strong></p>
                         </div>
                       </div>
 
