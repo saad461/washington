@@ -312,16 +312,14 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
         </div>
 
         {/* ── RIGHT: Results panel ──────────────────────────────────────── */}
-        <div className="lg:col-span-5 lg:sticky lg:top-24">
-          <div className="bg-[#F3F4F6] border border-gray-200 rounded-xl p-4 sm:p-6 h-full min-h-[500px]">
+        <div className="lg:col-span-5 lg:sticky lg:top-24 bg-[#F3F4F6] border border-gray-200 rounded-xl p-4 sm:p-6 min-h-[500px] flex flex-col">
           <AnimatePresence mode="wait">
             {!result ? (
               <motion.div
                 key="empty"
                 initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.98 }}
-                className="h-full flex flex-col"
+                className="h-full flex flex-col bg-white border border-gray-200 rounded-xl p-6 shadow-sm"
               >
-                <div className="bg-white border border-gray-200 rounded-xl p-6 flex-1 shadow-sm">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
                       <Calculator size={18} />
@@ -332,7 +330,6 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                   <div className="mt-8 text-center">
                     <p className="text-sm font-semibold text-gray-500">Enter income to update this result</p>
                   </div>
-                </div>
               </motion.div>
             ) : (
               <motion.div
@@ -379,26 +376,26 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                       <Scale size={14} /> Income Breakdown
                     </h4>
 
-                    <div className="space-y-3">
+                  <dl className="space-y-3">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-600">P1 {isYearly ? 'Annual' : 'Monthly'} Net Income</span>
-                        <span className="font-bold text-gray-900 tabular-nums">
+                      <dt className="text-sm text-gray-600">P1 {isYearly ? 'Annual' : 'Monthly'} Net Income</dt>
+                      <dd className="font-bold text-gray-900 tabular-nums">
                           <AnimatedNumber value={toggleValue(result.netP1)} />
-                        </span>
+                      </dd>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-600">P2 {isYearly ? 'Annual' : 'Monthly'} Net Income</span>
-                        <span className="font-bold text-gray-900 tabular-nums">
+                      <dt className="text-sm text-gray-600">P2 {isYearly ? 'Annual' : 'Monthly'} Net Income</dt>
+                      <dd className="font-bold text-gray-900 tabular-nums">
                           <AnimatedNumber value={toggleValue(result.netP2)} />
-                        </span>
+                      </dd>
                       </div>
                       <div className="flex justify-between items-center pt-2 border-t border-gray-100">
-                        <span className="text-sm font-bold text-gray-900">Combined {isYearly ? 'Annual' : 'Monthly'} Net Income</span>
-                        <span className="font-bold text-gray-900 tabular-nums">
+                      <dt className="text-sm font-bold text-gray-900">Combined {isYearly ? 'Annual' : 'Monthly'} Net Income</dt>
+                      <dd className="font-bold text-gray-900 tabular-nums">
                           <AnimatedNumber value={toggleValue(result.combinedIncome)} />
-                        </span>
+                      </dd>
                       </div>
-                    </div>
+                  </dl>
 
                     <div className="pt-2">
                       <div className="flex justify-between mb-2">
@@ -418,28 +415,28 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                       <Calculator size={14} /> Support Calculation
                     </h4>
 
-                    <div className="space-y-4">
+                    <dl className="space-y-4">
                       <div className="flex justify-between items-start">
-                        <div className="flex flex-col">
+                        <dt className="flex flex-col">
                           <span className="text-sm font-bold text-gray-900">{isYearly ? 'Annual' : 'Basic'} Support Obligation</span>
                           <span className="text-[12px] text-gray-500">
                             2026 schedule · combined {curFormatter.format(result.roundedCombinedIncome)} · {result.children} {result.children === 1 ? 'child' : 'children'}
                           </span>
-                        </div>
-                        <span className="font-bold text-gray-900 tabular-nums">
+                        </dt>
+                        <dd className="font-bold text-gray-900 tabular-nums">
                           <AnimatedNumber value={toggleValue(result.baseSupport)} />
-                        </span>
+                        </dd>
                       </div>
 
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-gray-700">
+                        <dt className="text-sm text-gray-700">
                           {payingParent === "P1" ? "P1" : "P2"} Proportional Share ({Math.round((payingParent === "P1" ? result.shareP1 : result.shareP2) * 100)}%)
-                        </span>
-                        <span className="font-bold text-gray-900 tabular-nums">
+                        </dt>
+                        <dd className="font-bold text-gray-900 tabular-nums">
                           <AnimatedNumber value={toggleValue(result.breakdown.baseSupport)} />
-                        </span>
+                        </dd>
                       </div>
-                    </div>
+                    </dl>
                   </div>
 
                   {/* FINAL TOTAL SECTION */}
@@ -591,7 +588,6 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
               </motion.div>
             )}
           </AnimatePresence>
-          </div>
         </div>
       </div>
 

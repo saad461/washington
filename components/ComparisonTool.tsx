@@ -168,7 +168,11 @@ export default function ComparisonTool() {
                       onChange={(e) => updateScenario(s.id, { name: e.target.value })}
                     />
                     {scenarios.length > 1 && (
-                      <button onClick={() => removeScenario(s.id)} className="text-gray-400 hover:text-red-500 transition-colors">
+                      <button
+                        onClick={() => removeScenario(s.id)}
+                        className="text-gray-400 hover:text-red-500 transition-colors"
+                        aria-label={`Remove ${s.name}`}
+                      >
                         <Trash2 size={18} />
                       </button>
                     )}
