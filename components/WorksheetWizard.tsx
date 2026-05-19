@@ -79,6 +79,7 @@ const MobileStepNav = ({
           <button
             onClick={() => setIsOpen(true)}
             className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-[12px] font-bold text-gray-700 uppercase tracking-widest"
+            aria-label="Open worksheet parts menu"
           >
             [≡ Parts]
           </button>
@@ -261,6 +262,7 @@ const InputField = ({
               type="button"
               onClick={toggleTooltip}
               className="focus:outline-none"
+            aria-label="Toggle information tooltip"
             >
               <Info className="w-4 h-4 text-[var(--color-text-secondary)] cursor-help mt-1" />
             </button>

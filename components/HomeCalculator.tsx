@@ -576,7 +576,11 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                     Launch Full Wizard
                     <ArrowRight size={18} />
                   </Link>
-                  <button onClick={() => window.print()} className="btn btn-secondary btn-secondary-lg px-6">
+                  <button
+                    onClick={() => window.print()}
+                    className="btn btn-secondary btn-secondary-lg px-6"
+                    aria-label="Print calculation results"
+                  >
                     <Printer size={18} />
                     Print Results
                   </button>

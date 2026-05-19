@@ -118,6 +118,7 @@ export default function HistoryPanel({
                             onClick={() => onReload(entry.inputs)}
                             className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                             title="Reload inputs"
+                            aria-label="Reload these inputs"
                           >
                             <RotateCcw size={16} />
                           </button>
@@ -125,6 +126,7 @@ export default function HistoryPanel({
                             onClick={() => deleteEntry(entry.id)}
                             className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                             title="Delete"
+                            aria-label="Delete this saved calculation"
                           >
                             <Trash2 size={16} />
                           </button>

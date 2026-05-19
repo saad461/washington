@@ -67,7 +67,11 @@ export default function CookieBanner() {
               </Link>
             </p>
           </div>
-          <button onClick={() => setShow(false)} className="text-white/20 hover:text-white transition-colors p-1 cursor-pointer">
+          <button
+            onClick={() => setShow(false)}
+            className="text-white/20 hover:text-white transition-colors p-1 cursor-pointer"
+            aria-label="Close privacy notice"
+          >
             <X size={18} />
           </button>
         </div>
