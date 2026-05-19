@@ -99,25 +99,20 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       </section>
 
       {/* ── CALCULATOR SECTION ────────────────────────────────────────── */}
-      <section className="py-0 w-full bg-white">
-        <div className="container-wide">
-          <div className="flex flex-col">
-            <h2 className="text-center mt-[32px] mb-[16px] scroll-mt-24 no-print" id="calculator-heading">
-              Calculate Your Child Support Obligation Instantly
-            </h2>
-            <div id="calculator" className="scroll-mt-24 mb-[32px]">
-              <HomeCalculator
-                selectedCounty={selectedCounty}
-                setSelectedCounty={setSelectedCounty}
-              />
-            </div>
-          </div>
+      <section className="py-0 w-full bg-white container-wide flex flex-col">
+        <h2 className="text-center mt-[32px] mb-[16px] scroll-mt-24 no-print" id="calculator-heading">
+          Calculate Your Child Support Obligation Instantly
+        </h2>
+        <div id="calculator" className="scroll-mt-24 mb-[32px]">
+          <HomeCalculator
+            selectedCounty={selectedCounty}
+            setSelectedCounty={setSelectedCounty}
+          />
         </div>
       </section>
 
       {/* ── STAT BAR ────────────────────────────────────────────────────── */}
-      <section className="py-[32px] bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative no-print">
-        <div className="container-wide">
+      <section className="py-[32px] bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative no-print container-wide flex flex-col">
           {/* Desktop view: Single row with dividers */}
           <div className="hidden md:flex items-center bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] px-7 py-5 divide-x divide-[var(--color-bg-border)]">
             {[
@@ -147,7 +142,6 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
               </div>
             ))}
           </div>
-        </div>
       </section>
 
       {/* ── TRUST & FEATURES ────────────────────────────────────────────── */}
