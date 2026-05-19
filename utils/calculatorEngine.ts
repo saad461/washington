@@ -1,8 +1,8 @@
 import { getExactSupport } from '../data/washingtonTable2026.ts';
 
 // LEGAL CONSTANTS — RCW 26.19.065
-const MIN_SUPPORT_PER_CHILD = 50;
-const SELF_SUPPORT_RESERVE = 2394; // 180% federal poverty line, 2026
+export const MIN_SUPPORT_PER_CHILD = 50;
+export const SELF_SUPPORT_RESERVE = 2394; // 180% federal poverty line, 2026
 
 interface ParentValues {
   p1?: string | number | boolean;
@@ -29,6 +29,9 @@ export interface ChildSupportResult {
   children: number;
   breakdown: {
     baseSupport: number;
+    payerNetIncome: number;
+    payerSharePercentage: number;
+    payerAvailableAfterSSR: number;
     parentingAdjustment: number;
     otherChildrenAdjustment: number;
     healthInsurance: number;
@@ -276,6 +279,9 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
     children,
     breakdown: {
       baseSupport: payingParent === "P1" ? presumptiveP1 : presumptiveP2,
+      payerNetIncome: payingParent === "P1" ? netP1 : netP2,
+      payerSharePercentage: payingParent === "P1" ? shareP1 : shareP2,
+      payerAvailableAfterSSR: (payingParent === "P1" ? netP1 : netP2) - SELF_SUPPORT_RESERVE,
       parentingAdjustment,
       otherChildrenAdjustment,
       healthInsurance: healthcareAdjustment,
