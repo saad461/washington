@@ -115,8 +115,7 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
   const lookup = getExactSupport(combinedIncome, children);
 
   if (lookup.status === "calculated") {
-    // 2026 Interpretation: table value is per-child, so multiply by number of children
-    baseTableSupport = lookup.totalSupport * children;
+    baseTableSupport = lookup.totalSupport;
     obligationP1 = baseTableSupport * shareP1;
     obligationP2 = baseTableSupport * shareP2;
 
@@ -127,7 +126,7 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
     obligationP2 = baseTableSupport * shareP2;
 
   } else if (lookup.status === "above_maximum") {
-    baseTableSupport = lookup.tableMaxTotal * children;
+    baseTableSupport = lookup.tableMaxTotal;
     obligationP1 = baseTableSupport * shareP1;
     obligationP2 = baseTableSupport * shareP2;
     adjustmentReason =
@@ -187,9 +186,9 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
       const lookupWholeFamily = getExactSupport(combinedIncome, children + otherChildren);
       let baseWholeFamily = 0;
       if (lookupWholeFamily.status === "calculated") {
-        baseWholeFamily = lookupWholeFamily.totalSupport * children;
+        baseWholeFamily = lookupWholeFamily.familyTotal * children;
       } else if (lookupWholeFamily.status === "above_maximum") {
-        baseWholeFamily = lookupWholeFamily.tableMaxTotal * children;
+        baseWholeFamily = lookupWholeFamily.familyTotal * children;
       } else {
         baseWholeFamily = MIN_SUPPORT_PER_CHILD * children;
       }

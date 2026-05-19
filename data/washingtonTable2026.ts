@@ -2,12 +2,6 @@
  * OFFICIAL WASHINGTON STATE CHILD SUPPORT ECONOMIC TABLE (2026)
  * Source: WSCSS Economic Table, Chapter 26.19 RCW, Effective January 1, 2026
  *
- * IMPORTANT LEGAL NOTE:
- * Table values are TOTAL monthly basic support obligations for the entire family.
- * Do NOT multiply by the number of children.
- *
- * Example: Income $5,000, 2 children → $723 total.
- *
  * FIXES vs prior version:
  * - Complete $100 increments from $2,200–$50,000 (781 rows)
  * - Previously missing: $13,100–$13,900, $14,100–$14,900, and many others
@@ -25,7 +19,7 @@ export type SupportTableEntry = {
 export type WashingtonSupportTable2026 = SupportTableEntry[];
 
 // Raw table: [combinedMonthlyNetIncome, 1child, 2children, 3children, 4children, 5children]
-// All values are TOTAL monthly basic support obligation for the family.
+// All values represent the monthly basic support obligation PER CHILD.
 const RAW_TABLE: [number, number, number, number, number, number][] = [
   [2200,477,367,298,250,220],[2300,499,384,311,261,230],[2400,521,400,325,272,239],
   [2500,543,417,338,283,249],[2600,565,433,351,294,259],[2700,587,450,365,305,269],
@@ -220,7 +214,11 @@ const BRACKETS: number[] = RAW_TABLE.map(r => r[0]);
  * Then clamps to [2200, 50000] for table lookup.
  */
 function roundIncome(income: number): number {
-  return Math.round(income / 100) * 100;
+  const integerIncome = Math.floor(income);
+  const base = Math.floor(integerIncome / 100) * 100;
+  const remainder = integerIncome % 100;
+
+  return remainder >= 50 ? base + 100 : base;
 }
 
 /**
@@ -262,6 +260,8 @@ export type SupportCalculationResult =
       income: number;
       children: number;
       reason: string;
+      /** Per-child rate at the table maximum */
+      familyTotal: number;
       /** Table maximum values — court may exceed with written findings of fact */
       tableMaxTotal: number;
     }
@@ -310,13 +310,13 @@ export function getExactSupport(
     return { status: "error", message: "Invalid input parameters", debug: debugInfo };
   }
 
-  // 2. Below-table threshold → manual determination (minimum $50 per child per month/month)
+  // 2. Below-table threshold → manual determination (minimum $50 per child per month)
   if (income < 2200) {
     return {
       status: "manual_determination",
       income,
       children,
-      reason: "Combined income below $2,200 statutory threshold. Minimum support is $50 per child per month/month unless court finds unjust. (RCW 26.19.065(2)(a))",
+      reason: "Combined income below $2,200 statutory threshold. Minimum support is $50 per child per month unless court finds unjust. (RCW 26.19.065(2)(a))",
       debug: debugInfo,
     };
   }
@@ -325,12 +325,14 @@ export function getExactSupport(
   if (income > 50000) {
     const childrenUsed = Math.max(1, Math.min(Math.round(children), 5)) as ChildCount;
     const maxRow = washingtonTable2026[50000];
-    const maxTotal = maxRow?.[childrenUsed] ?? 0;
+    const familyTotal = maxRow?.[childrenUsed] ?? 0;
+    const maxTotal = familyTotal * childrenUsed;
     return {
       status: "above_maximum",
       income,
       children: childrenUsed,
       reason: "Combined income exceeds $50,000 table maximum. Court may exceed presumptive maximum with written findings of fact. (RCW 26.19.065(3))",
+      familyTotal,
       tableMaxTotal: maxTotal,
     };
   }
@@ -358,7 +360,7 @@ export function getExactSupport(
   }
 
   // 7. Total Basic Obligation (covers all children per 2026 table)
-  const totalSupport = familyTotal;
+  const totalSupport = familyTotal * childrenUsed;
 
   if (debug && debugInfo) {
     debugInfo.roundedIncome = roundedIncome;
