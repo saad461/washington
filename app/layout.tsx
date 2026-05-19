@@ -109,6 +109,28 @@ export default function RootLayout({
  return (
  <html lang="en" className={`${inter.variable} ${poppins.variable} ${geistMono.variable} h-full antialiased`}>
  <head>
+ {/* Manual defer of non-critical CSS using MutationObserver to fix LCP regression */}
+ <script
+  dangerouslySetInnerHTML={{
+  __html: `
+   (function() {
+    var observer = new MutationObserver(function(mutations) {
+     mutations.forEach(function(m) {
+      m.addedNodes.forEach(function(node) {
+       if (node.tagName === 'LINK' && node.rel === 'stylesheet') {
+        node.media = 'print';
+        node.addEventListener('load', function() {
+         node.media = 'all';
+        });
+       }
+      });
+     });
+    });
+    observer.observe(document.documentElement, {childList:true, subtree:true});
+   })();
+  `,
+  }}
+ />
  {/* Performance: preconnect to analytics origins for faster load */}
  <link rel="preconnect" href="https://www.googletagmanager.com" />
  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
