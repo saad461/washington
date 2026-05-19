@@ -6,7 +6,7 @@ import {
   Scale, Shield, Calculator,
   ChevronRight, ChevronDown, CheckCircle, AlertCircle, Info, ArrowRight, Printer,
 } from "lucide-react";
-import { calculateChildSupport } from "@/utils/calculatorEngine";
+import { calculateChildSupport, SELF_SUPPORT_RESERVE, MIN_SUPPORT_PER_CHILD } from "@/utils/calculatorEngine";
 import ParentingTimeSelector from "@/components/calculator/ParentingTimeSelector";
 import { motion, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import HeroCard from "@/components/hero/HeroCard";
@@ -456,50 +456,85 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                   </div>
                 </div>
 
-                {/* Explanatory Section */}
-                <div className="mt-2">
-                  <button
-                    onClick={() => setShowExplanation(!showExplanation)}
-                    className="flex items-center gap-2 text-[13px] font-bold text-gray-500 hover:text-blue-600 transition-colors py-2 px-1"
-                  >
-                    How was this calculated? {showExplanation ? "▲" : "▼"}
-                  </button>
-                  <AnimatePresence>
-                    {showExplanation && (
-                      <motion.div
-                        key="explanation"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="mt-2 p-6 bg-white border border-gray-200 rounded-2xl text-sm text-gray-600 leading-relaxed shadow-sm space-y-4">
-                          <div className="space-y-4">
-                            <div className="flex gap-4">
-                              <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">1</div>
-                              <p>We took P1 income <strong>{curFormatter.format(result.netP1)}</strong> and P2 income <strong>{curFormatter.format(result.netP2)}</strong> to get combined income <strong>{curFormatter.format(result.combinedIncome)}</strong></p>
-                            </div>
-                            <div className="flex gap-4">
-                              <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">2</div>
-                              <p>We looked up combined income <strong>{curFormatter.format(result.roundedCombinedIncome)}</strong> with {result.children} {result.children === 1 ? 'child' : 'children'} in the 2026 Washington Schedule table — basic obligation: <strong>{curFormatter.format(result.baseSupport)}</strong></p>
-                            </div>
-                            <div className="flex gap-4">
-                              <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">3</div>
-                              <p>P1 income share = <strong>{Math.round(result.shareP1 * 100)}%</strong> | P2 income share = <strong>{Math.round(result.shareP2 * 100)}%</strong></p>
-                            </div>
-                            <div className="flex gap-4">
-                              <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">4</div>
-                              <p>P1 proportional share = <strong>{curFormatter.format(result.netP1 * result.baseSupport / (result.netP1 + result.netP2 || 1))}</strong> (approx based on shares)</p>
-                            </div>
-                            <div className="flex gap-4">
-                              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">5</div>
-                              <p>Monthly transfer payment = <strong>{curFormatter.format(result.finalSupport)}</strong> ({payingParent === "P1" ? "P1 pays P2" : "P2 pays P1"})</p>
-                            </div>
-                          </div>
+                {/* Math Breakdown Section */}
+                <div className="mt-4">
+                  <div className="p-6 bg-white border border-gray-200 rounded-2xl text-sm text-gray-600 leading-relaxed shadow-sm space-y-6">
+                    <h4 className="text-base font-bold text-gray-900 mb-4">Transparent Math Breakdown</h4>
+                    <div className="space-y-6">
+                      {/* Step 1 - Table Lookup */}
+                      <div className="flex gap-4">
+                        <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">1</div>
+                        <div className="flex flex-col gap-1">
+                          <p className="font-bold text-gray-900">Step 1 — Table Lookup</p>
+                          <p>Combined income <strong>{curFormatter.format(result.combinedIncome)}</strong> + <strong>{result.children}</strong> {result.children === 1 ? 'child' : 'children'} → Table value: <strong>{curFormatter.format(result.baseSupport)}</strong></p>
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                      </div>
+
+                      {/* Step 2 - Income Share */}
+                      <div className="flex gap-4">
+                        <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">2</div>
+                        <div className="flex flex-col gap-1">
+                          <p className="font-bold text-gray-900">Step 2 — Income Share</p>
+                          <p>Paying Parent income <strong>{curFormatter.format(result.breakdown.payerNetIncome)}</strong> ÷ Combined <strong>{curFormatter.format(result.combinedIncome)}</strong> = <strong>{Math.round(result.breakdown.payerSharePercentage * 100)}%</strong></p>
+                        </div>
+                      </div>
+
+                      {/* Step 3 - Proportional Share */}
+                      <div className="flex gap-4">
+                        <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">3</div>
+                        <div className="flex flex-col gap-1">
+                          <p className="font-bold text-gray-900">Step 3 — Proportional Share</p>
+                          <p><strong>{curFormatter.format(result.baseSupport)}</strong> × <strong>{Math.round(result.breakdown.payerSharePercentage * 100)}%</strong> = <strong>{curFormatter.format(result.breakdown.baseSupport)}</strong></p>
+                        </div>
+                      </div>
+
+                      {/* Step 4 - Self-Support Reserve Check */}
+                      <div className="flex gap-4">
+                        <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">4</div>
+                        <div className="flex flex-col gap-1 w-full">
+                          <p className="font-bold text-gray-900">Step 4 — Self-Support Reserve Check</p>
+                          <p>Paying Parent income <strong>{curFormatter.format(result.breakdown.payerNetIncome)}</strong> − Reserve <strong>{curFormatter.format(SELF_SUPPORT_RESERVE)}</strong> = <strong>{curFormatter.format(result.breakdown.payerAvailableAfterSSR)}</strong> available</p>
+
+                          {result.breakdown.payerAvailableAfterSSR >= result.breakdown.baseSupport ? (
+                            <div className="mt-2 p-3 bg-green-50 border border-green-100 rounded-lg flex items-center gap-2 text-green-700 font-medium">
+                              <CheckCircle size={14} />
+                              <span>✅ Above reserve — full amount transfers</span>
+                            </div>
+                          ) : result.breakdown.payerAvailableAfterSSR < (MIN_SUPPORT_PER_CHILD * result.children) ? (
+                            <div className="mt-2 p-3 bg-amber-50 border border-amber-100 rounded-lg flex flex-col gap-1 text-amber-700 font-medium">
+                              <div className="flex items-center gap-2">
+                                <AlertCircle size={14} />
+                                <span>⚠️ Below minimum — raised to {curFormatter.format(MIN_SUPPORT_PER_CHILD * result.children)}</span>
+                              </div>
+                              <span className="text-xs opacity-80">(minimum $50/child per RCW 26.19.065)</span>
+                            </div>
+                          ) : (
+                            <div className="mt-2 p-3 bg-amber-50 border border-amber-100 rounded-lg flex items-center gap-2 text-amber-700 font-medium">
+                              <AlertCircle size={14} />
+                              <span>⚠️ Reserve cap applied — reduced to {curFormatter.format(result.breakdown.payerAvailableAfterSSR)}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Step 5 - Transfer Payment */}
+                      <div className="flex gap-4">
+                        <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">5</div>
+                        <div className="flex flex-col gap-1">
+                          <p className="font-bold text-gray-900">Step 5 — Transfer Payment</p>
+                          <p>Transfer = lower of (<strong>{curFormatter.format(result.breakdown.baseSupport)}</strong> vs <strong>{curFormatter.format(Math.max(MIN_SUPPORT_PER_CHILD * result.children, result.breakdown.payerAvailableAfterSSR))}</strong>)</p>
+                          <p className="text-blue-600 font-extrabold mt-1">Final result: {curFormatter.format(result.finalSupport)}/month</p>
+                        </div>
+                      </div>
+
+                      {/* DSHS Note */}
+                      {result.ssrApplied && (
+                        <p className="text-[11px] text-gray-500 italic border-t border-gray-100 pt-4 leading-relaxed">
+                          Note: The DSHS Quick Estimator may show a higher number (<strong>{curFormatter.format(result.breakdown.baseSupport)}</strong>) — that is the gross obligation before the self-support reserve (RCW 26.19.065) is applied.
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 {/* What-If Sliders */}
