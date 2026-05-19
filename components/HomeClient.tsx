@@ -37,10 +37,11 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
 
   return (
     <div className="flex-1 flex flex-col bg-white relative overflow-hidden w-full">
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
+      {/* ── HERO & CALCULATOR ─────────────────────────────────────────── */}
       <section
+        id="hero-calculator"
         aria-label="Washington Child Support Calculator Hero"
-        className="bg-white pt-8 pb-0 lg:pt-12 lg:pb-0 relative overflow-hidden no-print"
+        className="bg-white pt-8 lg:pt-12 relative overflow-hidden no-print"
       >
         {/* Background Decoration */}
         <div
@@ -96,21 +97,16 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ── CALCULATOR SECTION ────────────────────────────────────────── */}
-      <section className="py-0 w-full bg-white">
-        <div className="container-wide">
-          <div className="flex flex-col">
-            <h2 className="text-center mt-[32px] mb-[16px] scroll-mt-24 no-print" id="calculator-heading">
-              Calculate Your Child Support Obligation Instantly
-            </h2>
-            <div id="calculator" className="scroll-mt-24 mb-[32px]">
-              <HomeCalculator
-                selectedCounty={selectedCounty}
-                setSelectedCounty={setSelectedCounty}
-              />
-            </div>
+        <div className="container-wide mt-12 mb-8 sm:mb-12">
+          <h2 className="text-center mb-[16px] scroll-mt-24 no-print" id="calculator-heading">
+            Calculate Your Child Support Obligation Instantly
+          </h2>
+          <div id="calculator" className="scroll-mt-24">
+            <HomeCalculator
+              selectedCounty={selectedCounty}
+              setSelectedCounty={setSelectedCounty}
+            />
           </div>
         </div>
       </section>
@@ -118,32 +114,16 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
       {/* ── STAT BAR ────────────────────────────────────────────────────── */}
       <section className="py-[32px] bg-[var(--color-bg-subtle)] border-y border-[var(--color-bg-border)] relative no-print">
         <div className="container-wide">
-          {/* Desktop view: Single row with dividers */}
-          <div className="hidden md:flex items-center bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] px-7 py-5 divide-x divide-[var(--color-bg-border)]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:bg-[var(--color-bg-subtle)] md:border md:border-[var(--color-bg-border)] md:rounded-[14px] md:px-7 md:py-5 md:divide-x md:divide-[var(--color-bg-border)]">
             {[
               { label: "2026 SSR",     value: "$2,394 / mo"    },
               { label: "Min Support",  value: "$50 / child"      },
               { label: "Table Limit",  value: "$50,000"          },
               { label: "Covers All 39 WA Counties", value: "Washington State" },
             ].map((fig, i) => (
-              <div key={i} className="flex-1 px-8 text-center flex flex-col items-center justify-center">
+              <div key={i} className="bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] md:bg-transparent md:border-none md:rounded-none p-5 md:p-0 md:px-8 text-center flex flex-col items-center justify-center">
                 <div className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-[0.03em] mb-1">{fig.label}</div>
-                <div className="text-xl font-bold text-[var(--color-text-primary)] leading-tight">{fig.value}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile/Tablet view: 2x2 Grid */}
-          <div className="grid md:hidden grid-cols-2 gap-4">
-            {[
-              { label: "2026 SSR",     value: "$2,394 / mo"    },
-              { label: "Min Support",  value: "$50 / child"      },
-              { label: "Table Limit",  value: "$50,000"          },
-              { label: "Covers All 39 WA Counties", value: "Washington State" },
-            ].map((fig, i) => (
-              <div key={i} className="bg-[var(--color-bg-subtle)] border border-[var(--color-bg-border)] rounded-[14px] p-5 text-center flex flex-col items-center justify-center">
-                <div className="text-[12px] font-bold text-[var(--color-text-secondary)] uppercase tracking-[0.03em] mb-1">{fig.label}</div>
-                <div className="text-lg font-bold text-[var(--color-text-primary)] leading-tight">{fig.value}</div>
+                <div className="text-lg md:text-xl font-bold text-[var(--color-text-primary)] leading-tight">{fig.value}</div>
               </div>
             ))}
           </div>
@@ -166,19 +146,19 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24">
-                <div className="space-y-4">
+                <ul className="space-y-4" role="list">
                   {[
                     "Compliant with RCW 26.19 standards",
                     "Includes Self-Support Reserve (SSR) logic",
                     "Applies the 45% net income safety cap",
                     "Live updates as you adjust inputs",
                   ].map((text, i) => (
-                    <div key={i} className="flex items-center gap-4">
+                    <li key={i} className="flex items-center gap-4">
                       <CheckCircle size={20} className="text-[var(--color-success)] shrink-0" />
                       <span className="text-base font-semibold text-[var(--color-text-body)]">{text}</span>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
 
                 <div className="table-container shadow-[var(--shadow-card-md)]">
                   <table className="w-full text-left border-collapse">
@@ -362,18 +342,18 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                 Income Case: ${CASE_STUDY_INCOME.toLocaleString()} Net Monthly
               </h3>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+              <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
                 {[
                   { label: "Net Monthly Income", value: `$${CASE_STUDY_INCOME.toLocaleString()}` },
                   { label: "Number of Children", value: String(CASE_STUDY_CHILDREN)             },
                   { label: "Location",           value: "King County"                           },
                 ].map((item, i) => (
                   <div key={i} className="stat-block p-4">
-                    <div className="stat-label">{item.label}</div>
-                    <div className="stat-value text-[15px] font-semibold">{item.value}</div>
+                    <dt className="stat-label">{item.label}</dt>
+                    <dd className="stat-value text-[15px] font-semibold">{item.value}</dd>
                   </div>
                 ))}
-              </div>
+              </dl>
 
               <div className="max-w-md mx-auto w-full">
                 <div className="bg-white border border-[var(--color-brand-primary-mid)] rounded-xl p-8 text-center shadow-sm">

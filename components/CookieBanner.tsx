@@ -53,9 +53,9 @@ export default function CookieBanner() {
       aria-label="Cookie consent"
       className="fixed bottom-0 left-0 right-0 z-[100] no-print animate-in fade-in slide-in-from-bottom-8 duration-500"
     >
-      <div className="bg-[#111827] text-white p-8 shadow-[0_-4px_20px_rgba(0,0,0,0.2)] ring-1 ring-white/10 backdrop-blur-2xl">
-        <div className="flex items-start gap-4 mb-8">
-          <div className="p-2.5 bg-indigo-500/20 rounded-2xl flex-shrink-0">
+      <div className="bg-[#111827] text-white p-6 shadow-[0_-4px_20px_rgba(0,0,0,0.2)] ring-1 ring-white/10 backdrop-blur-2xl">
+        <div className="flex items-start gap-4 mb-4">
+          <div className="p-2 bg-indigo-500/20 rounded-xl flex-shrink-0">
             <Shield className="w-6 h-6 text-[var(--color-brand-primary-hover)]" />
           </div>
           <div className="flex-1">
@@ -67,7 +67,11 @@ export default function CookieBanner() {
               </Link>
             </p>
           </div>
-          <button onClick={() => setShow(false)} className="text-white/20 hover:text-white transition-colors p-1 cursor-pointer">
+          <button
+            onClick={() => setShow(false)}
+            className="text-white/20 hover:text-white transition-colors p-1 cursor-pointer"
+            aria-label="Close privacy notice"
+          >
             <X size={18} />
           </button>
         </div>
