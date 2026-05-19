@@ -6,9 +6,6 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 86400,
   },
   compress: true,
-  experimental: {
-    optimizeCss: true,
-  },
 
   // Bypass Windows path-casing collision that crashes _error.js prerender locally.
   // Vercel Linux builds are unaffected.
