@@ -28,6 +28,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/joint-custody-calculator`,
+      lastModified: '2026-05-14',
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/deviation-calculator`,
+      lastModified: '2026-05-14',
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/modification-calculator`,
+      lastModified: '2026-05-14',
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/compare`,
+      lastModified: '2026-05-14',
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/glossary`,
       lastModified,
       changeFrequency: 'monthly',
