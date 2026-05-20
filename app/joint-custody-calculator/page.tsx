@@ -28,6 +28,38 @@ export default function JointCustodyPage() {
     "mainEntity": [
       {
         "@type": "Question",
+        "name": "Does 50/50 custody mean no one pays child support in Washington?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Equal parenting time does not automatically waive child support. Washington family courts prioritize minimizing the standard-of-living gap between households. If one parent has a higher monthly net income, they will usually owe a child support transfer payment, though it may be adjusted downward using a residential deviation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which parent pays child support in a joint custody arrangement?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The parent with the higher monthly net income is designated as the payer (obligor). Even in strict 50/50 parenting schedules, the higher earner pays a calculated transfer payment to ensure the child has adequate resources in both homes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are residential custody credits guaranteed by WA family courts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, residential credits are entirely discretionary under RCW 26.19.075. A judge can deny your request for a downward residential deviation if reducing the support transfer payment leaves the lower-earning household without enough funds to cover the child's basic necessities like housing and utilities."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I modify my old child support order under the new 2026 guidelines?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The implementation of House Bill 1014, which expanded the Washington presumptive child support economic table from a $12,000/month cap to a $50,000/month cap, creates a valid opportunity for parents—especially middle and high-income earners—to file for a modification of their child support order."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "How does joint custody affect child support in Washington State?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -40,22 +72,6 @@ export default function JointCustodyPage() {
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The 135 day rule means that if a parent has the child for at least 135 overnights per year (approximately 37% of the year), they qualify for a residential credit adjustment to the standard child support calculation under Washington State law."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does 50/50 custody eliminate child support in Washington?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Even in a 50/50 custody arrangement, child support is still typically owed in Washington State. The higher earning parent usually pays the lower earning parent the difference between their proportional obligations. The residential credit reduces but rarely eliminates the payment entirely."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which parent pays child support in joint custody?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "In Washington State joint custody arrangements, the parent with the higher income typically pays child support to the lower income parent. The amount is reduced by the residential credit formula if both parents meet the 135 day threshold."
         }
       },
       {
