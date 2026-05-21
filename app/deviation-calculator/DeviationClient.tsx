@@ -553,7 +553,7 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
 
             <div className="pt-12 border-t border-gray-100">
               <h2 className="text-2xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
-              <FAQAccordion faqs={faqs} />
+              <FAQAccordion faqs={faqs} renderSchema={false} />
             </div>
 
             <div className="p-8 bg-amber-50 border border-amber-100 rounded-2xl">
