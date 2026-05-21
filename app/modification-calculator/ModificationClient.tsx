@@ -122,7 +122,7 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
         </div>
       </section>
 
-      <section className="section-default bg-[var(--color-bg-subtle)]">
+      <section className="section-default bg-[var(--color-bg-subtle)] pb-4">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
@@ -423,6 +423,132 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
         </div>
       </section>
 
+      {/* NEW CONTENT BLOCK */}
+      <section className="section-default bg-white !pt-0">
+        <div className="container-wide">
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-12 text-gray-700">
+
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-gray-900">Do You Qualify to Change Your Child Support in Washington State?</h2>
+                <p className="text-lg leading-relaxed text-gray-600">
+                  Whether your income has shifted, your child’s needs have grown, or you want to apply the newly updated <strong className="text-gray-900 font-bold">2026 Washington State Child Support Schedule</strong>, our Qualification Check Tool reviews your situation against strict state rules. In Washington, updating an order falls under two legal paths: a full <strong className="text-gray-900 font-bold">Modification</strong> or an <strong className="text-gray-900 font-bold">Adjustment</strong> under RCW 26.09.170.
+                </p>
+                <p className="text-lg leading-relaxed text-gray-600">
+                  Use this quick tool to see if your current scenario passes the legal threshold required by family law courts across all 39 counties.
+                </p>
+
+                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 text-slate-800 rounded-r-md shadow-sm">
+                  <div className="flex items-start gap-4">
+                    <span className="text-2xl">💡</span>
+                    <div className="space-y-2">
+                      <h4 className="font-bold text-blue-900 uppercase tracking-wide text-sm">CRITICAL 2026 LEGAL UPDATE</h4>
+                      <p className="leading-relaxed">
+                        On January 1, 2026, Washington State expanded its child support economic tables to cover a combined monthly net income of up to <strong className="font-bold">$50,000</strong> (previously capped at $12,000). If you or the other parent are high earners, your current transfer payment may be vastly outdated. This structural shift alone provides the legal grounds to check your case eligibility immediately.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-8">
+                <h2 className="text-3xl font-bold text-gray-900">3 Legal Fast-Tracks for a Child Support Update in 2026</h2>
+                <p className="text-lg leading-relaxed text-gray-600">
+                  Under Washington State law (RCW 26.09.170), you do not always have to prove a massive crisis to get a judge to review your support worksheets. You can fast-track a review if you meet any of these three specific criteria:
+                </p>
+
+                <div className="grid grid-cols-1 gap-6">
+                  <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-3">
+                      <span className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0">1</span>
+                      The 24-Month "No-Fault" Rule
+                    </h3>
+                    <p className="leading-relaxed pl-11">
+                      If <strong className="text-gray-900 font-bold">24 months or more</strong> have passed since your current child support order was signed or last modified, you can request an adjustment based entirely on changes to parental income or the 2026 economic table standards. You do <em>not</em> have to prove a "substantial change of circumstances" under this statutory provision.
+                    </p>
+                  </div>
+
+                  <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-3">
+                      <span className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0">2</span>
+                      The Age Category Transition
+                    </h3>
+                    <p className="leading-relaxed pl-11">
+                      The Washington State Child Support Schedule separates kids into two age tiers: <strong className="text-gray-900 font-bold">ages 0–11</strong> and <strong className="text-gray-900 font-bold">ages 12–18</strong>. If your child has recently turned 12 since your last order was filed, you are legally eligible to request an upward adjustment to account for the higher baseline costs of raising an older child.
+                    </p>
+                  </div>
+
+                  <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-3">
+                      <span className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold shrink-0">3</span>
+                      Post-Secondary Educational Support
+                    </h3>
+                    <p className="leading-relaxed pl-11">
+                      Is your teenager finishing high school and planning to attend college or trade school? You can file a motion before their 18th birthday to extend child support payments to cover university tuition, books, and living expenses under RCW 26.09.170(6)(c).
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-red-50 border-l-4 border-red-500 p-4 text-slate-800 rounded-r-md shadow-sm">
+                  <div className="flex items-start gap-4">
+                    <span className="text-2xl">⚠️</span>
+                    <div className="space-y-2">
+                      <h4 className="font-bold text-red-900 uppercase tracking-wide text-sm">WARNING: RETROACTIVE TRANSFERS ARE RARE</h4>
+                      <p className="leading-relaxed">
+                        In Washington State, child support updates are strictly <strong className="font-bold text-red-900">prospective</strong>. This means any financial relief or modification granted by a judge will only apply from the <em className="font-bold">exact date you formally file and serve your petition</em> moving forward. Waiting to file because of an informal verbal agreement can cost you thousands of dollars that cannot legally be recovered retroactively.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-gray-900">What Qualifies as a "Substantial Change in Circumstances"?</h2>
+                <p className="text-lg leading-relaxed text-gray-600">
+                  If your order is less than one year old, the court will dismiss an adjustment request unless you establish a sudden, unanticipated, and permanent shift in your life. Valid examples that our tool evaluates include:
+                </p>
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <div className="mt-1.5 w-2 h-2 bg-blue-500 rounded-full shrink-0"></div>
+                    <p className="text-gray-600"><strong className="text-gray-900 font-bold">Involuntary Income Cuts:</strong> Being laid off, suffering a company downsizing, or encountering a health status change that permanently reduces your earning capacity.</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="mt-1.5 w-2 h-2 bg-blue-500 rounded-full shrink-0"></div>
+                    <p className="text-gray-600"><strong className="text-gray-900 font-bold">The 15% Modification Threshold:</strong> The Division of Child Support (DCS) generally looks for a projected change of at least 15% in the net support amount before accepting a review request.</p>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="mt-1.5 w-2 h-2 bg-blue-500 rounded-full shrink-0"></div>
+                    <p className="text-gray-600"><strong className="text-gray-900 font-bold">A New Child to Support:</strong> If you have had a new biological child with a new partner, the court may grant a downward deviation to ensure resources are equitably balanced among all your dependents.</p>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="p-8 bg-slate-900 rounded-3xl text-white shadow-xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full -mr-32 -mt-32 blur-3xl transition-all group-hover:bg-blue-600/20"></div>
+                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                  <div className="space-y-4 text-center md:text-left">
+                    <h3 className="text-2xl font-bold flex items-center justify-center md:justify-start gap-3">
+                      <span className="text-3xl">🛠️</span>
+                      NEXT STEP TO TAKE
+                    </h3>
+                    <p className="text-slate-300 text-lg max-w-xl">
+                      If our tool indicates that you qualify for a change, run your updated income numbers through our primary <strong className="text-white font-bold">Washington State Child Support Calculator</strong>. This will generate a direct side-by-side estimate showing exactly how your monthly payment obligation will swing under the new 2026 guidelines.
+                    </p>
+                  </div>
+                  <Link
+                    href="/joint-custody-calculator"
+                    className="btn bg-blue-600 hover:bg-blue-500 text-white border-none px-8 py-4 h-auto text-lg font-bold shadow-lg shadow-blue-900/20 whitespace-nowrap"
+                  >
+                    View 2026 Calculator
+                  </Link>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* DISCLAIMER SECTION */}
       <section className="section-default border-t border-gray-100 no-print">
         <div className="container-wide">
@@ -432,12 +558,6 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                 <h2 className="text-2xl font-bold text-gray-900">When Can You Modify Child Support in Washington State</h2>
                 <p className="text-gray-600 leading-relaxed">
                   Washington State law permits a modification request when at least one of two conditions is met. Either the recalculated support amount differs from the current order by 15% or more, or it has been at least 3 years since the order was entered or last modified. You only need to meet one of these two thresholds — not both.
-                </p>
-              </div>
-              <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-gray-900">The 15% Rule Explained</h2>
-                <p className="text-gray-600 leading-relaxed">
-                  If your or the other parent's income has changed significantly, the new calculated support amount may differ from your current order by 15% or more. This threshold exists to prevent constant court filings over minor income changes while still allowing modifications when the financial difference is meaningful.
                 </p>
               </div>
               <div className="space-y-4">
