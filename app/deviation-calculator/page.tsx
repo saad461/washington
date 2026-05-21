@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import DeviationClient from "./DeviationClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington State Child Support Deviation Calculator 2026 | WSCSS" },
-  description: "Calculate above or below standard child support in Washington State. Enter deviation reasons per RCW 26.19.075 and get your adjusted 2026 support estimate instantly.",
+  title: { absolute: "WA Child Support Deviation Calculator 2026" },
+  description: "Calculate above or below standard child support in Washington. Factor in high income, debt, split families, and non-standard court deviations.",
   alternates: { canonical: "https://wscss.site/deviation-calculator" },
   openGraph: {
-    title: "Washington Child Support Deviation Calculator 2026",
-    description: "Free Washington State deviation calculator. See how extraordinary expenses, prior debts, and other factors adjust your standard 2026 child support obligation up or down.",
+    title: "WA Child Support Deviation Calculator 2026",
+    description: "Calculate above or below standard child support in Washington. Factor in high income, debt, split families, and non-standard court deviations.",
     url: "https://wscss.site/deviation-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Child Support Deviation Calculator 2026",
-    description: "Free Washington State deviation calculator. See how extraordinary expenses, prior debts, and other factors adjust your standard 2026 child support obligation up or down.",
+    title: "WA Child Support Deviation Calculator 2026",
+    description: "Calculate above or below standard child support in Washington. Factor in high income, debt, split families, and non-standard court deviations.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };

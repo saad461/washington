@@ -6,11 +6,11 @@ import { ArrowLeft, Shield } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: { absolute: "Privacy Policy | WSCSS Child Support Calculator" },
-  description: "WSCSS privacy policy. We do not store personal calculation data. Analytics only. No data is ever sold or shared with third parties.",
+  description: "WSCSS privacy policy. Learn how we handle information. We do not store or track personal calculations or private financial data.",
   alternates: { canonical: 'https://wscss.site/privacy' },
   openGraph: {
-    title: "Privacy Policy | WSCSS",
-    description: "WSCSS privacy policy. No personal calculation data stored. Analytics only. No data sold or shared.",
+    title: "Privacy Policy | WSCSS Child Support Calculator",
+    description: "WSCSS privacy policy. Learn how we handle information. We do not store or track personal calculations or private financial data.",
     url: "https://wscss.site/privacy",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Privacy Policy | WSCSS",
-    description: "WSCSS privacy policy. No personal calculation data stored or sold.",
+    title: "Privacy Policy | WSCSS Child Support Calculator",
+    description: "WSCSS privacy policy. Learn how we handle information. We do not store or track personal calculations or private financial data.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
   robots: {

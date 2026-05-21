@@ -6,12 +6,12 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: { absolute: "2024 vs 2026 WA Child Support Changes | WSCSS" },
-  description: "Compare Washington child support guidelines 2024 vs 2026. SSR increased to $2,394, economic table expanded to $50,000, and PFML deductions now included.",
+  title: { absolute: "2024 vs 2026 Washington Child Support Changes" },
+  description: "See how the new 2026 Washington child support schedule impacts your payments. Compare old vs. new economic tables side-by-side.",
   alternates: { canonical: 'https://wscss.site/compare-2024-2026' },
   openGraph: {
-    title: "2024 vs 2026 WA Child Support Changes | WSCSS",
-    description: "Key 2026 changes: SSR increased to $2,394, economic table expanded to $50,000, PFML deductions added. Compare with the 2024 schedule.",
+    title: "2024 vs 2026 Washington Child Support Changes",
+    description: "See how the new 2026 Washington child support schedule impacts your payments. Compare old vs. new economic tables side-by-side.",
     url: "https://wscss.site/compare-2024-2026",
     type: "article",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "2024 vs 2026 WA Child Support Changes | WSCSS",
-    description: "2026 changes: SSR $2,394, table expanded to $50,000, PFML deductions now included.",
+    title: "2024 vs 2026 Washington Child Support Changes",
+    description: "See how the new 2026 Washington child support schedule impacts your payments. Compare old vs. new economic tables side-by-side.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };

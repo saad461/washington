@@ -6,11 +6,11 @@ import ContactForm from '@/components/ContactForm';
 
 export const metadata: Metadata = {
   title: { absolute: "Contact WSCSS | WA Child Support Center" },
-  description: "Contact the WSCSS editorial and support team. Report calculator bugs, suggest improvements, or ask questions about Washington child support guidelines.",
+  description: "Get in touch with the WSCSS team for support, feedback, or tool inquiries regarding our Washington state child support calculators.",
   alternates: { canonical: 'https://wscss.site/contact' },
   openGraph: {
     title: "Contact WSCSS | WA Child Support Center",
-    description: "Contact the WSCSS team. Report calculator bugs, suggest improvements, or ask questions about Washington child support.",
+    description: "Get in touch with the WSCSS team for support, feedback, or tool inquiries regarding our Washington state child support calculators.",
     url: "https://wscss.site/contact",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Contact WSCSS | WA Child Support Center",
-    description: "Contact the WSCSS team for calculator feedback and Washington child support questions.",
+    description: "Get in touch with the WSCSS team for support, feedback, or tool inquiries regarding our Washington state child support calculators.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
   robots: {

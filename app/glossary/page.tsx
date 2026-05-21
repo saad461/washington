@@ -7,12 +7,12 @@ import GlossaryClient from '@/components/glossary/GlossaryClient';
 import FAQAccordion from '@/components/FAQAccordion';
 
 export const metadata: Metadata = {
-  title: { absolute: "WA Child Support Glossary 2026 | 20 Terms | WSCSS" },
-  description: "Plain-language definitions of 20 Washington child support terms including SSR, imputed income, deviation, transfer payment, and economic table. Updated 2026.",
+  title: { absolute: "Washington Child Support Glossary | Legal Terms" },
+  description: "Clear, simple definitions of Washington child support legal terminology. Understand net income, deviations, worksheets, and standard support rules.",
   alternates: { canonical: 'https://wscss.site/glossary' },
   openGraph: {
-    title: "WA Child Support Glossary 2026 | 20 Terms | WSCSS",
-    description: "Plain-language definitions of 20 Washington child support terms including SSR, imputed income, deviation, and transfer payment. Updated 2026 RCW 26.19.",
+    title: "Washington Child Support Glossary | Legal Terms",
+    description: "Clear, simple definitions of Washington child support legal terminology. Understand net income, deviations, worksheets, and standard support rules.",
     url: "https://wscss.site/glossary",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "WA Child Support Glossary 2026 | 20 Terms | WSCSS",
-    description: "Plain-language definitions of 20 Washington child support legal terms. Updated for 2026 RCW 26.19 guidelines.",
+    title: "Washington Child Support Glossary | Legal Terms",
+    description: "Clear, simple definitions of Washington child support legal terminology. Understand net income, deviations, worksheets, and standard support rules.",
     images: ['https://wscss.site/wscss-og.webp']
   },
 };

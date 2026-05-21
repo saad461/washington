@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import ModificationClient from "./ModificationClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington Child Support Modification & Qualification Check Tool (2026)" },
-  description: "Check if you qualify to change your Washington child support order under RCW 26.09.170. Instant 2026 eligibility screening for adjustments and modifications.",
+  title: { absolute: "WA Child Support Modification Calculator 2026" },
+  description: "Find out if your Washington child support order qualifies for modification. Check if your payments change under current 2026 rules.",
   alternates: { canonical: "https://wscss.site/modification-calculator" },
   openGraph: {
-    title: "Washington Child Support Modification & Qualification Check Tool (2026)",
-    description: "Check if you qualify to change your Washington child support order under RCW 26.09.170. Instant 2026 eligibility screening for adjustments and modifications.",
+    title: "WA Child Support Modification Calculator 2026",
+    description: "Find out if your Washington child support order qualifies for modification. Check if your payments change under current 2026 rules.",
     url: "https://wscss.site/modification-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Child Support Modification & Qualification Check Tool (2026)",
-    description: "Check if you qualify to change your Washington child support order under RCW 26.09.170. Instant 2026 eligibility screening for adjustments and modifications.",
+    title: "WA Child Support Modification Calculator 2026",
+    description: "Find out if your Washington child support order qualifies for modification. Check if your payments change under current 2026 rules.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
