@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import ModificationClient from "./ModificationClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington State Child Support Modification Calculator 2026 | WSCSS" },
-  description: "Find out if your Washington State child support order qualifies for modification in 2026. Compare old vs new income and check the 15% threshold per RCW 26.09.170.",
+  title: { absolute: "Washington Child Support Modification & Qualification Check Tool (2026)" },
+  description: "Check if you qualify to change your Washington child support order under RCW 26.09.170. Instant 2026 eligibility screening for adjustments and modifications.",
   alternates: { canonical: "https://wscss.site/modification-calculator" },
   openGraph: {
-    title: "Washington Child Support Modification Calculator 2026",
-    description: "Free Washington State modification calculator. Enter current and original incomes to instantly see if your support order has changed enough to warrant a 2026 modification.",
+    title: "Washington Child Support Modification & Qualification Check Tool (2026)",
+    description: "Check if you qualify to change your Washington child support order under RCW 26.09.170. Instant 2026 eligibility screening for adjustments and modifications.",
     url: "https://wscss.site/modification-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Child Support Modification Calculator 2026",
-    description: "Free Washington State modification calculator. Enter current and original incomes to instantly see if your support order has changed enough to warrant a 2026 modification.",
+    title: "Washington Child Support Modification & Qualification Check Tool (2026)",
+    description: "Check if you qualify to change your Washington child support order under RCW 26.09.170. Instant 2026 eligibility screening for adjustments and modifications.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
@@ -64,6 +64,30 @@ export default function ModificationPage() {
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. Child support does not change automatically in Washington State when income changes. You must file a formal modification petition with the court or through the Division of Child Support. Until a new order is entered, the existing order remains legally in effect and must be paid as ordered."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between a modification and an adjustment in Washington?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An adjustment is a simplified, faster court process used to update support amounts based on the 24-month rule or a child turning 12. A modification is a full lawsuit required when you need to change major underlying structural parts of the order, such as adding post-secondary college support or handling a permanent disability."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change child support if the other parent refuses to share income info?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. If the other parent refuses to cooperate, you can file a petition with the court. The legal process forces both parties to engage in mandatory financial disclosure, requiring them to submit tax returns, W-2s, and recent paystubs under penalty of perjury."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does a child support modification take in WA?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An undisputed adjustment can be completed in as little as 4 to 6 weeks if both parents sign the new worksheets. However, a contested modification lawsuit involving financial discovery, motions, or a trial can take anywhere from 3 to 9 months depending on county court backlogs."
         }
       }
     ]
