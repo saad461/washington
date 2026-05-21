@@ -12,9 +12,15 @@ interface FAQProps {
  faqs: FAQItem[];
  defaultOpenCount?: number;
  singleOpen?: boolean;
+ renderSchema?: boolean;
 }
 
-export default function FAQAccordion({ faqs, defaultOpenCount = 2, singleOpen = false }: FAQProps) {
+export default function FAQAccordion({
+  faqs,
+  defaultOpenCount = 2,
+  singleOpen = false,
+  renderSchema = true
+}: FAQProps) {
  // Initialize state based on the defaultOpenCount (normally the first 2 items)
  const [openIndexes, setOpenIndexes] = useState<number[]>(
  faqs.slice(0, defaultOpenCount).map((_, i) => i)
@@ -48,10 +54,12 @@ export default function FAQAccordion({ faqs, defaultOpenCount = 2, singleOpen = 
 
  return (
  <section className="w-full">
- <script
- type="application/ld+json"
- dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
- />
+ {renderSchema && (
+   <script
+     type="application/ld+json"
+     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+   />
+ )}
  <div className="divide-y divide-[var(--color-bg-border-soft)]">
  {faqs.map((item, index) => {
  const isOpen = openIndexes.includes(index);
