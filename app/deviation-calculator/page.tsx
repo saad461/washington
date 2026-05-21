@@ -65,6 +65,46 @@ export default function DeviationPage() {
           "@type": "Answer",
           "text": "No. Either parent can request a deviation independently. However a judge must approve it. If both parents agree to a deviation amount, the court will typically approve it as long as it is not against the child's best interests."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "How does nonrecurring income affect child support in Washington?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Under RCW 26.19.075, if your income is temporarily inflated by a one-time bonus, inheritance, or lottery winnings, the court may deviate downward from the standard calculation to isolate your baseline income from these nonrecurring windfalls."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does my partner's income count towards child support in Washington?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "While a step-parent or live-in partner has no legal duty to support your child, their financial contributions to household expenses like rent and utilities can change your financial position. A judge may use this household income to justify an upward adjustment or deny a downward deviation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What extraordinary expenses qualify for a deviation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Qualifying extraordinary expenses include special medical or mental health costs, specialized private schooling for a disabled child, court-ordered debt from a previous marriage, and high costs for long-distance transportation between parents."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get a deviation if I have children from another relationship?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Washington law allows for a downward deviation if the paying parent has a legal duty to support biological children from a different relationship, ensuring that all children are financially supported."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why might a judge deny my child support deviation request?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Common reasons for denial include the 'Substantial Hardship Rule'—where a deviation would push the receiving parent below the poverty line—and a lack of strict documentation, such as failing to provide receipts or invoices for claimed expenses."
+        }
       }
     ]
   };

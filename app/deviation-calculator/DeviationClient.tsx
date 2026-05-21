@@ -473,6 +473,84 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
               </div>
             </div>
 
+            <div className="pt-12 border-t border-gray-100 space-y-12">
+              <section>
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">Legal Grounds for a Child Support Deviation in Washington State</h2>
+                <p className="text-gray-600 leading-relaxed mb-8">
+                  When using a deviation calculator, it is vital to know which statutory factors the court legally recognizes. Under Washington law (RCW 26.19.075), judges will not grant a deviation for lifestyle preferences. You must qualify under specific legal categories.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="card-standard p-6 border-gray-100">
+                    <h3 className="text-lg font-bold text-gray-900 mb-3">1. Nonrecurring Income or One-Time Financial Windfalls</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      If a parent’s income is temporarily inflated by a one-time bonus, inheritance, lottery winnings, or a short-term real estate sale, the court may deviate downward from using that specific year's tax returns. Courts can isolate baseline income from these nonrecurring windfalls when determining a just transfer payment.
+                    </p>
+                  </div>
+
+                  <div className="card-standard p-6 border-gray-100">
+                    <h3 className="text-lg font-bold text-gray-900 mb-3">2. Income of Other Adults in the Household</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      While a step-parent or new live-in partner has no legal duty to support your child, their financial contributions to rent, groceries, and utilities change your financial position. A judge may use this household income to deny a downward deviation or justify an upward adjustment.
+                    </p>
+                  </div>
+
+                  <div className="card-standard p-6 border-gray-100">
+                    <h3 className="text-lg font-bold text-gray-900 mb-3">3. Extraordinary Expenses and Debt Obligations</h3>
+                    <div className="text-sm text-gray-600 leading-relaxed space-y-2">
+                      <p>Standard child support schedules assume basic cost-of-living metrics. You can request a deviation if you pay for:</p>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li><strong>Special Needs:</strong> Extraordinary medical, dental, or mental health costs.</li>
+                        <li><strong>Educational Needs:</strong> Specialized private schooling or tutoring for a disabled child.</li>
+                        <li><strong>Prior Debt:</strong> Court-ordered debt from a previous marriage that severely limits current income.</li>
+                        <li><strong>Long-Distance Travel:</strong> High costs associated with transporting the child between parents for residential time.</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="card-standard p-6 border-gray-100">
+                    <h3 className="text-lg font-bold text-gray-900 mb-3">4. Children from Other Relationships</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      If the paying parent has a legal duty to support biological children from a different relationship, Washington law allows for a downward deviation. This ensures that children from a first or subsequent family are not financially starved by the current child support transfer payment.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section className="bg-white border border-gray-200 rounded-3xl p-8 md:p-10 shadow-sm">
+                <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Was My Child Support Deviation Denied?</h2>
+                <p className="text-gray-600 leading-relaxed mb-8">
+                  Even if our deviation tool shows you qualify for an adjustment, a family law judge can still deny your request. The two most common reasons for denial in Washington courts are:
+                </p>
+
+                <div className="space-y-8">
+                  <div className="flex gap-6">
+                    <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center shrink-0">
+                      <Scale size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">The Substantial Hardship Rule</h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        The court will reject any downward deviation if reducing the support payment pushes the receiving parent's household below the federal poverty line or leaves them unable to provide basic shelter and food for the child.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-6">
+                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center shrink-0">
+                      <Printer size={24} />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">Lack of Strict Documentation</h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        You cannot use estimates. If you request a deviation for extraordinary medical bills or travel, you must provide the court with receipts, clear invoices, and a history of payment records.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+
             <div className="pt-12 border-t border-gray-100">
               <h2 className="text-2xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
               <FAQAccordion faqs={faqs} />
