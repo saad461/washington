@@ -311,12 +311,12 @@ export function getExactSupport(
   }
 
   // 2. Below-table threshold → manual determination (minimum $50 per child per month)
-  if (income < 2200) {
+  if (income < 600) {
     return {
       status: "manual_determination",
       income,
       children,
-      reason: "Combined income below $2,200 statutory threshold. Minimum support is $50 per child per month unless court finds unjust. (RCW 26.19.065(2)(a))",
+      reason: "Combined income below $600 statutory threshold. Minimum support is $50 per child per month unless court finds unjust. (RCW 26.19.065(2)(a))",
       debug: debugInfo,
     };
   }
@@ -342,7 +342,7 @@ export function getExactSupport(
 
   // 5. Round income per official WSCSS instructions, then floor-match bracket
   const roundedIncome = roundIncome(income);
-  const bracketUsed = findBracket(roundedIncome);
+  const bracketUsed = findBracket(roundedIncome) ?? BRACKETS[0];
 
   if (bracketUsed === undefined) {
     return { status: "error", message: "No suitable income bracket found", debug: debugInfo };

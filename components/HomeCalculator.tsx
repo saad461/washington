@@ -527,12 +527,6 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                         </div>
                       </div>
 
-                      {/* DSHS Note */}
-                      {result.ssrApplied && (
-                        <p className="text-[11px] text-gray-500 italic border-t border-gray-100 pt-4 leading-relaxed">
-                          Note: The DSHS Quick Estimator may show a higher number (<strong>{curFormatter.format(result.breakdown.baseSupport)}</strong>) — that is the gross obligation before the self-support reserve (RCW 26.19.065) is applied.
-                        </p>
-                      )}
                     </div>
                   </div>
                 </div>
