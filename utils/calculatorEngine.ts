@@ -143,16 +143,17 @@ export function calculateChildSupport(formData: Record<string, ParentValues>): C
 
   // ── SSR PROTECTION (RCW 26.19.065(2)(b)) ─────────────────────────
   // SSR must be applied BEFORE deviations like parenting time
-  const applySSR = (share: number, netIncome: number) => {
+  const applySSR = (share: number, netIncome: number, isPayer: boolean) => {
+    if (!isPayer) return share;
+    if (combinedIncome < 2200) return share;
     const minFloor = MIN_SUPPORT_PER_CHILD * children;
     const available = netIncome - SELF_SUPPORT_RESERVE;
-    // The equation must compare the Proportional Share against Available Income After SSR
-    // and must not drop below the statutory floor.
-    return Math.max(minFloor, Math.min(share, available));
+    if (available <= 0) return minFloor;
+    return share;
   };
 
-  obligationP1 = applySSR(obligationP1, netP1);
-  obligationP2 = applySSR(obligationP2, netP2);
+  obligationP1 = applySSR(obligationP1, netP1, payingParent === "P1");
+  obligationP2 = applySSR(obligationP2, netP2, payingParent === "P2");
 
   const postSSRP1 = obligationP1;
   const postSSRP2 = obligationP2;
