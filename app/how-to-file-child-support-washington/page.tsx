@@ -3,12 +3,12 @@ import Link from 'next/link';
 import { FileText, CheckCircle2, AlertTriangle, Building2, ChevronRight, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: { absolute: "How to File Child Support in Washington 2026 | WSCSS" },
-  description: "Step-by-step 2026 guide to filing child support in Washington. Required court forms, serving the other parent, and county filing procedures under RCW 26.19.",
+  title: { absolute: "How to File Child Support in Washington (2026 Guide)" },
+  description: "Step-by-step guide to filing child support in WA. Learn which AOC forms to use, where to submit paperwork, and local courthouse filing fees.",
   alternates: { canonical: 'https://wscss.site/how-to-file-child-support-washington' },
   openGraph: {
-    title: "How to File Child Support in Washington 2026 | WSCSS",
-    description: "Step-by-step 2026 guide to filing child support in Washington. Required forms, serving procedures, and county filing info under RCW 26.19.",
+    title: "How to File Child Support in Washington (2026 Guide)",
+    description: "Step-by-step guide to filing child support in WA. Learn which AOC forms to use, where to submit paperwork, and local courthouse filing fees.",
     url: "https://wscss.site/how-to-file-child-support-washington",
     type: "article",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "How to File Child Support in Washington 2026 | WSCSS",
-    description: "Step-by-step guide to filing child support in Washington 2026. Required forms and county filing procedures.",
+    title: "How to File Child Support in Washington (2026 Guide)",
+    description: "Step-by-step guide to filing child support in WA. Learn which AOC forms to use, where to submit paperwork, and local courthouse filing fees.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };

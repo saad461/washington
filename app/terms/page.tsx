@@ -4,11 +4,11 @@ import { FileText, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: { absolute: "Terms of Service | WSCSS Child Support Calculator" },
-  description: "Terms of service for WSCSS Washington child support calculator. Educational use only. All calculations are estimates and do not constitute legal advice.",
+  description: "Terms of service for utilizing the WSCSS platform. Access rules, liability limitations, and educational use boundaries.",
   alternates: { canonical: 'https://wscss.site/terms' },
   openGraph: {
-    title: "Terms of Service | WSCSS",
-    description: "WSCSS terms of service. Educational use only. Calculations are estimates and not legal advice.",
+    title: "Terms of Service | WSCSS Child Support Calculator",
+    description: "Terms of service for utilizing the WSCSS platform. Access rules, liability limitations, and educational use boundaries.",
     url: "https://wscss.site/terms",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Terms of Service | WSCSS",
-    description: "WSCSS terms of service. Educational use only. Not legal advice.",
+    title: "Terms of Service | WSCSS Child Support Calculator",
+    description: "Terms of service for utilizing the WSCSS platform. Access rules, liability limitations, and educational use boundaries.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
   robots: {

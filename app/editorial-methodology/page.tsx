@@ -5,12 +5,12 @@ import { Scale, CheckCircle2, ShieldCheck, ArrowLeft, ChevronRight } from "lucid
 import CalculatorSchema from "@/components/CalculatorSchema";
 
 export const metadata: Metadata = {
-  title: { absolute: "Editorial Methodology | WSCSS Child Support" },
-  description: "Learn how WSCSS calculates Washington child support. Based on RCW 26.19, the 2026 AOC economic table, and verified against official DSHS tools.",
+  title: { absolute: "Editorial Methodology | WSCSS Calculator Rules" },
+  description: "Discover how WSCSS calculates child support. Learn about our verification process, data sources, and adherence to WA State AOC schedules.",
   alternates: { canonical: 'https://wscss.site/editorial-methodology' },
   openGraph: {
-    title: "Editorial Methodology | WSCSS Child Support",
-    description: "How WSCSS calculates Washington child support using RCW 26.19 and the 2026 AOC economic table. Verified against official DSHS tools.",
+    title: "Editorial Methodology | WSCSS Calculator Rules",
+    description: "Discover how WSCSS calculates child support. Learn about our verification process, data sources, and adherence to WA State AOC schedules.",
     url: "https://wscss.site/editorial-methodology",
     type: "article",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Editorial Methodology | WSCSS",
-    description: "How WSCSS calculates Washington child support using RCW 26.19 and the 2026 AOC economic table.",
+    title: "Editorial Methodology | WSCSS Calculator Rules",
+    description: "Discover how WSCSS calculates child support. Learn about our verification process, data sources, and adherence to WA State AOC schedules.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };

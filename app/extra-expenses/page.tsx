@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import ExtraExpensesClient from "./ExtraExpensesClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Extraordinary Expenses Splitter | WA Child Support | WSCSS" },
-  description: "Calculate proportional shares for healthcare and daycare expenses in Washington child support. Ensure compliance with RCW 26.19 proportional split rules.",
+  title: { absolute: "WA Extraordinary Expenses Calculator 2026" },
+  description: "Calculate proportional shares for healthcare, daycare, and education expenses under the official Washington child support guidelines.",
   alternates: { canonical: 'https://wscss.site/extra-expenses' },
   openGraph: {
-    title: "Extraordinary Expenses Splitter | WA Child Support | WSCSS",
-    description: "Calculate proportional shares for healthcare and daycare expenses in Washington child support. RCW 26.19 compliant.",
+    title: "WA Extraordinary Expenses Calculator 2026",
+    description: "Calculate proportional shares for healthcare, daycare, and education expenses under the official Washington child support guidelines.",
     url: "https://wscss.site/extra-expenses",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Extraordinary Expenses Splitter | WA Child Support | WSCSS",
-    description: "Calculate proportional shares for healthcare and daycare expenses in WA child support.",
+    title: "WA Extraordinary Expenses Calculator 2026",
+    description: "Calculate proportional shares for healthcare, daycare, and education expenses under the official Washington child support guidelines.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };

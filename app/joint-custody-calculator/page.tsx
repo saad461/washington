@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import JointCustodyClient from "./JointCustodyClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington State Joint Custody Child Support Calculator 2026 | WSCSS" },
-  description: "Calculate child support for joint custody arrangements in Washington State using the 2026 schedule. Includes residential credit calculation per RCW 26.19.080.",
+  title: { absolute: "WA Joint Custody Support Calculator 2026" },
+  description: "Calculate Washington child support for joint custody. Estimate residential credits, split placement impact, and shared parenting costs instantly.",
   alternates: { canonical: "https://wscss.site/joint-custody-calculator" },
   openGraph: {
-    title: "Washington Joint Custody Child Support Calculator 2026",
-    description: "Free Washington State joint custody support calculator. Enter both parents' income and residential days to get your adjusted 2026 child support estimate instantly.",
+    title: "WA Joint Custody Support Calculator 2026",
+    description: "Calculate Washington child support for joint custody. Estimate residential credits, split placement impact, and shared parenting costs instantly.",
     url: "https://wscss.site/joint-custody-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Joint Custody Child Support Calculator 2026",
-    description: "Free Washington State joint custody support calculator. Enter both parents' income and residential days to get your adjusted 2026 child support estimate instantly.",
+    title: "WA Joint Custody Support Calculator 2026",
+    description: "Calculate Washington child support for joint custody. Estimate residential credits, split placement impact, and shared parenting costs instantly.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
