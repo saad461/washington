@@ -98,7 +98,7 @@ export default function FAQAccordion({
  <div className="overflow-hidden">
  {isOpen && (
  <div className="faq-answer">
- <p>{item.answer}</p>
+ <p dangerouslySetInnerHTML={{ __html: item.answer }} />
  </div>
  )}
  </div>

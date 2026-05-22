@@ -49,13 +49,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       authors: [post.author],
       url: `https://wscss.site/blog/${slug}`,
       siteName: "WSCSS — Washington State Child Support Schedule",
-      images: [{ url: "https://wscss.site/wscss-og.webp", width: 1200, height: 630, alt: `${post.title} | WSCSS Washington Child Support Guide` }],
+      images: [{ url: post.image.url.startsWith('/') ? `https://wscss.site${post.image.url}` : post.image.url, width: post.image.width, height: post.image.height, alt: post.image.alt }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.metaTitle.slice(0, 60),
       description: post.metaDescription.slice(0, 160),
-      images: ["https://wscss.site/wscss-og.webp"],
+      images: [post.image.url.startsWith('/') ? `https://wscss.site${post.image.url}` : post.image.url],
     },
   };
 }
