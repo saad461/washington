@@ -12,10 +12,9 @@ interface ParentingTimeSelectorProps {
 }
 
 export const PARENTING_TIERS = [
-  { label: "0% — No overnights",    value: 0,   nights: "0 nights" },
-  { label: "25% — ~91 nights/yr",   value: 91,  nights: "91 nights" },
-  { label: "35% — ~128 nights/yr",  value: 128, nights: "128 nights" },
-  { label: "50% — Equal (183 nights)", value: 183, nights: "183 nights" },
+  { label: "Standard Parenting",    value: 0,   nights: "0–90 overnights" },
+  { label: "Significant Time",      value: 91,  nights: "91–182 overnights" },
+  { label: "Equal Parenting Time",  value: 183, nights: "183+ overnights" },
 ];
 
 export default function ParentingTimeSelector({

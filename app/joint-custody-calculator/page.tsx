@@ -63,15 +63,15 @@ export default function JointCustodyPage() {
         "name": "How does joint custody affect child support in Washington State?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "In Washington State, when a child spends 135 or more overnights per year with a parent, a residential credit is applied under RCW 26.19.080. This credit reduces the standard child support obligation to reflect the costs each parent directly bears during their residential time."
+          "text": "In Washington State, there is no fixed formula for joint custody. Instead, courts have the discretion to deviate from the standard calculation under RCW 26.19.075(1)(d) if the child spends significant time with the paying parent. The court considers the actual increased expenses of the paying parent and decreased expenses of the receiving parent."
         }
       },
       {
         "@type": "Question",
-        "name": "What is the 135 day rule in Washington child support?",
+        "name": "What are the requirements for a residential deviation in Washington?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The 135 day rule means that if a parent has the child for at least 135 overnights per year (approximately 37% of the year), they qualify for a residential credit adjustment to the standard child support calculation under Washington State law."
+          "text": "To receive a residential deviation, the paying parent must show they have significant parenting time (usually more than 90 overnights). The court must make written findings of fact explaining why the deviation is appropriate based on the households' actual expenses. No fixed percentages or 'offset methods' exist in official Washington law."
         }
       },
       {
@@ -79,7 +79,7 @@ export default function JointCustodyPage() {
         "name": "Is this calculator accurate for 2026 Washington State cases?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "This calculator uses the 2026 Washington State Child Support Schedule and applies the RCW 26.19.080 residential credit formula. It provides a close estimate but actual court ordered amounts may vary based on deviations, childcare costs, and other factors. Always consult a family law attorney for legal advice."
+          "text": "This calculator uses the 2026 Washington State Child Support Schedule and provides an estimated range for potential residential deviations based on RCW 26.19.075. It provides a close estimate but actual court ordered amounts are determined by a judge based on written findings. Always consult a family law attorney for legal advice."
         }
       }
     ]
