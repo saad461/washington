@@ -1230,9 +1230,9 @@ Transfer payment = Non-residential parent's share</div>
     category: "Calculation Guide",
     keywords: "joint custody child support wa, washington child support calculator joint custody, washington state child support joint custody",
     readTime: "10 min",
-    excerpt: "How does joint custody affect child support in Washington State? Learn how the residential credit works, who pays whom, and how to calculate your adjusted obligation using the 2026 WSCSS formula.",
+    excerpt: "How does joint custody affect child support in Washington State? Learn how residential deviations work, who pays whom, and how to estimate your obligation using the 2026 WSCSS formula.",
     metaTitle: "Joint Custody Child Support Washington State 2026 | WSCSS",
-    metaDescription: "How does joint custody affect child support in WA? Learn about residential credit, who pays whom, and how to calculate your 2026 adjusted obligation.",
+    metaDescription: "How does joint custody affect child support in WA? Learn about residential deviations, court discretion, and how to estimate your 2026 adjusted obligation.",
     author: "WSCSS Editorial Team",
     createdAt: "2026-05-14",
     updatedAt: "2026-05-14",
@@ -1243,57 +1243,58 @@ Transfer payment = Non-residential parent's share</div>
         <strong>Key Takeaways (2026)</strong>
         <ul class="space-y-2 text-indigo-800 list-disc ml-6 mt-2">
           <li>Joint custody does <strong>not</strong> automatically eliminate child support in Washington</li>
-          <li>The residential credit under <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.080' target='_blank' rel='noopener noreferrer'>RCW 26.19.080</a> applies when a parent has <strong>135+ overnights per year</strong></li>
+          <li>Residential deviations under <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.075' target='_blank' rel='noopener noreferrer'>RCW 26.19.075(1)(d)</a> are discretionary</li>
           <li>Even in a true 50/50 split, the higher-earning parent typically still pays</li>
-          <li>The credit reduces but rarely eliminates the transfer payment entirely</li>
-          <li>Use our <a href="/joint-custody-calculator">Joint Custody Calculator</a> to get your 2026 adjusted estimate instantly</li>
+          <li>No fixed percentages exist; the court considers actual expenses of both households</li>
+          <li>Use our <a href="/joint-custody-calculator">Joint Custody Calculator</a> to see your 2026 estimated range instantly</li>
         </ul>
       </div>
       <p class="text-sm italic mb-6">Disclaimer: This guide explains Washington State's 2026 joint custody child support rules for educational purposes. It is not legal advice. Consult a licensed WA family law attorney for advice specific to your case.</p>
 
-      <p class="mb-4">One of the most common misconceptions in Washington family law is that 50/50 custody means zero child support. It doesn't. Washington State uses a residential credit formula under <strong><a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.080' target='_blank' rel='noopener noreferrer'>RCW 26.19.080</a></strong> that adjusts the standard support amount based on how many overnights each parent has, but the higher-earning parent almost always still owes something. Here's exactly how it works.</p>
+      <p class="mb-4">One of the most common misconceptions in Washington family law is that 50/50 custody means zero child support. It doesn't. Washington State allows for a residential deviation under <strong><a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.075' target='_blank' rel='noopener noreferrer'>RCW 26.19.075(1)(d)</a></strong> that adjusts the standard support amount based on significant parenting time, but the higher-earning parent almost always still owes something. Here's exactly how it works.</p>
 
-      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Joint Custody Key Figures</caption><thead><tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'><th class='py-3 px-4 text-sm font-medium'>Key Figure</th><th class='py-3 px-4 text-sm font-medium'>2026 Standard</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Residential Credit Threshold</td><td class='py-3 px-4 text-sm font-medium'>135 overnights per year</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-medium'>$2,394/month</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Minimum Support</td><td class='py-3 px-4 text-sm font-medium'>$50 per child per month</td></tr></tbody></table></div>
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Joint Custody Key Figures</caption><thead><tr class='bg-[var(--color-brand-primary-light)] border-y border-[var(--color-brand-primary-mid)]'><th class='py-3 px-4 text-sm font-medium'>Key Figure</th><th class='py-3 px-4 text-sm font-medium'>2026 Standard</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Deviation Threshold</td><td class='py-3 px-4 text-sm font-medium'>Typically 90+ overnights per year</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>Self Support Reserve</td><td class='py-3 px-4 text-sm font-medium'>$2,394/month</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Minimum Support</td><td class='py-3 px-4 text-sm font-medium'>$50 per child per month</td></tr></tbody></table></div>
 
-      <h2 class="mt-12 mb-6">What Is the 135 Day Rule in Washington?</h2>
-      <p class="mb-4">Washington's residential credit only activates when a parent has the child for at least <strong>135 overnights per year</strong> — roughly 37% of the year. This threshold is the legal trigger for the <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.080' target='_blank' rel='noopener noreferrer'>RCW 26.19.080</a> adjustment. Below 135 days, the standard calculation applies with no credit. At or above 135 days, the offset method kicks in and reduces the transfer payment.</p>
+      <h2 class="mt-12 mb-6">The Myth of Fixed Percentages</h2>
+      <p class="mb-4">Unlike some other states, Washington does <strong>not</strong> have fixed tier percentages or a rigid 'offset method' for joint custody. You may see generic calculators mentioning 6.67%, 16.67%, or 25% reductions — these do not exist in official Washington law. Instead, the court has broad discretion to reduce support if the child spends 'significant time' with the paying parent.</p>
 
-      <p class="mb-4">If both parents exceed 135 days — which happens in true shared parenting arrangements — both receive a proportional credit and the difference between those credits becomes the transfer payment. The parent with the higher income typically still makes a payment to the lower-earning parent, just a reduced one.</p>
+      <p class="mb-4">Under <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.075' target='_blank' rel='noopener noreferrer'>RCW 26.19.075(1)(d)</a>, a judge must consider whether the parenting schedule results in increased expenses for the paying parent and decreased expenses for the receiving parent. The court must make written findings of fact to justify any deviation from the standard calculation.</p>
 
-      <h2 class="mt-12 mb-6">How the Residential Credit Formula Works</h2>
-      <p class="mb-4">Washington uses what's called the <strong>offset method</strong> for joint custody calculations. Here's the process step by step:</p>
-      <ol class="list-decimal pl-6 space-y-4 mb-8">
-        <li>Calculate the basic support obligation from the 2026 WSCSS table using combined income and number of children</li>
-        <li>Determine each parent's proportional income share</li>
-        <li>Calculate each parent's theoretical obligation based on their income share</li>
-        <li>Multiply each parent's obligation by the percentage of time the child spends with the other parent</li>
-        <li>Subtract the smaller result from the larger — the difference is the transfer payment</li>
-      </ol>
-
-      <p class="mb-4">This math gets complex quickly, which is why we built the <a href="/joint-custody-calculator">Joint Custody Calculator</a> — enter both incomes and residential days and it handles the entire formula instantly.</p>
-
-      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Custody Days Impact</caption><thead><tr class='bg-[var(--color-warning-bg)] border-y border-[var(--color-warning-border)]'><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Parent B Days</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Residential Credit</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Effect on Transfer</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Under 135 days</td><td class='py-3 px-4 text-sm font-medium'>No credit</td><td class='py-3 px-4 text-sm font-medium'>Standard amount applies</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>135–182 days</td><td class='py-3 px-4 text-sm font-medium'>Partial credit</td><td class='py-3 px-4 text-sm font-medium'>Reduced transfer payment</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>183 days (50/50)</td><td class='py-3 px-4 text-sm font-medium'>Full offset credit</td><td class='py-3 px-4 text-sm font-medium'>Only income difference remains</td></tr></tbody></table></div>
-
-      <h2 class="mt-12 mb-6">A Worked Example: 50/50 Custody</h2>
-      <p class="mb-4">Parent A earns $6,000/month net. Parent B earns $3,000/month net. Combined income: $9,000. One child. 2026 WSCSS table shows basic obligation of approximately $950/month.</p>
+      <h2 class="mt-12 mb-6">How Residential Deviations Are Determined</h2>
+      <p class="mb-4">Washington courts generally look at three tiers of parenting time when considering a deviation:</p>
       <ul class="list-disc pl-6 space-y-4 mb-8">
-        <li>Parent A's share (67%): $637/month</li>
-        <li>Parent B's share (33%): $313/month</li>
-        <li>Child spends 50% with each parent (183 days each)</li>
-        <li>Parent A's credit: $637 × 50% = $319</li>
-        <li>Parent B's credit: $313 × 50% = $157</li>
-        <li>Transfer payment: $319 − $157 = <strong>$162/month</strong> (Parent A pays Parent B)</li>
+        <li><strong>0 to 90 overnights:</strong> Courts rarely deviate. The standard calculation typically applies in its entirety.</li>
+        <li><strong>91 to 182 overnights:</strong> Considered 'significant' parenting time. Courts may reduce the standard amount, often by 10% to 25% depending on the specific costs shared.</li>
+        <li><strong>183 or more overnights (50/50):</strong> With equal time, courts often grant more significant reductions, sometimes as high as 50%. However, a deviation can never result in a payment of $0 or near-zero if it leaves the lower-earning household with insufficient funds.</li>
       </ul>
-      <p class="mb-4">Without the residential credit, Parent A would owe $637/month. The 50/50 split reduces it to $162 — a significant difference, but not zero.</p>
 
-      <h2 class="mt-12 mb-6">Does 50/50 Custody Ever Result in Zero Child Support?</h2>
-      <p class="mb-4">Rarely, but it can happen when both parents earn nearly identical incomes. If Parent A nets $4,000 and Parent B nets $3,800 with a true 50/50 split, the offset credits nearly cancel each other out and the transfer payment may be under $30/month — effectively zero for practical purposes. Courts may still enter a nominal order to keep the structure in place.</p>
+      <p class="mb-4">This level of judicial discretion is why we built the <a href="/joint-custody-calculator">Joint Custody Range Tool</a> — it provides the estimated bands that Washington judges typically use in real-world courtrooms.</p>
+
+      <div class='overflow-x-auto'><table class='w-full'><caption class='sr-only'>Custody Days Impact</caption><thead><tr class='bg-[var(--color-warning-bg)] border-y border-[var(--color-warning-border)]'><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Payer Overnights</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Typical Court Action</th><th class='py-3 px-4 text-sm font-medium text-[var(--color-highlight)]'>Estimated Range</th></tr></thead><tbody><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>Under 90 days</td><td class='py-3 px-4 text-sm font-medium'>No deviation</td><td class='py-3 px-4 text-sm font-medium'>100% of Standard Amount</td></tr><tr class='border-b border-[var(--color-bg-border-soft)] bg-[var(--color-bg-subtle)]/50'><td class='py-3 px-4 text-sm'>91–182 days</td><td class='py-3 px-4 text-sm font-medium'>Significant time deviation</td><td class='py-3 px-4 text-sm font-medium'>75% – 90% of Standard</td></tr><tr class='border-b border-[var(--color-bg-border-soft)]'><td class='py-3 px-4 text-sm'>183+ days (50/50)</td><td class='py-3 px-4 text-sm font-medium'>Equal time deviation</td><td class='py-3 px-4 text-sm font-medium'>50% – 75% of Standard</td></tr></tbody></table></div>
+
+      <h2 id="example" class="mt-12 mb-6">A Worked Example: 50/50 Custody</h2>
+      <p class="mb-4">Parent A earns $6,000/month net. Parent B earns $3,000/month net. Combined income: $9,000. One child. 2026 WSCSS table shows a basic obligation of approximately $950/month. Parent A's proportional share (the standard amount) is $637/month.</p>
+      <ul class="list-disc pl-6 space-y-4 mb-8">
+        <li><strong>Standard Amount:</strong> $637/month</li>
+        <li><strong>Custody:</strong> 183 overnights (50/50)</li>
+        <li><strong>Estimated Court Range (50-75%):</strong> $319 — $478 / month</li>
+      </ul>
+      <p class="mb-4">The judge will decide where in that range (or even outside of it) the final payment lands, based on who pays for clothing, extracurriculars, and other direct expenses.</p>
+
+      <h2 class="mt-12 mb-6">The 50% Floor Rule</h2>
+      <p class="mb-4">It is important to note that Washington law almost never allows a deviation to result in zero support unless the parents have identical incomes. Even with perfect 50/50 custody, a deviation rarely goes below 50% of the standard calculation. The law ensures that the child's basic needs are met in both homes and that the transfer payment does not leave one household with a significantly lower standard of living.</p>
 
       <h2 class="mt-12 mb-6">What About Childcare in Joint Custody Cases?</h2>
-      <p class="mb-4">Work-related childcare costs are added on top of the residential credit adjusted base amount and split proportionally regardless of custody arrangement. If daycare costs $1,500/month and Parent A has 67% of combined income, Parent A pays $1,005 of that regardless of how many nights the child spends with each parent. The custody adjustment only affects the base transfer payment, not extraordinary expenses.</p>
+      <p class="mb-4">Work-related childcare costs and health insurance premiums are added on top of the base amount and are always split proportionally based on income. These costs are rarely part of a residential deviation. If daycare costs $1,500/month and Parent A has 67% of combined income, Parent A pays $1,005 of that regardless of the overnight schedule.</p>
 
-      <h2 class="mt-12 mb-6">How to Request a Joint Custody Adjustment</h2>
-      <p class="mb-4">The residential credit is not applied automatically. You must present your residential schedule clearly in your parenting plan, document the number of overnights each parent has per year, and ensure the worksheets reflect the adjusted calculation. If your current order was based on a different custody arrangement and residential time has changed significantly, you may be eligible to petition for modification under <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.09.170' target='_blank' rel='noopener noreferrer'>RCW 26.09.170</a>.</p>
+      <h2 class="mt-12 mb-6">How to Request a Joint Custody Deviation</h2>
+      <p class="mb-4">A residential deviation is not applied automatically. You must:</p>
+      <ol class="list-decimal pl-6 space-y-4 mb-8">
+        <li>Request a deviation under RCW 26.19.075(1)(d) in your petition.</li>
+        <li>Document your precise residential schedule in a proposed Parenting Plan.</li>
+        <li>Be prepared to show how your household expenses increase during your parenting time.</li>
+        <li>The court must then enter written findings of fact justifying the reduction.</li>
+      </ol>
 
       <h2 class="mt-12 mb-6">Related Articles</h2>
       <ul class="list-disc pl-6 space-y-4 mb-8">
@@ -1303,37 +1304,35 @@ Transfer payment = Non-residential parent's share</div>
       </ul>
 
       <h2 class="mt-12 mb-6">Bottom Line</h2>
-      <p class="mb-4">Joint custody reduces child support in Washington — it does not eliminate it unless both parents earn almost identical incomes. The 135 day threshold is the key trigger, and the offset method determines how much credit each parent receives. Use our <a href="/joint-custody-calculator">Joint Custody Calculator</a> to see exactly what the 2026 formula produces for your specific income and parenting schedule.</p>
+      <p class="mb-4">Joint custody can reduce child support in Washington, but it requires judicial approval and written findings. There is no fixed formula or 'offset method' in the law. Use our <a href="/joint-custody-calculator">Joint Custody Calculator</a> to see the typical range a Washington court is likely to award for your specific schedule.</p>
 
-      <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Calculate Your Joint Custody Obligation</h3><ul class="space-y-2"><li><a href="/joint-custody-calculator" class="hover:underline">Use the Joint Custody Calculator — adjusted for residential days</a></li><li><a href="/" class="hover:underline">Run the standard child support estimate first</a></li><li><a href="/deviation-calculator" class="hover:underline">Add deviation factors to your result</a></li></ul></div>
+      <div class="mt-8 mb-8 p-6 bg-[var(--color-bg-subtle)] rounded-2xl border border-[var(--color-bg-border-soft)]"><h3 class="font-semibold text-[var(--color-text-body)] mb-4">Estimate Your Joint Custody Range</h3><ul class="space-y-2"><li><a href="/joint-custody-calculator" class="hover:underline">Use the Joint Custody Range Tool — based on RCW 26.19.075</a></li><li><a href="/" class="hover:underline">Run the standard child support estimate first</a></li><li><a href="/deviation-calculator" class="hover:underline">Add other deviation factors to your result</a></li></ul></div>
       <p class="text-sm mt-8 italic">For official state resources and documentation, please visit the <a href="https://www.dshs.wa.gov" rel="nofollow" class="hover:underline">Washington DSHS</a> or the <a href="https://www.courts.wa.gov" rel="nofollow" class="hover:underline">Washington Courts</a> homepage.</p>
-      <div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4"><div><p class="font-semibold text-gray-900 text-base mb-1">Calculate Your Joint Custody Child Support</p><p class="text-sm text-gray-500">Free · 2026 <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19' target='_blank' rel='noopener noreferrer'>RCW 26.19</a> Guidelines · Residential Credit Included</p></div><a href="/joint-custody-calculator" class="btn btn-primary whitespace-nowrap">Calculate Now →</a></div>
+      <div class="my-8 p-6 bg-blue-50 border border-blue-100 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4"><div><p class="font-semibold text-gray-900 text-base mb-1">Calculate Your Joint Custody Range</p><p class="text-sm text-gray-500">Free · 2026 <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19' target='_blank' rel='noopener noreferrer'>RCW 26.19</a> Guidelines · Discretionary Range Tool</p></div><a href="/joint-custody-calculator" class="btn btn-primary whitespace-nowrap">Estimate Range →</a></div>
     `,
     faqs: [
       {
         question: "Does 50/50 custody eliminate child support in Washington State?",
-        answer: "Not automatically. Even with equal residential time, if one parent earns significantly more than the other, they will still owe a transfer payment. The residential credit under <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.080' target='_blank' rel='noopener noreferrer'>RCW 26.19.080</a> reduces the standard amount using an offset formula, but only eliminates support entirely when both parents earn nearly identical incomes."
+        answer: "No. Equal parenting time does not automatically waive support. Washington uses court discretion under <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.075' target='_blank' rel='noopener noreferrer'>RCW 26.19.075(1)(d)</a>. If one parent earns significantly more, they will likely still owe a transfer payment to ensure the child's needs are met in both households."
       },
       {
         question: "What is the 135 day rule in Washington child support?",
-        answer: "The 135 day rule means a parent must have the child for at least 135 overnights per year — roughly 37% of the year — to qualify for the residential credit adjustment under <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.080' target='_blank' rel='noopener noreferrer'>RCW 26.19.080</a>. Below this threshold, the standard child support calculation applies with no reduction for parenting time."
+        answer: "There is no '135 day rule' in official Washington statutory law. While some old worksheets or generic calculators used 135 days as a threshold, RCW 26.19.075 allows for deviations starting whenever parenting time becomes 'significant' (typically 90+ overnights). No fixed formula or percentage exists; it is entirely up to court discretion based on actual expenses."
       },
       {
         question: "Which parent pays child support in a joint custody arrangement in Washington?",
-        answer: "The parent with the higher income typically pays child support to the lower-earning parent even in joint custody. The residential credit reduces the amount based on how many overnights each parent has, but the direction of payment — from higher earner to lower earner — generally stays the same."
+        answer: "The parent with the higher income is designated as the payer. Even in equal 50/50 schedules, the higher earner pays a calculated transfer payment to the lower earner to maintain a consistent standard of living for the child in both homes."
       },
       {
-        question: "How do I request the residential credit adjustment in Washington?",
-        answer: "The residential credit is not applied automatically. You must document the residential schedule in your parenting plan, specify the number of overnights each parent has per year, and ensure your child support worksheets reflect the adjusted calculation using the <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.080' target='_blank' rel='noopener noreferrer'>RCW 26.19.080</a> offset formula. If residential time has changed significantly since your original order, you may petition for modification."
+        question: "How do I request a residential deviation in Washington?",
+        answer: "You must request a deviation under RCW 26.19.075 in your court filings. You need to provide a proposed parenting plan showing significant time and be prepared to show the court that your household expenses increase (and the other parent's decrease) because of the schedule. The court must then enter written findings of fact."
       },
       {
         question: "Is this calculator accurate for 2026 Washington State joint custody cases?",
-        answer: "Our Joint Custody Calculator uses the 2026 Washington State Child Support Schedule and applies the <a href='https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.080' target='_blank' rel='noopener noreferrer'>RCW 26.19.080</a> residential credit formula. It provides a close estimate, but actual court-ordered amounts may vary based on childcare costs, health insurance, deviations, and other factors. Always consult a family law attorney for legal advice."
+        answer: "Our calculator uses the 2026 Washington State Child Support Schedule and provides the estimated deviation bands typically used by judges under RCW 26.19.075. It is an estimate; actual court-ordered amounts depend on a judge's written findings of fact regarding the specific expenses of your case."
       }
     ]
   },
-
-  // ─────────────────────────────────────────────────────────────────────────────
   // BLOG 11
   // ─────────────────────────────────────────────────────────────────────────────
   {

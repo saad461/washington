@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import {
-  Calculator, ArrowLeft, AlertCircle, Printer, Scale
+  Calculator, ArrowLeft, AlertCircle, Printer, Scale, Info
 } from "lucide-react";
 import { calculateChildSupport } from "@/utils/calculatorEngine";
 import { convertGrossToNet } from "@/utils/taxUtils";
@@ -14,6 +14,7 @@ import IncomeHelper from "@/components/calculator/IncomeHelper";
 import AttorneyCTA from "@/components/calculator/AttorneyCTA";
 import CrossSuggestions from "@/components/calculator/CrossSuggestions";
 import HistoryPanel from "@/components/calculator/HistoryPanel";
+import RangeDisplay from "@/components/calculator/RangeDisplay";
 
 const curFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -51,7 +52,7 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
   const [isYearly, setIsYearly] = useState(false);
 
   // What-If Sliders State
-  const [whatIfADays, setWhatIfADays] = useState<number | null>(null);
+  const [whatIfPayerDays, setWhatIfPayerDays] = useState<number | null>(null);
 
   const pADaysNum = parseInt(parentADays) || 0;
   const pBDaysNum = parseInt(parentBDays) || 0;
@@ -68,57 +69,65 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
       "5_children": { p1: childCount },
     });
 
-    const basicObligation = calc.baseSupport;
     const shareA = calc.shareP1;
     const shareB = calc.shareP2;
+    const standardAmountFull = calc.baseSupport; // 100% Table Total
 
-    const parentAStandardObligation = basicObligation * shareA;
-    const parentBStandardObligation = basicObligation * shareB;
+    // Determine Payer based on higher income share
+    const payer = shareA >= shareB ? "Parent A" : "Parent B";
+    const payerShare = payer === "Parent A" ? shareA : shareB;
+    const recipientShare = payer === "Parent A" ? shareB : shareA;
 
-    // Residential credit applies if BOTH parents have 135+ days (per standard joint custody interpretation)
-    const creditApplies = pAD >= 135 && pBD >= 135;
+    // standardAmount is the payer's individual proportional share (Worksheet Line 9)
+    const standardAmount = Math.round(standardAmountFull * payerShare);
 
-    let adjustedA = parentAStandardObligation;
-    let adjustedB = parentBStandardObligation;
+    // Payer's overnights
+    const payerOvernights = payer === "Parent A" ? pAD : pBD;
 
-    if (creditApplies) {
-      // Offset method: share * (days with other parent / 365)
-      adjustedA = parentAStandardObligation * (pBD / 365);
-      adjustedB = parentBStandardObligation * (pAD / 365);
-    }
+    let lowEstimate = standardAmount;
+    let highEstimate = standardAmount;
+    let tier = "none";
+    let message = "";
 
-    const netSupport = adjustedA - adjustedB;
-
-    const shareChildcareA = childcare * shareA;
-    const shareChildcareB = childcare * shareB;
-
-    let finalTransfer = 0;
-    let payer = "Parent A";
-    if (netSupport > 0) {
-      finalTransfer = netSupport + shareChildcareA;
-      payer = "Parent A";
+    if (payerOvernights <= 90) {
+      tier = "standard";
+      message = "Based on Washington state guidelines, the standard calculation applies. Courts rarely deviate below 90 overnights per year with the paying parent.";
+    } else if (payerOvernights <= 182) {
+      tier = "significant";
+      lowEstimate = Math.round(standardAmount * 0.75);
+      highEstimate = Math.round(standardAmount * 0.90);
+      message = "Washington courts MAY reduce support when the paying parent has significant parenting time. The actual amount depends on each parent's increased expenses and requires written court findings. RCW 26.19.075(1)(d)";
     } else {
-      finalTransfer = Math.abs(netSupport) + shareChildcareB;
-      payer = "Parent B";
+      tier = "equal";
+      lowEstimate = Math.round(standardAmount * 0.50);
+      highEstimate = Math.round(standardAmount * 0.75);
+      message = "With approximately equal parenting time, Washington courts often reduce support significantly. However the exact amount requires written court findings based on actual expenses of both households. RCW 26.19.075(1)(d)";
     }
+
+    // 50% Floor Cap (RCW 26.19.075 - deviation cannot result in near-zero)
+    const minFloor = Math.round(standardAmount * 0.50);
+    if (lowEstimate < minFloor) {
+      lowEstimate = minFloor;
+    }
+
+    const finalTransfer = standardAmount + Math.round(childcare * payerShare);
 
     return {
       netA: pANet,
       netB: pBNet,
       combined: calc.combinedIncome,
-      baseSupport: basicObligation,
-      pADaysNum: pAD,
-      pBDaysNum: pBD,
-      creditApplies,
-      parentAStandardObligation,
-      parentBStandardObligation,
-      adjustedA,
-      adjustedB,
-      finalTransfer,
+      baseSupport: standardAmountFull,
+      standardAmount,
       payer,
+      payerShare,
+      recipientShare,
+      payerOvernights,
+      lowEstimate,
+      highEstimate,
+      tier,
+      message,
+      finalTransfer,
       childcare,
-      shareChildcareA,
-      shareChildcareB,
       shareA,
       shareB
     };
@@ -128,16 +137,20 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
     [parentAAnnual, parentBAnnual, childrenCount, pADaysNum, pBDaysNum, hasChildcare, monthlyChildcare]);
 
   const whatIfResult = useMemo(() => {
-    if (whatIfADays === null) return null;
-    return calculateResult(parentAAnnual, parentBAnnual, childrenCount, whatIfADays, 365 - whatIfADays, hasChildcare, monthlyChildcare);
-  }, [whatIfADays, parentAAnnual, parentBAnnual, childrenCount, hasChildcare, monthlyChildcare]);
+    if (whatIfPayerDays === null) return null;
+    // For what-if, we simulate the payer's days. We need to know which one is the payer first.
+    const tempResult = calculateResult(parentAAnnual, parentBAnnual, childrenCount, pADaysNum, pBDaysNum, hasChildcare, monthlyChildcare);
+    const pA = tempResult.payer === "Parent A" ? whatIfPayerDays : 365 - whatIfPayerDays;
+    const pB = tempResult.payer === "Parent B" ? whatIfPayerDays : 365 - whatIfPayerDays;
+    return calculateResult(parentAAnnual, parentBAnnual, childrenCount, pA, pB, hasChildcare, monthlyChildcare);
+  }, [whatIfPayerDays, parentAAnnual, parentBAnnual, childrenCount, hasChildcare, monthlyChildcare, pADaysNum, pBDaysNum]);
 
   // Sync what-if slider
   useEffect(() => {
-    if (pADaysNum >= 0) {
-      if (whatIfADays === null) setWhatIfADays(pADaysNum);
+    if (result.payerOvernights >= 0) {
+      if (whatIfPayerDays === null) setWhatIfPayerDays(result.payerOvernights);
     }
-  }, [pADaysNum]);
+  }, [result.payerOvernights, whatIfPayerDays]);
 
   const toggleValue = (val: number) => isYearly ? val * 12 : val;
 
@@ -248,14 +261,12 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                     </div>
                   </div>
 
-                  {((pADaysNum >= 90 && pADaysNum < 135) || (pBDaysNum >= 90 && pBDaysNum < 135)) && (
-                    <div className="p-4 bg-blue-50 border border-blue-100 rounded-xl flex gap-3 animate-in fade-in slide-in-from-top-1">
-                      <AlertCircle size={16} className="text-blue-600 shrink-0 mt-0.5" />
-                      <p className="text-[12px] text-blue-800 leading-relaxed">
-                        <strong>Notice:</strong> While automatic baseline formulas calculate residential credits starting at 135 overnights, Washington judges possess the statutory discretion under <a href="https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.075" target="_blank" rel="noopener noreferrer" className="font-bold underline decoration-blue-200 underline-offset-2 hover:text-blue-900 transition-colors">RCW 26.19.075</a> to grant downward adjustments for anything over 90 overnights on a case-by-case basis.
-                      </p>
-                    </div>
-                  )}
+                  <div className="p-4 bg-indigo-50 border border-indigo-100 rounded-xl flex gap-3">
+                    <Info size={16} className="text-indigo-600 shrink-0 mt-0.5" />
+                    <p className="text-[12px] text-indigo-800 leading-relaxed">
+                      <strong>Payer Identification:</strong> {result.payer} is the paying parent because they earn {Math.round(result.payerShare * 100)}% of the combined household income.
+                    </p>
+                  </div>
 
                   <div className="space-y-4">
                     <label className="input-label">Work related childcare costs?</label>
@@ -326,38 +337,29 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                     <div className="p-6 sm:p-8 bg-gray-50/50 border-y border-gray-100 space-y-4">
                       <div className="flex justify-between items-start">
                         <div className="flex flex-col">
-                          <span className="text-sm font-bold text-gray-900">{isYearly ? 'Annual' : 'Basic'} Support Obligation</span>
-                          <span className="text-[12px] text-gray-500">2026 Economic Table</span>
+                          <span className="text-sm font-bold text-gray-900">{isYearly ? 'Annual' : 'Standard'} Calculation</span>
+                          <span className="text-[12px] text-gray-500">Payer's Share of 2026 Table</span>
                         </div>
-                        <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.baseSupport))}</span>
+                        <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.standardAmount))}</span>
                       </div>
                     </div>
 
-                    <AnimatePresence>
-                      {result.creditApplies && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          className="p-6 sm:p-8 space-y-4"
-                        >
-                          <h4 className="text-[11px] font-bold text-blue-600 uppercase tracking-widest">Residential Credit (RCW 26.19.080)</h4>
-                          <div className="space-y-2">
-                            <div className="flex justify-between text-sm pt-2 border-t border-gray-100">
-                              <span className="text-gray-700 font-medium">A Adjusted Obligation</span>
-                              <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.adjustedA))}</span>
-                            </div>
-                            <div className="flex justify-between text-sm">
-                              <span className="text-gray-700 font-medium">B Adjusted Obligation</span>
-                              <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.adjustedB))}</span>
-                            </div>
-                          </div>
-                        </motion.div>
+                    <div className="p-6 sm:p-8 space-y-4">
+                      <p className="text-[13px] text-gray-600 leading-relaxed mb-4">
+                        {result.message}
+                      </p>
+
+                      {result.tier !== "standard" && (
+                        <RangeDisplay
+                          low={toggleValue(result.lowEstimate)}
+                          high={toggleValue(result.highEstimate)}
+                        />
                       )}
-                    </AnimatePresence>
+                    </div>
 
                     <div className="p-6 sm:p-8 bg-blue-50/30 border-t border-blue-100">
                       <div className="flex justify-between items-center">
-                        <span className="text-base font-bold text-gray-900">{isYearly ? 'Annual' : 'Monthly'} Transfer Payment</span>
+                        <span className="text-base font-bold text-gray-900">{isYearly ? 'Annual' : 'Total'} Transfer Payment</span>
                         <div className="text-right">
                           <div className="text-3xl sm:text-4xl font-extrabold text-blue-600 tracking-tight">
                             {curFormatter.format(toggleValue(result.finalTransfer))}
@@ -369,15 +371,6 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                       </div>
                     </div>
                   </div>
-
-                  {!result.creditApplies && (pADaysNum > 0 || pBDaysNum > 0) && (
-                    <div className="bg-amber-50 p-4 rounded-xl border border-amber-100 flex gap-3">
-                      <AlertCircle size={16} className="text-amber-600 shrink-0 mt-0.5" />
-                      <p className="text-[12px] text-amber-800">
-                        Residential credit typically requires both parents to have 135+ days (37% time) per RCW 26.19.080. Using standard transfer calculation.
-                      </p>
-                    </div>
-                  )}
 
                   {/* Explanatory Section */}
                   <div className="mt-2">
@@ -412,28 +405,24 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                               </div>
                               <div className="flex gap-4">
                                 <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">4</div>
-                                <p>Parent A proportional share = <strong>{curFormatter.format(result.parentAStandardObligation)}</strong></p>
+                                <p>{result.payer} proportional share (Standard Amount) = <strong>{curFormatter.format(result.standardAmount)}</strong></p>
                               </div>
                               <div className="flex gap-4">
                                 <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">5</div>
-                                <p>Monthly transfer payment = <strong>{curFormatter.format(result.finalTransfer)}</strong></p>
+                                <p>{result.payer} has {result.payerOvernights} overnights per year ({result.tier === "standard" ? "0-90" : result.tier === "significant" ? "91-182" : "183+"} tier)</p>
                               </div>
-                              <div className="flex gap-4">
-                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">6</div>
-                                <p>Parent A has {result.pADaysNum} days and Parent B has {result.pBDaysNum} days ({result.creditApplies ? "Above" : "Below"} 135 day threshold)</p>
-                              </div>
-                              {result.creditApplies && (
-                                <>
-                                  <div className="flex gap-4">
-                                    <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">7</div>
-                                    <p>Residential credit calculated: Parent A gets reduction to <strong>{curFormatter.format(result.adjustedA)}</strong> and Parent B gets reduction to <strong>{curFormatter.format(result.adjustedB)}</strong></p>
-                                  </div>
-                                  <div className="flex gap-4">
-                                    <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">8</div>
-                                    <p>Adjusted transfer payment after credit: <strong>{curFormatter.format(result.finalTransfer)}</strong></p>
-                                  </div>
-                                </>
+                              {result.tier !== "standard" && (
+                                <div className="flex gap-4">
+                                  <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">6</div>
+                                  <p>Estimated Court Range: <strong>{curFormatter.format(result.lowEstimate)} — {curFormatter.format(result.highEstimate)}</strong></p>
+                                </div>
                               )}
+                              <div className="flex gap-4">
+                                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">
+                                  {result.tier !== "standard" ? "7" : "6"}
+                                </div>
+                                <p>Total transfer payment including childcare: <strong>{curFormatter.format(result.finalTransfer)}</strong></p>
+                              </div>
                             </div>
                           </div>
                         </motion.div>
@@ -442,43 +431,54 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                   </div>
 
                   {/* What-If Sliders */}
-                  {whatIfADays !== null && whatIfResult && (
+                  {whatIfPayerDays !== null && whatIfResult && (
                     <div className="mt-8 p-6 bg-white border border-gray-200 rounded-2xl shadow-sm">
-                      <h4 className="text-lg font-bold text-gray-900 mb-2">Explore What If Scenarios</h4>
-                      <p className="text-xs text-gray-500 mb-6">Explore scenarios below — your original calculation above is not affected.</p>
+                      <h4 className="text-lg font-bold text-gray-900 mb-2">Live Range Sandbox</h4>
+                      <p className="text-xs text-gray-500 mb-6">Drag to see how overnight tiers impact the estimated range.</p>
 
-                      <div className="space-y-8">
+                      <div className="space-y-6">
                         <div className="space-y-4">
                           <div className="flex justify-between items-center">
-                            <label className={`text-sm font-bold ${whatIfADays >= 135 ? "text-green-600" : "text-gray-700"}`}>Parent A Days: {whatIfADays}</label>
-                            <label className={`text-sm font-bold ${365 - whatIfADays >= 135 ? "text-green-600" : "text-gray-700"}`}>Parent B Days: {365 - whatIfADays}</label>
+                            <label className="text-sm font-bold text-blue-600 uppercase tracking-wide">
+                              {result.payer}'s Overnights: {whatIfPayerDays}
+                            </label>
+                            <span className="text-[11px] font-bold px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full uppercase">
+                              {whatIfResult.tier === "standard" ? "Standard" : whatIfResult.tier === "significant" ? "Significant" : "Equal"} Tier
+                            </span>
                           </div>
                           <input
                             type="range"
                             min="0"
                             max="365"
                             step="1"
-                            value={whatIfADays}
-                            onChange={(e) => setWhatIfADays(Number(e.target.value))}
+                            value={whatIfPayerDays}
+                            onChange={(e) => setWhatIfPayerDays(Number(e.target.value))}
                             className="w-full h-2 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
                           />
-                          {whatIfADays >= 135 && 365 - whatIfADays >= 135 && (
-                            <p className="text-[10px] font-bold text-green-600 uppercase tracking-widest text-center">135 day threshold met ✓</p>
-                          )}
                         </div>
 
-                        <div className="pt-6 border-t border-gray-100 grid grid-cols-2 gap-4">
-                          <div className="text-center">
-                            <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Residential Credit</p>
-                            <p className="text-sm font-bold text-gray-900">
-                              {whatIfResult.creditApplies ? curFormatter.format(whatIfResult.parentAStandardObligation - whatIfResult.adjustedA) : "$0"}
-                            </p>
-                          </div>
-                          <div className="text-center">
-                            <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Adjusted Transfer</p>
-                            <p className="text-sm font-bold text-blue-600">{curFormatter.format(whatIfResult.finalTransfer)}</p>
-                          </div>
+                        <div className="p-4 bg-gray-50 rounded-xl space-y-3">
+                           <div className="flex justify-between items-center text-sm">
+                             <span className="text-gray-500 font-medium">Standard Amount</span>
+                             <span className="font-bold text-gray-900">{curFormatter.format(whatIfResult.standardAmount)}</span>
+                           </div>
+                           {whatIfResult.tier !== "standard" ? (
+                             <div className="flex justify-between items-center text-sm pt-2 border-t border-gray-200">
+                               <span className="text-blue-600 font-bold">Estimated Range</span>
+                               <span className="font-bold text-blue-700">
+                                 {curFormatter.format(whatIfResult.lowEstimate)} — {curFormatter.format(whatIfResult.highEstimate)}
+                               </span>
+                             </div>
+                           ) : (
+                             <div className="text-[11px] text-gray-500 italic text-center pt-2 border-t border-gray-200">
+                               Standard calculation applies below 91 overnights.
+                             </div>
+                           )}
                         </div>
+
+                        <p className="text-[12px] text-gray-500 leading-relaxed italic">
+                          {whatIfResult.message}
+                        </p>
                       </div>
                     </div>
                   )}
@@ -567,12 +567,12 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
               </div>
 
               <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-gray-900">The 90-Overnight Rule vs. The 135-Overnight Threshold</h2>
+                <h2 className="text-3xl font-bold text-gray-900">Residential Deviations for Significant Parenting Time</h2>
                 <p className="text-gray-600 leading-relaxed">
-                  While generic online calculators often assume that a parent must hit a strict threshold of 135 overnights (roughly 37% of the year) to qualify for a residential credit, Washington statutory law is far more flexible. Under state guidelines and local county rules (such as those practiced in King County, Pierce County, and Snohomish County family courts), a judge may consider a downward residential deviation if the non-primary parent has substantial residential time.
+                  While generic online calculators often assume that a parent must hit a strict threshold or follow a fixed formula to qualify for a residential credit, Washington statutory law is far more flexible. Under state guidelines and local county rules (such as those practiced in King County, Pierce County, and Snohomish County family courts), a judge may consider a downward residential deviation if the non-primary parent has significant residential time.
                 </p>
                 <p className="text-gray-600 leading-relaxed">
-                  Local court precedents regularly recognize any schedule exceeding 90 overnights per year (approximately 25% residential time) as substantial enough to trigger a credit evaluation. The precise amount of the credit depends on a detailed breakdown of shared expenses. Our automated <Link href="/joint-custody-calculator" className="text-blue-600 font-bold hover:underline">WSCSS Joint Custody Deviation Tool</Link> handles these complex, tiered overnight formulas automatically.
+                  Local court precedents regularly recognize any schedule exceeding 90 overnights per year (approximately 25% residential time) as substantial enough to trigger a deviation evaluation under <a href="https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.075" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold hover:underline">RCW 26.19.075</a>. The precise amount of the reduction depends on a detailed breakdown of shared expenses and the actual increased costs of the paying parent. Our automated <Link href="/joint-custody-calculator" className="text-blue-600 font-bold hover:underline">WSCSS Joint Custody Deviation Tool</Link> handles these complex, tiered overnight estimates automatically.
                 </p>
               </div>
 
@@ -608,7 +608,7 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                 Legal Disclaimer
               </h3>
               <p className="text-sm text-amber-800 leading-relaxed">
-                This Joint Custody Calculator is provided for informational purposes only. It uses the 2026 Washington State Child Support Schedule and the offset method derived from <a href="https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.080" target="_blank" rel="noopener noreferrer" className="eyebrow !text-amber-900 hover:underline">RCW 26.19.080</a>. Residential credits are discretionary and subject to judicial approval.
+                This Joint Custody Calculator is provided for informational purposes only. It uses the 2026 Washington State Child Support Schedule and the deviation principles derived from <a href="https://app.leg.wa.gov/RCW/default.aspx?cite=26.19.075" target="_blank" rel="noopener noreferrer" className="eyebrow !text-amber-900 hover:underline">RCW 26.19.075</a>. Residential deviations are discretionary and subject to judicial approval based on written findings of fact.
               </p>
             </div>
           </div>
@@ -623,27 +623,26 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
         ]}
         calculationBase={[
           { label: "Children:", value: childrenCount },
-          { label: "Residential Schedule:", value: `A: ${result.pADaysNum} days | B: ${result.pBDaysNum} days` },
+          { label: "Residential Schedule:", value: `A: ${pADaysNum} days | B: ${pBDaysNum} days` },
+          { label: "Payer Overnights:", value: `${result.payerOvernights} (${Math.round(result.payerOvernights / 365 * 100)}%)` },
         ]}
         analysisItems={[
-          { label: "Standard A Share:", value: curFormatter.format(result.parentAStandardObligation) },
-          { label: "Standard B Share:", value: curFormatter.format(result.parentBStandardObligation) },
-          ...(result.creditApplies ? [
-            { label: "Adjusted A Share:", value: curFormatter.format(result.adjustedA) },
-            { label: "Adjusted B Share:", value: curFormatter.format(result.adjustedB) }
+          { label: "Standard Amount:", value: curFormatter.format(result.standardAmount) },
+          { label: "Overnight Tier:", value: result.tier === "standard" ? "0-90 Days" : result.tier === "significant" ? "91-182 Days" : "183+ Days" },
+          ...(result.tier !== "standard" ? [
+            { label: "Estimated Court Range:", value: `${curFormatter.format(result.lowEstimate)} — ${curFormatter.format(result.highEstimate)}` },
           ] : []),
           ...(hasChildcare ? [
             { label: "Total Childcare:", value: curFormatter.format(result.childcare) },
-            { label: "A Childcare Share:", value: curFormatter.format(result.shareChildcareA) },
-            { label: "B Childcare Share:", value: curFormatter.format(result.shareChildcareB) }
+            { label: "Payer Childcare Share:", value: curFormatter.format(Math.round(result.childcare * result.payerShare)) }
           ] : [])
         ]}
-        totalLabel="Final Transfer Payment"
+        totalLabel="Standard Transfer Amount"
         totalValue={curFormatter.format(result.finalTransfer)}
         secondaryTotalLabel="Designated Payer"
         secondaryTotalValue={result.payer}
-        assumptions="Based on RCW 26.19.080 and 2026 economic tables. Net income estimated using simplified 2026 conversion."
-        disclaimerText="This estimate is based on the 2026 Washington State Child Support Schedule. This is not a legal document. Consult a family law attorney for advice."
+        assumptions="Based on RCW 26.19.075 and 2026 economic tables. Range estimate uses 50-90% deviation bands based on typical Washington court patterns."
+        disclaimerText="This is an estimate only. Washington courts determine actual deviation amounts based on written findings of fact per RCW 26.19.075. Consult a Washington family law attorney for accurate advice."
       />
     </div>
   );

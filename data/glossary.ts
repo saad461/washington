@@ -79,7 +79,7 @@ export const glossaryTerms: GlossaryTerm[] = [
       "Common reasons courts grant downward deviations: The paying parent has significant residential time with the child. The paying parent has extraordinary debt not voluntarily incurred. The paying parent supports children from other relationships. Income used in the calculation is nonrecurring such as a one-time bonus.",
       "A deviation must be requested in writing, supported by evidence, and approved by the court with written findings. Courts cannot accept an incomplete deviation request."
     ],
-    fullExample: "Standard calculation result: $1,200/mo\nPaying parent has child 35% of the time.\nCourt grants downward deviation of 25%.\n\nDeviation credit: $1,200 × 25% = $300\nAdjusted transfer payment: $1,200 - $300 = $900/mo\n\nThe court enters written findings documenting the residential time and expense evidence supporting the $300 deviation.",
+    fullExample: "Standard calculation result: $1,200/mo\nPaying parent has child 35% of the time.\nCourt grants downward deviation based on households' actual expenses.\n\nAdjusted transfer payment: $900/mo\n\nThe court enters written findings documenting the residential time and expense evidence supporting the deviation per RCW 26.19.075(1)(d).",
     howItAffects: "A deviation directly increases or decreases your final Line 17 transfer payment. The standard calculation is always determined first — the court cannot consider deviation reasons until the standard calculation is established. Deviations are not guaranteed and require compelling written evidence.",
     faqs: [
       { question: "Can parents agree to a deviation without court approval?", answer: "No. All deviations must be approved by the court with written findings of fact. A private agreement between parents without court approval is not a legally enforceable deviation." },
@@ -475,25 +475,25 @@ export const glossaryTerms: GlossaryTerm[] = [
     name: "Parenting Time Credit",
     slug: "parenting-time-credit",
     category: "Court Adjustments",
-    definition: "A parenting time credit is a deviation that reduces child support when the paying parent has significant residential time with the child. Washington courts reference 25% of the basic obligation when calculating this credit under RCW 26.19.075.",
-    example: "A paying parent with the child 35% of the time may receive a credit that reduces their monthly payment from $850 to $743.",
+    definition: "A parenting time credit is a deviation that reduces child support when the paying parent has significant residential time with the child. Under RCW 26.19.075(1)(d), the court has discretion to deviate based on actual increased expenses for the paying parent and decreased expenses for the receiving parent.",
+    example: "A paying parent with the child 35% of the time may receive a deviation that reduces their monthly payment based on the households' actual shared costs.",
     linkLabel: "Read Parenting Time Credit Guide →",
     relatedLinks: [],
     metaTitle: "Parenting Time Credit in WA Child Support | WSCSS",
-    metaDescription: "Parenting time credit reduces child support in Washington when the paying parent has significant residential time. Learn how courts calculate this deviation under RCW 26.19.075.",
+    metaDescription: "Parenting time credit reduces child support in Washington when the paying parent has significant residential time. Learn how courts determine this deviation under RCW 26.19.075.",
     h1Title: "What is Parenting Time Credit in Washington Child Support?",
     ogTitle: "Parenting Time Credit in WA Child Support | WSCSS",
     ogDescription: "Parenting time credit reduces Washington child support when the paying parent has significant residential time under RCW 26.19.075.",
     legalDefinition: "RCW 26.19.075(1)(d): The court may deviate from the standard calculation if the child spends a significant amount of time with a parent who is obligated to make a support transfer payment. The court shall consider increased expenses to the paying parent and decreased expenses to the receiving parent resulting from the time.",
     howItWorks: [
-      "The credit is applied as a percentage reduction to the basic obligation on Line 9 of the worksheet after all SSR limitations are applied. Washington uses 25% of the Line 9 amount as a reference point for this credit though the court exercises full discretion on the amount.",
-      "Important: The credit applies to the SSR-reduced Line 9 amount — never to the pre-SSR amount."
+      "No fixed formula or 'offset method' exists in Washington law for parenting time credits. The court exercises full discretion on the amount based on written findings of fact.",
+      "Important: The credit applies to the standard calculation amount. The court must consider whether a deviation would leave the receiving parent's household with insufficient funds."
     ],
-    fullExample: "P1 basic obligation after SSR (Line 9): $850\nP1 has child 35% of the time.\nCourt grants 25% parenting time credit.\n\nCredit: $850 × 25% = $212.50\nAdjusted Line 17: $955 - $212.50 = $742.50\nFinal transfer payment: $743/mo\n\nWithout the credit P1 would pay $955/mo.\nThe credit saves P1 $212/mo.",
-    howItAffects: "The credit directly reduces your final transfer payment. However it is not automatic — you must request it and provide evidence of the residential schedule. The court will not grant the credit if it would leave the receiving parent's household with insufficient funds to meet the child's basic needs.",
+    fullExample: "P1 basic obligation (standard calculation): $850\nP1 has child 35% of the time.\nCourt grants a residential deviation based on actual expenses incurred.\n\nFinal transfer payment: $680/mo\n\nThe court enters written findings documenting the residential time and expense evidence supporting the deviation.",
+    howItAffects: "The credit directly reduces your final transfer payment. However it is not automatic — you must request it and provide evidence of the residential schedule and shared expenses. The court will not grant the credit if it would leave the receiving parent's household with insufficient funds to meet the child's basic needs.",
     faqs: [
-      { question: "Is parenting time credit automatic if I have the child 50% of the time?", answer: "No. You must request the deviation in writing with evidence of the actual residential schedule. 50/50 schedules are handled differently and may involve a residential split adjustment." },
-      { question: "How much time qualifies as significant?", answer: "Washington law does not define a specific threshold. Courts use discretion based on the residential schedule and evidence of expenses incurred during residential time." },
+      { question: "Is parenting time credit automatic if I have the child 50% of the time?", answer: "No. You must request the deviation in writing with evidence of the actual residential schedule. There is no fixed percentage or automatic reduction even with 50/50 time; the court decides based on actual expenses and written findings." },
+      { question: "How much time qualifies as significant?", answer: "Washington law does not define a specific threshold, though courts typically consider time exceeding 90 overnights (approximately 25% of the year) as significant. The court uses discretion based on the residential schedule and evidence of expenses." },
       { question: "Can the credit be denied?", answer: "Yes. The court may deny the credit if it would leave insufficient funds in the receiving parent's household to meet the child's basic needs." }
     ],
     relatedTerms: [
@@ -555,9 +555,9 @@ export const glossaryTerms: GlossaryTerm[] = [
     legalDefinition: "RCW 26.09.187 governs residential schedules in Washington. The schedule determines which parent is the primary residential parent — the parent with whom the child lives the majority of the time. This parent typically receives the transfer payment.",
     howItWorks: [
       "The primary residential parent receives the transfer payment from the other parent. If the paying parent has significant time under the residential schedule they may request a parenting time credit deviation to reduce their transfer payment.",
-      "A 50/50 equal residential schedule is handled differently using a residential split adjustment that compares each parent's obligation against the per-child amounts for children in each household."
+      "A 50/50 equal residential schedule is handled by the court using discretion and written findings of fact. No fixed formula exists."
     ],
-    fullExample: "Residential schedule: Child lives with P2 70% of time and P1 30% of time.\nP1 is the paying parent.\n\nP1 requests parenting time credit for 30% time.\nCourt reviews evidence of actual time and expenses incurred during P1's residential time.\nCourt grants 25% downward deviation.\n\nWithout deviation P1 pays $1,200/mo.\nWith deviation P1 pays $900/mo.",
+    fullExample: "Residential schedule: Child lives with P2 70% of time and P1 30% of time.\nP1 is the paying parent.\n\nP1 requests parenting time credit for 30% time.\nCourt reviews evidence of actual time and expenses incurred during P1's residential time.\nCourt grants a downward deviation based on shared expenses.\n\nWithout deviation P1 pays $1,200/mo.\nWith deviation P1 pays $960/mo.",
     howItAffects: "A residential schedule that gives the paying parent more time can support a deviation request that meaningfully reduces the transfer payment. Courts require documented evidence of the schedule — a signed parenting plan or court order showing the actual days and times.",
     faqs: [
       { question: "Does a 50/50 schedule eliminate child support?", answer: "Not automatically. Even with equal time the parent with higher income typically still pays support to equalize resources available to the child in each household." },

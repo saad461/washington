@@ -73,13 +73,21 @@ export default function ComparisonTool() {
       let transferPayment = calc.finalSupport;
 
       if (s.custodyType === "Joint Custody" && s.daysA !== undefined) {
-        const daysB = 365 - s.daysA;
-        if (s.daysA >= 135 && daysB >= 135) {
-           const shareA = calc.shareP1;
-           const shareB = calc.shareP2;
-           const adjA = (basicObligation * shareA) * (daysB / 365);
-           const adjB = (basicObligation * shareB) * (s.daysA / 365);
-           transferPayment = Math.abs(adjA - adjB);
+        // Updated to follow RCW 26.19.075 range-based estimation (using midpoint)
+        const shareA = calc.shareP1;
+        const shareB = calc.shareP2;
+        const payerShare = shareA >= shareB ? shareA : shareB;
+        const standardAmount = basicObligation * payerShare;
+        const payerOvernights = shareA >= shareB ? s.daysA : (365 - s.daysA);
+
+        if (payerOvernights > 182) {
+           // Equal Tier: 50% - 75% (midpoint 62.5%)
+           transferPayment = standardAmount * 0.625;
+        } else if (payerOvernights > 90) {
+           // Significant Tier: 75% - 90% (midpoint 82.5%)
+           transferPayment = standardAmount * 0.825;
+        } else {
+           transferPayment = standardAmount;
         }
       } else if (s.custodyType === "With Deviation" && s.deviationAmount) {
         const devAmt = parseFloat(s.deviationAmount) || 0;
