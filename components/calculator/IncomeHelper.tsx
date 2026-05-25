@@ -4,12 +4,22 @@ import React, { useState } from "react";
 import { Info, Calculator, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface IncomeHelperProps {
-  onUseAmount: (amount: string) => void;
-  label?: string;
+interface IncomeTarget {
+  label: string;
+  onUse: (amount: string) => void;
 }
 
-export default function IncomeHelper({ onUseAmount, label = "Not sure of your monthly net income? Calculate it here" }: IncomeHelperProps) {
+interface IncomeHelperProps {
+  onUseAmount?: (amount: string) => void;
+  label?: string;
+  targets?: IncomeTarget[];
+}
+
+export default function IncomeHelper({
+  onUseAmount,
+  label = "Not sure of your monthly net income? Calculate it here",
+  targets
+}: IncomeHelperProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [mode, setMode] = useState<"hourly" | "annual">("hourly");
 
@@ -32,6 +42,7 @@ export default function IncomeHelper({ onUseAmount, label = "Not sure of your mo
   };
 
   const monthlyNet = calculateMonthlyNet();
+  const roundedNet = Math.round(monthlyNet);
 
   return (
     <div className="w-full mb-4">
@@ -115,21 +126,43 @@ export default function IncomeHelper({ onUseAmount, label = "Not sure of your mo
                 </div>
               )}
 
-              <div className="pt-2 border-t border-gray-100 flex items-center justify-between gap-4">
+              <div className="pt-2 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
                   <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Estimated Monthly Net</p>
                   <p className="text-xl font-extrabold text-gray-900">
-                    ${Math.round(monthlyNet).toLocaleString()}
+                    ${roundedNet.toLocaleString()}
                   </p>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => onUseAmount(Math.round(monthlyNet).toString())}
-                  className="btn btn-primary !py-2 !px-4 !text-xs"
-                  disabled={monthlyNet <= 0}
-                >
-                  Use this amount
-                </button>
+                <div className="flex flex-wrap gap-2 justify-end w-full sm:w-auto">
+                  {targets ? (
+                    targets.map((target, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          target.onUse(roundedNet.toString());
+                          setIsOpen(false);
+                        }}
+                        className="btn btn-primary !py-2 !px-4 !text-xs whitespace-nowrap"
+                        disabled={roundedNet <= 0}
+                      >
+                        Use for {target.label}
+                      </button>
+                    ))
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onUseAmount?.(roundedNet.toString());
+                        setIsOpen(false);
+                      }}
+                      className="btn btn-primary !py-2 !px-4 !text-xs"
+                      disabled={roundedNet <= 0 || !onUseAmount}
+                    >
+                      Use this amount
+                    </button>
+                  )}
+                </div>
               </div>
 
               <div className="flex items-start gap-2 p-3 bg-blue-50/50 rounded-lg border border-blue-100/50">
