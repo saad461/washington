@@ -215,13 +215,19 @@ export default function HomeCalculator({ selectedCounty = "", setSelectedCounty 
                 </div>
               </div>
 
-              <IncomeHelper onUseAmount={(amt) => setParent1Income(amt)} label="P1: Not sure of your monthly net income?" />
-              <IncomeHelper onUseAmount={(amt) => setParent2Income(amt)} label="P2: Not sure of your monthly net income?" />
-
-              <p className="text-sm font-medium text-blue-600 -mb-6">Start with your monthly take-home pay after taxes</p>
+              <p className="text-sm font-medium text-blue-600 -mb-4">Start with your monthly take-home pay after taxes</p>
 
               {/* Parent income inputs */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 bg-[var(--color-bg-subtle)] rounded-xl border border-[var(--color-bg-border)]">
+                <div className="sm:col-span-2 -mb-2">
+                  <IncomeHelper
+                    label="Not sure of your monthly net income? Estimate it here"
+                    targets={[
+                      { label: "Parent 1", onUse: (amt) => setParent1Income(amt) },
+                      { label: "Parent 2", onUse: (amt) => setParent2Income(amt) }
+                    ]}
+                  />
+                </div>
                 <div className="flex flex-col">
                   <label htmlFor="parent1-income" className="input-label">
                     Parent 1 Net Income

@@ -190,8 +190,13 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                 </div>
 
                 <div className="space-y-8">
-                  <IncomeHelper onUseAmount={(amt) => setParentAAnnual((parseFloat(amt) * 1.25 * 12).toString())} label="Parent A: Calculate annual gross from net monthly" />
-                  <IncomeHelper onUseAmount={(amt) => setParentBAnnual((parseFloat(amt) * 1.25 * 12).toString())} label="Parent B: Calculate annual gross from net monthly" />
+                  <IncomeHelper
+                    label="Not sure of your monthly net income? Estimate it here"
+                    targets={[
+                      { label: "Parent A", onUse: (amt) => setParentAAnnual((parseFloat(amt) * 1.25 * 12).toString()) },
+                      { label: "Parent B", onUse: (amt) => setParentBAnnual((parseFloat(amt) * 1.25 * 12).toString()) }
+                    ]}
+                  />
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>

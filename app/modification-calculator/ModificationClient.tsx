@@ -137,8 +137,13 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                 </div>
 
                 <div className="space-y-8">
-                  <IncomeHelper onUseAmount={(amt) => setCurrentP1Net(amt)} label="P1: Not sure of current monthly net income?" />
-                  <IncomeHelper onUseAmount={(amt) => setCurrentP2Net(amt)} label="P2: Not sure of current monthly net income?" />
+                  <IncomeHelper
+                    label="Not sure of current monthly net income? Estimate it here"
+                    targets={[
+                      { label: "P1", onUse: (amt) => setCurrentP1Net(amt) },
+                      { label: "P2", onUse: (amt) => setCurrentP2Net(amt) }
+                    ]}
+                  />
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>

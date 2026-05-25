@@ -154,8 +154,13 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                 </div>
 
                 <div className="space-y-8">
-                  <IncomeHelper onUseAmount={(amt) => setObligorAnnual((parseFloat(amt) * 1.25 * 12).toString())} label="Obligor: Calculate annual gross from net monthly" />
-                  <IncomeHelper onUseAmount={(amt) => setObligeeAnnual((parseFloat(amt) * 1.25 * 12).toString())} label="Obligee: Calculate annual gross from net monthly" />
+                  <IncomeHelper
+                    label="Not sure of monthly net income? Estimate it here"
+                    targets={[
+                      { label: "Obligor", onUse: (amt) => setObligorAnnual((parseFloat(amt) * 1.25 * 12).toString()) },
+                      { label: "Obligee", onUse: (amt) => setObligeeAnnual((parseFloat(amt) * 1.25 * 12).toString()) }
+                    ]}
+                  />
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
