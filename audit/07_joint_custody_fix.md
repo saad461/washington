@@ -92,3 +92,61 @@ if (lowEstimate < floor) lowEstimate = floor;
 
 ## Compliance
 All changes are strictly isolated from the core `calculatorEngine.ts` and `washingtonTable2026.ts` data files.
+
+## Follow-Up Fixes (Session 2)
+
+### Issue 1: RangeDisplay Hidden for 0-90 Days
+**Problem:** The RangeDisplay was visible (showing $0 or empty) for 0-90 overnights.
+**Fix:** Implemented strict conditional rendering using `payerOvernights > 90`.
+
+**Code Before:**
+```tsx
+{result.tier !== "standard" && (
+  <RangeDisplay ... />
+)}
+```
+
+**Code After:**
+```tsx
+{result.payerOvernights > 90 && (
+  <RangeDisplay ... />
+)}
+```
+
+**Verification:**
+- TEST A (0 days): Component NOT rendered.
+- TEST B (90 days): Component NOT rendered.
+- TEST C (91 days): Component rendered correctly (75-90% range).
+- TEST D (183 days): Component rendered correctly (50-75% range).
+
+### Issue 2: ComparisonTool Revert & Text Update
+**Problem:** Comparison tool used inaccurate "tier midpoint" calculations.
+**Fix:** Removed midpoint logic. Joint custody scenarios now display a static text message with a link.
+
+**Code Before:**
+```tsx
+if (payerOvernights > 182) {
+   transferPayment = standardAmount * 0.625;
+} else if (payerOvernights > 90) {
+   transferPayment = standardAmount * 0.825;
+}
+```
+
+**Code After:**
+```tsx
+if (s.custodyType === "Joint Custody") {
+  return {
+    id: s.id,
+    basicObligation: 0,
+    transferPayment: 0,
+    annualTotal: 0,
+    isJointCustody: true
+  };
+}
+```
+
+**Verification:**
+- No dollar amounts shown for joint custody.
+- Neutral gray border used (no Best/Worst highlighting).
+- Working link to `/joint-custody-calculator`.
+- Mobile-friendly 44px tap target.

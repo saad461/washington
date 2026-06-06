@@ -354,7 +354,7 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                         {result.message}
                       </p>
 
-                      {result.tier !== "standard" && (
+                      {result.payerOvernights > 90 && (
                         <RangeDisplay
                           low={toggleValue(result.lowEstimate)}
                           high={toggleValue(result.highEstimate)}
@@ -467,7 +467,7 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                              <span className="text-gray-500 font-medium">Standard Amount</span>
                              <span className="font-bold text-gray-900">{curFormatter.format(whatIfResult.standardAmount)}</span>
                            </div>
-                           {whatIfResult.tier !== "standard" ? (
+                           {whatIfPayerDays > 90 ? (
                              <div className="flex justify-between items-center text-sm pt-2 border-t border-gray-200">
                                <span className="text-blue-600 font-bold">Estimated Range</span>
                                <span className="font-bold text-blue-700">
@@ -634,7 +634,7 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
         analysisItems={[
           { label: "Standard Amount:", value: curFormatter.format(result.standardAmount) },
           { label: "Overnight Tier:", value: result.tier === "standard" ? "0-90 Days" : result.tier === "significant" ? "91-182 Days" : "183+ Days" },
-          ...(result.tier !== "standard" ? [
+          ...(result.payerOvernights > 90 ? [
             { label: "Estimated Court Range:", value: `${curFormatter.format(result.lowEstimate)} — ${curFormatter.format(result.highEstimate)}` },
           ] : []),
           ...(hasChildcare ? [

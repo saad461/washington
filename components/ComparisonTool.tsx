@@ -72,23 +72,14 @@ export default function ComparisonTool() {
       let basicObligation = calc.baseSupport;
       let transferPayment = calc.finalSupport;
 
-      if (s.custodyType === "Joint Custody" && s.daysA !== undefined) {
-        // Updated to follow RCW 26.19.075 range-based estimation (using midpoint)
-        const shareA = calc.shareP1;
-        const shareB = calc.shareP2;
-        const payerShare = shareA >= shareB ? shareA : shareB;
-        const standardAmount = basicObligation * payerShare;
-        const payerOvernights = shareA >= shareB ? s.daysA : (365 - s.daysA);
-
-        if (payerOvernights > 182) {
-           // Equal Tier: 50% - 75% (midpoint 62.5%)
-           transferPayment = standardAmount * 0.625;
-        } else if (payerOvernights > 90) {
-           // Significant Tier: 75% - 90% (midpoint 82.5%)
-           transferPayment = standardAmount * 0.825;
-        } else {
-           transferPayment = standardAmount;
-        }
+      if (s.custodyType === "Joint Custody") {
+        return {
+          id: s.id,
+          basicObligation: 0,
+          transferPayment: 0,
+          annualTotal: 0,
+          isJointCustody: true
+        };
       } else if (s.custodyType === "With Deviation" && s.deviationAmount) {
         const devAmt = parseFloat(s.deviationAmount) || 0;
         if (s.deviationDirection === "upward") {
@@ -116,6 +107,7 @@ export default function ComparisonTool() {
     let maxIds: string[] = [];
 
     results.forEach(r => {
+      if (r.isJointCustody) return;
       if (r.transferPayment < minVal) {
         minVal = r.transferPayment;
         minIds = [r.id];
@@ -287,37 +279,54 @@ export default function ComparisonTool() {
                   </div>
                 </div>
 
-                <div className={`card-standard !p-0 overflow-hidden shadow-md border-2 transition-all ${
-                  highlight === "min" ? "border-green-500 ring-4 ring-green-500/10" :
-                  highlight === "max" ? "border-red-500 ring-4 ring-red-500/10" :
+                <div className={`card-standard !p-0 overflow-hidden shadow-md border-2 transition-all h-full ${
+                  highlight === "min" && !res.isJointCustody ? "border-green-500 ring-4 ring-green-500/10" :
+                  highlight === "max" && !res.isJointCustody ? "border-red-500 ring-4 ring-red-500/10" :
                   "border-gray-200"
                 }`}>
-                  <div className="p-6 space-y-4">
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-500">Basic Obligation</span>
-                      <span className="font-bold text-gray-900">{curFormatter.format(res.basicObligation)}</span>
-                    </div>
-                    <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-500">Annual Total</span>
-                      <span className="font-bold text-gray-900">{curFormatter.format(res.annualTotal)}</span>
-                    </div>
-                  </div>
-                  <div className={`p-6 border-t ${
-                    highlight === "min" ? "bg-green-50" :
-                    highlight === "max" ? "bg-red-50" :
-                    "bg-blue-50/30"
-                  }`}>
-                    <div className="text-center">
-                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Transfer Payment</p>
-                      <p className={`text-3xl font-extrabold ${
-                        highlight === "min" ? "text-green-600" :
-                        highlight === "max" ? "text-red-600" :
-                        "text-blue-600"
-                      }`}>
-                        {curFormatter.format(res.transferPayment)}
+                  {res.isJointCustody ? (
+                    <div className="p-6 h-full flex flex-col justify-center text-center space-y-4 bg-white min-h-[160px]">
+                      <p className="text-sm md:text-[14px] text-gray-600 leading-relaxed">
+                        Joint custody support varies by court order. See the{" "}
+                        <Link
+                          href="/joint-custody-calculator"
+                          className="text-blue-600 font-bold hover:underline inline-flex items-center justify-center min-h-[44px] min-w-[44px]"
+                        >
+                          joint custody calculator
+                        </Link>{" "}
+                        for an estimated range based on your specific parenting schedule.
                       </p>
                     </div>
-                  </div>
+                  ) : (
+                    <>
+                      <div className="p-6 space-y-4">
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="text-gray-500">Basic Obligation</span>
+                          <span className="font-bold text-gray-900">{curFormatter.format(res.basicObligation)}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-sm">
+                          <span className="text-gray-500">Annual Total</span>
+                          <span className="font-bold text-gray-900">{curFormatter.format(res.annualTotal)}</span>
+                        </div>
+                      </div>
+                      <div className={`p-6 border-t ${
+                        highlight === "min" ? "bg-green-50" :
+                        highlight === "max" ? "bg-red-50" :
+                        "bg-blue-50/30"
+                      }`}>
+                        <div className="text-center">
+                          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Transfer Payment</p>
+                          <p className={`text-3xl font-extrabold ${
+                            highlight === "min" ? "text-green-600" :
+                            highlight === "max" ? "text-red-600" :
+                            "text-blue-600"
+                          }`}>
+                            {curFormatter.format(res.transferPayment)}
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             );
