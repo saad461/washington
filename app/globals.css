@@ -675,4 +675,56 @@
     border-radius: 10px;
     padding: 16px 20px;
   }
+
+  /* ══ SHARED TYPOGRAPHY ════════════════════════ */
+  .prose-standard {
+    font-size: var(--font-size-body-xl); /* 17px */
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+  }
+  .prose-standard h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-top: 48px;
+    margin-bottom: 24px;
+    line-height: 1.25;
+  }
+  .prose-standard h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    line-height: 1.35;
+  }
+  .prose-standard p {
+    margin-bottom: 24px;
+  }
+  .prose-standard strong {
+    color: var(--color-text-primary);
+    font-weight: 700;
+  }
+  .prose-standard a {
+    color: var(--color-brand-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .prose-standard a:hover {
+    text-decoration: underline;
+  }
+  .prose-standard ul, .prose-standard ol {
+    margin-bottom: 32px;
+    padding-left: 20px;
+  }
+  .prose-standard li {
+    margin-bottom: 12px;
+  }
+  .prose-standard blockquote {
+    border-left: 4px solid var(--color-bg-border);
+    padding-left: 24px;
+    font-style: italic;
+    color: var(--color-text-tertiary);
+    margin: 40px 0;
+  }
 }

@@ -249,18 +249,7 @@ export default async function BlogPostPage({ params }: Props) {
             <MobileTOC headings={headings} />
           </div>
 
-          <div className="prose prose-gray max-w-none mb-20 text-[17px] leading-[1.8] text-gray-700">
-             <style dangerouslySetInnerHTML={{ __html: `
-               .prose h2 { font-size: 28px; font-weight: 700; color: #111827; margin-top: 64px; margin-bottom: 24px; line-height: 1.25; }
-               .prose h3 { font-size: 22px; font-weight: 700; color: #111827; margin-top: 40px; margin-bottom: 16px; line-height: 1.35; }
-               .prose p { margin-bottom: 24px; }
-               .prose strong { color: #111827; font-weight: 700; }
-               .prose a { color: #2563eb; font-weight: 600; text-decoration: none; }
-               .prose a:hover { text-decoration: underline; }
-               .prose ul, .prose ol { margin-bottom: 32px; padding-left: 20px; }
-               .prose li { margin-bottom: 12px; }
-               .prose blockquote { border-left: 4px solid #e5e7eb; padding-left: 24px; italic; color: #4b5563; margin: 40px 0; }
-             `}} />
+          <div className="prose-standard mb-20">
              <div dangerouslySetInnerHTML={{ __html: updatedHtml }} />
           </div>
 

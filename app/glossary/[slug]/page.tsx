@@ -126,33 +126,32 @@ export default async function GlossaryTermPage({ params }: Props) {
       {/* ── CONTENT BODY ───────────────────────────────────────────────── */}
       <section className="py-16 bg-white">
         <div className="container-reading space-y-20">
-
           {/* Legal Definition */}
-          <section>
-            <div className="flex items-center gap-3 mb-6">
+          <section className="prose-standard">
+            <div className="flex items-center gap-3 mb-6 not-prose">
               <div className="p-2 bg-blue-50 rounded-lg">
                 <Scale className="w-5 h-5 text-blue-600" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">Legal Definition Under Washington Law</h2>
+              <h2 className="!mt-0 !mb-0 font-bold text-gray-900 leading-tight" style={{ fontSize: '28px' }}>Legal Definition Under Washington Law</h2>
             </div>
-            <div className="prose prose-blue max-w-none">
-              <p className="text-lg text-gray-700 leading-relaxed border-l-4 border-blue-600 pl-6 py-1 italic bg-blue-50/30 rounded-r-lg">
+            <div>
+              <p className="border-l-4 border-blue-600 pl-6 py-1 italic bg-blue-50/30 rounded-r-lg">
                 {termData.legalDefinition}
               </p>
             </div>
           </section>
 
           {/* How it Works */}
-          <section>
-            <div className="flex items-center gap-3 mb-6">
+          <section className="prose-standard">
+            <div className="flex items-center gap-3 mb-6 not-prose">
               <div className="p-2 bg-blue-50 rounded-lg">
                 <BookOpen className="w-5 h-5 text-blue-600" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">How {termData.name} Works in Practice</h2>
+              <h2 className="!mt-0 !mb-0 font-bold text-gray-900 leading-tight" style={{ fontSize: '28px' }}>How {termData.name} Works in Practice</h2>
             </div>
             <div className="space-y-6">
               {termData.howItWorks.map((para, i) => (
-                <p key={i} className="text-lg text-gray-700 leading-relaxed">
+                <p key={i}>
                   {para}
                 </p>
               ))}
@@ -160,27 +159,27 @@ export default async function GlossaryTermPage({ params }: Props) {
           </section>
 
           {/* Real-World Example */}
-          <section className="bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-100 shadow-sm">
-            <div className="flex items-center gap-3 mb-8">
+          <section className="bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-100 shadow-sm prose-standard">
+            <div className="flex items-center gap-3 mb-8 not-prose">
               <div className="p-2 bg-blue-600 rounded-lg">
                 <CalcIcon className="w-5 h-5 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">Real-World Example</h2>
+              <h2 className="!my-0 text-[28px] font-bold text-gray-900">Real-World Example</h2>
             </div>
-            <div className="bg-white rounded-2xl p-6 md:p-8 font-mono text-sm md:text-base text-gray-800 border border-gray-200 whitespace-pre-wrap leading-relaxed shadow-inner">
+            <div className="bg-white rounded-2xl p-6 md:p-8 font-mono text-sm md:text-base text-gray-800 border border-gray-200 whitespace-pre-wrap leading-relaxed shadow-inner not-prose">
               {termData.fullExample}
             </div>
           </section>
 
           {/* How it Affects Amount */}
-          <section>
-            <div className="flex items-center gap-3 mb-6">
+          <section className="prose-standard">
+            <div className="flex items-center gap-3 mb-6 not-prose">
               <div className="p-2 bg-blue-50 rounded-lg">
                 <FileText className="w-5 h-5 text-blue-600" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">How {termData.name} Affects Your Child Support Amount</h2>
+              <h2 className="!mt-0 !mb-0 font-bold text-gray-900 leading-tight" style={{ fontSize: '28px' }}>How {termData.name} Affects Your Child Support Amount</h2>
             </div>
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <p>
               {termData.howItAffects}
             </p>
           </section>
@@ -191,7 +190,7 @@ export default async function GlossaryTermPage({ params }: Props) {
               <div className="p-2 bg-blue-50 rounded-lg">
                 <HelpCircle className="w-5 h-5 text-blue-600" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">Frequently Asked Questions</h2>
+              <h2 className="font-bold text-gray-900 leading-tight" style={{ fontSize: '28px' }}>Frequently Asked Questions</h2>
             </div>
             <FAQAccordion faqs={termData.faqs} defaultOpenCount={1} />
           </section>
@@ -202,7 +201,7 @@ export default async function GlossaryTermPage({ params }: Props) {
               <div className="p-2 bg-blue-50 rounded-lg">
                 <LinkIcon className="w-5 h-5 text-blue-600" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">Related Terms</h2>
+              <h2 className="font-bold text-gray-900 leading-tight" style={{ fontSize: '28px' }}>Related Terms</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {termData.relatedTerms.map((link, idx) => (
