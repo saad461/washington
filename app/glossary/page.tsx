@@ -119,17 +119,17 @@ export default function GlossaryIndex() {
             </p>
 
             {/* SEO Intro Content */}
-            <div className="max-w-3xl space-y-6">
-              <h2 className="text-2xl font-bold text-gray-900">
+            <div className="max-w-3xl prose-standard">
+              <h2>
                 Washington Child Support Legal Terms — 2026 Complete Guide
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p>
                 Washington State uses the Income Shares Model under RCW 26.19 to calculate child support. Both parents net incomes are combined to determine the basic support obligation from the 2026 economic table. Each parent then pays their proportional share based on their percentage of combined income.
               </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p>
                 Understanding the key legal terms in this process is essential for parents completing the WSCSS worksheet, attending court hearings, or reviewing an existing support order. This glossary covers all 20 core terms used in the official 2026 Washington State Child Support Schedule including income definitions, calculation methods, court adjustment factors, limitation standards, and enforcement terminology.
               </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p>
                 All definitions are based on RCW 26.19 and the 2026 AOC economic table effective January 1 2026.
               </p>
             </div>
