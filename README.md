@@ -24,8 +24,15 @@ Visit the live application at: [https://wscss.site](https://wscss.site)
 *Calculate your 2026 Washington child support instantly using the official state standards.*
 
 ## 📸 Screenshots
-![Portfolio Preview](./public/preview.png)
-> **Note:** Replace with actual screenshot of the application.
+
+### Home Page - 2026 Child Support Calculator
+![Home Page Preview](./public/preview.png)
+
+### Joint Custody Calculator
+![Joint Custody Preview](./public/joint-custody-preview.png)
+
+### Modification Calculator
+![Modification Preview](./public/modification-preview.png)
 
 ## ✨ Features
 - **2026 Legislative Compliance**: Fully updated for House Bill 1014 and the latest Washington State AOC economic tables.
