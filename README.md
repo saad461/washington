@@ -96,7 +96,7 @@ The project is optimized for deployment on the **Vercel** platform:
 - **Name**: Saad Nadeem
 - **Email**: [saadnadeem157@gmail.com](mailto:saadnadeem157@gmail.com)
 - **GitHub**: [@saad461](https://github.com/saad461)
-- **Portfolio**: [portfolio-saaad.vercel.app](https://portfolio-saaad.vercel.app/)
+- **Portfolio**: [portfolio-saaad.vercel.app](https://saad--nadeem.vercel.app/)
 
 ## 📄 License
 This project is licensed under the **MIT License**.
