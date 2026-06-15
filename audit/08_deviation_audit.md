@@ -120,3 +120,18 @@ Playwright headless tests in this environment exhibited intermittent race condit
 12. Legal disclaimer showing? **YES**
 13. Mobile 375px verified? **YES**
 14. Children from other relationships shows 4 fields? **YES**
+
+## Section 6: Responsiveness Verification
+
+The deviation calculator was audited across multiple viewports to ensure high usability and zero layout breakage:
+
+- **320px (iPhone SE):** PASS. Zero horizontal overflow. All 15 factor labels wrap correctly. The "Other Children" multi-field section stacks into a single column. Disclaimer text fits perfectly.
+- **375px (Standard Mobile):** PASS. Main grid stacks. Analysis card follows the inputs. Tap targets (Checkboxes, Toggles, Upward/Downward buttons) are touch-safe and meet minimum size recommendations.
+- **768px (Tablet):** PASS. Single-column layout provides generous space for all inputs and detailed deviation cards.
+- **1280px+ (Desktop):** PASS. 12-column grid activated. Input section (col-span-7) and Sticky Analysis Sidebar (col-span-5) are correctly aligned.
+
+**Responsive Design Patterns Used:**
+- `grid-cols-1 lg:grid-cols-12` for main page layout.
+- `grid-cols-1 sm:grid-cols-2` for field pairs.
+- `w-full` for all mobile interactive elements.
+- `text-[13px]` for mobile-optimized fine print (disclaimers and citations).
