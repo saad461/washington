@@ -3,10 +3,10 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import {
-  Calculator, ArrowLeft, CheckCircle, AlertCircle, Printer, Scale, Plus, Minus
+  Calculator, ArrowLeft, CheckCircle, AlertCircle, Printer, Scale, Plus, Minus, Info, ChevronDown, ChevronUp
 } from "lucide-react";
 import { calculateChildSupport } from "@/utils/calculatorEngine";
-import { convertGrossToNet } from "@/utils/taxUtils";
+import { convertGrossToNet } from "@/utils/deviationTaxUtils";
 import { motion, AnimatePresence } from "framer-motion";
 import PrintReport from "@/components/calculator/PrintReport";
 import FAQAccordion from "@/components/FAQAccordion";
@@ -40,13 +40,136 @@ function sanitizeIncome(raw: string): string {
   return raw;
 }
 
-const DEVIATION_REASONS = [
-  { id: "medical", label: "Extraordinary medical expenses" },
-  { id: "educational", label: "Educational expenses" },
-  { id: "transportation", label: "Long distance transportation costs" },
-  { id: "debt", label: "Debt obligations prior to separation" },
-  { id: "other_children", label: "Children from other relationships" },
-  { id: "child_assets", label: "Significant assets of the child" },
+interface DeviationReason {
+  id: string;
+  label: string;
+  citation: string;
+  tooltip: string;
+  explanation: string;
+  example: string;
+}
+
+const DEVIATION_REASONS: DeviationReason[] = [
+  {
+    id: "medical",
+    label: "Extraordinary medical expenses",
+    citation: "RCW 26.19.075(1)(c)(iv)",
+    tooltip: "Significant medical expenses not covered by insurance.",
+    explanation: "This covers uninsured medical, dental, or mental health costs that exceed what is normally expected.",
+    example: "Example: Ongoing specialized therapy or orthodontic work not covered by insurance."
+  },
+  {
+    id: "educational",
+    label: "Educational expenses",
+    citation: "RCW 26.19.075(1)(c)(i)",
+    tooltip: "Tuition and related costs for private schools or special needs.",
+    explanation: "Includes costs for private school, tutoring, or specialized educational programs that meet the specific needs of the child.",
+    example: "Example: Private school tuition when a child has specific learning requirements that public school cannot meet."
+  },
+  {
+    id: "transportation",
+    label: "Long distance transportation costs",
+    citation: "RCW 26.19.075(1)(c)(i)",
+    tooltip: "Travel costs for residential time when parents live far apart.",
+    explanation: "Costs associated with transporting the child between parents for residential time, such as airfare or significant gas expenses.",
+    example: "Example: Monthly flights for a child to visit a parent living in another state."
+  },
+  {
+    id: "debt",
+    label: "Debt obligations prior to separation",
+    citation: "RCW 26.19.075(1)(c)(i)",
+    tooltip: "Debts incurred during the relationship that are still being paid.",
+    explanation: "Significant debt obligations incurred by the parents before they separated that one parent is still responsible for paying.",
+    example: "Example: Large joint credit card debt or loans used for family expenses prior to separation."
+  },
+  {
+    id: "other_children",
+    label: "Children from other relationships",
+    citation: "RCW 26.19.075(1)(e)",
+    tooltip: "Legal duty to support biological children from other relationships.",
+    explanation: "The court considers the total household circumstances, including support paid for other biological children.",
+    example: "Example: A parent paying $500/month for a child from a previous marriage."
+  },
+  {
+    id: "child_assets",
+    label: "Significant assets of the child",
+    citation: "RCW 26.19.075(1)(a)(vii)",
+    tooltip: "Child has substantial independent wealth or assets.",
+    explanation: "When a child has their own significant savings, investments, or trust funds that can contribute to their support.",
+    example: "Example: A child who inherited a large trust fund from a grandparent."
+  },
+  {
+    id: "spouse_income",
+    label: "Income of new spouse or domestic partner",
+    citation: "RCW 26.19.075(1)(a)(i)",
+    tooltip: "May be considered only if the parent is also requesting deviation for another reason. Not sufficient alone.",
+    explanation: "While a new partner isn't legally required to support the child, their contribution to household costs can be considered if another deviation is also requested.",
+    example: "Example: A new spouse pays the entire rent, freeing up more of the parent's income for child support."
+  },
+  {
+    id: "nonrecurring",
+    label: "Nonrecurring income",
+    citation: "RCW 26.19.075(1)(b)",
+    tooltip: "Overtime, bonuses, or second job income that will not recur. Based on prior 2 calendar years.",
+    explanation: "This applies when income included in the calculation (like a bonus or overtime) will not recur in future years. The court reviews the past 2 calendar years of this income.",
+    example: "Example: A one-time $10,000 bonus that will not be repeated."
+  },
+  {
+    id: "substantial_wealth",
+    label: "Possession of substantial wealth",
+    citation: "RCW 26.19.075(1)(a)(vi)",
+    tooltip: "Savings, investments, real estate, vehicles, boats, pensions, bank accounts, insurance, or other assets.",
+    explanation: "Courts may deviate if a parent has significant wealth that isn't reflected in their monthly net income, such as large investment accounts.",
+    example: "Example: A parent with $2 million in liquid stocks but relatively low monthly salary."
+  },
+  {
+    id: "child_income",
+    label: "Extraordinary income of a child",
+    citation: "RCW 26.19.075(1)(a)(vii)",
+    tooltip: "Child has significant income of their own.",
+    explanation: "Applies when a child is earning significant income, often through professional work or business interests.",
+    example: "Example: A teenager who earns substantial income from a successful social media business."
+  },
+  {
+    id: "tax_planning",
+    label: "Tax planning considerations",
+    citation: "RCW 26.19.075(1)(a)(viii)",
+    tooltip: "Deviation may be granted only if children receive no lesser economic benefit as a result.",
+    explanation: "Allows for adjustments based on complex tax strategies, provided the child's financial situation does not worsen.",
+    example: "Example: Adjusting support to optimize tax filings between parents for a higher total household net."
+  },
+  {
+    id: "disabled_child",
+    label: "Special needs of disabled child",
+    citation: "RCW 26.19.075(1)(c)(iii)",
+    tooltip: "Physical, mental, or emotional disabilities requiring special care or expenses.",
+    explanation: "Accounts for the additional costs of raising a child with significant physical or mental disabilities.",
+    example: "Example: Specialized home care or medical equipment required for a child with a chronic condition."
+  },
+  {
+    id: "psychological",
+    label: "Psychological needs of child",
+    citation: "RCW 26.19.075(1)(c)(iv)",
+    tooltip: "Special psychological or mental health needs beyond normal healthcare expenses.",
+    explanation: "Focuses on the mental and emotional health requirements of a child that necessitate extra spending.",
+    example: "Example: Intensive weekly counseling or specialized mental health programs."
+  },
+  {
+    id: "reunification",
+    label: "Court ordered reunification costs",
+    citation: "RCW 26.19.075(1)(c)(v)",
+    tooltip: "Costs to comply with court ordered reunification efforts under chapter 13.34 RCW.",
+    explanation: "Covers the mandatory costs a parent must pay to participate in court-ordered programs to reunite with their child.",
+    example: "Example: Court-mandated supervised visitation fees or reunification therapy costs."
+  },
+  {
+    id: "income_disparity",
+    label: "Significant income disparity",
+    citation: "RCW 26.19.075(1)(c)(ii)",
+    tooltip: "Significant difference in living costs between households due to conditions beyond parents control.",
+    explanation: "May be used when one parent's living expenses are vastly different from the other due to factors they cannot control.",
+    example: "Example: One parent must live in a much more expensive area for work, creating a vast disparity in disposable income."
+  }
 ];
 
 interface DeviationClientProps {
@@ -59,7 +182,16 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
   const [childrenCount, setChildrenCount] = useState(1);
   const [selectedReasons, setSelectedReasons] = useState<string[]>([]);
   const [reasonAmounts, setReasonAmounts] = useState<Record<string, string>>({});
-  const [deviationDirection, setDeviationDirection] = useState<"upward" | "downward">("upward");
+  const [reasonDirections, setReasonDirections] = useState<Record<string, "upward" | "downward">>({});
+  const [expandedLearnMore, setExpandedLearnMore] = useState<string | null>(null);
+
+  // Other children specific state
+  const [otherChildrenCount, setOtherChildrenCount] = useState(1);
+  const [otherChildrenSupport, setOtherChildrenSupport] = useState("");
+  const [otherChildrenPaid, setOtherChildrenPaid] = useState(true);
+  const [otherChildrenDirection, setOtherChildrenDirection] = useState<"upward" | "downward">("downward");
+
+  const [deviationDirectionGlobal, setDeviationDirectionGlobal] = useState<"upward" | "downward">("upward");
   const [showExplanation, setShowExplanation] = useState(false);
   const [isYearly, setIsYearly] = useState(false);
 
@@ -67,10 +199,19 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
     setSelectedReasons(prev =>
       prev.includes(id) ? prev.filter(r => r !== id) : [...prev, id]
     );
+    if (id === "other_children") {
+      setReasonDirections(prev => ({ ...prev, [id]: "downward" }));
+    } else {
+      setReasonDirections(prev => ({ ...prev, [id]: deviationDirectionGlobal }));
+    }
   };
 
   const setAmount = (id: string, val: string) => {
     setReasonAmounts(prev => ({ ...prev, [id]: sanitizeIncome(val) }));
+  };
+
+  const setDirection = (id: string, dir: "upward" | "downward") => {
+    setReasonDirections(prev => ({ ...prev, [id]: dir }));
   };
 
   const result = useMemo(() => {
@@ -85,14 +226,40 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
 
     const standardObligation = calc.obligationP1; // P1 is obligor
 
-    let totalDeviation = 0;
+    let netDeviation = 0;
+    const details: { label: string; amount: number; direction: "upward" | "downward"; citation: string }[] = [];
+
     selectedReasons.forEach(id => {
-      totalDeviation += parseFloat(reasonAmounts[id]) || 0;
+      const reasonObj = DEVIATION_REASONS.find(r => r.id === id);
+      let amount = 0;
+      let direction: "upward" | "downward" = reasonDirections[id] || deviationDirectionGlobal;
+
+      if (id === "other_children") {
+        amount = parseFloat(otherChildrenSupport) || 0;
+        direction = otherChildrenDirection;
+      } else {
+        amount = parseFloat(reasonAmounts[id]) || 0;
+      }
+
+      if (amount > 0) {
+        if (direction === "upward") {
+          netDeviation += amount;
+        } else {
+          netDeviation -= amount;
+        }
+        details.push({
+          label: reasonObj?.label || id,
+          amount,
+          direction,
+          citation: reasonObj?.citation || ""
+        });
+      }
     });
 
-    const adjustedObligation = deviationDirection === "upward"
-      ? standardObligation + totalDeviation
-      : Math.max(0, standardObligation - totalDeviation);
+    // Apply minimum floor check: Support cannot go below $50 per child per month
+    const minFloor = childrenCount * 50;
+    const adjustedObligation = Math.max(minFloor, standardObligation + netDeviation);
+    const isAtFloor = adjustedObligation === minFloor && (standardObligation + netDeviation) < minFloor;
 
     const percentDiff = standardObligation > 0
       ? (adjustedObligation - standardObligation) / standardObligation
@@ -103,18 +270,16 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
       netObligee: obligeeNet,
       combined: calc.combinedIncome,
       standardObligation,
-      totalDeviation,
+      netDeviation,
       adjustedObligation,
       percentDiff,
-      reasons: selectedReasons.map(id => ({
-        label: DEVIATION_REASONS.find(r => r.id === id)?.label || id,
-        amount: parseFloat(reasonAmounts[id]) || 0
-      })),
+      reasons: details,
       shareP1: calc.shareP1,
       shareP2: calc.shareP2,
-      baseSupport: calc.baseSupport
+      baseSupport: calc.baseSupport,
+      isAtFloor
     };
-  }, [obligorAnnual, obligeeAnnual, childrenCount, selectedReasons, reasonAmounts, deviationDirection]);
+  }, [obligorAnnual, obligeeAnnual, childrenCount, selectedReasons, reasonAmounts, reasonDirections, deviationDirectionGlobal, otherChildrenSupport, otherChildrenDirection]);
 
   const toggleValue = (val: number) => isYearly ? val * 12 : val;
 
@@ -129,10 +294,10 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
 
           <div className="flex flex-col gap-4">
             <p className="eyebrow">
-              RCW 26.19.075 · 2026 Guidelines
+              RCW 26.19.075 · 2025 IRS Tax Brackets
             </p>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
-              Washington State <span className="text-blue-600">Child Support Deviation Calculator 2026</span>
+              Washington State <span className="text-blue-600">Child Support Deviation Calculator</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
               Washington State child support begins with the standard schedule amount but courts can order more or less based on specific circumstances. This deviation calculator helps you estimate how qualifying factors under RCW 26.19.075 may adjust your support obligation above or below the 2026 Washington State Child Support Schedule amount.
@@ -154,6 +319,12 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                 </div>
 
                 <div className="space-y-8">
+                  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md">
+                    <p className="text-sm text-blue-800">
+                      <strong>Federal tax estimate based on 2025 IRS tax brackets.</strong> Standard deduction of $15,000 applied.
+                    </p>
+                  </div>
+
                   <IncomeHelper
                     label="Not sure of monthly net income? Estimate it here"
                     targets={[
@@ -209,26 +380,60 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
 
                   <div>
                     <h3 className="text-lg font-bold mb-4">Deviation Factors</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4">
                       {DEVIATION_REASONS.map(reason => (
-                        <button
-                          key={reason.id}
-                          onClick={() => toggleReason(reason.id)}
-                          className={`flex items-center gap-3 p-4 rounded-xl border-2 text-left transition-all ${
-                            selectedReasons.includes(reason.id)
-                              ? "bg-blue-50 border-blue-600 ring-2 ring-blue-100"
-                              : "bg-white border-gray-100 hover:border-gray-300"
-                          }`}
-                        >
-                          <div className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 ${
-                            selectedReasons.includes(reason.id) ? "bg-blue-600 border-blue-600 text-white" : "border-gray-300"
-                          }`}>
-                            {selectedReasons.includes(reason.id) && <CheckCircle size={14} />}
+                        <div key={reason.id} className="flex flex-col">
+                          <button
+                            onClick={() => toggleReason(reason.id)}
+                            className={`flex items-start gap-3 p-4 rounded-xl border-2 text-left transition-all ${
+                              selectedReasons.includes(reason.id)
+                                ? "bg-blue-50 border-blue-600 ring-2 ring-blue-100"
+                                : "bg-white border-gray-100 hover:border-gray-300"
+                            }`}
+                          >
+                            <div className={`mt-1 w-5 h-5 rounded-md border flex items-center justify-center shrink-0 ${
+                              selectedReasons.includes(reason.id) ? "bg-blue-600 border-blue-600 text-white" : "border-gray-300"
+                            }`}>
+                              {selectedReasons.includes(reason.id) && <CheckCircle size={14} />}
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex flex-col">
+                                <span className={`text-sm font-bold ${selectedReasons.includes(reason.id) ? "text-blue-900" : "text-gray-600"}`}>
+                                  {reason.label}
+                                </span>
+                                <span className="text-[11px] text-gray-400 font-medium">{reason.citation}</span>
+                              </div>
+                            </div>
+                            <Info size={16} className="text-gray-300 mt-1" title={reason.tooltip} />
+                          </button>
+
+                          <div className="px-4 py-2">
+                            <button
+                              onClick={() => setExpandedLearnMore(expandedLearnMore === reason.id ? null : reason.id)}
+                              className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 transition-colors"
+                            >
+                              {expandedLearnMore === reason.id ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                              Learn more
+                            </button>
+
+                            <AnimatePresence>
+                              {expandedLearnMore === reason.id && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="mt-2 p-4 bg-gray-50 rounded-xl border border-gray-100 text-xs text-gray-600 space-y-2">
+                                    <p className="font-medium text-gray-700">{reason.explanation}</p>
+                                    <p className="italic">{reason.example}</p>
+                                    <p className="text-blue-600 font-bold">{reason.citation}</p>
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
                           </div>
-                          <span className={`text-sm font-bold ${selectedReasons.includes(reason.id) ? "text-blue-900" : "text-gray-600"}`}>
-                            {reason.label}
-                          </span>
-                        </button>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -240,32 +445,121 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                         animate={{ opacity: 1, height: "auto" }}
                         className="space-y-6"
                       >
-                        <h3 className="text-lg font-bold">Deviation Amounts</h3>
+                        <h3 className="text-lg font-bold">Deviation Details</h3>
                         <div className="grid grid-cols-1 gap-4">
-                          {selectedReasons.map(id => (
-                            <div key={id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                              <span className="text-sm font-bold text-gray-700">{DEVIATION_REASONS.find(r => r.id === id)?.label}</span>
-                              <div className="relative max-w-[200px]">
-                                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
-                                <input
-                                  type="number"
-                                  value={reasonAmounts[id] || ""}
-                                  onChange={(e) => setAmount(id, e.target.value)}
-                                  placeholder="0.00"
-                                  className="input-standard pl-8 w-full !h-10"
-                                />
+                          {selectedReasons.map(id => {
+                            const reasonObj = DEVIATION_REASONS.find(r => r.id === id);
+                            if (id === "other_children") {
+                              return (
+                                <div key={id} className="p-6 bg-white rounded-xl border-2 border-blue-100 shadow-sm space-y-6">
+                                  <div className="flex items-center gap-2 mb-2">
+                                    <div className="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-sm">
+                                      <Scale size={16} />
+                                    </div>
+                                    <span className="font-bold text-gray-900">{reasonObj?.label}</span>
+                                  </div>
+
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                      <label className="input-label">Number of other children</label>
+                                      <input
+                                        type="number"
+                                        min="1"
+                                        value={otherChildrenCount}
+                                        onChange={(e) => setOtherChildrenCount(parseInt(e.target.value) || 1)}
+                                        className="input-standard w-full"
+                                      />
+                                    </div>
+                                    <div>
+                                      <label className="input-label">Monthly support ordered</label>
+                                      <div className="relative">
+                                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+                                        <input
+                                          type="number"
+                                          value={otherChildrenSupport}
+                                          onChange={(e) => setOtherChildrenSupport(sanitizeIncome(e.target.value))}
+                                          placeholder="0.00"
+                                          className="input-standard pl-8 w-full"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
+                                    <span className="text-sm font-bold text-gray-700">Is support actually being paid?</span>
+                                    <div className="flex gap-2">
+                                      <button
+                                        onClick={() => setOtherChildrenPaid(true)}
+                                        className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${otherChildrenPaid ? "bg-blue-600 text-white shadow-sm" : "bg-white text-gray-500 border border-gray-200"}`}
+                                      >YES</button>
+                                      <button
+                                        onClick={() => setOtherChildrenPaid(false)}
+                                        className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${!otherChildrenPaid ? "bg-red-600 text-white shadow-sm" : "bg-white text-gray-500 border border-gray-200"}`}
+                                      >NO</button>
+                                    </div>
+                                  </div>
+
+                                  <div>
+                                    <label className="input-label">Deviation direction</label>
+                                    <div className="grid grid-cols-2 gap-4">
+                                      <button onClick={() => setOtherChildrenDirection("downward")} className={toggleBtn(otherChildrenDirection === "downward")}>
+                                        <Minus size={16} /> Downward
+                                      </button>
+                                      <button onClick={() => setOtherChildrenDirection("upward")} className={toggleBtn(otherChildrenDirection === "upward")}>
+                                        <Plus size={16} /> Upward
+                                      </button>
+                                    </div>
+                                    <p className="text-[11px] text-gray-400 mt-2 font-medium">Having children from other relationships typically results in a downward deviation.</p>
+                                  </div>
+
+                                  <div className="p-4 bg-amber-50 border border-amber-100 rounded-xl text-xs text-amber-800 leading-relaxed">
+                                    Court will consider total household circumstances. Enter monthly support amount ordered for other children above. This typically results in a downward deviation of that amount or less.
+                                  </div>
+
+                                  {otherChildrenDirection === "upward" && (
+                                    <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-xs text-red-800 leading-relaxed font-medium">
+                                      ⚠️ Note: Upward deviation for children from other relationships is uncommon. Courts typically grant downward deviations for this factor. RCW 26.19.075(1)(e)
+                                    </div>
+                                  )}
+                                </div>
+                              );
+                            }
+
+                            return (
+                              <div key={id} className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-4">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                  <span className="text-sm font-bold text-gray-700">{reasonObj?.label}</span>
+                                  <div className="relative max-w-[200px]">
+                                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+                                    <input
+                                      type="number"
+                                      value={reasonAmounts[id] || ""}
+                                      onChange={(e) => setAmount(id, e.target.value)}
+                                      placeholder="0.00"
+                                      className="input-standard pl-8 w-full !h-10"
+                                    />
+                                  </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-3">
+                                  <button onClick={() => setDirection(id, "upward")} className={`h-9 px-3 rounded-lg border flex items-center justify-center gap-2 text-xs font-bold transition-all ${reasonDirections[id] === "upward" ? "bg-blue-600 border-blue-600 text-white" : "bg-white border-gray-200 text-gray-500"}`}>
+                                    <Plus size={14} /> Upward
+                                  </button>
+                                  <button onClick={() => setDirection(id, "downward")} className={`h-9 px-3 rounded-lg border flex items-center justify-center gap-2 text-xs font-bold transition-all ${reasonDirections[id] === "downward" ? "bg-blue-600 border-blue-600 text-white" : "bg-white border-gray-200 text-gray-500"}`}>
+                                    <Minus size={14} /> Downward
+                                  </button>
+                                </div>
                               </div>
-                            </div>
-                          ))}
+                            );
+                          })}
                         </div>
 
-                        <div>
-                          <label className="input-label">Deviation Direction</label>
+                        <div className="pt-4 border-t border-gray-100">
+                          <label className="input-label text-gray-400 text-[10px] uppercase tracking-wider">Default Direction for New Factors</label>
                           <div className="grid grid-cols-2 gap-4">
-                            <button onClick={() => setDeviationDirection("upward")} className={toggleBtn(deviationDirection === "upward")}>
+                            <button onClick={() => setDeviationDirectionGlobal("upward")} className={toggleBtn(deviationDirectionGlobal === "upward")}>
                               <Plus size={16} /> Upward
                             </button>
-                            <button onClick={() => setDeviationDirection("downward")} className={toggleBtn(deviationDirection === "downward")}>
+                            <button onClick={() => setDeviationDirectionGlobal("downward")} className={toggleBtn(deviationDirectionGlobal === "downward")}>
                               <Minus size={16} /> Downward
                             </button>
                           </div>
@@ -307,11 +601,11 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                         <span className="text-gray-500">Standard 2026 Obligation</span>
                         <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.standardObligation))}</span>
                       </div>
-                      {result.totalDeviation > 0 && (
+                      {Math.abs(result.netDeviation) > 0 && (
                         <div className="flex justify-between items-center text-sm">
-                          <span className="text-gray-500">Total Deviation ({deviationDirection})</span>
-                          <span className={`font-bold ${deviationDirection === "upward" ? "text-blue-600" : "text-amber-600"}`}>
-                            {deviationDirection === "upward" ? "+" : "-"}{curFormatter.format(toggleValue(result.totalDeviation))}
+                          <span className="text-gray-500">Net Deviation Adjustment</span>
+                          <span className={`font-bold ${result.netDeviation >= 0 ? "text-blue-600" : "text-amber-600"}`}>
+                            {result.netDeviation >= 0 ? "+" : "-"}{curFormatter.format(toggleValue(Math.abs(result.netDeviation)))}
                           </span>
                         </div>
                       )}
@@ -325,9 +619,14 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                         >
                           <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Included Factors</h4>
                           {result.reasons.map((r, i) => (
-                            <div key={i} className="flex justify-between text-[13px]">
-                              <span className="text-gray-600">{r.label}</span>
-                              <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(r.amount))}</span>
+                            <div key={i} className="flex justify-between items-start gap-4 text-[13px]">
+                              <div className="flex flex-col">
+                                <span className="text-gray-600 leading-tight">{r.label}</span>
+                                <span className="text-[10px] text-gray-400 font-medium">{r.citation}</span>
+                              </div>
+                              <span className={`font-bold whitespace-nowrap ${r.direction === "upward" ? "text-blue-600" : "text-amber-600"}`}>
+                                {r.direction === "upward" ? "+" : "-"}{curFormatter.format(toggleValue(r.amount))}
+                              </span>
                             </div>
                           ))}
                         </motion.div>
@@ -346,7 +645,18 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                           </p>
                         </div>
                       </div>
+
+                      {result.isAtFloor && (
+                        <div className="mt-4 p-3 bg-blue-100/50 border border-blue-200 rounded-lg text-[11px] text-blue-800 font-medium">
+                          💡 Washington law requires a minimum support obligation of $50 per child ($50 x {childrenCount} = {curFormatter.format(childrenCount * 50)}). Your deviation cannot reduce support below this mandatory floor.
+                        </div>
+                      )}
                     </div>
+                  </div>
+
+                  {/* Legal Disclaimer Output Section */}
+                  <div className="bg-amber-50 border border-amber-200 p-4 rounded-lg text-[13px] text-gray-600 leading-relaxed shadow-sm">
+                    Deviation amounts are determined by the court after considering all circumstances. This calculator provides an estimate only. Courts require written findings of fact for any deviation from the standard calculation per RCW 26.19.075(2). Consult a Washington family law attorney for accurate advice.
                   </div>
 
                   {/* Explanatory Section */}
@@ -386,29 +696,25 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                               </div>
                               <div className="flex gap-4">
                                 <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">5</div>
-                                <p>Monthly transfer payment = <strong>{curFormatter.format(result.standardObligation)}</strong> (P1 pays P2)</p>
-                              </div>
-                              <div className="flex gap-4">
-                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">6</div>
                                 <p>Standard obligation: <strong>{curFormatter.format(result.standardObligation)}</strong></p>
                               </div>
                               <div className="flex gap-4">
-                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">7</div>
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">6</div>
                                 <div className="flex-1">
                                   <p>Deviation reasons:</p>
                                   <ul className="list-disc pl-5 mt-1 space-y-1">
                                     {result.reasons.length > 0 ? result.reasons.map((r, i) => (
-                                      <li key={i}>{r.label}: {curFormatter.format(r.amount)}</li>
+                                      <li key={i}>{r.label}: {r.direction === "upward" ? "+" : "-"}{curFormatter.format(r.amount)}</li>
                                     )) : <li>No reasons selected</li>}
                                   </ul>
                                 </div>
                               </div>
                               <div className="flex gap-4">
-                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">8</div>
-                                <p>Total deviation: <strong>{curFormatter.format(result.totalDeviation)}</strong> ({deviationDirection})</p>
+                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">7</div>
+                                <p>Net deviation: <strong>{result.netDeviation >= 0 ? "+" : "-"}{curFormatter.format(Math.abs(result.netDeviation))}</strong></p>
                               </div>
                               <div className="flex gap-4">
-                                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">9</div>
+                                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">8</div>
                                 <p>Final adjusted amount: <strong>{curFormatter.format(result.adjustedObligation)}</strong></p>
                               </div>
                             </div>
@@ -420,15 +726,20 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
 
                   <HistoryPanel
                     storageKey="wscss_history_deviation"
-                    currentInputs={{ obligorAnnual, obligeeAnnual, childrenCount, selectedReasons, reasonAmounts, deviationDirection }}
+                    currentInputs={{ obligorAnnual, obligeeAnnual, childrenCount, selectedReasons, reasonAmounts, reasonDirections, deviationDirectionGlobal, otherChildrenCount, otherChildrenSupport, otherChildrenPaid, otherChildrenDirection }}
                     currentResult={result.adjustedObligation}
                     onReload={(inputs) => {
                       setObligorAnnual(inputs.obligorAnnual);
                       setObligeeAnnual(inputs.obligeeAnnual);
                       setChildrenCount(inputs.childrenCount);
                       setSelectedReasons(inputs.selectedReasons);
-                      setReasonAmounts(inputs.reasonAmounts);
-                      setDeviationDirection(inputs.deviationDirection);
+                      setReasonAmounts(inputs.reasonAmounts || {});
+                      setReasonDirections(inputs.reasonDirections || {});
+                      setDeviationDirectionGlobal(inputs.deviationDirectionGlobal || "upward");
+                      setOtherChildrenCount(inputs.otherChildrenCount || 1);
+                      setOtherChildrenSupport(inputs.otherChildrenSupport || "");
+                      setOtherChildrenPaid(inputs.otherChildrenPaid !== undefined ? inputs.otherChildrenPaid : true);
+                      setOtherChildrenDirection(inputs.otherChildrenDirection || "downward");
                     }}
                     formatResult={(val) => curFormatter.format(val)}
                   />
@@ -587,16 +898,15 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
         analysisItems={[
           ...result.reasons.map(r => ({
             label: r.label,
-            value: curFormatter.format(r.amount),
+            value: (r.direction === "upward" ? "+" : "-") + curFormatter.format(r.amount),
           })),
-          { label: "Deviation Direction:", value: deviationDirection.toUpperCase(), isBold: true },
-          { label: "Total Deviation:", value: curFormatter.format(result.totalDeviation), isBold: true }
+          { label: "Net Deviation:", value: (result.netDeviation >= 0 ? "+" : "-") + curFormatter.format(Math.abs(result.netDeviation)), isBold: true }
         ]}
         totalLabel="Adjusted Support Amount"
         totalValue={curFormatter.format(result.adjustedObligation)}
         secondaryTotalLabel="Percentage Change"
         secondaryTotalValue={perFormatter.format(result.percentDiff)}
-        assumptions="Based on RCW 26.19.075 and 2026 economic tables. Net income estimated using simplified 2026 conversion."
+        assumptions="Based on RCW 26.19.075 and 2026 economic tables. Net income estimated using 2025 federal tax brackets and $15,000 standard deduction."
         disclaimerText="This estimate is based on the 2026 Washington State Child Support Schedule. This is not a legal document. Consult a family law attorney for advice."
       />
     </div>
