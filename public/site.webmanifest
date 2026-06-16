@@ -4,8 +4,8 @@
   "description": "Free Washington State child support calculator using the official 2026 AOC economic table",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1e3a5f",
-  "theme_color": "#6366f1",
+  "background_color": "#173069",
+  "theme_color": "#173069",
   "icons": [
     {
       "src": "/favicon-192x192.png",

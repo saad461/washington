@@ -98,7 +98,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
- themeColor: '#6366f1',
+ themeColor: '#173069',
 };
 
 export default function RootLayout({
@@ -147,7 +147,7 @@ export default function RootLayout({
   href="/wscss-og.webp"
   type="image/webp"
  />
- <meta name="msapplication-TileColor" content="#1e3a5f" />
+ <meta name="msapplication-TileColor" content="#173069" />
  <meta name="msapplication-TileImage" content="/favicon-192x192.png" />
  </head>
  <body className="min-h-full flex flex-col bg-page">
