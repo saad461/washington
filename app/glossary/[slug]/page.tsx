@@ -153,6 +153,9 @@ export default async function GlossaryTermPage({ params }: Props) {
               {termData.howItWorks.map((para, i) => (
                 <p key={i}>
                   {para}
+                  {i === 0 && (
+                    <> Understanding this term is important when completing your child support calculation. <Link href="/worksheet" className="text-blue-600 hover:underline">Use our worksheet calculator</Link> to see how this applies to your case.</>
+                  )}
                 </p>
               ))}
             </div>

@@ -97,7 +97,7 @@ export default function CourtsIndex() {
             <div className="mt-8 prose prose-gray prose-lg max-w-3xl">
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Filing Child Support in Washington State</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
-                Washington State has 39 counties, each with its own Superior Court that handles child support orders, modifications, and enforcement. All 39 counties follow the same Washington State Child Support Schedule (RCW 26.19) and use the official 2026 economic table for calculating support obligations.
+                Washington State has 39 counties, each with its own Superior Court that handles child support orders, modifications, and enforcement. All 39 counties follow the same Washington State Child Support Schedule (RCW 26.19) and use the official 2026 economic table for calculating support obligations. <Link href="/worksheet" className="text-blue-600 hover:underline">Calculate your worksheet before filing</Link> to ensure your paperwork is accurate.
               </p>
               <p className="text-gray-600 font-semibold mb-2">To file a child support order in Washington:</p>
               <ol className="list-decimal pl-5 text-gray-600 space-y-1 mb-4">
