@@ -1,4 +1,4 @@
-import { getExactSupport } from "@/data/washingtonTable2026";
+import { getExactSupport, washingtonSupportTable2026 } from "@/data/washingtonTable2026";
 import {
   washingtonCounties,
   WashingtonCounty,
@@ -303,6 +303,42 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
     formattedSupport,
   );
 
+  const childrenText = children === 1 ? "one child" : `${children} children`;
+
+  // Section 4 & 5 Logic
+  const getSafeSupport = (inc: number, kids: number) => {
+    const res = getExactSupport(inc, kids);
+    if (res.status === "calculated") return res.totalSupport;
+    if (res.status === "above_maximum") return res.tableMaxTotal;
+    return 0;
+  };
+
+  const s1_val = getSafeSupport(income, 1);
+  const s2_val = getSafeSupport(income, 2);
+  const cur_val = supportNum ?? getSafeSupport(income, children);
+
+  const s4_support_1_child = formatter.format(s1_val);
+  const s4_support_2_children = formatter.format(s2_val);
+  const s4_per_child = children > 0 ? formatter.format(cur_val / children) : "$0";
+  const s4_difference = formatter.format(Math.abs(s2_val - s1_val));
+  const s4_percentage = s1_val > 0 ? Math.round(((s2_val / s1_val) - 1) * 100) : 0;
+
+  const table = washingtonSupportTable2026;
+  const curIdx = table.findIndex(e => e.income === income);
+  const prevE = curIdx > 0 ? table[curIdx - 1] : null;
+  const nextE = curIdx !== -1 && curIdx < table.length - 1 ? table[curIdx + 1] : null;
+
+  const childKey = Math.max(1, Math.min(children, 5)) as 1 | 2 | 3 | 4 | 5;
+  const prevInc = prevE?.income;
+  const prevSup = prevE ? formatter.format(prevE.familyTotal[childKey] * children) : null;
+  const nextInc = nextE?.income;
+  const nextSup = nextE ? formatter.format(nextE.familyTotal[childKey] * children) : null;
+
+  const cSlug = county?.slug;
+  const cPart = children === 1 ? "1-child" : `${children}-children`;
+  const prevL = prevInc ? (cSlug ? `/${cSlug}-income-${prevInc}-${cPart}` : `/income-${prevInc}-${cPart}`) : null;
+  const nextL = nextInc ? (cSlug ? `/${cSlug}-income-${nextInc}-${cPart}` : `/income-${nextInc}-${cPart}`) : null;
+
   if (!county && process.env.NODE_ENV === 'development') {
     console.warn('County name is null on calculation page — check slug data');
   }
@@ -444,6 +480,83 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <h2 id="ssr-info" className="scroll-mt-24 text-3xl font-bold text-gray-900 mb-8">The SSR and Low-Income Safeguards</h2>
                 </div>
                 <p className="text-lg leading-relaxed">{ssr}</p>
+
+                {/* Section 1: County Filing Block */}
+                {county && (
+                  <div className="my-8">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">Filing in {countyName} Superior Court</h3>
+                    <p className="text-lg leading-relaxed">
+                      In {county.name} Superior Court, located in {county.seat}, child support
+                      orders based on a {formattedIncome} combined income are filed with the
+                      {county.court} clerk at {county.courtAddress}. Filing fees in
+                      {county.name} are {county.filingFee}. Once filed, the presumptive
+                      {formattedSupport}/mo order for {childrenText} becomes the baseline
+                      unless either parent requests a deviation hearing.
+                    </p>
+                  </div>
+                )}
+
+                {/* Section 2: Income Bracket Context Block */}
+                <div className="my-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Income Bracket Context</h3>
+                  <p className="text-lg leading-relaxed">
+                    {income < 3500 && (
+                      <>At {formattedIncome}/mo, this household falls in the lower income bracket of Washington's 2026 schedule — below the state median of $7,114/mo. At this level, SSR protections and low-income deviations are more likely to influence the final order than the presumptive {formattedSupport} figure.</>
+                    )}
+                    {income >= 3500 && income <= 10000 && (
+                      <>At {formattedIncome}/mo, this household sits within Washington's standard mid-range bracket on the 2026 schedule, near the state median of $7,114/mo. The presumptive {formattedSupport} for {childrenText} is typically applied as-is at this level, with fewer deviations than lower or higher income tiers.</>
+                    )}
+                    {income > 10000 && (
+                      <>At {formattedIncome}/mo, this household falls in the upper income bracket of Washington's 2026 schedule — above the state median of $7,114/mo. At this level, courts have wider discretion to order above the presumptive {formattedSupport}, particularly for lifestyle-based deviation arguments in {countyName}.</>
+                    )}
+                  </p>
+                </div>
+
+                {/* Section 3: Deviation Likelihood Block */}
+                <div className="my-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Deviation Likelihood in {countyName}</h3>
+                  <p className="text-lg leading-relaxed">
+                    {income < 2200 && (
+                      <>Deviation requests are very common at the {formattedIncome} income level in {countyName}. Because {formattedSupport} at this tier frequently conflicts with the $2,394 SSR floor, judges routinely reduce orders to the $50/child statutory minimum. Parents at this income level should come prepared with full financial documentation.</>
+                    )}
+                    {income >= 2200 && income <= 12000 && (
+                      <>At the {formattedIncome} level, deviation requests are less common but still possible in {countyName}. The most frequent grounds are extraordinary healthcare costs, shared custody arrangements, or documented debts. The presumptive {formattedSupport} is upheld in the majority of standard cases at this income tier.</>
+                    )}
+                    {income > 12000 && (
+                      <>High-income deviation arguments are frequently raised in {countyName} at the {formattedIncome} level. Since the schedule caps at $12,000 combined net income, the {formattedSupport} figure is a floor — not a ceiling. Attorneys often argue for upward deviations based on the children's established standard of living and available parental resources.</>
+                    )}
+                  </p>
+                </div>
+
+                {/* Section 4: Children-Specific Insight Block */}
+                <div className="my-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Children-Specific Insight</h3>
+                  <p className="text-lg leading-relaxed">
+                    {children === 1 && (
+                      <>For {childrenText} at {formattedIncome}/mo, the {formattedSupport} obligation reflects Washington's base rate. Parents adding a second child to the order would see this figure rise to {s4_support_2_children} — an increase of {s4_difference} — reflecting the additional resources required under the 2026 schedule.</>
+                    )}
+                    {children === 2 && (
+                      <>The {formattedSupport} for {childrenText} at {formattedIncome}/mo reflects Washington's standard two-child rate. Compared to a one-child order ({s4_support_1_child}) at the same income, the second child adds {s4_difference}/mo — a {s4_percentage}% increase rather than a full doubling, reflecting shared household costs.</>
+                    )}
+                    {children >= 3 && (
+                      <>For {childrenText} at {formattedIncome}/mo, Washington's 2026 schedule applies an economies-of-scale reduction. The {formattedSupport} total works out to {s4_per_child}/mo per child — compared to {s4_support_1_child} for one child at the same income. This reflects shared costs like housing and utilities that don't scale linearly with each additional child.</>
+                    )}
+                  </p>
+                </div>
+
+                {/* Section 5: Related Income Tiers Block */}
+                <div className="my-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Related Income Tiers</h3>
+                  <p className="text-lg leading-relaxed">
+                    {nextInc && nextSup && (
+                      <>Parents earning slightly more than {formattedIncome} — at <Link href={nextL || "#"} className="text-blue-600 hover:underline">{formatter.format(nextInc)}/mo</Link> — would face a presumptive order of {nextSup}/mo for {childrenText} in Washington. </>
+                    )}
+                    {prevInc && prevSup && (
+                      <>Those earning slightly less at <Link href={prevL || "#"} className="text-blue-600 hover:underline">{formatter.format(prevInc)}/mo</Link> would owe {prevSup}/mo. </>
+                    )}
+                    These neighboring brackets help illustrate how Washington's 2026 schedule scales support incrementally with income.
+                  </p>
+                </div>
 
                 {county && (
                   <>
