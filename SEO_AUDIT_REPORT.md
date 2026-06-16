@@ -31,8 +31,8 @@ This report provides a comprehensive overview of the SEO configuration for the W
 | **Legal Disclaimer** | `/disclaimer` | No | `https://wscss.site/disclaimer` | `noindex, follow` | No |
 | **Privacy Policy** | `/privacy` | No | `https://wscss.site/privacy` | `noindex, follow` | No |
 | **Terms of Service** | `/terms` | No | `https://wscss.site/terms` | `noindex, follow` | No |
-| **Income Pages (Round)** | `/[slug]` (e.g. $5,000) | Partial* | `https://wscss.site/${slug}` | `index, follow` | No |
-| **Income Pages (Other)** | `/[slug]` (e.g. $5,500) | No | `https://wscss.site/${slug}` | `noindex, follow` | No |
+| **Income Pages ($100s)** | `/[slug]` (e.g. $5,100) | Yes* | `https://wscss.site/${slug}` | `index, follow` | No |
+| **Income Pages (Other)** | `/[slug]` (e.g. $5,125) | No | `https://wscss.site/${slug}` | `noindex, follow` | No |
 
 ---
 
@@ -72,5 +72,6 @@ Every page utilizes the Next.js `Metadata` object to ensure search engines conso
 ---
 
 ## 6. Recommendations
-1.  **Income Sitemap Expansion:** Consider dynamically adding all "$1,000 increment" income pages to the sitemap to improve their discovery, as they are already set to `index`.
-2.  **Breadcrumb Schema:** (Verified) Most pages correctly include `BreadcrumbList` schema that matches the canonical structure.
+1.  **Income Sitemap Expansion:** (Completed) High-value income tiers ($500/$1,000 increments) for all 39 counties are now included in the sitemap.
+2.  **Indexing Policy:** (Completed) All $100 income increments matching the official 2026 economic table are now set to `index, follow`.
+3.  **Breadcrumb Schema:** (Verified) Most pages correctly include `BreadcrumbList` schema that matches the canonical structure.

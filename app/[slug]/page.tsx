@@ -217,7 +217,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     slug,
   });
 
-  const isRoundIncome = income % 1000 === 0;
+  const isRoundIncome = income % 100 === 0 && income <= 50000;
   const robots = isRoundIncome ? "index, follow" : "noindex, follow";
 
   return {
