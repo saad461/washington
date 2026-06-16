@@ -409,7 +409,7 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                   <strong className="text-[var(--color-text-primary)] font-bold">Income Shares Model</strong>, where both parents&apos;
                   monthly net incomes are combined. A proportional share is
                   dedicated to the children, reflecting what would have been
-                  spent if the household remained together.
+                  spent if the household remained together. <Link href="/worksheet" className="text-blue-600 hover:underline">Fill out your worksheet</Link> to see how this model applies to your specific income.
                 </p>
 
                 <div className="card-standard space-y-6">

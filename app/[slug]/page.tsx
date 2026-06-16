@@ -114,7 +114,7 @@ function generateDynamicContent(
     incomeBlock = `
  <div class="p-8 bg-blue-50 border border-blue-100 rounded-3xl my-12 shadow-sm">
  <h3 class="flex items-center gap-3 mt-0 font-bold text-2xl text-blue-600">Low-Income Protective Measures</h3>
- <p class="leading-relaxed text-lg text-gray-700 mt-4">For families with a combined monthly income of <strong>${formattedIncome}</strong>, Washington's 2026 guidelines trigger automatic poverty protections. At this level, the standard ${formattedSupport} obligation is often reduced to the statutory minimum of $50 per child per month.</p>
+ <p class="leading-relaxed text-lg text-gray-700 mt-4">For families with a combined monthly income of <strong>${formattedIncome}</strong>, Washington's 2026 guidelines trigger automatic poverty protections. At this level, the standard ${formattedSupport} obligation is often reduced to the statutory minimum of $50 per child per month. Want a complete breakdown including deviations and expenses? <a href='/worksheet' class='text-blue-600 hover:underline font-bold'>Calculate your full worksheet</a></p>
  <ul class="mt-8 space-y-4 text-gray-600">
  <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-600"></span><strong>SSR Protection:</strong> Approximately $2,394 reserve is strictly applied.</li>
  <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-600"></span><strong>Statutory Minimum:</strong> Usually $50 per child per month.</li>
@@ -125,7 +125,7 @@ function generateDynamicContent(
     incomeBlock = `
  <div class="p-8 bg-gray-50 border border-gray-200 rounded-3xl my-12 shadow-sm">
  <h3 class="flex items-center gap-3 mt-0 font-bold text-2xl text-gray-900">Standard Mid-Income Calculation</h3>
- <p class="leading-relaxed text-lg text-gray-600 mt-4">Your ${formattedIncome} income falls within the standard economic schedule. This means the <strong>${formattedSupport}</strong> figure is the presumptive legal standard.</p>
+ <p class="leading-relaxed text-lg text-gray-600 mt-4">Your ${formattedIncome} income falls within the standard economic schedule. This means the <strong>${formattedSupport}</strong> figure is the presumptive legal standard. Want a complete breakdown including deviations and expenses? <a href='/worksheet' class='text-blue-600 hover:underline font-bold'>Calculate your full worksheet</a></p>
  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
  <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
  <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Presumptive Amount</p>
@@ -141,7 +141,7 @@ function generateDynamicContent(
     incomeBlock = `
  <div class="p-8 bg-amber-50 border border-amber-200 rounded-3xl my-12 shadow-sm">
  <h3 class="flex items-center gap-3 mt-0 font-bold text-2xl text-amber-900">High-Income Notice</h3>
- <p class="leading-relaxed text-lg text-amber-800 mt-4">Because your combined income of <strong>${formattedIncome}</strong> exceeds the $12,000 statutory ceiling, the ${formattedSupport} base is a minimum starting point. Judges in ${locationName} have discretion to increase support proportional to the family's standard of living.</p>
+ <p class="leading-relaxed text-lg text-amber-800 mt-4">Because your combined income of <strong>${formattedIncome}</strong> exceeds the $12,000 statutory ceiling, the ${formattedSupport} base is a minimum starting point. Judges in ${locationName} have discretion to increase support proportional to the family's standard of living. Want a complete breakdown including deviations and expenses? <a href='/worksheet' class='text-blue-600 hover:underline font-bold'>Calculate your full worksheet</a></p>
  <p class="mt-6 text-sm italic text-amber-600 font-medium">Note: The 45% net income cap remains a vital legal defense.</p>
  </div>`;
   }

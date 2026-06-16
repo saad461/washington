@@ -141,7 +141,7 @@ export default function HowToFileGuide() {
             </div>
             <div className="prose prose-gray prose-lg max-w-none text-gray-600 mb-10">
               <p className="text-lg leading-relaxed">
-                Before you file any paperwork, you must know what the state presumes your support amount should be. Washington law requires all child support petitions to include a formally calculated <strong className="text-gray-900">Washington State Child Support Worksheet (v2026)</strong>.
+                Before you file any paperwork, you must know what the state presumes your support amount should be. Washington law requires all child support petitions to include a formally calculated <strong className="text-gray-900">Washington State Child Support Worksheet (v2026)</strong>. You can <Link href="/worksheet" className="text-blue-600 hover:underline">use our worksheet tool to calculate your numbers first</Link> before beginning your legal petition.
               </p>
             </div>
             <div className="bg-white p-8 rounded-2xl border border-gray-200 flex flex-col md:flex-row items-center justify-between gap-8">

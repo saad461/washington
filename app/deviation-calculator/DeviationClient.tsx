@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import {
-  Calculator, ArrowLeft, CheckCircle, AlertCircle, Printer, Scale, Plus, Minus, Info, ChevronDown, ChevronUp
+  Calculator, ArrowLeft, ArrowRight, CheckCircle, AlertCircle, Printer, Scale, Plus, Minus, Info, ChevronDown, ChevronUp
 } from "lucide-react";
 import { calculateChildSupport } from "@/utils/calculatorEngine";
 import { convertGrossToNet } from "@/utils/deviationTaxUtils";
@@ -745,6 +745,9 @@ export default function DeviationClient({ faqs }: DeviationClientProps) {
                   />
 
                   <div className="flex flex-col gap-3 pt-4 no-print">
+                    <Link href="/worksheet" className="btn btn-primary w-full shadow-lg shadow-blue-900/20">
+                      Next, fill out your worksheet <ArrowRight size={18} />
+                    </Link>
                     <button onClick={() => window.print()} className="btn btn-secondary w-full">
                       <Printer size={18} /> Print Results
                     </button>
