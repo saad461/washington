@@ -44,57 +44,130 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
   const [currentP1Net, setCurrentP1Net] = useState("");
   const [currentP2Net, setCurrentP2Net] = useState("");
   const [childrenCount, setChildrenCount] = useState(1);
+  const [childDOBs, setChildDOBs] = useState<string[]>([""]);
   const [reason, setReason] = useState("Income change");
   const [showExplanation, setShowExplanation] = useState(false);
   const [isYearly, setIsYearly] = useState(false);
 
   const result = useMemo(() => {
-    // Calculate original obligation using 2026 schedule and original incomes
-    const originalCalc = calculateChildSupport({
-      "incomeType": { p1: "monthly" },
-      "1a": { p1: parseFloat(originalP1Net) || 0, p2: parseFloat(originalP2Net) || 0 },
-      "5_children": { p1: childrenCount },
-    });
+    const p1Current = parseFloat(currentP1Net);
+    const p2Current = parseFloat(currentP2Net);
+    const orderAmt = parseFloat(currentAmount);
 
-    // Calculate new obligation using 2026 schedule and current incomes
-    const newCalc = calculateChildSupport({
-      "incomeType": { p1: "monthly" },
-      "1a": { p1: parseFloat(currentP1Net) || 0, p2: parseFloat(currentP2Net) || 0 },
-      "5_children": { p1: childrenCount },
-    });
+    const hasCurrentIncomes = !isNaN(p1Current) && !isNaN(p2Current);
+    const hasOrderAmt = !isNaN(orderAmt) && orderAmt > 0;
+    const hasOrderDate = orderDate !== "";
+    const hasRequiredInputs = hasCurrentIncomes && hasOrderAmt && hasOrderDate;
 
-    const originalObligation = originalCalc.obligationP1; // Assuming P1 is payer
-    const newObligation = newCalc.obligationP1;
-
-    const dollarDiff = newObligation - originalObligation;
-    const percentChange = originalObligation > 0 ? (newObligation - originalObligation) / originalObligation : 0;
-
-    // Threshold 1: Amount change >= 15%
-    const threshold1Met = Math.abs(percentChange) >= 0.15;
-
-    // Threshold 2: Time >= 3 years
-    let yearsPassed = 0;
-    let threshold2Met = false;
-    if (orderDate) {
-      const start = new Date(orderDate);
-      const end = new Date(); // Current date (2026 in context of task)
-      yearsPassed = (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
-      threshold2Met = yearsPassed >= 3;
+    // New obligation using 2026 schedule and current incomes
+    let newObligation = 0;
+    if (hasCurrentIncomes) {
+      const newCalc = calculateChildSupport({
+        "incomeType": { p1: "monthly" },
+        "1a": { p1: p1Current, p2: p2Current },
+        "5_children": { p1: childrenCount },
+      });
+      newObligation = newCalc.obligationP1;
     }
 
-    const modificationWarranted = threshold1Met || threshold2Met;
+    const dollarDiff = newObligation - orderAmt;
+    const percentChange = orderAmt > 0 ? (newObligation - orderAmt) / orderAmt : 0;
+
+    // Threshold 1: Amount change >= 15% (Task 2)
+    const threshold1Met = hasCurrentIncomes && hasOrderAmt && Math.abs(percentChange) >= 0.15;
+
+    // Threshold 2 & 3: Time calculation (Task 3 & Question 7)
+    let monthsPassed = 0;
+    let threshold2Met = false;
+    let threshold3Met = false;
+
+    if (hasOrderDate) {
+      const start = new Date(orderDate + "T00:00:00");
+      const end = new Date();
+      monthsPassed = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+      threshold2Met = monthsPassed >= 36;
+      threshold3Met = monthsPassed >= 24;
+    }
+
+    // Threshold 4: Age Transition (Task 4)
+    let threshold4Status: "MET" | "NOT_MET" | "NOT_APPLICABLE" | "HIDDEN" = "HIDDEN";
+    let threshold4Message = "";
+
+    if (hasOrderDate && childDOBs.some(dob => dob !== "")) {
+      let isMet = false;
+      let isNotMetYet = false;
+      let isActuallyApplicable = false;
+
+      const start = new Date(orderDate + "T00:00:00");
+      const end = new Date();
+
+      childDOBs.forEach(dob => {
+        if (!dob) return;
+        const birthDate = new Date(dob + "T00:00:00");
+        const twelfthBirthday = new Date(birthDate);
+        twelfthBirthday.setFullYear(birthDate.getFullYear() + 12);
+
+        const ageAtOrder = (start.getTime() < twelfthBirthday.getTime()) ? "under12" : "over12";
+        const ageToday = (end.getTime() >= twelfthBirthday.getTime()) ? "over12" : "under12";
+
+        if (ageAtOrder === "under12") {
+          isActuallyApplicable = true;
+          if (ageToday === "over12") {
+            isMet = true;
+          } else {
+            isNotMetYet = true;
+          }
+        }
+      });
+
+      if (isMet) {
+        threshold4Status = "MET";
+        threshold4Message = "One or more children have crossed the age 12 threshold since your order was entered. Washington uses different support levels for children ages 0-11 and ages 12-18. This entitles you to request an upward adjustment. RCW 26.09.170(5)(b)";
+      } else if (isNotMetYet) {
+        threshold4Status = "NOT_MET";
+        threshold4Message = "Child has not yet reached age 12. Threshold will apply when child turns 12.";
+      } else if (!isActuallyApplicable) {
+        threshold4Status = "NOT_APPLICABLE";
+      }
+    }
+
+    // Final Verdict Logic
+    const modificationWarranted = threshold1Met || threshold2Met || threshold3Met || threshold4Status === "MET";
+    let verdictLabel = modificationWarranted ? "✓ MODIFICATION WARRANTED" : "✗ NOT WARRANTED";
+    let verdictColor = modificationWarranted ? "text-green-800 bg-green-100 border-green-500" : "text-red-800 bg-red-100 border-red-500";
+
+    if (reason === "Child turned 18") {
+      verdictLabel = "ACTION REQUIRED";
+      verdictColor = "text-blue-600 bg-blue-50 border-blue-300";
+    }
+
+    const p1Orig = parseFloat(originalP1Net);
+    const p2Orig = parseFloat(originalP2Net);
+    const combinedOrig = p1Orig + p2Orig;
+    const show2026Message = !isNaN(p1Orig) && !isNaN(p2Orig) && combinedOrig > 12000 && reason !== "Child turned 18";
 
     return {
-      originalObligation,
+      hasCurrentIncomes,
+      hasOrderAmt,
+      hasOrderDate,
+      hasRequiredInputs,
       newObligation,
+      orderAmt,
       dollarDiff,
       percentChange,
-      yearsPassed,
+      monthsPassed,
       threshold1Met,
       threshold2Met,
-      modificationWarranted
+      threshold3Met,
+      threshold4Status,
+      threshold4Message,
+      modificationWarranted,
+      verdictLabel,
+      verdictColor,
+      show2026Message,
+      combinedOrig
     };
-  }, [orderDate, originalP1Net, originalP2Net, currentP1Net, currentP2Net, childrenCount]);
+  }, [orderDate, currentAmount, currentP1Net, currentP2Net, childrenCount, childDOBs, reason, originalP1Net, originalP2Net]);
 
   const toggleValue = (val: number) => isYearly ? val * 12 : val;
 
@@ -166,9 +239,14 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                           value={currentAmount}
                           onChange={(e) => setCurrentAmount(sanitizeIncome(e.target.value))}
                           placeholder="e.g. 650"
-                          className="input-standard pl-8 w-full"
+                          className={`input-standard pl-8 w-full ${(currentAmount === "0" || currentAmount === "") && "border-red-300"}`}
                         />
                       </div>
+                      {(currentAmount === "0" || currentAmount === "") && (
+                        <p className="text-red-500 text-xs mt-1">
+                          Please enter the current monthly order amount to calculate the 15% threshold.
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -242,15 +320,22 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                       <select
                         id="children-count"
                         value={childrenCount}
-                        onChange={(e) => setChildrenCount(Number(e.target.value))}
+                        onChange={(e) => {
+                          const count = Number(e.target.value);
+                          setChildrenCount(count);
+                          if (childDOBs.length > count) {
+                            setChildDOBs(childDOBs.slice(0, count));
+                          }
+                        }}
                         className="input-standard w-full"
                       >
                         {[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
                       </select>
                     </div>
                     <div>
-                      <label className="input-label">Reason for Modification</label>
+                      <label htmlFor="reason-select" className="input-label">Reason for Modification</label>
                       <select
+                        id="reason-select"
                         value={reason}
                         onChange={(e) => setReason(e.target.value)}
                         className="input-standard w-full"
@@ -261,6 +346,43 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                         <option>Child turned 18</option>
                         <option>Custody arrangement change</option>
                       </select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <label htmlFor="dob-0" className="input-label">Child's Date of Birth (Optional — for age transition check)</label>
+                    <div className="space-y-3">
+                      {childDOBs.map((dob, index) => (
+                        <div key={index} className="flex gap-2">
+                          <input
+                            id={`dob-${index}`}
+                            type="date"
+                            value={dob}
+                            onChange={(e) => {
+                              const newDOBs = [...childDOBs];
+                              newDOBs[index] = e.target.value;
+                              setChildDOBs(newDOBs);
+                            }}
+                            className="input-standard w-full"
+                          />
+                          {index > 0 && (
+                            <button
+                              onClick={() => setChildDOBs(childDOBs.filter((_, i) => i !== index))}
+                              className="p-2 text-gray-400 hover:text-red-500"
+                            >
+                              <AlertCircle size={20} />
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                      {childDOBs.length < childrenCount && (
+                        <button
+                          onClick={() => setChildDOBs([...childDOBs, ""])}
+                          className="text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                        >
+                          + Add another child
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -295,110 +417,277 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                   <div className="card-standard !p-0 overflow-hidden shadow-[var(--shadow-card-md)] border-gray-200">
                     <div className="p-6 sm:p-8 space-y-4">
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-gray-500">Original Obligation (2026 Table)</span>
-                        <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.originalObligation))}</span>
+                        <span className="text-gray-500">Current Court Order:</span>
+                        <span className="font-bold text-gray-900">{result.hasOrderAmt ? curFormatter.format(toggleValue(result.orderAmt)) : "—"}</span>
                       </div>
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-gray-500">New Obligation (2026 Table)</span>
-                        <span className="font-bold text-gray-900">{curFormatter.format(toggleValue(result.newObligation))}</span>
+                        <span className="text-gray-500">New Calculated Obligation:</span>
+                        <span className="font-bold text-gray-900">{result.hasCurrentIncomes ? curFormatter.format(toggleValue(result.newObligation)) : "—"}</span>
                       </div>
                       <div className="pt-2 border-t border-gray-100 flex justify-between items-center">
-                        <span className="text-sm font-bold">Percentage Change</span>
-                        <span className={`font-bold ${result.threshold1Met ? "text-blue-600" : "text-gray-900"}`}>
-                          {result.percentChange > 0 ? "+" : ""}{perFormatter.format(result.percentChange)}
+                        <span className="text-sm font-bold text-gray-900">Difference:</span>
+                        <span className={`font-bold ${result.hasCurrentIncomes && result.hasOrderAmt && result.threshold1Met ? "text-blue-600" : "text-gray-900"}`}>
+                          {result.hasCurrentIncomes && result.hasOrderAmt ? (
+                            <>
+                              {curFormatter.format(toggleValue(result.dollarDiff))} ({result.percentChange > 0 ? "+" : ""}{perFormatter.format(result.percentChange)})
+                            </>
+                          ) : "—"}
                         </span>
                       </div>
                     </div>
 
                     <div className="p-6 sm:p-8 bg-gray-50/50 border-t border-gray-100 space-y-4">
-                      <div className={`p-4 rounded-xl border flex items-center justify-between ${result.threshold1Met ? "bg-blue-50 border-blue-200" : "bg-white border-gray-200"}`}>
-                        <div className="flex items-center gap-3">
-                          <TrendingUp size={18} className={result.threshold1Met ? "text-blue-600" : "text-gray-400"} />
-                          <span className="text-sm font-bold">Threshold 1: 15% Change</span>
+                      {reason === "Child turned 18" ? (
+                        <div className="p-4 bg-white border border-gray-200 rounded-xl space-y-3">
+                          <p className="text-sm text-gray-600 leading-relaxed">
+                            When a child turns 18 and graduates high school support for that child ends automatically. If you have multiple children recalculate support for remaining children using the standard calculator.
+                          </p>
+                          <p className="text-sm text-gray-600 leading-relaxed">
+                            If this was your only child file a motion to terminate the order. RCW 26.09.170(1)(e)
+                          </p>
+                          <Link href="/" className="text-sm font-bold text-blue-600 hover:underline">
+                            Go to standard calculator →
+                          </Link>
                         </div>
-                        <span className={`text-xs font-bold uppercase tracking-widest ${result.threshold1Met ? "text-blue-600" : "text-gray-400"}`}>
-                          {result.threshold1Met ? "MET" : "NOT MET"}
-                        </span>
-                      </div>
-                      <div className={`p-4 rounded-xl border flex items-center justify-between ${result.threshold2Met ? "bg-blue-50 border-blue-200" : "bg-white border-gray-200"}`}>
-                        <div className="flex items-center gap-3">
-                          <Clock size={18} className={result.threshold2Met ? "text-blue-600" : "text-gray-400"} />
-                          <span className="text-sm font-bold">Threshold 2: 3 Years Passed</span>
-                        </div>
-                        <span className={`text-xs font-bold uppercase tracking-widest ${result.threshold2Met ? "text-blue-600" : "text-gray-400"}`}>
-                          {result.threshold2Met ? "MET" : "NOT MET"}
-                        </span>
-                      </div>
+                      ) : (
+                        <>
+                          {/* Threshold 1 */}
+                          <div className={`p-4 rounded-xl border flex flex-col gap-2 ${
+                            result.hasCurrentIncomes && result.hasOrderAmt ? (
+                              reason === "Job loss" ? "bg-amber-50 border-amber-300" :
+                              result.threshold1Met ? "bg-green-50 border-green-300" : "bg-red-50 border-red-300"
+                            ) : "bg-gray-50 border-gray-200"
+                          }`}>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <TrendingUp size={18} className={
+                                  result.hasCurrentIncomes && result.hasOrderAmt ? (
+                                    reason === "Job loss" ? "text-amber-600" :
+                                    result.threshold1Met ? "text-green-600" : "text-red-600"
+                                  ) : "text-gray-400"
+                                } />
+                                <span className={`text-sm font-bold ${
+                                  result.hasCurrentIncomes && result.hasOrderAmt ? (
+                                    reason === "Job loss" ? "text-amber-700" :
+                                    result.threshold1Met ? "text-green-700" : "text-red-700"
+                                  ) : "text-gray-500"
+                                }`}>Threshold 1 (15% Rule)</span>
+                              </div>
+                              <span className={`text-xs font-bold uppercase tracking-widest ${
+                                result.hasCurrentIncomes && result.hasOrderAmt ? (
+                                  reason === "Job loss" ? "text-amber-700" :
+                                  result.threshold1Met ? "text-green-700" : "text-red-700"
+                                ) : "text-gray-400"
+                              }`}>
+                                {result.hasCurrentIncomes && result.hasOrderAmt ? (result.threshold1Met ? "✓ MET" : "✗ NOT MET") : "—"}
+                              </span>
+                            </div>
+                            {result.hasCurrentIncomes && result.hasOrderAmt && reason === "Income change" && (
+                              <p className="text-xs text-gray-500">Income changes are evaluated using the 15% threshold. Both increases and decreases in income qualify.</p>
+                            )}
+                            {result.hasCurrentIncomes && result.hasOrderAmt && reason === "Job loss" && (
+                              <div className="space-y-2">
+                                <p className="text-xs font-bold text-amber-700 bg-amber-50 p-2 border border-amber-200 rounded-lg">Job loss may qualify as substantial change of circumstances even before 15% threshold is met if the income loss is involuntary and significant. RCW 26.09.170(2)</p>
+                                <p className="text-xs text-gray-500">Tip: Document your job loss with termination letter, unemployment benefits records, or medical records if health-related.</p>
+                              </div>
+                            )}
+                            {result.hasCurrentIncomes && result.hasOrderAmt && reason === "New child in household" && (
+                              <div className="space-y-2">
+                                <p className="text-xs text-gray-500">Having a new biological or legal child may support a downward deviation request. This is separate from the modification thresholds and is handled through the deviation calculator. RCW 26.19.075(1)(e)</p>
+                                <Link href="/deviation-calculator" className="text-xs font-bold text-blue-600 hover:underline">Go to deviation calculator →</Link>
+                              </div>
+                            )}
+                            {result.hasCurrentIncomes && result.hasOrderAmt && reason === "Custody arrangement change" && (
+                              <div className="space-y-2">
+                                <p className="text-xs text-gray-500">Significant custody changes qualify as substantial change of circumstances and may support modification outside the standard thresholds. RCW 26.09.170(2)(b)</p>
+                                <Link href="/joint-custody-calculator" className="text-xs font-bold text-blue-600 hover:underline">Go to joint custody calculator →</Link>
+                              </div>
+                            )}
+                            {!(result.hasCurrentIncomes && result.hasOrderAmt) && <p className="text-xs text-gray-400">(enter incomes and order amount above)</p>}
+                          </div>
+
+                          {/* Threshold 2 */}
+                          <div className={`p-4 rounded-xl border flex flex-col gap-2 ${result.hasOrderDate ? (result.threshold2Met ? "bg-green-50 border-green-300" : "bg-red-50 border-red-300") : "bg-gray-50 border-gray-200"}`}>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <Clock size={18} className={result.hasOrderDate ? (result.threshold2Met ? "text-green-600" : "text-red-600") : "text-gray-400"} />
+                                <span className={`text-sm font-bold ${result.hasOrderDate ? (result.threshold2Met ? "text-green-700" : "text-red-700") : "text-gray-500"}`}>Threshold 2: 3 Years Passed</span>
+                              </div>
+                              <span className={`text-xs font-bold uppercase tracking-widest ${result.hasOrderDate ? (result.threshold2Met ? "text-green-700" : "text-red-700") : "text-gray-400"}`}>
+                                {result.hasOrderDate ? (result.threshold2Met ? "✓ MET" : "✗ NOT MET") : "—"}
+                              </span>
+                            </div>
+                            {!result.hasOrderDate && <p className="text-xs text-gray-400">(enter order date above)</p>}
+                          </div>
+
+                          {/* Threshold 3 */}
+                          <div className={`p-4 rounded-xl border flex flex-col gap-2 ${result.hasOrderDate ? (result.threshold3Met ? "bg-green-50 border-green-300" : "bg-red-50 border-red-300") : "bg-gray-50 border-gray-200"}`}>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-3">
+                                <Scale size={18} className={result.hasOrderDate ? (result.threshold3Met ? "text-green-600" : "text-red-600") : "text-gray-400"} />
+                                <span className={`text-sm font-bold ${result.hasOrderDate ? (result.threshold3Met ? "text-green-700" : "text-red-700") : "text-gray-500"}`}>Threshold 3: 24 Months Passed (Adjustment Path)</span>
+                              </div>
+                              <span className={`text-xs font-bold uppercase tracking-widest ${result.hasOrderDate ? (result.threshold3Met ? "text-green-700" : "text-red-700") : "text-gray-400"}`}>
+                                {result.hasOrderDate ? (result.threshold3Met ? "✓ MET" : "✗ NOT MET") : "—"}
+                              </span>
+                            </div>
+                            {result.hasOrderDate && (
+                              <p className="text-xs text-gray-500 leading-relaxed">
+                                {result.threshold3Met ? (
+                                  `Your order is ${result.monthsPassed} months old. You may request an adjustment based on income changes or updated 2026 economic tables without proving substantial change of circumstances. RCW 26.09.170(7)`
+                                ) : (
+                                  `Your order is ${result.monthsPassed} months old. The 24-month adjustment path requires waiting ${24 - result.monthsPassed} more months. RCW 26.09.170(7)`
+                                )}
+                              </p>
+                            )}
+                            {!result.hasOrderDate && <p className="text-xs text-gray-400">(enter order date above)</p>}
+                          </div>
+
+                          {/* Threshold 4 */}
+                          {result.threshold4Status !== "HIDDEN" && result.threshold4Status !== "NOT_APPLICABLE" && (
+                            <div className={`p-4 rounded-xl border flex flex-col gap-2 ${
+                              result.threshold4Status === "MET" ? "bg-green-50 border-green-300" :
+                              result.threshold4Status === "NOT_MET" ? "bg-red-50 border-red-300" :
+                              "bg-gray-50 border-gray-200"
+                            }`}>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                  <TrendingUp size={18} className={
+                                    result.threshold4Status === "MET" ? "text-green-600" :
+                                    result.threshold4Status === "NOT_MET" ? "text-red-600" :
+                                    "text-gray-400"
+                                  } />
+                                  <span className={`text-sm font-bold ${
+                                    result.threshold4Status === "MET" ? "text-green-700" :
+                                    result.threshold4Status === "NOT_MET" ? "text-red-700" :
+                                    "text-gray-500"
+                                  }`}>Threshold 4: Age Category Transition (Child Turned 12)</span>
+                                </div>
+                                <span className={`text-xs font-bold uppercase tracking-widest ${
+                                  result.threshold4Status === "MET" ? "text-green-700" :
+                                  result.threshold4Status === "NOT_MET" ? "text-red-700" :
+                                  "text-gray-400"
+                                }`}>
+                                  {result.threshold4Status === "MET" ? "✓ MET" :
+                                   result.threshold4Status === "NOT_MET" ? "✗ NOT MET" :
+                                   "— NOT APPLICABLE"}
+                                </span>
+                              </div>
+                              <p className={`text-xs leading-relaxed ${result.threshold4Status === "NOT_APPLICABLE" ? "text-gray-500" : "text-gray-500"}`}>
+                                {result.threshold4Message}
+                              </p>
+                            </div>
+                          )}
+                        </>
+                      )}
                     </div>
 
-                    <div className={`p-6 sm:p-8 border-t ${result.modificationWarranted ? "bg-blue-50/30 border-blue-100" : "bg-gray-50/50 border-gray-100"}`}>
+                    <div className={`p-6 sm:p-8 border-t ${result.hasRequiredInputs || (result.hasOrderDate && (result.threshold2Met || result.threshold3Met || result.threshold4Status === "MET")) ? result.verdictColor : "bg-gray-50/50 border-gray-100"}`}>
                       <div className="flex justify-between items-center">
-                        <span className="text-base font-bold text-gray-900">Final Verdict</span>
+                        <span className={`text-base font-bold ${result.hasRequiredInputs || (result.hasOrderDate && (result.threshold2Met || result.threshold3Met || result.threshold4Status === "MET")) ? "" : "text-gray-900"}`}>Final Verdict</span>
                         <div className="text-right">
-                          <div className={`text-xl sm:text-2xl font-extrabold tracking-tight ${result.modificationWarranted ? "text-blue-600" : "text-gray-600"}`}>
-                            {result.modificationWarranted ? "MODIFICATION WARRANTED" : "NOT WARRANTED"}
+                          <div className={`text-lg sm:text-xl font-extrabold tracking-tight`}>
+                            {result.hasRequiredInputs || (result.hasOrderDate && (result.threshold2Met || result.threshold3Met || result.threshold4Status === "MET")) ? (
+                              reason === "Child turned 18" ? (
+                                <span className="font-normal"><span className="font-bold">ACTION REQUIRED</span> — File termination motion or recalculate for remaining children.</span>
+                              ) : result.verdictLabel
+                            ) : "—"}
                           </div>
-                          <p className={`text-[10px] font-bold uppercase tracking-wider mt-1 ${result.modificationWarranted ? "text-blue-400" : "text-gray-400"}`}>
-                            {result.modificationWarranted ? "Threshold Met" : "Thresholds Not Met"}
+                          <p className={`text-[10px] font-bold uppercase tracking-wider mt-1 ${result.hasRequiredInputs || (result.hasOrderDate && (result.threshold2Met || result.threshold3Met || result.threshold4Status === "MET")) ? "" : "text-gray-400"}`}>
+                            {result.hasRequiredInputs || (result.hasOrderDate && (result.threshold2Met || result.threshold3Met || result.threshold4Status === "MET")) ? (
+                              reason === "Child turned 18" ? "Action Required" :
+                              result.modificationWarranted ? "Threshold Met" : "Thresholds Not Met"
+                            ) : "Enter details above to check eligibility"}
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
 
+                  {/* Task 8 - Legal Disclaimer */}
+                  {result.hasRequiredInputs && (
+                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 text-[13px] text-gray-600 leading-relaxed shadow-sm">
+                      <p>
+                        This calculator estimates whether your situation meets Washington State thresholds for requesting a child support modification. Meeting a threshold allows you to petition the court but does not guarantee the court will grant a modification. Judges have broad discretion under RCW 26.09.170. This is not legal advice. Consult a Washington family law attorney for guidance specific to your situation.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Task 7 - 2026 Table Update Message */}
+                  {result.show2026Message && (
+                    <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 shadow-sm">
+                      <h4 className="text-sm font-bold text-blue-900 mb-1">2026 Table Update May Apply</h4>
+                      <p className="text-[13px] text-blue-800 leading-relaxed">
+                        Your combined original income of {curFormatter.format(result.combinedOrig)} exceeded the old $12,000 table cap. Under the new 2026 guidelines covering up to $50,000 combined income your order may be significantly outdated even without income changes. This alone may support a modification request. RCW 26.19.065(3)
+                      </p>
+                    </div>
+                  )}
+
                   {/* Explanatory Section */}
-                  <div className="mt-2">
-                    <button
-                      onClick={() => setShowExplanation(!showExplanation)}
-                      className="flex items-center gap-2 text-[13px] font-bold text-gray-500 hover:text-blue-600 transition-colors py-2 px-1"
-                    >
-                      How was this calculated? {showExplanation ? "▲" : "▼"}
-                    </button>
-                    <AnimatePresence>
-                      {showExplanation && (
-                        <motion.div
-                          key="explanation"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="mt-2 p-6 bg-white border border-gray-200 rounded-2xl text-sm text-gray-600 leading-relaxed shadow-sm space-y-4">
-                            <div className="space-y-4">
-                              <div className="flex gap-4">
-                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">6</div>
-                                <p>Original obligation under 2026 schedule: <strong>{curFormatter.format(result.originalObligation)}</strong></p>
-                              </div>
-                              <div className="flex gap-4">
-                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">7</div>
-                                <p>New obligation under 2026 schedule: <strong>{curFormatter.format(result.newObligation)}</strong></p>
-                              </div>
-                              <div className="flex gap-4">
-                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">8</div>
-                                <p>Difference: <strong>{curFormatter.format(result.dollarDiff)}</strong> ({perFormatter.format(result.percentChange)})</p>
-                              </div>
-                              <div className="flex gap-4">
-                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">9</div>
-                                <p>15% threshold: <strong>{result.threshold1Met ? "met" : "not met"}</strong></p>
-                              </div>
-                              <div className="flex gap-4">
-                                <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">10</div>
-                                <p>3 year threshold: <strong>{result.threshold2Met ? "met" : "not met"}</strong></p>
-                              </div>
-                              <div className="flex gap-4">
-                                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">11</div>
-                                <p>Verdict: <strong>modification {result.modificationWarranted ? "warranted" : "not warranted"}</strong></p>
+                  {result.hasRequiredInputs && reason !== "Child turned 18" && (
+                    <div className="mt-2">
+                      <button
+                        onClick={() => setShowExplanation(!showExplanation)}
+                        className="flex items-center gap-2 text-[13px] font-bold text-gray-500 hover:text-blue-600 transition-colors py-2 px-1"
+                      >
+                        How was this calculated? {showExplanation ? "▲" : "▼"}
+                      </button>
+                      <AnimatePresence>
+                        {showExplanation && (
+                          <motion.div
+                            key="explanation"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="mt-2 p-6 bg-white border border-gray-200 rounded-2xl text-sm text-gray-600 leading-relaxed shadow-sm space-y-4">
+                              <div className="space-y-4">
+                                <div className="flex gap-4">
+                                  <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">1</div>
+                                  <p>Current Court Order: <strong>{curFormatter.format(result.orderAmt)}</strong></p>
+                                </div>
+                                <div className="flex gap-4">
+                                  <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">2</div>
+                                  <p>New Calculated Obligation: <strong>{curFormatter.format(result.newObligation)}</strong></p>
+                                </div>
+                                <div className="flex gap-4">
+                                  <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">3</div>
+                                  <p>Difference: <strong>{curFormatter.format(result.dollarDiff)}</strong> ({perFormatter.format(result.percentChange)})</p>
+                                </div>
+                                <div className="flex gap-4">
+                                  <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">4</div>
+                                  <p>15% threshold: <strong>{result.threshold1Met ? "met" : "not met"}</strong></p>
+                                </div>
+                                <div className="flex gap-4">
+                                  <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">5</div>
+                                  <p>3 year threshold: <strong>{result.threshold2Met ? "met" : "not met"}</strong></p>
+                                </div>
+                                <div className="flex gap-4">
+                                  <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">6</div>
+                                  <p>24 month threshold: <strong>{result.threshold3Met ? "met" : "not met"}</strong></p>
+                                </div>
+                                {result.threshold4Status !== "HIDDEN" && (
+                                  <div className="flex gap-4">
+                                    <div className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0 font-bold text-xs">7</div>
+                                    <p>Age transition threshold: <strong>{result.threshold4Status.toLowerCase().replace('_', ' ')}</strong></p>
+                                  </div>
+                                )}
+                                <div className="flex gap-4">
+                                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center shrink-0 font-bold text-xs">!</div>
+                                  <p>Verdict: <strong>modification {result.modificationWarranted ? "warranted" : "not warranted"}</strong></p>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  )}
 
                   <HistoryPanel
                     storageKey="wscss_history_modification"
-                    currentInputs={{ orderDate, currentAmount, originalP1Net, originalP2Net, currentP1Net, currentP2Net, childrenCount, reason }}
+                    currentInputs={{ orderDate, currentAmount, originalP1Net, originalP2Net, currentP1Net, currentP2Net, childrenCount, reason, childDOBs }}
                     currentResult={result.modificationWarranted ? 1 : 0}
                     onReload={(inputs) => {
                       setOrderDate(inputs.orderDate);
@@ -409,6 +698,7 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                       setCurrentP2Net(inputs.currentP2Net);
                       setChildrenCount(inputs.childrenCount);
                       setReason(inputs.reason);
+                      if (inputs.childDOBs) setChildDOBs(inputs.childDOBs);
                     }}
                     formatResult={(val) => val === 1 ? "Warranted" : "Not Warranted"}
                   />
@@ -597,31 +887,36 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
         </div>
       </section>
 
-      <PrintReport
-        caseContext={[
-          { label: "Current Order Date:", value: orderDate || "Not provided" },
-          { label: "Original P1 Net:", value: curFormatter.format(parseFloat(originalP1Net) || 0) },
-          { label: "Original P2 Net:", value: curFormatter.format(parseFloat(originalP2Net) || 0) },
-        ]}
-        calculationBase={[
-          { label: "Current P1 Net:", value: curFormatter.format(parseFloat(currentP1Net) || 0) },
-          { label: "Current P2 Net:", value: curFormatter.format(parseFloat(currentP2Net) || 0) },
-          { label: "Children:", value: childrenCount },
-        ]}
-        analysisItems={[
-          { label: "Original 2026 Obligation:", value: curFormatter.format(result.originalObligation) },
-          { label: "New 2026 Obligation:", value: curFormatter.format(result.newObligation) },
-          { label: "Percentage Change:", value: perFormatter.format(result.percentChange), isBold: true },
-          { label: "Threshold 1 (15%):", value: result.threshold1Met ? "YES" : "NO" },
-          { label: "Threshold 2 (3 Years):", value: result.threshold2Met ? "YES" : "NO" }
-        ]}
-        totalLabel="Verdict"
-        totalValue={result.modificationWarranted ? "WARRANTED" : "NOT WARRANTED"}
-        secondaryTotalLabel="Reasoning"
-        secondaryTotalValue={result.modificationWarranted ? "Threshold Met" : "Thresholds Not Met"}
-        assumptions="Based on RCW 26.09.170 and 2026 economic tables."
-        disclaimerText="This estimate is based on the 2026 Washington State Child Support Schedule. This is not a legal document. Consult a family law attorney for advice."
-      />
+      {result.hasRequiredInputs && (
+        <PrintReport
+          caseContext={[
+            { label: "Current Order Date:", value: orderDate || "Not provided" },
+            { label: "Current Order Amount:", value: curFormatter.format(result.orderAmt) },
+            { label: "Reason for Modification:", value: reason },
+          ]}
+          calculationBase={[
+            { label: "Current P1 Net:", value: curFormatter.format(parseFloat(currentP1Net) || 0) },
+            { label: "Current P2 Net:", value: curFormatter.format(parseFloat(currentP2Net) || 0) },
+            { label: "Children:", value: childrenCount },
+          ]}
+          analysisItems={reason === "Child turned 18" ? [
+            { label: "Status:", value: "Child turned 18 / Graduation" }
+          ] : [
+            { label: "New Calculated Obligation:", value: curFormatter.format(result.newObligation) },
+            { label: "Percentage Change:", value: perFormatter.format(result.percentChange), isBold: true },
+            { label: "Threshold 1 (15% Rule):", value: result.threshold1Met ? "YES" : "NO" },
+            { label: "Threshold 2 (3 Years Passed):", value: result.threshold2Met ? "YES" : "NO" },
+            { label: "Threshold 3 (24 Months Passed):", value: result.threshold3Met ? "YES" : "NO" },
+            { label: "Threshold 4 (Age 12 Transition):", value: result.threshold4Status === "MET" ? "YES" : "NO" }
+          ]}
+          totalLabel="Verdict"
+          totalValue={reason === "Child turned 18" ? "ACTION REQUIRED — File termination motion or recalculate for remaining children." : result.verdictLabel}
+          secondaryTotalLabel="Reasoning"
+          secondaryTotalValue={reason === "Child turned 18" ? "Action Required" : (result.modificationWarranted ? "Threshold Met" : "Thresholds Not Met")}
+          assumptions="Based on RCW 26.09.170 and 2026 economic tables."
+          disclaimerText="This estimate is based on the 2026 Washington State Child Support Schedule. This is not a legal document. Consult a family law attorney for advice."
+        />
+      )}
     </div>
   );
 }
