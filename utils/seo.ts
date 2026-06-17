@@ -80,23 +80,46 @@ export function getIncomePageMeta({
   amount,
   slug,
 }: IncomeMetaProps): Metadata {
-  const countyName = county ? county.name : "Washington";
-  const formattedIncome = formatNumber(income);
-  const formattedAmount = formatNumber(Math.round(amount));
-  const childrenLabel = getChildrenLabel(children);
+  const isHighIncome = income > 50000;
 
-  const titleText = `Child Support $${formattedIncome} – ${countyName}, WA (${childrenLabel}) | 2026 | WSCSS`;
-  const descriptionText = `2026 child support for $${formattedIncome}/mo income and ${childrenLabel} in ${countyName}, WA. Presumptive: $${formattedAmount}/mo. Includes SSR and RCW 26.19 rules.`;
+  // Base values
+  const countyNameTitle = county ? county.name : "Washington State";
+  const countyNameDesc = county ? `${county.name}, WA` : "Washington State";
+  const courtRulesName = county
+    ? `${county.name} court rules`
+    : "Washington State court rules";
+
+  const formattedIncome = `$${formatNumber(income)}`;
+  const formattedSupport = isHighIncome
+    ? "Court Discretion"
+    : `$${formatNumber(Math.round(amount))}`;
+
+  // Capitalization: Title uses "Child/Children", Description uses "child/children"
+  const childrenTextTitle = children === 1 ? "1 Child" : `${children} Children`;
+  const childrenTextDesc = children === 1 ? "1 child" : `${children} children`;
+
+  // New Title Pattern:
+  // [countyName] Child Support: [formattedIncome] Income, [childrenText] (2026) | [formattedSupport]/mo
+  const titleText = isHighIncome
+    ? `${countyNameTitle} Child Support: ${formattedIncome} Income, ${childrenTextTitle} (2026) | Court Discretion`
+    : `${countyNameTitle} Child Support: ${formattedIncome} Income, ${childrenTextTitle} (2026) | ${formattedSupport}/mo`;
+
+  // New Description Pattern:
+  // Standard: What is child support for [children] at [income] in [location]? The 2026 presumptive amount is [amount]. See how SSR, deviations, and [rules] affect your final order.
+  // Court Discretion: What is child support for [children] at [income] in [location]? See how SSR, deviations, and [rules] determine your final order.
+  const descriptionText = isHighIncome
+    ? `What is child support for ${childrenTextDesc} at ${formattedIncome}/mo in ${countyNameDesc}? See how SSR, deviations, and ${courtRulesName} determine your final order.`
+    : `What is child support for ${childrenTextDesc} at ${formattedIncome}/mo in ${countyNameDesc}? The 2026 presumptive amount is ${formattedSupport}/mo. See how SSR, deviations, and ${courtRulesName} affect your final order.`;
 
   return {
-    title: { absolute: titleText.slice(0, 60) },
-    description: descriptionText.slice(0, 160),
+    title: { absolute: titleText },
+    description: descriptionText,
     alternates: {
       canonical: `https://wscss.site/${slug}`,
     },
     openGraph: {
-      title: `$${formattedIncome} Child Support in ${countyName} – ${childrenLabel} | 2026`.slice(0, 60),
-      description: `2026 child support in ${countyName} is ~$${formattedAmount}/mo for $${formattedIncome} combined net income and ${childrenLabel}. Includes SSR and court info.`.slice(0, 160),
+      title: titleText,
+      description: descriptionText,
       url: `https://wscss.site/${slug}`,
       siteName: "WSCSS — Washington State Child Support Schedule",
       images: [
@@ -104,7 +127,7 @@ export function getIncomePageMeta({
           url: "https://wscss.site/wscss-og.webp",
           width: 1200,
           height: 630,
-          alt: `Child Support for $${formattedIncome} Income in ${countyName} WA 2026 | WSCSS`,
+          alt: `Child Support for ${formattedIncome} Income in ${countyNameTitle} 2026 | WSCSS`,
         },
       ],
       locale: "en_US",
@@ -112,8 +135,8 @@ export function getIncomePageMeta({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${countyName} Support $${formattedIncome} | ${childrenLabel} | 2026`.slice(0, 60),
-      description: `2026 child support for $${formattedIncome} income and ${childrenLabel} in ${countyName}, WA: ~$${formattedAmount}/mo. Based on AOC economic table.`.slice(0, 160),
+      title: titleText,
+      description: descriptionText,
       images: ["https://wscss.site/wscss-og.webp"],
     },
   };
