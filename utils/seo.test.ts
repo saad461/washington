@@ -51,29 +51,68 @@ describe("SEO Utility", () => {
       county: mockPierceCounty,
       income: 5000,
       children: 2,
-      amount: 723,
+      amount: 1446,
       slug: "pierce-county-income-5000-2-children",
     });
+    const title = (meta.title as any).absolute as string;
+    expect(title).toBe("Pierce County Child Support: $5,000 Income, 2 Children (2026) | $1,446/mo");
+
+    const desc = meta.description as string;
+    expect(desc).toBe("What is child support for 2 children at $5,000/mo in Pierce County, WA? The 2026 presumptive amount is $1,446/mo. See how SSR, deviations, and Pierce County court rules affect your final order.");
+
     const ogTitle = meta.openGraph?.title as string;
-    expect(ogTitle).toContain("$5,000");
-    expect(ogTitle).toContain("Pierce County");
-    expect(ogTitle).toContain("2 Children");
+    expect(ogTitle).toBe(title);
+
     const images = meta.openGraph?.images;
     const image = Array.isArray(images) ? images[0] : images;
-    expect((image as any).alt).toBe("Child Support for $5,000 Income in Pierce County WA 2026 | WSCSS");
+    expect((image as any).alt).toBe("Child Support for $5,000 Income in Pierce County 2026 | WSCSS");
   });
 
-  it("uses singular '1 Child' label for any income page with 1 child", () => {
+  it("generates correct meta for generic Washington State income page, $7,000, 3 children", () => {
+    const meta = getIncomePageMeta({
+      county: null,
+      income: 7000,
+      children: 3,
+      amount: 1891,
+      slug: "income-7000-3-children",
+    });
+    const title = (meta.title as any).absolute as string;
+    expect(title).toBe("Washington State Child Support: $7,000 Income, 3 Children (2026) | $1,891/mo");
+
+    const desc = meta.description as string;
+    expect(desc).toBe("What is child support for 3 children at $7,000/mo in Washington State? The 2026 presumptive amount is $1,891/mo. See how SSR, deviations, and Washington State court rules affect your final order.");
+  });
+
+  it("generates correct meta for high income (Court Discretion) case", () => {
+    const meta = getIncomePageMeta({
+      county: mockCounty,
+      income: 55000,
+      children: 2,
+      amount: 0,
+      slug: "king-county-income-55000-2-children",
+    });
+    const title = (meta.title as any).absolute as string;
+    expect(title).toBe("King County Child Support: $55,000 Income, 2 Children (2026) | Court Discretion");
+
+    const desc = meta.description as string;
+    expect(desc).toBe("What is child support for 2 children at $55,000/mo in King County, WA? See how SSR, deviations, and King County court rules determine your final order.");
+  });
+
+  it("uses singular '1 Child' label in title and '1 child' in description", () => {
     const meta = getIncomePageMeta({
       county: mockCounty,
       income: 3000,
       children: 1,
-      amount: 652,
+      amount: 589,
       slug: "king-county-income-3000-1-child",
     });
     const title = (meta.title as any).absolute as string;
     expect(title).toContain("1 Child");
     expect(title).not.toContain("1 Children");
+
+    const desc = meta.description as string;
+    expect(desc).toContain("1 child");
+    expect(desc).not.toContain("1 Child");
   });
 
   it("ensures og:image ends in .webp for any income page", () => {
