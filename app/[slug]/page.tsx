@@ -501,7 +501,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Income Bracket Context</h3>
                   <p className="text-lg leading-relaxed">
                     {income < 3500 && (
-                      <>At {formattedIncome}/mo, this household falls in the lower income bracket of Washington's 2026 schedule — below the state median of $7,114/mo. At this level, SSR protections and low-income deviations are more likely to influence the final order than the presumptive {formattedSupport} figure.</>
+                      <>At {formattedIncome}/mo, this household falls in the lower income bracket of Washington's 2026 schedule — below the state median of $7,114/mo. At this level, <Link href="/glossary/self-support-reserve" className="text-blue-600 hover:underline">SSR protections</Link> and <Link href="/glossary/deviation" className="text-blue-600 hover:underline">low-income deviations</Link> are more likely to influence the final order than the presumptive {formattedSupport} figure.</>
                     )}
                     {income >= 3500 && income <= 10000 && (
                       <>At {formattedIncome}/mo, this household sits within Washington's standard mid-range bracket on the 2026 schedule, near the state median of $7,114/mo. The presumptive {formattedSupport} for {childrenText} is typically applied as-is at this level, with fewer deviations than lower or higher income tiers.</>
@@ -517,13 +517,13 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Deviation Likelihood in {countyName}</h3>
                   <p className="text-lg leading-relaxed">
                     {income < 2200 && (
-                      <>Deviation requests are very common at the {formattedIncome} income level in {countyName}. Because {formattedSupport} at this tier frequently conflicts with the $2,394 SSR floor, judges routinely reduce orders to the $50/child statutory minimum. Parents at this income level should come prepared with full financial documentation.</>
+                      <><Link href="/glossary/deviation" className="text-blue-600 hover:underline">Deviation requests</Link> are very common at the {formattedIncome} income level in {countyName}. Because {formattedSupport} at this tier frequently conflicts with the <Link href="/glossary/self-support-reserve" className="text-blue-600 hover:underline">$2,394 SSR floor</Link>, judges routinely reduce orders to the $50/child statutory minimum. Parents at this income level should come prepared with full financial documentation.</>
                     )}
                     {income >= 2200 && income <= 12000 && (
-                      <>At the {formattedIncome} level, deviation requests are less common but still possible in {countyName}. The most frequent grounds are extraordinary healthcare costs, shared custody arrangements, or documented debts. The presumptive {formattedSupport} is upheld in the majority of standard cases at this income tier.</>
+                      <>At the {formattedIncome} level, <Link href="/glossary/deviation" className="text-blue-600 hover:underline">deviation requests</Link> are less common but still possible in {countyName}. The most frequent grounds are <Link href="/glossary/healthcare-expenses" className="text-blue-600 hover:underline">extraordinary healthcare costs</Link>, <Link href="/glossary/residential-schedule" className="text-blue-600 hover:underline">shared custody arrangements</Link>, or documented debts. The presumptive {formattedSupport} is upheld in the majority of standard cases at this income tier.</>
                     )}
                     {income > 12000 && (
-                      <>High-income deviation arguments are frequently raised in {countyName} at the {formattedIncome} level. Since the schedule caps at $12,000 combined net income, the {formattedSupport} figure is a floor — not a ceiling. Attorneys often argue for upward deviations based on the children's established standard of living and available parental resources.</>
+                      <>High-income <Link href="/glossary/deviation" className="text-blue-600 hover:underline">deviation</Link> arguments are frequently raised in {countyName} at the {formattedIncome} level. Since the schedule caps at $12,000 combined net income, the {formattedSupport} figure is a floor — not a ceiling. Attorneys often argue for upward deviations based on the children's established standard of living and available parental resources.</>
                     )}
                   </p>
                 </div>
