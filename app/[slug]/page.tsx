@@ -487,11 +487,11 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                     <h3 className="text-2xl font-bold text-gray-900 mb-4">Filing in {countyName} Superior Court</h3>
                     <p className="text-lg leading-relaxed">
                       In {county.name} Superior Court, located in {county.seat}, child support
-                      orders based on a {formattedIncome} combined income are filed with the
+                      orders based on a {formattedIncome} combined income are <Link href="/how-to-file-child-support-washington" className="text-blue-600 hover:underline">filed</Link> with the
                       {county.court} clerk at {county.courtAddress}. Filing fees in
                       {county.name} are {county.filingFee}. Once filed, the presumptive
                       {formattedSupport}/mo order for {childrenText} becomes the baseline
-                      unless either parent requests a deviation hearing.
+                      unless either parent requests a <Link href="/deviation-calculator" className="text-blue-600 hover:underline">deviation hearing</Link>.
                     </p>
                   </div>
                 )}
@@ -501,13 +501,13 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Income Bracket Context</h3>
                   <p className="text-lg leading-relaxed">
                     {income < 3500 && (
-                      <>At {formattedIncome}/mo, this household falls in the lower income bracket of Washington's 2026 schedule — below the state median of $7,114/mo. At this level, SSR protections and low-income deviations are more likely to influence the final order than the presumptive {formattedSupport} figure.</>
+                      <>At {formattedIncome}/mo, this household falls in the <Link href="/blog/minimum-child-support-washington-low-income" className="text-blue-600 hover:underline">lower income bracket</Link> of <Link href="/blog/washington-child-support-schedule-2026-economic-table" className="text-blue-600 hover:underline">Washington's 2026 schedule</Link> — below the state median of $7,114/mo. At this level, <Link href="/glossary/self-support-reserve" className="text-blue-600 hover:underline">SSR protections</Link> and <Link href="/glossary/deviation" className="text-blue-600 hover:underline">low-income deviations</Link> are more likely to influence the final order than the presumptive {formattedSupport} figure.</>
                     )}
                     {income >= 3500 && income <= 10000 && (
-                      <>At {formattedIncome}/mo, this household sits within Washington's standard mid-range bracket on the 2026 schedule, near the state median of $7,114/mo. The presumptive {formattedSupport} for {childrenText} is typically applied as-is at this level, with fewer deviations than lower or higher income tiers.</>
+                      <>At {formattedIncome}/mo, this household sits within <Link href="/blog/washington-child-support-schedule-2026-economic-table" className="text-blue-600 hover:underline">Washington's standard mid-range bracket on the 2026 schedule</Link>, near the state median of $7,114/mo. The presumptive {formattedSupport} for {childrenText} is typically applied as-is at this level, with fewer deviations than lower or higher income tiers.</>
                     )}
                     {income > 10000 && (
-                      <>At {formattedIncome}/mo, this household falls in the upper income bracket of Washington's 2026 schedule — above the state median of $7,114/mo. At this level, courts have wider discretion to order above the presumptive {formattedSupport}, particularly for lifestyle-based deviation arguments in {countyName}.</>
+                      <>At {formattedIncome}/mo, this household falls in the upper income bracket of <Link href="/blog/washington-child-support-schedule-2026-economic-table" className="text-blue-600 hover:underline">Washington's 2026 schedule</Link> — above the state median of $7,114/mo. At this level, courts have wider discretion to order above the presumptive {formattedSupport}, particularly for lifestyle-based <Link href="/deviation-calculator" className="text-blue-600 hover:underline">deviation arguments</Link> in {countyName}.</>
                     )}
                   </p>
                 </div>
@@ -517,13 +517,13 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Deviation Likelihood in {countyName}</h3>
                   <p className="text-lg leading-relaxed">
                     {income < 2200 && (
-                      <>Deviation requests are very common at the {formattedIncome} income level in {countyName}. Because {formattedSupport} at this tier frequently conflicts with the $2,394 SSR floor, judges routinely reduce orders to the $50/child statutory minimum. Parents at this income level should come prepared with full financial documentation.</>
+                      <><Link href="/glossary/deviation" className="text-blue-600 hover:underline">Deviation requests</Link> are very common at the {formattedIncome} income level in {countyName}. Because {formattedSupport} at this tier frequently conflicts with the <Link href="/glossary/self-support-reserve" className="text-blue-600 hover:underline">$2,394 SSR floor</Link>, judges routinely reduce orders to the <Link href="/blog/minimum-child-support-washington-low-income" className="text-blue-600 hover:underline">$50/child statutory minimum</Link>. Parents at this income level should come prepared with full <Link href="/blog/what-counts-as-income-child-support-washington-2026" className="text-blue-600 hover:underline">financial documentation</Link>.</>
                     )}
                     {income >= 2200 && income <= 12000 && (
-                      <>At the {formattedIncome} level, deviation requests are less common but still possible in {countyName}. The most frequent grounds are extraordinary healthcare costs, shared custody arrangements, or documented debts. The presumptive {formattedSupport} is upheld in the majority of standard cases at this income tier.</>
+                      <>At the {formattedIncome} level, <Link href="/glossary/deviation" className="text-blue-600 hover:underline">deviation requests</Link> are less common but still possible in {countyName}. The most frequent grounds are <Link href="/extra-expenses" className="text-blue-600 hover:underline">extraordinary healthcare costs</Link>, <Link href="/joint-custody-calculator" className="text-blue-600 hover:underline">shared custody arrangements</Link>, or documented debts. The presumptive {formattedSupport} is upheld in the majority of standard cases at this income tier.</>
                     )}
                     {income > 12000 && (
-                      <>High-income deviation arguments are frequently raised in {countyName} at the {formattedIncome} level. Since the schedule caps at $12,000 combined net income, the {formattedSupport} figure is a floor — not a ceiling. Attorneys often argue for upward deviations based on the children's established standard of living and available parental resources.</>
+                      <><Link href="/blog/washington-child-support-deviation-2026" className="text-blue-600 hover:underline">High-income deviation arguments</Link> are frequently raised in {countyName} at the {formattedIncome} level. Since the schedule caps at $12,000 combined net income, the {formattedSupport} figure is a floor — not a ceiling. Attorneys often argue for upward deviations based on the children's established standard of living and available parental resources.</>
                     )}
                   </p>
                 </div>
@@ -533,13 +533,13 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Children-Specific Insight</h3>
                   <p className="text-lg leading-relaxed">
                     {children === 1 && (
-                      <>For {childrenText} at {formattedIncome}/mo, the {formattedSupport} obligation reflects Washington's base rate. Parents adding a second child to the order would see this figure rise to {s4_support_2_children} — an increase of {s4_difference} — reflecting the additional resources required under the 2026 schedule.</>
+                      <>For {childrenText} at {formattedIncome}/mo, the {formattedSupport} obligation reflects <Link href="/blog/child-support-calculation-washington-2026" className="text-blue-600 hover:underline">Washington's base rate</Link>. Parents adding a second child to the order would see this figure rise to {s4_support_2_children} — an increase of {s4_difference} — reflecting the additional resources required under the <Link href="/blog/washington-child-support-guidelines-2026" className="text-blue-600 hover:underline">2026 schedule</Link>.</>
                     )}
                     {children === 2 && (
                       <>The {formattedSupport} for {childrenText} at {formattedIncome}/mo reflects Washington's standard two-child rate. Compared to a one-child order ({s4_support_1_child}) at the same income, the second child adds {s4_difference}/mo — a {s4_percentage}% increase rather than a full doubling, reflecting shared household costs.</>
                     )}
                     {children >= 3 && (
-                      <>For {childrenText} at {formattedIncome}/mo, Washington's 2026 schedule applies an economies-of-scale reduction. The {formattedSupport} total works out to {s4_per_child}/mo per child — compared to {s4_support_1_child} for one child at the same income. This reflects shared costs like housing and utilities that don't scale linearly with each additional child.</>
+                      <>For {childrenText} at {formattedIncome}/mo, <Link href="/blog/washington-child-support-guidelines-2026" className="text-blue-600 hover:underline">Washington's 2026 schedule</Link> applies an economies-of-scale reduction. The {formattedSupport} total works out to {s4_per_child}/mo per child — compared to {s4_support_1_child} for one child at the same income. This reflects shared costs like housing and utilities that don't scale linearly with each additional child.</>
                     )}
                   </p>
                 </div>
@@ -554,7 +554,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                     {prevInc && prevSup && (
                       <>Those earning slightly less at <Link href={prevL || "#"} className="text-blue-600 hover:underline">{formatter.format(prevInc)}/mo</Link> would owe {prevSup}/mo. </>
                     )}
-                    These neighboring brackets help illustrate how Washington's 2026 schedule scales support incrementally with income.
+                    These neighboring brackets help illustrate how Washington's 2026 schedule <Link href="/blog/how-to-calculate-child-support-washington-state" className="text-blue-600 hover:underline">scales support incrementally with income</Link>.
                   </p>
                 </div>
 
