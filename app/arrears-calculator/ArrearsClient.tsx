@@ -39,7 +39,7 @@ export default function ArrearsClient({ faqs }: ArrearsClientProps) {
     const newArrears = (orderAmt * missed) - partial;
     const totalArrears = existing + Math.max(0, newArrears);
 
-    const INTEREST_RATE = 0.06; // 6%
+    const INTEREST_RATE = 0.12; // 12%
     const annualInterest = totalArrears * INTEREST_RATE;
     const monthlyInterest = annualInterest / 12;
     const totalWithInterest = totalArrears + annualInterest;
@@ -69,12 +69,12 @@ export default function ArrearsClient({ faqs }: ArrearsClientProps) {
             <span className="breadcrumb-current">Arrears Calculator</span>
           </nav>
           <div className="flex flex-col gap-4">
-            <p className="eyebrow">RCW 26.18.050 · 6% Interest</p>
+            <p className="eyebrow">RCW 26.23.060 · 12% Interest</p>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
               Washington State <span className="text-blue-600">Arrears Calculator</span>
             </h1>
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              Calculate unpaid child support arrears and the 6% annual interest required by Washington law. Estimate how long it will take to pay off back child support.
+              Calculate unpaid child support arrears and the 12% annual interest required by Washington law. Estimate how long it will take to pay off back child support.
             </p>
           </div>
         </div>
@@ -160,7 +160,7 @@ export default function ArrearsClient({ faqs }: ArrearsClientProps) {
                   Legal Warning
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Washington charges <strong>6% annual interest</strong> on unpaid child support under <strong>RCW 26.18.050</strong>. Interest accrues from the date each payment was due. Failure to pay can lead to license suspension, wage garnishment, and contempt of court.
+                  Washington charges <strong>12% annual interest</strong> on unpaid child support under <strong>RCW 26.23.060</strong>. Interest accrues from the date each payment was due. Failure to pay can lead to license suspension, wage garnishment, and contempt of court.
                 </p>
               </div>
             </div>
@@ -193,7 +193,7 @@ export default function ArrearsClient({ faqs }: ArrearsClientProps) {
                     </div>
 
                     <div className="card-standard shadow-sm border-gray-200 !p-6 bg-red-50/30">
-                      <h4 className="text-[10px] font-bold text-red-400 uppercase tracking-widest mb-4">Interest Calculations (6%)</h4>
+                      <h4 className="text-[10px] font-bold text-red-400 uppercase tracking-widest mb-4">Interest Calculations (12%)</h4>
                       <div className="space-y-3">
                         <div className="flex justify-between items-center text-sm">
                           <span className="text-gray-600">Monthly Interest Accrual</span>
@@ -276,7 +276,7 @@ export default function ArrearsClient({ faqs }: ArrearsClientProps) {
 
               <h3>Interest Rates</h3>
               <p>
-                Under <strong>RCW 26.18.050</strong>, all past-due child support payments automatically accrue interest at the rate of <strong>6% per annum</strong>. This interest is mandatory and cannot be waived by a judge unless specifically allowed by limited state programs for state-owed debt.
+                Under <strong>RCW 26.23.060</strong>, all past-due child support payments automatically accrue interest at the rate of <strong>12% per annum</strong>. This interest is mandatory and cannot be waived by a judge unless specifically allowed by limited state programs for state-owed debt.
               </p>
 
               <h3>Enforcement Actions</h3>

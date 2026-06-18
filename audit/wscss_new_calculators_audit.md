@@ -69,7 +69,7 @@
 - **Health Insurance**: P1 $5000, P2 $3000, Premium $400 -> P2 reimburses P1 $150 (Verified)
 - **Medical Expense**: P1 $5000, P2 $3000, Expense $500 -> P2 reimburses P1 $187.50 (Verified)
 - **Education Expense**: P1 $5000, P2 $3000, Expense $300 -> P1 pays P2 $187.50 (Verified)
-- **Arrears**: $794 order, 6 months missed -> $4,764 total, $23.82/mo interest (Verified)
+- **Arrears**: $794 order, 6 months missed -> $4,764 total, $47.64/mo interest (Verified)
 - **Net Income**: $60,000/year single -> $4,117 monthly net (Verified)
 - **Tax Benefit**: $80,000/year, 1 child -> $2,000 annual CTC ($167/mo) (Verified)
 
