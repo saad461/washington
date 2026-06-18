@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import HealthInsuranceClient from "./HealthInsuranceClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington Health Insurance Calculator 2026 — Split Premium" },
-  description: "Calculate how to split children's health insurance premiums between parents in Washington State. Based on RCW 26.19.080(2).",
+  title: { absolute: "Health Insurance Calculator | wscss.site — 2026" },
+  description: "Split children's health insurance premiums between parents by income share for 2026. Free calculator with accurate RCW 26.19.080(2) split in Washington.",
   alternates: { canonical: "https://wscss.site/health-insurance-calculator" },
   openGraph: {
-    title: "Washington Health Insurance Calculator 2026 — Split Premium",
-    description: "Calculate how to split children's health insurance premiums between parents in Washington State. Based on RCW 26.19.080(2).",
+    title: "Health Insurance Calculator | wscss.site — 2026",
+    description: "Split children's health insurance premiums between parents by income share for 2026. Free calculator with accurate RCW 26.19.080(2) split in Washington.",
     url: "https://wscss.site/health-insurance-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Health Insurance Calculator 2026 — Split Premium",
-    description: "Calculate how to split children's health insurance premiums between parents in Washington State. Based on RCW 26.19.080(2).",
+    title: "Health Insurance Calculator | wscss.site — 2026",
+    description: "Split children's health insurance premiums between parents by income share for 2026. Free calculator with accurate RCW 26.19.080(2) split in Washington.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
@@ -31,7 +31,7 @@ export default function HealthInsurancePage() {
         "name": "How is health insurance split in Washington child support?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Under RCW 26.19.080(2) premiums are split proportionally by income. The parent carrying insurance is reimbursed by the other parent."
+          "text": "Under RCW 26.19.080(2) premiums are split proportionally by income. The parent carrying insurance is reimbursed by the other parent for their share of the children's portion of the premium."
         }
       },
       {
@@ -39,7 +39,7 @@ export default function HealthInsurancePage() {
         "name": "What health expenses are included?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Medical, dental, orthodontia, vision, chiropractic, mental health, prescriptions under RCW 26.19.080(2). These are separate from basic support."
+          "text": "Medical, dental, orthodontia, vision, chiropractic, mental health, and prescriptions under RCW 26.19.080(2). These are shared proportionally separate from basic support."
         }
       },
       {
@@ -55,7 +55,7 @@ export default function HealthInsurancePage() {
         "name": "What if insurance costs change?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Either parent can request modification if the premium changes substantially separately from basic support order."
+          "text": "Either parent can request modification if the premium changes substantially, separate from a basic support order modification."
         }
       }
     ]

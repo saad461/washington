@@ -67,7 +67,7 @@ export const blogs: BlogPost[] = [
 
       <p class="mb-4">So instead of just looking at what the non-custodial parent earns, Washington combines <em>both</em> parents' monthly net incomes into a single pool, looks up a basic support obligation from the economic table, and then splits that obligation between the parents proportionally. If you earn 60% of the combined income, you're responsible for 60% of the obligation.</p>
 
-      <p class="mb-4">Here's what that looks like in practice. Let's say Parent A nets $4,500 per month after taxes and mandatory deductions, and Parent B nets $2,500. Their combined income is $7,000. For two children at $7,000 combined income, the 2026 economic table would show a basic support obligation of $1,450 per month. Parent A, who earns 64% of the total, would be responsible for about $928. Parent B would be responsible for $522. The parent who has the children less of the time pays their share as a transfer payment to the other parent.</p>
+      <p class="mb-4">Here's what that looks like in practice. Let's say Parent A nets $4,500 per month after taxes and mandatory deductions, and Parent B nets $2,500. Their combined income is $7,000. For two children at $7,000 combined income, the 2026 economic table would show a basic support obligation of $1,450 per month. Parent A, who earns 64% of the total, would be responsible for about $928. Parent B would be responsible for $522. The parent who has the children less of the time pays their share as a transfer payment to the other parent. You can estimate your net monthly income using our <a href="/net-income-calculator">net income calculator</a>.</p>
 
       <p class="mb-4">Want to check your own numbers? Use our <a href="/">Washington child support calculator</a> to run the estimate instantly, or the <a href="/worksheet">Professional Worksheet Wizard</a> for the full 8-part breakdown.</p>
 
@@ -340,7 +340,7 @@ export const blogs: BlogPost[] = [
        <h2 class="mt-12 mb-6">5. Does the SSR Apply to Support Modifications?</h2>
       <p class="mb-4">Yes, absolutely. If you were paying based on an older order established before the SSR was raised, or before your income dropped, you may now be entitled to a reduction. If your current income is hovering near the $2,394 threshold, it's worth running a fresh calculation and potentially filing a Petition to Modify Child Support.</p>
 
-      <p class="mb-4">Remember: you can only get a modification from the date you file, not retroactively from when your income changed. If you lost your job three months ago and haven't filed yet, those three months of accrued payments won't be forgiven even if your income clearly triggered the SSR. File immediately when your situation changes.</p>
+      <p class="mb-4">Remember: you can only get a modification from the date you file, not retroactively from when your income changed. If you lost your job three months ago and haven't filed yet, those three months of accrued payments won't be forgiven even if your income clearly triggered the SSR. File immediately when your situation changes. Check your modification eligibility with our <a href="/modification-calculator">modification calculator</a>.</p>
 
        <h2 class="mt-12 mb-6">6. How to Raise the SSR in Court</h2>
       <p class="mb-4">If you believe the SSR applies to your situation, you need to bring it to the court's attention explicitly, don't assume the commissioner will apply it automatically. Make sure your financial worksheet documents your adjusted net income accurately, and specifically note in your declaration that the calculated obligation, if applied, would leave you below the $2,394 SSR. Provide your pay stubs and tax documents to prove your income is what you claim.</p>
@@ -488,7 +488,7 @@ export const blogs: BlogPost[] = [
         <li>SSR check: $5,000 - $975 transfer = $4,025 remaining. Passes.</li>
         <li>45% check: $975 = 19.5% of $5,000. Passes.</li>
       </ol>
-      <p class="mb-4">If Parent B (the lower earner) has the children less often and is making the transfer payment: $585 base + credit for their $675 daycare share = complex math best handled by our <a href="/worksheet">Worksheet Wizard</a>, which automatically handles these calculations.</p>
+      <p class="mb-4">If Parent B (the lower earner) has the children less often and is making the transfer payment: $585 base + credit for their $675 daycare share = complex math best handled by our <a href="/worksheet">Worksheet Wizard</a>, which automatically handles these calculations. You can also manually estimate expense splits with our <a href="/childcare-calculator">childcare calculator</a> and <a href="/health-insurance-calculator">health insurance calculator</a>.</p>
 
        <h2 class="mt-12 mb-6">Related Articles</h2>
        <ul class="list-disc pl-6 space-y-6 mb-8">
@@ -598,7 +598,7 @@ export const blogs: BlogPost[] = [
        <h2 class="mt-12 mb-6">6. If You Fall Behind: Act Immediately</h2>
       <p class="mb-4">If your income has already dropped and you're accruing arrears, the most important thing is to file a modification petition immediately. Arrears that accumulate before the filing date <em>cannot be retroactively waived</em>, they are permanent debts. Every day you wait is another day of accruing arrearage at Washington's <strong>12% annual interest rate</strong>.</p>
 
-      <p class="mb-4">Also critical: unemployment benefits are gross income under Washington law and can be garnished by DSHS. Even while on unemployment, you're expected to be making payments, at least the minimum amount. Don't assume unemployment creates an automatic pause in your obligation.</p>
+      <p class="mb-4">Also critical: unemployment benefits are gross income under Washington law and can be garnished by DSHS. Even while on unemployment, you're expected to be making payments, at least the minimum amount. Don't assume unemployment creates an automatic pause in your obligation. If you fall behind, calculate your interest with our <a href="/arrears-calculator">arrears calculator</a>.</p>
 
        <h2 class="mt-12 mb-6">Related Articles</h2>
        <ul class="list-disc pl-6 space-y-6 mb-8">
@@ -702,7 +702,7 @@ export const blogs: BlogPost[] = [
 
       <p class="mb-4">If you're the parent with 60% of the combined income and daycare is $2,400/month, your share is $1,440, on top of your base transfer payment. The total obligation can easily reach $2,000+ when daycare is factored in for a Seattle-based case, even at a moderate income level.</p>
 
-      <p class="mb-4">This is exactly why worksheets matter so much in King County. The base support number from the economic table is rarely the whole story. Run your <a href="/worksheet">full worksheet</a> to see what daycare and healthcare actually do to your total obligation.</p>
+      <p class="mb-4">This is exactly why worksheets matter so much in King County. The base support number from the economic table is rarely the whole story. Run your <a href="/worksheet">full worksheet</a> to see what daycare and healthcare actually do to your total obligation. You can also use our standalone <a href="/childcare-calculator">childcare split calculator</a> to see your share.</p>
 
        <h2 class="mt-12 mb-6">5. Commissioners vs. Judges in King County Family Court</h2>
       <p class="mb-4">Most initial hearings, temporary orders, and uncontested support orders in King County are handled by <strong>Court Commissioners</strong>, judicial officers with full authority to enter binding orders. A Superior Court judge reviews commissioner decisions only if a party files a Motion for Revision within 10 days.</p>
@@ -780,7 +780,7 @@ export const blogs: BlogPost[] = [
 
       <p class="mb-4">Suppose you miss $600/month in payments for 12 months. After one year, you owe $7,200 in principal. But Washington's 12% interest rate means that $7,200 is accruing $864 in interest per year, about $72 per month just in interest. Miss two years of payments, and your principal is $14,400, with growing interest on top of that. After five years, a parent who stopped paying $600/month can easily owe $25,000–$30,000 when interest is calculated.</p>
 
-      <p class="mb-4">These debts have <strong>no statute of limitations</strong> in Washington. DCS can pursue arrears 20 years after your youngest child turns 18. There is no escape route except paying what's owed.</p>
+      <p class="mb-4">These debts have <strong>no statute of limitations</strong> in Washington. DCS can pursue arrears 20 years after your youngest child turns 18. There is no escape route except paying what's owed. Estimate your back pay and interest with our <a href="/arrears-calculator">arrears calculator</a>.</p>
 
        <h2 class="mt-12 mb-6">3. License Suspensions: Driver's and Professional</h2>
       <p class="mb-4">Under Washington law, DCS has the authority to suspend your driver's license if you're more than 6 months behind on child support payments or owe more than $1,000 in arrears. The process is administrative, you receive a notice, and if you don't respond within 20 days, the license is suspended without a court hearing.</p>
@@ -903,7 +903,7 @@ export const blogs: BlogPost[] = [
         <li><strong>Worksheet 3:</strong> Adds extraordinary expenses (childcare, medical insurance, uninsured medical, other approved expenses) and calculates the final transfer payment</li>
       </ul>
 
-      <p class="mb-4">If both parents submit conflicting worksheets, which happens in contested cases, the commissioner works through the discrepancies. The areas of dispute are almost always income amounts and extraordinary expense totals. Everything else is standardized math.</p>
+      <p class="mb-4">If both parents submit conflicting worksheets, which happens in contested cases, the commissioner works through the discrepancies. The areas of dispute are almost always income amounts and extraordinary expense totals. Everything else is standardized math. Check your parenting time percentage first with our <a href="/parenting-time-calculator">parenting time calculator</a>.</p>
 
        <h2 class="mt-12 mb-6">3. How Courts Verify Income</h2>
       <p class="mb-4">This is where contested hearings get most contentious. Each party is expected to disclose income honestly, but when there's a reason to doubt the disclosure, courts have powerful fact-finding tools.</p>

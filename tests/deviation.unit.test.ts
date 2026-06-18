@@ -3,16 +3,16 @@ import { calculateDeviationResult } from '../utils/deviationLogic';
 
 describe('Deviation Calculator Logic Units', () => {
 
-  test('Tax Conversion: 8,000 Annual Gross to Net', () => {
+  test('Tax Conversion: 48,000 Annual Gross to Net (2026)', () => {
     const net = convertGrossToNet(48000);
-    // Calculated: 4000 (gross) - 310 (tax) - 306 (fica) - 60 (wa) = 3324
-    expect(net).toBe(3324);
+    // 2026 Estimates: 4000 (gross) - 306 (tax) - 306 (fica) - 60 (wa) = 3328
+    expect(net).toBe(3328);
   });
 
-  test('Tax Conversion: 8,000 Annual Gross to Net', () => {
+  test('Tax Conversion: 18,000 Annual Gross to Net (2026)', () => {
     const net = convertGrossToNet(18000);
-    // Calculated: 1500 (gross) - 25 (tax) - 137 (fica+wa) = 1338
-    expect(net).toBe(1338);
+    // 2026 Estimates: 1500 (gross) - 21 (tax) - 137 (fica+wa) = 1342
+    expect(net).toBe(1342);
   });
 
   test('Standard Obligation & Upward Deviation (Test 1)', () => {

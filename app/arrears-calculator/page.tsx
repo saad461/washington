@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import ArrearsClient from "./ArrearsClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington Child Support Arrears Calculator 2026 — Back Pay & Interest" },
-  description: "Calculate unpaid child support arrears and 12% interest in Washington State. Based on RCW 26.23.060.",
+  title: { absolute: "Arrears & Interest Calculator | wscss.site — 2026" },
+  description: "Calculate back pay and 12% interest for child support arrears in 2026. Free calculator with accurate RCW 26.23.060 rules and enforcement info in Washington.",
   alternates: { canonical: "https://wscss.site/arrears-calculator" },
   openGraph: {
-    title: "Washington Child Support Arrears Calculator 2026 — Back Pay & Interest",
-    description: "Calculate unpaid child support arrears and 12% interest in Washington State. Based on RCW 26.23.060.",
+    title: "Arrears & Interest Calculator | wscss.site — 2026",
+    description: "Calculate back pay and 12% interest for child support arrears in 2026. Free calculator with accurate RCW 26.23.060 rules and enforcement info in Washington.",
     url: "https://wscss.site/arrears-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Child Support Arrears Calculator 2026 — Back Pay & Interest",
-    description: "Calculate unpaid child support arrears and 12% interest in Washington State. Based on RCW 26.23.060.",
+    title: "Arrears & Interest Calculator | wscss.site — 2026",
+    description: "Calculate back pay and 12% interest for child support arrears in 2026. Free calculator with accurate RCW 26.23.060 rules and enforcement info in Washington.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };

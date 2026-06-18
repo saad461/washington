@@ -704,6 +704,20 @@ export default function ModificationClient({ faqs }: ModificationClientProps) {
                   />
 
                   <div className="flex flex-col gap-3 pt-4 no-print">
+                    <div className="p-4 bg-white border border-blue-100 rounded-xl mb-2 space-y-4">
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">Check your arrears balance with our arrears calculator.</p>
+                        <Link href="/arrears-calculator" className="text-sm font-bold text-blue-600 hover:underline flex items-center gap-1">
+                          Arrears Calculator <ArrowRight size={14} />
+                        </Link>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">Update your net income estimate first.</p>
+                        <Link href="/net-income-calculator" className="text-sm font-bold text-blue-600 hover:underline flex items-center gap-1">
+                          Net Income Calculator <ArrowRight size={14} />
+                        </Link>
+                      </div>
+                    </div>
                     <Link href="/worksheet" className="btn btn-primary w-full shadow-lg shadow-blue-900/20">
                       Next, fill out your worksheet <ArrowRight size={18} />
                     </Link>

@@ -251,7 +251,7 @@ export default function ArrearsClient({ faqs }: ArrearsClientProps) {
                       </Link>
                     </div>
 
-                    <CrossSuggestions calculatorType="modification" />
+                    <CrossSuggestions calculatorType="arrears" />
                   </div>
                 ) : (
                   <div className="card-standard !p-8 text-center text-gray-400">
@@ -268,33 +268,79 @@ export default function ArrearsClient({ faqs }: ArrearsClientProps) {
       <section className="section-default border-t border-gray-100 no-print">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Understanding Child Support Arrears in Washington</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Washington Child Support Arrears Calculator (2026) — Calculate Back Pay and 12% Annual Interest</h2>
             <div className="prose-standard">
               <p>
-                In Washington State, when a parent fails to pay their court-ordered child support, the unpaid amount is called <strong>arrears</strong> or back child support. Arrears are a legal debt that is enforceable by the court and the Division of Child Support (DCS).
+                Missing a child support payment in Washington is expensive. The state charges 12% annual interest on unpaid child support under <strong>RCW 26.23.060</strong> — compounding annually. A parent who falls $5,000 behind owes $600 in interest in the first year alone, on top of the missed payments. This calculator shows your total arrears balance, accrued interest, and a realistic payoff timeline before enforcement actions escalate.
               </p>
 
-              <h3>Interest Rates</h3>
+              <h2>Washington&apos;s 12% Arrears Interest Rate</h2>
               <p>
-                Under <strong>RCW 26.23.060</strong>, all past-due child support payments automatically accrue interest at the rate of <strong>12% per annum</strong>. This interest is mandatory and cannot be waived by a judge unless specifically allowed by limited state programs for state-owed debt.
-              </p>
-
-              <h3>Enforcement Actions</h3>
-              <p>
-                The state has powerful tools to collect child support arrears, including:
+                Washington State has one of the highest child support interest rates in the country. Under <strong>RCW 26.23.060</strong>, all past-due child support payments automatically accrue interest at the rate of 12% per annum.
               </p>
               <ul>
-                <li><strong>Wage Garnishment:</strong> Deducting money directly from your paycheck.</li>
-                <li><strong>Tax Intercept:</strong> Seizing federal tax refunds.</li>
-                <li><strong>License Suspension:</strong> Suspending driver's, professional, or recreational licenses.</li>
-                <li><strong>Passport Denial:</strong> If arrears exceed $2,500, you may be ineligible for a US passport.</li>
-                <li><strong>Liens:</strong> Placing legal claims on property, bank accounts, or insurance settlements.</li>
+                <li><strong>Compounds Annually:</strong> The interest is added to the principal balance, making the debt grow exponentially if left unpaid.</li>
+                <li><strong>Accrues from Due Date:</strong> Interest begins accruing from the date each individual payment was due, not from the date of a court judgment.</li>
+                <li><strong>Mandatory:</strong> This interest is mandatory and cannot be waived by a judge unless specifically allowed by limited state programs for state-owed debt.</li>
+                <li><strong>Example:</strong> A $10,000 arrears balance generates <strong>$1,200 per year</strong> in interest, which is <strong>$100 per month</strong> just to keep the balance from growing.</li>
               </ul>
 
-              <h3>Do Arrears Ever Expire?</h3>
+              <h2>Washington Child Support Enforcement Consequences</h2>
               <p>
-                No. In Washington State, child support judgments do not expire. Arrears remain a valid debt until paid in full, even after the child reaches adulthood.
+                The state has powerful tools to collect child support arrears, and falling behind can have severe legal and financial consequences:
               </p>
+              <ul>
+                <li><strong>Wage Garnishment:</strong> Deducting money directly from your paycheck (up to 50-65% under <strong>RCW 26.18.070</strong>).</li>
+                <li><strong>Tax Intercept:</strong> Seizing federal and state tax refunds.</li>
+                <li><strong>License Suspension:</strong> Suspending driver&apos;s, professional, or recreational licenses when arrears exceed $2,500.</li>
+                <li><strong>Passport Denial:</strong> If arrears exceed $2,500, you are ineligible for a US passport.</li>
+                <li><strong>Liens and Seizures:</strong> Placing legal claims on property, bank accounts, or insurance settlements.</li>
+                <li><strong>Credit Reporting:</strong> Reporting balances over $1,000 to credit bureaus, severely damaging your credit score.</li>
+                <li><strong>Contempt of Court:</strong> Possible jail time for willful failure to pay under <strong>RCW 26.18.050</strong>.</li>
+                <li><strong>Judgment Duration:</strong> Child support judgments last 10 years after the child turns 18 under <strong>RCW 4.56.210</strong>.</li>
+              </ul>
+
+              <h2>How to Pay Off Child Support Arrears in Washington</h2>
+              <p>
+                If you have an arrears balance of <strong>$4,764</strong> (the example used in our calculator), here are three common payoff scenarios:
+              </p>
+              <p><strong>Option 1: Pay 10% extra per month</strong></p>
+              <ul>
+                <li>Extra Payment: $476/month</li>
+                <li>Payoff Timeline: Approximately 10 months</li>
+              </ul>
+              <p><strong>Option 2: Pay 20% extra per month</strong></p>
+              <ul>
+                <li>Extra Payment: $953/month</li>
+                <li>Payoff Timeline: Approximately 5 months</li>
+              </ul>
+              <div className="bg-red-50 border border-red-200 p-4 rounded-lg my-4">
+                <p className="text-red-800 font-bold mb-1">Option 3: Interest Only (Warning)</p>
+                <p className="text-red-700 text-sm mb-0">
+                  Monthly interest on $4,764 at 12% is <strong>$47.64</strong>. If you only pay the interest amount, your principal arrears balance will never decrease.
+                </p>
+              </div>
+
+              <h2>Working with Washington DCS on Arrears</h2>
+              <p>
+                The Division of Child Support (DCS) manages most enforcement actions. It is often better to contact DCS to make a payment arrangement before they initiate garnishment or license suspension. Note that there is a difference between "state-owed" arrears (owed if the child received public assistance) and "parent-owed" arrears. The state has more flexibility to compromise state-owed debt than debt owed to the other parent.
+              </p>
+
+              <div className="bg-blue-50 border border-blue-200 p-6 rounded-xl my-8 shadow-sm">
+                <h3 className="text-blue-900 mt-0">2026 Enforcement Note</h3>
+                <p className="text-blue-800 mb-0">
+                  The 12% interest rate under <strong>RCW 26.23.060</strong> was not changed by the 2026 <strong>EHB 1014</strong> reforms. While the 2026 updates focused on the economic table and self-support reserve, the enforcement mechanisms for unpaid support remain as strict as ever.
+                </p>
+              </div>
+
+              <h2>Internal Resources</h2>
+              <ul>
+                <li>Calculate your current standard obligation using our <Link href="/">Washington child support calculator</Link>.</li>
+                <li>If your income has changed, you may be eligible to lower future payments using our <Link href="/modification-calculator">modification calculator</Link>.</li>
+                <li>Understand the deductions used to calculate your income with our <Link href="/net-income-calculator">net income calculator</Link>.</li>
+                <li><Link href="/washington-courts/king-county">King County Superior Court</Link> handles the highest volume of child support enforcement cases in the state.</li>
+                <li>Learn the formal definition of <Link href="/glossary/arrears">arrears</Link> in our Washington child support glossary.</li>
+              </ul>
             </div>
 
             <div className="pt-12 border-t border-gray-100">

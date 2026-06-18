@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import NetIncomeClient from "./NetIncomeClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington Net Income Calculator 2026 — Gross to Net for Child Support" },
-  description: "Convert gross income to net monthly income for Washington child support. Uses 2026 federal tax brackets and WA mandatory deductions.",
+  title: { absolute: "Net Income Calculator | wscss.site — 2026" },
+  description: "Convert gross to net monthly income for child support in 2026. Free calculator with federal brackets, FICA, and WA PFML/LTC RCW 26.19.071(5) deductions.",
   alternates: { canonical: "https://wscss.site/net-income-calculator" },
   openGraph: {
-    title: "Washington Net Income Calculator 2026 — Gross to Net for Child Support",
-    description: "Convert gross income to net monthly income for Washington child support. Uses 2026 federal tax brackets and WA mandatory deductions.",
+    title: "Net Income Calculator | wscss.site — 2026",
+    description: "Convert gross to net monthly income for child support calculations in 2026. Free calculator with federal brackets, FICA, and WA PFML/LTC RCW 26.19.071(5) deductions.",
     url: "https://wscss.site/net-income-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Net Income Calculator 2026 — Gross to Net for Child Support",
-    description: "Convert gross income to net monthly income for Washington child support. Uses 2026 federal tax brackets and WA mandatory deductions.",
+    title: "Net Income Calculator | wscss.site — 2026",
+    description: "Convert gross to net monthly income for child support calculations in 2026. Free calculator with federal brackets, FICA, and WA PFML/LTC RCW 26.19.071(5) deductions.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
@@ -47,7 +47,7 @@ export default function NetIncomePage() {
         "name": "Does Washington have state income tax for child support purposes?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Washington has no state income tax. Only federal tax, FICA, and WA mandatory insurance premiums are deducted for child support."
+          "text": "Washington has no state income tax. Only federal tax, FICA, and WA mandatory insurance premiums (PFML and LTC) are deducted for child support."
         }
       },
       {
