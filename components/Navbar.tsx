@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Calculator, ChevronRight, Menu, X } from "lucide-react";
+import { Calculator, ChevronRight, Menu, X, Clock, Shield, Scale, Plus, DollarSign, Wallet, GraduationCap, HeartPulse, Coins, Landmark } from "lucide-react";
 import SearchMock from "./SearchMock";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -18,21 +18,14 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close drawer on route change
   useEffect(() => {
-    /* eslint-disable-next-line react-hooks/set-state-in-effect */
     setMobileOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
-
-  const handlePrint = () => {
-    if (typeof window !== "undefined") window.print();
-  };
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -43,13 +36,24 @@ export default function Navbar() {
     { href: "/compare-2024-2026", label: "2026 Updates"        },
   ];
 
-  const calculators = [
-    { href: "/", label: "Income Estimator" },
-    { href: "/joint-custody-calculator", label: "Joint Custody" },
-    { href: "/deviation-calculator", label: "Deviation Tool" },
-    { href: "/modification-calculator", label: "Modification Check" },
-    { href: "/extra-expenses", label: "Expense Splitter" },
-    { href: "/compare", label: "Compare Scenarios" },
+  const coreCalculators = [
+    { href: "/", label: "Income Estimator", icon: Wallet },
+    { href: "/joint-custody-calculator", label: "Joint Custody", icon: Scale },
+    { href: "/deviation-calculator", label: "Deviation Tool", icon: Shield },
+    { href: "/modification-calculator", label: "Modification Check", icon: Clock },
+    { href: "/extra-expenses", label: "Expense Splitter", icon: Coins },
+    { href: "/compare", label: "Compare Scenarios", icon: Calculator },
+  ];
+
+  const expenseTimeTools = [
+    { href: "/parenting-time-calculator", label: "Parenting Time", icon: Clock },
+    { href: "/childcare-calculator", label: "Childcare Split", icon: Coins },
+    { href: "/health-insurance-calculator", label: "Health Insurance", icon: Shield },
+    { href: "/medical-expense-calculator", label: "Medical Expense", icon: HeartPulse },
+    { href: "/education-expense-calculator", label: "Education Expense", icon: GraduationCap },
+    { href: "/arrears-calculator", label: "Arrears & Interest", icon: Landmark },
+    { href: "/net-income-calculator", label: "Net Income (Gross to Net)", icon: Wallet },
+    { href: "/tax-benefit-calculator", label: "Child Tax Benefit", icon: DollarSign },
   ];
 
   const isActive = (href: string) => {
@@ -57,10 +61,7 @@ export default function Navbar() {
     return pathname === href;
   };
 
-  // Single source of truth for nav height — used for both the header
-  // and the drawer top offset so they never mismatch.
   const navH      = scrolled ? "h-16" : "h-16 lg:h-20";
-  const drawerTop = scrolled ? "top-16" : "top-16";
 
   return (
     <>
@@ -98,7 +99,6 @@ export default function Navbar() {
 
           {/* ── Desktop Nav ── */}
           <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
-            {/* Calculator Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setDropdownOpen(true)}
@@ -106,7 +106,7 @@ export default function Navbar() {
             >
               <button
                 className={`relative px-3 py-2 text-sm transition-all duration-200 flex items-center gap-1 ${
-                  calculators.some(c => isActive(c.href))
+                  [...coreCalculators, ...expenseTimeTools].some(c => isActive(c.href))
                     ? "text-blue-600 font-semibold"
                     : "text-gray-600 font-medium hover:text-blue-600 transition-colors"
                 }`}
@@ -121,21 +121,46 @@ export default function Navbar() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full left-0 w-56 bg-white border border-gray-100 shadow-xl rounded-xl py-2 overflow-hidden"
+                    className="absolute top-full left-0 w-[500px] bg-white border border-gray-100 shadow-2xl rounded-2xl p-6 grid grid-cols-2 gap-8"
                   >
-                    {calculators.map((calc) => (
-                      <Link
-                        key={calc.href}
-                        href={calc.href}
-                        className={`block px-4 py-2.5 text-sm transition-colors ${
-                          isActive(calc.href)
-                            ? "bg-blue-50 text-blue-600 font-bold"
-                            : "text-gray-600 hover:bg-gray-50 font-medium"
-                        }`}
-                      >
-                        {calc.label}
-                      </Link>
-                    ))}
+                    <div>
+                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Core Calculators</p>
+                      <div className="space-y-1">
+                        {coreCalculators.map((calc) => (
+                          <Link
+                            key={calc.href}
+                            href={calc.href}
+                            className={`flex items-center gap-3 px-3 py-2 text-sm rounded-lg transition-colors ${
+                              isActive(calc.href)
+                                ? "bg-blue-50 text-blue-600 font-bold"
+                                : "text-gray-600 hover:bg-gray-50 font-medium"
+                            }`}
+                          >
+                            <calc.icon size={16} className={isActive(calc.href) ? "text-blue-600" : "text-gray-400"} />
+                            {calc.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Expense & Time Tools</p>
+                      <div className="space-y-1">
+                        {expenseTimeTools.map((calc) => (
+                          <Link
+                            key={calc.href}
+                            href={calc.href}
+                            className={`flex items-center gap-3 px-3 py-2 text-sm rounded-lg transition-colors ${
+                              isActive(calc.href)
+                                ? "bg-blue-50 text-blue-600 font-bold"
+                                : "text-gray-600 hover:bg-gray-50 font-medium"
+                            }`}
+                          >
+                            <calc.icon size={16} className={isActive(calc.href) ? "text-blue-600" : "text-gray-400"} />
+                            {calc.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -187,12 +212,8 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* ── Mobile Drawer ──────────────────────────────────────────────────
-          FIX: backdrop moved outside header to avoid stacking context issues.
-          FIX: glassmorphism overlay style with semi-transparent background.
-      ──────────────────────────────────────────────────────────────────── */}
+      {/* ── Mobile Drawer ── */}
       <div className="no-print">
-        {/* Backdrop Overlay */}
         <div
           className={`lg:hidden fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40 transition-opacity duration-300 ${
             mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -201,14 +222,12 @@ export default function Navbar() {
           aria-hidden="true"
         />
 
-        {/* Right-side Drawer */}
         <nav
           aria-label="Mobile navigation"
-          className={`lg:hidden fixed top-0 right-0 bottom-0 w-[80%] max-w-[320px] bg-white z-50 shadow-2xl transition-transform duration-250 ease-in-out flex flex-col ${
+          className={`lg:hidden fixed top-0 right-0 bottom-0 w-[85%] max-w-[360px] bg-white z-50 shadow-2xl transition-transform duration-250 ease-in-out flex flex-col ${
             mobileOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          {/* Drawer Header */}
           <div className="flex items-center justify-between px-6 h-16 border-b border-gray-100">
             <span className="font-bold text-gray-900">Menu</span>
             <button
@@ -220,18 +239,16 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto py-4">
-            <div className="px-6 mb-4">
+          <div className="flex-1 overflow-y-auto py-6">
+            <div className="px-6 mb-6">
               <SearchMock isNavbar={true} />
             </div>
 
-            {/* Links ordered as requested */}
             <div className="flex flex-col">
-              {/* Calculators Mobile Group */}
-              <div className="px-6 py-2">
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Calculators</p>
+              <div className="px-6 mb-6">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Core Calculators</p>
                 <div className="grid grid-cols-1 gap-1">
-                  {calculators.map((calc) => (
+                  {coreCalculators.map((calc) => (
                     <Link
                       key={calc.href}
                       href={calc.href}
@@ -240,7 +257,32 @@ export default function Navbar() {
                         isActive(calc.href) ? "text-blue-600" : "text-gray-700"
                       }`}
                     >
-                      {calc.label}
+                      <span className="flex items-center gap-3">
+                        <calc.icon size={18} className={isActive(calc.href) ? "text-blue-600" : "text-gray-300"} />
+                        {calc.label}
+                      </span>
+                      <ChevronRight size={14} className={isActive(calc.href) ? "text-blue-600" : "text-gray-300"} />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              <div className="px-6 mb-6">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Expense & Time Tools</p>
+                <div className="grid grid-cols-1 gap-1">
+                  {expenseTimeTools.map((calc) => (
+                    <Link
+                      key={calc.href}
+                      href={calc.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`flex items-center justify-between py-3 text-sm font-semibold transition-colors ${
+                        isActive(calc.href) ? "text-blue-600" : "text-gray-700"
+                      }`}
+                    >
+                      <span className="flex items-center gap-3">
+                        <calc.icon size={18} className={isActive(calc.href) ? "text-blue-600" : "text-gray-300"} />
+                        {calc.label}
+                      </span>
                       <ChevronRight size={14} className={isActive(calc.href) ? "text-blue-600" : "text-gray-300"} />
                     </Link>
                   ))}
@@ -249,12 +291,7 @@ export default function Navbar() {
 
               <div className="my-2 border-t border-gray-50" />
 
-              {[
-                navLinks.find(l => l.href === "/worksheet"),
-                navLinks.find(l => l.href === "/washington-courts"),
-                navLinks.find(l => l.href === "/glossary"),
-                navLinks.find(l => l.href === "/compare-2024-2026"),
-              ].map((link) => link && (
+              {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -271,9 +308,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="mx-6 my-4 border-t border-gray-100" />
-
-            <div className="px-6">
+            <div className="p-6">
               <Link
                 href="/worksheet"
                 onClick={() => setMobileOpen(false)}
@@ -285,7 +320,6 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Legal link at the very bottom */}
           <div className="p-6 border-t border-gray-100 mt-auto">
             <Link
               href="/disclaimer"

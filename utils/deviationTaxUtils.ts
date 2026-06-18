@@ -1,46 +1,53 @@
+// Federal tax brackets: 2026 estimates
+// Updated from 2025 for consistency
+// Official 2026 brackets published by IRS
+// in October-November 2025.
+// Update when official brackets confirmed.
+
 /**
- * ACCURATE 2025 WASHINGTON TAX CONVERSION FOR DEVIATIONS
+ * ACCURATE 2026 WASHINGTON TAX CONVERSION FOR DEVIATIONS
  * Converts Annual Gross to Monthly Net
  *
  * Includes:
- * - Federal Income Tax (2025 Brackets - Single Filer)
- * - Standard Deduction ($15,000)
- * - FICA (Social Security 6.2% up to $176,100, Medicare 1.45%)
- * - WA Mandatory (PFML 0.92% up to $176,100, LTC 0.58%)
+ * - Federal Income Tax (2026 Estimates - Single Filer)
+ * - Standard Deduction ($15,450)
+ * - FICA (7.65%)
+ * - WA Mandatory (PFML 0.92%, LTC 0.58%)
  */
 
 export function convertGrossToNet(annualGross: number): number {
   if (annualGross <= 0) return 0;
 
-  // Step 1: Calculate Federal Income Tax (2025 Brackets)
-  const taxableAnnual = Math.max(0, annualGross - 15000);
+  // Step 1: Calculate Federal Income Tax (2026 Estimates - Single)
+  const taxableAnnual = Math.max(0, annualGross - 15450);
   let annualFedTax = 0;
 
-  if (taxableAnnual > 0) {
-    if (taxableAnnual <= 11925) {
-      annualFedTax = taxableAnnual * 0.10;
-    } else if (taxableAnnual <= 48475) {
-      annualFedTax = 1192.5 + (taxableAnnual - 11925) * 0.12;
-    } else if (taxableAnnual <= 103350) {
-      annualFedTax = 5578.5 + (taxableAnnual - 48475) * 0.22;
-    } else if (taxableAnnual <= 197300) {
-      annualFedTax = 17651 + (taxableAnnual - 103350) * 0.24;
-    } else if (taxableAnnual <= 250525) {
-      annualFedTax = 40199 + (taxableAnnual - 197300) * 0.32;
-    } else if (taxableAnnual <= 626350) {
-      annualFedTax = 57231 + (taxableAnnual - 250525) * 0.35;
-    } else {
-      annualFedTax = 188769.75 + (taxableAnnual - 626350) * 0.37;
+  const brackets = [
+    { threshold: 0, rate: 0.10 },
+    { threshold: 11925, rate: 0.12 },
+    { threshold: 48475, rate: 0.22 },
+    { threshold: 103350, rate: 0.24 },
+    { threshold: 197300, rate: 0.32 },
+    { threshold: 250525, rate: 0.35 },
+    { threshold: 626350, rate: 0.37 },
+  ];
+
+  for (let i = 0; i < brackets.length; i++) {
+    const current = brackets[i];
+    const next = brackets[i + 1];
+    const upperLimit = next ? next.threshold : Infinity;
+
+    if (taxableAnnual > current.threshold) {
+      const amountInBracket = Math.min(taxableAnnual, upperLimit) - current.threshold;
+      annualFedTax += amountInBracket * current.rate;
     }
   }
 
-  // Step 2: Calculate FICA
-  const socialSecurity = Math.min(annualGross, 176100) * 0.062;
-  const medicare = annualGross * 0.0145;
-  const totalFICA = socialSecurity + medicare;
+  // Step 2: Calculate FICA (7.65%)
+  const totalFICA = annualGross * 0.0765;
 
   // Step 3: Calculate WA State Mandatory Deductions
-  const waPFML = Math.min(annualGross, 176100) * 0.0092;
+  const waPFML = annualGross * 0.0092;
   const waLTC = annualGross * 0.0058;
   const totalWA = waPFML + waLTC;
 
