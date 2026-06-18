@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import ArrearsClient from "./ArrearsClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Arrears & Interest Calculator | wscss.site — 2026" },
-  description: "Calculate back pay and 12% interest for child support arrears in 2026. Free calculator with accurate RCW 26.23.060 rules and enforcement info in Washington.",
+  title: { absolute: "Washington Child Support Arrears Calculator 2026 — Back Pay & 12% Interest" },
+  description: "Calculate unpaid child support arrears and the 12% annual interest required in Washington State. Free calculator based on RCW 26.23.060.",
   alternates: { canonical: "https://wscss.site/arrears-calculator" },
   openGraph: {
-    title: "Arrears & Interest Calculator | wscss.site — 2026",
-    description: "Calculate back pay and 12% interest for child support arrears in 2026. Free calculator with accurate RCW 26.23.060 rules and enforcement info in Washington.",
+    title: "Washington Child Support Arrears Calculator 2026 — Back Pay & 12% Interest",
+    description: "Calculate unpaid child support arrears and the 12% annual interest required in Washington State. Free calculator based on RCW 26.23.060.",
     url: "https://wscss.site/arrears-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arrears & Interest Calculator | wscss.site — 2026",
-    description: "Calculate back pay and 12% interest for child support arrears in 2026. Free calculator with accurate RCW 26.23.060 rules and enforcement info in Washington.",
+    title: "Washington Child Support Arrears Calculator 2026 — Back Pay & 12% Interest",
+    description: "Calculate unpaid child support arrears and the 12% annual interest required in Washington State. Free calculator based on RCW 26.23.060.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
@@ -39,7 +39,7 @@ export default function ArrearsPage() {
         "name": "Can child support arrears be forgiven in Washington?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "State cannot forgive arrears owed to other parent without their consent. Courts can compromise state-owed arrears in some cases."
+          "text": "The state cannot forgive arrears owed to the other parent without their consent. Courts can compromise state-owed arrears in some cases."
         }
       },
       {
@@ -55,7 +55,7 @@ export default function ArrearsPage() {
         "name": "How long can arrears be collected in Washington?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Washington child support judgments do not expire. Arrears collected indefinitely until paid in full including all accrued interest."
+          "text": "Washington child support judgments last 10 years after the child turns 18 under RCW 4.56.210. Arrears can be collected until paid in full including all interest."
         }
       }
     ]

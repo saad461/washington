@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import ParentingTimeClient from "./ParentingTimeClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Parenting Time Calculator | wscss.site — 2026" },
+  title: { absolute: "Washington Parenting Time Calculator 2026 — Overnights & Custody Percentage" },
   description: "Calculate parenting time overnights and custody percentage for 2026 child support free. See how your schedule affects payments under RCW 26.19.075.",
   alternates: { canonical: "https://wscss.site/parenting-time-calculator" },
   openGraph: {
-    title: "Parenting Time Calculator | wscss.site — 2026",
+    title: "Washington Parenting Time Calculator 2026 — Overnights & Custody Percentage",
     description: "Calculate parenting time overnights and custody percentage for 2026 child support free. See how your schedule affects payments under RCW 26.19.075.",
     url: "https://wscss.site/parenting-time-calculator",
     type: "website",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Parenting Time Calculator | wscss.site — 2026",
+    title: "Washington Parenting Time Calculator 2026 — Overnights & Custody Percentage",
     description: "Calculate parenting time overnights and custody percentage for 2026 child support free. See how your schedule affects payments under RCW 26.19.075.",
     images: ["https://wscss.site/wscss-og.webp"],
   },

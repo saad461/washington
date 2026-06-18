@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import ChildcareClient from "./ChildcareClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Childcare Split Calculator | wscss.site — 2026" },
-  description: "Split childcare costs between parents by income proportionally for 2026. Free split calculator with RCW 26.19.080(3) updates for Washington State.",
+  title: { absolute: "Washington Childcare Cost Calculator 2026 — Split Daycare Expenses Free" },
+  description: "Calculate how Washington splits childcare costs proportionally by income. Free calculator based on RCW 26.19.080(3) with 2026 economic table updates.",
   alternates: { canonical: "https://wscss.site/childcare-calculator" },
   openGraph: {
-    title: "Childcare Split Calculator | wscss.site — 2026",
-    description: "Split childcare costs between parents by income proportionally for 2026. Free split calculator with RCW 26.19.080(3) updates for Washington State.",
+    title: "Washington Childcare Cost Calculator 2026 — Split Daycare Expenses Free",
+    description: "Calculate how Washington splits childcare costs proportionally by income. Free calculator based on RCW 26.19.080(3) with 2026 economic table updates.",
     url: "https://wscss.site/childcare-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Childcare Split Calculator | wscss.site — 2026",
-    description: "Split childcare costs between parents by income proportionally for 2026. Free split calculator with RCW 26.19.080(3) updates for Washington State.",
+    title: "Washington Childcare Cost Calculator 2026 — Split Daycare Expenses Free",
+    description: "Calculate how Washington splits childcare costs proportionally by income. Free calculator based on RCW 26.19.080(3) with 2026 economic table updates.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
