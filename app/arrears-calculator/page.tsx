@@ -3,11 +3,11 @@ import ArrearsClient from "./ArrearsClient";
 
 export const metadata: Metadata = {
   title: { absolute: "Washington Child Support Arrears Calculator 2026 — Back Pay & Interest" },
-  description: "Calculate unpaid child support arrears and 6% interest in Washington State. Based on RCW 26.18.050.",
+  description: "Calculate unpaid child support arrears and 12% interest in Washington State. Based on RCW 26.23.060.",
   alternates: { canonical: "https://wscss.site/arrears-calculator" },
   openGraph: {
     title: "Washington Child Support Arrears Calculator 2026 — Back Pay & Interest",
-    description: "Calculate unpaid child support arrears and 6% interest in Washington State. Based on RCW 26.18.050.",
+    description: "Calculate unpaid child support arrears and 12% interest in Washington State. Based on RCW 26.23.060.",
     url: "https://wscss.site/arrears-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Washington Child Support Arrears Calculator 2026 — Back Pay & Interest",
-    description: "Calculate unpaid child support arrears and 6% interest in Washington State. Based on RCW 26.18.050.",
+    description: "Calculate unpaid child support arrears and 12% interest in Washington State. Based on RCW 26.23.060.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
@@ -31,7 +31,7 @@ export default function ArrearsPage() {
         "name": "What is the interest rate on arrears in Washington?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "6% annual interest under RCW 26.18.050. Accrues from the date each payment was due."
+          "text": "12% annual interest under RCW 26.23.060. Accrues from the date each payment was due."
         }
       },
       {
