@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, Scale, Shield, Clock, Calculator } from "lucide-react";
+import { ArrowRight, Scale, Shield, Clock, Calculator, HeartPulse, GraduationCap, Coins, Wallet, Landmark } from "lucide-react";
 
 interface Suggestion {
   title: string;
@@ -11,12 +11,26 @@ interface Suggestion {
   icon: React.ElementType;
 }
 
+export type CalculatorType =
+  | "basic"
+  | "joint"
+  | "deviation"
+  | "modification"
+  | "parenting-time"
+  | "childcare"
+  | "health-insurance"
+  | "medical-expense"
+  | "education-expense"
+  | "arrears"
+  | "net-income"
+  | "tax-benefit";
+
 interface CrossSuggestionsProps {
-  calculatorType: "basic" | "joint" | "deviation" | "modification";
+  calculatorType: CalculatorType;
 }
 
 export default function CrossSuggestions({ calculatorType }: CrossSuggestionsProps) {
-  const allSuggestions: Record<string, Suggestion[]> = {
+  const allSuggestions: Record<CalculatorType, Suggestion[]> = {
     basic: [
       {
         title: "Joint Custody Calculator",
@@ -97,12 +111,172 @@ export default function CrossSuggestions({ calculatorType }: CrossSuggestionsPro
         icon: Scale,
       },
     ],
+    "parenting-time": [
+      {
+        title: "Child Support",
+        desc: "Standard calculation",
+        href: "/",
+        icon: Calculator,
+      },
+      {
+        title: "Joint Custody",
+        desc: "Calculate with custody adjustment",
+        href: "/joint-custody-calculator",
+        icon: Scale,
+      },
+      {
+        title: "Modification",
+        desc: "Check if you can update order",
+        href: "/modification-calculator",
+        icon: Clock,
+      },
+    ],
+    childcare: [
+      {
+        title: "Health Insurance",
+        desc: "Split medical premiums",
+        href: "/health-insurance-calculator",
+        icon: Shield,
+      },
+      {
+        title: "Medical Expense",
+        desc: "Split uninsured costs",
+        href: "/medical-expense-calculator",
+        icon: HeartPulse,
+      },
+      {
+        title: "Child Support",
+        desc: "Standard calculation",
+        href: "/",
+        icon: Calculator,
+      },
+    ],
+    "health-insurance": [
+      {
+        title: "Childcare Split",
+        desc: "Proportional cost sharing",
+        href: "/childcare-calculator",
+        icon: Coins,
+      },
+      {
+        title: "Medical Expense",
+        desc: "Split uninsured costs",
+        href: "/medical-expense-calculator",
+        icon: HeartPulse,
+      },
+      {
+        title: "Child Support",
+        desc: "Standard calculation",
+        href: "/",
+        icon: Calculator,
+      },
+    ],
+    "medical-expense": [
+      {
+        title: "Health Insurance",
+        desc: "Split medical premiums",
+        href: "/health-insurance-calculator",
+        icon: Shield,
+      },
+      {
+        title: "Childcare Split",
+        desc: "Proportional cost sharing",
+        href: "/childcare-calculator",
+        icon: Coins,
+      },
+      {
+        title: "Child Support",
+        desc: "Standard calculation",
+        href: "/",
+        icon: Calculator,
+      },
+    ],
+    "education-expense": [
+      {
+        title: "Childcare Split",
+        desc: "Proportional cost sharing",
+        href: "/childcare-calculator",
+        icon: Coins,
+      },
+      {
+        title: "Medical Expense",
+        desc: "Split uninsured costs",
+        href: "/medical-expense-calculator",
+        icon: HeartPulse,
+      },
+      {
+        title: "Child Support",
+        desc: "Standard calculation",
+        href: "/",
+        icon: Calculator,
+      },
+    ],
+    arrears: [
+      {
+        title: "Modification",
+        desc: "Check if you can update order",
+        href: "/modification-calculator",
+        icon: Clock,
+      },
+      {
+        title: "Child Support",
+        desc: "Standard calculation",
+        href: "/",
+        icon: Calculator,
+      },
+      {
+        title: "Joint Custody",
+        desc: "Calculate with custody adjustment",
+        href: "/joint-custody-calculator",
+        icon: Scale,
+      },
+    ],
+    "net-income": [
+      {
+        title: "Child Support",
+        desc: "Standard calculation",
+        href: "/",
+        icon: Calculator,
+      },
+      {
+        title: "Deviation",
+        desc: "Factor in special expenses",
+        href: "/deviation-calculator",
+        icon: Shield,
+      },
+      {
+        title: "Modification",
+        desc: "Check if you can update order",
+        href: "/modification-calculator",
+        icon: Clock,
+      },
+    ],
+    "tax-benefit": [
+      {
+        title: "Child Support",
+        desc: "Standard calculation",
+        href: "/",
+        icon: Calculator,
+      },
+      {
+        title: "Net Income",
+        desc: "Calculate your monthly net",
+        href: "/net-income-calculator",
+        icon: Wallet,
+      },
+      {
+        title: "Modification",
+        desc: "Check if you can update order",
+        href: "/modification-calculator",
+        icon: Clock,
+      },
+    ],
   };
 
   const suggestions = allSuggestions[calculatorType] || [];
 
   return (
-    <div className="mt-12">
+    <div className="mt-12 no-print">
       <h4 className="text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-6">You may also need</h4>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {suggestions.map((s, i) => (
