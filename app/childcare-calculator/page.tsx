@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import ChildcareClient from "./ChildcareClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington Childcare Cost Calculator 2026 — Split Daycare" },
-  description: "Calculate how Washington State splits childcare costs between parents proportionally by income. Based on RCW 26.19.080(3).",
+  title: { absolute: "Washington Childcare Cost Calculator 2026 — Split Daycare Expenses Free" },
+  description: "Calculate how Washington splits childcare costs proportionally by income. Free calculator based on RCW 26.19.080(3) with 2026 economic table updates.",
   alternates: { canonical: "https://wscss.site/childcare-calculator" },
   openGraph: {
-    title: "Washington Childcare Cost Calculator 2026 — Split Daycare",
-    description: "Calculate how Washington State splits childcare costs between parents proportionally by income. Based on RCW 26.19.080(3).",
+    title: "Washington Childcare Cost Calculator 2026 — Split Daycare Expenses Free",
+    description: "Calculate how Washington splits childcare costs proportionally by income. Free calculator based on RCW 26.19.080(3) with 2026 economic table updates.",
     url: "https://wscss.site/childcare-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Childcare Cost Calculator 2026 — Split Daycare",
-    description: "Calculate how Washington State splits childcare costs between parents proportionally by income. Based on RCW 26.19.080(3).",
+    title: "Washington Childcare Cost Calculator 2026 — Split Daycare Expenses Free",
+    description: "Calculate how Washington splits childcare costs proportionally by income. Free calculator based on RCW 26.19.080(3) with 2026 economic table updates.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
@@ -39,7 +39,7 @@ export default function ChildcarePage() {
         "name": "Does the court order childcare cost sharing in Washington?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Washington courts routinely include childcare cost sharing in child support orders listed separately from basic support."
+          "text": "Yes. Washington courts routinely include childcare cost sharing in child support orders, listed separately from basic support."
         }
       },
       {

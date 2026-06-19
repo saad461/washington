@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import EducationExpenseClient from "./EducationExpenseClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington Education Expense Calculator 2026 — Split School Costs" },
-  description: "Calculate how education expenses are split between parents in Washington State. Tuition, fees, and supplies. Based on RCW 26.19.080(3).",
+  title: { absolute: "Washington Education Expense Calculator 2026 — Split School Costs Free" },
+  description: "Calculate how education expenses are split between parents in Washington State. Free 2026 calculator for tuition and fees based on RCW 26.19.080(3).",
   alternates: { canonical: "https://wscss.site/education-expense-calculator" },
   openGraph: {
-    title: "Washington Education Expense Calculator 2026 — Split School Costs",
-    description: "Calculate how education expenses are split between parents in Washington State. Tuition, fees, and supplies. Based on RCW 26.19.080(3).",
+    title: "Washington Education Expense Calculator 2026 — Split School Costs Free",
+    description: "Calculate how education expenses are split between parents in Washington State. Free 2026 calculator for tuition and fees based on RCW 26.19.080(3).",
     url: "https://wscss.site/education-expense-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Education Expense Calculator 2026 — Split School Costs",
-    description: "Calculate how education expenses are split between parents in Washington State. Tuition, fees, and supplies. Based on RCW 26.19.080(3).",
+    title: "Washington Education Expense Calculator 2026 — Split School Costs Free",
+    description: "Calculate how education expenses are split between parents in Washington State. Free 2026 calculator for tuition and fees based on RCW 26.19.080(3).",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
@@ -31,7 +31,7 @@ export default function EducationExpensePage() {
         "name": "Are private school costs covered in Washington child support?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Private school tuition can be included as special child-rearing expense under RCW 26.19.080(3) if court finds it reasonable."
+          "text": "Private school tuition can be included as a special child-rearing expense under RCW 26.19.080(3) if the court finds it reasonable."
         }
       },
       {
@@ -39,7 +39,7 @@ export default function EducationExpensePage() {
         "name": "Does Washington cover college costs in child support?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Post-secondary support is advisory under RCW 26.19.090. Courts may order support for college up to age 23 if child is enrolled and in good academic standing."
+          "text": "Post-secondary support is advisory under RCW 26.19.090. Courts may order support for college up to age 23 if the child is enrolled and in good academic standing."
         }
       },
       {

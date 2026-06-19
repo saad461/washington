@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import ParentingTimeClient from "./ParentingTimeClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington Parenting Time Calculator 2026 — Overnights & Percentage" },
-  description: "Calculate parenting time overnights and percentage for Washington State child support. See which parenting tier applies under RCW 26.19.075(1)(d).",
+  title: { absolute: "Washington Parenting Time Calculator 2026 — Overnights & Custody Percentage" },
+  description: "Calculate parenting time overnights and custody percentage for 2026 child support free. See how your schedule affects payments under RCW 26.19.075.",
   alternates: { canonical: "https://wscss.site/parenting-time-calculator" },
   openGraph: {
-    title: "Washington Parenting Time Calculator 2026 — Overnights & Percentage",
-    description: "Calculate parenting time overnights and percentage for Washington State child support. See which parenting tier applies under RCW 26.19.075(1)(d).",
+    title: "Washington Parenting Time Calculator 2026 — Overnights & Custody Percentage",
+    description: "Calculate parenting time overnights and custody percentage for 2026 child support free. See how your schedule affects payments under RCW 26.19.075.",
     url: "https://wscss.site/parenting-time-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Parenting Time Calculator 2026 — Overnights & Percentage",
-    description: "Calculate parenting time overnights and percentage for Washington State child support. See which parenting tier applies under RCW 26.19.075(1)(d).",
+    title: "Washington Parenting Time Calculator 2026 — Overnights & Custody Percentage",
+    description: "Calculate parenting time overnights and custody percentage for 2026 child support free. See how your schedule affects payments under RCW 26.19.075.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };

@@ -5,6 +5,16 @@
 // Update this file when official
 // brackets are confirmed.
 
+export interface DeductionResults {
+  grossMonthly: number;
+  fedTax: number;
+  fica: number;
+  waPFML: number;
+  waLTC: number;
+  optionalTotal: number;
+  netMonthly: number;
+}
+
 export function calculate2026Tax(annualGross: number, filingStatus: 'single' | 'hoh' | 'married'): number {
   let standardDeduction = 15450;
   if (filingStatus === 'hoh') standardDeduction = 23200;
@@ -12,37 +22,6 @@ export function calculate2026Tax(annualGross: number, filingStatus: 'single' | '
 
   const taxableIncome = Math.max(0, annualGross - standardDeduction);
 
-  const brackets = {
-    single: [
-      { cap: 11925, rate: 0.10 },
-      { cap: 48475, rate: 0.12 },
-      { cap: 103350, rate: 0.22 },
-      { cap: 197300, rate: 0.24 },
-      { cap: 250525, rate: 0.32 },
-      { cap: 626350, rate: 0.35 },
-      { cap: Infinity, rate: 0.37 },
-    ],
-    hoh: [
-      { cap: 17000, rate: 0.10 },
-      { cap: 64850, rate: 0.12 },
-      { cap: 103350, rate: 0.22 },
-      { cap: 197300, rate: 0.24 },
-      { cap: 250500, rate: 0.32 },
-      { cap: 626350, rate: 0.35 },
-      { cap: Infinity, rate: 0.37 },
-    ],
-    married: [
-      { cap: 23850, rate: 0.10 },
-      { cap: 96950, rate: 0.12 },
-      { cap: 206700, rate: 0.22 },
-      { cap: 206700, rate: 0.24 }, // Correcting the overlap in instructions: $206,700 - $394,600 is 24%
-      // Re-reading instructions:
-      // $96,950 - $206,700: 22%
-      // $206,700 - $394,600: 24%
-    ]
-  };
-
-  // Re-defining brackets more clearly based on provided values
   const activeBrackets = filingStatus === 'single' ? [
     { threshold: 0, rate: 0.10 },
     { threshold: 11925, rate: 0.12 },
@@ -84,30 +63,40 @@ export function calculate2026Tax(annualGross: number, filingStatus: 'single' | '
   return tax;
 }
 
-export function calculateNetIncome2026(annualGross: number, filingStatus: 'single' | 'hoh' | 'married', optionalDeductions: number = 0): {
-  monthlyGross: number;
-  fedTax: number;
-  fica: number;
-  pfml: number;
-  ltc: number;
-  optional: number;
-  monthlyNet: number;
-} {
-  const monthlyGross = annualGross / 12;
-  const fedTax = calculate2026Tax(annualGross, filingStatus) / 12;
-  const fica = (annualGross * 0.0765) / 12;
-  const pfml = (annualGross * 0.0092) / 12;
-  const ltc = (annualGross * 0.0058) / 12;
+export function calculateNetIncome(
+  amount: number,
+  period: 'annual' | 'monthly' | 'biweekly' | 'weekly',
+  filingStatus: 'single' | 'hoh' | 'married',
+  optional: {
+    mandatoryPension?: number;
+    unionDues?: number;
+    maintenancePaid?: number;
+    otherDeductions?: number;
+  } = {}
+): DeductionResults {
+  let annualGross = 0;
+  if (period === 'annual') annualGross = amount;
+  else if (period === 'monthly') annualGross = amount * 12;
+  else if (period === 'biweekly') annualGross = amount * 26;
+  else if (period === 'weekly') annualGross = amount * 52;
 
-  const monthlyNet = monthlyGross - fedTax - fica - pfml - ltc - optionalDeductions;
+  const fedTaxAnnual = calculate2026Tax(annualGross, filingStatus);
+  const ficaAnnual = annualGross * 0.0765;
+  const pfmlAnnual = annualGross * 0.0092;
+  const ltcAnnual = annualGross * 0.0058;
+
+  const optionalTotal = (optional.mandatoryPension || 0) +
+                        (optional.unionDues || 0) +
+                        (optional.maintenancePaid || 0) +
+                        (optional.otherDeductions || 0);
 
   return {
-    monthlyGross,
-    fedTax,
-    fica,
-    pfml,
-    ltc,
-    optional: optionalDeductions,
-    monthlyNet
+    grossMonthly: annualGross / 12,
+    fedTax: fedTaxAnnual / 12,
+    fica: ficaAnnual / 12,
+    waPFML: pfmlAnnual / 12,
+    waLTC: ltcAnnual / 12,
+    optionalTotal: optionalTotal,
+    netMonthly: (annualGross / 12) - (fedTaxAnnual / 12) - (ficaAnnual / 12) - (pfmlAnnual / 12) - (ltcAnnual / 12) - optionalTotal
   };
 }

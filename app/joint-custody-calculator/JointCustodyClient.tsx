@@ -505,6 +505,12 @@ export default function JointCustodyClient({ faqs }: JointCustodyClientProps) {
                   />
 
                   <div className="flex flex-col gap-3 pt-4 no-print">
+                    <div className="p-4 bg-white border border-blue-100 rounded-xl mb-2">
+                      <p className="text-xs text-gray-500 mb-2">Calculate your exact overnight count first with our parenting time calculator.</p>
+                      <Link href="/parenting-time-calculator" className="text-sm font-bold text-blue-600 hover:underline flex items-center gap-1">
+                        Open Parenting Time Calculator <ArrowRight size={14} />
+                      </Link>
+                    </div>
                     <Link href="/worksheet" className="btn btn-primary w-full shadow-lg shadow-blue-900/20">
                       Next, fill out your worksheet <ArrowRight size={18} />
                     </Link>

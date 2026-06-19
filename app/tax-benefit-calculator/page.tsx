@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import TaxBenefitClient from "./TaxBenefitClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington Child Tax Benefit Calculator 2026 — Dependent Exemption" },
-  description: "Estimate the tax benefit of claiming your child as a dependent. Calculate Child Tax Credit value for Washington State parents.",
+  title: { absolute: "Washington Child Tax Benefit Calculator 2026 — Dependent Exemption Value" },
+  description: "Estimate the 2026 value of claiming your child as a dependent. Free calculator with Child Tax Credit phase-outs and RCW 26.19.100 rules for Washington.",
   alternates: { canonical: "https://wscss.site/tax-benefit-calculator" },
   openGraph: {
-    title: "Washington Child Tax Benefit Calculator 2026 — Dependent Exemption",
-    description: "Estimate the tax benefit of claiming your child as a dependent. Calculate Child Tax Credit value for Washington State parents.",
+    title: "Washington Child Tax Benefit Calculator 2026 — Dependent Exemption Value",
+    description: "Estimate the 2026 value of claiming your child as a dependent. Free calculator with Child Tax Credit phase-outs and RCW 26.19.100 rules for Washington.",
     url: "https://wscss.site/tax-benefit-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Child Tax Benefit Calculator 2026 — Dependent Exemption",
-    description: "Estimate the tax benefit of claiming your child as a dependent. Calculate Child Tax Credit value for Washington State parents.",
+    title: "Washington Child Tax Benefit Calculator 2026 — Dependent Exemption Value",
+    description: "Estimate the 2026 value of claiming your child as a dependent. Free calculator with Child Tax Credit phase-outs and RCW 26.19.100 rules for Washington.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
@@ -55,7 +55,7 @@ export default function TaxBenefitPage() {
         "name": "Does claiming the child affect child support in Washington?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The tax exemption is separate from child support calculations. However courts may consider tax benefits when reviewing support amounts."
+          "text": "The tax exemption is separate from child support calculations. However, courts may consider tax benefits when reviewing support amounts."
         }
       }
     ]

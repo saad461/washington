@@ -209,7 +209,7 @@ export default function ParentingTimeClient({ faqs }: ParentingTimeClientProps) 
                     </Link>
                   </div>
 
-                  <CrossSuggestions calculatorType="basic" />
+                  <CrossSuggestions calculatorType="parenting-time" />
                 </div>
               </div>
             </div>
@@ -221,32 +221,61 @@ export default function ParentingTimeClient({ faqs }: ParentingTimeClientProps) 
       <section className="section-default border-t border-gray-100 no-print">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Understanding Parenting Time in Washington State</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Washington Parenting Time Calculator (2026) — Calculate Overnights and Custody Percentage</h2>
             <div className="prose-standard">
               <p>
-                In Washington State, child support is calculated using the standard economic table, but judges have the authority to "deviate" from that amount if a child spends a significant amount of time with the paying parent. This is known as a <strong>residential deviation</strong> under RCW 26.19.075(1)(d).
+                Washington State replaced traditional custody labels with a Residential Schedule system under <strong>RCW 26.09.187</strong>. Instead of "primary custody" or "joint custody," courts assign each parent a specific number of overnights per year. This number directly affects your child support obligation when the paying parent has significant residential time under <strong>RCW 26.19.075(1)(d)</strong>. Use this calculator to find your overnight count and see which parenting tier applies.
               </p>
 
-              <h3>Parenting Time Tiers</h3>
+              <h2>How Washington Calculates Parenting Time</h2>
               <p>
-                While not strictly defined in the law, most Washington courts look at parenting time in four primary tiers:
+                Washington measures parenting time in overnights — the number of nights per year a child sleeps at each parent&apos;s home. Courts use overnights rather than hours because overnight stays reflect true residential care responsibilities.
+              </p>
+              <p>
+                Under the 2026 Washington State Child Support Schedule, courts may consider a parenting time deviation when the paying parent has a significant number of overnights. While Washington law does not set a rigid threshold, the common benchmark seen in practice is:
               </p>
               <ul>
-                <li><strong>Standard (Under 91 Overnights):</strong> The standard calculation typically applies without adjustment.</li>
-                <li><strong>Substantial (91-127 Overnights):</strong> Deviations are possible but often require showing a high income disparity or specific financial hardship.</li>
-                <li><strong>Significant (128-182 Overnights):</strong> Courts are much more likely to consider a downward deviation to account for the expenses incurred in the second household.</li>
-                <li><strong>Equal (183+ Overnights):</strong> In 50/50 arrangements, deviations are common, though the higher-earning parent will still likely owe support to ensure the child has similar resources in both homes.</li>
+                <li><strong>Under 91 overnights (less than 25%):</strong> Standard child support calculation applies. No deviation typically considered.</li>
+                <li><strong>91 to 127 overnights (25% to 34%):</strong> Court may consider a deviation based on increased expenses of the paying parent under RCW 26.19.075(1)(d). Deviation requires written court findings.</li>
+                <li><strong>128 to 182 overnights (35% to 49%):</strong> Significant residential time. Deviation more commonly considered. Court weighs increased costs of paying parent against decreased costs of receiving parent.</li>
+                <li><strong>183 or more overnights (50% or more):</strong> Equal or near-equal parenting time. Courts regularly consider substantial deviation from standard calculation.</li>
               </ul>
-
-              <h3>How Percentage is Calculated</h3>
               <p>
-                Washington uses a 365-day year for parenting time calculations. To find your percentage, take the total number of overnights assigned to you in your parenting plan and divide by 365.
+                Important: Washington uses discretionary deviation — not an automatic formula. Any reduction requires written findings of fact by the court per <strong>RCW 26.19.075(3)</strong>.
               </p>
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 my-8">
-                <p className="text-center font-bold text-gray-900 mb-0">
-                  (Overnights ÷ 365) × 100 = Parenting Time %
+
+              <h2>Example — Every Other Weekend Schedule</h2>
+              <p>
+                Parent A earns $5,000/month net. Parent B earns $3,000/month net. One child. Standard calculation: $794/month.
+              </p>
+              <p>
+                Parent A has child every other weekend = 52 overnights = 14.2% parenting time.
+              </p>
+              <p>
+                At 52 overnights, Parent A is below the 91-overnight threshold. Standard $794/month calculation applies with no deviation.
+              </p>
+              <p>
+                If Parent A increases to 182 overnights (50% schedule) through a parenting plan modification, the court may consider a deviation downward from $794/month. The actual new amount depends on each parent&apos;s documented additional expenses.
+              </p>
+              <p>
+                Run the parenting time calculator above to see your overnight count and tier.
+              </p>
+
+              <div className="bg-blue-50 border border-blue-200 p-6 rounded-xl my-8">
+                <h3 className="text-blue-900 mt-0">2026 Washington Parenting Plan Updates</h3>
+                <p className="text-blue-800 mb-0">
+                  The 2026 reforms under <strong>EHB 1014</strong> expanded the economic table but did not change the parenting deviation standards. Courts still apply RCW 26.19.075(1)(d) using discretion based on increased expenses of the paying parent and decreased expenses of the receiving parent. No automatic percentage reduction was enacted.
                 </p>
               </div>
+
+              <h2>Internal Resources</h2>
+              <ul>
+                <li>Calculate your standard child support obligation first using our <Link href="/">Washington child support calculator</Link>.</li>
+                <li>See how parenting time affects your deviation request using our <Link href="/deviation-calculator">deviation calculator</Link>.</li>
+                <li>If you are considering a modification based on a custody change, see our <Link href="/modification-calculator">modification calculator</Link>.</li>
+                <li><Link href="/washington-courts/king-county">King County courts</Link> apply these same parenting time standards.</li>
+                <li>Learn what <Link href="/glossary/residential-schedule">residential schedule</Link> means in our Washington child support glossary.</li>
+              </ul>
             </div>
 
             <div className="pt-12 border-t border-gray-100">

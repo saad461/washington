@@ -49,8 +49,26 @@ const RelatedCalculations: React.FC<RelatedCalculationsProps> = ({ countySlug })
             </div>
           </div>
 
-          {/* Subsection 2 — Compare Washington Counties */}
+          {/* Subsection 2 — New Calculator Tools */}
           <div className="p-10 bg-[var(--color-bg-subtle)] rounded-3xl border border-gray-100">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-8">2026 Support Tools</h3>
+            <div className="flex flex-wrap gap-3 mb-8">
+              {[
+                { label: "Parenting Time", href: "/parenting-time-calculator" },
+                { label: "Childcare Split", href: "/childcare-calculator" },
+                { label: "Net Income", href: "/net-income-calculator" },
+                { label: "Arrears & Interest", href: "/arrears-calculator" },
+              ].map((tool) => (
+                <Link
+                  key={tool.href}
+                  href={tool.href}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-sm text-gray-700 hover:border-blue-400 hover:text-blue-600 hover:bg-blue-50 transition-colors duration-150"
+                >
+                  {tool.label} Tool →
+                </Link>
+              ))}
+            </div>
+
             <h3 className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-8">Compare Washington Counties</h3>
             <div className="flex flex-wrap gap-3">
               {comparisonCounties.map((c) => (

@@ -3,11 +3,11 @@ import NetIncomeClient from "./NetIncomeClient";
 
 export const metadata: Metadata = {
   title: { absolute: "Washington Net Income Calculator 2026 — Gross to Net for Child Support" },
-  description: "Convert gross income to net monthly income for Washington child support. Uses 2026 federal tax brackets and WA mandatory deductions.",
+  description: "Convert gross income to net monthly income for Washington child support using 2026 federal tax brackets and WA mandatory deductions. Based on RCW 26.19.071.",
   alternates: { canonical: "https://wscss.site/net-income-calculator" },
   openGraph: {
     title: "Washington Net Income Calculator 2026 — Gross to Net for Child Support",
-    description: "Convert gross income to net monthly income for Washington child support. Uses 2026 federal tax brackets and WA mandatory deductions.",
+    description: "Convert gross income to net monthly income for Washington child support using 2026 federal tax brackets and WA mandatory deductions. Based on RCW 26.19.071.",
     url: "https://wscss.site/net-income-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Washington Net Income Calculator 2026 — Gross to Net for Child Support",
-    description: "Convert gross income to net monthly income for Washington child support. Uses 2026 federal tax brackets and WA mandatory deductions.",
+    description: "Convert gross income to net monthly income for Washington child support using 2026 federal tax brackets and WA mandatory deductions. Based on RCW 26.19.071.",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };

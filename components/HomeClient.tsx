@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronRight, CheckCircle, Calculator, Scale, Shield, MapPin, Calendar } from "lucide-react";
+import { ChevronRight, CheckCircle, Calculator, Scale, Shield, MapPin, Calendar, Clock, HeartPulse, GraduationCap, Coins, Wallet, Landmark, DollarSign } from "lucide-react";
 import HomeCalculator from "@/components/HomeCalculator";
 import FAQAccordion from "@/components/FAQAccordion";
 import { getSupport } from "@/data/washingtonTable2026";
@@ -257,6 +257,111 @@ export default function HomeClient({ homeFaqs }: HomeClientProps) {
                   </p>
                   <Link href="/worksheet" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
                     Launch Wizard <ChevronRight size={14} />
+                  </Link>
+                </div>
+
+                {/* New Phase 3 Calculators */}
+                <div className="card-standard text-center flex flex-col items-center group">
+                  <div className="w-12 h-12 bg-blue-50 text-blue-500 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-blue-500 group-hover:text-white transition-all">
+                    <Clock size={24} />
+                  </div>
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Parenting Time</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Find your exact overnight count and parenting percentage.
+                  </p>
+                  <Link href="/parenting-time-calculator" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Open Tool <ChevronRight size={14} />
+                  </Link>
+                </div>
+
+                <div className="card-standard text-center flex flex-col items-center group">
+                  <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-orange-600 group-hover:text-white transition-all">
+                    <Coins size={24} />
+                  </div>
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Childcare Split</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Split daycare, after-school, and summer program costs proportionally.
+                  </p>
+                  <Link href="/childcare-calculator" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Open Tool <ChevronRight size={14} />
+                  </Link>
+                </div>
+
+                <div className="card-standard text-center flex flex-col items-center group">
+                  <div className="w-12 h-12 bg-teal-100 text-teal-600 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-teal-600 group-hover:text-white transition-all">
+                    <Shield size={24} />
+                  </div>
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Health Insurance</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Calculate proportional health and dental premium sharing.
+                  </p>
+                  <Link href="/health-insurance-calculator" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Open Tool <ChevronRight size={14} />
+                  </Link>
+                </div>
+
+                <div className="card-standard text-center flex flex-col items-center group">
+                  <div className="w-12 h-12 bg-rose-100 text-rose-600 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-rose-600 group-hover:text-white transition-all">
+                    <HeartPulse size={24} />
+                  </div>
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Medical Expense</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Share copays and uninsured medical costs by income share.
+                  </p>
+                  <Link href="/medical-expense-calculator" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Open Tool <ChevronRight size={14} />
+                  </Link>
+                </div>
+
+                <div className="card-standard text-center flex flex-col items-center group">
+                  <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-amber-600 group-hover:text-white transition-all">
+                    <GraduationCap size={24} />
+                  </div>
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Education Expense</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Split tuition, school supplies, and post-secondary fees.
+                  </p>
+                  <Link href="/education-expense-calculator" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Open Tool <ChevronRight size={14} />
+                  </Link>
+                </div>
+
+                <div className="card-standard text-center flex flex-col items-center group">
+                  <div className="w-12 h-12 bg-red-100 text-red-600 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-red-600 group-hover:text-white transition-all">
+                    <Landmark size={24} />
+                  </div>
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Arrears Calculator</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Calculate back child support and mandatory 12% interest.
+                  </p>
+                  <Link href="/arrears-calculator" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Open Tool <ChevronRight size={14} />
+                  </Link>
+                </div>
+
+                <div className="card-standard text-center flex flex-col items-center group">
+                  <div className="w-12 h-12 bg-cyan-100 text-cyan-600 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-cyan-600 group-hover:text-white transition-all">
+                    <Wallet size={24} />
+                  </div>
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Net Income</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Convert gross pay to net monthly income with 2026 tax logic.
+                  </p>
+                  <Link href="/net-income-calculator" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Open Tool <ChevronRight size={14} />
+                  </Link>
+                </div>
+
+                <div className="card-standard text-center flex flex-col items-center group">
+                  <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-[12px] flex items-center justify-center mb-0 shadow-sm group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                    <DollarSign size={24} />
+                  </div>
+                  <h3 className="text-[16px] font-bold text-gray-900 mt-4 mb-2">Tax Benefit</h3>
+                  <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                    Estimate the annual value of the 2026 Child Tax Credit.
+                  </p>
+                  <Link href="/tax-benefit-calculator" className="text-blue-600 font-bold text-sm flex items-center gap-1 mt-auto">
+                    Open Tool <ChevronRight size={14} />
                   </Link>
                 </div>
               </div>

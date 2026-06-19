@@ -78,6 +78,7 @@
 - **Related Calculators**: Updated `CrossSuggestions.tsx` with logic for all new types.
 - **Sitemap**: Added all 8 new routes to `app/sitemap.ts`.
 - **Tax Logic**: Updated `utils/deviationTaxUtils.ts` to use 2026 bracket estimates.
+- **Content Fixes**: Added worked examples to Net Income, Tax Benefit, and Education pages. Fixed "direction" display on Education and Medical result cards.
 
 ## Build Status
 - `npm run build`: Passed successfully.

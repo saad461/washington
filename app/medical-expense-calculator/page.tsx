@@ -2,12 +2,12 @@ import { Metadata } from "next";
 import MedicalExpenseClient from "./MedicalExpenseClient";
 
 export const metadata: Metadata = {
-  title: { absolute: "Washington Medical Expense Calculator 2026 — Uninsured Cost Split" },
-  description: "Calculate how uninsured medical expenses are split between parents in Washington State by income. Based on RCW 26.19.080(2).",
+  title: { absolute: "Washington Medical Expense Calculator 2026 — Split Uninsured Costs Free" },
+  description: "Calculate how uninsured medical expenses are split between parents in Washington State by income. Free 2026 tool based on RCW 26.19.080(2).",
   alternates: { canonical: "https://wscss.site/medical-expense-calculator" },
   openGraph: {
-    title: "Washington Medical Expense Calculator 2026 — Uninsured Cost Split",
-    description: "Calculate how uninsured medical expenses are split between parents in Washington State by income. Based on RCW 26.19.080(2).",
+    title: "Washington Medical Expense Calculator 2026 — Split Uninsured Costs Free",
+    description: "Calculate how uninsured medical expenses are split between parents in Washington State by income. Free 2026 tool based on RCW 26.19.080(2).",
     url: "https://wscss.site/medical-expense-calculator",
     type: "website",
     siteName: "WSCSS — Washington State Child Support Schedule",
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Washington Medical Expense Calculator 2026 — Uninsured Cost Split",
-    description: "Calculate how uninsured medical expenses are split between parents in Washington State by income. Based on RCW 26.19.080(2).",
+    title: "Washington Medical Expense Calculator 2026 — Split Uninsured Costs Free",
+    description: "Calculate how uninsured medical expenses are split between parents in Washington State by income. Free 2026 tool based on RCW 26.19.080(2).",
     images: ["https://wscss.site/wscss-og.webp"],
   },
 };
@@ -39,7 +39,7 @@ export default function MedicalExpensePage() {
         "name": "What counts as uninsured medical expense in Washington?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Copays, deductibles, dental, orthodontia, glasses, mental health, prescriptions not covered by insurance."
+          "text": "Copays, deductibles, dental, orthodontia, glasses, mental health, and prescriptions not covered by insurance."
         }
       },
       {
@@ -47,7 +47,7 @@ export default function MedicalExpensePage() {
         "name": "How do I request reimbursement for medical expenses?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Provide receipts to the other parent. If refused file a motion for enforcement with your county Superior Court."
+          "text": "Provide receipts to the other parent. If refused, file a motion for enforcement with your county Superior Court."
         }
       }
     ]
