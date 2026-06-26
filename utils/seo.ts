@@ -104,12 +104,9 @@ export function getIncomePageMeta({
     ? `${countyNameTitle} Child Support: ${formattedIncome} Income, ${childrenTextTitle} (2026) | Court Discretion`
     : `${countyNameTitle} Child Support: ${formattedIncome} Income, ${childrenTextTitle} (2026) | ${formattedSupport}/mo`;
 
-  // New Description Pattern:
-  // Standard: What is child support for [children] at [income] in [location]? The 2026 presumptive amount is [amount]. See how SSR, deviations, and [rules] affect your final order.
-  // Court Discretion: What is child support for [children] at [income] in [location]? See how SSR, deviations, and [rules] determine your final order.
-  const descriptionText = isHighIncome
-    ? `What is child support for ${childrenTextDesc} at ${formattedIncome}/mo in ${countyNameDesc}? See how SSR, deviations, and ${courtRulesName} determine your final order.`
-    : `What is child support for ${childrenTextDesc} at ${formattedIncome}/mo in ${countyNameDesc}? The 2026 presumptive amount is ${formattedSupport}/mo. See how SSR, deviations, and ${courtRulesName} affect your final order.`;
+  // New Description Pattern (Task 4):
+  // How much is child support on $[INCOME]/mo in [COUNTY] County? The 2026 WA table puts the estimate at $[AMOUNT] for [CHILDREN] kids. See what affects your final number.
+  const descriptionText = `How much is child support on ${formattedIncome}/mo in ${countyNameTitle} County? The 2026 WA table puts the estimate at ${formattedSupport} for ${children} kids. See what affects your final number.`;
 
   return {
     title: { absolute: titleText },

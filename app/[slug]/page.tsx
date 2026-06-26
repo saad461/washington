@@ -110,51 +110,56 @@ function generateDynamicContent(
   );
 
   let incomeBlock = "";
-  if (income < 2200) {
+  if (income < 3000) {
     incomeBlock = `
  <div class="p-8 bg-blue-50 border border-blue-100 rounded-3xl my-12 shadow-sm">
- <h3 class="flex items-center gap-3 mt-0 font-bold text-2xl text-blue-600">Low-Income Protective Measures</h3>
- <p class="leading-relaxed text-lg text-gray-700 mt-4">For families with a combined monthly income of <strong>${formattedIncome}</strong>, Washington's 2026 guidelines trigger automatic poverty protections. At this level, the standard ${formattedSupport} obligation is often reduced to the statutory minimum of $50 per child per month. Want a complete breakdown including deviations and expenses? <a href='/worksheet' class='text-blue-600 hover:underline font-bold'>Calculate your full worksheet</a></p>
- <ul class="mt-8 space-y-4 text-gray-600">
- <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-600"></span><strong>SSR Protection:</strong> Approximately $2,394 reserve is strictly applied.</li>
- <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-600"></span><strong>Statutory Minimum:</strong> Usually $50 per child per month.</li>
- <li class="flex items-center gap-3"><span class="w-2 h-2 rounded-full bg-blue-600"></span><strong>Deviation Probability:</strong> High at the ${formattedIncome} tier.</li>
- </ul>
+ <h3 class="flex items-center gap-3 mt-0 font-bold text-2xl text-blue-900">What This Number Means For You</h3>
+ <p class="leading-relaxed text-lg text-gray-700 mt-4">If your net monthly income is under $3,000, the first thing you should know is that Washington's Self-Support Reserve exists specifically to protect you. The SSR is set at $2,394 for 2026, which means if paying the standard amount would leave you with less than that, the court is required to consider reducing your obligation. Bring documentation of every expense you have — rent, utilities, car payments, health insurance — because commissioners take SSR arguments seriously when the math is close. The presumptive number you see here is a starting point, not a sentence. Run your numbers through the deviation calculator before your hearing so you walk in knowing exactly where you stand.</p>
  </div>`;
-  } else if (income <= 12000) {
+  } else if (income < 7000) {
     incomeBlock = `
  <div class="p-8 bg-gray-50 border border-gray-200 rounded-3xl my-12 shadow-sm">
- <h3 class="flex items-center gap-3 mt-0 font-bold text-2xl text-gray-900">Standard Mid-Income Calculation</h3>
- <p class="leading-relaxed text-lg text-gray-600 mt-4">Your ${formattedIncome} income falls within the standard economic schedule. This means the <strong>${formattedSupport}</strong> figure is the presumptive legal standard. Want a complete breakdown including deviations and expenses? <a href='/worksheet' class='text-blue-600 hover:underline font-bold'>Calculate your full worksheet</a></p>
- <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
- <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
- <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Presumptive Amount</p>
- <p class="text-3xl font-bold text-blue-600">${formattedSupport}</p>
- </div>
- <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
- <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Schedule Bracket</p>
- <p class="text-3xl font-bold text-gray-900">Standard Limit</p>
- </div>
- </div>
+ <h3 class="flex items-center gap-3 mt-0 font-bold text-2xl text-gray-900">What This Number Means For You</h3>
+ <p class="leading-relaxed text-lg text-gray-700 mt-4">If you're earning between $3,000 and $7,000 a month net, you're in the most common income range Washington courts see, and the 2026 economic table handles this tier cleanly. The SSR of $2,394 isn't a concern at this level, so the presumptive number you're looking at is likely close to what a commissioner would order. That said, close doesn't mean final — if you have your kids more than the standard custody split, a parenting time credit could meaningfully reduce what you pay. Run the full worksheet wizard to see how your actual custody schedule affects the bottom line before assuming the number on this page is what you'll owe.</p>
  </div>`;
   } else {
     incomeBlock = `
  <div class="p-8 bg-amber-50 border border-amber-200 rounded-3xl my-12 shadow-sm">
- <h3 class="flex items-center gap-3 mt-0 font-bold text-2xl text-amber-900">High-Income Notice</h3>
- <p class="leading-relaxed text-lg text-amber-800 mt-4">Because your combined income of <strong>${formattedIncome}</strong> exceeds the $12,000 statutory ceiling, the ${formattedSupport} base is a minimum starting point. Judges in ${locationName} have discretion to increase support proportional to the family's standard of living. Want a complete breakdown including deviations and expenses? <a href='/worksheet' class='text-blue-600 hover:underline font-bold'>Calculate your full worksheet</a></p>
- <p class="mt-6 text-sm italic text-amber-600 font-medium">Note: The 45% net income cap remains a vital legal defense.</p>
+ <h3 class="flex items-center gap-3 mt-0 font-bold text-2xl text-amber-900">What This Number Means For You</h3>
+ <p class="leading-relaxed text-lg text-amber-900 mt-4">At $7,000 or more in monthly net income, the standard 2026 economic table still applies as long as combined income stays under $50,000 — but the 45% net income cap becomes something worth paying attention to. Courts can't order you to pay more than 45% of your net monthly income in total child support without making a specific finding of good cause, and at higher income levels that ceiling matters. Deviation requests are also more common here, particularly around private school tuition, extracurricular costs, and travel expenses for custody exchanges. Use the scenario comparison tool to model how different custody arrangements and expense splits change your total obligation before you sit down with the other parent.</p>
  </div>`;
   }
 
   let familyBlock = "";
-  if (children >= 3) {
-    familyBlock = `
+  let familyText = "";
+  if (children === 1) {
+    familyText = "A single-child obligation is the lowest tier in Washington's table, and it's also the most frequently modified when custody schedules change. If your parenting time increases significantly, a modification petition is worth running through the calculator first.";
+  } else if (children === 2) {
+    familyText = "Two children is the most common case configuration in Washington courts, and the 2026 table is well-established at this level. Commissioners see this combination daily, so expect the presumptive number to hold unless you have a strong deviation argument.";
+  } else if (children === 3) {
+    familyText = "With three children, deviation requests become more common because extraordinary expenses — daycare, medical costs, school fees — multiply quickly. Courts look carefully at how those costs are split proportionally between parents at this tier.";
+  } else if (children >= 4) {
+    familyText = "When four or more children are involved, the Self-Support Reserve becomes a central issue in almost every case. A commissioner won't order a payment that leaves the paying parent unable to meet their own basic needs, regardless of what the table says.";
+  }
+
+  familyBlock = `
  <div class="p-8 bg-blue-600 rounded-3xl my-12 shadow-xl relative overflow-hidden">
  <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-32 translate-x-32 pointer-events-none no-print"></div>
- <h4 class="text-white flex items-center gap-3 mt-0 font-bold text-2xl relative z-10">Large Family Analysis</h4>
- <p class="leading-relaxed text-blue-50 text-lg mt-4 relative z-10">Raising ${childrenText} involves 'economies of scale'. The multiplier applied to the base income accounts for shared household costs. While the total of ${formattedSupport} is higher than for one child, the per-child cost is lower, reflecting common shared resources.</p>
+ <h3 class="text-white flex items-center gap-3 mt-0 font-bold text-2xl relative z-10">Number of Children: What To Expect</h3>
+ <p class="leading-relaxed text-blue-50 text-lg mt-4 relative z-10">${familyText}</p>
  </div>`;
-  }
+
+  const whatToDoBlock = `
+ <div class="p-8 bg-white border border-blue-200 rounded-3xl my-12 shadow-sm">
+ <h3 class="flex items-center gap-3 mt-0 font-bold text-2xl text-blue-600">What To Do After Seeing Your Number</h3>
+ <p class="leading-relaxed text-lg text-gray-700 mt-4">The number on this page is a presumptive estimate — it's where the court starts, not necessarily where it ends. Don't let it panic you before you understand what's actually negotiable. Your parenting time schedule directly affects what you pay, and even a modest increase in overnight stays can produce a meaningful credit under Washington's residential time formula. Extraordinary expenses like daycare and health insurance premiums get added on top of the base, so your real total may be higher than what you see here. You also have the legal right to request a deviation if your circumstances qualify — high debt, other dependents, or a shared custody arrangement all count. Start with the worksheet wizard to see your full picture before your hearing.</p>
+ <div class="mt-8 flex flex-wrap gap-4">
+  <a href="/worksheet" class="px-6 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors">Run Full Worksheet →</a>
+  <a href="/deviation-calculator" class="px-6 py-3 bg-white border border-blue-600 text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition-colors">Check Deviation</a>
+  <a href="/compare" class="px-6 py-3 bg-white border border-blue-600 text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition-colors">Compare Scenarios</a>
+  <a href="/how-to-file-child-support-washington" class="px-6 py-3 bg-white border border-blue-600 text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition-colors">Read Filing Guide</a>
+ </div>
+ </div>`;
 
   return {
     intro,
@@ -164,6 +169,7 @@ function generateDynamicContent(
     legal,
     incomeBlock,
     familyBlock,
+    whatToDoBlock,
   };
 }
 
@@ -297,6 +303,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
     legal,
     incomeBlock,
     familyBlock,
+    whatToDoBlock,
   } = generateDynamicContent(slug, income, children, county);
   const dynamicFAQs = generateDynamicFAQs(
     income,
@@ -475,14 +482,7 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
 
                 <div className="not-prose" dangerouslySetInnerHTML={{ __html: incomeBlock }} />
                 <div className="not-prose" dangerouslySetInnerHTML={{ __html: familyBlock }} />
-
-                <div className="flex flex-col not-prose">
-                  <p aria-hidden="true" className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-2">
-                    Low-Income Protection
-                  </p>
-                  <h2 id="ssr-info" className="scroll-mt-24 text-3xl font-bold text-gray-900 mb-8">The SSR and Low-Income Safeguards</h2>
-                </div>
-                <p className="text-lg leading-relaxed">{ssr}</p>
+                <div className="not-prose" dangerouslySetInnerHTML={{ __html: whatToDoBlock }} />
 
                 {/* Section 1: County Filing Block */}
                 {county && (
@@ -498,54 +498,6 @@ export default async function ProgrammaticSEOPage({ params }: Props) {
                     </p>
                   </div>
                 )}
-
-                {/* Section 2: Income Bracket Context Block */}
-                <div className="my-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Income Bracket Context</h3>
-                  <p className="text-lg leading-relaxed">
-                    {income < 3500 && (
-                      <>At {formattedIncome}/mo, this household falls in the <Link href="/blog/minimum-child-support-washington-low-income" className="text-blue-600 hover:underline">lower income bracket</Link> of <Link href="/blog/washington-child-support-schedule-2026-economic-table" className="text-blue-600 hover:underline">Washington's 2026 schedule</Link> — below the state median of $7,114/mo. At this level, <Link href="/glossary/self-support-reserve" className="text-blue-600 hover:underline">SSR protections</Link> and <Link href="/glossary/deviation" className="text-blue-600 hover:underline">low-income deviations</Link> are more likely to influence the final order than the presumptive {formattedSupport} figure.</>
-                    )}
-                    {income >= 3500 && income <= 10000 && (
-                      <>At {formattedIncome}/mo, this household sits within <Link href="/blog/washington-child-support-schedule-2026-economic-table" className="text-blue-600 hover:underline">Washington's standard mid-range bracket on the 2026 schedule</Link>, near the state median of $7,114/mo. The presumptive {formattedSupport} for {childrenText} is typically applied as-is at this level, with fewer deviations than lower or higher income tiers.</>
-                    )}
-                    {income > 10000 && (
-                      <>At {formattedIncome}/mo, this household falls in the upper income bracket of <Link href="/blog/washington-child-support-schedule-2026-economic-table" className="text-blue-600 hover:underline">Washington's 2026 schedule</Link> — above the state median of $7,114/mo. At this level, courts have wider discretion to order above the presumptive {formattedSupport}, particularly for lifestyle-based <Link href="/deviation-calculator" className="text-blue-600 hover:underline">deviation arguments</Link> in {countyName}.</>
-                    )}
-                  </p>
-                </div>
-
-                {/* Section 3: Deviation Likelihood Block */}
-                <div className="my-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Deviation Likelihood in {countyName}</h3>
-                  <p className="text-lg leading-relaxed">
-                    {income < 2200 && (
-                      <><Link href="/glossary/deviation" className="text-blue-600 hover:underline">Deviation requests</Link> are very common at the {formattedIncome} income level in {countyName}. Because {formattedSupport} at this tier frequently conflicts with the <Link href="/glossary/self-support-reserve" className="text-blue-600 hover:underline">$2,394 SSR floor</Link>, judges routinely reduce orders to the <Link href="/blog/minimum-child-support-washington-low-income" className="text-blue-600 hover:underline">$50/child statutory minimum</Link>. Parents at this income level should come prepared with full <Link href="/blog/what-counts-as-income-child-support-washington-2026" className="text-blue-600 hover:underline">financial documentation</Link>.</>
-                    )}
-                    {income >= 2200 && income <= 12000 && (
-                      <>At the {formattedIncome} level, <Link href="/glossary/deviation" className="text-blue-600 hover:underline">deviation requests</Link> are less common but still possible in {countyName}. The most frequent grounds are <Link href="/extra-expenses" className="text-blue-600 hover:underline">extraordinary healthcare costs</Link>, <Link href="/joint-custody-calculator" className="text-blue-600 hover:underline">shared custody arrangements</Link>, or documented debts. The presumptive {formattedSupport} is upheld in the majority of standard cases at this income tier.</>
-                    )}
-                    {income > 12000 && (
-                      <><Link href="/blog/washington-child-support-deviation-2026" className="text-blue-600 hover:underline">High-income deviation arguments</Link> are frequently raised in {countyName} at the {formattedIncome} level. Since the schedule caps at $12,000 combined net income, the {formattedSupport} figure is a floor — not a ceiling. Attorneys often argue for upward deviations based on the children's established standard of living and available parental resources.</>
-                    )}
-                  </p>
-                </div>
-
-                {/* Section 4: Children-Specific Insight Block */}
-                <div className="my-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Children-Specific Insight</h3>
-                  <p className="text-lg leading-relaxed">
-                    {children === 1 && (
-                      <>For {childrenText} at {formattedIncome}/mo, the {formattedSupport} obligation reflects <Link href="/blog/child-support-calculation-washington-2026" className="text-blue-600 hover:underline">Washington's base rate</Link>. Parents adding a second child to the order would see this figure rise to {s4_support_2_children} — an increase of {s4_difference} — reflecting the additional resources required under the <Link href="/blog/washington-child-support-guidelines-2026" className="text-blue-600 hover:underline">2026 schedule</Link>.</>
-                    )}
-                    {children === 2 && (
-                      <>The {formattedSupport} for {childrenText} at {formattedIncome}/mo reflects Washington's standard two-child rate. Compared to a one-child order ({s4_support_1_child}) at the same income, the second child adds {s4_difference}/mo — a {s4_percentage}% increase rather than a full doubling, reflecting shared household costs.</>
-                    )}
-                    {children >= 3 && (
-                      <>For {childrenText} at {formattedIncome}/mo, <Link href="/blog/washington-child-support-guidelines-2026" className="text-blue-600 hover:underline">Washington's 2026 schedule</Link> applies an economies-of-scale reduction. The {formattedSupport} total works out to {s4_per_child}/mo per child — compared to {s4_support_1_child} for one child at the same income. This reflects shared costs like housing and utilities that don't scale linearly with each additional child.</>
-                    )}
-                  </p>
-                </div>
 
                 {/* Section 5: Related Income Tiers Block */}
                 <div className="my-8">
