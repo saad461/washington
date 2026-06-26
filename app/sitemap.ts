@@ -146,34 +146,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const sitemapUrls: MetadataRoute.Sitemap = [...staticPages];
 
   // Programmatic Income Pages
-  const genericIncrements = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 18000, 20000, 25000, 30000, 35000, 40000, 45000, 50000];
-  const standardIncrements = [3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 12000, 15000, 20000, 25000];
-  const commonChildren = [1, 2, 3];
+  const topCounties = ["king-county", "pierce-county", "snohomish-county", "spokane-county"];
+  const childCounts = [1, 2, 3, 4];
 
-  genericIncrements.forEach((income) => {
-    commonChildren.forEach((children) => {
+  // Generic income pages - using 2500 increment as fallback
+  for (let income = 2500; income <= 50000; income += 2500) {
+    childCounts.forEach((children) => {
       const childrenText = children === 1 ? '1-child' : `${children}-children`;
       sitemapUrls.push({
         url: `${baseUrl}/income-${income}-${childrenText}`,
         lastModified,
         changeFrequency: 'monthly',
-        priority: 0.7,
+        priority: 0.6,
       });
     });
-  });
+  }
 
   washingtonCounties.forEach((county) => {
-    standardIncrements.forEach((income) => {
-      [1, 2].forEach((children) => {
+    const isTop = topCounties.includes(county.slug);
+    const increment = isTop ? 1000 : 2500;
+
+    for (let income = increment; income <= 50000; income += increment) {
+      childCounts.forEach((children) => {
         const childrenText = children === 1 ? '1-child' : `${children}-children`;
         sitemapUrls.push({
           url: `${baseUrl}/${county.slug}-income-${income}-${childrenText}`,
           lastModified,
           changeFrequency: 'monthly',
-          priority: 0.5,
+          priority: isTop ? 0.6 : 0.4,
         });
       });
-    });
+    }
 
     sitemapUrls.push({
       url: `${baseUrl}/washington-courts/${county.slug}`,

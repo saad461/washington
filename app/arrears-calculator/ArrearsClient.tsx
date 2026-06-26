@@ -245,6 +245,29 @@ export default function ArrearsClient({ faqs }: ArrearsClientProps) {
                       </div>
                     </div>
 
+                    <div className="mt-8 p-6 bg-blue-600 rounded-2xl text-white shadow-lg relative overflow-hidden">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -translate-y-16 translate-x-16 pointer-events-none"></div>
+                      <h4 className="text-lg font-bold mb-4 relative z-10">Your Strategic Action Plan</h4>
+                      <div className="space-y-4 relative z-10">
+                        <div className="flex gap-3 items-start">
+                          <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0 font-bold text-xs">1</div>
+                          <p className="text-sm font-medium"><strong>Save this number:</strong> Take a screenshot or print this page to document your calculations.</p>
+                        </div>
+                        <div className="flex gap-3 items-start">
+                          <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0 font-bold text-xs">2</div>
+                          <p className="text-sm font-medium"><strong>Run the worksheet wizard:</strong> <Link href="/worksheet" className="underline hover:text-blue-100">Prepare official forms</Link> to show the court your current income.</p>
+                        </div>
+                        <div className="flex gap-3 items-start">
+                          <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0 font-bold text-xs">3</div>
+                          <p className="text-sm font-medium"><strong>Check for modification:</strong> See if your <Link href="/modification-calculator" className="underline hover:text-blue-100">payment should be lowered</Link> based on 2026 rules.</p>
+                        </div>
+                        <div className="flex gap-3 items-start">
+                          <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0 font-bold text-xs">4</div>
+                          <p className="text-sm font-medium"><strong>Read the guide:</strong> Learn <Link href="/blog/what-happens-if-child-support-is-not-paid-washington" className="underline hover:text-blue-100">what to do if you fall behind</Link> on payments.</p>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="flex flex-col gap-3 pt-4 no-print">
                       <Link href="/modification-calculator" className="btn btn-primary w-full shadow-lg shadow-blue-900/20">
                         Check for Modification <ArrowRight size={18} />
