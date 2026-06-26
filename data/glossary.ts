@@ -30,6 +30,7 @@ export const glossaryTerms: GlossaryTerm[] = [
     linkLabel: "Read SSR Guide",
     relatedLinks: [
       { label: "Check your SSR Eligibility", href: "/worksheet" },
+      { label: "Read Our Complete SSR Guide", href: "/blog/washington-ssr-self-support-reserve-explained" },
       { label: "Washington Court Directory", href: "/washington-courts" }
     ],
     metaTitle: "Self-Support Reserve (SSR) in WA 2026 | WSCSS",
@@ -65,7 +66,9 @@ export const glossaryTerms: GlossaryTerm[] = [
     example: "A judge grants a downward deviation because the parents have a 50/50 residential split, or an upward deviation because the paying parent possesses significant undocumented wealth.",
     linkLabel: "Read Deviation Guide",
     relatedLinks: [
-      { label: "Calculate Base Obligation to Find Deviation Value", href: "/worksheet" }
+      { label: "Calculate Base Obligation to Find Deviation Value", href: "/worksheet" },
+      { label: "What Qualifies for a Deviation (2026 Guide)", href: "/blog/washington-child-support-deviation-2026" },
+      { label: "Use the Deviation Calculator", href: "/deviation-calculator" }
     ],
     metaTitle: "Child Support Deviation in Washington | WSCSS",
     metaDescription: "A deviation is a court-approved adjustment to WA's standard child support. Learn when courts grant deviations and request one under RCW 26.19.075.",
@@ -101,7 +104,9 @@ export const glossaryTerms: GlossaryTerm[] = [
     example: "If a software engineer who previously made $150,000 voluntarily quits to work a minimum wage job to avoid child support, the court may impute an income of $150,000 based on their actual earning capacity.",
     linkLabel: "Read Imputed Income Guide",
     relatedLinks: [
-      { label: "Calculate Impact of Increased Income", href: "/worksheet" }
+      { label: "Calculate Impact of Increased Income", href: "/worksheet" },
+      { label: "What Counts as Income (2026 Guide)", href: "/blog/what-counts-as-income-child-support-washington-2026" },
+      { label: "Use the Net Income Calculator", href: "/net-income-calculator" }
     ],
     metaTitle: "Imputed Income in WA Child Support | WSCSS",
     metaDescription: "Imputed income is assigned by a court when a parent is voluntarily unemployed. Learn how courts calculate it under RCW 26.19.071.",
@@ -141,7 +146,9 @@ export const glossaryTerms: GlossaryTerm[] = [
     example: "After calculating gross income, deductions, and proportional shares on the worksheet, the resulting number—for example, $450—is the official monthly transfer payment.",
     linkLabel: "Read Transfer Payment Guide",
     relatedLinks: [
-      { label: "Estimate Your Transfer Payment", href: "/worksheet" }
+      { label: "Estimate Your Transfer Payment", href: "/worksheet" },
+      { label: "Step-by-Step Calculation Guide", href: "/blog/child-support-calculation-washington-2026" },
+      { label: "2026 Guidelines Handbook", href: "/blog/washington-child-support-guidelines-2026" }
     ],
     metaTitle: "Transfer Payment in WA Child Support | WSCSS",
     metaDescription: "The transfer payment is the final monthly amount one parent pays the other in Washington child support. Learn how it is calculated under RCW 26.19.",
@@ -182,7 +189,9 @@ export const glossaryTerms: GlossaryTerm[] = [
     example: "If Parent A has a net income of $3,000 and Parent B has a net income of $5,000, their 'Combined Net Income' is $8,000. This $8,000 figure is used to look up the base child support obligation on the state economic table.",
     linkLabel: "Read Net Income Guide",
     relatedLinks: [
-      { label: "View Support Estimates for $8,000 Income", href: "/income-8000-2-children" }
+      { label: "View Support Estimates for $8,000 Income", href: "/income-8000-2-children" },
+      { label: "Reading the 2026 Economic Table", href: "/blog/washington-child-support-schedule-2026-economic-table" },
+      { label: "Use the Net Income Calculator", href: "/net-income-calculator" }
     ],
     metaTitle: "Combined Net Income in WA Child Support | WSCSS",
     metaDescription: "Combined net income is both parents' monthly income after mandatory deductions. It determines your position on WA's 2026 economic table under RCW 26.19.071.",
@@ -218,7 +227,9 @@ export const glossaryTerms: GlossaryTerm[] = [
     example: "Daycare, health insurance premiums, and long-distance travel expenses for visitation are all considered extraordinary expenses. If Parent A makes 70% of the combined income, they pay 70% of the daycare bill.",
     linkLabel: "Read Extraordinary Expenses Guide",
     relatedLinks: [
-      { label: "Calculate Proportional Expense Splits", href: "/extra-expenses" }
+      { label: "Calculate Proportional Expense Splits", href: "/extra-expenses" },
+      { label: "How to Calculate Child Support (2026)", href: "/blog/how-to-calculate-child-support-washington-state" },
+      { label: "Childcare Split Calculator", href: "/childcare-calculator" }
     ],
     metaTitle: "Extraordinary Expenses in WA Child Support | WSCSS",
     metaDescription: "Extraordinary expenses are costs not covered by basic child support in WA, including healthcare and daycare. Learn how they are split proportionally under RCW 26.19.080.",
@@ -253,7 +264,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "The basic child support obligation is the monthly amount determined from the 2026 Washington economic table based on both parents combined net income and number of children. It is the starting point for calculating the final transfer payment before any adjustments or credits are applied.",
     example: "A combined net income of $6,000 for two children results in a $795 per-child table value. The basic child support obligation is therefore $1,590.",
     linkLabel: "Read Basic Obligation Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "Reading the 2026 Economic Table", href: "/blog/washington-child-support-schedule-2026-economic-table" },
+      { label: "Step-by-Step Calculation Guide", href: "/blog/child-support-calculation-washington-2026" },
+      { label: "WA Child Support Calculator", href: "/" }
+    ],
     metaTitle: "Basic Child Support Obligation in Washington | WSCSS",
     metaDescription: "The basic child support obligation is the monthly amount from WA's 2026 economic table based on combined net income and family size under RCW 26.19.020.",
     h1Title: "What is the Basic Child Support Obligation in Washington State?",
@@ -289,7 +304,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "Washington uses the Income Shares Model to calculate child support. Both parents net incomes are combined and used to look up the basic obligation in the economic table. Each parent then pays their proportional share based on their percentage of combined income.",
     example: "If Parent A earns 60% of the combined income, they are responsible for 60% of the basic support obligation.",
     linkLabel: "Read Income Shares Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "Step-by-Step Calculation Guide", href: "/blog/child-support-calculation-washington-2026" },
+      { label: "2026 Guidelines Handbook", href: "/blog/washington-child-support-guidelines-2026" },
+      { label: "Worksheet Wizard", href: "/worksheet" }
+    ],
     metaTitle: "Income Shares Model in WA Child Support | WSCSS",
     metaDescription: "Washington uses the Income Shares Model where both parents' net incomes are combined to find support. Each parent pays their proportional share under RCW 26.19.",
     h1Title: "What is the Income Shares Model in Washington Child Support?",
@@ -325,7 +344,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "A proportional share is each parent's percentage of the combined net income. This percentage determines each parent's share of the basic obligation and all extraordinary expenses including healthcare and daycare.",
     example: "If the combined net income is $10,000 and Parent A's net income is $7,000, Parent A's proportional share is 70%.",
     linkLabel: "Read Proportional Share Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "How to Calculate Child Support (2026 Guide)", href: "/blog/how-to-calculate-child-support-washington-state" },
+      { label: "Proportional Shares Explained", href: "/blog/child-support-calculation-washington-2026" },
+      { label: "Worksheet Wizard", href: "/worksheet" }
+    ],
     metaTitle: "Proportional Share in WA Child Support | WSCSS",
     metaDescription: "Proportional share is each parent's percentage of combined net income in WA child support. It determines each parent's obligation share under RCW 26.19.080.",
     h1Title: "What is Proportional Share in Washington Child Support?",
@@ -359,7 +382,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "Gross monthly income includes all income from any source before deductions — wages, salaries, business income, rental income, investment income, pension, Social Security, and unemployment benefits. Washington law requires full disclosure of all income sources under RCW 26.19.071.",
     example: "A parent earning $5,000 in salary and $500 in rental income has a gross monthly income of $5,500.",
     linkLabel: "Read Gross Income Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "What Counts as Income (2026 Guide)", href: "/blog/what-counts-as-income-child-support-washington-2026" },
+      { label: "Net Income Calculator", href: "/net-income-calculator" },
+      { label: "Worksheet Wizard", href: "/worksheet" }
+    ],
     metaTitle: "Gross Monthly Income in WA Child Support | WSCSS",
     metaDescription: "Gross monthly income in WA child support includes all income from any source before deductions. Learn what counts and what is excluded under RCW 26.19.071.",
     h1Title: "What is Gross Monthly Income in Washington Child Support?",
@@ -396,7 +423,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "Net monthly income is gross income after subtracting mandatory deductions including federal and state income taxes, FICA, mandatory union dues, required pension contributions, and state insurance premiums. The 2026 economic table uses net income not gross income.",
     example: "If a parent's gross income is $5,000 and mandatory deductions total $1,200, their net monthly income is $3,800.",
     linkLabel: "Read Net Income Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "What Counts as Income (2026 Guide)", href: "/blog/what-counts-as-income-child-support-washington-2026" },
+      { label: "Net Income Calculator", href: "/net-income-calculator" },
+      { label: "SSR Explanation", href: "/blog/washington-ssr-self-support-reserve-explained" }
+    ],
     metaTitle: "Net Monthly Income in WA Child Support | WSCSS",
     metaDescription: "Net monthly income in Washington child support is gross income minus mandatory deductions. The 2026 economic table uses net - not gross - income under RCW 26.19.071.",
     h1Title: "What is Net Monthly Income in Washington Child Support?",
@@ -438,7 +469,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "The standard calculation is the presumptive monthly child support amount determined by following the Washington child support schedule exactly. Courts must use this amount unless specific written reasons for deviation are provided under RCW 26.19.035.",
     example: "Completing Lines 1-17 of the worksheet for a parent earning $5,000 results in a standard calculation of $1,446 for two children.",
     linkLabel: "Read Standard Calculation Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "Step-by-Step Calculation Guide", href: "/blog/child-support-calculation-washington-2026" },
+      { label: "How Courts Decide Support", href: "/blog/how-courts-decide-child-support-washington" },
+      { label: "Worksheet Wizard", href: "/worksheet" }
+    ],
     metaTitle: "Standard Calculation in WA Child Support | WSCSS",
     metaDescription: "The standard calculation is the presumptive child support amount in WA from the WSCSS worksheet. Courts must use it unless deviation reasons exist under RCW 26.19.035.",
     h1Title: "What is the Standard Calculation in Washington Child Support?",
@@ -478,7 +513,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "A parenting time credit is a deviation that reduces child support when the paying parent has significant residential time with the child. Under RCW 26.19.075(1)(d), the court has discretion to deviate based on actual increased expenses for the paying parent and decreased expenses for the receiving parent.",
     example: "A paying parent with the child 35% of the time may receive a deviation that reduces their monthly payment based on the households' actual shared costs.",
     linkLabel: "Read Parenting Time Credit Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "Joint Custody Child Support Explained", href: "/blog/joint-custody-child-support-washington-2026" },
+      { label: "Joint Custody Calculator", href: "/joint-custody-calculator" },
+      { label: "Parenting Time Calculator", href: "/parenting-time-calculator" }
+    ],
     metaTitle: "Parenting Time Credit in WA Child Support | WSCSS",
     metaDescription: "Parenting time credit reduces child support in Washington when the paying parent has significant residential time. Learn how courts determine this deviation under RCW 26.19.075.",
     h1Title: "What is Parenting Time Credit in Washington Child Support?",
@@ -510,7 +549,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "The economic table is the official Washington State chart used to determine the basic child support obligation per child. It lists combined monthly net incomes from $2,200 to $50,000 against family size from 1 to 5 children. Updated January 1 2026 under RCW 26.19.020.",
     example: "For a combined net income of $7,400, the 2026 table specifies a per-child obligation of $918 for a family with two children.",
     linkLabel: "Read Economic Table Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "Reading the 2026 Economic Table", href: "/blog/washington-child-support-schedule-2026-economic-table" },
+      { label: "2026 Guidelines Handbook", href: "/blog/washington-child-support-guidelines-2026" },
+      { label: "WA Child Support Calculator", href: "/" }
+    ],
     metaTitle: "WA Child Support Economic Table 2026 | WSCSS",
     metaDescription: "The 2026 WA economic table determines basic child support per child based on combined net income and family size. Learn how to read and apply it under RCW 26.19.020.",
     h1Title: "What is the Washington Child Support Economic Table 2026?",
@@ -546,7 +589,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "The residential schedule defines when each parent has the child. It determines which parent is the primary residential parent for child support purposes and may be used to request a parenting time deviation under RCW 26.09.187.",
     example: "A schedule where the child spends 70% of the time with Parent A and 30% with Parent B establishes Parent A as the primary residential parent.",
     linkLabel: "Read Residential Schedule Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "Joint Custody Child Support Explained", href: "/blog/joint-custody-child-support-washington-2026" },
+      { label: "Parenting Time Calculator", href: "/parenting-time-calculator" },
+      { label: "Joint Custody Calculator", href: "/joint-custody-calculator" }
+    ],
     metaTitle: "Residential Schedule in WA Child Support | WSCSS",
     metaDescription: "The residential schedule defines when each parent has the child in WA. It affects child support calculations and parenting time deviations under RCW 26.09.187.",
     h1Title: "What is a Residential Schedule in Washington Child Support?",
@@ -578,7 +625,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "Monthly healthcare costs for children including insurance premiums, copays, dental, vision, and mental health treatment are not included in the basic child support obligation. They must be shared proportionally based on each parent's income share under RCW 26.19.080.",
     example: "If Parent A makes 65% of the income and the children's healthcare costs are $350, Parent A is responsible for $227.50 of that cost.",
     linkLabel: "Read Healthcare Expenses Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "Proportional Shares Explained", href: "/blog/child-support-calculation-washington-2026" },
+      { label: "Medical Expense Calculator", href: "/medical-expense-calculator" },
+      { label: "Health Insurance Calculator", href: "/health-insurance-calculator" }
+    ],
     metaTitle: "Healthcare Expenses in WA Child Support | WSCSS",
     metaDescription: "Healthcare expenses in WA child support include insurance premiums and uninsured medical costs. They are shared proportionally between parents under RCW 26.19.080.",
     h1Title: "What are Healthcare Expenses in Washington Child Support?",
@@ -614,7 +665,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "Work-related daycare and childcare costs are not included in the basic child support obligation. They are treated as extraordinary expenses and shared proportionally between parents based on their income share percentages under RCW 26.19.080.",
     example: "If daycare costs $800 and Parent A's income share is 70%, Parent A contributes $560 toward the monthly daycare bill.",
     linkLabel: "Read Daycare Expenses Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "Proportional Shares Explained", href: "/blog/child-support-calculation-washington-2026" },
+      { label: "Childcare Split Calculator", href: "/childcare-calculator" },
+      { label: "Education Expense Calculator", href: "/education-expense-calculator" }
+    ],
     metaTitle: "Daycare Expenses in WA Child Support | WSCSS",
     metaDescription: "Daycare expenses in Washington child support are work-related childcare costs shared proportionally between parents. Learn how they are calculated under RCW 26.19.080.",
     h1Title: "What are Daycare Expenses in Washington Child Support?",
@@ -648,7 +703,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "A parent is considered voluntarily unemployed if they choose not to work or work below their earning capacity without good cause. Washington courts will impute income to voluntarily unemployed parents based on their work history and local job market under RCW 26.19.071.",
     example: "An accountant who quits their $5,000/mo job to avoid support may be found voluntarily unemployed and have $5,000 in income imputed.",
     linkLabel: "Read Voluntary Unemployment Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "What Counts as Income (2026 Guide)", href: "/blog/what-counts-as-income-child-support-washington-2026" },
+      { label: "Minimum Child Support Guide", href: "/blog/minimum-child-support-washington-low-income" },
+      { label: "Net Income Calculator", href: "/net-income-calculator" }
+    ],
     metaTitle: "Voluntary Unemployment in WA Child Support | WSCSS",
     metaDescription: "Voluntary unemployment in Washington child support triggers income imputation by the court. Learn how courts determine voluntary status under RCW 26.19.071.",
     h1Title: "What is Voluntary Unemployment in Washington Child Support?",
@@ -680,7 +739,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "A support modification is a court-approved change to an existing child support order. In Washington a modification requires showing a substantial change in circumstances — typically a 15% or more change in either parent's net income under RCW 26.09.170.",
     example: "If a parent receives a 30% salary increase, the other parent may petition to modify the support amount based on the new income level.",
     linkLabel: "Read Support Modification Guide →",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "How to Modify Child Support (2026 Guide)", href: "/blog/how-to-modify-child-support-washington-2026" },
+      { label: "Modification Calculator", href: "/modification-calculator" },
+      { label: "Worksheet Wizard", href: "/worksheet" }
+    ],
     metaTitle: "Child Support Modification in Washington | WSCSS",
     metaDescription: "Child support modification in Washington requires a substantial change - typically a 15% income change. Learn the full process under RCW 26.09.170.",
     h1Title: "What is Child Support Modification in Washington State?",
@@ -713,7 +776,11 @@ export const glossaryTerms: GlossaryTerm[] = [
     definition: "Washington law limits child support to 45% of a parent's net monthly income for all their biological or legal children combined. Courts may exceed this cap only for good cause including substantial wealth or special needs of the children under RCW 26.19.065.",
     example: "A parent earning $3,000/mo net has an income cap of $1,350 for all their children combined.",
     linkLabel: "Read Income Cap Guide",
-    relatedLinks: [],
+    relatedLinks: [
+      { label: "SSR Explanation", href: "/blog/washington-ssr-self-support-reserve-explained" },
+      { label: "Minimum Child Support Guide", href: "/blog/minimum-child-support-washington-low-income" },
+      { label: "WA Child Support Calculator", href: "/" }
+    ],
     metaTitle: "45% Income Cap in WA Child Support | WSCSS",
     metaDescription: "Washington limits child support to 45% of a parent's net income for all children combined. Learn when the cap applies and exceptions under RCW 26.19.065.",
     h1Title: "What is the 45% Income Cap in Washington Child Support?",

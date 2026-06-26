@@ -217,8 +217,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     slug,
   });
 
-  const isRoundIncome = income % 100 === 0 && income <= 50000;
-  const robots = isRoundIncome ? "index, follow" : "noindex, follow";
+  const isTopCounty = ["king-county", "pierce-county", "snohomish-county", "spokane-county"].includes(county?.slug || "");
+  const increment = isTopCounty ? 1000 : 2500;
+  const isRoundIncome = income % increment === 0 && income <= 50000;
+  const isValidChildCount = children >= 1 && children <= 4;
+  const robots = (isRoundIncome && isValidChildCount) ? "index, follow" : "noindex, follow";
 
   return {
     ...seoMeta,

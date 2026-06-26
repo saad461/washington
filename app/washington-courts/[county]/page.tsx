@@ -269,10 +269,16 @@ export default async function CountyCourtPage({ params }: Props) {
               */}
               <div className="card-standard">
                 <p aria-hidden="true" className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-8 flex items-center gap-2">
-                  <BookOpen className="w-4 h-4" /> Resources
+                  <BookOpen className="w-4 h-4" /> {county.name} Resources
                 </p>
                 <nav className="divide-y divide-[var(--color-bg-border-soft)]">
-                  {[{ href: "/worksheet", label: `Calculate ${county.name} Support` }, { href: "/how-to-file-child-support-washington", label: "Filing Guide" }, { href: "/washington-courts", label: "All WA Courthouses" }].map(link => (
+                  {[
+                    { href: `/${county.slug}-income-5000-2-children`, label: `${county.name} Income Examples` },
+                    { href: "/how-to-file-child-support-washington", label: "Filing Guide" },
+                    { href: "/deviation-calculator", label: "Deviation Calculator" },
+                    { href: "/worksheet", label: `Worksheet Wizard` },
+                    { href: "/washington-courts", label: "All WA Courthouses" }
+                  ].map(link => (
                     <Link key={link.href} href={link.href} className="flex items-center justify-between group py-5 hover:text-blue-600 transition-colors">
                       <span className="font-semibold text-[var(--color-text-body)] group-hover:text-blue-600 transition-colors">{link.label}</span>
                       <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-all" />

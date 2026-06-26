@@ -148,8 +148,11 @@ export default function Footer() {
             <p className="text-[13px] font-semibold text-gray-400 mb-2">
               &copy; 2026 Washington State Child Support Schedule
             </p>
-            <p className="text-[13px] text-gray-400 leading-relaxed">
+            <p className="text-[13px] text-gray-400 leading-relaxed mb-4">
               WSCSS is not a law firm and does not provide legal advice. We are an independent resource for 2026 WA State Child Support guidelines. All calculations are estimates only.
+            </p>
+            <p className="text-[11px] text-gray-500 leading-relaxed italic">
+              Built and maintained by <Link href="/about" className="underline hover:text-white transition-colors">Saad Nadeem</Link>, an independent researcher. Not a law firm. Not affiliated with Washington State courts or DSHS.
             </p>
           </div>
 

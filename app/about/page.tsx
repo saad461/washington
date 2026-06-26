@@ -30,9 +30,10 @@ export default function AboutPage() {
     "url": "https://wscss.site/about",
     "description": "WSCSS is an independent educational platform providing free accurate Washington State child support calculations based on the official 2026 RCW 26.19 economic tables",
     "author": {
-      "@type": "Organization",
-      "name": "WSCSS Editorial & Legal Team",
-      "url": "https://wscss.site",
+      "@type": "Person",
+      "name": "Saad Nadeem",
+      "jobTitle": "Independent Child Support Research Publisher",
+      "url": "https://wscss.site/about",
       "email": "support@wscss.site"
     },
     "publisher": {
@@ -119,23 +120,48 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── MISSION ─────────────────────────────────────────────────────── */}
+      {/* ── MISSION & FOUNDER ────────────────────────────────────────────── */}
       <section className="section-default bg-[var(--color-bg-subtle)] py-10 border-b border-gray-100">
         <div className="container-reading">
-          <div className="card-standard">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
-                <Scale size={20} />
+          <div className="grid gap-8">
+            <div className="card-standard !p-8 md:!p-12">
+              <div className="flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
+                <div className="w-32 h-32 rounded-2xl bg-gray-200 shrink-0 overflow-hidden shadow-inner flex items-center justify-center border-4 border-white">
+                  <Users className="w-16 h-16 text-gray-400" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Saad Nadeem</h2>
+                  <p className="text-blue-600 font-bold uppercase tracking-widest text-xs mb-6">Founder & Independent Researcher</p>
+                  <div className="prose prose-gray max-w-none">
+                    <p className="text-lg leading-relaxed text-gray-700 italic">
+                      "I spent 6 months studying Washington State child support laws, AOC economic tables, and RCW 26.19 guidelines to build this tool. I built WSCSS because I couldn't find one clear, free, accurate place to understand how the process actually works."
+                    </p>
+                  </div>
+                </div>
               </div>
-              <h2 className="text-2xl font-bold">Our Mission</h2>
             </div>
-            <div className="space-y-4">
-              <p className="text-[var(--color-text-body)] leading-relaxed text-lg">
-                Navigating child support calculations can be overwhelming. WSCSS was built to demystify the process by providing a free, accurate, and easy-to-use calculator based on the official 2026 Washington State Child Support Economic Table.
-              </p>
-              <p className="text-[var(--color-text-body)] leading-relaxed">
-                We believe every parent deserves access to transparent, understandable financial guidance — without requiring expensive legal consultations for basic estimates.
-              </p>
+
+            <div className="card-standard">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center">
+                  <Scale size={20} />
+                </div>
+                <h2 className="text-2xl font-bold">Why I Built This Tool</h2>
+              </div>
+              <div className="space-y-6">
+                <p className="text-[var(--color-text-body)] leading-relaxed text-lg">
+                  Navigating child support calculations in Washington can be overwhelming. I discovered that while the laws are public, the tools to calculate them were often hidden behind paywalls or complex government forms that were hard to navigate on a phone.
+                </p>
+                <p className="text-[var(--color-text-body)] leading-relaxed">
+                  As an independent researcher, my mission is to provide every Washington parent access to transparent, understandable financial guidance. I believe that being informed is the first step toward a fair outcome for both parents and, most importantly, the children.
+                </p>
+                <div className="p-6 bg-blue-50 border border-blue-100 rounded-2xl">
+                  <p className="text-sm font-semibold text-blue-800 mb-2">My Commitment to Accuracy:</p>
+                  <p className="text-sm text-blue-700 leading-relaxed">
+                    Everything on this site is based on official 2026 RCW 26.19 guidelines. I manually verify our calculation engine against the Administrative Office of the Courts (AOC) economic tables to ensure our estimates match official standards.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
