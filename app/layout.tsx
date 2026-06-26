@@ -37,8 +37,8 @@ export const metadata: Metadata = {
  },
  description: "Calculate your 2026 Washington child support instantly using the official AOC economic table. Free for all 39 counties. Trusted by parents and attorneys.",
  keywords: ["Washington child support calculator", "WA child support 2026", "child support estimator", "Washington state family law", "AOC child support schedule"],
- authors: [{ name: "WSCSS Editorial & Legal Team", url: "https://wscss.site/about" }],
- creator: "WSCSS Editorial & Legal Team",
+ authors: [{ name: "Saad Nadeem", url: "https://wscss.site/about" }],
+ creator: "Saad Nadeem",
  alternates: { canonical: "https://wscss.site/" },
  icons: {
   icon: [
